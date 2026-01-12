@@ -12,6 +12,35 @@ This toolkit helps you:
 
 **Important**: This project respects copyright. It downloads content from official sources and generates AI transcripts only for missing episodes. All Security Now! content is © Steve Gibson/GRC and TWiT.tv.
 
+## ⭐ What Makes This Project Different
+
+### Single Script, Complete Automation
+
+**One PowerShell script does everything:**
+- ✅ **Past episodes** (2005-2025+): Downloads all 1000+ official show notes from GRC
+- ✅ **Missing episodes**: Automatically generates AI transcripts for ~100 episodes that never had official notes
+- ✅ **Future episodes**: Simply re-run the script after new episodes air—it automatically detects and downloads them
+- ✅ **Consistent format**: Every episode gets a PDF (official or AI-generated), organized by year
+
+### Complete Coverage, Zero Manual Work
+
+Unlike other archival solutions:
+- **No manual downloads** - Script handles GRC.com and TWiT.tv automatically
+- **No gaps** - AI fills in missing episodes with clearly marked transcripts
+- **Future-proof** - Same script works for episodes 1-1000+ and beyond
+- **Smart detection** - Checks both GRC and TWiT for official notes before generating AI versions
+
+### Intelligent Fallback System
+
+**For each episode, the script:**
+
+1. **First**: Checks GRC.com for official show notes PDF → Downloads if available
+2. **Second**: If no official notes, checks TWiT.tv for embedded PDFs → Downloads if found
+3. **Third**: If still missing, downloads audio (MP3) and generates AI transcript → Converts to PDF with disclaimer
+4. **Result**: Every episode has consistent PDF documentation, clearly marked as official or AI-generated
+
+**You get a complete archive** with one command—no manual intervention, no gaps, ready for research.
+
 ## ⚙️ Prerequisites
 
 Before you begin, ensure you have:
@@ -102,10 +131,11 @@ SecurityNowArchive/
 ├── local/
 │   ├── PDF/
 │   │   ├── 2005/
-│   │   │   ├── sn-1-notes-ai.pdf
+│   │   │   ├── sn-1-notes-ai.pdf    ← AI-generated (no official notes)
+│   │   │   ├── sn-2-notes.pdf       ← Official GRC notes
 │   │   │   └── ...
 │   │   ├── 2024/
-│   │   │   ├── sn-1000-notes.pdf
+│   │   │   ├── sn-1000-notes.pdf    ← Official GRC notes
 │   │   │   └── ...
 │   ├── mp3/
 │   │   └── sn-1.mp3 (audio for AI episodes)
@@ -121,11 +151,14 @@ Open `data/SecurityNowNotesIndex.csv` in Excel or any spreadsheet app:
 | Episode | Url | File |
 |---------|-----|------|
 | 1 | (empty - AI generated) | sn-1-notes-ai.pdf |
+| 2 | https://www.grc.com/sn/sn-2-notes.pdf | sn-2-notes.pdf |
 | 432 | https://www.grc.com/sn/sn-432-notes.pdf | sn-432-notes.pdf |
 | 1000 | https://www.grc.com/sn/sn-1000-notes.pdf | sn-1000-notes.pdf |
 
 - **Empty URL**: AI-derived transcript (no official notes existed)
 - **GRC URL**: Official show notes from Steve Gibson
+
+**Every episode is documented** with a consistent PDF format, making your entire archive searchable and complete.
 
 ## 🔄 Updating for New Episodes
 
@@ -136,10 +169,13 @@ When new Security Now! episodes are released:
 ```
 
 The script automatically:
-- Checks for new episodes on GRC
-- Downloads new official notes
+- Checks for new episodes on GRC and TWiT
+- Downloads new official notes (if available)
+- Generates AI transcripts (if official notes don't exist)
 - Skips existing files (no re-downloads)
 - Updates the CSV index
+
+**Same script, works forever** - Run it weekly, monthly, or after each new episode to stay current.
 
 ## 🔐 Public vs. Private Usage
 
