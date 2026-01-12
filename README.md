@@ -1,47 +1,29 @@
-# Security Now! Tools & Index
+# Security Now Archive Tools
 
-This repository contains tooling and index data to help researchers and fans work with Steve Gibson's **Security** Now! podcast episodes.[file:1]
+This repo contains PowerShell tools and a CSV index to help you build your own local archive of Steve Gibson’s Security Now show notes.[web:52][file:2]
 
-## What this repo contains
+- No PDFs or MP3s are stored here.
+- All content comes directly from GRC.com and TWiT when you run the script.[web:52][web:76]
 
-- PowerShell scripts to:
-  - Discover official show-notes PDFs (\sn-XXXX-notes.pdf\) on Gibson Research Corporation (GRC).[file:1]
-  - Detect episodes with no official notes and (optionally) generate clearly marked AI-derived notes locally.
-  - Organize local notes PDFs by year.
-  - Maintain a CSV index of all episodes and their associated notes files.
+## How to use
 
-- A CSV index under \data\ (for example \SecurityNowNotesIndex.csv\) with:
-  - Episode number
-  - Title (when available)
-  - Original show-notes URL on GRC and TWiT.tv
-  - Local file name (on **your** system)
-  - Flags indicating whether AI-derived notes exist locally.[file:1]
+1. Open PowerShell.
+2. Go to the repo folder:
 
-## What this repo does NOT contain
+   `cd "D:\Desktop\SecurityNow-Full"`
 
-This public repository does **not** contain:
+3. Run the main script:
 
-- Original Security Now! show-notes PDFs from GRC (\sn-XXXX-notes.pdf\).[file:1]
-- TWiT.tv transcripts or audio files (MP3s).
-- Any copyrighted content from GRC or TWiT.tv.
+   `.\scripts\SecurityNow-EndToEnd.ps1`
 
-Instead, it provides tools and an index so that you can obtain that material yourself from the official sources and keep it in a separate private archive.[file:1]
+This will create a **local** folder structure (PDF, mp3, AI notes) and update `SecurityNow_NotesIndex.csv` on your machine.[file:2][file:78]
 
-## Respecting Steve Gibson and TWiT
+## What this repo is
 
-All Security Now! content is authored and owned by Steve Gibson / Gibson Research Corporation and published in cooperation with TWiT.tv.[file:1]
-This project exists to assist with personal research and archival and to avoid making others re-implement the same tooling.
+- A script: `scripts\SecurityNow-EndToEnd.ps1`.[file:2]
+- A CSV index: `SecurityNow_NotesIndex.csv` with episode number, URL, and local file name.[file:78]
 
-Any AI-derived notes workflow is intended only to fill gaps for episodes which never had official show notes, and generated files must always be clearly labeled as automatically generated and **not** official show notes.[file:1]
+## What this repo is not
 
-## High-level workflow
-
-1. Clone this repo locally.
-2. Place the end-to-end PowerShell script into \scripts\SecurityNow-EndToEnd.ps1\.
-3. Run the script to:
-   - Build or update your local notes archive under a separate \local\ folder (kept out of this public repo).
-   - Update the CSV index under \data\.
-4. Maintain a **private** clone of this repo (or a separate private repo) that stores:
-   - PDFs (official and AI-derived).
-   - MP3s.
-   - AI-generated transcripts under \local\.[file:1]
+- It does **not** contain original show-note PDFs from GRC (`sn-XXXX-notes.pdf`).[web:52]
+- It does **not** contain TWiT audio or transcripts.[web:76]
