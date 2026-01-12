@@ -12,6 +12,23 @@ This toolkit helps you:
 
 **Important**: This project respects copyright. It downloads content from official sources and generates AI transcripts only for missing episodes. All Security Now! content is © Steve Gibson/GRC and TWiT.tv.
 
+## 💖 Support This Project
+
+If this toolkit saves you time organizing your Security Now! archive, consider supporting its development:
+
+[![GitHub Sponsor](https://img.shields.io/badge/Sponsor-💖-pink?logo=githubsponsors)](https://github.com/sponsors/msrproduct)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-☕-yellow?logo=buymeacoffee)](https://www.buymeacoffee.com/msrproduct)
+
+**Your support helps cover:**
+- Compute costs for AI transcription (Whisper processing)
+- Development time maintaining episode mappings
+- Testing with new Security Now! episodes
+- Server costs for hosting documentation
+
+**Note**: All donations are voluntary. This project is and will always remain **free and open-source**. Every feature is available to everyone, regardless of contribution.
+
+---
+
 ## ⭐ What Makes This Project Different
 
 ### Single Script, Complete Automation
