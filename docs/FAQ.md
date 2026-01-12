@@ -324,6 +324,178 @@ cd path\to\securitynow-archive-tools
 
 ---
 
+## Repository Sync Questions
+
+### What is the Sync-Repos.ps1 script?
+
+**Purpose:** Automatically synchronizes non-copyrighted files between your private archive (which includes PDFs/MP3s) and the public GitHub repository (scripts and docs only).
+
+**Why it exists:**
+- Keeps your private complete archive
+- Shares improvements with the community
+- Prevents accidental copyright violations
+- Automates what would otherwise be manual copying
+
+**See:** [SYNC-REPOS-GUIDE.md](SYNC-REPOS-GUIDE.md) for full documentation.
+
+---
+
+### Do I need two repositories?
+
+**No, but it's recommended** if you want to contribute back to the community.
+
+**Single repo (simpler):**
+- Clone the public repo
+- Run scripts to build your archive
+- Keep everything local
+- Don't push to GitHub
+
+**Two repos (advanced):**
+- **Private repo:** Your complete archive with media files
+- **Public repo:** Scripts and docs only
+- Use `Sync-Repos.ps1` to keep them in sync
+- Contribute improvements to public repo safely
+
+---
+
+### How do I set up the two-repo workflow?
+
+**Step-by-step:**
+
+1. **Clone public repo:**
+   ```powershell
+   git clone https://github.com/msrproduct/securitynow-archive-tools.git SecurityNow-Full
+   ```
+
+2. **Create private copy:**
+   ```powershell
+   Copy-Item -Path SecurityNow-Full -Destination SecurityNow-Full-Private -Recurse
+   cd SecurityNow-Full-Private
+   ```
+
+3. **Initialize as separate repo:**
+   ```powershell
+   Remove-Item -Path .git -Recurse -Force
+   git init
+   git add .
+   git commit -m "Initial private archive"
+   ```
+
+4. **Create private GitHub repo** (via website)
+
+5. **Push to private:**
+   ```powershell
+   git remote add origin https://github.com/YOUR-USERNAME/securitynow-full-archive.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+6. **Use sync script:**
+   ```powershell
+   .\scripts\Sync-Repos.ps1
+   ```
+
+**See:** [QUICK-START.md](QUICK-START.md#two-repo-setup-private--public) for detailed instructions.
+
+---
+
+### What files does Sync-Repos.ps1 sync?
+
+**Synced (private → public):**
+- ✅ `README.md`
+- ✅ `LICENSE`
+- ✅ `docs/` folder (all documentation)
+- ✅ `scripts/` folder (all scripts)
+- ✅ `data/SecurityNowNotesIndex.csv`
+
+**Never synced (stays private):**
+- ❌ `local/PDF/` (official and AI-generated PDFs)
+- ❌ `local/mp3/` (audio files)
+- ❌ `local/Notes/ai-transcripts/` (transcripts)
+- ❌ `.gitignore` (each repo maintains its own)
+
+---
+
+### How do I test sync without making changes?
+
+**Use dry-run mode:**
+
+```powershell
+.\scripts\Sync-Repos.ps1 -DryRun -Verbose
+```
+
+**Output shows:**
+- What files would be synced
+- What's already in sync
+- What would be skipped
+- **No changes are made**
+
+**Perfect for:**
+- Verifying sync before running
+- Checking if repos are already in sync
+- Testing after making changes
+
+---
+
+### Sync script says "Files synced: 0" - is that normal?
+
+**Yes!** This is **good** - it means:
+
+✅ Both repos are perfectly in sync  
+✅ No changes need to be copied  
+✅ Script is working correctly  
+
+**You'll see non-zero counts when:**
+- You've edited files in the private repo
+- You've added new scripts
+- You've updated documentation
+- First time running after changes
+
+---
+
+### Can I edit files in the public repo directly?
+
+**Not recommended.** The sync script copies from private → public (one-way).
+
+**What happens if you edit public repo:**
+- Next sync will **overwrite** your changes
+- You'll lose your edits
+
+**Correct workflow:**
+1. Edit files in **private** repo
+2. Commit to private repo
+3. Run `Sync-Repos.ps1`
+4. Changes automatically pushed to public
+
+**Exception:** If you only have a public repo (no private), edit directly and push normally.
+
+---
+
+### Sync failed with "Git operations failed" - what now?
+
+**Don't worry!** The files are already synced locally.
+
+**Cause:** Network issue, authentication problem, or merge conflict.
+
+**Solution:**
+
+```powershell
+# Navigate to public repo
+cd D:\Desktop\SecurityNow-Full
+
+# Check status
+git status
+
+# Try pushing manually
+git push origin main
+
+# If authentication fails, check your GitHub token
+```
+
+**See:** [TROUBLESHOOTING.md](TROUBLESHOOTING.md#git-issues) for detailed solutions.
+
+---
+
 ## Contributing
 
 ### Can I contribute improvements?
@@ -361,7 +533,10 @@ cd path\to\securitynow-archive-tools
 
 1. **Documentation:**
    - [README.md](../README.md) - Quick start guide
+   - [QUICK-START.md](QUICK-START.md) - Beginner-friendly setup
    - [WORKFLOW.md](WORKFLOW.md) - Detailed step-by-step instructions
+   - [SYNC-REPOS-GUIDE.md](SYNC-REPOS-GUIDE.md) - Sync script documentation
+   - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Problem solving
 
 2. **Community:**
    - [GitHub Issues](https://github.com/msrproduct/securitynow-archive-tools/issues) - Bug reports and questions
@@ -381,7 +556,7 @@ cd path\to\securitynow-archive-tools
 
 **However:**
 - The setup is designed to be beginner-friendly
-- Follow the [WORKFLOW.md](WORKFLOW.md) step-by-step
+- Follow the [QUICK-START.md](QUICK-START.md) step-by-step
 - Ask for help in [GitHub Discussions](https://github.com/msrproduct/securitynow-archive-tools/discussions) if stuck
 
 **If you're a business** needing professional assistance, consider hiring a freelance PowerShell developer on platforms like Upwork or Fiverr to help with setup.
@@ -393,8 +568,9 @@ cd path\to\securitynow-archive-tools
 **Didn't find your answer?**
 
 1. Search [existing issues](https://github.com/msrproduct/securitynow-archive-tools/issues)
-2. Check the [WORKFLOW.md](WORKFLOW.md) detailed guide
-3. Ask in [GitHub Discussions](https://github.com/msrproduct/securitynow-archive-tools/discussions)
+2. Check the [TROUBLESHOOTING.md](TROUBLESHOOTING.md) guide
+3. Review the [QUICK-START.md](QUICK-START.md) setup instructions
+4. Ask in [GitHub Discussions](https://github.com/msrproduct/securitynow-archive-tools/discussions)
 
 ---
 
