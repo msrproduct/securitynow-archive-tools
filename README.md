@@ -1,412 +1,186 @@
-Security Now! Tools & Episode Index
+# Security Now! Archive Tools
 
-This project helps you build your own local Security Now! archive using Steve Gibson’s official show notes on GRC and the Security Now episodes from TWiT.tv, without redistributing any copyrighted content.
-​
+A PowerShell-based toolkit for building and maintaining a personal archive of Steve Gibson's Security Now! podcast show notes and transcripts.
 
-It is designed for:
+## 📋 What This Project Does
 
-    Fans and researchers who want a complete, organized archive of Security Now episodes on their own machine.
+This toolkit helps you:
+- Download official show notes PDFs from [Gibson Research Corporation (GRC)](https://www.grc.com/securitynow.htm)
+- Generate AI-derived transcripts for episodes without official notes
+- Organize everything by year in a clean folder structure
+- Maintain a CSV index of all episodes
 
-    Users who may have no development tools installed and need a guided, step‑by‑step setup.
+**Important**: This project respects copyright. It downloads content from official sources and generates AI transcripts only for missing episodes. All Security Now! content is © Steve Gibson/GRC and TWiT.tv.
 
+## ⚙️ Prerequisites
 
-What This Project Does
+Before you begin, ensure you have:
 
-The scripts and data in this repository help you:
+### 1. PowerShell 7+
+**What it is**: The scripting environment that runs the automation.
 
-    Scan the official archives
+**Installation**:
+- Windows: Download from [Microsoft's PowerShell GitHub](https://github.com/PowerShell/PowerShell/releases)
+- Already have it? Check version: `pwsh --version`
 
-        GRC archive pages: https://www.grc.com/securitynow.htm and https://www.grc.com/sn/past-YYYY.htm.
+### 2. Whisper.cpp (Speech-to-Text Engine)
+**What it is**: Converts audio files to text transcripts.
 
-​
+**Why needed**: Creates transcripts for episodes that never had official show notes.
 
-​
+**Installation** (Windows):
+1. Download from [whisper.cpp releases](https://github.com/ggerganov/whisper.cpp/releases)
+2. Extract to a folder (e.g., `C:\whisper`)
+3. Download a model file (recommend `ggml-base.en.bin`) into the same folder
+4. Note the path—you'll configure this in the script
 
-TWiT episode pages: https://twit.tv/shows/security-now/episodes/{number}.
-​
+### 3. Git (Optional)
+Only needed if you want to clone the repository instead of downloading as ZIP.
 
-    ​
+**Installation**: [git-scm.com](https://git-scm.com/downloads)
 
-Download official show‑notes PDFs to your machine
+### 4. Chrome or Edge Browser
+Required for converting HTML transcripts to PDF format. Most Windows systems already have Edge.
 
-    Files like SN-1050-Notes.pdf are fetched directly from GRC into a local folder tree on your system.
+## 🚀 Quick Start
 
-​
+### Step 1: Get the Code
 
-    ​
+**Option A - Clone with Git**:
+```powershell
+git clone https://github.com/msrproduct/securitynow-archive-tools.git
+cd securitynow-archive-tools
+```
 
-Organize notes by year
+**Option B - Download ZIP**:
+1. Click the green "Code" button above
+2. Select "Download ZIP"
+3. Extract to a folder of your choice
 
-    Episodes are filed into PDF\YYYY folders (2005–2026) using a built‑in episode‑to‑year mapping.
+### Step 2: Configure Paths
 
-    ​
+Open `scripts/SecurityNow-EndToEnd.ps1` in a text editor and update these lines (near the top):
 
-Maintain a structured CSV index
+```powershell
+# Your whisper.cpp installation
+$WhisperExe = "C:\whisper\whisper-cli.exe"
+$WhisperModel = "C:\whisper\ggml-base.en.bin"
 
-    data/SecurityNowNotesIndex.csv tracks, per episode:
+# Your preferred root folder (change as needed)
+$Root = "$HOME\SecurityNowArchive"
+```
 
-    ​
+**Note**: Replace `C:\whisper\` with wherever you installed Whisper. The `$HOME` variable automatically uses your user folder, so you don't need to hard-code paths.
 
-        Episode number and title (when available)
+### Step 3: Allow Script Execution
 
-        Official GRC/TWiT show‑notes URL
+PowerShell's default security prevents running scripts. Open PowerShell 7 **as Administrator** and run:
 
-        Local filename on your machine
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 
-        Flags indicating whether AI‑derived notes exist
+### Step 4: Run the Script
 
-Optionally generate AI‑derived notes for missing PDFs
+Navigate to your repository folder and run:
 
-    For episodes with no official GRC PDF, the workflow can:
-
-        ​
-
-            Download the official MP3.
-
-            Use a Whisper speech‑to‑text tool to create a transcript.
-
-            Wrap that transcript into a PDF with a bold disclaimer that it is not an official Steve Gibson document.
-
-All AI‑generated content is for personal research and is always clearly labeled as unofficial.
-
-​
-What This Project Does Not Do
-
-To respect Steve Gibson, Gibson Research Corporation, and TWiT:
-
-    This public repository does not contain:
-
-​
-
-    Original GRC show‑notes PDFs (SN-XXXX-Notes.pdf).
-
-    TWiT transcripts or MP3 audio files.
-
-    Any other copyrighted GRC/TWiT content.
-
-Instead, it contains only:
-
-    ​
-
-        PowerShell scripts and helper code.
-
-        A CSV index with episode metadata and official URLs.
-
-        Documentation describing how to build your own private archive at home.
-
-The idea is: all original content comes from GRC and TWiT, this repo just automates the work Steve and Leo would fully approve of you doing for yourself.
-​
-
-​
-Legal & Attribution
-
-    Security Now! is written and hosted by Steve Gibson (Gibson Research Corporation) and co‑hosted by Leo Laporte on the TWiT network.
-
-​
-
-All official show notes, transcripts, and audio remain the property of GRC and TWiT.
-
-    ​
-
-This project:
-
-    Exists solely to assist with personal research and archival.
-
-    Requires you to fetch original show notes and audio from GRC and TWiT.tv yourself.
-
-​
-
-Requires that any AI‑derived notes you generate are clearly marked as automatically generated and not official show notes.
-
-    ​
-
-If you share anything publicly, share only your own code, your CSV index, and instructions that point other fans back to GRC and TWiT.
-Repository Layout (Public Tools Repo)
-
-This repo is intentionally small and media‑free so it is safe to share:
-
-text
-securitynow-archive-tools/
-├── data/
-│   └── SecurityNowNotesIndex.csv   # Episode index (numbers, titles, URLs, local filenames)
-├── scripts/
-│   └── SecurityNow-EndToEnd.ps1    # Main end-to-end automation script
-├── docs/
-│   ├── README.md                   # This file
-│   └── WORKFLOW.md                 # Detailed workflow & advanced usage (optional)
-└── .gitignore                      # Ensures media never enters this public repo
-
-On your machine, you will typically also have a private clone that adds a local folder for media, for example:
-
-​
-
-text
-C:\SecurityNow-Full-Private\
-├── data\
-│   └── SecurityNowNotesIndex.csv
-├── scripts\
-│   └── SecurityNow-EndToEnd.ps1
-├── docs\
-├── local\                          # PRIVATE MEDIA (not pushed to public GitHub)
-│   ├── PDF\
-│   │   ├── 2005\
-│   │   ├── 2024\
-│   │   └── SN-XXXX-Notes*.pdf / SN-XXXX-Notes-AI.pdf
-│   ├── mp3\
-│   │   └── sn-XXXX.mp3
-│   └── Notes\
-│       └── ai-transcripts\
-│           └── sn-XXXX-notes-ai.txt
-└── .gitignore
-
-The local folder is where all PDFs, MP3s, and AI transcripts live, and it must never be committed to this public repo.
-
-​
-Prerequisites (Assume the User Has Nothing)
-
-This section assumes the user starts from a clean Windows system and has never used Git or PowerShell before.
-1. GitHub account (optional but recommended)
-
-    Visit https://github.com/ and create a free account if you want to keep your own fork or contribute fixes.
-
-​
-
-If you don’t want to use Git at all, you can download a ZIP of this repo and skip cloning.
-
-    ​
-
-2. PowerShell
-
-    Windows 10/11 already comes with PowerShell.
-
-    For best experience, install PowerShell 7 from Microsoft’s official download page (search “Install PowerShell 7”).
-
-    ​
-
-    You will run all commands in a PowerShell window (not Command Prompt).
-
-3. A folder for your archive
-
-The scripts are designed to work on any drive or path. You do not have to use D:.
-
-​
-
-A common setup is:
-
-text
-C:\SecurityNow-Full          # Public tools/index clone (this repo)
-C:\SecurityNow-Full-Private  # Private working copy with media
-
-You can change these to any path you prefer (for example, E:\SNArchive); you will configure the root once and the script will create data, scripts, and local under that root.
-
-​
-4. Optional: Whisper for AI transcripts
-
-What Whisper is
-
-    Whisper is an open‑source speech‑to‑text system that can listen to audio (like Security Now MP3s) and produce a text transcript.
-
-    This project assumes a command‑line version (“Whisper CLI”), such as whisper.cpp or similar, that you run from PowerShell.
-
-    ​
-
-Why you might want Whisper
-
-    Some Security Now episodes never had official GRC show‑notes PDFs.
-
-    For those, Whisper can:
-
-        Listen to the official MP3.
-
-        Produce a transcript (sn-XXXX-notes-ai.txt).
-
-        Let the pipeline wrap that text into an AI‑generated PDF (sn-XXXX-notes-ai.pdf) with a strong disclaimer.
-
-        ​
-
-Basic install pattern (example)
-
-    Download a Whisper CLI build (e.g., whisper.cpp compiled for Windows).
-
-    Put it and its model file in a folder, such as:
-
-text
-C:\whisper-cli\whisper-cli.exe
-C:\whisper-cli\ggml-base.en.bin
-
-In scripts\SecurityNow-EndToEnd.ps1, you will set:
-
-    WhisperExe – full path to the CLI (e.g., C:\whisper-cli\whisper-cli.exe).
-
-    WhisperModel – full path to the model (e.g., C:\whisper-cli\ggml-base.en.bin).
-
-    ​
-
-If you skip Whisper configuration:
-
-    The script can still:
-
-        Download official PDFs.
-
-        Build the CSV index.
-
-        Organize PDFs by year.
-
-    You simply will not get AI‑generated PDFs for episodes that lack official notes.
-
-    ​
-
-Getting Started (Step‑by‑Step, Novice‑Friendly)
-Step 1 – Get this repo onto your machine
-
-You can use Git or download the ZIP.
-Option A: Clone with Git (recommended if you know Git)
-
-powershell
-# 1. Choose a folder for the public tools
-New-Item -ItemType Directory -Path "C:\SecurityNow-Full" -Force | Out-Null
-Set-Location "C:\SecurityNow-Full"
-
-# 2. Clone the public tools repo into this folder
-git clone https://github.com/msrproduct/securitynow-archive-tools.git .
-
-Option B: Download ZIP (no Git required)
-
-    Go to https://github.com/msrproduct/securitynow-archive-tools.
-
-    Click the green Code button → Download ZIP.
-
-    Extract the ZIP into C:\SecurityNow-Full (or any folder you like).
-
-    ​
-
-Step 2 – Create your private working copy
-
-The private working copy is where you will actually download PDFs and MP3s and run Whisper.
-
-powershell
-# Create a private root folder
-New-Item -ItemType Directory -Path "C:\SecurityNow-Full-Private" -Force | Out-Null
-Set-Location "C:\SecurityNow-Full-Private"
-
-# Copy or clone the tools into the private folder
-git clone https://github.com/msrproduct/securitynow-archive-tools.git .
-
-Now create the local media folders:
-
-powershell
-New-Item -ItemType Directory -Path .\local\PDF -Force                 | Out-Null
-New-Item -ItemType Directory -Path .\local\mp3 -Force                 | Out-Null
-New-Item -ItemType Directory -Path .\local\Notes\ai-transcripts -Force | Out-Null
-
-Everything downloaded or generated (PDFs, MP3s, transcripts) will go under local\ and stay on your machine.
-
-​
-Step 3 – Configure paths and options in the script
-
-Open scripts\SecurityNow-EndToEnd.ps1 in an editor (Notepad, Notepad++, VS Code).
-
-Look for a configuration section near the top; you will typically set:
-
-    Repo root
-
-        Often defined relative to the script location (for example, using PSScriptRoot), so you should not need to hard‑code C: or D:.
-
-    ​
-
-Local media root
-
-    Defaults to something like .\local, which is inside your repo root.
-
-    This is where PDFs, MP3s, and AI transcripts are stored.
-
-Whisper settings (if using AI notes)
-
-    Set WhisperExe to C:\whisper-cli\whisper-cli.exe (or wherever your CLI lives).
-
-    Set WhisperModel to C:\whisper-cli\ggml-base.en.bin (or your chosen model).
-
-        ​
-
-If you want the whole archive somewhere else (like E:\SecurityNowArchive), change the base path once, and let the script create its own data, scripts, and local folders there.
-
-​
-Step 4 – First full run (private repo)
-
-From your private working copy:
-
-powershell
-Set-Location "C:\SecurityNow-Full-Private"
-
-# Run the end-to-end script
+```powershell
+cd path\to\securitynow-archive-tools
 .\scripts\SecurityNow-EndToEnd.ps1
+```
 
-On the first run, the script will:
+**First run will take time** (hours) as it downloads hundreds of PDFs and generates AI transcripts for missing episodes.
 
-​
+## 📁 Output Structure
 
-    Scan GRC’s Security Now archive pages for all years.
+After running, you'll have:
 
-​
+```
+SecurityNowArchive/
+├── data/
+│   └── SecurityNowNotesIndex.csv    # Master index
+├── local/
+│   ├── PDF/
+│   │   ├── 2005/
+│   │   │   ├── sn-1-notes-ai.pdf
+│   │   │   └── ...
+│   │   ├── 2024/
+│   │   │   ├── sn-1000-notes.pdf
+│   │   │   └── ...
+│   ├── mp3/
+│   │   └── sn-1.mp3 (audio for AI episodes)
+│   └── Notes/
+│       └── ai-transcripts/
+│           └── sn-1-notes-ai.txt
+```
 
-​
+## 📊 Understanding the CSV Index
 
-Download any official show‑notes PDFs it finds into local\PDF\YYYY.
+Open `data/SecurityNowNotesIndex.csv` in Excel or any spreadsheet app:
 
-Build or update data\SecurityNowNotesIndex.csv.
+| Episode | Url | File |
+|---------|-----|------|
+| 1 | (empty - AI generated) | sn-1-notes-ai.pdf |
+| 432 | https://www.grc.com/sn/sn-432-notes.pdf | sn-432-notes.pdf |
+| 1000 | https://www.grc.com/sn/sn-1000-notes.pdf | sn-1000-notes.pdf |
 
-If Whisper is configured and an episode has no official PDF, it will:
+- **Empty URL**: AI-derived transcript (no official notes existed)
+- **GRC URL**: Official show notes from Steve Gibson
 
-    Download the official MP3 (if needed).
+## 🔄 Updating for New Episodes
 
-    Create sn-####-notes-ai.txt under local\Notes\ai-transcripts.
+When new Security Now! episodes are released:
 
-    Create sn-####-notes-ai.pdf under local\PDF\YYYY with a prominent AI disclaimer.
+```powershell
+.\scripts\SecurityNow-EndToEnd.ps1
+```
 
-        ​
+The script automatically:
+- Checks for new episodes on GRC
+- Downloads new official notes
+- Skips existing files (no re-downloads)
+- Updates the CSV index
 
-If something fails:
+## 🔐 Public vs. Private Usage
 
-    Already‑downloaded files remain on disk.
+This repository contains **only scripts and the index**—no copyrighted content.
 
-    You can fix configuration or networking issues and re‑run without losing progress.
+To maintain a full private archive:
+1. Clone this public repo to a private location
+2. Run the script there to build your local archive
+3. Keep the `local/` folder private (backup to OneDrive, etc.)
+4. Never commit PDFs/MP3s to a public repo
 
-Keeping Public and Private in Sync
+## 🛠️ Troubleshooting
 
-Typical usage pattern:
+### "Script not digitally signed"
+Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
-    Do all heavy work in the private repo (C:\SecurityNow-Full-Private):
+### "Whisper-cli.exe not found"
+- Verify the path in `SecurityNow-EndToEnd.ps1` matches your installation
+- Ensure `whisper-cli.exe` and the model file are in the same folder
 
-        Running the script.
+### AI transcripts not generating
+- Check that the MP3 downloaded successfully
+- Verify Whisper model file exists (e.g., `ggml-base.en.bin`)
+- Look for error messages in the PowerShell output
 
-        Downloading PDFs/MP3s.
+### PDFs not organizing by year
+- Ensure the script completed without errors
+- Check that episode numbers in filenames are correct
 
-        Generating AI notes.
+## 🙏 Credits
 
-        ​
+- **Security Now!** podcast: © Steve Gibson, [Gibson Research Corporation](https://www.grc.com)
+- **Podcast host**: [TWiT.tv](https://twit.tv/shows/security-now)
+- **Speech-to-text**: [whisper.cpp](https://github.com/ggerganov/whisper.cpp)
 
-    Copy safe changes back to the public repo (C:\SecurityNow-Full):
+This project is an unofficial archival tool for personal research and does not redistribute copyrighted content.
 
-        data\SecurityNowNotesIndex.csv
+## 📝 License
 
-        Updated scripts under scripts\
+This tooling is released under the MIT License. Security Now! content remains © Steve Gibson/GRC and TWiT.
 
-Example:
+---
 
-powershell
-# From PowerShell
-Copy-Item "C:\SecurityNow-Full-Private\data\SecurityNowNotesIndex.csv" `
-          "C:\SecurityNow-Full\data\SecurityNowNotesIndex.csv" -Force
-
-Copy-Item "C:\SecurityNow-Full-Private\scripts\SecurityNow-EndToEnd.ps1" `
-          "C:\SecurityNow-Full\scripts\SecurityNow-EndToEnd.ps1" -Force
-
-Then, from the public repo:
-
-powershell
-Set-Location "C:\SecurityNow-Full"
-git add data\SecurityNowNotesIndex.csv scripts\SecurityNow-EndToEnd.ps1
-git commit -m "Update Security Now index and pipeline"
-git push
-
-Your private archive keeps media; the public repo only shares scripts and index data.
+**Questions?** Open an issue on GitHub or consult the detailed `WORKFLOW.md` in the `docs/` folder.
