@@ -268,14 +268,17 @@ for ($ep = $MinEpisode; $ep -le $MaxEpisode; $ep++) {
         body {
             font-family: Arial, sans-serif;
             white-space: pre-wrap;
+            background-color: white;
+            color: black;
+            margin: 20px;
         }
         .disclaimer {
             font-weight: bold;
-            color: red;
-            margin-bottom: 1em;
-            padding: 1em;
-            border: 2px solid red;
-            background-color: #fff8f8;
+            color: white;
+            background-color: red;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid darkred;
         }
     </style>
 </head>
@@ -287,7 +290,7 @@ for ($ep = $MinEpisode; $ep -le $MaxEpisode; $ep++) {
         <br><br>
         Official Security Now! notes are available at: https://www.grc.com/securitynow.htm
     </div>
-    <pre>$bodyText</pre>
+    <pre>`$bodyText</pre>
 </body>
 </html>
 "@
@@ -300,7 +303,7 @@ for ($ep = $MinEpisode; $ep -le $MaxEpisode; $ep++) {
         $finalAiPdf = Join-Path $yearFolder "sn-$ep-notes-ai.pdf"
         
         try {
-            & $PdfTool --headless --disable-gpu --print-to-pdf="$pdfPath" $htmlPath 2>&1 | Out-Null
+            & $PdfTool --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="$pdfPath" $htmlPath 2>&1 | Out-Null
             Start-Sleep -Seconds 2
             
             if (Test-Path -LiteralPath $pdfPath) {
