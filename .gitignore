@@ -1,0 +1,9 @@
+# Public repo: tools and index only
+# Never commit local media or archives here
+
+local/
+*.mp3
+sn-*-notes.pdf
+sn-*-notes-ai.pdf
+sn-*-transcript.*
+*.zip
