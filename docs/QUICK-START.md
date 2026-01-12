@@ -8,7 +8,7 @@ Get your Security Now! archive up and running in under 30 minutes.
 
 **Before you begin, ensure you have:**
 
-- ✅ Windows 10/11 (or macOS/Linux with PowerShell 7+)
+- ✅ Windows 10/11, macOS 10.15+, or Linux (Ubuntu 20.04+)
 - ✅ PowerShell 7.0 or higher ([Download here](https://github.com/PowerShell/PowerShell))
 - ✅ Git installed ([Download here](https://git-scm.com/))
 - ✅ 5-10 GB free disk space
@@ -19,6 +19,12 @@ Get your Security Now! archive up and running in under 30 minutes.
 $PSVersionTable.PSVersion
 # Should show 7.0 or higher
 ```
+
+**Optional tools:**
+- **wkhtmltopdf** for HTML → PDF conversion ([Download](https://wkhtmltopdf.org/downloads.html))
+  - Windows: `winget install wkhtmltopdf`
+  - macOS: `brew install wkhtmltopdf`
+  - Linux: `apt-get install wkhtmltopdf` or `yum install wkhtmltopdf`
 
 ---
 
@@ -60,6 +66,36 @@ New-Item -Path "$archiveRoot\local\mp3" -ItemType Directory -Force
 New-Item -Path "$archiveRoot\local\Notes\ai-transcripts" -ItemType Directory -Force
 ```
 
+### Step 4: Install wkhtmltopdf (Optional)
+
+For converting HTML show notes to PDF:
+
+**Windows:**
+```powershell
+winget install wkhtmltopdf
+# Restart PowerShell after installation
+```
+
+**macOS:**
+```bash
+brew install wkhtmltopdf
+```
+
+**Linux:**
+```bash
+# Debian/Ubuntu
+sudo apt-get install wkhtmltopdf
+
+# RHEL/CentOS
+sudo yum install wkhtmltopdf
+```
+
+**Verify installation:**
+```powershell
+wkhtmltopdf --version
+# Should show: wkhtmltopdf 0.12.6
+```
+
 ---
 
 ## First Run (30-60 minutes)
@@ -76,6 +112,7 @@ If you only want official show notes PDFs:
 # - Download all official PDFs from GRC (~500 files)
 # - Organize by year
 # - Create CSV index
+# - Convert HTML notes to PDF (if wkhtmltopdf installed)
 # - Skip AI transcription (requires additional setup)
 ```
 
@@ -86,6 +123,7 @@ If you only want official show notes PDFs:
 The script displays:
 - Current episode being processed
 - Download status
+- HTML → PDF conversion (if applicable)
 - File organization updates
 - Final summary
 
@@ -94,6 +132,7 @@ Processing episode 1 of 1000...
 [OK] Downloaded sn-001-notes.pdf
 Processing episode 2 of 1000...
 [SKIP] sn-002-notes.pdf not available
+[OK] Converted HTML to PDF: sn-002-notes.pdf
 ...
 ```
 
@@ -227,7 +266,8 @@ notepad .\scripts\SecurityNow-EndToEnd.ps1
 
 # Set these variables:
 $enableAITranscripts = $true
-$whisperPath = "C:\whisper\main.exe"
+$whisperPath = "C:\whisper\main.exe"  # Windows
+# $whisperPath = "/usr/local/bin/main"  # macOS/Linux
 $whisperModel = "C:\whisper\models\ggml-base.en.bin"
 ```
 
@@ -259,6 +299,20 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 git --version
 
 # If not installed, download from https://git-scm.com/
+```
+
+### "wkhtmltopdf not found" error
+
+```powershell
+# Check if installed
+wkhtmltopdf --version
+
+# If not found:
+# Windows: winget install wkhtmltopdf
+# macOS: brew install wkhtmltopdf
+# Linux: apt-get install wkhtmltopdf
+
+# Restart PowerShell after installation
 ```
 
 ### Downloads failing
@@ -311,11 +365,15 @@ Remove-Item $HOME\SecurityNowArchive\logs\* -Recurse -Force
 | Task | Command |
 |------|----------|
 | Initial setup | `git clone https://github.com/msrproduct/securitynow-archive-tools.git` |
+| Install wkhtmltopdf (Windows) | `winget install wkhtmltopdf` |
+| Install wkhtmltopdf (macOS) | `brew install wkhtmltopdf` |
+| Install wkhtmltopdf (Linux) | `apt-get install wkhtmltopdf` |
 | Build archive | `.\scripts\SecurityNow-EndToEnd.ps1` |
 | Update archive | `.\scripts\SecurityNow-EndToEnd.ps1` |
 | Sync repos | `.\scripts\Sync-Repos.ps1` |
 | Test sync | `.\scripts\Sync-Repos.ps1 -DryRun -Verbose` |
-| Check version | `$PSVersionTable.PSVersion` |
+| Check PowerShell version | `$PSVersionTable.PSVersion` |
+| Check wkhtmltopdf | `wkhtmltopdf --version` |
 
 ### File Locations
 
@@ -327,6 +385,13 @@ Remove-Item $HOME\SecurityNowArchive\logs\* -Recurse -Force
 | Transcripts | `$HOME\SecurityNowArchive\local\Notes\ai-transcripts\` |
 | CSV index | `.\data\SecurityNowNotesIndex.csv` |
 | Scripts | `.\scripts\` |
+
+### Cross-Platform Paths
+
+| Tool | Windows | macOS/Linux |
+|------|---------|-------------|
+| wkhtmltopdf | `C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe` | `/usr/local/bin/wkhtmltopdf` |
+| whisper.cpp | `C:\whisper\main.exe` | `/usr/local/bin/main` |
 
 ---
 
