@@ -9,6 +9,7 @@ Detailed solutions for common issues with Security Now! Archive Tools.
 - [PowerShell Issues](#powershell-issues)
 - [Git Issues](#git-issues)
 - [Download Problems](#download-problems)
+- [HTML to PDF Conversion](#html-to-pdf-conversion)
 - [File Organization Issues](#file-organization-issues)
 - [Sync Script Problems](#sync-script-problems)
 - [AI Transcription Issues](#ai-transcription-issues)
@@ -266,6 +267,148 @@ Get-ChildItem -Path $HOME\SecurityNowArchive -Recurse -File |
 
 # Re-run script to download again
 .\scripts\SecurityNow-EndToEnd.ps1
+```
+
+---
+
+## HTML to PDF Conversion
+
+### "wkhtmltopdf not found"
+
+**Error:**
+```
+wkhtmltopdf : The term 'wkhtmltopdf' is not recognized
+```
+
+**Cause:** wkhtmltopdf not installed or not in PATH.
+
+**Solution:**
+
+**Windows:**
+```powershell
+# Install via winget
+winget install wkhtmltopdf
+
+# Add to PATH for current session
+$env:PATH += ";C:\Program Files\wkhtmltopdf\bin"
+
+# Add to PATH permanently
+$userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+$newPath = $userPath + ";C:\Program Files\wkhtmltopdf\bin"
+[Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+
+# Restart PowerShell
+```
+
+**macOS:**
+```bash
+brew install wkhtmltopdf
+
+# Verify
+wkhtmltopdf --version
+```
+
+**Linux:**
+```bash
+# Debian/Ubuntu
+sudo apt-get install wkhtmltopdf
+
+# RHEL/CentOS
+sudo yum install wkhtmltopdf
+
+# Verify
+wkhtmltopdf --version
+```
+
+---
+
+### HTML to PDF Conversion Fails
+
+**Error:**
+```
+Exit with code 1 due to network error: HostNotFoundError
+```
+
+**Cause:** wkhtmltopdf trying to access external resources that don't exist.
+
+**Solution:**
+
+```powershell
+# Use --disable-external-links flag
+wkhtmltopdf --disable-external-links input.html output.pdf
+
+# Or in script, update conversion command:
+wkhtmltopdf --quiet --disable-external-links --page-size Letter input.html output.pdf
+```
+
+---
+
+### PDF Output is Blank or Incomplete
+
+**Symptoms:** PDF is created but has no content or missing content.
+
+**Diagnosis:**
+
+```powershell
+# Test with a simple HTML file
+@"
+<!DOCTYPE html>
+<html><body><h1>Test</h1></body></html>
+"@ | Out-File test.html
+
+wkhtmltopdf test.html test.pdf
+
+# Check if test.pdf has content
+Start-Process test.pdf
+```
+
+**Solutions:**
+
+1. **Add delay for JavaScript to load:**
+   ```powershell
+   wkhtmltopdf --javascript-delay 1000 input.html output.pdf
+   ```
+
+2. **Disable smart shrinking:**
+   ```powershell
+   wkhtmltopdf --disable-smart-shrinking input.html output.pdf
+   ```
+
+3. **Use specific page size:**
+   ```powershell
+   wkhtmltopdf --page-size Letter --margin-top 10mm --margin-bottom 10mm input.html output.pdf
+   ```
+
+---
+
+### Cross-Platform Path Issues
+
+**Error (macOS/Linux):**
+```
+wkhtmltopdf: error while loading shared libraries
+```
+
+**Solution:**
+
+**macOS:**
+```bash
+# If installed via Homebrew but not found
+xcode-select --install
+brew reinstall wkhtmltopdf
+
+# Update PATH if needed
+export PATH="/usr/local/bin:$PATH"
+```
+
+**Linux:**
+```bash
+# Install dependencies
+sudo apt-get install -y libxrender1 libfontconfig1 libxext6
+
+# Or install via tarball for newer version
+wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
+sudo dpkg -i wkhtmltox_0.12.6-1.focal_amd64.deb
+sudo apt-get install -f
 ```
 
 ---
@@ -599,6 +742,9 @@ Get-ComputerInfo | Select-Object WindowsVersion, OsArchitecture
 # Git info
 git --version
 git remote -v
+
+# wkhtmltopdf info
+wkhtmltopdf --version
 
 # Path info
 $env:PATH -split ';'
