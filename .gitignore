@@ -1,132 +1,20 @@
-# Security Now Archive Tools - Git Ignore Rules
-# This prevents accidentally committing copyrighted media files
-
-# ========================================
-# Local Archive Files (NEVER COMMIT)
-# ========================================
-
-# Full local archive folder
+# Local media and archives - never commit to PUBLIC repo
 local/
-
-# PDF files (official GRC notes and AI-generated)
+*.mp3
 *.pdf
 sn-*-notes.pdf
 sn-*-notes-ai.pdf
+sn-*.mp3
 
-# Audio files
-*.mp3
-*.m4a
-*.wav
+# Build artifacts
+node_modules/
+dist/
+*.log
 
-# Transcript files
-*-ai.txt
-ai-transcripts/
-
-# Compressed archives
-*.zip
-*.7z
-*.tar.gz
-*.rar
-
-# ========================================
-# Operating System Files
-# ========================================
-
-# Windows
-Thumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-*.lnk
-
-# macOS
+# OS files
 .DS_Store
-.AppleDouble
-.LSOverride
-._*
+Thumbs.db
 
-# Linux
-*~
-.directory
-
-# ========================================
-# PowerShell & Development
-# ========================================
-
-# PowerShell transcript logs
-PowerShell_transcript.*.txt
-
-# Backup files
-*.bak
-*.backup
-*.old
-*.orig
-
-# Temporary files
-*.tmp
-*.temp
-~$*
-
-# ========================================
-# IDE & Editor Files
-# ========================================
-
-# Visual Studio Code
-.vscode/
-*.code-workspace
-
-# Visual Studio
-.vs/
-*.suo
-*.user
-
-# JetBrains IDEs
-.idea/
-*.iml
-
-# Sublime Text
-*.sublime-project
-*.sublime-workspace
-
-# Notepad++
-*.npp
-
-# ========================================
-# Git & Version Control
-# ========================================
-
-# Git merge artifacts
-*.orig
-*.BACKUP.*
-*.BASE.*
-*.LOCAL.*
-*.REMOTE.*
-
-# ========================================
-# What SHOULD Be Committed
-# ========================================
-
-# These files are ALLOWED (override the wildcards above):
-!scripts/*.ps1
-!data/*.csv
-!docs/*.md
-!*.md
-!.gitignore
-!LICENSE
-
-# ========================================
-# Notes for Contributors
-# ========================================
-
-# This repository contains ONLY:
-#   - PowerShell automation scripts
-#   - CSV index files (URLs only, no media)
-#   - Documentation
-#
-# NEVER commit:
-#   - PDFs (official or AI-generated)
-#   - MP3/audio files
-#   - Transcript text files
-#   - Full local archive folders
-#
-# These files are copyrighted by Steve Gibson/GRC and TWiT.tv
-# and should remain in your private local archive only.
+# PowerShell test files
+*-test.ps1
+*-temp.ps1
