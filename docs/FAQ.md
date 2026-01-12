@@ -114,32 +114,41 @@ This project generates them ONLY for episodes that:
 ### What are the system requirements?
 
 **Minimum:**
-- **OS:** Windows 10/11 (primary support)
+- **OS:** Windows 10/11, macOS 10.15+, or Linux (Ubuntu 20.04+, etc.)
 - **PowerShell:** Version 7.0 or higher
 - **Disk space:** 5-10 GB for full archive (1000+ PDFs + AI transcripts)
 - **RAM:** 4 GB (8 GB recommended for AI transcription)
 - **Internet:** Broadband connection
 
+**Optional (for HTML → PDF conversion):**
+- **wkhtmltopdf** ([Download](https://wkhtmltopdf.org/downloads.html))
+  - Windows: MSI installer (adds to PATH automatically)
+  - macOS: `brew install wkhtmltopdf`
+  - Linux: `apt-get install wkhtmltopdf` or `yum install wkhtmltopdf`
+
 **Optional (for AI transcripts):**
 - **whisper.cpp** (speech-to-text engine)
-- **Browser:** Chrome or Edge (for HTML → PDF conversion)
 
 ---
 
 ### Does this work on macOS or Linux?
 
-**Partially.** The core PowerShell scripts work on macOS/Linux with PowerShell 7, but:
+**Yes!** The scripts are fully cross-platform with PowerShell 7.
 
-**What works:**
-- Downloading PDFs from GRC
-- Building the CSV index
-- Organizing files by year
+**Installation:**
+- **macOS:** `brew install powershell wkhtmltopdf`
+- **Linux:** Install PowerShell 7 ([instructions](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-linux))
 
-**What needs adaptation:**
-- Whisper.cpp paths (use `/usr/local/bin/` instead of `C:\whisper\`)
-- Browser for HTML → PDF (may need alternative tools like `wkhtmltopdf`)
+**What works cross-platform:**
+- ✅ Downloading PDFs from GRC
+- ✅ HTML → PDF conversion (via wkhtmltopdf)
+- ✅ Building the CSV index
+- ✅ Organizing files by year
+- ✅ AI transcription (whisper.cpp available on all platforms)
 
-**Contributions welcome** to improve cross-platform support!
+**Path differences:**
+- Windows: `C:\whisper\main.exe`
+- macOS/Linux: `/usr/local/bin/main` or `~/whisper.cpp/main`
 
 ---
 
