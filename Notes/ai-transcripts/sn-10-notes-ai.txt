@@ -1,0 +1,405 @@
+ This is security now, episode 10 for October 20th, 2005, Open Wireless Access Points.
+ Steve Gibson is on the line, and we're ready to talk security, Steve of course, the head
+ honcho and maven at grc.com, a creator of the great Spinrite File Recovery and Disc Recovery
+ program, which I still use and have used for years in love, and it's updated and great
+ and better never.
+ And of course, SHIELD's up, and all of his free security products that you can download,
+ like Decombobulator, shoot the messenger, unplug and pray, or is it unplug and pray?
+ Unplug and pray.
+ It is unplug and pray.
+ Because the idea is you want to run it and then pray that nothing else gets you.
+ Pray, it works.
+ And then of course, the security now podcast, which we're very pleased to say is getting
+ a great response.
+ I think a lot of interest.
+ Everybody has to pay attention to security, and occasionally I'll see a message saying
+ "Oh, I'm a Mac user, but I still listen."
+ This stuff applies to Mac users too.
+ Well, and in fact, that's one of the things that we're trying to do with this is there
+ are some people who sort of just want to know what button to push.
+ It's like, "Oh, don't confuse me with any theory.
+ I just want to know what program to run, what button to push."
+ But it's really more interesting, I think, to, I mean, certainly we do some of that.
+ The way we did, for example, with rootkit revealer, telling people who are using Windows to just
+ get that off a Sys internal site and run it, at the same time, it's much more valuable,
+ I think, if we explain what this stuff is about, and I don't remember what the old
+ adage was, something about, "Give a man officially for a day.
+ Teach a man a fish.
+ He'll know what equipment to buy."
+ Exactly.
+ So what I think, I'm sure that's exactly the one that I was trying to think of.
+ So the point is that if we can explain, essentially, the things that we know in our soul from
+ having been dipped in all this technology for years and years in a way that's accessible
+ to people, then we're turning people into security gurus themselves who, for example,
+ won't want to know only what the best antivirus program is, but will be able to evaluate for
+ themselves what the best one might be.
+ I think that's important.
+ I think that, unfortunately, we do live in a world, certainly in the Windows side, where
+ you have to be a security expert, unless you're lucky enough to be sitting behind a well-manned
+ firewall at your office and you don't use this stuff at home.
+ Everybody needs to have some security information.
+ Right.
+ That's just part of the deal.
+ And if you're a Mac user, I think it's very important.
+ Well, the topic today impacts Mac users just as much as it impacts PC users.
+ Before we get to today's topic, let's kind of wrap up this rootkit because we did learn
+ some stuff since our last podcast.
+ Well, in fact, it was the day after you and I did the podcast in Toronto that we also
+ did a show on call for help about the same topic about rootkits.
+ We ran rootkit revealer on the various machines there.
+ I don't think there was a single one that came out perfectly clean, but a lot of it was
+ false positives.
+ Well, that's exactly the point.
+ For example, we discovered that Norton's secure delete facility actually uses the same
+ rootkit technology to hide deleted files from any programs in the operating system much
+ the same way we were talking about rootkit technology would be hiding malware.
+ Of course, Norton's secure deletion system is not malicious at all.
+ It's doing this in order to really securely save these deleted files until you want to
+ bring them back.
+ So it's a legitimate use of rootkit technology.
+ Yes.
+ Again, it's a perfect example of why it's worth spending some time on the theory behind
+ the things we talk about because this would allow people, if people understood that what
+ rootkit revealer was doing was not revealing rootkits necessarily, but actually showing
+ the difference between what's really on the system and what you're seeing.
+ I mean, for example, you would have a sense that, "Okay, this is something that's hidden
+ from me."
+ It's a false positive result from rootkit revealer, not something that's necessarily malicious.
+ We also found that Kaspersky's antivirus uses a rootkit to hide some of its processes.
+ Right.
+ And so we thought, "Oh my God, we ran on Andy's computer and we were laughing because it was
+ so loaded with stuff."
+ And then we realized, "Oh, it's just Kaspersky.
+ It's normal."
+ Right.
+ There have been some people who have responded that they have found rootkits.
+ They have found randomly named files and other confusing things.
+ So it looks like it's very useful.
+ But again, it certainly is the case that there are valid programs, non-nolicious programs
+ that are also hiding things on behalf of the user as part of their function.
+ It just underscores your point.
+ There's no such thing as push button security.
+ You really do kind of have to understand this stuff.
+ We have that bent, though, you and I, we like to understand it.
+ We're interested.
+ That's part of the fun of it for us.
+ Not everybody wants to, but that's, I guess, just the way it is at least.
+ I think that's what this, this program is about, is explaining issues of security, oftentimes
+ telling people, you know, what we recommend they do, but also, you know, a lot of why,
+ because, you know, why is what's really interesting, I think.
+ Let's change gears now, talk about our subject of the day, open wireless access points.
+ Something everybody has to deal with, not only when they set up their own wireless network
+ at home, but when you go to an internet cafe at airport, a hotel and use their wireless.
+ Right.
+ I think that, well, certainly, we will be talking about issues of wireless security many times.
+ You know, we were, at some point, we're going to talk about, you know, encryption and essentially
+ non-open use of Wi-Fi, but I really wanted to spend some time to talk about open access
+ points.
+ For example, right now, where I'm sitting at home, I don't have wireless running.
+ There are three open access points that my, you know, if I were running wireless, I'd
+ have complete access to the neighbors of mine have not secured their access points.
+ I walked downtown with Netstumbler running a couple of weeks ago, just to see, I walked
+ through my small town, live in a little community of about 50,000.
+ And I would estimate about 60%, and apparently this is a pretty consistent figure nationwide.
+ 60% of the access points I was able to see were unprotected.
+ Well, now, from prior conversations that we've had in Twit, we know that a lot of people
+ want their access point to be open.
+ They sort of like the idea of creating a communal access to their broadband through
+ their access point.
+ So sometimes they're doing it deliberately.
+ I used to be that way, but as soon as I realized that people can see everything I'm doing,
+ I kind of changed my tune.
+ Well, now that's exactly the point.
+ And that's really what I wanted to talk about is, if we step back a little bit, a wireless
+ system is like an internet hub in as much as, you know, anybody who has access to, who's
+ with it in range, it has access to the radio signals, is able to see all of the traffic
+ going to and from.
+ There are, you know, in internet technology, there's this notion of a hub versus a switch,
+ where the difference is, a switch actually looks at the data coming in and routes it
+ back to or out to the destination where it's going to.
+ So if one person is like sniffing all the traffic on their wire, they'll only see their
+ traffic going to and from the switch, because the switch sends other people's traffic down
+ their connections, whereas with a hub, you essentially, you're rebroadcasting everything
+ that the hub receives.
+ Well, similarly, a wireless access point that is running open is working like a hub in as
+ much as anyone sniffing the traffic that they're able to receive sees everything coming and
+ going, and because it's an open access point that is not encrypted, it's in the clear.
+ This is the nature of ethernet.
+ It's what they call a collision-based network.
+ All the, think of it as a big circle, a big ring, and all of the traffic goes around the
+ ring everywhere until it finds its destination, but it's visible meanwhile to everybody on
+ that ring.
+ Exactly.
+ In fact, the original topology for ethernet was a coax, a single coax cable, and you
+ tied your cards into this coax.
+ I remember that.
+ The idea was that if packets happened to be sent at the same time, they would collide,
+ and they were listening themselves to the traffic.
+ So they would see that they had collided because somebody else started transmitting at exactly
+ the same time, so they would wait a random length of time, chances are then that one of
+ the other would re-transmit in the clear.
+ So the upshot of this is that when you're on a network like this, anybody else on the
+ network can see what you're doing.
+ Well, yes, and in terms of what the person's doing, for example, e-mail, unless special
+ actions and measures are taken, e-mail is transmitted as pure raw text in the clear.
+ So for example, somebody running a packet sniffer, which are freely available for download
+ on the Internet, ethereal is my favorite packet sniffer, anyone sitting with a wireless machine
+ running ethereal, will see all the traffic going to and from everyone's machine that
+ is within range.
+ So they see raw data, though, but can they construct your emails, your passwords, can
+ they reconstruct that out of the raw packet?
+ Oh, absolutely, and in fact, tools like ethereal will reconstruct dialogues because it's able
+ to understand what the protocol is, it'll rebuild e-mail messages.
+ Much of the e-mail logon called POP is just in the clear, so you'll see your their names
+ and passwords going out, you'll see mail that they're sending and mail that they're
+ receiving.
+ I mean, it really is completely insecure, so I think the real point that we want to drive
+ home is that sure, you may think that it's a night war, exactly the model that you had,
+ where you were talking about initially running your access point open completely.
+ It's great to think about sharing your bandwidth in a situation where you're not being billed
+ per byte, you're just being billed a flat rate per month, it's like, "Hey, I'm not using
+ my bandwidth, I want to be a good citizen here and allow my neighbors to do so."
+ But it really is the case that unless you take special measures like running a VPN connection
+ through or running a secure tunnel to a remote proxy, it's very difficult to protect this
+ by default in an open access point.
+ So the solution is to scramble your data.
+ Now it's scrambled when you go to your bank or you buy a book on Amazon.com because those
+ are secure socket layers and they're scrambling it, but it's not scrambled when you're normally
+ when you're downloading email or visiting a web page, so you said you could protect it
+ by scrambling it and you mentioned VPN and other techniques.
+ So yeah, I had a person who wrote in asking if they were on a secure site filling out
+ a form and they did not yet have the little lock showing, was it safe to submit that data?
+ That's actually a really good point.
+ The way data is sent back to a web server is over, well, secure data is over this SSL
+ connection or as people see it in the URL, HTTPS being for secure as opposed to just
+ HTTP colon slash slash, the event of pushing the button and submitting the data will create
+ a secure connection.
+ So it's very likely that if the web page is running securely, that is even if it's not
+ showing you the lock when you're displaying the form, submitting the form can still be
+ done securely.
+ However, unless you take a look at the source code on the web page, you're not going to
+ be really sure that it's a secure submission.
+ So most sites will take the time to, for example, create the form on a secure page to show their
+ users that they've got SSL technology and to give them the assumption that when they actually
+ submit the data, it's going to be secured.
+ And a late model browser, and this you may have seen this warning, now you understand
+ what it means, late model browsers will say you're submitted warning, you're submitting
+ this data over an unencrypted connection.
+ Most browsers will now warn you about that, just so that you don't think, well, well,
+ if I'll give you an example, I use SSL for my email.
+ But in order to establish the SSL link, I have to send a password to log in, I presume
+ that password's sent in the clear, unencrypted, right?
+ I would guess that that's probably going to be encrypted.
+ If you're using SSL mail, you're probably connecting to a port other than the normal
+ pop-up port.
+ That's right.
+ We're connecting it over 443.
+ So it's secure already.
+ Exactly.
+ So the idea is that, I mean, the beauty of SSL, and it's a very nice protocol that, again,
+ we will be talking about in the future, in some length, because it involves this whole
+ public key, private key business.
+ The beauty is, it establishes a secure encrypted tunnel or connection between the endpoints
+ prior to any user data passing through it.
+ So the connection is secured before the URL goes through requesting a page to be delivered
+ over SSL before your username and password goes through.
+ It's extremely secure.
+ Now, when I set up my wireless network at home, I'm turning on WEP or better yet WPA.
+ That's protecting me.
+ Is that right?
+ Well, sort of.
+ One of the things I want to talk about soon, maybe we can do it next week, is to follow
+ on with this talk about, you know, open versus closed by talking about different types of
+ closed or encrypted connections, because it really matters what type of encryption you
+ use.
+ Well, let's save that for a later date, but just at least say use WPA if you can.
+ Yes.
+ Absolutely.
+ If as a result of us talking about this, people decide, hey, you know, I'm going to go to
+ a little more trouble now.
+ I think what happens is oftentimes people, you know, bring their wireless gear home.
+ They plug it in, they think, oh, well, you know, I'll worry about all that encryption
+ stuff later.
+ I just want to make sure this thing works and see if it goes.
+ And you know, they plug it in, they connect up everything's working.
+ And it's like, oh, well, I'll, I'll do that tomorrow or next week or whenever and never
+ get around to locking their access point down and it can be a real pain, you know, to do
+ that.
+ So I don't blame them.
+ So, but assuming you're doing that at home, you would be safe, yes?
+ Doing what?
+ Turning on WPA encryption.
+ Yes.
+ Yes.
+ If you, if you are at home, well, basically any of the encryption, the original encryption
+ WEP has been badly broken.
+ And that's what I want to talk about when we specifically discussed this because it's
+ really interesting how and why it's broken.
+ But the, the successor called WPA, it was specifically designed so that it could be
+ retrofitted in older gear that only use the WEP encryption.
+ So WPA is extremely strong.
+ I mean, it's, it's industrial strength.
+ You could use it anywhere.
+ If your equipment only has WEP encryption as all of the early equipment did, then that's
+ certainly best like way better than nothing at all because it will encrypt the data.
+ It's just that if somebody really wanted to get to it, they could.
+ So if you only have a choice of WEP, that's certainly better than leaving your access point
+ open completely.
+ But here's the problem.
+ If I go to a coffee shop or I go to the airport or a hotel, they don't turn on encryption.
+ They have to leave them open so I can log in, right?
+ Well, that's exactly right.
+ And again, it's really important to keep that in mind that if you're using an open access
+ point, you really need to think of it in terms of everyone in the coffee shop, for example,
+ is clustered around behind you looking at your stream.
+ It's, it's, I mean, they're not actually looking at your stream like chronically, but they're
+ sitting, they're seeing the mail you're sending, they're seeing the mail you're receiving.
+ There's really two issues.
+ If you talked about the privacy issue of people seeing your stream, what about the issue of
+ people hacking into your computer?
+ Aren't they able just to get access to your network by virtue of being able to glom onto
+ that connection?
+ Well, I'm hoping that anyone who's concerned with security has taken the measure already
+ of running a local personal firewall.
+ This is another good reason why even if you've got a Nat router at home that you know is going
+ to be protecting you from external intrusion into your network, you still really want to
+ be running a firewall on your machine.
+ If you ever leave your home network, you don't need on a desktop, but if you ever leave your
+ home network, you've got to have it on your own.
+ Yeah.
+ And anybody using Windows XP service pack to certainly anyone who's who's now running
+ Windows XP should be, or maybe you prefer zone alarm or, you know, side gate or Norton
+ or Outpost or Kerrio or any of these many personal firewalls, you know, that's going
+ to be there carried around on your machine, and it's going to keep people from getting
+ into it in any simple fashion, even though they are basically in a shared wireless mode.
+ Probably even just the Windows built-in Windows firewall would be sufficient in that case.
+ I think it really is absolutely sufficient in this case.
+ Especially service pack too, yeah.
+ So what do you do when you go to a wireless access point?
+ You can't force them to turn on WPA.
+ How do you protect yourself?
+ There are really only a couple ways.
+ If you were at a wireless, an open wireless access point accessing your corporate network,
+ most likely you're in a mode where in order to dial in or connect into a remote corporate
+ network, you're going to be running over a VPN.
+ A VPN is very much like SSL.
+ It actually uses a different protocol, typically IPsec, which is IP security, in order to establish
+ an extremely strongly encrypted connection between your machine and the remote network.
+ Essentially, you're participating in that remote network, sort of extending your corporate
+ network across the internet through the air to your table in the coffee shop and making
+ your remotely connected machine very much secure as if it were sitting inside of the
+ corporate firewall on the corporate network.
+ Many of us, unfortunately, don't work your companies where we can do that.
+ But there are alternatives, things you can do, even if you don't have a corporate network.
+ Yes, exactly.
+ The next step is to use some sort of a proxying service that is offering you a secure tunnel
+ on purpose.
+ You've mentioned the one that you have some appliance for.
+ Yeah, I use iPhanam.
+ Now you'd have to carry that around with you.
+ I don't know how practical that is, but that does that because it establishes an SSL link
+ with their servers.
+ Yes.
+ It's also anonymizer.com.
+ Anonymizer does it, and they explicitly offer exactly what we're talking about and
+ encrypted tunnel is what this is called, an encrypted tunneling service where you would
+ run some client software on your side.
+ Basically, you're using the wireless connection to get your machine on the internet.
+ Then you're creating an encrypted tunnel connection between your machine, client software running
+ on your side, and this service, for example, the anonymizer secure tunneling service so
+ that your traffic is encrypted through the air across the internet to anonymizer.com where
+ it is then decrypted in order to then transit from their location out over the internet just
+ as you normally would if you were at home or in a corporate environment or wherever else.
+ The point being that the vulnerable segment where you're going over the air from your
+ computer to the coffee shop or airport access point, that's encrypted.
+ It's also encrypted all the way to where it gets to anonymizer.
+ So, you're safe against, for example, employees at the access point who might be able to sniff
+ your traffic as well.
+ I want to mention two other products that do the same thing.
+ One is very inexpensive.
+ It's called hotspot VPN.
+ It uses SSL, which is kind of nice.
+ Because most of the time SSL ports are wide open, you don't have to talk to the coffee
+ shop to say, "Hey, please pass my VPN traffic."
+ Because not all routers will do that automatically.
+ That's a sad matter.
+ So since it's SSL, you can pretty much guarantee you'll be able to do that.
+ If you pay for a year, it's fairly inexpensive.
+ And then there's another one called publicvpn.com and same idea.
+ You subscribe and then you log into their servers and they protect you.
+ There are choices.
+ Do you think that's the way to go and if you're going to be in a coffee shop?
+ I really do think that's the way to go.
+ I mean, sure, it's not free, but you're getting some substantial benefit from the service.
+ If you want to be, if you're a person who uses open access points, you really need to
+ be aware that, well, in fact, what's really interesting is even if you were to use encryption,
+ that is, if you were to use first-generation weapon encryption, typically everybody on
+ the access point has the same key.
+ So even if it's encrypted, if you're using weapon encryption, you still don't have any
+ protection.
+ That's not good.
+ No.
+ It does have a configuration where you can use a per user key, but due to the tremendous
+ overhead of managing keys for individual users, almost no one does that.
+ Generally, an access point has a single key.
+ Everything connecting to it has the same key and it encrypts it.
+ It means that, again, sniffing the traffic, it can be trivially be decrypted if you're
+ using web style encryption, which is another reason web is really bad and WPA is a much
+ better solution if you have a choice.
+ Now, I noticed that Wi-Fi hotspot providers are becoming more aware of this.
+ I know that T-Mobile now claims that it's offering some sort of -- I'm not sure how they're
+ doing it, so we'll have to look into it, but they provide some sort of security for users
+ of T-Mobile hotspots.
+ I'm sure Wayport is going to -- the other big provider is going to start doing the same
+ thing.
+ Yes.
+ Buingo has for a long time.
+ So the user was just surfing the internet.
+ They didn't care if anyone was like looking over their shoulder, seeing the pages that
+ they were bringing up, saw the URLs they were clicking on, the music they were downloading,
+ or whatever they were doing.
+ There are certainly scenarios where you really just don't care about eavesdroppers, but it
+ is totally the case that unless you're taking some measures on an open access point, eavesdropping
+ is completely possible.
+ I mentioned one scenario for the home user that's useful because it's simple and free,
+ and that is if your access point is not part of your cable modem or your main router, but
+ you've got a separate access point like a freestanding little radio that you plug in
+ to your router, if that's a switch as opposed to a hub as most of these routers are, then
+ your traffic on your wired network is not going to be seen by the wireless network.
+ That switch gives you some isolation.
+ And so there are ways that you could, if you really wanted to run an open wireless access
+ point for your neighborhood, for example, there are ways that could be done securely,
+ but you really need to give it some thought.
+ Anything more to be said on this topic?
+ I know there's a lot more to be said, but on this particular show, how about?
+ I think we got this one covered.
+ And next week, let's talk about WEP versus WPA and the different types of encryption
+ of wireless because we've had a lot of questions from people about that.
+ For more information, of course, we've got the show notes there online.
+ We'll put links to all the websites and products we mentioned on the show notes at grc.com/securitynow.htm
+ or on thisweekintech.com where I also post the show notes.
+ By the way, I want to mention, if you use a podcast client like iPod or X or iPod, the
+ show notes are also visible in the RSS of the feed, so the information that we're talking
+ about is part of what you get if you subscribe to the show.
+ It's not visible in iTunes and some of the other aggregators, but it is visible in most
+ of them.
+ So that's another way to see where those links are and so forth.
+ Look in the show description of your aggregator to see more.
+ And Steve keeps a pretty good page with lots of information and feedback, and there's always
+ a conversation going on around it at his website grc.com/securitynow.htm.
+ That's where you'll find the small versions of this show, the 16-kilobit version for those
+ people who want to play it back on portable devices or just don't want to spend the time
+ downloading it.
+ He also provides transcripts in a variety of formats for people who want to share this
+ information with colleagues, friends, and family.
+ And I want to thank the folks at AOL's podcast network, AOL Radio at AOLMusic.com for providing
+ us with a bandwidth for security now.
+ It's a great pro bono service they offer that makes it possible for us to get this to you
+ in the easiest possible way.
+ We'll be back next Thursday with more security now with Steve Gibson.
+ Thanks Steve.
+ Thank you Leo.
+ Have a great day.
+ I'm Leo LaPorte.
+ Take care.
+ Security now.

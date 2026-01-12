@@ -1,0 +1,904 @@
+ Bandwidth for Security Now is provided by AOL Radio at AOL.com/podcasting.
+ This is Security Now at Steve Gibson, episode 40, from May 18th, 2006.
+ Listener questions and answers, number 7.
+ Security Now is brought to you by
+ A starro makers of the A starro security gateway
+ on the web at www.astarro.com
+ I look forward to Thursdays every week because I know I'm going to learn so much about security.
+ Ladies and gentlemen, Steve Gibson, the security guru.
+ Hey Leo, good to be back with you.
+ Good to have you.
+ This is episode 40, so it means it's one of our mod 4 episodes.
+ We're going to do questions and answers, but there's some big, a lot of big security news,
+ and I know you wanted to cover some of that.
+ Yeah, a couple things.
+ For one thing, Apple announced 31 vulnerabilities this week.
+ Yeah, with the OSX version 10.4.6 and previous,
+ and there are local and remote code execution problems,
+ information disclosure, denial of service, and local privilege escalation problems.
+ I mean, basically, just a whole collection of the typical kinds of problems
+ that, you know, exactly like what we were talking about last week and the week before,
+ with the, this is a fundamental problem of writing secure software.
+ And as we all know, Apple has for a long time enjoyed a history of much fewer problems
+ than Windows has been exposed to.
+ In fact, you've probably seen these commercials that they're running now, Leo.
+ You know, the guy who's standing in for Apple and the one who represents the PC,
+ you know, and how the PC gets viruses so quickly, but there aren't any for the Mac
+ and have some problems with those ads, but they're ads.
+ They're marketing, you know.
+ Yeah, and they're getting the message across.
+ What I'm noticing is that these are coming out just as it's beginning to be no longer true.
+ Right. Right.
+ Well, it's interesting because Apple never wanted to play that virus card,
+ and I think that they, one of their resistances was they didn't want to antagonize virus authors.
+ It was the best kept secret in the computing world was,
+ "There's no viruses, and don't tell anybody."
+ Well, and historically, as we've said before,
+ people who write viruses write them for the computers they own,
+ and Macs have, again, years ago, not been in the mainstream.
+ They've been in schools to some degree, but what kids had to play with were PCs,
+ and so that's what they wrote viruses for increasingly now, of course.
+ Macs are affordable, and they're an increasing target.
+ You watch, though.
+ I don't think we're going to see the same degree of virus problems on a Mac platform,
+ just because many of the things that make viruses possible that we've talked about on Windows,
+ things like ActiveX, ActiveScripting, the fact that any user is really running as admin,
+ those things aren't as prevalent or even like possible on the Mac side.
+ And population size.
+ I mean, a virus author who wants a well-propagated virus
+ will still write it for Windows just due to the population size.
+ Nowadays, the reason people write viruses is to co-opt computers,
+ and you're going to go where you can get the most computers.
+ Exactly.
+ That's one issue, yes.
+ Yeah, another really biggie is that a flaw has been found in the real VNC remote authentication.
+ Real VNC is a very popular open-source remote desktop system
+ that allows people to, you know, basically connect to a remote machine
+ and then get access to its desktop.
+ It's super well-used.
+ This is a really bad vulnerability because it completely defeats the authentication,
+ meaning that anyone who can find a real VNC server, or that is to say service port exposed,
+ can, until this patch is applied and real VNC is updated, can connect to it
+ and basically log in immediately.
+ Oh, boy.
+ Now, I got a kick out of the, you know, what to do in the meantime,
+ people were saying, "Well, you know, close any ports that you have exposed to the internet."
+ And this comes back to something that I've said before,
+ and I want to keep reminding people which is never leave default ports alone.
+ People who, for example, are running web servers,
+ you pretty much have to have the server running on port 80,
+ because that's where everyone's browser is going to expect to see it.
+ Now, if you were running your own web server, for example, from home,
+ just for remote access for you, for example,
+ if you wanted to access your documents or something remotely,
+ then by all means, move that web server to some funky port of your own imagination.
+ The only time you really need to leave ports in their default
+ is if you need people who don't know what port you've chosen to access your service remotely.
+ In the case of real VNC, someone running a real VNC server at home,
+ so that, for example, they're able to access their home desktop remotely,
+ by all means change the default port to some random number between 1024 and less than 65535,
+ because what happens is when a vulnerability like this is discovered,
+ the bad guys start scanning the internet for connections on the default real VNC port.
+ When they get one, knowing what the vulnerability is,
+ they can log on to your desktop and your theirs.
+ There's another way you could secure it.
+ We use real VNC for the radio show for call screening,
+ but what we do is we establish a VPN link first and then open the real VNC.
+ So it's within a VPN tunnel, which, until VPN is, which could be,
+ but until it's compromised, that's safe, right?
+ Well, as long as the real VNC server itself is not exposed,
+ that is the real VNC port is not exposed to the internet.
+ It's internal.
+ Then you're absolutely right. That's a great solution.
+ So in other words, I have to get on the local area network by using VPN
+ for I can get access to the VNC server.
+ It's not exposed. It's not naked to the world.
+ That's a great way to fly.
+ So for anyone listening to this who is using real VNC,
+ immediately update your real VNC to the latest version that you can get from their website.
+ They fixed the problem, but we want to get the message out.
+ And while you're doing that, if you are not running it on just some non-default
+ random port that you've chosen, make that move now.
+ Write the port down or use something memorable, but that's not leaving it
+ at the standard service port because you always want to run services
+ on non-default ports when you can.
+ This is a perfect example of why that's a really good lesson.
+ Of course, it's not fully secure to do that because some of the sniffing software
+ will just attempt to make a connection across all ports,
+ but it's a lot slower to do that.
+ And so I would imagine most people just stick with default ports
+ and there are enough open holes that they can just use those.
+ But if they really wanted to attack you, they could test every port
+ for a VNC connection.
+ Yes, for example, another approach is if instead of scanning the Internet,
+ if somebody knew your IP, for example, from it being posted
+ in a bulletin board blog or in e-mail that was made public
+ or in a news group forum where the e-mail was available on IRC on BitTorrent,
+ I mean, people know your IP address immediately.
+ Exactly.
+ It's not something that it's easy to keep quiet.
+ If someone knew your IP and they knew somewhere on that IP,
+ at some port on that IP, there was a real VNC server.
+ For example, you'd bragged about it in the past or talked about it or something.
+ They could find it.
+ They could, exactly.
+ The fact that they know where what IP it's on narrows their search dramatically.
+ Right.
+ If you used a Hamachi to establish the connection
+ and then had real VNC running locally,
+ that's a great application for Hamachi and you'd be completely safe.
+ All right.
+ Another interesting tidbit that I just wanted to mention is
+ there's sort of a boiling controversy over the purpose
+ and the future of the who is database that I can is
+ trying to decide what to do with.
+ Now, this is of great interest to me.
+ I'm sure it is to you, Steve.
+ When I have a website and I do have quite a few,
+ my address, my phone number, those are made public in the who is database.
+ Well, for example, one of our listeners created or grabbed the domain,
+ securitynow.info.
+ Oh, dear.
+ Well, I know, securitynow.info brings up a little page
+ that redirects people to my securitynow.html page.
+ Well, that was nice of him.
+ Very nice of him, but I didn't want to sort of formally endorse that
+ because he has control of the domain and I don't.
+ So I tried, I tried, I used the who is database to try to find him.
+ I got an email address, I don't remember now it was maybe a go daddy or something
+ and sent him a note saying, hey, I noticed you registered securitynow.info.
+ Would you be willing to transfer that to me?
+ I'd be happy to pay your expenses, blah, blah, blah.
+ I never got any reply.
+ Chances are it went into some bit bucket somewhere and he never saw it.
+ So he's listening now.
+ Yes, we're looking for you.
+ That would be, I'd really love to have the domain and be happy to, again,
+ cover his expenses.
+ But again, I can't endorse it because we don't have control of it.
+ So, you know, so that's a problem.
+ But, but for example, both sides of this is interesting because on one hand,
+ people, for example, political dissidents or bloggers may want the option
+ of retaining some anonymity.
+ And of course, the anonymity is something that the Internet to varying degrees
+ has always offered people.
+ Television show hosts might want some anonymity.
+ Don't forget that.
+ Sure, sure.
+ And so on one hand, you can say that the who is database needs to not necessarily
+ identify someone to the degree that would potentially compromise their own
+ personal safety.
+ The flip side is that in the post-Katrina disaster relief stuff,
+ we know that many fake donate to Contrina victims websites were created
+ and the Red Cross was very upset with those sites.
+ And they were able to use sort of the soft and fuzzy, doesn't necessarily
+ have to be accurate-ness of the who is database to hide themselves
+ and also to like put non-verifiable obscure records in.
+ So I can, and in general, the Internet community are really at odds right now
+ over what to do about the problem.
+ There is a simple solution, by the way, I think.
+ Is it a third party involved?
+ In fact, that's what I do with GoDaddy.
+ There's a company that offers its service for a fee at GoDaddy.
+ I think it's domains by proxy.
+ And everything, they hold the register, they hold the information.
+ And everything in my, if you go and do a who is on twitter.tv,
+ you'll see domains by proxy.
+ And then if you, I can go through domains by proxy and presumably a police agency
+ or ICANN could go to domains by proxy and say, "Hey, look, this is a spurious site.
+ We need that information."
+ Right.
+ I think that would be the way to do it.
+ And I hope that they find a solution.
+ Have they come up with anything?
+ No, it's really interesting.
+ I spent some time the other day reading through the, I mean,
+ just the incredible bureaucracy of this kind of process with, you know,
+ opening the forum to the public, allowing people to give their pros and cons.
+ And I mean, as with any complex issue,
+ it isn't clear that there's a cut and dry solution.
+ And in fact, the notion of running through a third party, as you suggest,
+ is discussed there.
+ And again, there's like the pros and cons of needing to do that.
+ Well, it's government.
+ And whenever, I mean, it's a quasi-governmental organization.
+ And whenever government gets involved, I was briefly on the technology committee
+ from my small town here.
+ And it's so frustrating because the laws of California and their good laws
+ that require, you know, the public to be informed about everything you do,
+ things like the Brown Act, made it very difficult.
+ We couldn't have, for instance, a private message board or even a mailing list
+ among the group members because the Brown Act prohibits that.
+ So it's both good and bad.
+ And this is, that's the way things are.
+ But I do think the third party ultimately will be the way to go.
+ I'm happy with it.
+ It can get my information, but it is available to, you know, somebody if they,
+ if they, if they absolutely needed it.
+ If they can demonstrate a real need.
+ Yeah, exactly.
+ You know, they go to court or whatever.
+ Yeah, I think that, I think I guess that the issue for me is that I can see
+ validity to both sides of the argument.
+ So I think you're rightly.
+ Oh, there is, yeah.
+ That having some intermediary who's, who acts as a buffer for the information
+ probably is the way it's going to want one hand.
+ And you and I are in both sides of it, really, because on the one hand,
+ I don't want somebody to have my, my phone number, my home address,
+ or even my, my office address.
+ But at the same time, I don't want anybody impersonating me on the net.
+ So, so we, of course we can see both sides of the equation.
+ Exactly.
+ And then one last thing, a listener named Weaver wrote from the UK.
+ He loved this notion that I talked about a couple weeks ago of, of browsing
+ the net with, with basically with a brow, with, in my case, with IE,
+ lock down tight, and then specifically white listing sites where I wanted
+ scripting and more features to be available.
+ So that, and in fact, the way he put it, he said, I love your idea of
+ interviewing a website and then deciding if it was, you know, worthy of trust
+ and then giving it trust.
+ He wanted to make sure that for people who are Firefox users,
+ that they knew, they, they knew about a, a plugin called NoScript.
+ It's just that the URL is www.noScript.net.
+ Which, and it's apparently a highly regarded plugin.
+ I did a little browsing around and it's got five out of five ratings
+ and it's been recommended by lots of people.
+ The idea being that similarly, JavaScript and Java are, are prevented
+ in Firefox until you decide that you want to or need to enable those
+ for a site that you trust and just a single click on a little blocked icon
+ down in the status bar will enable then basically white list the site
+ and this thing works in, in Mozilla and Firefox.
+ Important to make the distinction though between the kind of scripting
+ that can be done in Internet Explorer with active scripting and active X
+ and what's available in Firefox.
+ I mean, Java script, as far as I know, doesn't have anywhere near the risks
+ inherent in active scripting.
+ Some people did comment.
+ In fact, I think it was on the, on your Twitboard, Leo, that, that, you know,
+ you know, plugin code in Firefox is as vulnerable as active X code is.
+ You know, it is.
+ If it's running on your system.
+ Exactly.
+ It's clients, client-side code that you're inherently trusting if you use those plugins.
+ Although most plugins are written in JavaScript, they're written in Zool,
+ which is basically JavaScript.
+ And so the plugins, it's, their user interface, but they don't have, again,
+ they often don't have that kind of capability.
+ And that mean they don't have that level of power.
+ I mean, they could.
+ And that's the point if you should always be careful when you install any kind of,
+ you know, plugin.
+ And, and I guess it is to say the bad ones would.
+ Right.
+ One other point I wanted to bring up, but we got an email from a fellow who said,
+ you know, Steve's method of locking down IE is great.
+ As long as the bad guy hasn't modified your hosts file,
+ but as soon as somebody modifies the hosts file,
+ he can change where that apparent script is coming from and, and breach the security.
+ It's a very, very good point.
+ So if somebody has access to your system or has gotten a Trojan on your system,
+ it could modify your host file.
+ Now, now, of course, by that time it's too late.
+ I was going to say the flip side of that is if they're already in your system to the level
+ that would allow them to modify your host file, then you're pretty much hosed anyway.
+ And then a lot of spyware does that, by the way.
+ Yeah, we have not talked about the hosts file and we're definitely going to because it's,
+ it's ubiquitous.
+ It's an interesting sort of, sort of not well known unless you've, you've really dealt
+ with this stuff before, sort of, way station for DNS lookup that is powerful and vulnerable,
+ both at the same time.
+ And people can use it to protect themselves.
+ And I think I would love to have you talk about that.
+ We'll do it.
+ Let's save that for another one.
+ Right now, though, we've got a dozen questions from listeners, a dozen out of the 5,000 you
+ collected.
+ Actually, I did the math.
+ I have two folders, one for people who submit things anonymously and one where I could reply
+ to them because they've given me an email address.
+ The sum of the email in those two folders is 6,010 messages at the moment, which is why
+ you're not getting a personal reply for Mr. Gibson.
+ Oh, well, I do when I can.
+ As do I.
+ First, from Jason in Atlanta, Georgia, he actually has two questions.
+ So he's double your money, Jason.
+ He says, "I have Microsoft Small Business Server 2003 at our office, and I'm curious if the
+ SSL certificate that our server created itself is as secure as if I'd bought one from Veracine."
+ That's a good question.
+ It's a great question.
+ And the answer is yes.
+ The SSL certificates, which any contemporary system will generate, are absolutely as secure
+ as what you buy from Veracine, however, the only difference is that Veracine is standing
+ behind the identity that certificate represents, which really, if you've made one yourself
+ for your own users to access your server, that's really not an issue.
+ You just have to make sure you don't lose control of it.
+ Would it be seen by browsers as trusted, though, since it's not?
+ They can't relate that certificate, as you've talked about before, back to those handful
+ of trusted third parties?
+ Well, that's correct.
+ So the idea would be that if you're using a certificate that your own small business
+ server has generated, then everyone who needs to trust that would also have to import into
+ their browser or into their system the matching key for the server so that your browser is
+ able to verify the certificate.
+ Because as we know, web browsers come pre-built with a huge array of certificate certificates.
+ That's what I'm trying to say.
+ With a huge array of existing certificates that allow them to automatically check the
+ security of anyone who's trying to connect.
+ Right.
+ Right.
+ He also says, "If I'm at a secure site and I go to a web page on that site that has
+ another page embedded in it as in a frame or an iframe, would the information be encrypted
+ between my machine and that embedded page in the secure page?"
+ That was a good question.
+ That's a great question.
+ Yeah.
+ I wanted to include that.
+ So the level of encryption is at the level of the connection.
+ That is the asset or the resource which is being pulled from a remote server.
+ So if you had a frame and the frame loaded a non-secure URL, your browser would make
+ a non-secure connection so that the security on the outer frame or the outer page does
+ not necessarily imply anything about the security of content inside.
+ That's when I get that error message from my browser sometimes that says part of this
+ page is encrypted and part of it is not encrypted.
+ Is that what that's talking about?
+ Just what I was going to mention.
+ Exactly.
+ There, for example, in IE and other browsers, sometimes it's called mixed content.
+ The idea being that not all the assets on the page are secure, some, and it might just
+ be images, for example, that they're going to a third-party server that is not a secure
+ connection.
+ And so it's saying, "Hey, you should know that some stuff on this page is not secure."
+ So it may be that your browser will alert you, but it's not necessarily the case that
+ unless you're sure that it's going to be a secure asset.
+ I think some browsers have a modified key icon or lock icon when you're on a mixed site
+ like that.
+ That's funny, I don't remember for sure, but I've seen that.
+ Two people asked questions relating to President Bush's proposal for tamper-proof ID cards.
+ Steve Gilliam of Pinehurst, North Carolina, wrote, "President Bush recently said he wants
+ to give tamper-proof digital fingerprint IDs to legal guest workers.
+ How could public and private key encryption be used to generate these IDs and after it
+ goes into effect, how would counterfeiters try to defeat it?"
+ And that's one of the problems right now is that illegals often in fact have papers that
+ look real because counterfeiters have gotten very good at forging birth certificates, social
+ security numbers and that kind of thing.
+ Sure.
+ Go ahead and read Ben's question.
+ Ben also asked the president, suggested we needed a document that includes biometric
+ info to make a tamper-proof ID card so they'd check your fingerprint or your iris or whatever
+ for every legal foreign worker.
+ Do you think this can be done to a reliable degree?
+ He says, "I'd tend to think this would require a federal database of the information on the
+ ID card can be validated and probably so the card could be used as a kind of token.
+ I would imagine that a fingerprint could be used like a key to unlock the encrypted
+ info.
+ But I wonder about the likelihood of a standard electronic fingerprint reader reading the
+ same thumb each way, each time.
+ I know when you come into the US from a number of nations, you do in fact get fingerprinted.
+ In some cases, they also do iris recognition.
+ I mean, this kind of system does exist.
+ Well, I like this question because or both of these questions because it plays perfectly
+ into the foundation in crypto that we've laid before.
+ Now biometrics, of course, is sort of valuable but scary depending upon how it's employed.
+ But our crypto side gives us enough of an understanding of how something like this could
+ work.
+ Imagine that you had an ID card.
+ On the card was a picture of the person who had applied for the card and some printed
+ textual information, you know, name, address, whatever, you know, textual ID that they want
+ to have.
+ Then on a, for example, on a mag stripe like we have on our credit cards, on a mag stripe,
+ the same information that is a JPEG of the person's face and the same information printed
+ on the front of the card would be on the stripe.
+ All that we have to do is take that information and hash it as we've seen before that is create
+ a digital signature of that information.
+ Then somewhere there would be a master government public key which would, well, public and private
+ key.
+ The people generating these cards would use the private key to encrypt that digital signature
+ and that's basically all we need to do.
+ What that means then is that anybody carrying the card who wanted to have its authenticity
+ verified could present it to anyone's reader anywhere.
+ The reader would read the mag stripe, put the information up that is basically redisplay
+ the photo and the textual information so that the operator could compare it to the person
+ standing there.
+ So in this sense, you know, the biometrics is a photo and of course people are pretty
+ good about comparing pictures to people's faces and deciding, oh, that was you two years
+ ago kind of thing.
+ But the key is because this information had been digitally signed by the government,
+ all of the readers would only need to have the government's matching public key so any
+ reader could verify that this information, the information on the mag stripe, not necessarily
+ the visible information on the front of the card but the information on the mag stripe
+ had not been changed by a single bit and there's nothing then in terms of intellectual property
+ that could be stolen from these readers.
+ I mean, it could just be freeware that you load into a PC that has a little add-on mag
+ stripe reader.
+ Anybody could then verify that the digitally signed information on the mag stripe was originally
+ signed by a government agency.
+ So it's really just like me using my PGP key to sign my email.
+ You can verify that I sent you that email that that was my key and that the email has
+ been untampered with just by going to the PGP site and matching the keys.
+ Exactly.
+ It's an absolutely analogous application and crypto solves the problem for us.
+ It's really amazing.
+ Brian public key crypto and that's what's so great about public.
+ Brian from Ontario, Canada writes, "I know you've never had an episode specifically about
+ key loggers.
+ I'm sure we'll rectify that at some point.
+ But can a key logger be fooled if you use a program like RoboForm, which by the way is
+ a great program I recommended.
+ It fills out forms for you to fill in your passwords.
+ What are the ways to fool key loggers if a big if a key logger manages to get on my system?
+ I know software firewalls can warn you if a key logger phones home but viruses and spyware
+ may be disabled your software firewall or frankly there are hardware keystroke loggers that you'd
+ never see.
+ Right.
+ Yeah, I wanted to address this because we actually did discuss key logging stuff early
+ in our podcasts when we were talking about passwords and entering passwords.
+ Many people came up with clever ideas for defeating key loggers.
+ I do remember that.
+ Remember, typing a couple characters then clicking the mouse into a notepad, typing a
+ few more, cutting and pasting, scrambling, there's all kinds of things you can do if
+ you were concerned about that.
+ It certainly is the case.
+ First of all, RoboForm, which is down at the API of Windows, is not necessarily going to
+ be proof from a key logger because in order to fill in these forms, most of these utilities
+ and in order to be like a universal form filler, many of them literally simulate the keyboard.
+ Interesting.
+ I'm not being into the field so that the same hooks into the system which allow a key logger
+ to see keystrokes will similarly see something like RoboForm basically typing that information
+ in for you.
+ And I guess it really depends on the key logger too because some are lower level than others
+ and others some are higher level.
+ I mean, true.
+ If a keystroke logger is just looking for scan codes, well it probably would miss it but
+ if it's working at the API level it would probably see it.
+ And so actually some of the things that people suggested, some of the clever ideas in the
+ brainstorming back at the beginning of our podcast series, I thought were very workable
+ where nothing that was just looking at the keyboard would be able to tell where you were
+ typing these things.
+ So change your keyboard focus a few times, putting characters in different places so
+ that the end result of the string you want to have correct is correct but nothing passively
+ watching would be able to figure out what you had done.
+ Unless it's smart enough to be watching those fields and looking at the input in those fields
+ and stuff.
+ I mean in other words, it depends on the keystroke logger.
+ Yeah, bottom line is you really don't want to get anything bad in your system.
+ No.
+ And it's possible to put a keystroke logger on your keyboard that memorizes stuff.
+ If you use a public terminal.
+ Public access terminal.
+ Very likely or not very likely but very possible that all your keystrokes are being
+ logged but RoboForm would avoid it in that case.
+ Of course there's probably enough traces behind that it wouldn't make any difference.
+ Brian of Everett Washington is concerned about MD5 hashes.
+ In one of your cryptography podcasts you talked about the MD5 cryptographic hash as a way to
+ verify downloaded files.
+ However, I just read on the internet the MD5 algorithm has recently been found to be unreliable
+ and hash is generated with it can be cracked.
+ I think we talked a little bit about this.
+ He says, is it true a different internet site talking about MD5 said you could salt
+ an MD5 hash to prevent it from being broken?
+ What exactly does salting a hash mean?
+ It sounds like something they did in the Navy.
+ But does this fix the problem or is the MD5 algorithm truly unreliable?
+ Okay, there are a couple things.
+ MD5 generates 128 bit hash which is beginning to be not long enough.
+ So there are now 256 bit hashes and 512 bit hashes which are arguably way overkill but
+ with computers being as fast as they are and storage being as big as it is there just isn't
+ really a reason not to use a larger hash to prevent hash collisions which is what adding
+ bits more bit length to the hash does.
+ So on one side it's worth mentioning that this 128 bit is a little short.
+ But what the sites are talking about are something we've discussed in the context of
+ hashing before which is brute forcing a hash.
+ If you use an unsalted MD5 what sites are doing is they're pre-computing for many common
+ passwords and pass phrases that is up to a certain length, you start getting too many
+ of them as the length grows, they pre-compute the hash.
+ So you end up with a huge table of hashes and the password that if you hashed it would
+ result in that hash.
+ So what salting does, salting adds some extra fluff, some extra stuff to the input in order
+ to completely change the output.
+ So for example if you put in the word dog into an MD5 hash you're always going to get
+ the same 128 bits out no matter how many times you put the word dog in.
+ So in a pre-computation dictionary attack on MD5 the hash for dog would probably be
+ there.
+ If somebody tried it then they'd be able to figure out what your password was because
+ you'd chosen a really bad password, I mean there's no way that dog is a good password
+ to have.
+ On the other hand if you just added for example a minus sign or an underscore or some sort
+ of what's called salt to the hash then that would completely change the output so that
+ you'd get I mean with any good hashing algorithm a completely different set of 128 bits.
+ So adding any other debris to the algorithm will completely change the result and render
+ it basically uncrackable to this kind of brute force attack.
+ But you can't just add it to the hash it has to be the decoding program has to know about
+ this underscore you can't just make up something and put it in the hash.
+ So the idea would be for example UNIX systems use a salted MD5 they've got some junk that
+ is unique to the system which they always add when anyone types in a password so that
+ nobody who sees the resulting hash is able to you know basically have a universal crack
+ for the system.
+ Ah very clever, very nice.
+ Carl Schweitzer of Hillbert Wisconsin managed to untangle last week's discussion of the
+ stack and buffer overruns actually surprisingly large number people wrote to us thanking us
+ for it and saying they got it and that's great.
+ I mean that was one of the more complicated things we've discussed in the podcast.
+ I think I use I think I use the term aggressively technical as.
+ But he did have a question he said when it comes to the stack why did it have to write
+ up wouldn't it be more secure to write down or is there something more complicated going
+ on with that.
+ Okay now I didn't quite get his question on he's talking about why does it go up in
+ memory instead of down in memory but I don't think any difference doesn't actually there's
+ something brilliant about this which I really liked the first of all he says why does it
+ write up meaning why does your when you are when you're overflowing the buffer you're
+ going from lower memory to higher memory and that's writing up the stack and that's overwriting
+ the stuff that's higher in the stack which is critical information from previous programs
+ or previous subroutines because as we remember from last week the stack grows downwards well
+ his point was if buffers overflowed the other direction then they wouldn't be overwriting
+ the previous information they just be writing they be overwriting stuff that wasn't allocated
+ yet on the stack well he's completely correct now so why do they do it that way exactly
+ I mean they should I mean I love the question it's wait a minute wait a minute you're turning
+ years of computer science on its head literally well okay now first of all it's not easy from
+ a practical standpoint to to fill buffers downwards that is you know just everything
+ about the way we think has has a buffer being filled from from lower memory to higher memory
+ but what if you did that you would still overwrite you could overwrite in the negative
+ number well but but hold on but if the stack instead started at the bottom and grew upwards
+ yeah and there's no reason it can't right if the stack start at the bottom and grew upward
+ so you're saying if it started at at memory location zero or well zero not everybody
+ really zero let's say whatever zero is some some on you know arbitrary zero and then and
+ then allocating memory on the stack you do by moving your stack pointer up to us like
+ a certain amount now what's happened is you've reserved all of that memory below that point
+ for your own use anybody else you want some they move the pointer up and now they have
+ they've reserved that region that they just moved the pointer across for their own purpose
+ and and the beauty of this is the the person who is who is currently using the stack is
+ the so-called is like that on the top of the stack and if stacks grew from the bottom
+ up instead of from the top down then buffer overruns would overrun out into unused stack
+ space not already used stack space it's brilliant I mean it would really work and it would solve
+ the problem somehow I think there's more to it than that all right if it were that simple
+ wouldn't somebody have done this no I thought because again I'm no I mean all of this was
+ set up long before this ever became a problem I exactly that's exactly at Leo is that it's
+ a little more elegant from a from an architectural standpoint to have for reasons that are sort
+ of complicated and deal with the way pointers are handled to have the stack growing down
+ from the top of memory is is architecturally simpler but it was just done that way basically
+ as an arbitrary choice someone said show we have it come down from the top or up from
+ the bottom and it's a little simpler to have it come down from the top but but in terms
+ of the problems that it creates the idea that overrunning the allocation if you have if
+ you're coming down from the top you're inherently overriding the information of someone who's
+ who's already allocated information on the stack right before you somebody else's stack
+ frame somebody else's stack exactly but if you but literally if you allocate instead from
+ the bottom up you don't overrun it's it's wonderful okay I know we're gonna hear from
+ Randall Schwartz or one of our other programmers is gonna say something but I but I can't think
+ of what it could be maybe you're right and maybe this is a maybe this is a way to design
+ a whole new architecture Garrett of Rochester Minnesota is wondering about Skype security
+ that's what we use of course to do the show he says how could I properly configure Skype
+ for the best security I'm sitting behind in that router with universal plug and play turned
+ off and all the security settings on high anything else I need to do for a Skype connection
+ um no yeah we don't do anything particular exactly now the the one the one you're gonna
+ give away our secret well the one the one gotcha is it can be useful to allow incoming
+ connections to Skype in situations where both people who want to connect a conversation
+ are behind Nat routers but in this case Garrett was asking about Skype out connections where
+ he's using Skype to connect to the Skype servers in order to to use Skype sort of as his telephone
+ system isn't that I mean that's how Skype avoids Nat issues is we're always going through
+ a server to make the connection right um well no between two users there's a server to rendezvous
+ the two users yes so we don't have to worry about the incoming connection because I've already
+ established a connection with the Skype server exactly exactly so so so so Garrett is completely
+ secure he's behind a in that router which is giving him the inherent stateful firewall
+ action that that Nat does he's got universal plug and play turned off so nothing nasty
+ is able to reconfigure his router behind his back to open ports and he's calling out he's
+ connecting out to the Skype servers for his Skype out service and so nothing is able to
+ connect back in but I wouldn't have an issue I mean and I don't have an issue if you call
+ me on on Skype right I mean once I've logged into Skype anybody can call in as well correct
+ so that we get that again because it has a third party server I thought you were going
+ to reveal our secret which I don't want anybody to know about how we get these Skype calls
+ to sound good too so good which is that we use a dedicated Skype report what you told
+ me to do this and I have to say it has improved the quality of the Skype calls why well because
+ I've configured my Skype so that I'm able to I have basically of course a non-default
+ random port where where incoming Skype connections are able to reach me you can do that in the
+ Skype preferences it's in the base preferences and the reason I have a Nat hostile network
+ configuration as you can imagine Leo my security here is pretty strong and you and I when we
+ were connecting we're not able to get a direct a direct connection because my Nat router
+ wouldn't allow it so that so the art dialogue was going through a so-called super node it
+ was being relayed by a third party and what when you were telling me that you and I were
+ having such great success with Skype but but you were having some trouble with other uses
+ of Skype when you were talking to people that's when I suggested well if if you did
+ the same thing if you allowed a fixed port to come all the way in from the internet to
+ your Skype then then basically you know if you then it's like you're only behind a single
+ Nat router that is the the person you're connecting to is only behind a single Nat router they
+ are always able to initiate a connection through to you so a super node is never used and you
+ get this kind of Skype quality every time the supernoser clever hack that the Skype folks
+ did so that you don't have router problems not router problems but it but you can avoid
+ it by using a dedicated port now I do that unilaterally right I don't have to tell them
+ what port I'm using I just I just choose a dedicated port in my connection exactly and
+ suddenly you're just a a higher quality Skype connector location do I have to open that
+ port on my router or anything like yes you have yes yes yes you do need to have that port
+ mapped through so that somebody the idea is that that if if both people at each end of
+ a Skype conversation are behind Nat routers then the they may not be able to negotiate
+ to connect to each other directly on the fly and for for complex reasons of the way networks
+ but if either of the per of the people will create a statically mapped port through their
+ Nat router then the other person can always send a packet directly to that port and the
+ whole Skype protocol manages making sure that everyone knows what the port is you know our
+ secret it really does work it makes a huge difference and not for everybody but it does
+ on those people who have and and you map just TCP or is it UDP or what what do you have
+ to map it just UDP just UDP okay now I've given away our secret we have no advantage
+ whatsoever anymore that's all right except our great good looks Kim white of a secunda
+ South Africa wonders about securing mobile laptops I have a question pertaining to security
+ of notebooks could you guys do an episode on securing a notebook so that when not if it
+ gets stolen the data should be safe I've seen some ideas that use USB keys and so forth
+ that are used as tokens but these only protect from log in what about from boot the drive
+ is locked from boot and there's almost no way that the data can be stolen my concern
+ is that most of my laptop users have IP's from large corporations here in South Africa
+ it's worth hundred or not IP addresses intellectual property I should say right hundreds of millions
+ of dollars in the open market he's concerned and this happens all the time in fact it happened
+ very famously to the British Secret Service whose laptops were stolen and and secrets were
+ escaped well of course you know in the news from time to time you hear about exactly this
+ kind of problem laptop you know is like left unattended briefly in an airport and it disappears
+ some some corporation has a ton of valuable data on their laptop okay there are there are
+ a couple things going on some IBM think pads actually work with the the drives serial number
+ to to lock the laptop drive so that it will not boot unless a password is given at boot
+ time to unlock the drive that's that that's very good security but it has cause problems
+ because it is such good security that if that password is ever lost you're hosed I mean
+ there there is no way short of returning the drive to the manufacturer to unlock the drive
+ and the problem of course is that this is not generally done this is not generally available
+ on most laptops so a solution that is laptop specific may not be a good one either it's
+ often said that if somebody has physical access to a machine eventually they can get the data
+ and that's not true no no because and this is going to be the topic of next week's security
+ now podcast we're going to talk about true crypt yeah we love true crypt it is a it is
+ a fantastic open source encryption solution now what what what what Kim's company would
+ have to do would be I mean and this is not just trivial to do but it would the idea would
+ be that the the the the most laptops are configured with everything sitting in a one single huge
+ sea partition you know from from a of a windows drive designation standpoint what what you need
+ to do is do some preparation for this the idea being that you create another drive where all
+ of the intellectual property resides and and you just have the discipline to keep everything
+ that you need to have safe in this second drive and then a program like true like true crypt
+ which will be talking about next week is able to provide unbreakable I mean truly state of
+ the art you know past the end of the time of the universe style encryption to prevent
+ anyone from accessing that inadvertently and it can be configured so that if the drive
+ is turned off if it goes into standby if it's unattended for a certain length of time that
+ you you must reenter a password in order to access that contents and and it works for laptops
+ it works well you know for PC desktops anything true crypt is a fantastic solution which is
+ why we're going to be covering it in detail next week generally people set true crypts
+ so that it automatically unlocks once you log in so you might want to put on the BIOS passwords
+ and the login passwords and all that stuff just to you know keep it a little more difficult
+ to log into the computer well yes certainly if what you're suggesting is that they have
+ true crypt configured so that you don't need to enter a password which is for convenience
+ is good then you've been well you've basically defeated the whole purpose unless well yeah
+ I understand but you but if you turn on the you haven't really because as long as you trust
+ Windows login XB's login to be secure right because if they remove the hard drive they're
+ not going to be to log in without your password yeah by the way max have the similar built
+ into the operating system a similar strong encryption called file vault does the same
+ thing as true crypt does but it also is set to when you log in unlock and in that case
+ you want to modify your firmware so that nobody can change the master password right but a
+ good system we like true crypt you can even put it on a USB key a band writing anonymously
+ from his Gmail account asks the question is probably really dumb maybe that's why I wanted
+ to be anonymous but I have locked I have looked every place for somewhere to download PGP
+ and every site I try leads me the same place PGP.com he doesn't want PGP desktop 9.0 which
+ isn't free can you please send me a link to a site where you can download a free PGP program
+ well and Leo we know what that is yes and you talk about it and that's what you use what
+ I use which is the open source version of PGP this the story is long entanglement Phil
+ Zimmerman originally made PGP open source but the assets of PGP and the intellectual
+ property was sold to a corporation which still if you search at PGP.com long enough offers
+ a free version but it's a long hard search and not worth it when you can just go to GNU
+ privacy guard GNU P G dot org and download an open source free version of PGP and that's
+ what I use on the Mac and what I everybody should just use right well when I saw this
+ question from Ben I just I just went to Google and put in GNU space PGP GNU PGP and took
+ me right there yeah so that's how anybody can find it they call it new privacy guard
+ to avoid the copyright trade marks the PGP yeah that's a GNU P G dot oracle I'll do the
+ job and it's great I mean I it works on all machines it uses PGP style keys in fact I'm
+ reusing PGP keys that I made it's completely interoperable well and PGP is now an RFC
+ standard there there's an RFC so good so it's been well defined so you don't have to go
+ to the PGP corporation to get to get real PGP yes it's real PGP even without it
+ I'm Jason in Madison Wisconsin received a nasty gram from his corporate IT department
+ who I hate those he writes I just received a nasty gram essentially stating that I must
+ remove Skype from my laptop because quote it is P to P or peer to peer software that
+ lets viruses in end quote there words not mine what are the security risks posed by Skype
+ I realize my company may have a bandwidth issue regarding the super node feature and
+ Skype but is there something else Skype users should be aware of that's a great question
+ well it is and and I wanted to I wanted to to first say that if this is a corporate laptop
+ and it's their property then you want to make sure this doesn't get escalated beyond
+ an nasty gram because they can do anything they want yes you got certainly you could
+ argue that this is their computer you're using I mean if that's the case and that they have
+ a right to specify what software is used on it what will not even if you bring your computer
+ into the corporate network they can tell you what programs you may and may not use sure
+ that's their right it's their resource exactly so so the the he brings up the issue of super
+ node which we were just talking about and about the bandwidth being consumed and it sounds
+ like his corporate IT department somehow discovered that he was using Skype on his laptop all
+ of that sounds like he does not have a firewall running on his laptop because you can't be
+ a super node if you have a router or a firewall exactly you wouldn't you you you you super
+ nodes are are random Skype users who are not behind a net router or a firewall who suddenly
+ discovered that they're being used as a relay point for other people that Skype cannot otherwise
+ connect between and we should point out that that should be a small number of people is
+ getting smaller all the time I mean who's on the internet without a firewall or a router
+ come on it is it is an annoyance that Skype provides no user interface option you can't
+ turn off exactly for disallowing super node usage of your own client so so I would tell
+ Jason that if you know if he wants to continue using Skype and I would imagine he's behind
+ Windows XP or he he's using Windows XP that if he turns on the service pack to firewall
+ that ought to be built in or uses any third party firewall so that inbound connections
+ are not allowed he should be able to use Skype without any trouble and there's no way his
+ IT department could ever determine that that's what he was doing but again I'm not suggesting
+ that he goes against the wishes of his his corporate IT people but you know their argument
+ that Skype is peer to peer and therefore is and for that reason should not be used I think
+ that doesn't hold much water but I can certainly understand understand them not wanting to get
+ into all this is there right not to but there I think they're somehow conflating it with
+ the Napster or Morpheus or you know one of those peer to peer it's not peer to peer that
+ way right yeah although I think there is some kind of tenuous connection with Kazaa I seem
+ to remember but that's not the peer to peer that's in fact it was the Skype it was the
+ Kazaa guys who figured out natural reversal right who then started Skype and used that
+ natural reversal technology from their peer to peer experience in order to create a system
+ that just works behind that router so easily but it's not sharing music you're not allowing
+ virus I don't think there's any way I mean it's not allowing viruses in is it no of course
+ not no no unless you know somebody sends you a file and you accept it well in fact at the
+ beginning of this podcast Leo I sent you a PDF and we use Skype in order to send a to
+ do a file transfer because it worked beautifully and you can do that and chat clients and instant
+ messenger clients and so forth right in fact the truth is if they allow any instant messenger
+ at all it's no different than Skype I mean aim Yahoo all of these offer voice in and over
+ the Internet in very much the same way Skype does right Russell of Salt Lake City asks we
+ all know that chat clients hope speak speak of the devil chat clients like MSN aim and
+ Yahoo messenger about as insecure as it gets as far as the channel communication goes my
+ question is regarding Google chat I'm not talking about the standalone Google chat client but
+ that when you log into your email account this is something new they just added at using
+ HTTP s colon slash slash gmail.google.com in that web interface you're able to conduct
+ chats so my question is you know I'm inside the secure server HTTPS I'm encrypted and
+ secure am I or is it using a different port I mean it is my chat secure right well this
+ is really interesting and I thought this was a great question the the you have security guaranteed
+ by HTTPS that is by an SSL connection which we know is really good security from from your
+ browser to Google the problem is everything that you are chatting with then goes through
+ Google's servers and who's to say that that next year Google's not going out gonna announce
+ hey by the way you can search for everything you ever chatted about which they might because
+ we've been sucking it all in and keeping it forever you know and it's a possibility Google
+ tends to do that so you know with our government becoming increasingly concerned about you know
+ terrorist activities within our borders and all of this NSA eavesdropping and you know now
+ all of our phone records being sucked up and analyzed I would be concerned using any third
+ party server to be the relay point for my chats there is a very good very secure chat
+ client called bit wise I am oh yeah we like that yes in fact you and I Leo use it because
+ it also offers VoIP services although the quality still wasn't up to oh in fact it uses
+ the Speaks codec which is why we gave it a try but it still wasn't up to what the G
+ IPS the global IP sound technology that Skype is using is able to give us so we backed away
+ from it for our for our our podcast recordings but bit wise space I am if you just go to Google
+ and put it in bit wise I am for instant messenger I know the author I've interacted with him
+ in fact I worked with him to improve his nat traversal technology so that it works a lot
+ better than it did before it really this guy is a neat guy it's cross-platform Mac Linux
+ and Windows and it just look you know if you're looking for something that isn't a huge bull's
+ eye that isn't the same sort of target MSN and aim and Yahoo and Google are where you where
+ you want to do point-to-point chat and not run through a third-party server oh and everything
+ is encrypted so it's very strongly encrypted chat it's what I would recommend there are
+ corporate versions available of aim and MSN that provide encryption as well but this is
+ just you know you just download it it's free and it's easy to use yeah that's great David
+ from Bozier City Louisiana discovered security now two weeks ago welcome David he just he
+ says he just finished listening to all 39 episodes whoa okay he must be a little exhausted right
+ now he had a question that yeah I think that's great he had a question about Linux open source
+ and buffer overruns he says unless I'm misunderstanding something I would think there would be more
+ exploits from buffer overruns with Linux since it's open source and a programmer could see all
+ the problems in the code easier than Windows in other words could find these holes or does
+ that make it less likely that problems with things like buffer overruns because the number
+ of eyes looking at the code in the open source community I asked because I I would think this
+ may be one of the great concepts that comes in the open source community and wondered your
+ thoughts this is actually a common area of discussion among open source folks I would
+ say that it is the big unresolved issue that's why I thought this was a great question that
+ David had posed is I mean and it's it's a religious battle in the same way that you know
+ Mac versus Windows is sort of a religious thing it's it's you know closed versus open source
+ exactly closed versus open what is more secure you made a comment that I didn't react to last
+ week when we were talking about buffer overruns which was that many of these are discovered
+ by people just pounding on the code and in fact the guys at E.I. down in Eliso Viejo they've
+ got a room full of machines that just throw junk at software and when one of those machines
+ crashes it's because they just found some new buffer override so they basically have
+ a million monkeys in a room trying to crack it yeah and that's kind of finding stuff all
+ the time right in exactly this fashion whereas you could look at a source listing of a program
+ if you were really an accomplished programmer or accomplished hacker and and perhaps find
+ buffer overflows I guess you know it comes down to the the choice of of security through
+ obscurity that is you're secure because it's kind of hidden or or true security which is
+ that it's opened it's exposed and and you know people yes we'll find it but people will
+ also fix it right away I I bet on open source to be honest with you but that is a religious
+ battle you're right my sense is that from a from a programmer standpoint if there were
+ backdoors deliberately programmed into code you those would be found immediately right
+ in an open source environment which is why PGP was open I mean I wouldn't trust any encryption
+ program that wasn't open source because you need to know what they put in there and so
+ that's the advantage of open source but but the nature of buffer overruns is that that
+ it wasn't clear to the programmer who wrote it and when you look at the source code there's
+ this inherent tendency to adopt that same mindset and to sort of follow along with the
+ code it's just so hard to see the mistakes that somebody has made even when you're looking
+ at it so I don't think that open source would be more secure because people would tend to
+ find other people's mistakes people tend to just read along and you know get through the
+ job that they're doing it's it's more the case that you find these things sort of just
+ by pounding on the code exactly as you had said last week and there's certainly I mean
+ the truth is there have been plenty of buffer overflow exploits in open source software certainly
+ no programmers immune from it that's a very good point and you know here's the question
+ I mean if you if you write a module and or a part of a major open source program is anybody
+ going to rewrite it or check it for security maybe maybe not well and that's actually that's
+ a very good point too it's it's cool that this source is open but many people wonder if anyone
+ else ever looks at the source code again I mean in theory they do I mean there's somebody
+ with commit access to an open source project who's supposed to review all this stuff but
+ it's you know I mean yeah I think there's no guarantee it's been highly reviewed well
+ yeah a perfect example is my use of of a news server a GRC runs a very active wonderful
+ set of news groups relating to security and privacy anyone who's got a news reader and
+ in fact everybody who is using a contemporary browser probably has a news reader built in
+ you can just go you can aim your news reader at news dot GRC dot com and we've got a new
+ server with a bunch of fantastic news groups there well I've got all kinds of extra features
+ that over the years I've built into our new server like we have secure authentication
+ and people who post notices are able to delete theirs but nobody else can can delete theirs
+ and I've I've taken the open source standard INN new server and thanks to it being open
+ source I've gone in and and made a whole bunch of custom enhancements for you know basically
+ turning it into a hybrid adding a bunch of GRC stuff which I would never have been able
+ to do if it were just some new server I'd bought in executable code fashion and then
+ inherently been unable to modify so it's a boon for a programmer but it's not clear
+ to me you know that from a standpoint of you know tons of people going over the source
+ code if problems are gonna be found that way well when you over yet Steve you're getting
+ a sound like an open source kind of guy I have to say you know it also depends on how
+ low level the code is I think if it's a if it's a PHP you know message boards a system
+ a lot more people are looking at the code than if it's an assembly language kernel module
+ well and that's a perfect example too of something that is very vulnerable a PHP based
+ message board system is inherently you know it's like sticking its face out there on the
+ net and looking for someone to find a way to exploit it and of course we know that there's
+ just you know PHP exploits by the hundreds a month right right our last question Paul
+ winners nestled in the Colorado Rockies asks I'd love to hear your comments Steve on recent
+ legislative proposals to have ISPs maintain logs of all activity what good would this
+ be if a user is using VPN or encryption of any kind he is completely correct I mean it
+ is disturbing when we see legislation I mean and the ISPs are as disturbed as their users
+ they don't want to do this no it's a huge burden the idea being that they've got to maintain
+ logs for law enforcement to use in order to track down illicit activity I mean it's a
+ good thing if it works it's hugely burdensome for ISPs and then you end up you know with
+ people feeling like their ISPs are spying on them much as we do now with you know all
+ of our phone records going to the government for processing and analysis and so the question
+ was does running all this traffic through a VPN solve the problem and the answer is yes
+ there is again contemporary VPN technology cannot be broken and all and ISP would have
+ is let me literally random bits of data because as we know from our security podcasts once
+ you have true security the data that results from good encryption is indistinguishable from
+ random noise yeah so that's all an ISP would be able to see yeah I mean I have to say I'm
+ using encryption more and more although you know in Britain the house of commons I guess
+ just proposed a bill I'm not sure where the bill came from the legislative against encryption
+ no to make you illegal actually no I take it back this has always been the law but they've
+ never enforced it now they're talking about enforcing it that you must reveal your password
+ or decrypt if requested to by law enforcement and if you don't you just go straight to jail
+ wow and I think that that's going to be a con commitment of any kind of move like this
+ if they're starting to log all the information and the encryption is widely available well
+ you've got to pass a law saying that you have to hand over the keys so that's interesting
+ so the idea being that if if they capture a bunch of this random noise we're talking
+ about they can go to the guy and they say to you you must tell us yeah exactly basically
+ we we are legally compelling you to decrypt this data so that we can see it you have to
+ or suffer the consequences go to jail anyway wow whether you've done anything wrong or
+ not so and I think that every I have a feeling that every major industrial nation will pass
+ laws like this because that's the only way to deal with encryption and crime especially
+ description encryption becomes more well-known and commonly available in that well and as
+ I mean here here we've been talking about the NSA literally eavesdropping on the content
+ of calls to where they have reason to suspect that there's something bad going on and it's
+ like well okay all you have to do is use VoIP encrypted because we know no one as far as
+ we know not even the NSA is able to decrypt deeply encrypted you know state of the art
+ encryption on the flip side if this legislation passes then all they do is collect the data
+ and compel you to decrypt it for right wow I mean it makes sense but you know it's not
+ easy to feel so smug now about encryption yeah in fact there's some even some move that
+ the UK may actually ahead of time ask businesses to hand over the cryptographic keys just in
+ case just in case hmm it's a I don't want to get you upset I know how you feel about
+ these things where can we move to nowhere that's the problem now that's why one of the
+ things we like about true crypt is this plausible deniability it doesn't even look like encrypted
+ data it just looks like noise yep but if you've got noise I guess you could say if if if you
+ were on your internet service provider and sending something that sounded like noise you
+ could say what are you talking about that must have just been a burst of noise prove prove
+ that it's not encryption what encryption yeah yeah exactly I mean in fact it is not it is
+ not possible to prove that encrypted data is not random noise right so maybe that's our
+ defense there we go we solve the problem I hope yeah good luck what do we do we have a
+ plan for next week or are we going to wing it well if you're not going to make me prove
+ that a stack is much better I guarantee you I'm going to hear from Randall Schwartz and
+ he's going to explain but there's no other way to do it but anyway we'll see maybe you
+ know any a good very well send me an email saying you're right why don't why did I think
+ of that but other than that do you have any other ideas next week is true crypt oh we'll
+ do crude great can't wait that'll be a lot of fun we do thank you for joining us thanking
+ our friends of course at a star operation for making this possible we couldn't do it without
+ them and they've they just been so generous our great sponsor if you are interested in
+ security you should know the name of star if you're interested in open source you should
+ know the name of star they make great open source security solutions like the star security
+ gateway for your business or even if you're a home user for you absolutely free you download
+ it and put it on a PC and you've got all sorts of great security you can pay a little bit
+ more and even get anti spam and anti virus and spyware and filtering to well and thanks
+ for the fact that it is using you know lean and mean open source OS and solutions you can
+ take that old tranky machine from the garage that you know no longer play games anymore
+ and and turn it into a really nice internet firewall appliance download your free copy
+ today at AST a R O dot com and of course it's not exactly a sponsor but we do give a lot
+ of credit to spin right because that is Steve's day job and without it well I we'd have to
+ find a way to pay him or something it keeps the lights on and it helps people all the
+ time yeah it's wonderful if you want to read some testimonials for how people have used
+ spin right to recover their data to save their drives to save their lives go to spin
+ right dot info s p i n r i t e dot info go to g r c dot com slash security now dot h t
+ m if or I guess you go to security now dot info for a while anyway to get the show notes
+ sixteen kilobit versions of the show for the bandwidth impaired and full transcripts thanks
+ to Elaine of each and every show of course Steve's notes about the topics we talk about
+ it's also a good place to read the security news groups that he has going there at g r c
+ dot com and even submit your questions for future editions of security now g r c dot com
+ that's the home of spin right and security now thanks to our friends at a o l radio for
+ providing the bandwidth for this podcast a l dot com slash and podcasting and thanks
+ to you Steve Gibson for being such a dude always enjoy this Leo it's really fun thank you we'll
+ see you next thursday on security now security now security now

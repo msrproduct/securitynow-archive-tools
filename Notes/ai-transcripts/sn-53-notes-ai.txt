@@ -1,0 +1,586 @@
+ Bandwidth for Security Now is provided by AOL Radio at AOL.com/podcasting.
+ This is Security Now with Steve Gibson, episode 53 for August 17th, 2006, Virtualization Part 2.
+ Security Now is brought to you by
+ Astaro, makers of the Astaro Security Gateway
+ on the web at www.ast, a-r-o.com.
+ It's Thursday and you know what that means, it's time to find out what's going on in the world
+ of security with our good friend Steve Gibson, the security czar.
+ I'm naming you a czar of security now.
+ Well, and now I'm the birthdays czar.
+ Happy Birthday.
+ To Security Now, this is the official anniversary being episode number 53.
+ Hallelujah.
+ Yeah.
+ Wow, that's great.
+ Congratulations.
+ It really has gone quickly, Leo.
+ It has, it doesn't seem like a year.
+ No.
+ No.
+ I'm really pleased, so that's great.
+ And I expect we'll go on for many years to come.
+ I certainly hope so.
+ Gosh, no security isn't going to go anywhere.
+ You know, like we said the week before last, we've got Vista coming out.
+ It's going to keep, it's going to keep us really busy, I think.
+ Plenty to talk about.
+ Plenty.
+ Yeah.
+ So, we had started and it's now been two weeks, three weeks back.
+ Yeah.
+ We're talking about virtualization.
+ Should we recap a little bit of what we talked about?
+ Yeah.
+ I want you for sure.
+ I actually, I was a little concerned that people might not be interested in our walk down memory lane,
+ which was, you know, really talking about where it first began and really covering a broad spectrum.
+ But I got a bunch of really positive feedback from people who, who liked to know things they didn't know about the history of virtual machine technology and, you know, emulators and UCSD Pascal and all that.
+ And a lot of people who had been around but hadn't thought about it for a long time.
+ And we're saying, oh, yeah, I remember that.
+ And so, anyway, gosh, it knows we've been around a long time and we can talk about it. Can we, Steve?
+ Exactly.
+ What really sometimes we, you and I are the same age and go back to kind of the earliest years of personal computing.
+ And sometimes I really do feel like an old guy when I, yeah, I remember we had 4.77 megahertz and we were happy.
+ We were glad to have it.
+ We knew we'd never need more than 640k.
+ So virtualization is what?
+ The best definition, I think, is it is software pretending to be a computer.
+ So it's a computer running within a computer, essentially.
+ And there are many different flavors because there are many ways to accomplish a computer within a computer.
+ The traditional sort of older fashioned way was known as like a pure emulator.
+ And in fact, for example, even the original basic language, basic was a language that was interpreted by a computer.
+ You could consider that a virtual machine.
+ And in fact, basic was often compiled down into something called bytecode, which was a sort of a pseudo machine language that the interpreter then executed as if it were actually the hardware interpreting that bytecode.
+ So there have been, there have been many implementations of this, but essentially the idea is you have a computer that sort of is creating another computer.
+ Now the tremendous advantage of that.
+ And the reason we're talking about this at all is from a security standpoint, it means that the software running in the computer's computer, that is that virtual computer, that's the name, it isn't actually running on the raw hardware in an unconstrained fashion.
+ So constraints can be put around it.
+ Essentially, and this is the term that we'll be using.
+ Sandboxing is the term that's been used to describe the idea of creating a restricted environment in which software runs so that it's able to do useful things, but it's not able to do harmful, malicious, and completely uncontrolled things.
+ So essentially a virtual computer is a computing environment of some sort.
+ It may be purely software, it may be a hybrid, or even purely hardware in theory, although we really haven't seen anything like that before.
+ But certainly possible theoretically to have a virtual computer that is running only on hardware, which is doing the virtualization.
+ In most cases you have some software that's involved too.
+ So that's sort of the broad brush background of virtual computers.
+ And it's real use in security.
+ In fact, what's interesting is because nowadays all of the new Intel processors, for instance, support this kind of stuff in hardware, there is much less of a penalty paid for virtualization.
+ Well, we're more interested in it.
+ Yes, and in fact, that's a nice segue into talking about VMware and where they've come from and where they're going.
+ What's happening is I predict we're on the cusp of a substantial rise in virtual computing.
+ I think that virtual machine technology is one of the reasons I'm glad we're talking about it and covering it.
+ Something that is with us, and it's funny too, because it was something done a long time ago, then it sort of died out.
+ And no one was really talking about virtual machines for a period of a couple decades.
+ And then it began to see a comeback as RAM got large enough, as hard drives got large enough, as systems got fast enough.
+ Because normally, just exactly as you said, Leo, there's some penalty paid for this extra layer.
+ You've got a wrapper.
+ This thing doing the sandboxing does have some overhead of varying degrees.
+ Well, VMware was early in the game, VMware Corporation, early in the game of taking the Intel processor, which really wasn't designed to do virtualization,
+ but figuring out how to sandbox it and trap the privileged instructions, which are normally not trappable,
+ how to do this in order to create virtual machines.
+ What is happening now is because of this resurgence of virtual technology, Intel, and I'm sure AMD will be following,
+ is now making it easier to do this.
+ Well, so VMware Corporation is being a little concerned because one of their competitive advantages was that they had a bunch of patents,
+ I don't know, they've got like 20 or 30 patents on ways to solve these problems where the hardware is still a little hostile to doing it completely.
+ They came up with workarounds.
+ What is happening is the hardware is now evolving in a direction to make virtual machines much easier to implement.
+ So some of the competitive advantage that VMware Corporation had is being lost. The other thing, the other evolution here,
+ is that we're beginning to see virtual machine technology because it's so useful, it's being subsumed by the operating system.
+ I think we're in a very short time, we're going to be seeing Linuxes with increasing virtual machine technology.
+ Even free BSD already has something called jails, which is an OS level supported sandboxing technology that allows multiple users
+ to basically feel like they've got an entire free BSD machine to themselves, but they can't get out of jail.
+ They're not actually talking with full privileges, even though you can log in as root, you're a jailed root user.
+ I like that.
+ Yes, it's very cool.
+ I imagine Windows will do this at some point. There have been rumors that Apple would be doing this with their next OS X Leopard,
+ which will be out next spring. They did talk a little bit about Leopard at the World Wide Developers Conference,
+ but didn't mention that, so I don't know if that will be part of it or not.
+ They did mention there's a lot of stuff we're not showing you, so.
+ Well, and interestingly, the World Wide Developers Conference was just last week or two weeks ago.
+ I'm sorry, VMware introduced VMware for Mac.
+ You're able to sign up for an early beta, but we've talked a couple times about parallels.
+ We both use that.
+ That's how we run Windows on our Intel Macs.
+ I'm very happy with it, I have to say.
+ In fact, it's very VMware-like. When I was installing and setting it up, I was like, "Wow, the icons even look similar."
+ I felt immediately at home with it, the one thing, and we're going to talk about in this episode,
+ is that it is very cool, is that all of the VMware products across their product line are compatible.
+ You could create a Windows virtual machine, do all the work there, and you're able to package these things up.
+ That's in fact what the free VMware player plays.
+ We should explain that most of the time, at least in my experience, all of these programs,
+ instead of having a hard drive or taking a partition on your hard drive, they just create a large file,
+ which appears to be a hard drive to the software as it's running.
+ For instance, with parallel setup on my Intel Mac, I have a big file that's my Windows operating system
+ and all the files on it and all the documents on it.
+ You're saying I could take that one big file, copy it to another system, a Linux system,
+ say, using VMware and run it as if I were running the same version of Windows.
+ Yes, wow.
+ In fact, what I love, because I've been a long-term VMware user.
+ I have used it in the past.
+ I guess I'm getting a little bit ahead of myself here.
+ I've used it in the past to evaluate lots of different personal software firewalls.
+ Great way to do that.
+ You don't have to mess up your machine.
+ Exactly.
+ A firewall is inherently an invasive thing to install.
+ It's going in and sinking its roots down into your kernel, putting in drivers, patching things,
+ doing all kinds of stuff.
+ On one hand, you could re-format your drive, you could uninstall it, but you're never really
+ sure if you got it all out of there.
+ There's another advantage, which is that the systems are identical.
+ You can start from scratch fresh each time with an identical system.
+ In fact, for example, what I do is I use VMware Workstation and I create a new instance of
+ a virtual machine.
+ What's really funny, the first time I used it, I installed VMware Workstation, started
+ it up, and you literally push the power-on button for this virtual machine, and you see
+ a black-and-white screen booting.
+ It's got the BIOS in there counting up how much memory it has.
+ It's exactly like turning on a computer and watching it boot.
+ To that level, it's a virtual machine.
+ It's a computer running on your screen.
+ Then I install Windows into that.
+ Get it.
+ Windows all configured the way I want to.
+ Install some other apps and things to get the environment ready.
+ Then you're able to save it, and you can then stamp them out like cookies.
+ Then I'll have, for example, 10 identical virtual machines.
+ I then name them zone alarm, curio, personal, semantic, Norton, McAfee.
+ Give them all names.
+ Then I go to each one, basically turn it on again, and then install that personal firewall
+ in that instance of the virtual machine.
+ The beauty of that is, in fact, VMware has really got this nailed.
+ You end up with a tabbed interface where you can just click on tabs, and it jumps you
+ immediately between entirely separate instances of the installed and setup windows.
+ It's very cool.
+ It's serious magic.
+ It is deep voodoo.
+ It works.
+ They have networking working, so you're able to, if you want to, you can make these machines
+ communicate with each other, communicate to the host machine, sort of your own little
+ private network in order to connect, and you do file sharing, and you can even do drag-and-drop
+ sort of operations, so it's extremely cool.
+ For me, the advantage then is if I come back a day later, because I have something I forgot
+ to test, well, I've got all of these, it's like having 10 machines literally running inside
+ of one, so I'm able to say, "Oh, I forgot to test something," and I just click through
+ all the different machines running different personal firewalls in order to test them in
+ a way that, you know, with something that I'd forgotten.
+ Of course, you must have had a big hard drive.
+ Oh, I mean, yes.
+ These things are hungry for, you know, you can't run it on your grandmother's computer.
+ It does need to be run on a contemporary machine.
+ And lots of RAM, too, because remember, you're running essentially two operating systems simultaneously.
+ Well, yes, it is RAM-hungry, and there are things you're able to do.
+ I mean, you're able to, like, shut down the machine.
+ You can pause the machine.
+ You can suspend it using the OS's own suspension mechanism.
+ I mean, it is really feature-packed.
+ Now, the cool thing is that once you've done all that, you end up with this file.
+ I think it's VMX, which is like the master file for the virtual machine.
+ You can take that to any other copy of VMware, whether the full workstation, whether the free
+ player, or even now, VMware, for example, on Linux or soon to be on the Mac, and all of
+ them are compatible at that file level.
+ I mean, you're probably talking about, you know, many hundreds of megabytes, maybe three or
+ four hundred meg, so, you know, burn onto a CD.
+ But what you end up with is this portable, sort of this module, which any other VMware
+ system will run.
+ And the player is free.
+ So, if what you've created is also free, I mean, you can't go stamping Microsoft Windows,
+ your own personally licensed copies of Microsoft Windows all over the place.
+ That's obviously a violation of Microsoft's copyright.
+ But if you were to build something with open source software, then you end up with something
+ that will run anywhere.
+ Well, we should point out, well, maybe I shouldn't, but I'm going to, that the Windows activation
+ is done within the virtual machine.
+ So, if you make a copy on a Mac of a VMware Windows installation to move it to your Linux
+ box, you're not really changing machines.
+ So, the activation goes right with it.
+ Right.
+ VMware used to only be hosted on top of another operating system.
+ But they've even got a version called ESX, which you install like the first operating
+ system.
+ You install this VMware ESX on raw hardware, and they actually started with any operating
+ system.
+ Wow.
+ Nope.
+ Nope.
+ They started with a version of Linux, sorry, Linux years ago.
+ They're migrating more away from Linux into their own code.
+ So, this ESX, the VMware ESX is actually not hosted on any other OS.
+ It itself is installable directly on empty hardware.
+ So, you take a machine, you install this VMware ESX, and then it creates virtual machines
+ in which you install whatever operating systems you want.
+ So, it allows, for example, commercial companies who want to provide hosted servers to install,
+ for example, lots of copies of Unix or Linux, give each one to a different company.
+ And you really, each OS is sandboxed and has its controlled access to the hard drive.
+ Apparently, they'll install up to 128 virtual machines on a single server, and they can
+ all be running at once.
+ Well, that's amazing.
+ And so, you know, a client leaves, you just delete their virtual machine, and then stamp
+ out another one ready to go for your next customer off of your master template.
+ So, this notion of having templates is incredibly cool because it affords you the ability to
+ set up, basically, a completely configured computer of, you know, whether it's Windows
+ or Linux or FreeBSD, basically you install whatever operating system you want into this
+ empty virtual machine, and you've got something that runs at near full speed.
+ So, that's another question, you say near how near?
+ Well, it's getting better all the time.
+ In my experience, on good hardware, you really can't tell the difference.
+ I mean, it is snappy, and it's just like you're using Windows.
+ Now, I, in parallels, and I have two gigabytes on a MacBook, so it's not the highest-end
+ Intel dual core, but it's still pretty fast, it's a two gigahertz, dual two gigahertz.
+ It does seem to run pretty snappily, I haven't tried running games on it, but I am able to
+ run Adobe Audition with many tracks, and I use voice dictation software, that seems
+ to work fine.
+ And now, from a security standpoint, here's where this all comes in, is it is super secure,
+ and in fact, one of the things that people are doing is they're using a virtual machine
+ for doing anything on the net where they care about not only security, but privacy, because
+ that's the other thing that a virtual machine affords you.
+ Since you're able to tell, in VMware, you're able to say, "Do not save any state changes
+ of the virtual machine while I'm using it," that is, they have this notion of snapshotting
+ where every time you boot or turn it on, it starts out the way it originally was.
+ And so, you know--
+ It's interesting.
+ It's very cool.
+ So it throws out any changes you made.
+ Exactly.
+ It'll save them during your session, but it will not save them across sessions.
+ And so, you know, many people are concerned about leaving tracks when they're using a
+ browser because browsers are saving cookies, they're caching images and caching web pages
+ you've gone to.
+ Basically, it's a lot of work to clean out any, you know, to make sure you've left no
+ debris behind from your use of a computer.
+ Making anything in a virtual machine that is set up correctly in this way absolutely guarantees
+ that when you shut it down, it has not modified your main machine, your exterior computer
+ at all, and even turning it back on again starts it from its master image losing any
+ changes that were made last time.
+ Well, I can see the real security advantage of that.
+ Of course, it's not the ideal way to operate on a computer where you actually want to do
+ any work long-term, be nice to save some stuff.
+ True.
+ True.
+ And it's worth saying too that, I mean, this VM player, it's interesting, VMware Corporation
+ is showing all the signs of a company that recognizes, you know, it got an early lead,
+ but the world is catching up.
+ You know, of course, Microsoft bought Connectix, I think was the name of the company, and acquired
+ a very similar virtual machine technology from them.
+ That of course is now Microsoft's, you know, virtual PC product line, and Microsoft is
+ giving a player away also for free.
+ Oh, I should mention that VMware's will also run Microsoft Virtual PC images.
+ So you're even, yes, you're even able to use Microsoft Virtual PC virtual machines and
+ run them in VMware.
+ That's interesting.
+ Wow.
+ So the images are close enough that they can do that.
+ Wow.
+ Well, I think what they've done is they've really, they went in and, yes, they went in
+ and deeply reversed, engineered what Microsoft had.
+ But so, so VMware, you know, they're, they're giving things away for free, they're, they're
+ really...
+ Now you say you get the player, but what can you, what can you do with the, who can't create
+ a new image?
+ You'd have to use somebody else's creation image.
+ Well, no, but there is a couple of very cool things.
+ As I was, as I was researching this, I was excited to be telling our audience about some
+ of this because first of all, the player is about 30 megabytes.
+ It's not huge in size, but it does deeply install on your machine.
+ It creates some virtual network adapters that will show up under your network properties.
+ I mean, it's, it takes a while to install because I mean, it's, and you do have to do
+ a reboot afterwards.
+ So I mean, installing the player itself is not something that you do casually.
+ Just like, "Oh, I'm going to quickly, you know, run this little program and see what
+ it does."
+ I mean, it's, it's really putting some serious technology on your machine.
+ What's cool about it, though, is that there are, there are now what, what VMware calls
+ appliances and there's a directory, again, we've got links on, on the show notes page
+ for this to VMware's page.
+ They're collecting, and there's like, I don't know, maybe 50 or 60, what they call appliances,
+ which are virtual machines that other people have already created.
+ And some of the coolest ones are various flavors of, of Unix and Linux.
+ And so what people could do is, I mean, it's a, it's a very easy way to just screw around
+ with free BSD, or with, is it called UBuntu?
+ UBuntu, yeah, that's the, the Linux effect.
+ That's the one I use and love.
+ Is it a derivative of Debian?
+ It is.
+ It's a Debian.
+ Nicely packaged Mark Shuttleworth, who made quite a bit of money in the.com boom, is basically
+ funding it.
+ And it's free.
+ You could, they'll send you a disk, u-b-u-n-t-u.com.
+ Well, so for example, you install VMware's player.
+ They have a ready to go Firefox based, UBuntu, uh, oh, a little, so you just could load that
+ in.
+ Oh, it, you, now you absolutely do.
+ And it works perfectly.
+ I was playing around with it because it was free.
+ So all of that is free.
+ So you don't have to worry about licensing and all that.
+ They can just give it to you as a blob.
+ How big is the blob?
+ Now that's, that's the problem.
+ The, it's a big blob to download.
+ It's 271 megabytes.
+ Oh, that's not that bad.
+ Well, until you unzip it and, and it's a gig.
+ Yeah, because it's gotta be a whole operating system.
+ Well, it's a whole operating system and it's got a whole bunch of apps installed.
+ The reason I thought it was.
+ Now what does that run on?
+ It runs on anything that the VMware player will run on.
+ Exactly.
+ Wow.
+ So, I mean, it is really cool, Leo.
+ I mean, so it is, it, it comes with, um, I think it's the gnome desktop.
+ That's right.
+ Well, it looks, it looks great.
+ It's very windows-like.
+ I was playing around with it and I installed the calculator app, which it didn't already
+ have because it's got a very nice, um, application.
+ That's great.
+ Yes.
+ And in fact, I saw that it was a dot dev file.
+ So I think all that, I remember that from my own, my own playing with, with Debian.
+ It uses apps get, I, I think Ubuntu is incredible.
+ I actually put it, I have an old Mac power book because when I went to the Intel, my,
+ my year old power book was suddenly obsolete and I put on, and it's great.
+ It's just wonderful.
+ But that, well, I didn't need to because it sounds like I could have just downloaded
+ the VMware version.
+ That would have been a lot easier.
+ Well, and that's what's so cool.
+ And that's what I wanted to really expose our listeners to is that, you know, I mean,
+ we've talked about Linux and Unix and all this.
+ And I mean, in from, from most people, it's like, oh, you know, I don't have a spare machine.
+ I don't want to do dual booting and like mess with my partitions and all that.
+ But wouldn't it be cool just to be able to play with some of this stuff?
+ So if, or if for instance, you wanted to surf safely on, I mean, really safely on windows,
+ you download the player.
+ They have a blob I presume for, oh, it doesn't matter.
+ It's cross platform.
+ So as long as they have a player for windows, you're okay.
+ Yep.
+ And you download the blob and you, and when you surf, you surf in Ubuntu.
+ And even if you were to get a virus, is it, is it?
+ Now this is the question.
+ A lot of people ask me, can it go across the barrier from the virtual environment into your
+ real environment?
+ Well, you still need to be careful that you don't pull programs out of the VM, out of
+ the virtual machine, out onto your real machine.
+ So you could actually see it.
+ I mean, you can see your drive and you could copy stuff over and stuff.
+ Yeah.
+ Yes.
+ You are able to do that if by default it is disabled.
+ So you're unable to have any contact with your external drive, although the technology
+ does support drag and drop of files and content.
+ So I mean, it, I mean, I, if, if this is interesting to people, I encourage them to try it.
+ It is, it is weird when you see the, this thing boot.
+ And in fact, that, that's exactly the experience I had with the VM where, you know, just the
+ free player, download of the free player, 31 megabytes, I think it was.
+ And then I, I downloaded the, um, the, they call it the browser appliance.
+ The browser appliance, exactly, two, two, two, 71 meg.
+ And then I unzipped it into a directory.
+ I have a clear little appliances directory under my VMware directory where I, where I unzipped
+ that.
+ And then they have other appliances, by the way, oh, there's like 60 of them.
+ Yeah.
+ Yeah.
+ I mean, there's a ton of them that various people are, are submitting.
+ Many of them are really nicely pre-configured versions of, of Linux and Unix running.
+ In fact, I probably would not recommend the default browser appliance because it's an
+ older version of Ubuntu and it's just Firefox.
+ So you might want to look at the other free virtual appliances to see which one.
+ Yeah.
+ I saw, I saw some opera, I was it, it would be able to install opera nine if you wanted
+ to.
+ And, and that's a relatively current one.
+ So what was so cool, Leo was here, I'm looking at this, this app and I, I started and I'm,
+ I watch Ubuntu booting going through its little checks, checking off, you know, starting
+ up this, starting up that, you know, and it's literally, it's booting the first time.
+ Now, once it had done that, when I just closed the app, it, because this was told to like,
+ save where I am, next time I ran it, it continued exactly from where I was.
+ That's so cool.
+ It really is.
+ And then, and then to be able to download these.
+ So that one saves your bookmarks.
+ It saves every changes you make and, and not only does it save them, you just go right
+ to it the next time you run it.
+ Yes.
+ Wow.
+ Yes.
+ And you are sandboxed because the idea is that, I mean, the, the application thinks it
+ is the application itself, the Ubuntu has no idea that it is not actually booting on
+ a real machine.
+ Right.
+ So if you got malware in there, it could be having a party thinking, ha, ha, ha, I got
+ this guy now.
+ But in fact, it's a virtual party.
+ I mean, it's not, it's not actually touching your hardware because the virtual machine
+ technology, and that's what, what VMware nailed early on that is being made easier as our
+ hardware advances.
+ It's able to intercept all contact to physical memory and physical hardware devices.
+ And in fact, it's one of the, one of the cool things is that with this VM machine, you get
+ sort of a, a wrapper of compatibility.
+ It pretends to be the most standard USB hardware.
+ The most standard ethernet card, the most standard, everything.
+ So there's, you don't have any like driver issues because the VMware, the, the, the virtualization
+ manager, it's, it's simulating a generic ethernet adapter that all operating systems
+ will support like an old, you know, three comm E 100 or something.
+ As long as the player supports your real hardware, you'll have no trouble with a, a
+ later.
+ Exactly.
+ I mean, if you had to be really oddball, I suppose the player itself might not work.
+ I guess potentially sure.
+ Yeah.
+ Yeah.
+ I mean, it is, it is really, it is, it's just, it's a neat, it's a neat thing to, to
+ see it happening.
+ Again, it's going to need a gig in order to expand the browser.
+ And I imagine that since the other things are, are varying in size, there are things
+ that are smaller and larger than that 271 browser appliance that they offer.
+ But I mean to, for, for someone to just install some apps and be able to boot like a virtual
+ machine and then install anything you want to in there.
+ Now again, you have the, the free thing that the free version, the VMware player is a,
+ is a player only, it'll allow you to do this with images that other people have set up.
+ But the, and I think the, I think VMware itself, the whole workstation is version five point,
+ you know, something or other.
+ As cheap as I remember.
+ No, it's about 199.
+ That's not bad.
+ That's not bad.
+ For the whole thing.
+ For me, it's a godsend.
+ Yes, but when I want to do something with a machine where I want to experiment and like
+ jump around between different instances of a machine and it's making a, a serious dent
+ in corporate, um, large sort of computing infrastructures where they want to be able
+ to run many software servers inside of a virtual server.
+ Yeah.
+ Of course, the VMware is the best known, but as you mentioned, there is a Microsoft's
+ own virtual PC and parallels, which is in very active development on the, on the Mac platform,
+ but they also have windows and Unix versions as well.
+ So this is a, this is not a, it's a, it's going to be a crowded field, ironically.
+ And I think it's just exciting as heck.
+ I think probably anybody is really concerned about security.
+ You might want to just go get the free version of VMware, the player and get a, and get the
+ browser appliance and install it just at least to have that.
+ Yeah, I agree.
+ And just see how it feels.
+ I mean, it's, it's there's overhead associated with getting it launched and getting it going.
+ Of course, you say a gig is a must for a RAM.
+ Uh, I would think so because I think it actually is using a much smaller amount.
+ And then, but it basically laid out a container for a virtual drive.
+ And so that, that gig is, is, as I remember, it's not very full, but they wanted to basically,
+ you know, uh, take up that much space so that then if you stored things in there, you know,
+ like, like the browser had some caching space and so forth, basically it is that file which
+ is pretending to be the drive.
+ So a gig of hard drive space, but also a gig of RAM and that, that really is a must.
+ Oh, yeah.
+ It is going to be using up RAM also.
+ Yeah.
+ Very cool.
+ Yeah.
+ So it is going to be a good organization.
+ Now that you know what it is, run out and get some of your very own.
+ Yeah.
+ And I couldn't be happier using parallels on the, on my Mac book.
+ It's just really a wonderful thing.
+ Well, and frankly, I'm probably going to switch.
+ I have, I own parallels.
+ Um, I think I'll probably get VMware for the Mac just so that I have the cross platform
+ compatibility.
+ Yeah.
+ That'd be very cool.
+ I think that's worth 199 bucks.
+ Yeah.
+ So that is in development right now or is it actually out?
+ They just announced it.
+ And they announced that the developers conference, there's a, there's a sign up for the beta.
+ So that, that implies that the beta is not quite ready.
+ Yeah.
+ Yeah.
+ They say later, I think later this year, which could be tomorrow or it could be December
+ 29th.
+ Yeah.
+ They, they probably had to like stake their claim during the Apple developers conference
+ just to get on record.
+ Well, I love having the competition and then a, you know, parallels is very reasonable.
+ I think it's only $40, but you know, you're right.
+ The compatibility cross platform to have one copy of windows that I could put on all
+ of my machines would be really cool or one.
+ It is.
+ It is really neat.
+ Yeah.
+ Um, there, there is one, there's one, um, appliance that I saw there.
+ It's called PC hyphen BSD.
+ And it's a, it's a very nice version of free BSD that's got the gooey all installed and
+ running.
+ And so if people wanted to poke around with a, a, a Unix free BSD Unix, which of course
+ has always been my favorite as.
+ Yeah.
+ Yeah.
+ Yeah.
+ PC BSD is another appliance there, which has been very well reviewed and, and it's being
+ maintained.
+ And you know, again, you can run it right on top of your windows machine.
+ Steve once again, you've, you've shined a light into a fascinating area of technology
+ that I think a lot of people never heard of, but I know they, I know now that they will
+ be very interested in knowing more.
+ Well, next week we're going to talk about a different flavor of this.
+ We're going to talk about sort of lighter weight sandboxing technologies because there
+ are some ways to sandbox without the whole VM where virtual PC sort of overhead.
+ And so that's where we're going to go next there, their VM, their virtual machine like
+ stuff, but sort of lighter weight.
+ If people want to know more, they should go to your website, grc.com.
+ That's where the 16 kilobit version of this show lives for the bandwidth of parent.
+ And of course, Elaine's great transcripts, if you'd like to read along as Steve talks.
+ And it's also the great place to find spin right S P I N R I T E. It's Steve's bread
+ and butter has been for some time.
+ The latest version is just fantastic for all PCs.
+ I use it all the time.
+ It's the ultimate discovery and maintenance utility.
+ If you have a hard drive, you need spin right check out spin right dot info for great testimonials.
+ And I know Leo, we've I've I've been lazy posting new ones because we're there.
+ We're just getting too many that already that page is so long, it's like, I, I, I've
+ been thinking maybe I'll just put up a note and say, you know, the last one here, I think
+ it was in April or something.
+ And I've, I've getting them all the time, but I just don't want the page to become too
+ long.
+ Well, take off the old ones and put in the new ones, but the old ones are good too.
+ They're all his babies, he doesn't want to give up any of them.
+ We also thank our sponsor Staro Corporation makers of the greatest Staro security gateway.
+ If you're small or medium business network needs superior protection from spam virus
+ and as a hackers, you could put a little dog at the gate, which is apparently what's barking
+ in the background here, or you could actually get superior protection, including complete
+ VPN capabilities, intrusion protection, content filtering and an industrial strength firewall
+ in a single easy to use high performance appliance, a star, it's like a little pit bull protecting
+ your system.
+ WWW dot A S T A R O dot com or call eight, seven, seven, the number four A S T A R O toll free
+ to schedule a free trial of a star security gateway appliance in your business.
+ Free versions for a, and for a non business users are also available at A S T A R O dot
+ com.
+ We thank them so much for supporting security now.
+ We thank you for supporting security now for listening to the show, for being a part of
+ the community that is growing around security now tell your friends, please feel free to
+ share this with people if you want to put it on a CD and give it away.
+ That's fine.
+ We get, we've got, we continue to get almost every week a request from internet service
+ providers from cable companies and variety of other people to say, can we redistribute
+ this?
+ We'd love our customers or clients to know about it.
+ Our license absolutely allows non commercial use as long as you attribute it back to Steve
+ Gibson and twit.tv of this because we really do want everybody to be able to hear it and
+ take advantage of it.
+ So for non commercial use, go right ahead and use it.
+ If you want to use it commercially, in other words, you're trying to make money on it,
+ contact us and we can talk about that.
+ Steve, what's next?
+ Do you know?
+ Yeah, we're, as I said, we're going to talk about lighter weight virtual machine approaches.
+ Oh yeah, you did.
+ So-called sandbox.
+ So we'll do that in boxing.
+ Yeah.
+ They in the sandbox with, yeah, uncle Steve next week on security now.
+ Hey, thanks so much, Steve.
+ We'll see you next time.
+ Always a pleasure.
+ We're going to take care.
+ Security now.

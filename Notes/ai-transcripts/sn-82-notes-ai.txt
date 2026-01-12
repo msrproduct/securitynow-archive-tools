@@ -1,0 +1,653 @@
+ NetCasts you love, from people you trust.
+ Bandwidth for Security Now is provided by AOL Radio at AOL.com/podcasting.
+ This is Security Now with Steve Gibson, Episode 82, for Thursday, March 8th, 2007, Cyber Warfare.
+ Security Now is brought to you by Astaro, makers of the Astaro Security Gateway, on the web
+ at www.astRO.com.
+ And by Nerds on Site, looking to grow your IT service business, find out how Nerds on
+ Site can help visit, IWANNABEANNURD.com.
+ Time to talk about security, protecting yourself, your computers, your home, your family, and
+ our national borders with Mr. Steve Gibson.
+ I kind of blew it up a little bit bigger than it really is.
+ Well, actually we are going to talk about national borders today, so that's...
+ Oh, really?
+ Oh, good.
+ Oh.
+ Yeah, we're going to talk about state-sponsored cyber warfare.
+ Holy cow.
+ Which I think is, you know, a really interesting topic.
+ And there's actually more going on than people might guess, so I think it's going to be
+ really interesting.
+ I can't wait to hear that.
+ But any thing that we want to clear up from last episode, or...
+ Oh, yes, the challenge of secure Wi-Fi just never seems to be resolved.
+ We of course talked last week following up from the week before, last week we were talking
+ about this problem of how ad hoc networks as opposed to infrastructure networks, an infrastructure
+ being where you've got a base station you're connecting to, an ad hoc network being where
+ you just have two random, for example, laptops that are able to directly connect to each
+ other or associate in order to create a connection, and how unfortunately Windows XP is a little
+ misbehaving.
+ In fact, you had that neat anecdote from two weeks ago Leo about how there's sort of almost
+ a virus, this free Wi-Fi network virus that jumps from laptop to laptop.
+ Well, hearing last week's episode where we talked about and showed on the show notes
+ page how to go through and deliberately disable this sort of automatic ad hoc network connectivity,
+ some sharp people over in the GRC news groups picked up and said, "Hey Steve, did you forget
+ about the Windows client update from late last year?"
+ And it's like, then of course it rang a bell and I remembered being aware of it, but it's
+ something we definitely want to talk about.
+ Okay, now get this, Leo, this is really annoying, a completely patched, like right up-to-date
+ XP system that includes wireless, will not have a client update to the Windows, it goes
+ by various names like wireless zero configuration WZC, but it will not have a really important
+ update which all XP service pack people, service pack two people, will really want to incorporate.
+ So it's something that Microsoft, it turns out it was on October 17th of '06.
+ So only a few months ago that Microsoft released this to fix a whole bunch of holes in this
+ wireless zero configuration, but they never put it on their list of stuff that you'd
+ like to have automatically downloaded into your machine.
+ Oh, so you have to specifically request it?
+ Yes.
+ Yes, and it's really important.
+ For example, on our show notes page, of course, I've got links to all this, but reading under
+ changes for ad hoc networks, it says on a computer that does not have the wireless client update,
+ which is what we're talking about, installed.
+ Wireless auto configuration, which is the other name it goes by, either zero configuration
+ or auto configuration, automatically tries to connect to all the wireless networks in
+ the preferred networks list that have previously been connected to, get this, if no infrastructure
+ mode networks are present, wireless auto configuration sends probe requests out to try to connect
+ to the first ad hoc wireless network in the preferred networks list.
+ An observer could monitor these probe requests and establish an unsecured connection with
+ a window's wireless client.
+ So literally, you're a laptop that someone just carrying around with them when they're
+ not connected into a network already.
+ It's every minute, it's sending out probes announcing networks that it used to be connected
+ to or had been connected to in the past to see whether there might be a non-broadcasting
+ network that is a network which is not broadcasting its SSID, its network identification that
+ would allow then this machine to connect to it.
+ So it's literally, it's spilling the beans, it's sending out the names of networks that
+ your laptop knows about.
+ So, yeah, and so like, okay, this is not a huge security problem, but who wants their
+ window's machine sending out, you know, on by radio, Wi-Fi names of...
+ Here's people I trust.
+ Here's people I trust.
+ Okay.
+ Just someone.
+ Pretend you're one of them.
+ Yeah.
+ I mean, essentially anyone passively sniffing Wi-Fi packets will be learning about the names
+ of the networks that the people around them have connected to in the past.
+ Now, I guess that I would guess that's how the free public Wi-Fi is present.
+ That's exactly how it happens is that a machine that has it broadcasts it, another machine
+ says, "Oh!"
+ And connects it.
+ And now it has it.
+ So the change is on a computer that has the wireless client update installed, wireless
+ auto configuration does not send probe requests to connect to newly created ad hoc wireless
+ networks in the preferred networks list because many ad hoc wireless networks are created
+ for temporary wireless connectivity.
+ I mean, that's like all what you'd be using it for.
+ You must use the choose a wireless network dialog box to manually initiate a connection
+ to an ad hoc mode wireless network.
+ Okay.
+ Now, that makes sense.
+ So here's a perfect example of Microsoft still not getting this trade-off between privacy
+ and security and convenience because the original design even post-service pack two, I mean,
+ this is just, you know, in October of at the end of '06 is, you know, so even past post-service
+ pack two, the big much heralded security update for Windows XP, they're saying, "Oh, it's
+ better to air in the direction of convenience and oh, look, it just works than it is towards
+ privacy and security."
+ Interestingly though, this whole wireless zero config while it I guess on the surface looks
+ more convenient is cost more problems for more people.
+ It is not is the opposite of convenient.
+ I mean, I get people complaining all the time that they drop connections in offense because
+ wireless zero config is kind of promiscuous.
+ Well, actually, that's also one of the things that this updates deals with is if you end
+ up with another network acquiring a stronger signal than the one you've got.
+ Just flip over, yes, yours, it's able to jump networks and switch to the stronger one.
+ It's like, "No, that's not my network."
+ You know, this is not a cell phone where I want to be jumping between cell towers.
+ So anyway, they've fixed a bunch of things.
+ We've got links on the show notes page to this description to the page you can use for
+ downloading and just, I was curious.
+ So I literally, I took an XP machine that had never, it was fully patched up to date.
+ I looked at one of the main files, which is WZCSVC.dll.
+ So that's going to be wireless zero config service.dll.
+ On a completely patched XP service pack two machine, it's file date with 6.2105.
+ Okay.
+ That's completely patched with critical patches, but not these optional patches.
+ Well, no, everything that you can get automatically from, you know, as you install an XP, then
+ you go through all the Windows update cycles over and over and over until it finally, you
+ know, the patches have had their patches and they've had their patches so that it's all
+ settled down and says, "Okay, you got everything you need.
+ This thing is not part of that."
+ And so only if you deliberately update, then it jumps you from a 6.2105 to 8.8806 on basically
+ a whole set of files, which are enumerated on this page.
+ So people will be able to look at their files, see whether this has been done for them by
+ someone and most likely it hasn't been since it hasn't been that long ago.
+ It was in October.
+ I'm sure not.
+ And so I mean, everyone listening is going to want to run this patch because this basically
+ locks down the wireless service, you know, this auto config sort of promiscuity of XP.
+ So once again, you'll run Windows Update.
+ It's not a critical patch, though.
+ You have to go in the optional patches.
+ And what's the name of it?
+ No, no, no, Leo, it's not in Windows Update.
+ You can't find it there.
+ It's not even there?
+ No, you have to deliberately go and ask for this by name.
+ So the only way to find it, I mean, if you put in, for example, to Google or to Microsoft,
+ you put in a wireless client update.
+ I'm sure you could find it on Microsoft's site that way.
+ So wireless client update, put it in the Microsoft search box.
+ I'm sure you'll find it.
+ Or we've got links to it on our show notes, but there is no way, I mean, it doesn't show
+ at all through any of the normal, you know, take care of me Microsoft update.
+ It's not even an optional update.
+ It's okay.
+ And it is the first Google result if you do wireless client update.
+ And there is a download link on that page.
+ So perfect.
+ And that's for XP.
+ Now, presumably they fixed that in Vista.
+ Yes.
+ Given, given, you know, that they know they made a mistake and they should have fixed this
+ and Vista came out, you know, only last month in February, we can presume.
+ Yeah.
+ Although I still I have to say I'm still scratching my head about where they've hidden all these
+ things in Vista.
+ It's like I dug around and couldn't find sort of the same thing that I'm used to seeing
+ in XP.
+ So this modifies six different files.
+ So it's a it's a quite a big of big update.
+ It's yes.
+ Basically, it's the entire collection of, of, you know, windows, zero, the wireless zero
+ config set and I only read one aspect of the behavior changes there.
+ There's like five or six different things that this thing says, Oh, this isn't really
+ not what we want to do.
+ It's just, I mean, who wants their, their unconnected laptop that probably has a Wi-Fi
+ still on the Wi-Fi radio still on unless you're like really, you know, conscious of that as
+ I am, for example, to shut it down and save battery life.
+ When I remember to do that, you know, who wants it broadcasting the, the name of networks
+ it knows.
+ Yeah.
+ That's just not cool.
+ Well, in the past, we've, we've got this question a lot on the radio show and I just
+ told people disable the wireless zero config service that you don't want it because it's
+ a bad thing.
+ But now I, I have something better, which is download an update and you know, you should
+ come on the radio show and tell everybody, because I think people need to know this.
+ This is something we want to get out.
+ Very.
+ Oh, that's a great idea.
+ Any other updates?
+ Well, no, except that I've been trying to read this one really neat piece of email that
+ we received about a spin rights saving someone's business.
+ Yeah.
+ But, you know, of course, last week it saved you, it saved your computer.
+ So I was, I was quite willing to have you to talk about that.
+ You do it now.
+ Anyway, so this is from, this is email from a Michael Diaz in New Jersey and he, the subject
+ of the email with spin rights saves a business.
+ He says, I just wanted to drop you a note thanking you for your great product spin right.
+ I'm a network administrator and I use spin right on a regular basis to diagnose problems
+ as well as refreshing drives on our older PCs.
+ I'm well aware of the value and power of spin right as a business tool.
+ That's why it's what I used when a friend's business was on the line.
+ He says, I have a friend who is an automotive specialty tuner and I didn't even know about
+ this kind of thing, but he says he builds and customizes primarily late model Ford Mustangs.
+ Many of these cars have 400, 500, even 600 plus horsepower and in order to reliably and
+ safely drive these cars on the street, there needs to be a very good tune as he calls it
+ built into them.
+ Different cars are tuned via software and that usually requires a laptop and a lot of
+ tweaking to the car's software.
+ So I receive a frantic call from a friend one day basically saying his laptop will not
+ boot.
+ It starts up, gets a blue screen of death and then reboots getting caught on a cycle.
+ I know this is never a good sign, so I dart out to his shop with only spin right in hand.
+ When I arrive there, my first question is of course, do you back up the data on the laptop?
+ To which I hear the reply, no, no, no, no, no, so this ends up being like critical stuff
+ to this guy.
+ He says, knowing full well that his reputation as a tuner and the hard hours of work he's
+ put into building his business are on the line, I put spin right to work.
+ The first thing I notice is that the hard drive is clicking.
+ Uh oh.
+ He says, that is never a good sign.
+ I start to wonder if I'm too late, but I continue on with spin right.
+ It does not take long for it to find some bad sectors and we decide to leave it running
+ for a while.
+ Many, many hours later, the scan finishes with a plethora of red use showing on the screen.
+ The only way I can describe it is it looks like virtual Swiss cheese.
+ As I attempt to reboot the laptop, the clicking is gone and windows boots.
+ So the red user are unrecoverable sectors and it's been right.
+ Yes, what it really represents is we were unable to get all of the sectors data back.
+ One of the very coolest things about spin right that makes it completely unique as far as I
+ know is we're able to read most of a sector, even if we can't get it all.
+ And so spin right will try like crazy to get it all.
+ And in fact, that's what this whole dynastat thing is the dynamic statistics is it's able
+ to accept whatever the computer is able to read, even if it's not perfect, knowing that's
+ not perfect.
+ And so it's very often the case that we can get one good read, but if not, even after
+ trying a lot, spin right is able to say, okay, I couldn't get it all.
+ But for example, out of 4,096 bits, which is what a sector is, it might get 4,090, which
+ you could argue for in many cases, for example, if it's a critical, for example, a file system
+ sector, you might get back your file system, because that one sector was preventing the
+ whole file system from functioning.
+ So you can tolerate some fuzziness in some sectors.
+ Anyway, so he says, I attempt to reboot the laptop, the clicking is gone, and Windows
+ boots, not trusting the drive, not trusting the drive.
+ I quickly retrieve his data and tuning files, as well as his custom tuning software, none
+ of which he had copies of.
+ Not long after transferring all his vital data off the system, the click is back.
+ This time, the drive just dies.
+ Luckily, spin right was able to make it stable enough for me to get all the data off before
+ it completely seized.
+ Spin right does not have to completely fix a drive to save the day.
+ In my case, it did enough for me to get the vital customer data off the dying drive, and
+ yes, save his business.
+ I can't tell you how competitive the custom tuner scene is, especially in the world of
+ super high-power streetcars.
+ When's reputation is key, and in this case, that reputation is intact, thanks to spin
+ right.
+ So that was your backup.
+ Yes, please, please, I mean, you know, I'm glad we're able to like, you know, come to
+ the rescue in these cases, but really, when there's this kind of data, I'm sure his friend
+ now has learned a lesson by seeing how close he came to the brink of losing everything.
+ He's very lucky.
+ And it generally takes one of those lessons to, you know, unfortunately get so included.
+ It's really true.
+ Hey, we're going to get to our subject, which is, I think, very interesting cyber warfare.
+ In just a second, we do want to thank Ostaro, our sponsors for this show.
+ They've released version seven of the Ostaro security gateway and a number of improvements,
+ including, as we mentioned before, transparent email encryption and decryption, which means
+ it's centralized in the Ostaro gateway.
+ So your users, your, your, your employees don't have to even know about it.
+ No additional encryption software is required on their computers.
+ It just does it all for them and even handles digital signatures based on SMI and open PGP
+ standards.
+ Really, really works and inbound mail is automatically decrypted.
+ So it allows you to have a completely secure email without any effort on your part.
+ Of course, there's lots of other new features, including SSL for VPN.
+ In fact, I think the Ostaro is the only UTM appliance on the market with such an amazing
+ array of VPN and remote access solutions.
+ You can cluster them, which means it'll scale to any size as many as 10 gateways can be
+ clustered together.
+ And they have, and this is for home users, great news, eliminated the home user fee.
+ So you can continue to download the home use package for free as always for non commercial
+ use.
+ You'll also get the base license, all subscriptions and a star are up to date for free.
+ They're giving it away.
+ So if you've got an old beige box lying around, you want to turn into a security gateway.
+ This is the way to do it.
+ A S T A R O dot common.
+ Don't forget, you can call a star for a free trial in your business.
+ Just call eight, seven, seven.
+ The number four A S T A R O thank them for supporting security now.
+ Cyber warfare, even the even the name sounds scary, sounds like war games, sounds like
+ Matthew Broderick should be part of this.
+ Well, yes.
+ And I think the really interesting thing is that without specific details, it's so easy
+ to pass off this whole concept as just sci fi.
+ It's like, oh, yeah, come on, I mean, like, you know, state sponsored cyber warfare.
+ What what what I want to start with here is reading a really interesting article because
+ it provides this kind of grounding and foundation.
+ This was in federal computer week.
+ The article is dated November, I'm sorry, February 13th.
+ So less than a month ago from Norfolk, Virginia, the article reads at the Naval Network Warfare
+ Command.
+ Okay.
+ So first of all, there is something we have in the United States called the Naval Network
+ Warfare Command.
+ Napoleon Solo should be an agent for that.
+ My goodness.
+ Wow.
+ If they it says US cyber defenders track and investigate hundreds of suspicious events
+ each day.
+ Oh, I forgot to read the title.
+ The title of this article is cyber officials colon, Chinese hackers attack anything and
+ everything.
+ Yeah, that I know is the title.
+ So wow.
+ It says, so, so cyber defenders track and investigate hundreds of suspicious events every day.
+ But the predominant threat comes from Chinese hackers who are constantly waging all out
+ warfare against defense department networks, network, com officials say, I don't know if
+ they're targeting defense department networks because they're also all at warfare against
+ my website.
+ So I think it's just general.
+ Yes.
+ Well, it says attacks coming from China, probably with government support.
+ Our outstrip other attackers in terms of volume proficiency and sophistication set a senior
+ network com official who spoke to reporters on background February 12th.
+ The conflict has reached the level of a campaign style force on force engagement.
+ He said, I don't even sure what force on force means.
+ It doesn't sound good.
+ It doesn't sound good that he says, quote, they will exploit anything and everything the
+ senior officials said referring to the Chinese hacker strategy.
+ And although it is impossible to confirm the involvement of a China's government, I'm sorry,
+ of China's government, the attacks are so deliberate, quote, it's hard to believe it's not government
+ driven.
+ This the official said the motives of Chinese hackers run the gamut, including technology
+ theft, intelligence gathering, ex filtration, research on DoD operations and the creation
+ of dormant presences within DoD networks for future action, the official said, a recent
+ Chinese military white paper state, okay, get this, a recent Chinese military white paper
+ states that China plans to be able to win and quote, informationized war, unquote, by the
+ middle of this century, overall, China seeks a position of power to ensure its freedom of
+ action in international affairs and the ability to influence the global economy, the senior
+ official said.
+ Chinese hackers were responsible for an intrusion in November 2006 that disabled the Naval War
+ College's network, forcing the college to shut down its email and computer systems for
+ several weeks, the official said, forensic analysis showed that the Chinese were seeking
+ information on war games in development at NWC, the official said, NWC was vulnerable
+ because it was not part of the Navy Marine Corps intranet and did not have the latest
+ security protections, the official explained, he said this was indicative of the Chinese
+ strategy to focus on weak points in the network, China has also been using spearfishing, sending
+ deceptive mass email messages to lure DoD users into clicking on a malicious URL, because
+ it's spearfishing.
+ Yeah, well, because it's instead of phishing where you're just sort of broadcasting to
+ anyone, yes, a spearfishing exploit is exactly as targeted, and in this case, at DoD users,
+ DoD employees, so it's directly, and of course, spearfishing means that they can also tune
+ the content of the email to be more application specific.
+ So it might be more prone to a DoD interest and look more authentic to people in the DoD.
+ It says, China is also using more traditional hacking methods such as Trojan horse viruses
+ and worms, but in innovative ways.
+ For example, a hacker will plan a virus as a distraction and then come in "slow and low"
+ to hide in a system while the monitors are distracted.
+ Hackers will also use coordinated multi-pronged attacks, the official added.
+ Chinese hackers gained notoriety in the United States when a series of devastating intrusions
+ beginning in 2003 was traced to a team of researchers in the Guangdong Province.
+ The program, which DoD called Titan Rain, was first reported by Federal Computer Week
+ in August 2005 following that incident, DoD renamed the program and then classified the
+ new name, so we don't know what it's called.
+ That particular set of hackers is still active, the net war calm official said.
+ He would not confirm whether the Titan Rain group was linked to the NWC attack or any
+ other recent high profile intrusions.
+ Other senior military officials have spoken out recently on US cyber strategy saying the
+ country urgently needs to develop new policies and procedures for fighting in the cyber domain.
+ Current US cyber warfare strategy is dysfunctional said General James Cartwright, commander of
+ the Strategic Command Stratcom, in a speech at the Air Warfare Symposium in Orlando,
+ Florida the week before.
+ Offensive defensive and reconnaissance efforts among US cyber forces are incompatible and
+ don't communicate with one another, resulting in a disjointed effort, said Cartwright.
+ General Ronald Keyes, commander of Air Combat Command, told reporters at the conference
+ that current policies prevent the United States from pursuing cyber threats based in foreign
+ countries.
+ He has outpaced policy in cyberspace, he said.
+ The United States should take more aggressive measures against foreign hackers and websites
+ that help others attack government systems, Keyes said.
+ It may take a cyber version of the 2001 terrorist attack, meaning 9/11, for the country to realize
+ it must re-examine its approach to cyber warfare.
+ Networkcom officials describe their approach as an active defense in which monitors build
+ defenses around the perimeter of DOD systems, work to mitigate the effects of attacks and
+ restore damaged parts of the network.
+ Meanwhile, the consolidation of DOD's cyber resources is ongoing.
+ Networkcom works directly with a joint task force for global network operations, DOD's
+ lead agency on network defense and operations, a component of Stratcom.
+ Networkcom, the Navy's lead cyber agency, is moving from monitoring the networks to full
+ command and control capabilities.
+ The Air Force announced in October '06 that it will create a cyber command based on the
+ infrastructure of the 8th Air Force under Lieutenant General Robert Elder at Barchdale
+ Air Force Base, Louisiana, to coordinate its cyber warfare efforts.
+ In the end, the cyber threat is revolutionary, because it has no battle lines, the intelligence
+ is intangible, and attacks come without warning, leaving no time to prepare defenses.
+ Education and training of computer users, not enforcement, are the most effective defense
+ measures officials said.
+ Well, we've kind of said that for a long time.
+ Yeah.
+ That's what we do.
+ It isn't that.
+ I mean, it demonstrates that the U.S. and certainly other nations on the globe are really
+ taking this notion of the importance of our global network and the need to defend ourselves
+ against deliberate attacks and intrusions into that network surface.
+ I thought it was really interesting, too, because last week or the week before, I don't remember
+ which, about this idea of good guys who had the best interests of the world and users
+ and the network and so forth at heart, could they proactively do things to other people's
+ machines that were good for them?
+ For example, since we had the IPs of worms on the internet, and we even have them today,
+ I mean, there's still instances of blaster and code red and other war in NIMDA out on
+ the net scanning around, still trying to infect machines.
+ And if you put a fresh copy of Windows 2000 or XP on the network without its firewall
+ in place and not behind a router, it'll get infected before long.
+ That's now been proven and as well known.
+ So that means that we all know the IPs of those machines, but the law protects us from
+ fixing them, even though we could, since they were infectable by this problem, we could
+ you know, use the same problem to disinfect them, but doing so is illegal.
+ And so similarly, it's clear that in this report, the military is saying that US policy
+ and law prevent them from doing to others what apparently is being done to us effectively.
+ Yeah, I mean, you know, I sometimes it's unfortunate after many years of being lied
+ to by our government.
+ I'm not sure I completely trust what they're saying.
+ I'm trying to think of what ulterior motives they might have to this and I'd hate to see
+ them move towards locking down what we can do on the internet using this as an excuse
+ for it.
+ But I think it's probably pretty clear that this is going on, isn't it?
+ One, yeah, I think so.
+ And in fact, one thing that I find really interesting is that it seems that they're having such
+ a problem in protecting themselves.
+ Now there was a reference to an intranet, meaning that these systems that were vulnerable
+ were apparently directly on the internet.
+ And so you can imagine, I mean, you know, DoD has humans has people just like any others.
+ And they've got their their their PC at home where they've surfed the net and they click
+ on links and they've got email.
+ And the problem is the experience is so much the same when they're on the internet at work
+ that they probably bring some of their their casual habits that developed in non, you
+ know, critical non information, non intelligence, critical environments with them and may without
+ thinking click on a link in email.
+ So to me, it's really interesting that with this much at stake with, with, you know, national
+ secrets and the idea that some somebody could obviously, as we know, you click on a link
+ and your browser goes somewhere, you've got scripting active, there's, you know, a whole
+ basket full of exploits that that are are currently known that allow even fully patched
+ browsers to get compromised.
+ So so it's very much the case that that I guess I'm surprised that these networks are
+ exposed to the internet, which we know is such a hostile place.
+ You would think though, that if anybody could block and lock down their systems, it would
+ be the Department of Fast.
+ Well, I have an interesting story that I've I've never told from dates back about five
+ years ago, a hacker contacted me a white hat hacker contacted me saying that he had gained
+ access into Microsoft's internal networks.
+ And I said, okay, I don't want to talk to you about this.
+ I mean, I said, I don't want anything to do with this.
+ Go away.
+ Yeah.
+ And he said, well, you know, I really think this deserves some attention.
+ And I said, go talk, tell Microsoft, you know, tell them how you're doing this.
+ If your interest is really to like help them do things better.
+ And I said, look, you know, and he wanted to like send me some proof and I said, no, you're
+ not sending me anything.
+ And he said, well, you know, how can I bring this to public attention?
+ And I said, well, you know, if your interest is in embarrassing Microsoft, then you want
+ to talk to some computer reporter and not me.
+ I said, I'm not going there.
+ So actually, I did have a guy that I knew that I referred him to, and that is a very
+ active reporter in the computer industry who did receive based on all of his, you know,
+ reporter confidentiality agreements and things.
+ He received some documents that proved to him that this guy really had penetrated Microsoft's
+ network.
+ And again, he urged the guy, I urged the guy, just tell Microsoft, you know, you know, get
+ a story written if that's what turns you on, but tell Microsoft.
+ And, but the point of this is what he explained was that, that he had, he'd gotten in through
+ some satellite network in a foreign country.
+ I mean, a Microsoft remote sales or support office or something got essentially onto a
+ computer that wasn't as secure as it should have been.
+ I think it was back in the Windows 2000 days.
+ So the Windows 2K box that had some vulnerabilities, he was able to get into it.
+ Once he was there, he was on a network.
+ And so he established a presence on that machine.
+ And he was able to, within Microsoft's network to, and this was arguably, and as I recall,
+ I mean, this is a long time ago, he was able to go from sort of leapfrog, from an insecure
+ intranet to a much higher security intranet by finding a machine that had dual network
+ adapters.
+ So somewhere there was somewhere, maybe at Redmond or, or, or who knows where there was
+ a machine on, that was straddling both networks.
+ It was on the less secure intranet and also had a presence on the game.
+ Well, exactly.
+ And so whoever it was running that machine, they needed, they needed to simultaneous
+ connection to both networks.
+ And there was no hard vision separating these two intranets.
+ So he was able to get himself onto from a, from a satellite machine onto basically a more,
+ a more important machine that had two networks and then essentially hop into the much stronger
+ network through that means setting up a relay point of his own at that machine.
+ So, so I guess the point is that, that, you know, even, even a network architecture designed
+ to be secure where, you know, you really, really have spent time showing this thing up
+ and, and preventing anyone from getting in, if it's a sufficiently, a sufficiently complex
+ and sophisticated set of connectivities, there can be little loopholes that, you know, you,
+ that are not obvious and that somebody determined really just sort of like exerting pressure
+ from the outside, they can find a leak.
+ If they, if they sit there and exert sufficient pressure, does this mean that it's impossible
+ that the hackers will always win because, I mean, there's just more of them and they're
+ more willing to work at this than anybody else is willing to defend?
+ I mean, if the Department of Defense can't secure it, Microsoft can't secure it.
+ Well, we don't have any hope.
+ Well, it's certainly the case that, that there are systems within the DoD that are off the
+ internet and, you know, we've all seen in sort of, you know, sci-fi movies where you,
+ you go into a room that just got a computer sitting there and, you know, and it's a super
+ high security machine.
+ Well, you know, there's no way that you can go www.google.com and, you know, you are not
+ on the internet on that machine.
+ So you have to have, you know, a completely separate network with like no, no connectivity
+ across.
+ So certainly that's the case, but what happens is people do want convenience and that's always
+ that case of like, well, you know, I'll be really careful.
+ I need to be able to get on the internet, but I also need to have access to the internal
+ DoD documents.
+ So that's a point of vulnerability.
+ And I think you could argue that with networks being so sophisticated, so complex with their
+ interconnectivity becoming richer and richer that there are ways to worm around inside.
+ Yeah.
+ Amazing.
+ Well, let's hope that people are listening to this and the Chinese aren't.
+ And if you're in China, we're glad you're listening.
+ And please don't hack us.
+ Please.
+ We beg of you.
+ Well, yes.
+ And, you know, I'm, I'm a little skeptical of these guys saying, oh, this is supported
+ by the Chinese government and, you know, because of the nature of the attacks, you know, we
+ know that, that, you know, teenagers are running botnets of tens of thousands of bots and are
+ able to administer huge attacks anywhere they want to, you know, bandwidth floods and they're,
+ they're being used for spamming emails and things.
+ And if it weren't known that these were 13 year olds who were running these networks,
+ you might think, oh, this must be some, you know, major government operations, like, no,
+ it turns out that, you know, people are curious and, you know, like, like certainly in the
+ case that I was talking about the, this white hacker guy who's, you know, I remember very
+ little about him now, but he was just, you know, he was curious and he was just poking
+ around and seeing what he could do, seeing, I mean, oh, and it's illegal and we want to
+ make sure we stress that all of this is illegal, but, you know, it's very possible to me that
+ there are just, you know, non government backed people certainly all over the world who are
+ poking at other countries networks, I wouldn't be at all surprised if we're doing the same.
+ I could provide you with evidence of that.
+ If I look at my logs and I bet if you look at your logs, I get every day hundreds and hundreds
+ of attempts to find back doors into my system attempts to log on via telnet and SSH and
+ almost all of them come from Chinese IP addresses.
+ I don't think the government's trying to break it to a TV.
+ I think they're a lot of, and they're, they're usually universities in China.
+ I think there are a lot of kids there who, you know, for whatever reason they liked it,
+ they're hacking and they're trying to find a backdoor into my system.
+ I can guarantee you that twit.tv is not a backdoor into the Department of Defense.
+ Maybe they know something I don't know, but it's just, I mean, it's gone on for as long
+ as I've had a web server and, and, you know, they, they try to hack every service SMTP,
+ IMAP, you know, and they have that hack services that I don't have.
+ They're just, they're just, I'm sure they're automated.
+ They're just trying every, and it's brute force, uh, login attempts.
+ Well, and, you know, site defacing happens all the time.
+ I, I have to think too that, you know, the way based on, on, on domestic U.S. politics,
+ there is some tendency for these guys to maybe over inflate the threat because they want bigger
+ budgets.
+ Not like they want.
+ They ever do that.
+ Of course.
+ Not like they would have that would ever happen.
+ Yes.
+ Which is not to say these things are not possible, you know.
+ That's the problem.
+ It's hard to assess because we tell, you know, that's hard to assess.
+ Yeah.
+ I guess that was my point.
+ And that's why it's too bad.
+ We don't trust our government a little bit more.
+ Well, and you know, you could also argue that the U.S. was caught off guard on the morning
+ of 9/11 and that since we've done things to make ourselves safer, this guy makes the point
+ that it's, it may take something like that in order to get the government to say, oh,
+ maybe you guys do need some more money for, for more fancy security and networks and so
+ forth.
+ There was right after 9/11, of course, there was a cyber security czar and there was a
+ lot of attention paid to this.
+ I don't know if that, that activity is waned or if it's still part of Homeland Security,
+ I imagine it still is.
+ I'm sure there's like, you know, a title on a door somewhere, but the question is, how
+ much money are they being given?
+ It's all a fun.
+ I mean, it's all comes down to money, what you're able to afford.
+ And, you know, we've heard stories, for example, about how the FBI's network is just horribly
+ antiquated.
+ Right.
+ I mean, just, you know, just, you know, almost punch cards and it's like, okay, well, maybe
+ you can get rid of those old copies of word star and word perfect one these days.
+ As soon as Jay Edgar Hoover, oh, wait a minute.
+ Never mind.
+ Yeah.
+ Folks, this podcast is sponsored by I want to be a nerd.com.
+ That's the folks at nerds on site.
+ They are a great group.
+ They're growing too, and they need more nerds to service their customers looking for folks
+ with competencies and skills in all areas from PC and Mac experts to specialties like
+ Cisco and Oracle.
+ You name it.
+ They need it.
+ They're technicians, website designers, programmers, project managers, sales, folks,
+ trainers, security experts, antivirus gurus, and more.
+ They especially love those nerds who troubleshoot, tear apart and rebuild their own systems in
+ their spare time.
+ You know who you are nerds are independent contractors.
+ You're in business for yourself, but not by yourself.
+ And I think that's what I like so much about nerds on site.
+ You can focus on your passion, but they handle the burdens of running the business.
+ Now in seven countries, the Canada, US, Mexico, England, Australia, South Africa and even Bolivia.
+ And if you want to know more, go to I want to be a nerd.com register for a nerds only
+ meeting in your area today.
+ Good people are people.
+ I want to be a nerd.com that's nerds on site.
+ We thank them so much for their support for security now.
+ They love you, Steve.
+ They see one of their own.
+ They're good guys.
+ Because you mentioned the site that had a video of me and I was curious last week.
+ I went there thinking, oh, you know, what's this going to be?
+ They tape.
+ Yeah.
+ And what was cool, it was me telling them the story that I had told to our security now
+ listeners before about this guy who was fired because Spinrite saved this cute old lady's
+ drive.
+ And so I, so, you know, I must have been before I told it on security now that I was up in
+ Toronto.
+ I think it was.
+ You're in Toronto.
+ Yes.
+ And I told these guys the story.
+ And so that was a little short video.
+ I don't know.
+ It's like five or six minutes of me, you know, waving my hands around the air as I am apt
+ to do, telling them the story of, you know, it's funny too, because the first thing they
+ said when, when I told them that here, you know, the younger junior, good, good repair
+ guy was terminated because he was willing to take like double the time and to run Spinrite
+ and recover the data rather than just reformatting that this poor old lady's machine.
+ And the first thing these guys, the, the nerds say was, who is he?
+ We, you know, we want to hire him.
+ We want him to be one of our nerds.
+ So, you know, it's the kind of guys they're looking for.
+ So it was a fun story.
+ It was a perfect story for their site nerds on site.
+ I want to be a nerd.com.
+ We thank you all for being here and of course, if you want 16 kilobits versions of this show,
+ we make them available on Steve site, grc.com.
+ We also offer transcripts there of the show so you can read along with Steve and they'll
+ be links there to the original document, the cyber warfare document that started this whole
+ discussion off.
+ That's grc.com.
+ That's also where you'll find all of Steve's free security products, including shields
+ up and the new secureable and of course, spin right, you've got trouble with your hard drive,
+ spin right is the answer.
+ grc.com.
+ We'll be back next week and talk more about security.
+ Okay, Steve?
+ Cool.
+ Looking forward to a layoff.
+ See you then.
+ Security now.
+ Security now.

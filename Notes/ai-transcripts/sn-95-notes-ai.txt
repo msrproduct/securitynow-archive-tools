@@ -1,0 +1,714 @@
+ This is Twit!
+ Bandwidth for Security Now is provided by AOL Radio at AOL.com/podcasting.
+ This is Security Now with Steve Gibson, episode 95 for June 7th, 2007, Open ID.
+ Security Now is brought to you by Astaro, makers of the Astaro Security Gateway, on the web
+ at www.ASTARO.com.
+ And by Nerds on Site, looking to grow your IT service business, find out how Nerds on Site
+ can help visit, I want to be a nerd.com.
+ It's time to talk about security, everybody, yeah, gather around the radio.
+ Uncle Stevie's Security Hour has come every Thursday.
+ There's a new one, I like that.
+ That could be a new title.
+ Uncle Stevie's Security Hour.
+ I think we better just drop that now.
+ Steve Gibson's here from grc.com, the creator of Spinrite, everybody's favorite, certainly
+ my favorite, hard drive maintenance and recovery utility, he creates all those great free security
+ programs like Shields Up, Decon Bobulator, Shoot the Messenger, Unplug and Pray, the
+ click of death, that was one of the first ones, and on and on and on.
+ And today, we're going to talk about, you said Open ID, Open ID, yes, in fact, you referred
+ to it when we were talking in our multi-factor authentication, one of the two recent episodes
+ where we talked about authenticating people, and we were talking about, remember, I was
+ making the wish of, boy, wouldn't it be cool if there was some third party, for example,
+ that could take something really secure like RSA's secure ID token, which uses the combination
+ of a pin and a slowly changing number, a number that changes once every minute.
+ And so you had like really strong authentication, yet not every individual place you would
+ want to use it, would need their own authentication scheme, essentially, there'd be some third-party
+ provider who was doing the authentication with you sort of as a proxy, and then being
+ able to say to this target site, yes, we're sure this is Steve, or Leo, or whomever, and
+ so it was sort of offload that, well, it turns out that is exactly what Open ID is and does.
+ And so we're going to explain it all in the next hour.
+ I think it's great because I'm kind of a fan of Open ID, and I'd like to see it more and
+ more widespread use because all of these technologies, you know, aren't meaningful unless they're
+ especially Open ID, but many of them are not meaningful unless everybody uses them or a
+ large percentage of people use them.
+ Well, I'll tell you, this thing has all of the feel of the way it's the way it should
+ be done.
+ Yes.
+ And it's got also this, it feels very much like the way the web was originally designed.
+ It's got the characteristics in every way I can see of something that's going to be
+ very successful, there's a little bit of intellectual property encumbrance that seems yet still
+ to be resolved.
+ So I think it's a Danish company has about a six year old, some intellectual property
+ patent claims over something like this.
+ It's like, oh, no, please just give it away.
+ And in fact, the Open ID net site explicitly says, you know, we want this to be as unencumbered
+ by any intellectual property as it's possible for us to have it be.
+ So, you know, let's hope that gets resolved.
+ But I guess my point is that this thing has the feeling of the one that's going to win.
+ Well, we'll get to that in a second.
+ And we also have some addenda and responses to some email from previous shows.
+ But before we go much further, I think we should say hello to our friends at nerds on
+ site, they are our sponsor and I think they're wrapping up this week.
+ They're a time with us and we're very glad to have had them on board nerds on site.
+ It's kind of a it's kind of a complicated idea.
+ So probably the best thing to do is go to the website.
+ I want to be a nerd dot com.
+ They're looking for nerds to help service their customers.
+ If you've got PC or Mac skills, mad skills, if you know, Cisco or Cisco or Oracle, you
+ name it, they need it.
+ Everything from fix it technicians, website designers, you don't have to know all of these,
+ by the way, any one of these programmers, project managers, even sales trainers, of course,
+ security experts, antivirus gurus and more and they love nerds at troubleshoot, tear apart
+ and rebuild their own machines in their spare time.
+ If you do that, then you, you are definitely a candidate independent contractors, you know,
+ which is nice.
+ So you're in business for yourself, but not by yourself.
+ You focus on your passion and not the burdens of running a business.
+ They're all over the world everywhere you can hear my voice.
+ And they have a University of Nerdology too, to help you perfect your skills, to hone
+ your skills.
+ If you're a nerd, you love working with people, go to www.I Wanna Be a Nerd dot com and register
+ for nerds only meeting in your area today.
+ Great people, a great company, and we really thank them for supporting this show.
+ That's nerds on site.
+ I Wanna Be a Nerd dot com.
+ So we wrap up before we go into this open ID thing, wrap up anything from previous episodes.
+ Well, yeah, I have a couple things.
+ I'm sort of, remember that I referred to the fact that we're beginning to get comments.
+ I mean, really interesting and useful comments from listeners, not just questions.
+ So I'm sort of calling this the mailbag portion and I want to get a jingle.
+ Exactly, I went a couple weeks without opening the mailbag just because I've been running
+ around my wits end at this end and haven't had a chance really to go back and do a lot
+ of reading.
+ And now that I've done that, I don't know, I'm wishing we were somehow able to share more
+ of this than we can.
+ Well, next week we get a question and answer session, but I agree with you.
+ I think we get such great mail.
+ It's so fascinating.
+ It really is.
+ Anyway, Brad Burke, I want to say his name, Brad Burke Meyer in North Sioux City, South
+ Dakota writes, sort of very coincidentally, I tossed this in because of what we're going
+ to be talking about today.
+ He says, show 94 really sparked my imagination.
+ I'd absolutely love to run my own open ID server with secure ID authentication.
+ But the problem is, how much does a secure ID installation cost?
+ Will RSA even sell it to me without being a business?
+ I'm guessing there's a software package you have to purchase and then you can purchase
+ secure ID tokens as needed individually or in packs.
+ I love to know.
+ I love to know.
+ But he's right.
+ Yeah.
+ I'd love to know more about that if you have any idea if this isn't possible to do on a
+ personal scale, Steve should start his own open ID plus secure ID business.
+ He says, I'd buy.
+ You don't have enough to do.
+ You need to start.
+ Nah.
+ That's right.
+ I don't have enough projects in the back in the queue.
+ Anyway, I just, I wanted to share that because his note was echoed by a number of other listeners.
+ And I'm guessing that he's right.
+ I don't know.
+ I haven't researched it relative to RSA's secure ID, but I'm guessing they've got it
+ locked up.
+ It's proprietary.
+ You need to use something that they've got, you know, complete intellectual property
+ protection wrapped around and probably, you know, dripping in crypto so that it's not possible
+ to do sort of a free open version that uses their tokens.
+ The tokens are so cool that I just purchased a bunch of them and they've got, well, credit
+ card ones.
+ They got credit cards ones with a little 10 key pad on them.
+ I just, I mean, I'm not going to be able to use them for anything because I don't have
+ all the other software, but just the idea of something, you know, a little key fob that's
+ got a six digit number that changes mysteriously every minute.
+ I got just kind of like that.
+ So yeah, certainly, you know, high geek factor, but you know, what the heck anyway, Lars Solberg
+ in Norway is using the USB fingerprint device.
+ I talked about wanting last time.
+ You may remember that that I talked about one that I'd seen that was very inexpensive.
+ I think it was $30 or something and they know it had a, it had a fingerprint scanner that
+ apparently unlocked its contents, but you had mentioned that you guys have looked at that
+ probably the same one on the lab with Leo.
+ This one was made by Sandis.
+ Yes.
+ Yes.
+ It happened that the day we recorded that podcast, I found the box on my doorstep and that's
+ funny.
+ And sure enough, exactly as you said, Leo, this thing was dumb in the, in as much as
+ it only worked with Windows.
+ The good news is I did plug it in.
+ It did launch itself, which, you know, always gives us a queasy feeling when, you know,
+ software on strangle runs itself.
+ I think they're using a U3 like system, but not U3 itself.
+ Well, it's not a, it's, it's because I have looked at you three and that just gives me
+ the willies because I mean, it's really invasive.
+ It's popping up menus and stuff and you can't get rid of it easily.
+ Anyway, the, at least the sand disk solution is lightweight, but it still is heavily dependent
+ on the PC.
+ Well, Lars found one and I will have a link in our show notes.
+ It's a by, bioslimdisk.com.
+ So www.bislimdisk.com and they've got one that is what I was hoping for.
+ It's entirely self contained, no drivers, OS independent.
+ Um, well, let, let me just read Lars note, he says long time listener, first mailer during
+ the last podcast.
+ You said that a USB stick that could just work everywhere with fingerprint authentication
+ would be so cool.
+ Well, I've got some good news.
+ I have that ultimate USB stick and I use it every day.
+ You could find it at and he gives the URL bioslimdisk.com.
+ It encrypts with AES 256.
+ If I remember correctly on board.
+ So there are no extra drivers or anything that needs to be installed and it works with
+ every OS and device that supports simple USB sticks.
+ He said, I even have used it on my TV, which has a USB input on it.
+ I just love this thing.
+ Uh, he said it was hard to find it, but he did find it.
+ It came in the mail and he's had it ever since B.I.O.S L I M D I S K dot com.
+ Bioslimdisk.
+ Bioslimdisk.
+ Bioslimdisk.
+ You know, it's, it's, it's, oh, you're right.
+ It's bio bio.
+ Look at the capitalization on the website.
+ It's bio slimd. You heard the music from the website bio slimdisk.
+ So now we know.
+ Yep.
+ Not bioslimdisk.
+ Yeah, which doesn't make nearly as much sense.
+ Although it's that say bios, which we just sort of tend to lock onto naturally bio slimdisk.
+ Okay.
+ Got it.
+ Good.
+ So finally, uh, I got a really neat spin right testimonial that I want to share with people
+ from, uh, again, a security now listener, Russ Souter, um, who wrote, I've been a regular
+ security now listener since about episode 15.
+ And I've loved it to show support for the show and for a little extra piece of mine.
+ I purchased spin right a while back without any immediate need for it.
+ And we know where this is going, uh, he says, it's sat on my shelf for a while until a good
+ friend of mine who's a CPA called me on Friday, March 23rd in the middle of tax season, telling
+ me that his server had crashed with all his important client documents still on it.
+ Oh, he said, he said I rushed over and checked his backups.
+ They hadn't run successfully in two months, but with the hustle of tax season, he hadn't
+ bothered to check them.
+ So I dusted off my copy of spin right and put it to work on the poor, tired, antiquated
+ scuzzy drive inside his four year old server.
+ Wow.
+ Yeah.
+ He says it took until midday Monday, I don't know what day that was he started, but he
+ says it took until midday Monday before it finished its job.
+ And there were a whole lot of red use showing up, but there were a lot more recovered sectors.
+ When it had finished, I took out the spin right CD and sure enough, the system booted
+ up and everything was running again.
+ It lasted the rest of the way through tax season.
+ And by April 16th, we were installing his new Dell server brands with a raid one mirror
+ and a complete offsite backup system with reporting and copying all his data from the
+ old server without any problems on behalf of my friend and the hundreds of customers
+ who now have their 2006 tax returns filed on time.
+ Thank you.
+ You probably never knew how close they came.
+ Well, well, actually, you can tell that they really, you know, they saw the end of their
+ life here because I mean, then he went to a, he raid one full mirroring and offsite backup.
+ And you know, that happens often is that people will get spin right because they've had like
+ a near death experience and it's like, Oh, thank God we're, you know, all they needed
+ was like one massive save and then they've learned their lesson and they're like never
+ going to be in a situation, even though now they're glad they have spin right.
+ They just, they recognize because they've, they came so close to complete loss of everything
+ that now they've got to do something so that they're not as dependent on any single point
+ of failure as they were before.
+ Yep.
+ Yep.
+ Very good.
+ Well, that's not a nice story with a happy ending.
+ Although I'd like to see raid five, not raid one, but that's another story entirely.
+ Yes.
+ Let us move on to the subject at hand, shall we?
+ I'm very interested to see what you, what you make of open idea.
+ We've interviewed a couple of open ID people.
+ In fact, we did on net at night a couple of months ago and I use a number of different
+ open ID services.
+ And so I've been intrigued by this for a while, but it seems early days.
+ It seems like it's not quite useful yet, but you've done some research on how it works.
+ Well, it's, it's certainly I agree with you, it's early days in as much as I don't think
+ I have yet encountered a single site in my limited browsing.
+ You know, I'm not nearly the pervasive web surfer that you and Amber are, Leo, but I
+ don't think I've ever seen a site or at least I've never noticed it.
+ Now, of course, it's just like anything else.
+ You know, you, you learn a new word and suddenly everyone seems to be using that new word and
+ you think was it, was no one doing this before I knew what it meant?
+ AOL is, AOL is going to use it digs using it.
+ We could use it on Twitter.
+ It's actually available as a Drupal module.
+ Well, now, wait a minute, is Dig actually using it?
+ Because I went to dig.
+ They're supposed to be.
+ Hearing that Kevin had announced he was going to earlier this year and is still not there
+ yet.
+ Yeah.
+ I think AOL is using it now.
+ Well, actually AOL definitely is using it and it turns out that they, the way they implemented
+ it.
+ And I'm going to explain how this is possible is they've said any AOL, you existing users,
+ that is your, your existing log on credentials can be used as an open ID authentication.
+ So if you have an AOL account, you, you've got a, an open ID.
+ Exactly.
+ Neat.
+ Exactly.
+ And AOL ID is an open ID server, which we're all about to explain.
+ So, so here's the idea.
+ First of all, open ID allows a, what's known as a single sign on capability without something
+ like this, we're where we are today, where every site we go to wants our user ID, sometimes
+ it's our email address, for example, and then a password.
+ And you know, as we've been preaching for a long time, Leo, in order to minimize the risk
+ of a single site being malicious, it's, it's good practice to come up with different passwords,
+ maybe different usernames and, and not heavily reuse those because again, the danger is you
+ are, you're authenticating yourself with each site you visit one on one.
+ The reason I was, I was so stoked about the idea, for example, of a secure ID base that
+ this is a RSA secure token, is that it's, first of all, it gets the strength of multi-factor
+ authentication by bringing something you have, meaning the token, and something you know,
+ which would be your matching personal password or, or pin, it would bring that multi-factor
+ authentication to the concept of single sign on, meaning that, that there's some other entity
+ than the website you want to authenticate yourself with.
+ That entity is the one that you build a, an identity or, and a trust relationship with.
+ And then the site you want to authenticate with asks that third party, is this really
+ that person?
+ So this isn't anything new.
+ In fact, Microsoft did the, did this AOL has done this before, Microsoft's passport is
+ still around, although not particularly vital, but I still use passport on a few sites.
+ That was the idea, right?
+ You'd have a passport account with Microsoft and then log into Expedia and various other
+ sites using that.
+ Yes.
+ I mean, so you're right.
+ It's certainly not a new idea.
+ What is fantastic about open ID is that, as I mentioned before, it is absolutely open.
+ I mean, open, open, open.
+ It's not Microsoft's.
+ It's not AOL's.
+ Nobody owns it.
+ Right, the protocols are all absolutely in the public domain.
+ Hopefully this isn't going to run across, or run afoul of anyone who comes along and
+ says, well, we actually invented this, because you know how I feel about, you know, people
+ inventing things that are neat, but sort of obvious.
+ Hopefully there will be, you know, some, some prior, some clear prior use of this concept,
+ even if not in this exact implementation that would, that would water down and hopefully
+ prevent somebody from locking it down.
+ But for example, there are implementations of this in C-sharp, in C++, Java, Pearl, Python,
+ Ruby, PHP, ColdFusion, you know, in looking at lists, I'm thinking, wait, no, assembly
+ language?
+ But I think you could implement it.
+ I think I could probably handle that, but okay, so one of the reasons that this, for example,
+ this differs from Microsoft's passport is, you know, that was all about Microsoft.
+ Open ID is not, and in fact, Microsoft is one of the major people embracing Open ID,
+ and planning to integrate it into the system that they've got, which is card space for
+ Vista.
+ And that's one of card space and Windows will be a topic that we are going to be covering
+ here before long.
+ But so even Microsoft is saying, okay, passport didn't really take.
+ And of course, nothing that is sole provider is going to.
+ One of the so cool things about this is that any user can have total control.
+ There's no centralized authority.
+ Users can choose their own authentication servers.
+ You know, I'm avoiding all of the jargon of Open ID because there's a ton of jargon.
+ And that's just confusing.
+ So I'm going to, I'm going to use general terms that we understand.
+ I'm sure this will not be the last time we're talking about Open ID.
+ So you know, we'll, we'll drill down into the specifics over time.
+ But, but in general, I want to explain how this works, why it's so open, why I really
+ think this is the one and, you know, basically what, what problems it has and then the different
+ modes it has of operation.
+ So, so again, the idea is that this single sign on model is, which is the goal exactly
+ as you say Leo with passport is that you would and well, as this becomes more prevalent sites
+ would offer you the opportunity of using your open ID if you had one.
+ So you could, for instance, come to Twitter.com and we would say, use your Twitter pass password.
+ But if you have an open ID password, you can also use that instead.
+ Exactly.
+ It'd be like, we will accept that too.
+ Now, an example of this that many people may be familiar with, for example, is PayPal.
+ You know, I'm, I am a heavy web commerce user.
+ And I absolutely look for a PayPal option if I'm buying something on the net from some
+ random site that I've never worked with before, you know, I, I will always try to purchase
+ from Amazon because I would rather lump my, my trust with a single big provider who has
+ a ton to lose if they ever screw up the, the security side of things.
+ I mean, can you imagine a bigger disaster than, you know, than Amazon's user passwords
+ and, and database and purchasing patterns and credit card, everything escaping.
+ Say it.
+ Say it not.
+ Right.
+ So one imagines they are being really, really, really responsible.
+ Now you compare that to some random mom and pop site somewhere.
+ And I mean, I just, I do not want to give them my credit card information.
+ Basically enough people feel that way that that puts pressure on them to accept PayPal.
+ And so on sites where I can use PayPal, I never fail to do so because there I am giving
+ them essentially PayPal is exactly this kind of solution for, for my, my credit information
+ where, where I end up bouncing, you know, they bounce me to PayPal.
+ I log in there with my PayPal credentials, say to PayPal, yes, I'm me.
+ And, and what happened was pay the site where I was sort of sent some shopping cart information
+ along with my bounce, my redirection to PayPal.
+ I'm talking about this because this is also very much the way open ID works in a couple
+ of its simpler modes.
+ So now I'm at PayPal.
+ I log into PayPal, you know, choose the way I want to pay, do I want to use my credit
+ card, my bank account, whatever, say yes, I want you to send money PayPal back to the
+ site where I was.
+ So PayPal takes the money from my card, verifies it, and, and then bounces me back to the site
+ where I was.
+ And that site having got authentication from PayPal that basically the money is now theirs
+ says, oh, good, we're going to ship your goodies to you.
+ And now the comparing this, I want to make one more comparison because I've recently
+ become a fan of Google checkout and I prefer it to PayPal because Google has more information
+ that they're able to provide and, and, and that is specifically, I don't have to fill
+ out all the other stuff about myself because Google's got my shipping address and my billing
+ address, whereas PayPal is limited just to the financial transaction.
+ So if I'm somewhere and Google checkout is offered, I find that even nicer because I,
+ I log into Google and, and I don't have to fill out all the other information.
+ And then again, I mentioned this because that's also something that some open ID extensions
+ will be, and while I can't currently do and will be used more in the future, that is you're
+ able to control a flow of information that, that you control back to that website for,
+ to, for example, populate forms with all of your standard boilerplate information after
+ you've authorized that site to receive it.
+ So so there's, I really see an evolution here and open ID, I'm guessing is going to be the
+ one that wins because it is non proprietary, it's completely open and it's, it's extremely
+ lightweight.
+ Now, the way this works in practice is an open ID that is this, this token, this string
+ that a user uses to identify themselves is just a URL.
+ It's the, it's a URL of, of a page on the web that they control.
+ They or a friend of theirs, you know, uncle Steve or Bob or somebody, it's, or maybe it's,
+ you know, a blogging site that offers the ability to, to host open ID stuff.
+ One way or another, it's a URL of a page.
+ Now they've, they, what I liked about it, you know, you've heard me complain about the
+ HTTP colon slash slash www nonsense you in the open ID spec, you specifically don't need
+ to provide that because the, the recipient of this token knows to stick all that junk
+ on because you're giving it a web page URL.
+ So what, so you, so I'm going to a site where I want to authenticate myself with using the
+ open ID system for whatever reason.
+ So I, I, I put in this string, which is basically somehow to a page that I control, it can be
+ my own server, it can be somebody else's doesn't matter.
+ So that site pulls that page from the internet and looks for a essentially a tag in the header.
+ It looks for an open ID tag, which will contain the URL for the server.
+ I have assigned as my open ID authentication server.
+ So there's sort of a level of indirection, meaning that I give a tag pointing to my page.
+ My page provides the URL for the server that I want this site that I'm wanting to authenticate
+ myself to, to go query in order to authenticate me.
+ Yeah.
+ I've seen this with, so you'd have an open ID provider, but you could have it be your
+ own site that, that, that you supply when you log into open ID page.
+ Well, yes.
+ And in fact, there are, I mean, all of this is open source.
+ So there are already, I mean, there's a ton of servers written in PHP and Java.
+ There were servers, you know, anybody, you know, you could run one on your computer at
+ home with a serving port 80, you know, a standard web port open and easily create your
+ own little personal open ID server.
+ Yeah.
+ But then it's not trustworthy, isn't it?
+ Sure, because it's you, yeah, exactly.
+ You're controlling it.
+ Now, now there are one of the things I want to be clear about, and when we will, as we
+ go through the way this protocol works, it is a bare bones protocol.
+ That is, and it's why I think it has a chance of succeeding much as the original HTML was,
+ you know, oh my goodness, you know, I mean, you could compare to today's web pages.
+ You couldn't do anything like that, but it's because it was so simple and it was easy to
+ implement and inexpensive and nobody claimed ownership of it.
+ Those are the things that that blasted the web into existence and people could like copy
+ other people's web pages and they, oh, I'm going to change the color to green, but otherwise
+ look, my web page is already done.
+ I mean, it was so simple and this protocol has all of those characteristics.
+ So the site that I'm wanting to authenticate myself to gets a page whose URL I have given
+ it.
+ From that, it gets the URL of the server I have chosen as my open ID authentication server.
+ It now it takes my little handle and some other information about the transaction that
+ is just, you know, sort of a blob of stuff.
+ And one of the things it gives the server is the page it wants the server to come back
+ to, which will make sense in a second.
+ Anyway, so basically it responds and read in a, I should first say that there are several
+ operating modes for open ID.
+ I'm going to first run through the simplest that requires the least intelligence and implementation
+ overhead on the site that I'm wanting to authenticate to.
+ And it's very much like the model with PayPal.
+ So essentially when I, when I submit my token, my authentication name to this site I want
+ to authenticate to and click the button, my browser is redirected after that site picks
+ up the URL of my open ID authenticator.
+ My browser is redirected to that server with it, carrying with it a bunch of extra information
+ from the site that I want to authenticate to, including what, what URL to send me back
+ to when we're done.
+ Now, so basically now I am my browser is at my authentication server and we can do whatever
+ we want to authenticate and this is one of the beauties of this.
+ One of the, the reason this thing is so open is that no one is saying what I, my browser
+ and my open ID server need to do.
+ It could be as simple as establishing a secure connection and using my, for example, an SSLD
+ client side certificate to prove, you know, which contains my, my own public key, which
+ has been signed by a common certificate authority.
+ It could be something like that.
+ I could be prompted with a, another log on username and password, I could be asked to
+ stick my secure ID USB token into the computer or swipe my finger on my, my PC's fingerprint
+ scanner.
+ I mean, virtually anything.
+ So that's one of the cool things about this is that now I'm having a dialogue with whatever
+ authentication provider I've chosen using whatever level of authentication I care about.
+ Remember that this is, this is a service for me.
+ So no one is imposing any criteria on this.
+ Maybe if this is an e-commerce system or I'm wanting to authenticate to my bank, then
+ I want a very trustworthy third party authenticator and whatever level of, of trust and authentication
+ credentials, I think is sufficient.
+ But again, it's all up to me.
+ So, so once that's done, once I've satisfied the authentication server that I really am
+ me, then the authentication server uses some crypto stuff to to and the information that
+ was provided by the site I'm authenticating to basically to redirect my browser back to
+ that original site.
+ So in that sense, it's like the trip you make to PayPal to authenticate yourself with PayPal.
+ But in this case, it's not, it's not an e-commerce transaction, it's sort of a generic authentication
+ transaction.
+ So now I'm back.
+ My browser is redirected back to the site where I want to authenticate myself.
+ It is able to look at the essentially the data that came back with me, which it presume,
+ excuse me, it presumes is the information that came back from this authentication third party.
+ But there's one weakness in the system.
+ And that is that all of this came through my browser.
+ So we want to make sure the over on the site that I'm wanting to authenticate myself to,
+ we need to make sure that this really came from that third party authentication, so server.
+ So now the site I want to authenticate myself to creates a direct connection to the authentication
+ server and asks that server to validate the signature that it has that has come through
+ the browser and does it directly.
+ That prevents the client side of this whole little redirection bouncing from being corrupted
+ undetectably.
+ At that point, the site that I want to authenticate knows that that the server I chose to do the
+ authentication has said, yes, this is this person who wants to authenticate and by having
+ a direct connection has verified the credentials that came back from the browser and I'm logged
+ in.
+ So there's three.
+ Let me see if I get this.
+ There's three sites here.
+ One, two, there's my site, which is where I store a credential for myself.
+ This is unnecessary, but you could have your site be doing this.
+ Yes, you could.
+ And that could be the same as the security provider.
+ Open ID.
+ Yeah.
+ Exactly.
+ So I use claim ID.com, which is one of many open.
+ There's a lot of these guys and they're all trying to have certain value add features on
+ top of the open ID.
+ There's jite.com.
+ There's a claim ID.
+ There's quite a few anyway.
+ I use claim ID, among others.
+ I use Leoville.com as my server.
+ And so let's say I'm logging into twit.tv using open ID.
+ I would instead of providing with with other credentials, I would just give it Leoville.com
+ and in the open ID space, it would then go through Leoville.com towards my to my open
+ ID provider claim ID, which would then put up a login page using the claim ID login and
+ password.
+ I know those credentials claim ID would then say to twit.tv.
+ Yep.
+ He is who he says he is.
+ And I'm logged in.
+ Exactly.
+ I mean, there's a little back and forth going on there.
+ I'm just trying to simplify it right now.
+ There are there is a nicer mode.
+ I mean, one of the things that's that's cool about this is what I just described was was
+ the sort of like the simplest least technology required anywhere approach.
+ If you allow some scripting to go on server side and all and maybe client side scripting
+ as well, you're able to make a you're able to make a a quicker process where, for example,
+ in the model I just showed, you're always bouncing to your authentication server.
+ So your whole web browser goes, you know, bounce over to the authentication server where
+ you authenticate yourself and then you're bouncing back.
+ It is there is extensions to the protocol, which allows that process to be bypassed.
+ It's possible for the site you want to authenticate to to create a direct connection initially
+ to your authentication server, providing it with your ID saying, do you authenticate this
+ person?
+ Now, what for example, you could provide a list of sites where you just want de facto
+ authentication or a timeout from the last time you authenticated yourself, you know, any
+ kind of features.
+ And again, what's so cool about this is that it is wide open.
+ It is a fertile ground, a sort of a basic structure to support this fertile ground of
+ innovation and value added and services at it exactly as you were saying Leo with claim
+ ID where, you know, any way people want to have this work, they'll be someone providing
+ it and you could easily do it yourself.
+ So so the mechanism, for example, might be where for certain sites you that you've identified,
+ you don't want to be forced to go through a reauthentication.
+ And if, for example, a timeout has expired, then instead a small login window, a little
+ browser pop up window could could come up where you do have a connection to your authentication
+ server and log in in order to prove your you.
+ And then the site you're wanting to authenticate to is able to get that that that updated authentication
+ information, confirm it and log you in so it can be nicely transparent.
+ And I'm sure that Microsoft will be moving in that direction with Windows where the the
+ transaction to the third party server could probably use your window log on credentials
+ and maybe, you know, other things on the fly.
+ That's a good, that's a good point.
+ So if you're logged on to your Windows account, you wouldn't have to anything anything more
+ or it would just say, okay, there you go.
+ Exactly.
+ And so that's kind of neat, but it's going to be, I think, really cool because because
+ over time, it's going to get easier to use, but we already and we're going to begin to
+ see spreading adoption of this.
+ I mean, just as PayPal is becoming more popular and Google checkout is becoming more popular
+ because people are more comfortable trusting single sources, this kind of single sign on
+ will end up changing the way people use the web.
+ And of course, at some point, it will acquire critical mass.
+ And so there will be websites under pressure to support this.
+ Users are going to say, look, I don't want to have to come up with a username and password
+ for your, you know, LinkedIn site.
+ I want you to support OpenID and it's going to be so easy to do so.
+ No cost incurred anywhere and a fundamentally very secureable technology.
+ Now there are some scary things.
+ For example, this is all DNS based.
+ And we know that DNS isn't the most secure of all protocols, which is putting a mildly
+ amazing.
+ So there could be a man in the middle attack here.
+ Yes.
+ So for example, there is the use of strong crypto where necessary.
+ OpenID does specify a Diffie-Hellman key exchange at one point in one of its modes.
+ And I would argue that you want an SSL connection so that you avoid man in the middle attacks
+ and you're going to want to verify certificates.
+ But none of that is required, which is sort of good and bad.
+ I've seen some people on the web complaining that it's possible to run OpenID in a non-secure,
+ in a non-bulletproof mode and you could say, well, yes, fine.
+ If I'm just wanting to go to some other blogging site to post a comment and I don't want to
+ have to create a log on account for some random blogging site, I'd like to use my credentials
+ at my main blogging site in a transportable fashion.
+ You could say, okay, they'll make the technology scale with the amount of authentication security
+ that you need.
+ And again, for something really secure where you're doing your online banking and you're
+ not wanting to have to again authenticate individually, well, there you'd want your authentication
+ server to require contact over SSL by the site you want to authenticate to require SSL in
+ its interaction with you, if any.
+ And so again, that's up to the user.
+ What's so beautiful about this is it is, you know, that kind of burden, that kind of cost,
+ for example, SSL certificates.
+ I mean, you know, I have to buy one every couple of years from Veracine and I grumble
+ every time I do, it's worth it for me because I want, of course, secure e-commerce for GRC.
+ But the nice thing is there are free non SSL open ID servers that are very useful so long
+ as users understand what level of security they're providing.
+ And certainly there are commercial ones.
+ I mean, Veracine has one.
+ And there is a, I've got a bunch of links that are in the show notes, Leo.
+ So for people who are interested in this, you know, by all means, check out the show
+ notes for this episode because there's lots of places.
+ And again, you're already an open ID user.
+ I have about four of them, but I, but I've ended up settling on claim ID.
+ I was going to say that's a little against the principle.
+ Well, like, I try stuff out.
+ You understand.
+ I do.
+ And each of these open ID providers has, as I said, you know, as a kind of a come on to
+ use their service, they offer different things like claim ID, for instance, has a whole page
+ where you can say, I claim this, these pages on the web.
+ These are not mine.
+ So I use that service and as a, so the open ID is kind of a side benefit to it.
+ Yeah.
+ It's one of the things that the open ID system identifies itself and it's very clear to explain
+ that this is about identity, not trust.
+ Yes.
+ And that's good.
+ That's good to make that distinction, isn't it?
+ Yes, because, you know, trust requires identity, but not the other way around.
+ You have, you have to be sure about who it is that you're trusting, but, but, but in
+ order to identify someone uniquely, that doesn't imply anything about trusting them.
+ That just means who they are.
+ So it, and so by making that distinction very clear, that's one of the ways that the open
+ ID system has sort of kept itself at a lowest common denominator, completely open source,
+ completely open spec.
+ There are, as you said, there are, there are hundreds of servers all over the world.
+ Many of them are, well, probably, I'm sure most of them are free, even the secure ones
+ are free.
+ Anyway, I think we're going to see this is the system that ends up taking hold and it
+ has been thought through carefully.
+ It's got the feel of lightweight internet style protocols and it's so open that people
+ are going to be building more onto it.
+ I wish Microsoft and Apple and Linux would support this in the operating system and that
+ would really be fantastic.
+ Then when you log in with your secure credential on your operating system, you'd automatically
+ have an open ID.
+ Yeah.
+ I think it's just a matter of time.
+ It is, it is relatively new.
+ It's only a few years old.
+ It's catching on fast and I mean, I look for the day when we're no longer sitting here
+ jumbling, you know, individual passwords coming up with, you know, personal password protocols
+ and all the stuff we've talked about for managing the fact that to be really secure,
+ what you want to, you know, not share your ID, this allows exactly what we've been talking
+ about where, you know, you establish a a strong identification, authentication relationship
+ with one server and then using an open free protocol, all the other sites on the net are
+ able to ask it if you're who you say you are.
+ Now, I just want to underscore and you said this, but I want to say it again, this, this
+ is not not identity verification in any way.
+ You can create an open ID that says you're Steve Gibson.
+ It's just a way of having a single password for all the sites you visit.
+ It's not, it's not like a PGP signature.
+ It's not, there's no web of trust as you point out.
+ There's no verification.
+ Well, now a perfect example though of, of an extension to this would be you could imagine
+ a commercial service that wanted to provide exactly that act, you know, full industrial
+ strength identity verification, so it would, it would claim that that's what it's going
+ to do.
+ It's not going to ever say it, it, it has identified someone where that person hasn't
+ first gone through some rigorous protocol for establishing their true identity with that
+ service.
+ So in the same way, for example, that GRC every few years in order to get a, an SSL certificate,
+ I have to re-approve to their assign that I, me, you know, Gibson Research Corporation,
+ a corporation still in good standing in California, blah, blah, blah, and all this stuff in order
+ to get that GRC.com certificate that allows me to establish a secure connection so that
+ people who connect to my server know that it's really me.
+ Similarly, you could have a service that is going to go put, put users and users, I mean,
+ you know, individual people through some sort of similar ringer so that if you use them
+ as your authenticator, you are, and the only way they will authenticate you is if they've
+ proven your identity beforehand, then that's a perfect example of additional features built
+ on top of this system.
+ Right.
+ Right.
+ So that's exciting.
+ I hope it does take off.
+ Of course, it's meaningless unless sites start using it if you know, Amazon starts using
+ it and travelocity and Expedia, you know, the sites that you shop at LL Bean, whatever
+ wherever it is that you go, then that becomes exciting.
+ I'd love, you know, if Amazon would get behind something like this, I think that that would
+ be enough to kind of put it over the top.
+ Well, it certainly does need that kind of ubiquitous support, but I remember as I'm sure
+ you do Leo, the early days of the web before virtually everyone in the world was on the
+ web and it was like, well, I mean, wherever we used to talk about the chicken and egg,
+ well, yeah, maybe this will take off, but, you know, unless the things I really want
+ are on the net, then why and why are people going to go on the net or like, like put themselves
+ on the net before it really exists?
+ How is it going to achieve critical mass, blah, blah, blah?
+ Well, it just happened because it was so inexpensive to do it.
+ And at some point, companies had to be on the internet or they were going to get left behind.
+ And although there isn't the same sort of your here or your notness to this and there
+ are like other ways to authenticate, I can see that pressure will be put on sites once
+ open ID becomes the way people want to authenticate themselves.
+ Well, I'd like to put some pressure on you, our listener, to take a look at a star.
+ I was out for a segue, our great sponsor, Staro makes the star of security gateway.
+ And now a version seven is out and man, I have to say, they have really improved what was
+ already a great product, adding things like centralized server side, a gateway side email
+ encryption so that your users don't even know they're using encryption, but they get
+ encryption decryption, even digital signatures based on S Mime and open PGP.
+ I imagine they'll implement open ID at some point in this.
+ That makes perfect sense.
+ Really is a great way to do it.
+ They've got secure remote access via SSL VPN as well as the more traditional forms.
+ You also have scalability via clustering.
+ Their active active clustering enables a low distribution for as many as 10 star of security
+ gateways eliminating the need to install additional load balancers.
+ It really is amazing plus if you've got the home license, it's absolutely free.
+ You get now you get a star up to date as well as their antivirus and anti spyware and it's
+ anti spam and all the tools free free used to be 79 euros.
+ So get it free downloaded at staro.com A S T A R O dot com.
+ And if you want to try it out in your business, absolutely free call eight, seven, seven, the
+ number four A S T A R O and you could try the star of security gateway in your business.
+ I use one it is so great is just bulletproof A S T A R O dot com.
+ We thank them for their support of security now.
+ So next week we're going to answer questions Q and A episode number 20.
+ Yay.
+ I'm so happy.
+ I love doing those Q and A's.
+ Meanwhile, you can of course get a 16 kilobit version of this show.
+ As always, from Steve site, GRC dot com.
+ He has transcripts there, show notes and more that's GRC dot com slash security now.
+ You can also of course get his great program spin right everybody's favorite.
+ My favorite this recovery and maintenance utility S P I N R I T E. It's available from
+ GRC dot com.
+ While you're there, check out shields up on us free security utilities.
+ Steve will adjourn and get back together with uncle Stevie's our own security next week.
+ Have a good week.
+ Thanks Leo.
+ Security now.

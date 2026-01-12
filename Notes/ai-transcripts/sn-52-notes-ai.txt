@@ -1,0 +1,876 @@
+ Bandwidth for Security Now is provided by AOL Radio at AOL.com/podcasting.
+ This is Security Now is Steve Gibson, episode 52 for August 10th, 2006.
+ Security Bulletins.
+ Security Now is brought to you by a starro, makers of the a starro security gateway on
+ the web at www.astarro.com.
+ Time for security now and well, maybe an anniversary, maybe not depending on how sticky you want
+ to get about your definitions.
+ It's episode 52, Steve Gibson.
+ Yeah, I actually got some mail from people who were saying, "You know, it's not this
+ episode that's going to be the anniversary.
+ It's the next one."
+ And they were saying, "Had you numbered your episodes like a programmer from number 0,
+ then 52 really would be your first anniversary.
+ Instead, you're one-off."
+ Like, "Okay, yeah, that's true."
+ Some of my podcasts do have an episode 0.
+ The pilot is usually numbered 0.
+ We never did a pilot on this one.
+ So, it'd be sort of like celebrating your birthday the day before your birthday.
+ Yeah, this is the last podcast of the first year and the next podcast will be the first
+ podcast of the second year.
+ So when is the anniversary now or next week?
+ I don't know.
+ I don't know.
+ Happy birthday.
+ Happy anniversary.
+ That's not too sticky.
+ Ha!
+ You know, it reminds me of...
+ Let's have it be on...
+ Let's have it be on both days.
+ Both.
+ We'll celebrate both.
+ Yeah.
+ And the year 2000, remember there was that whole debate.
+ Is this really the end of the millennium?
+ Or, you know, well, it is the end, but is it the beginning of the new millennium?
+ No, 2001 is the beginning of the new millennium long.
+ Right.
+ Because there was no year zero.
+ Right.
+ It just seems to me to be a semantic quibble.
+ And I'm not going to get into the debate.
+ But happy birthday.
+ Happy anniversary.
+ 52 episodes.
+ Almost 52 episodes done.
+ Now, that's true.
+ I have to say, we can't celebrate to the end of this episode.
+ Well, that's a good point.
+ We don't know what's going to happen.
+ That's a good point.
+ I do know.
+ Well, I do know one thing.
+ This would normally be our mod 4 question and answer episode.
+ It would if we hadn't had such a frantic week of security events.
+ We had the Black Hat and the Defcon conferences in Vegas.
+ And so much was revealed that I want to talk about that I just, you know, we'll just push
+ these questions to our next mod 4 and cover the phenomenal number of things.
+ And many of them very, very worrisome.
+ I wanted to let people know that I'll be talking about a lot of things that they're probably
+ going to want to follow up on.
+ I'll have links galore on our show notes this week.
+ Basically, I'll be making up for all the many weeks where I just say, well, I had no links
+ to share or, you know, a additional note.
+ So, you know, check back next time.
+ Well, this page, and, you know, Leo, you can copy them onto the Twitch site or refer people
+ to the show notes page on GRC, whatever you want to do.
+ But I want to let people know that there's going to be some things they're going to want
+ to follow up on, don't drive their car off the road trying to write these down if they're
+ listening to the podcast Friday morning and not wanting to lose this information.
+ It'll all be on our show notes page.
+ Many people sent me offers or links to what they thought were script-free CSS only menus
+ for one reason or another.
+ None of them worked for me.
+ So I wanted to, in our show notes, is a link to the R&D menu that I developed over the
+ course of those two months with the help of the great group of people in our news groups.
+ And the menuing system that will shortly be appearing on GRC is robust to a level that
+ nothing else we have found on the web is.
+ It runs cross-platform on all Mac browsers, all Windows browsers, old browsers, new browsers.
+ I mean, virtually, I mean, almost shoe leather browsers.
+ I mean, how is that?
+ Let me ask you, because that's difficult without doing logic text using JavaScript for
+ the browser.
+ How do you do that without saying, "Okay, if you're in an ed Explorer, do this?"
+ Yeah.
+ I mean, it really is difficult.
+ For a while, we had a number of what are called CSS hacks, which take advantage of parsing
+ errors that specific browsers have.
+ And in fact...
+ Of course, if they fix the browser, then they fix that error, you're not going to have...
+ Well, I don't...
+ I mean, exactly.
+ It's not a...
+ I mean, there were several places where we had them.
+ I ended up working all of them out.
+ So we ended up even virtually hack-free.
+ There might still be one.
+ Now I can't quite remember.
+ There was a Safari behavior where I had to keep Safari from reading one CSS rule.
+ But I've explicitly put the result of this work in the public domain.
+ There's a banner at the top of the page of the main menu.css page saying where I'm placing
+ this in the public domain, I also, not only for myself, but for anyone else, I commented
+ it extensively.
+ I mean, almost a line-by-line commentary of, you know, "What the heck this wacky thing
+ is for?"
+ I mean, it is a phenomenally complex piece of work, but it's the most robust menuing system
+ I've seen, and it is script-free.
+ Now we're going to be talking about scripting here in the rest of our erratic, because scripting
+ comes up several times this week.
+ And it turns out that, you know, I surf, as I've said often, with JavaScript all scripting
+ disabled, because that's the right way to do it.
+ And we'll be seeing a little bit more why here in a minute.
+ But many menus are, as you said, require JavaScript in order to function.
+ And, you know, so I'll go to sites where, you know, they don't work.
+ It turns out that about 10% of internet users are now surfing without scripting enabled.
+ So, 10% of all sites that depend upon scripting for their site navigation are not going to
+ be functioning without someone having to lower their security enabling scripting in order
+ to get the menus to work.
+ And it's a constant annoyance for me, so I just couldn't have GRC, you know, need scripting
+ enabled.
+ And so, anyway, so the point is, there's a link, it's grc.com/menu2/invitro.html, which
+ is just sort of the development menu that we ended up putting together.
+ I say we, me, and all the people in the news group who are like pounding on it and testing
+ it and changing the window size and just, you know, I mean, it ended up being a tremendously
+ robust solution, which I just want to bring to people's attention, because there's a lot
+ of interest in this notion of a script-free menu and, you know, I've got one and I'm giving
+ it away to everybody.
+ That's great.
+ That's great.
+ Well, I'm sure the community will be very interested in what you've done.
+ And it will be borrowing heavily, liberally, from your solution.
+ I hope so.
+ It would be great.
+ Yeah.
+ And I wouldn't have to be lowering my security all the time in order to use other people's
+ menus.
+ Right.
+ Right.
+ Something else happened, well, a number of things.
+ You know how, how, I don't know how much of an eBay user you are, Leo, but, you know,
+ I stuff all the time.
+ I just bought two things this week.
+ Yep.
+ I do, too.
+ I realized I could get the old HP 11C calculators there, which I have now an inventory of just
+ because I never want to be without them as the best calculator ever created.
+ And you know, one of the things that anyone using eBay depends upon is that feedback,
+ is you know, you want to know that the person you're buying something from is real.
+ Right.
+ And so you use the community's history with, with, with those sellers and the presumably
+ the sellers look at the buyer's feedback to see, you know, okay, everybody is a good
+ guy.
+ Right.
+ We'll get, get a load of this.
+ The latest application of botnets, you know, that we've talked about often about Trojan
+ programs, which are get installed in people's computers and then use their internet connections.
+ It originally was just to attack other people.
+ Then we had spam problems where, where, where bots or these Trojans were sending spam to
+ people.
+ The latest application of botnets is creating fake, high confidence eBay users.
+ Oh, no.
+ They're using botnets are being are being now used to create new fake eBay users.
+ Then they all do one penny, one cent buy it now transactions with each other in order
+ to qualify them for leaving feedback.
+ They leave raving positive feedback to create high quality fake users that are then used
+ by the botnet runners, the botnet owners, to, to create large dollar volume fake sales
+ for something that looks very good.
+ Then that of course allows users to get fooled into trusting someone who's going to take
+ their money and never ship their product.
+ Oh, my goodness.
+ Is there any way to spot that?
+ You can imagine that eBay knows about this and they'll be doing, you know, whatever they
+ can, you know, maybe putting little captures on like all the pages, you know, captures,
+ captures being those little funky things where you have to type in something that it says
+ in order to prove that you're human.
+ It's getting frustrating.
+ They're captures everywhere.
+ Now you can't put a comment on dig without a capture, but that's because of these automated
+ solutions that are spamming and doing other things.
+ Exactly.
+ Oh, that's terrible.
+ I am devastated because I do rely on those seller ratings and well, yeah, I mean, I've
+ got a 100% perfect rating and I'm, you know, I'm proud of it.
+ Well, I guess if you look at the, if you read the comments, it should become clear when
+ they're automated and when they're not, there'll be a certain uniformity to them.
+ They'll, I would imagine, yeah, I wanted to let everyone know, both from a standpoint
+ of, you know, security now and also just, you know, eBay users, you need to be careful.
+ Maybe, you know, maybe for something that's enough high value, have an interchange with
+ the seller in order to get some confidence.
+ I don't know.
+ I mean, but anyway, buyer beware, speaking of buyers, Hamachi was bought.
+ This stuns me.
+ I never thought this would happen.
+ Yeah, I'm, I'm not happy about it because I trusted and got such a good feeling from
+ Alex Pankarov, the developer and, and guy behind Hamachi.
+ And you know, it's, I hope they keep it free of anyway, it was bought by log me in, which
+ has, you know, some related services.
+ Get this Leo.
+ When we first talked about Hamachi, they had about a quarter million users.
+ Then they had, last December, after we talked about them and, you know, things really began
+ to get going.
+ They were at about three quarters of a million.
+ Wow.
+ In April, just what, five months ago, they were at two million.
+ Oh, my goodness.
+ And now they have three million users.
+ Oh, so you can, you're responsible for a, for a total of two, two orders of magnitude
+ growth.
+ I think company.
+ I think security now really did serve to put them on the map.
+ And of course, we also talked about it on, on call for help up in Toronto.
+ And, and I do think that word of mouth after it takes over once you get a certain critical
+ mass.
+ Of course.
+ We helped them get to critical mass and then from then on, it was explosive and I'm glad
+ Alex.
+ Good.
+ I'm glad he's going to make some money.
+ I hope he's going to make some good money out of it.
+ Well, I mean, it was a beautiful system.
+ Well, conceived.
+ I always appreciated.
+ I mean, that like right from the get go, the, while it was still in beta, the UI was
+ just beautiful.
+ I mean, like really had someone paying attention to it.
+ Well, and if you wanted to, I guess you could download Hamachi server right now and not worry
+ about logmians involvement, just run it yourself.
+ That's a very good point.
+ You could set up your own private, your own private, your own private, right, Hamachi
+ network.
+ It was never open source, which always bothered me.
+ And this is one of the reasons I'm not fond of close source.
+ Had it been open source, even had he sold it, you could fork it and can, and there would
+ always be a free and open version of it, regardless of what he did with it.
+ Yeah.
+ So from his point of view, it probably was smart to keep a close source.
+ He made, I'm sure some money.
+ But from the point of view, the user community, this is why I rarely will recommend a close
+ source solution.
+ Yep.
+ Moving on.
+ Okay.
+ Well, got some bad news.
+ Oh.
+ Um, the, the bright guys down at EI in Elisa, VA, ho, the great security company, the big
+ guy.
+ And, and, and mean there, there, there, there are a bunch of really neat, young, you know,
+ like white hat hackers.
+ They found a bad problem in D-Link routers.
+ Oh, I just bought one early, I know early, early this year, they informed D-Link toward
+ the end of February and gave them half a year to deal with it.
+ D-Link has done nothing.
+ Okay.
+ Now, and it's funny too, because I mean, the, the, the fundamental principles of security
+ just keep applying.
+ How many times have you heard me talk about not running services or servers, servers you
+ don't need?
+ And how many times have we said disable universal plug and play turns out there's a stack overflow,
+ a traditional buffer overrun in, in a handful of D-Link routers.
+ The D-I 524, the, the 604, the 624, the 784, the EBR 2310, the WBR 1310 and the WBR 2310.
+ Again, we'll have, I have links on our show notes to EI's page, which talks about this.
+ But reading from what EI said, they said a remote stack overflow exists in a range of
+ wired and wireless D-Link routers.
+ This vulnerability allows an attacker to execute privileged code on an affected device.
+ When a specific request is sent to an affected device, a traditional stack overflow is triggered,
+ allowing an attacker complete control of the router with the ability to execute code on
+ the device, it is then possible to apply modified firmware and ultimate, and ultimately compromise
+ the entire network.
+ So you would use this attack to change the router's firmware and presumably put some
+ code in there that would give you kind of an easy access to the network.
+ Now if the machine's on the other end or secure, would that matter?
+ Well, you, you, there's no way you would want the equivalent of somebody plugging their
+ own connection into your inside your internal network.
+ Right.
+ I mean, you may, you may not, they may have to find another attack to get into your machines,
+ but, but at least they have unfettered access and effectively turns off your firewall.
+ Um, well, it does anything it wants to.
+ Now we should say that this is a universal plug and play server and that's only facing
+ the land side.
+ So, so first, somebody would have to get access one way or another to, to the land interface.
+ That is, you know, it's, so it would have to be code running in your machine that was
+ talking to the router or if you were using unsecured Wi-Fi, then of course that gives
+ them land side access.
+ So an, so unsecured wireless would then probably be the most typical entry point.
+ But if, if a, if anyone were like out war driving and you did not have web or WAP, web
+ or WPA security on your, on your, on one of these D-Link routers, which after half a
+ year, I mean, that's annoying.
+ After half a year, this has not been fixed.
+ They should fix that.
+ You bet.
+ Clearly, clearly there just isn't enough pressure on D-Link to do this or, or, or they would
+ have.
+ So, you know, maybe by us talking about it, we'll help to bring some pressure to, to D-Link
+ and get this, this firmware updated.
+ Well, this is how EI works.
+ EI is really good.
+ I mean, they do, you know, it's a balance between full exposure and, and keeping it
+ quiet.
+ So they give you six months, but if you don't do anything in six months, then the only way
+ to put pressure on a company is to announce it publicly.
+ Yep.
+ You know, the, the idea and the companies, of course, all get upset.
+ Well, you're telling hackers how to use it.
+ Well, we told you first, and if you didn't patch it in six months, by now many hackers
+ may in fact know, so the, the only thing we can do is to tell the world, well, that's
+ a shame.
+ Now it's fortunately not the router I bought and, but, so to lock my router down, it's
+ first of all, it's not wireless.
+ So that's a good step.
+ Is it sufficient to turn off universal plug and play?
+ Yes, because it is, it, it is an overflow in that server.
+ So we've always told people to do that.
+ Yes.
+ We've always been telling people if unless you know you need universal plug and play, turn
+ it off.
+ It's a good thing not to have it on because it does allow anything that gets loose in your
+ system to reconfigure your, your router behind your back.
+ And now we know because of on these D link routers, because of a, of a buffer overrun
+ in the universal plug and play server running in the router, it allows even a much greater
+ degree of compromise.
+ So this is once again, another reason to do a, do these lockdown things that we tell
+ you to do with your router, including turning off you PNP speaking of which we all know
+ what a fan I am of client side scripting, I've got my tongue in my cheek, I'm fighting
+ it.
+ Yes.
+ I mean, I, you know, client side scripting, you know, in email, in web browser, anything
+ is bad.
+ You know, and people say, Oh, but it's so nice.
+ It's like, yes.
+ And it's bad.
+ Now I've always agreed with you when it comes to active script because active script, which
+ is the windows technology really has no sandboxing at all, but surely we're safe with JavaScript.
+ No, he said setting you up.
+ What?
+ Thank you, Leo.
+ What has been figured out by some guys at a security company, SPI dynamics is how standard
+ JavaScript with no bugs, no exploits, no buffer of runs over runs, no mistakes at all can
+ be used to port scan your internal network, identify devices, take them over, reprogram
+ them and send any information home.
+ So by going to a website running JavaScript, they could do that to my internal network.
+ Yes.
+ And there's a proof of there's a proof of concept online right now that demonstrates basically
+ you go to their page, their JavaScript will scan your internal network and any site you
+ went to that was that was using scripting and you can bet it's not going to take long
+ before this this I mean, this is now out in the wild.
+ This was talked about at the black hat conference last week.
+ And so all the bad guys know about this now.
+ So should I turn off JavaScript?
+ Well, yes.
+ I mean, Leo.
+ What's Steve?
+ I've been saying it's bad.
+ That's Steve.
+ This is what I'm this is what I'm talking about.
+ None of my sites work with that.
+ I mean, it just works with that job.
+ Well, mine does.
+ Why?
+ Because it's possible.
+ I mean, okay, but with all due respect, your site is does not do all that much.
+ It does a jump up and down and dance around.
+ I know it doesn't do a lot of things.
+ Okay, let me just let me just don't set session cookies or anything, right?
+ No, I have I'm just beginning to use cookies because that's another thing I wanted.
+ But the said session cookies don't don't you need JavaScript to do that or some scripting?
+ No, you could do server side.
+ Yeah.
+ Well, yeah.
+ Yeah.
+ I mean, cookies have traditional being server side.
+ Okay.
+ So, so, okay.
+ SBI dynamic says, and I've got I've got a lot of JavaScript.
+ I've got link.
+ I've got links to this stuff says, imagine visiting a blog on a social site like myspace.com
+ or checking your email on a portal like Yahoo's web mail.
+ While you're reading the web page, JavaScript code is downloaded and executed by your web
+ browser.
+ I mean, we all know that's the way these things work.
+ In this case, it scans your entire home network, detects and determines your linksys router
+ model number, and then sends commands to the router to turn on wireless networking and
+ turn off all encryption.
+ Now imagine that this happens to a million people across the United States in less than
+ 24 hours.
+ This scenario is no longer one of fiction.
+ Well it doesn't break to a TV too much.
+ It only thing it breaks by turning off JavaScript is my is our flash player.
+ So they say, yes, yes, they say getting inside the internet, the intranet, the scanner is
+ written in JavaScript, which can be embedded into an any HTML page, simply viewing the
+ page downloads the JavaScript along with the HTML to the user's browser, automatically
+ executing the code once loaded.
+ It does not matter if the user is sitting in a coffee shop using a wireless hotspot or
+ inside an office building using a corporate network.
+ If a user can browse the web, he or she can visit a page that includes the scanner and
+ have his or her network, whether internal or external, be scanned and attacked.
+ Well, and using MySpace as an example is a very good example because as we know that
+ WMF flaw was propagated to a million computers on MySpace, just a few weeks ago, a lot of
+ unsophisticated users on MySpace.
+ Anyway, these guys go on to explain how the equivalent of a ping can be created with JavaScript
+ to ping all the IPs within a range.
+ We know that JavaScript is able to determine the user's IP because we've talked in the
+ past about how some of those sites scare people by saying we know the private IP of
+ your computer and we've said before, yeah, okay, big deal, that doesn't do anything.
+ But in this case, it tells the scanner what kind of network you're on and what range
+ of IPs to scan for other machines.
+ And they go on to show how this thing can find web servers and then send requests to
+ web servers which may be less secure on the internet than they are from the outside on
+ the internet where they're worried about bad guys getting in.
+ And I mean, basically, do anything this thing wants to inside your network.
+ So I mean, Leo, the problem is you are going to untrusted sites and running script that
+ they provide.
+ It's just a bad idea.
+ I mean, it's unfortunate that it's bad.
+ But like so many things that we want to do, they're not secure.
+ And here is a perfect example now, finally, of what, you know, valid, non-buggy JavaScript
+ can do on your machine whenever you visit a website that chooses to do this for whatever
+ purpose.
+ Well, all I can say is we're going to turn off JavaScript on Twitter and figure out a
+ way to make it work without JavaScript.
+ There are a lot of things that use JavaScript, unfortunately, including ad banners, I mean,
+ a lot of the net relies on JavaScript.
+ Well, you know, Leo, we trust you.
+ I have put you in my trusted list on IE.
+ And so when I go to Twitter, everything jumps around and dances the way you want it to.
+ There's not that much time.
+ So what I would say is you don't have to turn it off and not use it.
+ Choose safe sites.
+ You don't have to turn it off and not use it.
+ Right.
+ Well, no, like from your standpoint, as a webmaster, what you want to do is you want
+ to focus more on the hopefully growing percentage of security savvy users who will visit your
+ site with JavaScript at least initially disabled.
+ So you know, I mean, and certainly I see sites more and more that say, you know, that stop
+ me as I'm trying to enter saying this site requires JavaScript to be enabled.
+ It's like, okay, well, and then I make a decision how much do I want to go any further.
+ So so from a webmaster standpoint, I would just say, think, you know, disable JavaScript
+ on your browser, use your own site, see how if it's okay.
+ And if not, ask your web designers to do a better job for non scripted browsers who visit,
+ because if I had my way, everyone would would have their scripting disabled by default until
+ they chose to deliberately trust someone.
+ Well, and that's certainly how I set up my browsers from now on, but a great many sites.
+ You know, all the Ajax functionality that we've come to expect, that's all that matter of
+ fact.
+ The SPI guys specifically address Ajax and talk about how JavaScript because it's a component
+ of Ajax, it is becoming, you know, more pervasive.
+ And now we've seen it's not safe.
+ Oh, this is devastating.
+ Fortunately, most of my site, my sites make very little use of JavaScript, except for the
+ admin interface, which is in an Ajax interface.
+ So all you'll lose is the ability to play a flash player.
+ But for instance, there are some things that are, well, I'll have to have to look at them.
+ They're things like it.
+ We won't launch iTunes when you click the iTunes button.
+ So even a simple site like mine, JavaScript is fairly, very important.
+ I know.
+ Believe it or not, we got one more bad one.
+ All right.
+ It turns out that Intel Centrino Wi-Fi chip drivers have a bad bug in the frame processing,
+ which, and this is one thing that also has come out just in the last week.
+ Intel Centrino, you know, the widely deployed wireless chipset family that lots of laptops
+ are using has the Windows drivers have a very bad bug that allows you to bypass Wi-Fi security.
+ Now, this is the demo they did at Black Hat where they took over a MacBook.
+ Is it the same flaw?
+ No, that's a different flaw.
+ Another flaw.
+ Wonderful.
+ Yes.
+ Another flaw.
+ This affects only Windows drivers.
+ Now, Intel did ship new drivers for its Wi-Fi shortly after the Black Hat demo.
+ I wonder if that fixed this flaw.
+ Oh, yes.
+ This flaw has been fixed.
+ Okay.
+ I'm wanting to tell people about it.
+ I mean, unlike the JavaScript problem, which, you know, we're stuck with.
+ We can't fix that.
+ This is a bug.
+ It has been patched.
+ Again, links on our page take you to a downloadable tester that will tell you what
+ version of your centrino you have and which ones are vulnerable.
+ And then Intel has a patch.
+ Unfortunately, the patch is as huge as 130 megs to download this, although you don't
+ have to install all that, but you do have to download that blob.
+ And then, in fact, on one of my tablets, I had a buggy driver in one of my tablets on
+ my little libretto.
+ It doesn't use centrino, so I was fine there.
+ But anybody who's got like that centrino label on the back of their, or maybe the underside
+ of their laptop ought to take a look at this because it is the thing that's scary about
+ it is that no encryption and protection saves you.
+ This is an error in the frame in the packet processing, the frame processing before we
+ get to encryption and security and decryption.
+ So potentially, somebody sending this specially malformed packet could execute code.
+ Oh, and the code executed is at the privilege level of the driver, which, of course, is
+ the kernel.
+ It's always ring zero.
+ That's how exactly so full kernel privileges.
+ Wow.
+ So anybody using centrino wants to get this stuff from our show notes and get themselves
+ patched immediately.
+ And there is, of course, this larger issue, which was demonstrated black hat with almost
+ all.
+ They said Wi-Fi drivers, similar muffler of a flow, I expect, although they did not tell
+ the world how the exploit worked, but they attacked a Mac Mac book.
+ Of course, they had to use a third party Wi-Fi card to do it, which nobody would do since
+ you already have one, but they said, and we used a Mac book because Mac users are so smug.
+ We just wanted to show them they have problems now, but it is a problem on Windows machines
+ just as much.
+ So this, there are holes in these drivers, but it's a really scary thing when you have
+ whole security flaws in a driver.
+ Well, yes, and especially one on Wi-Fi because of the wireless problem and the opportunity
+ to do war driving and one which affects you independent of web or WPA encryption.
+ I mean, there is no protection for this other than patching the driver immediately.
+ And because it's wireless inherently, I mean, people have talked about the possibility of
+ a wireless worm because a worm could jump from one wireless notebook to another like
+ in an airport or in a coffee shop or even in a corporation where a lot of people were
+ using internal Wi-Fi hotspots.
+ I have to say, it sure sounds like the hackers are winning today.
+ It's been a busy week.
+ This is bad.
+ Do you have any good news at all?
+ I have a piece of really neat good news.
+ Thank you.
+ Can you end with that?
+ Yes, and as a matter of fact, it is the last one of my lengthy list of Erata for the week.
+ I don't want to end on such a scary note here.
+ There's a group called the Stop Bad Wear Coalition that is developing a list, a comprehensive
+ list of sites that are known to have malware content.
+ Google has just started working with them.
+ Wonderful.
+ And it's really cool.
+ Will alert anyone who clicks on a link, which is going to a site which is known or believed
+ to have some sort of spyware, malware, or just sort of generic badware, it'll instead
+ take the user to the Stop Bad Wear Coalition page.
+ Fantastic.
+ Just to give them a warning that you should know that there's been some concerns raised
+ about the site.
+ If you're about to visit, do you want to keep going?
+ Holy cow.
+ It's very cool.
+ And get this Leo.
+ It turns out that in a study they did a few months ago prior to launching this, 10% of
+ search results are of sites that have this collision of known badware.
+ So one out of 10 links that Google returns or any other search engine is returning.
+ Of course, this is a great advantage for Google, and the Stop Bad Wear Coalition guys are first
+ working with Google.
+ It's not an exclusive relationship, so you can imagine that all the other search engines
+ are going to want to jump on this because, I mean, basically, it's a cool service for
+ protecting users from going to sites that have known problems.
+ So it's a huge burden, and a lot of power in the hands of Stop Bad Wear, I should point
+ out that Stop Bad Wear is a coalition, Google, Lenovo, and Sun Microsystems are partners.
+ I think it's kind of a newer group that was started with this in mind.
+ Yes, and only recently.
+ Yeah, in conjunction with Harvard's Berkman Center.
+ And Oxford University is Oxford in an institute.
+ So these are good people, consumer reports, is involved as well.
+ So I think that this is good.
+ There is a lot of power now that this group has, because--
+ Well, imagine being incorrectly listed.
+ It would be, you know, devastating.
+ Oh, my goodness.
+ So it's important that they really be above suspicion in any way, and that they be absolutely
+ objective, and apparently they're so, I mean, I'm impressed with what they've done.
+ So and thank you, Google, for doing this.
+ It's a risky thing for Google to do.
+ I mean, it exposes them.
+ But it's a next step.
+ I mean, ultimately, it's the kind of thing where it's like, yeah, I wish I had thought
+ of it.
+ But it's a risky thing to do, because you're going to get sued.
+ Yep.
+ I mean, let's face it, Google is being sued all the time anyway, because people are pissed
+ off that they're not ranked where they think they should be in Google's engine.
+ So thank you, Google, for taking the hit for all of us on this one.
+ It's an important thing to do.
+ I bet you, you said other search engines should do this.
+ They may be forced to just because Google's doing it, it'll be one more reason for everybody
+ to use Google.
+ But I bet you, there's a lot of resistance among the management of these search engine
+ companies saying, excuse me, we don't want to, we don't want to go out on a limb like
+ that.
+ Yeah.
+ I mean, it's just, it's a, who would not, I mean, if you, if you, if you were, it didn't
+ have any other reason to use Google, like liking it, if you were using other search engines,
+ now you could, yeah, I was going to say, who wouldn't prefer that just to have that extra
+ layer of protection.
+ So everyone, before long, it'll just be the way it's done.
+ And as it should be.
+ Another step forward.
+ Exactly.
+ Well, I'm glad you ended on a happy note.
+ Actually, I have one more story to add that really isn't security.
+ It's more about privacy, but it just raises the issue of search engines and how much they
+ know.
+ I don't know if you saw the New York Times article, I think it was today about America
+ Online.
+ You may remember last week, America Online admitted and later apologized.
+ The screw up.
+ Now, that they gave a lot of information about searching.
+ They published it.
+ What did they do?
+ They gave it out or they, I can't remember.
+ I didn't follow it closely either.
+ I just knew that they were, that they were embarrassed and they were apologizing for,
+ for some sort of information disclosure.
+ They collected, well, they're made a list of 20 million web search queries on AOL.
+ And now you might say, as AOL did, well, they're anonymous.
+ They're not giving out personal information where, where this database is just what people
+ search for.
+ We, we numbered the users so no one knows who it is.
+ Well, an intrepid reporter for the New York Times looked at the information and you know,
+ it's not as anonymous as you might think.
+ He actually tracked down number 4417749, mainly because her searches as most of our searches
+ would, I think, gave a lot of information about who she is.
+ She was searching for landscapers in her hometown and searching for people with a last
+ name that was similar to hers.
+ And I mean, it was enough information that this reporter was actually able to talk to
+ her.
+ Wow.
+ So that's a terrifying thought.
+ Would you like all the things you searched for in the last year to be published on the
+ internet?
+ No.
+ And I mean, you, you could, you could argue that it would be easy for people to also to
+ like misinterpret what we're searching for.
+ I mean, I'm, after all the revelations this year about the NSA, you know, watching us,
+ I'm, and then if there was something just the other day, I was, it was something to
+ do with a, with a suspicious, you know, anti-terrorism sort of website thing.
+ And I just thought, boy, I mean, it's kind of creepy to think that, that what we do on
+ the net may be watched and somebody may be interpreting our intentions, which of course,
+ you know, that's the leap that they have to make is understanding why it is that a person
+ is going there.
+ Yeah.
+ Well, did pull the search data off of its site over the weekend, apologize for the release.
+ They saying it was an unauthorized move by a team who actually would just wanted to benefit
+ the academic community.
+ You know, here's a lot of information that maybe you can, you can get some value out
+ of.
+ They did it, I think they did it in the best intentions, but it just points up that, you
+ know, there is a, you don't need somebody's name to know a lot about them.
+ Well, and you know, that, that's really, it's funny you say that because one of my arguments
+ against the whole third party cookie thing is people, they, they, the aggregators are
+ saying, oh no, this is anonymous.
+ It's like, it starts out being anonymous, but when you acquire enough information, you
+ look at your end, and you're, and that's the whole point of, of aggregating data.
+ You aggregate all this and you end up with something that can sometimes not be so anonymous.
+ I'll put a link along with your links to this New York Times article.
+ It's, it's quite, quite amazing.
+ Well now that we've scared the pants off of everybody and maybe you have a little bit
+ with the, the Google information, I think it's time we adjourned this edition of security
+ now, but we'll be back next week.
+ Do you want to pick up the virtualization topic?
+ Yes, that's what we're going to do.
+ I'm going to talk about sort of the granddaddy of, of commercial companies, VMware, which
+ I've actually been using for many years.
+ And so we're going to kind of cover what they offer and their products and, and give people
+ some introduction to that.
+ And that'll be our next step in discussing virtual machine stuff.
+ I can't wait.
+ Of course, I want to thank the folks at Astaro for providing the, the, the wherewithal to
+ continue this podcast, it's their support really that encourages me so much with security
+ now because, you know, we could go on doing this for a long time out of our own pocket,
+ but the fact that somebody, a company like Astaro has come along and said, you know,
+ it's worthwhile.
+ We want to help support it.
+ It just really, it makes me feel good.
+ They are the makers of the Astaro security gateway.
+ If you're small or medium business network needs superior protection from spam, from
+ viruses from hackers, as well as complete VPN capabilities, intrusion protection, content
+ filtering and an industrial strength firewall, all in an easy to use, high performance appliance,
+ contact Astaro www dot A S T A R O dot com or call eight, seven, seven.
+ The number four, a star, oh, you can schedule a free trial of the Astaro security gateway
+ appliance in your business.
+ And of course, as always, non commercial users, you and me can download the software version
+ of ASG for home use, absolutely free.
+ That's also at A S T A R O dot com and for a low press, I think it's 79 euros a year.
+ You can add very strong anti virus, anti spam and other protections to it that's automatically
+ updated.
+ It really is a great solution.
+ If you've got an old box line around that you can put Linux and a star on.
+ This is a really neat thing to do.
+ A S T A R O dot com.
+ Of course, security now is provided by Steve as a as a pro bono benefit to the community.
+ But if you'd like to benefit him back, I just talked to somebody.
+ It's so funny this week who said, yeah, I bought a copy of spin right.
+ I didn't need it.
+ I just wanted to give something back to Steve.
+ You don't have to buy it if you don't need it.
+ But if you need file maintenance and recovery, I shouldn't speak for you, Steve.
+ But I think I think you would agree with me.
+ Don't buy it if you don't need it.
+ But if you have a hard drive, you might want it.
+ Spin right is the absolute best in file recovery and disk maintenance.
+ It's available at grc.com.
+ And if you want to read some testimonials, spin right S P I N R I T E dot info.
+ That's a great answer.
+ And you're rightly, I mean, I, I would never ask anyone to spend $89.
+ You don't need donations.
+ Right.
+ My whole goal here is just to plant the seed.
+ I mean, sooner or later, pretty much everybody who uses a PC over a long period has some sort
+ of a disk crash.
+ I mean, you know, a physical problem that they turn their machine on and it says, you know,
+ no operating system found.
+ Just like, I mean, or a question because you, what happens with spin right is you make
+ a boot CD or a boot floppy that'll run spin right because you run it from, from DOS, basically.
+ Correct.
+ Now that Mackintosh runs on Intel, can I use it on my Mac machine on an Intel?
+ You know, we're getting questions about that.
+ And I don't know yet.
+ You have a Mac Intel.
+ Why don't you try it?
+ Well, you know, I do, but I've, I'm liking the Mac.
+ I'm like, I'm liking the Mac so much that, that, that first I, first I cut the hard drive
+ in half using Apple's boot camp.
+ Right.
+ So it was a half Mac and half Windows and I got Windows installed and set up and it all
+ worked really well.
+ It's like, okay, cool.
+ Now I've got, you know, Windows on this really nice Mac hardware, then I was using the Mac
+ for a while and I was thinking, I'm kind of liking this Mac side.
+ So I, I wiped out the Windows side and I, I use boot camp again to repartition it.
+ And this I'm only gave Windows 10 gig out of my total of 80 and, and now it's gone completely.
+ Oh, no, don't tell this.
+ Well, because one of the tools we'll be talking about is Parallels, which is a virtual, it's
+ a virtual machine technology for the Mac, which on an Intel machine runs Windows at full speed
+ in a window.
+ I love it.
+ Well, it's a, it's a, it's a cool solution because, for example, I've got some friends
+ that I, I would like to have always had on a Mac, except they like need one particular
+ application.
+ I, I've got a really great realtor friend and she has to have her did this one application
+ for her multiple, it is, it's her multiple listing thing and it only runs under Windows.
+ So this is like a perfect solution for her.
+ So it's not that it's not that it won't check the disk because it's file system independent,
+ right?
+ Well, yes, because it's, it's about the physical sectors.
+ It's a spin right actually runs underneath the level of the file system dealing with the,
+ the actual recording of data on the disk and doesn't care what the data is that it's reading.
+ It works to recover it and, and, and also to remove bad sectors from use, swapping them
+ out with spares that the drives always have.
+ So it would work on Linux.
+ It would work on a Mac.
+ The issue really is booty.
+ People run it.
+ People run it on their teavos.
+ Oh, yeah.
+ Of course.
+ It'd be great for that.
+ Yeah.
+ They fix it.
+ It's been right, it'll fix teavo drives that are in trouble.
+ So, so in theory, however, it is down at the bare metal.
+ I wrote it, of course, all in assembly language and it's, you know, it was, there's no bio.
+ There's no traditional bios on a Mac.
+ Oh, then you're right.
+ Yeah.
+ That's a good word.
+ It's not going to bring all of the stuff around it still does.
+ It's expect to see a PC.
+ So you're, you're correct.
+ Yeah.
+ But I have a feeling gang with Steve's new love that it may be some day for Mac users
+ too.
+ They'll be a, they'll be a.
+ Well, and Mac people do you spin right by pulling the drive out and sticking it over
+ on a PC.
+ So that would work fine then.
+ And it does.
+ And people have, people have done it a lot.
+ Okay.
+ That's good to know.
+ GRC.com.
+ That's also where you'll find the show notes, the 16 kilobit version of this show for the
+ band with impaired and Elaine's fantastic transcriptions for those who'd like to read
+ their security now or many do read along with Steve.
+ I'm seeing notes from people who are, who are using Google to find the transcripts,
+ which then lead them into the podcast.
+ Interesting.
+ And so we're, we're acquiring people who are doing Google searches for things.
+ And they, they run across the transcripts.
+ And so it's really nice cause, cause Elaine's transcripts mean that, that security now is
+ searchable.
+ Right.
+ Well, and I, I will add that it is going to be searchable in another way because we've
+ done a deal with pod zinger, which is a BBN company.
+ And they do amazing work in, in voice to text.
+ And they are scanning now all of the Twit.TV network programs, creating transcriptions, not
+ as good as Elaine's.
+ They're, they're computer transcriptions, but it's good enough for searches.
+ And as we're soon to implement as the, a new search box that we already have a text search
+ box on the Twit.TV, but we'll have a text and audio search box that will allow you to
+ search any of the podcasts.
+ And this will be great.
+ So if you want to know more about netstat, you can go and type netstat and not only will
+ it take you to the podcast where Steve talked about netstat, it'll take you, it'll queue
+ it up to that portion of the podcast.
+ Oh, very nice.
+ So there's a little player and you're able to do that without any scripting.
+ That's amazing.
+ Yeah, we'll see about that.
+ I don't know.
+ You might not work with that.
+ I think as a goal for all websites and certainly for, for mine, eliminating all scripting is
+ a, you know, all client side scripting is a, is, well, or, or, or a reasonable compromise,
+ I think is to, is to minimize the, the impact from not scripting.
+ You know, so, so as a, I think a responsible webmaster should just turn scripting off and,
+ you know, see if the site is still usable.
+ Maybe not all the bells and whistles are still working, but at least, you know, you could,
+ you could get around.
+ Well, of course I did do that.
+ The minute you told me here earlier in the podcast, and as I mentioned, the only thing
+ that seems not to work is the flash based player.
+ I guess it uses a little, in fact, I know it uses a little JavaScript to pull up a player
+ but we can change that.
+ Right.
+ That's, that's, that's just an easy thing to change.
+ The search still works, by the way.
+ So, right.
+ For people who are Firefox users, there's a very nice Firefox plugin called NoScript.
+ And NoScript does exactly what I recommend doing.
+ And that is, it allows you to run by default with scripting disabled.
+ And then white list sites that you trust, you know, Google, Amazon and so forth.
+ So you get, you get the best of both worlds.
+ You get scripting, like amtwit.tv, of course.
+ You get scripting for any sites you visit, it automatically turns it on on the fly in
+ the same way that Internet Explorer uses its zones in order to give you differing levels
+ of security depending upon what, what, whether it's, it's a default Internet site or one
+ that you have explicitly trusted.
+ So it's called NoScript for Firefox.
+ I was almost gave a point to, to, to explore and said this is a reason to use Explorer because
+ of that capability.
+ I'm glad to know about NoScript.
+ That's good.
+ Yep.
+ Yeah.
+ All right.
+ We will say goodbye to you now.
+ We'll be back next week talking about virtualization and specifically VMware.
+ Remember twit.tv is a place to find not only this podcast, but a great many others.
+ We're actually going to be up to a dozen podcasts soon on all topics, technology oriented.
+ And if you like.
+ Oh my God, you must be busy Leo.
+ You know, I've decided to really make this my full time job.
+ I, I, I kind of was on the fence for a while, but it's working.
+ Now that we're getting advertising, we're getting the donations have been very strong.
+ And by the way, the fact that we have advertising doesn't mean stop donating.
+ I really appreciate those donations.
+ The reason is we use the donations to support infrastructure, which includes, of course,
+ server expenses, equipment expenses, rent, that kind of thing.
+ And the, and the advertising money goes to the hosts, you know, to pay for them because
+ they're everybody, including Steve, we're doing it voluntarily right now.
+ And me.
+ But I, you know, it's exciting.
+ I think things are really going well.
+ And, and I, I really think there's a, an interest in this kind of information.
+ I, I know if security now didn't exist, I would be missing a lot of really important
+ information.
+ So I'm very grateful to you, Steve, for doing this for a year for actually you're starting
+ to get a little money now that we have advertising.
+ Well, and the audience seems to be holding.
+ I mean, we're, we're growing, we're growing, baby.
+ Or is that with the last number showed?
+ Yeah.
+ And the numbers, some of the strongest numbers we've had yet.
+ Very nice.
+ So I'm very encouraged.
+ People do like what we're doing.
+ And we appreciate it.
+ We're glad you listened.
+ And we hope you'll be back next Thursday for another exciting, thrilling, gripping and
+ let's hope not so depressing episode of security now.
+ Thanks, Steve.
+ Thanks a lot.
+ Security now.

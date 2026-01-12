@@ -1,0 +1,739 @@
+ Netcast you love from people you trust this is twist bandwidth for security now is provided
+ by AOL radio at AOL.com/podcasting
+ security now is Steve Gibson episode 63 for October 26th 2006 mojo pack
+ security now is brought to you by a starrow makers of the starrow security
+ gateway on the web at www dot a s t a r o dot com and by Dell for this week's
+ specials visit Twitt dot TV slash Dell it's time to say hello to Steve Gibson
+ and another great security now hello Steve how are you a Leo great to be back
+ fall has hit I don't know about Irvine but Petaluma the leaves are starting to
+ drop off the trees it's really got a great fall feeling to it well you guys
+ get a lot of rain up in northern California to we did we got some rain
+ yeah so but it it's it's been a little nippy actually so I think that that's why
+ warm it during the days in the 70s but at night getting a little chilly I
+ don't know why I'm giving you the weather forecast I don't know why we're
+ giving a hundred thousand listeners the weather that's yeah that's one thing to
+ give you the weather forecast maybe we should talk about security what's up
+ today well today we're going to talk about mojo pack mojo pack last week I
+ thought we were going to talk about mojo pack and you three and something
+ called mocha five but in the interim I've learned a lot about mojo pack I did
+ finally get a hold of the mojo pack people at the actually actually the
+ parent company is a company called ring cube I had a conference call with the
+ the CTO the their chief technology officer to get all of my you know deep
+ techie questions answered the the problem I had was that their website is is all
+ about features and benefits you know it's very sales and marketing but you know
+ as I was always the case I wanted to understand what they were actually doing
+ what was going on you know underneath what was the technology what is this
+ virtual machine technology you know or and how they'd implemented it into what
+ level because what that essentially everything that it that that it can do
+ flows from the way it does what it does of course yeah I mean wait wait I think
+ everybody's seen the hype or at least a lot of people have and kind of take it
+ on face value and of course that's why we're counting on you to tell us what's
+ really going on and if it really does what it says it does we've heard some
+ problems - I've gotten some emails from companies who say you know the light our
+ licenses didn't work once it was installed on mojo pack things like that so
+ well I can address that because now I understand from the from be got by
+ understanding that the the underlying technology I understand why they've had
+ those problems and so as a result and because you three and mocha five and a
+ couple other portable app solutions are so different I we're just gonna talk
+ about mojo pack today this will be the mojo pack episode and then I big but the
+ other things are also neat in it in a different way and so we'll talk about
+ those in future episodes of security now in fact I think you know like near term
+ future so good episodes well this kind of follows on what we just did finished
+ which is our virtual virtualization series so this is kind of another kind
+ it's not really virtualization but it's something else something related well
+ yes so so here's the story mojo pack is a cool thing I've I've downloaded it
+ I've been playing with it for a few days and it there there's a lot of good
+ about it but but what it's doing is difficult to do essentially it's not
+ virtual machine technology as we've been talking about it at all what it I mean
+ it it I don't want to say that it's rootkit technology because that has a
+ negative connotation but it's it's friendly rootkit technology interesting
+ huh what they're actually doing is they are they're installing a dynamic driver
+ so so jumping ahead a little bit you are a mojo pack user you've got this USB
+ device and that can either be a hard disk drive or a solid state you know
+ flash rom dongle you stick it in to an unsuspecting Windows XP machine that has
+ never seen mojo pack before has nothing mojo-ish installed on it at the moment
+ and so what happens is the the auto start dot any fires up if it's enabled on
+ that Windows machine so that so on that Windows XP machine it's also important
+ say that this won't work on Windows 2000 this is an XP only solution okay so so
+ one issue is that you know power users may have disabled auto start and there
+ or you know other systems may have it disabled for one reason other so and you
+ may have to manually run the start dot XC program on your dongle or your drive
+ if the hosting machine has auto start disabled no big deal but it's you know
+ a little bit less automatic in any event when you when you run this start dot
+ XC it essentially and it dynamically loads a kernel driver into the system
+ which deeply hooks the Windows native API we've talked about those are words
+ that scare me when you say that I know and and in fact I I don't I the other
+ word I don't want to use up to describe mojo pack is Cluj because Cluj also
+ has lots of negative yeah negative connotations but but frankly you know a
+ personal firewall a third-party personal firewall is also a Cluj because you know
+ it's doing something to Windows that Windows was never designed to have done
+ to it and you know and that's why personal firewalls have caused problems
+ for people they've they've you know conflicted with other applications things
+ break blah blah blah you know it's it's it's doing something deeply to Windows
+ in the kernel that Windows was never designed to accommodate well mojo pack
+ is doing the same thing and so in that same sense it's a Cluj but it's a Cluj
+ with benefits it's a Cluj with power it's a Cluj that you might want to have
+ you know much like much like you want to have a personal firewall so what
+ happens is when you install mojo pack there's no virtualization stuff going on
+ basically it reaches deeply into Windows and and hooks the kernel many of the
+ of the kernel level API see already I don't this is making me very nervous
+ well and I'm gonna read you I mean I'm gonna flesh out this opinion which comes
+ from the technology with some real-world examples of the consequences so so so it
+ it makes these low-level hooks and this is the way you know you know before we
+ go too far I don't think we've really described because have we described what
+ it does from the user's point of view ah very good point we're talking about
+ what it does from the technical point but but why would why are people so
+ excited about this what does it do for the user okay so what what the
+ experience I've had which is why I started off saying this is a really cool
+ thing is I I downloaded the mojo pack I and the mojo pack Xe I installed it on
+ a 512 K dongle then I installed my my favorite news reader gravity and I
+ installed my favorite outlining tool which something called thought manager
+ desktop which I because I'm I love outlining you know I work from an outline
+ every time I'm here in front of the microphone with you Leo because I've
+ you know going through the all the points I want to remember about what I'm
+ talking so and then I I imported all of my working outlines I got online and I
+ downloaded 3,000 news group messages from the GRC news server all in this this
+ 512 K dongle then I uninstalled I shut down mojo pack and ejected the dongle
+ pulled it out went over to another different windows XP machine that had
+ never seen any of this stuck it in the USB port mojo pack ran by itself started
+ up brought me to a login dialogue where I had to give it my my password to log
+ in then the normal desktop that I had been looking at on that Windows X meme
+ on those Windows XP machine disappeared was replaced by a brand new Windows
+ desktop that looked just like what I had when I removed the dongle from the
+ first machine and there were in the you know standard Windows looking start
+ button I mean it is the Windows start button and programs there was my news
+ reader gravity and my outlining thought manager both running I mean able to
+ run why I brought I brought him up there were all my postings and so what it
+ creates basically it allows you through all of this work that these guys have
+ done to to sort of have a portable windows install of your own that can run
+ off of any USB 2.0 device so for example I mean a cell phone that's got an
+ additional memory card installed or your iPod or you know anything that is USB
+ 2.0 you're able to install mojo pack and basically build yourself a your own
+ portable Windows environment that is not just your data but also your
+ applications that's impressive well and that's the big difference because you
+ know certainly people have been able to you know synchronize their data and
+ like move PowerPoint files or briefcase to that I mean that's no big deal
+ exactly so so the real difference here is you're able to install applications
+ well the way they've pulled this off and and it's important to note also these
+ are any applications in a couple weeks we'll be talking about you three which is
+ sort of like this but you three takes a very different approach of creating an
+ environment where applications have to be aware that they're running from a
+ solid-state device the the mojo pack guys have have have basically by by
+ deeply hooking the windows kernel they have they're they're basically
+ simulating a a standard Windows environment on a USB device Wow so that
+ they so the applications are none the wiser now there are some caveats to that
+ because since they're not performing full virtualization the applications may
+ notice that they've been moved to different machine now now again this is
+ something the kind of thing that can probably be and and in some cases
+ definitely will be fixed in the future for example users immediately noticed
+ that the retail version of office would when they moved it to a to a foreign
+ machine they they'd installed office apps on their mojo pack USB device when
+ they moved it to another machine it said okay you need to activate me so office
+ deactivated because it's not that it had to different platform in a in a true
+ virtual machine environment as we know the you know the app doesn't know can't
+ know that it's on a different machine because the entire environment has been
+ virtualized here mojo pack is is doing what it needs to to make the
+ applications run however Mike the the CTO guy that I asked this question of
+ said in the next release of mojo pack they will deal with making office
+ function universally Wow Wow but now but but but this is sort of the this is
+ sort of the the way I want to characterize this I want to characterize it
+ carefully for people my sense is that it's a it's a quirky system because what
+ these guys are trying to do is difficult in the same way that the very first
+ personal firewalls were much more quirky than than they are now well I
+ even think of things like desk you and application switchers where you're
+ really trying to get into their hooks of the operating system and change how it
+ behaves yes you're just really taking some big chances well and so let me
+ give you some examples for example from their own knowledge base they cannot
+ install on a system where there are multiple where you have a multi boot
+ operating system that's booting from drives other than C you know that it is
+ possible for example to to have a CD any partitions or drives and have the OS
+ actually installed on D or E or a non C colon drive under windows mojo pack
+ can't handle that for another another example is host machine screen saver and
+ power management they say that some failures have been observed when the
+ host machine screen saver or power management options become active under
+ printer drivers problem oh no just wait Leo Colonel you know sometimes they're
+ saying Colonel mode printer drivers will fail installation in the guest that is
+ in the mojo pack guest this includes programs that install their own virtual
+ printer driver such as Adobe Acrobat okay it doesn't work well but but it's
+ important to know that acrobat reader does it's just the it's the it's the
+ acrobat distiller you know acrobat pseudo printer that can't but then they
+ say this limitation will be addressed in a future version it says that they have
+ a pretty long list of limitations to be addressed in future versions well yes
+ let me let me go a little bit further here just to sort of flesh out this
+ notion that is under com plus application certain applications that
+ require com plus may behave strangely or malfunction under the recycle bin on
+ some PCs deleted folders may not appear in the guest after file slash folder
+ deletion however there there may be items to empty in there my own
+ experience I like to have auto arrange turned on on my desktop and it's just
+ not sticky I've never I keep turning it on as I move mojo pack for machine to
+ machine and it doesn't stay neither do the icon positions because I like to sort
+ of organize where things are and it sort of forgets where they were previously
+ under word and excel they say that excel docs containing a font symbol that was
+ created on XP pro service pack to show the symbol as an unrecognizable value
+ and opened on the guest plugged into host without ms excel installed they may
+ they say you may see problems with ole when opening docs with office windows
+ media player users are advised not to install windows media player 11 within
+ mojo pack as it will lead to unpredictable behavior and recovery to the previous
+ stable state may not be possible under reboots by third-party applications
+ reboots by third-party applications may not always work the reboot is usually
+ requested during the application install I mean and this goes on and on and on
+ games for example one of the math cool things you can imagine would be like a
+ world of warcraft addict wants to carry his whole world of warcraft environmental
+ around with him so that he can go to a foreign machine plug in and just be up
+ and running except that it says certain games such as world of warcraft exhibit
+ offset mouse movement at the end of install in other words clicking on a
+ control a windows control will not trigger the desired action the user
+ should move the mouse around the control to find the amount of offset from the
+ mouse's visible and actual position the mouse can I know I know I'm reading this
+ going oh my goodness the mouse can then be moved to the offset location in order
+ to activate the control note this behavior does not occur when the user
+ plays the game oh something about the game is causing the mouse the mouse is
+ visible location and it's it's it's effective location to be skewed and so
+ they say well sort of you know hover over things and see when they light up to
+ figure out where the mouse actually is so so I mean and there's less a lot of
+ these things so so and and and so this is why I have to kind of characterize this
+ as a cluge but I don't want to put people off of it because for most things I
+ think it really works I mean I don't actually have a need to move you know my
+ news reader and all of my news groups around and and to do this kind of thing
+ but I'm I'm sure there are people who have this kind of need and it really does
+ work now what happens is when you when you are looking at the mojo desktop
+ there's a bar at the top the mojo bar that is unfortunately about the ugliest
+ thing I have ever seen I right clicked on it and there was a little pop-up saying
+ return to default skin so it's like oh great maybe I could like fix this well
+ this is actually reminiscent of zone alarm remember that day glow orange oh
+ yeah those own alarm guys use well I mean I love the firewall back in the
+ beginning but I used to tease them all the time about how horrible you know the
+ horrible colors they had chosen for the UI well the good news is that apparently
+ this mojo bar their own toolbar is skinable and I'm sure people are already
+ hard at work in replacing the default skin which is just got awful I mean it's
+ just it just ruins the the look of the rest of your system but you know it does
+ work and it allows you to instantly with a single click to switch back and forth
+ between your mojo eyes desktop and the desktop on the host when you're looking
+ from at the host view you can you can see the mojo drive and you're able to
+ copy any things that you want to to it sort of from the host side it looks just
+ like a regular drive they also provide a cool synchronization utility that
+ allows you and offers to just sort of like move your whole documents and
+ setting tree over so that all all of your settings and your your whole my
+ documents group are are moved over so so that's very it makes very easy to to
+ synchronize and and and to set things up over there one of the things you cannot
+ do is and this is the one of the most often requested things that they are
+ never going to address is you cannot simply move pre-installed applications
+ from your host machine into the mojo environment and and this is deliberate
+ on their part also it's very difficult to do as we know because it's it's very
+ difficult to move and an already installed app to you know anywhere because
+ apps can do so much to the system when they install themselves but these guys
+ recognize that they have in in do in creating this notion of mobile applications
+ they've really turned the license the software licensing model upside down I
+ mean on its head because if you look at the yulas the end user license
+ agreements in virtually anything you install it says this is for use on one
+ single computer now I talked to them about this explicitly and they said well
+ you know actually we looked at a lot of yulas many of them say on to you can do
+ two installs because they want to be laptop friendly they want to allow
+ people to install on their main workstation and also on a laptop I'm gonna
+ give them the benefit of the doubt on that the the yulas I have seen tend to
+ say only use this on one machine so inherently you're this is a multi machine
+ install you are installing the application that the yula says you can only run in
+ one location you're installing it on an inherently portable device you know my
+ feeling is you make one installation of the app you you are carrying it around
+ you're the only one using it I would say even though it might be outside the
+ letter of what the yula was written to say the yula wasn't written with mojo in
+ mind so you know I wouldn't consider that a big breach of the publisher's
+ license however this is why the mojo pack guys want to be very clear that when
+ you when you install mojo pack from the start basically you you you start off
+ with it what looks like an empty windows system it uses windows profiles they
+ basically it creates a mobile user profile on the mojo pack device and you
+ end up looking at you know a virgin windows desktop with a start button and
+ nothing in the programs group and you must then manually reinstall any things
+ from scratch that you want to have on your mojo pack and be portable the the
+ mojo pack guys feel that this this deals with the the upside-down nature of
+ portable licensing in a good way because basically they're saying users are being
+ given their responsibility of installing or reinstalling existing
+ applications if they want them to be portable rather than for example mojo
+ pack just cloning them somehow into this portable device which they're
+ explicitly not willing to do so so you know that's sort of the gist of this
+ thing it's a it's a small download it's only about a nine meg download it's not
+ currently digitally signed which is a point I brought up to them and they said
+ yes we know that we're gonna fix that because of course now my windows and
+ certainly Internet Explorer is becoming increasingly reactionary to the idea of
+ not having digitally you know took of users running non-signed things that
+ they've just downloaded from the internet you get all kinds of unknown
+ publishers and are you really sure you want to do this kinds of messages it it's
+ it's it's a the the release price was basically half price 24 99 it is going up
+ to 49 99 that is to say $50 in just three weeks I think that's a mistake on
+ Thursday exactly three weeks from today Leo Thursday November 16th the the
+ registered price of mojo pack doubles up to $50 I really I really think they
+ should given that that they've still got so many little bits of debris to work
+ out my advice would be what's the hurry you know extend this special offer time
+ another couple months especially since they had a bunch of problems when they
+ came out of the gate you know taking it out of beta I really think this is a
+ much too narrow window I guess it's really only been about a one-month window
+ before they jumped the price up as I understand it their venture finance so
+ they shouldn't have cash flow problems and I really I mean I would encourage
+ people to play with this the way the way it works without registration is you
+ get 30 days of use or 200 boots and they doubled that number of boots recently
+ because people were running dry well before their 30 days were up they only
+ had a hundred boots before that is actually a hundred stick the mojo packs
+ in a computer is what's called a boot and so you know I've already used up 15
+ of mine just moving it around in a couple days you know playing with it so so if
+ people think this might be something they're interested in in messing with
+ you've got three weeks before the price doubles the other good news is you know
+ I'm very sensitive to things impacting my system you know I I didn't like
+ installing you know VMware on test machines or or like messing with with
+ virtual PC and these other things because I mean these like these these
+ quacked your machine mojo pack doesn't as far as I can see it makes zero change
+ to the machine on which you download their XC and on and where you install
+ mojo pack and and and that's all part of their philosophy when you when you
+ shut down mojo pack and remove it from a machine their dynamic device driver
+ unloads the machine that that that host where you were temper that you were
+ temporarily visiting and basically using its its resources its network and
+ processing and screen and other resources it ends up not knowing anything
+ has happened and and that's the magic of their kernel level hooks the the apps
+ running in mojo pack see a c drive but they the c drive is the actual mojo pack
+ device remapped to see and and the the actual host c drive is not available it
+ is inaccessible so there's no changes be made to the registry there's no debris
+ left behind no browser settings no no trail of URLs you visited nothing
+ changes on the host and so so from from us from a security standpoint that you
+ know this is one of the main advantages that they were going for and this is
+ unique among these other solutions we know for example their sandboxy and there
+ are you know full robust VM solutions but any VM solution is inherently going
+ to seriously sit on the machine you install it on so in that in that in that
+ in that sense mojo pack is very lightweight it's I mean and I have to
+ say I mean I like it I would encourage people not to be put off by you know
+ their list of knowledge base yes we know we have these problems I mean I found
+ some myself I right-clicking on network neighborhood which is now renamed my
+ network places under XP nothing comes up I right click and do properties I can't
+ get properties I thought okay well you know what's going on so I clicked the
+ mojo bar at the top instantly switched back to the host right clicked on mine
+ my I forgot what it's called now network neighborhood or or my network
+ things and and the dioli network things is good I like that I recommend that for
+ this day yeah and you know and and everything was as I remembered it back
+ over to mojo and that just doesn't work yeah so I was like okay add that to the
+ list so so the point is what they're doing is something windows was never
+ designed to have done to it and and frankly if this is such a cool idea we
+ it's as long as we sort of tolerate the the question of mobile licenses which is
+ still a little bit up in the air in my opinion but the idea is so cool you can
+ imagine that in some future version of Windows that you know this won't be
+ something Windows fights it'll be something Microsoft acquires much as
+ Microsoft finally added a personal firewall to XP you know several years
+ after everybody else had had gotten bloodied on the battlefield developing
+ the technology I could easily imagine that this kind of portable application
+ stuff is so cool that it ends up ultimately you know generations from now
+ appearing in Windows but it's available today I might just point out that the
+ apples had this for about 10 years but okay thank you Lee actually it's not
+ that's really not fair in fact they may even exist for Windows but Apple
+ networking can be set up so that no matter where you are in the network when
+ you log into your network it's your desktop your preferences your applications
+ okay well now Windows has that too it's called a roaming profile roaming profile
+ right so yes and so this is not quite that but this is this is allows you to do
+ kind of a roaming profile right well this is way more than that because the
+ roaming profile doesn't provide you any of the encaps of the encapsulation that
+ mojo pack does I mean I mean remember you could literally install Firefox they've
+ got problems with IE 7 right now I may be wrong when I think the Apple one does
+ do that but I may be wrong provides real security encapsulate yeah basically
+ everything's all kind of packaged up well okay but I guess I don't know that's a
+ good question I don't know no access to the host because because you know oh I
+ see what you're saying no I think you probably would access the host I think
+ it's probably all living on the host yes and so so that's my point is it that
+ what I see you're taking it with you it's completely portable right well but
+ but not only portable and again I want to make sure we make this point it's it's
+ encapsulated that is to say when when you install your mojo pack device into
+ the machine it brings up the mojo pack desktop into which you log in and you
+ have no access to the normal hosts resources you cannot get to the hard
+ drive you cannot get to you you're able to access removable media you can see
+ the host CD ROM and and and DVD and other USB devices but but basically you're
+ only able to see those things which the mojo pack guys allow you to see it's
+ also important to note that you do have to be logged in as an admin user a full
+ strength user on the host they they have provisions which they will be making
+ available to universities because they you could imagine in a university setting
+ all the university students could have mojo pack you know dongles and dongles
+ around their neck and they go to to bolted down limited user XP systems stick
+ in their dongle and now they've got access to you know their own and their
+ own portable environment and so there is a way that a lit that mojo pack can
+ run as an admin user on top of a limited user host but that's not the normal
+ retail version that's not what people can buy right now right now you do have
+ the host that you that you that you that you stick your mojo pack into needs to
+ be running as an admin in order for mojo pack to install itself and and make
+ itself go because again it's it's installing a dynamic very low level
+ kernel driver in order to perform all of this all these modifications to
+ windows it's all it's also worth noting that there are sort of two profiles that
+ have sort of surfaced for mojo pack users the the people at ringcube who did
+ mojo pack all literally use mojo pack as their single environment they use
+ small USB to hard drives as opposed to solid state drives and they have installed
+ all of the applications they use I mean basically their entire PC is installed
+ in a mojo pack drive and so what what they have when they come to work is
+ literally an empty windows XP machine it's just it got a generic install it's
+ sitting there with nothing on it they they come to work in the morning plug
+ their drive-in bang they're looking at their desktop exactly as they left it at
+ home because they've done the same thing at home they've got a generic windows
+ XP install at home and when they come back from work they plug their drive in
+ and their whole environment is portable and has moved with them including all
+ the applications that they have installed so so you have this sort of this this
+ high-end whole environment portability user where you where for example the
+ sub the the relatively limited size of a USB dongle which is you know practically
+ you know 4 gig maybe 8 gig today and the somewhat lower performance of a
+ flash ROM device may not be enough for that kind of a user so you use a small
+ lightweight you know portable USB drive then you've got somebody like I was
+ pretending to be a couple days ago where I mean I I really wanted something in my
+ pocket or on my keychain and that's entirely practical the there have been
+ some postings on the net about slow performance problems with with mojo
+ pack I don't see that at all as far as I could see I mean I was using a good
+ SanDisk 512k high-speed USB device but but I've downloaded 3500 news group
+ messages just as fast as I would have it on a regular PC they claim about a 5
+ percent overhead of their of their system which is very low for this kind of
+ work but it's really not doing much it's just filtering at the kernel API in
+ order to sort of mutate the windows environment in order to mojo pack eyes
+ the the host machine to hide the hard drive to allow you to get access to the
+ networking layers and and so forth and basically to provide this mojo pack
+ desktop another example of sort of the cluge-ness of this is if a personal
+ firewall pops up a message it pops up on the underlying host desktop and you
+ can't see it so to get around this the mojo pack guys are watching for anything
+ popping up on the desktop underneath and then we'll provide you with a notice
+ that something has popped up on the host desktop which which requires you to
+ click the mojo bar flip over to the host and see what's going on one of the
+ other irata is that if a personal firewall blocks something that you're
+ doing in the mojo environment you may need to go back to the host and to permit
+ the application which is running on mojo to go through I mean again these are
+ these are consequences of the fact that windows was never designed to have this
+ done it's a testament the fact that these guys are able to do it all is a
+ testament to their courage and fortitude and and you know the fact that they had
+ a really cool idea which I'm sure is going to be evolving and improving and
+ getting better over time as they work out all of these sorts of you know dust and
+ debris much as I remember personal firewalls being in the beginning and now
+ they're much more solid so again I I don't want to put people off neither do I
+ want to oversell this my and the reason I think that that this evaluation period
+ is critical is people ought to give it a try it is you know everyone who sees it
+ says whoa this is so cool I mean and I feel that way too if I were if my life
+ were such that I was ever away from here and I wanted to carry an executable
+ windows environment with me and I knew that there would be there would be
+ host there would be available admin privileged windows XP machines wherever
+ I was going to need to do something and I'm carrying all my data I mean it is a
+ it is a really a cool solution and it works but it can be quirky for specific
+ things so you'd want to make sure for example if you were someone who needed to
+ use Adobe Acrobat's PDF creation capabilities that's just not working
+ under mojo pack today because it's it's something that you could imagine they
+ could be able probably get around to dealing with at some point thus my
+ sense is that this is going to keep getting better and better also relative
+ to licensing you've got this this 30 days or 200 boots and then you've got a
+ buy it and don't forget that from the time people are hearing this there's a
+ three-week window during which buying it is 2499 versus twice the price at
+ $49.99 so keep that in mind too once you have bought it there is the
+ ability to to migrate your mojo pack from one device to another they only run
+ on USB 2-0 because USB 2-0 spec requires a unique serial number on every device
+ so they're locking their license to it when you download this 9-meg mojo pack
+ install and then do your install you create an account over on the mojo pack
+ site a username and password on the mojo pack site and you use that that same
+ username and password in order to subsequently access your device although
+ you're able to change the password and I think they they prompt you to change the
+ password the very first time you you use this so so you've you've installed one
+ instance of mojo pack on one device if you outgrow that or you decide you want
+ to try a faster USB or you want to move over to a hard drive or do whatever you
+ want to they provide the facility for de-registering the current mojo pack
+ install and copying it over to another device and re-registering it there so
+ you are able to migrate your your purchased mojo pack to USB devices
+ virtually unlimited I think there actually is a a high limit because they
+ do want to prevent fraud you know some style of fraud from occurring but
+ basically it would never be something that would impede mojo packs users I
+ think though I mean it's something that really should be done at the operating
+ system level it just doesn't seem like an independent software vendor has a
+ chance of making this thing work I mean Microsoft changes one thing the whole
+ thing collapses well the that level of kernel API is pretty stable I ask them
+ about about Vista because of course Vista as we know is very hostile to
+ anyone mucking around down in its innards and they claim that they have it
+ running on I'm sure that the 32 bit beta interesting I think I think it's
+ running under RC 2 and again the the kernel API is a well documented well
+ structured well understood API all right so this is an accepted thing to do yes
+ well it's you know it I don't know what they're gonna do under the 64 bit version
+ of Vista in this in the same way that McAfee and Symantec are frozen out from
+ from going in and mucking around I have to imagine that mojo pack would would be
+ similarly prohibited until until as Microsoft has said with service pack one
+ of Vista's the 64 bit Vista then they will provide an API but that's apparently
+ only a monitoring API that's probably enough for Symantec and McAfee it may
+ not be enough so it may be I mean this is again this is another example of why
+ reluctant as I am to call this occluge that's the word for it because they just
+ may never be able to do this under the 64 bit version of Vista because Vista
+ won't let you go in and do this because again as I said it's its root kit ish
+ behavior and Vista 64 bit is specifically anti-root kit right but but
+ Leo really I mean you ought to try it I I'm encouraging people with all these
+ caveats I'm so reluctant to try it Steve how do you get this thing off your
+ system do you think it installs cleanly no no it's never on your never on your
+ system no that's what's so nice is you you download the nine mags you you you
+ give it a a USB device now they they suggest wait a minute it only
+ modifies your system in memory on the fly it never changes your operating system
+ correct it doesn't change the OS you originally install it you install the
+ mojo pack onto nor does it ever change anything about a guest operating system
+ I mean I mean that part I'm really clear about and it's why again it's it's you
+ know I know I've been I've I've thrown up all these caveats but it actually does
+ work if it doesn't if it doesn't modify my system well of course I'll try it why
+ not yeah well and as I said you know installing VMware is a horrifying thing
+ I mean it it creates virtual adapters it's just it's got stuff running
+ constantly in the background it's got services running it's all this stuff you
+ know VMware doesn't mojo pack does not do this it is it nothing on the system
+ where I originally installed it I mean nothing was even installed there it the
+ the little 9 meg installer just found my USB device asked me to choose which one
+ I wanted to install it to and it moved itself over there nothing changed on my
+ host system then when you install it and you plug it into guest systems it it
+ just dynamically loads this driver in RAM nothing is written to the hard drive
+ your your mojo view has no access to it to the registry to the hard drive or
+ anything so that anything you do is encapsulated and you there's nothing to
+ uninstall because it's never installed I mean it it is again I I think these guys
+ are in you know the first phase of a very cool thing and then a year from now
+ two years from now we're gonna look back at this you know at episode 63 if
+ security now and go well you know we were right this thing had all kinds of
+ wacky behavior I'm gonna I'm gonna make a deal they're gonna say Steve was right
+ Leo was full of it cuz I don't think this is ever gonna happen and I think
+ really if it does it should it should happen at the operating system level but
+ all right if you think no no now Leo I'm not saying I disagree with you except
+ we don't have it available well Microsoft's not doing it yeah Microsoft's not
+ doing it and it's gonna take them generations you know VISTAs already
+ done so it's not gonna be in VISTA this is not something I could see them adding
+ in a service pack so it's gonna have to be in WISTA or whatever whatever comes
+ after VISTA and that's gonna be a long time right so you know no one should hold
+ out hope for for this I understand that I understand that but I agree with you
+ I mean in the same way that I think a personal firewall should be in the OS
+ because you know that's the right place for it you know there's notion of
+ application portability installing normal hard disk targeted apps in a
+ portable device this is a cool thing when people see this this is cool I mean
+ and the mojo pack guys have have done as I said they they had a lot of guts and
+ they've tackled something which is fundamentally hostile to windows but
+ they're making it work and so again because it's a small download you get
+ 30 days to play with it it won't screw up your system it won't modify any guest
+ systems and it does allow you to have to take normal regular non special windows
+ applications and run them on a portable device and then it's really portable
+ and it creates privacy and security encapsulation for for what you're doing
+ on the mojo pack as they as I think I heard them say well we were talking the
+ phone you know what happens in mojo pack stays in mojo pack I mean it is it is
+ very cool it's just it was a huge challenge to do this I I give props as
+ hackers absolutely I give props absolutely I salute them and and tip my
+ hat I mean this is this is a very valuable thing that that you know and I'm I'm
+ I'm feeling again 50 bucks seems like a lot of money on the other hand I'm
+ charging 89 for my for my software so who might have talked but but it does
+ allow you to move around your your purchased mojo pack from from device to
+ device they they they suggest and this is all in the read me file that I did I
+ do encourage people to read they suggest for example that if you can you
+ reformat your dongle to ntfs rather than the default which will be a fat or fat
+ 32 file system obviously people who are using an iPod can't they're not able to
+ reformat they're gonna have to leave it in its default fat format because they
+ still want to be able to use their iPod you know on on a Mac I guess or on you
+ know in the way they normally do so they're not able to to change that to
+ ntfs but if you did have a standalone drive or a USB device which you're
+ able to use with ntfs they're just saying security is better and and it is
+ faster than fat oh and I forgot to mention that something that they did
+ broke compatibility with true crypt I was oh boy now slow down slow down I was
+ concerned about that so I asked them they they recognize they broke it they've
+ come up with a temporary workaround that allows true crypt to be used and the
+ next release will be completely true crypt friendly so our favorite ultra
+ robust security tool can also be used with mojo pack in order to to allow a
+ true crypt volume to be carried and to have to and where true crypt is running
+ on mojo pack no longer do you need to install true crypt on the target system
+ so that's even better than running true crypt by itself because if you had true
+ cryptid a dongle or a drive you would need to install true crypt on the host
+ machine in order to then have active portable access here true crypt is
+ running in mojo pack giving you access to your to your true crypt partition or
+ directories so I mean in some sense it's even better than then true crypt without
+ mojo pack and these I mean they're committed to the issue of security and
+ privacy so they're going to make it work and even better than it does now and it
+ does work now although you you need to do some work around you might I mean if
+ all you really need is email and browsing you there there are USB versions of
+ Firefox and a Thunderbird and so forth that you carry on a USB key it keeps all
+ your stuff on the key it doesn't have the same kind of encapsulation you're
+ talking about but you can't you can do that well that's absolutely true and in
+ fact you three which we'll be talking about in the future it is a is a specific
+ platform for running things from flash there are you know the the real advantage
+ of mojo pack is encapsulation because Firefox won't give you this kind of
+ robust encapsulation if you did get something a virus or something in
+ Firefox running from a dongle it would still have access to your seed drive and
+ and so again I mean there are there real benefits to what the mojo pack
+ guys have done that as far as I know are unique it's true that if you were
+ carrying a virtual machine around in your dongle and you knew that you had
+ VMware or parallels installed in any host machine you could simply launch
+ your VM and then operate but that requires a serious hit to the the
+ hosting platform mojo pack doesn't hit the hosting platform at all is flash
+ fast enough to do this I mean you you're running stuff and not off the hard drive
+ but off the flash well you are but the way windows operates first of all flash
+ reads at about twice the speed that it writes another concern is that flash has
+ a right limit there the actual the actual chemical technology of the
+ non volatility of a flash has a maximum of about a hundred thousand right
+ cycles so for example people who who arrange like flash booting Linux systems
+ I in fact my I have myself a flash booting free BSD system that I built I had to
+ go to to some links to not have a swapping partition on the flash and in
+ fact to make sure that I was excuse me that I was mounting my flash partitions
+ in read only mode so that the system would be logging to ram and not to flash
+ because you you never want a situation where you're right where by default you're
+ writing often and hard to your to your flash because it will end of life that
+ device very quickly now Mark Thompson actually did some experiments where he
+ burned out a flash in a couple of days wow just by booting a standard Windows
+ system and Windows just thrashed the thing and and and killed it and well
+ is now that flash is at least fairly cheap so you know you you might use it
+ for six months and have to buy a new one well I asked this question of the
+ mojo pack guys they've been using mojo pack for six months many of them on
+ flash devices and naturally they've been testing it and pounding on it and using
+ it like crazy not a single one of theirs has ever died I would I would
+ encourage people not to use bargain basement you know cash register oh here's
+ a $15 you know half a gig flash that you can get at the checkout stand by all
+ means stay with with you know Lexar or Sandisk or or a high-end is there really
+ a difference I really think there is yeah I mean certainly certainly in
+ performance too because in order to get accelerator performance what they're
+ doing is they're they're writing in parallel to many more flash devices inside
+ in order to get multiple multiples of right speed and there's also something
+ called right leveling which expensive flash has and cheapo flash doesn't what
+ right leveling does is it actually distributes the rights so that even
+ though you appear to be writing to the same logical location in the flash it's
+ actually the flash itself is writing and it's doing sort of the equivalent of
+ sector swapping on a hard drive it's actually writing to other physical areas
+ which are then read back from that area in sort of in a content addressable
+ scenario so the idea is it it it means that if you were only using part of
+ your flash and like you know recording pictures deleting them recording them
+ deleting them recording deleting them and like never filling up your flash if on
+ a normal fat file system that would end up burning out the front of the file
+ system way before way before the end you never read the end exactly yeah it's
+ so so so so basically you end up killing this thing way before you need to but
+ the the higher quality flash has right leveling built-in and it's
+ automatically distributing those rights across the entire physical surface of
+ the drive so it's really worth doing that these of course are not problems
+ for for an actual little USB 2o hard drive those little drives you can get
+ yeah now one of the thing they recommend that that is mojo pack recommends is
+ that you that the first time if you're concerned about performance or if it
+ seems sluggish I saw no sluggishness at all in my case I mean literally I'm I'm
+ totally happy using this thing for for like mail web browsing new new news
+ groups for example in and with a news reader in particular you really want to
+ carry your whole environment around because it's all the messages that you've
+ already read and all the messages that have occurred so that so that
+ conversation threading works correctly so there I mean it's just it's not the
+ same as going and doing like a web-based read of a forum where it is all being
+ kept over on the server side but I mean I'm I was completely happy with the
+ performance of this thing however by default Microsoft Windows turns off
+ right caching for USB devices the reason is if someone yanked it out of the
+ of the connection you might well have what's called a dirty cache in Windows
+ where it has been deliberately buffering rights so as not to
+ redundantly write to the device and also so as not to not to incur the
+ performance penalty of doing so so so what happens is Windows realizes this is
+ a USB device and it will turn off right caching you can go in to you know right
+ click on my computer go to manage go go to the find find the USB device select
+ the properties of it and they explain this in the mojo read me exactly what
+ the path of clicks is to get there and then you do you deliberately turn on
+ delayed writing that that means you need to shut down mojo pack through the UI
+ and not just yank it out but of course most users know now they really ought to
+ do a smooth shut down of a USB drive anyway really I'm oh yeah I didn't know
+ that I thought Windows just kind of you know it handled it so I just pulled it
+ out well it's on under Windows 2000 you have to do it but under you don't well
+ no and the reason you don't is Windows is still trying to flush it however if
+ you've ever done a large file copy even under XP it the file copy dialog will
+ finish and if you've got a light showing access to the device it'll sit there
+ and flash sometimes for 30 minutes because because Windows is it has flushed
+ everything out of its out of its upper UI level but the kernel is still trying
+ to write to an inherently slow writeable device which is what USB flash is so you
+ really need to wait and what you should do is right click on the on the drive
+ appearance in Explorer and and then select eject and wait for the eject to
+ complete and then it's safe to remove so so anyway my point is that if another
+ sort of a power user trick is you could disable or rather enable write caching
+ which is not the default setting for a USB a USB portable device because Microsoft
+ wants to keep the caches flushed and keep the drive current in case somebody
+ yanks it out without shutting it down I actually didn't bother with that and I
+ just saw no performance penalty I'm I'm really pleased with this so again I I
+ want to make sure people understand this is you know version 1.0 actually it's
+ 1.0.1 at the moment we I believe this thing has a future I think people are
+ right to be excited about it and it it it offers a lot of features the only
+ caveat being you know Windows wasn't designed this way and so these guys
+ have had to do deep hooks into the kernel in order to pull this off but I
+ think for most people they have and it'll only be some people who have problems
+ so again use that 30-day eval or your 200 boots you know as quickly as you can
+ within that period figure out of the things that you think you want to do
+ work without any trouble and if so you know then I think it's a great solution
+ for you very good I mean obviously these guys are filling a perceived need
+ there's no question about that and they're amazing hackers and since it
+ doesn't in any way impinge on your system why not try it why not give it a
+ shot yeah again it it's small and lightweight doesn't affect your system
+ and it's you know seeing it work is to believe it Leo your attitude I mean my
+ attitude change well I've tried it I mean I have seen it work okay yeah we
+ try to call for help actually Cali demonstrated it and it was impressive I
+ just it just makes me nervous m-o-j-o-p-a-c dot common as Steve said you can try
+ it for free you know we've been talking about a free trial version of a spin
+ right for some time I think you've really got to try that I don't know how I would
+ do that as I said to you before Leo you know we we offer it with a complete
+ money back guarantee I think that's the best way to do it well and and because
+ the fact is the first time you use it you you get tremendous benefit from it's
+ not an apple it's not a productivity application like word or or something
+ else where it's like okay do I really want to keep using it after 30 days I
+ in fact I we received a nice note from a security now listener just this week
+ he said I just wanted to give you some more feedback on spin right I've been
+ listening to security now since some of the earliest episodes and I've been
+ thinking about getting a copy of spin right well I had just the right
+ opportunity this past weekend a friend's computer started refusing to boot into
+ Windows XP and I took a good look at it and found the Max door hard drive was
+ going bad very bad oh he had over eight gigs of digital photos on it that he
+ absolutely did not want to lose and I was having very little luck trying to
+ copy the files off of it so I got a copy of spin right and ran it get this for
+ two and a half days oh my I see I think sometimes you will give up because they
+ don't realize it could take that long well he says he ran it for two and a half
+ day straight until we had a power outage oh no it's like okay he said after that I
+ decided to see what I could recover and I was able to easily recover all the
+ photos it was great so do you mean a handle a power outage like that I mean
+ it fails gracefully like that it fails gracefully that was something that was
+ tested extensively back in the spin right 1.0 days and you know I put in the
+ technology to make it do the right thing and you know two and a half days is
+ extreme you know many people talk about it running on 250 gig drives in a few
+ hours which it's certainly able to do but you know what happens is I mean
+ spin right is really doing hard work you had to do a lot on that drive and when
+ you compare this to taking the drive out and sending it somewhere right two and
+ two and a half days is much less time than waiting multiple weeks to have some
+ data recovery company fix it for you for way more than eighty nine dollars very
+ impressive s p i n r i t e it's a g r c dot com and if you want to see more
+ testimonials it's spin right dot info and of course g r c dot coms a place to go
+ for 16 kilobyte versions of this for the bandwidth challenged also Elaine's
+ great transcriptions she does those just for you because I know sometimes it's
+ hard to follow but you can read along as you listen again g r c dot com visit
+ twit dot TV we have an episode guide going back just as Steve does going back
+ all the way to the very first episode so you can see what you've missed and and
+ a lot of people download these shows much later I think it's the kind of thing
+ people collect and they want the whole set I I get postings from people all the
+ time saying that they just discovered us and they've been listening to all the
+ back episodes so I'm not really happy that we have that I know it's a good
+ thing it's absolutely a good thing to have if you like security now you might
+ like a Windows weekly it's another podcast this time about Windows with Paul
+ Therat very similar style Paul is a great Windows expert and we talk about
+ not not specifically security but just Windows Vista and Microsoft and what
+ they're up to and of course it's getting very interesting right now that's also
+ available at twit dot TV your support is much appreciated you know we've had
+ advertising for some time but as the advertising came on the show the
+ donations dwindled that's kind of bad news because frankly the donations pay
+ for the infrastructure the advertising only pays salaries so your two dollars
+ a month if you like somebody somebody asked me well I like this show but I
+ don't like that show can I just donate to this show yeah just you know put in
+ your note when you when you donate the two dollars say it's for Steve that's
+ fine and I'll I'll make sure that it only pays for the bandwidth that Steve
+ uses for something I think I use a lot of bandwidth I think you do I think you
+ do we do thank the great folks at Astaro who've been a sponsor for so long
+ really they were they came to us and said we love what you're doing we want to
+ support Steve and we'd like to become a kind of the flagship sponsor they make
+ the Astaro security gateway and I think that's a marriage made in heaven for
+ security now if you're a small or medium business network you need superior
+ protection from spam from viruses from hackers complete VPN capabilities and
+ intrusion protection content filtering and industrial strength firewall all in a
+ very easy to use single high-performance appliance you want to try out the
+ Astaro gateway contact ASTRO.com or call 877 the number four ASTRO you can
+ schedule an absolutely free trial of the Astaro security gateway in your
+ business and and then for non-business users you can download the software put
+ it on an old machine you can even subscribe to all of the things like the
+ anti-spam and any virus if you if you choose to it really is a great great deal
+ ASTRO.com also thanks to Dell for their sponsorship with the show we have more
+ Dell's picks on our special Leo's picks page it's twit.tv/dell somebody
+ sent me a note saying Leo why do you refer to yourself in the third person
+ like that well it's just what it's called the Leo's picks page they are my
+ picks Dell is at the twit.tv/dell and anytime you buy a computer from Dell if
+ you go through there we get credits so we'd appreciate it Steve next week we are
+ going to do questions and answers episode 64 one of my favorite numbers
+ being that it's a power of two as well oh yeah you know what if I keep when my
+ kid my son was like six or seven he said listen daddy two four eight sixteen
+ thirty two sixty four hundred twenty eight two hundred fifty six one thousand
+ twenty four five twelve one thousand and I went wow how do you Henry you're gonna
+ be good at computers he said oh yeah he goes all the way up to he was at that
+ time going to four thousand ninety six I'm I was impressed I thought this guy's
+ got a binary brain he's only shown aptitude as so far for a YouTube videos
+ though so I don't know maybe it was just you know just for just to entertain
+ myself Leo I used to practice seeing how far up I can go really it's pretty
+ scary how high do you can you get up to four million it gets a little four
+ billion it gets a little tough after that I had it why had it memorized up to
+ like 10 or 11 places I think I mean decimal digits just you know it's like
+ so you know some people memorize pie I memorize powers of two so maybe he's a
+ little budding Steve Gibson we thank you for joining us we'll see you next
+ Thursday and every Thursday on toot.tv for securing us see you Steve see you

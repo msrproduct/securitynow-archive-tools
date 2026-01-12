@@ -1,0 +1,388 @@
+ This is Twitch.
+ Bandwidth for Security Now is provided by AOL Radio at aol.com/podcasting.
+ This is Security Now with Steve Gibson, Episode 93 from May 24, 2007.
+ Software patents.
+ Security Now is brought to you by Astarro, makers of the Astarro Security Gateway on the web at www.astarro.com.
+ And by NERDS on site, looking to grow your IT service business, find out how NERDS on site can help visit, IWANNABEANNERD.com.
+ Time to take a look at security with our good friend Steve Gibson, the security guru.
+ From his fortress, his lair, his shielded mants in beautiful Irvine, California. Hello Steve.
+ Hello, Leo. Great to be back with you. And did we break 50 million?
+ Oh, yes. In fact, I meant to tell you, something happened about four weeks ago that another person in our news group pointed out, because there's a chart on the 12th original page of Shields Up, which shows how many unique IPs we encountered every day.
+ And someone somewhere must have written an article or something significant about Shields Up, because we've been about double the normal rate of uses, and it just blasted us through the 50 million marks.
+ And I don't feel my first thing was I was a little suspicious of, well, could that be some automated thing, which is, you know, pumping the numbers up, except that there is a weekly, a standard weekly cycle of activity where you can see it.
+ It's a seven day period, as people are, I don't know, I think they're busier on Mondays, and it's like in the beginning of the week we're busier and less so as the week goes on.
+ It's a simplified the size of that sine wave of weekly cycle. So it looks like these are really valid uses of Shields Up that something happened somewhere where it got a lot of extra attention and it seems to be sustaining.
+ So couldn't have any to do with the fact that you're peering on the radio show talking about Shields Up, couldn't.
+ Saturday or Sunday as a go up on the weekend. No, I don't, I don't, I never really actually looked to figure out which was the peak days. So I'm not sure that's, that would be really interesting.
+ Congratulations on your 50 millions. Thank you. 50 million systems tested by Shields Up, GRC.com. Whenever I get a new router firewall, that's what I try. It's absolutely free. It's Marvy.
+ Well, it's quick and easy. I think that's probably one of the nicest things about it is it's entirely client side. You don't have to load anything on your computer. You just go there and visit it with your browser and just gives you a real quick thumbs up.
+ In fact, I got a, I had an interesting dialogue with a writer, a tech writer for the paper in Houston who said that Apple's airport was not giving him stealth. It was, it was showing closed ports and he had, he had had a conversation with Apple and they said, yes, well, there are, you know, our airports work that way and we don't think it's a problem.
+ He talked to Bruce, Bruce Schneier and Bruce said, you know, as long as you don't have things open, it probably doesn't matter. And, and he said, so, you know, what do you think? And, and I said, well, what's interesting is that Apple's own firewall has a stealth option.
+ So, you know, you can tell Apple's firewall not to return any packets in response to something coming in. Don't, don't declare that you're even there at that IP. I said, so it seems interesting to me that Apple would take the trouble to put that in their own.
+ And I'm clearly seeing some value there, but not offer the same sort of opportunity in their airport router. So I said, you know, and I don't disagree with Bruce. I said, but it's so simple for a router to be stealth full, even though it's a technical breach of the RFCs.
+ Oh, it is. Yeah. The formal specification says that a packet arriving at a closed port should return a reset in response to a sin to say, I'm here, but this port is closed.
+ Thank you. Anyway, and the reason is a stealth port will receive four sin packets, because the, the, the, the stack, the TCP stack at the, at the sending end will send a packet, a sin packet, and it will wait.
+ Typically two seconds, then it will send another one and wait four seconds, send another one and wait eight seconds, send another one and wait 16, except that my math didn't work right because it ends up taking.
+ Oh, no, maybe the atom all up, but not not even then, but it ends up taking like 45 seconds to for a, a TCP stack to say, I'm unable to open a connection, because it will try four or five times.
+ And, and it, it exponentially scales the period of time it's waiting each time.
+ So the nice thing about sending a reset back is that you affirmatively say, I got your sin, I'm closed.
+ And that, and so, so it does make sense. Yeah. Yes, it saves time. It cleans up the net a little bit. You're not having these, these redundant sins.
+ Go away. I'm not here. But your point is that if you say that, you're telling a hacker, you are there. You're just not open for business.
+ Yes. And so, so the point I made to this, this guy in, in Houston was, you know, I'm not here to preach stealthfulness, although it's so simple to do that.
+ I mean, it's just, it's so simple not to respond that if you, if you just gave a switch where you asked a user, would you rather that someone could see that you're there?
+ But closed for business or that, or believe that, you know, you've unplugged your router and you're not there at all.
+ Almost any user I can imagine would say, I just read soon, not be here at all.
+ So, you know, it's simple. So it's like, okay, I can't speak to why Apple's not doing it, but I sure do know that all the, you know, typical commercial non-Apple routers certainly allow you to do that.
+ I mean, it's something that they promote. And it's funny because he said, do you think you're responsible for that? I said, Oh, as a matter of fact, I'm pretty sure I am.
+ It might be, I don't think it might even, though you coined the term stealth, didn't you?
+ I did coined the term stealth because, of course, the whole, the whole thing being a tricky myself, the whole obviously shields up comes from, you know, raise our shields.
+ Right. And, and so when I was trying to think of, okay, we have open and closed ports. What would it be if a port didn't respond at all?
+ And of course, so, you know, the, the cloaking, the cloaking generator that the Romulans always had, you know, you, you were stealth.
+ So, and in fact, there were some notes on Lynxis and Netgear routers where they were talking about, I remember seeing some, some firmware change notes where they said fixes a problem with router not being fully stealthed for shields up.
+ Oh, wow.
+ Yeah, I guess that's somebody's paying attention. Well, because, you know, the end users complain to their router maker. It's like, Hey, I'm not completely stealth on shields up, you know, got to fix that.
+ And it's funny too, because there have been firmware bugs where suddenly random ports stopped being stealth full and shields up caught it.
+ And then the router manufacturers were told by their customers. So there's a nice sort of closed loop feedback system in place too, that where, where shields up ends up getting used to find problems and routers, the customers and report and the firmware gets updated.
+ So it's a little nice ecosystem we have.
+ We're going to be talking this week about software patents and just a little bit. We'll also get to our ratta of the week. But first, let me just mention as long as we're talking about ports and shields and so forth that the best way to secure yourself these days, of course, is with an
+ tomorrow security gateway. Is it stealth? You bet it's stealth in every way possible. It's more than just a firewall though, the historic security gateway comprises the mix of best of breed open source and commercial software covering just about every aspect of security, including
+ email security, anti spam, anti-fishing, dual virus protection for email, transparent encryption at the server side. So your clients, your customers, your seats, whatever you call them in the IT business, don't have to worry about encryption or decryption.
+ It's handled for them automatically. It does web filtering, content filtering and antivirus filtering, anti spyware, even controls instant messaging peer to peer and network protection to like a firewall, remote access and VPN. And by the way, the new SSL VPN version seven is so slick.
+ And intrusion protection to it is at a really all in one amazing unit. And you could try it in your business absolutely free by calling a star. Oh, call 877 the number for a star. Oh, 877 for a star to schedule a free trial in your business.
+ Right now, or you can go online at www dot A S T A R O dot common non commercial users to find a free version of the star security gateway that they can install on a beige box any old computer they got lying around and you even get it now.
+ This is part of the new V seven base license all subscriptions in a star update. So you get all of that used to cost 79 euros absolutely free A S T A R O dot, comma, great company, great security guys and we're proud to say a sponsor of security now for over a year now.
+ So let's say should we handle some Rata.
+ Well, I got a couple. Well, actually, just one little thing and I had we never made mistakes, of course, I had a fun little anecdote.
+ Again, a little bit of spin right in fact, even this errata is spin right. You may remember that a couple weeks ago.
+ I read a note from a neat 12 year old computer guy, Justin Gerard, who told us how, yes, his computer went wonky.
+ And he called someone from the geek squad, which is are the best by people who came out and ran spin right on his on his machine in order to fix it.
+ And that was really cool, except I made unfortunately the observation that, well, the correct observation that they don't have any permission to run spin right there.
+ We do have an enterprise class license that they could get, you know, and like our nerds on site guys have an agreement with me that allows them to use spin right formally and officially in all their customers computers.
+ These guys don't. So I wanted to give credit to the geek squad for immediately following up. Oh, good. When when the broadcast went out, we the someone in the geek squad administration immediately contacted our office and said, we don't have any record of fixing a Justin Gerard's PC.
+ Could you find out any could you get any additional information exactly and they then and this person suggested since he's 12 years old.
+ It's probably in his parents name. Could you let us know, you know, who this is so we can track it down because we certainly don't want any of our geeks using their own software in an unlicensed way as part of their, you know, in their business
+ dealings with us. So I contacted Justin, and it turns out that that his note was a few months before he couldn't find a receipt. He didn't know who it was. Didn't have any other information blah, blah, blah.
+ And, and we both sort of expressed. We didn't really either of us want to get this particular geek in trouble for first of all, you know, saving Justin's computer, which he did.
+ But, you know, at the same point, I wanted to raise the issue that that this was not something. I mean, this goes a little bit. This stretches my, you know, touchy feely feeling about it.
+ You don't want to give this. This is your job. Yeah, exactly. It paid. It really does pay the bills here. So anyway, so I did, I did want to share.
+ I wanted to make sure we closed that issue. Did you know that the geek? They followed up on it, which is good. They followed up immediately. And we're as responsible as I could ask them to be. So I really did appreciate that.
+ Well, there's one more thing they could have done is buy a site license, but OK, but we won't believe that hasn't happened yet. But that would be great. They should.
+ I think they should, obviously, spin right works. And in fact, I got a note from a dentist constant who I guess must be somewhere around me in Southern California, because he says Steve, I recently flew from Southern California to Chicago to spend a week with my closest friend who was recovering from heart surgery.
+ He was well enough to have me drive him to his office. I guess he was well enough. And while there, I learned that his old PC had problems. Most of the time when he turned it on, it would not boot, but produced a horrible click click sound, which indicated that the hard drive was possibly dying.
+ That's a good indication. Yeah. He says, I had brought my laptop on the trip and had my trusty CD of Spinrite, and I ran Spinner on his PC using level two. After now, level two is a read-only version, like a faster read-only pass, which is used just sort of for seeing if there's any glaring problems on the drive.
+ Anyway, so he says, after a couple of hours, when the process was finished, I noticed that the PC seemed a little better, but still wouldn't boot most of the time.
+ Before I left the office, I started Spinrite again, this time using level five. It ran all night, the next day I left for Chicago. When I called my friend a few days later and asked about the PC, he said it worked perfectly.
+ Oh, yeah. Almost like new. He had no trouble getting the drive to boot, and the computer was faster than ever. Once again, Spinrite performed miracles thanks in regards to Dennis' constant.
+ That's good. That's a nice story, and keep those stories coming. I love to get them. We do.
+ So that is good news, a happy ending for the Geek Squad. Shall we launch into patents?
+ Yeah. Every so often, something comes up or happens that has nothing to do with security, which is obviously the focus of where we spend most of our time talking these last 93 episodes.
+ But it's something that is, I think, really interesting or really important, or something that bears on us, Leo, and so I take the opportunity infrequently.
+ But when I think it's important to sort of say, "Wait a minute. We'll get back to security issues next week," but something bears discussing that I think is important.
+ And you have some particular interest and expertise in this, because you have patents.
+ Well, I never bothered to follow through because they weren't things I was doing for myself. They were things I was doing as a consultant, and while pursuing the process, which is very lengthy, things changed such that it didn't make sense to pursue them.
+ But I have had many involvements with patents. I've also served as an expert witness testifying in a number of trials that involved patents.
+ And software patents is something I've been very -- it's something I have very -- if I may say Richard Stallman-like feelings about.
+ Oh, okay. Not as extreme as Stallman. No, but he's very anti-software patent. He thinks they're the spawn of Satan.
+ Well, and my problem is it's the test of non-obviousness.
+ Any patent -- I guess we have to step back a little bit. Because in so many online postings, I see confusion between patent, copyright, and trademark.
+ Those are sort of like the three pillars of intellectual property.
+ A trademark, obviously, is a phrase or a name for something which a company wants protection on so that nobody else can use that in a way that would confuse a consumer.
+ We have a trademark on Twit, for instance, and that doesn't mean you couldn't have an ice cream cone named Twit, but you couldn't have a podcast named Twit.
+ Yes, and in fact, I had an interesting event that not long ago, I have mentioned here that I trademarked the phrase "It's my computer" sort of as a battle cry.
+ It's like, you know, hands off. It's my computer. And we were challenged a few months ago by, unfortunately, network solutions.
+ Who said, "Our trademark, my computer, is too similar to yours, and we have preexisting usage of that."
+ Well, I've got a very good patent firm. They're the ones, in fact, that Apple uses and Ashton Tate used and, you know, it's a good LA firm, and they also have offices up in Silicon Valley.
+ And so it turns out that, I mean, we did everything right. I mean, I spent the money.
+ We applied for a trademark on "It's My Computer." I showed use of it.
+ We even filed for challenge, which is something where in a national registry, we say, "We're applying for the trademark.
+ It's my computer. Does anyone have any problem with that?"
+ And so all the intellectual property firms are supposed to be checking that and saying, "Wait a minute.
+ We have a client, network solutions, that has some intellectual property in the trademark of my computer.
+ You guys are in the same industry. This is confusingly similar. We object to that trademark."
+ Well, that didn't happen. No one raised an objection. We got the trademark assigned, and I have a trademark.
+ Well, then along marches, the law firm representing network solutions saying, "You can't have that. It's too confusingly similar."
+ And in fact, they haven't even applied for a trademark because we did a trademark search to make sure there was nothing--
+ But they don't have to, right? I mean, they can say you can't--
+ That is true. The bottom line is--
+ So if somebody's been calling their podcast "Twit," and without trademarking it for years, they could contest my trademark.
+ Yes, because prior use is the ultimate winner in this kind of dispute.
+ So essentially, we were going to lose, so I said, "Well, shoot. I really like that trademark, and I like my little battle cry."
+ And so my attorney said, "Well, why don't we tell them that we will stop using it and relinquish it for $5,000?"
+ And I said, "Oh, I like that. That sounds good."
+ So, you know, my attorney said a note to their attorney, their attorney said a note back saying, "How about 2,500?"
+ And so my attorney said, "Why do we say four?" I said, "No, let's say five. They're network solutions. Tell them exactly.
+ Tell them we'll settle for five and we'll reconsider our options if that's not okay with them."
+ So we got a check for $5,000. That's fair.
+ And then I gave up my trademark in, yeah, which I actually was going to, you know, if they wanted to fight me,
+ I was going to spend way more money than that and lose anyway.
+ But I presume you have spin-right trademark.
+ Absolutely. And there's no protesting that. And frankly, it wouldn't be worth a lot more than five grand.
+ I mean, nobody's going to take that name.
+ Right. Well, I've got 20 years of prior use.
+ And frankly, nobody seems to want "Twit," so I think we're safe on that.
+ Well, and it's funny too, because I did hear Kevin talking about Dig and how he's had to pursue them, yeah.
+ Yeah, I mean, the idea is you, if someone is infringing a trademark, you need to have to stand up for your rights or someone to come along.
+ Yep, they are able to say that. So that's trademark.
+ So copyright is what's probably people are most familiar with. It is essentially something saying,
+ "Here's a book and I'm copywriting it. You cannot make a, you know, a substantial copy of this piece of work."
+ And so, of course, copyright is one of the protections that all software seeks and obtains just to protect
+ the essentially someone from duplicating or substantially duplicating the entire thing.
+ So, you have to apply for a copyright. You get it. Automatically, you get a copyright just by creating a work.
+ That's crude. That's absolutely true. In fact, you can't apply, but there's no real, I don't think it's really advantage.
+ Right. And essentially, the only thing you need to do is you need to state on the work that you are claiming copyright in the work.
+ And so, you just say copyright and then the little circle C and then the year that you're making that claim.
+ And it sort of stamps it as, "Look, I'm asserting my ownership in this work, my copyright. That's all you need to do."
+ So, a patent, however, is completely different. A patent is the claim is that there's something that has been invented, something that is,
+ well, in fact, there are three tests for an invention. It needs to be novel. It needs to be non-obvious, and it needs to be useful.
+ So, the patent office, when they're looking at these things, they're saying, "Okay, is this new? Is this something that has not been done before?
+ Would it not be obvious to someone trained in the art is the way the actual language reads?"
+ Meaning that, for example, in the case of software, some software guy says, "Oh, look what I invented."
+ And the question would be, "Would another software person think that was amazing, or would they go, "You can't invent a bubble sort.
+ It's been around for years. That's non-obvious. Or it is obvious."
+ Exactly. And plus one equals two, that's obvious.
+ And just, I guess, to limit frivolous patents, the patent office also says, "And it has to be useful."
+ So, you know, I guess I can't imagine that nothing occurs to me on the top of my head that would be like,
+ "Why anyone would bother patenting something useless, especially these days when it is so expensive to patent anything?"
+ But still, they certainly want, you know, those are traditionally the tests that are applied.
+ So, my own problem with software patents has been that when I've seen software patents,
+ they've seemed obvious to me. I mean, I'm in the software. I love software. I spend a lot of time in that domain.
+ I'm no super software genius. So, I'm not saying that, you know, something that's obvious to me would be non-obvious to other people.
+ I think, in general, most of what I see people saying they invented often seems obvious.
+ Well, a good example is Jeff Bezos and Amazon's... This is one of the early software patents.
+ Oh, yes.
+ The one click patent. Very controversial. They claim that they own the rights to the idea that if you see something
+ and you click one button to buy it and buys it automatically, that's theirs. That's ours. We own it. We bought it. We invented it.
+ Yeah. And I think that fails the non-obvious test.
+ Right.
+ Now, certainly something like crypto-algorithms. It's like, good. Have that.
+ No, no, no, no, no.
+ You invited that, baby.
+ Yeah.
+ I look at those diagrams of S boxes and rotations and scrambling things. It's like, whoa. Somebody did some serious work.
+ But what's interesting is that even that historically would not have been patentable. Although we now know,
+ RSA has patents and other people have patents on crypto.
+ But in the past, you couldn't patent that.
+ True. The idea is software?
+ No, because the original thinking about software was that software is math, that software algorithms are just
+ mathematics, and you cannot invent math. You can discover math, but that's not an invention.
+ And so the idea was that math, you cannot patent math because it exists. I mean, it's inherent in reality is one plus one.
+ But it said, oh, yeah, it's two.
+ So the idea being that the original feeling in the patent office was that no software could be patented because that was,
+ it was tantamount to patenting math because that's what software was.
+ So for me, many years ago, probably 20 years ago, I did some consulting and was inventing things.
+ And the people that I was doing this work for wanted to acquire patents.
+ Now, I've never sought any myself. I mean, arguably, there are things in Spinrite that I invented.
+ I mean, there's some very cool things in Spinrite, but I mean, it's like practicing what you preach.
+ I mean, I don't really see the value in that.
+ I mean, I understand politically what the value is. But anyway, so on other people's behalf, I said, fine, I'll work with your patent attorney if you want to protect this thing that you say I've invented.
+ Well, the patent attorney said, okay, here's our problem.
+ The patent office won't give us a patent on software. Now, remember, this is two decades ago.
+ He said, so this is how we get around that. He said, give me a description of what you've done in hardware, because a hardware we can patent.
+ And even though hardware is not what he called the preferred embodiment of this patent, of this invention, it's not the preferred embodiment of the embodiment of the invention.
+ Software is we're going to get the patent on the hardware embodiment and say that, you know, this is an example of the invention implemented in hardware.
+ And it may not be the preferred embodiment of the invention.
+ So that protects us from anyone doing the same thing in software. So essentially, you've got a software patent.
+ And so, you know, I remember very well that, you know, those are my instructions then.
+ Well, the world has moved from that position incrementally over time to the point today. Actually, I think things are relatively out of control.
+ I mean, I'm sure you've seen the article here, the little news blurbs about people discovering genes, you know, in the human genome or chromosomes and patenting them.
+ And that they have a patent. I mean, they've been able to do it. I know. I know. It is happening now. So weird. When? Okay. So, so that's sort of where things have the way things have evolved.
+ Now, what companies began doing as patents, software patents became practical. I mean, possible to get is they started amassing software patent portfolios.
+ The IBM was the leader in this just because, you know, they had always been patenting all their hardware gizmos and widgets and things.
+ And so they were always, I'm sure, pushing on the patent and trademark office, the PTO to change the boundaries between software and hardware.
+ No doubt, they had attorneys who were giving them the same sort of advice I was given about how to get a software patent by showing an embodiment in hardware.
+ And that would also protect you from software that did the same thing. So, so over time, the patent, the trademark office changed their approach. IBM was, you know, acquiring tons of patents.
+ Other companies, of course, were doing the same thing, son. And, you know, virtually any computer company today has lots of patents.
+ And, of course, we remember the famous original Apple Microsoft lawsuit years ago, where they were fighting each other over, you know, things, you know, it wasn't clear whether they were, like, I guess they were designed patents.
+ They were saying, you know, this is our design of a desktop and, you know, no one can infringe on that. And so Microsoft and Apple ended up, essentially, smoking a peace pipe by doing what's called a cross licensing deal, where they would each agree to cross license the
+ other's patents and not bring any litigation against each other. And so what's happened is as software patents became popular, computer companies turned, you know, spent some chunk of their money to, to get to build a patent portfolio, not necessarily
+ because they intended to sue anyone who infringed their patent. Although that does happen. Of course, we just, we saw that remember the case a few months ago with rim, the blackberry company.
+ And I think it was NTP, where it was the company that was alleging and won. Well, actually, they, but some of their patents got invalidated. It's very confusing.
+ I thought, I thought the way it turned out was that they settled rim paid them a ton of money, even though it was believed that many of the patents would have been invalidated if they were challenged.
+ And that is a perfect segue to talk about one of the biggest problems we have is that the many people now agree that the patent to trademark office is issuing patents that they should not issue.
+ The problem is that it's patent attorneys get involved in this process. And of course, patent attorneys think the patents are good and more patents are better.
+ So there's just lots of patents being issued. The problem is you end up with, with arguably bogus patents, which give a company the essentially a government sponsored right to sue someone else who they feel is infringing on their patent.
+ And so, and this is, I've been an expert witness in a number of lawsuits where, you know, my opinion as someone in the industry and an end, and, and, and someone with some engineering background has been called upon to say, you know, what do I think about this?
+ And, you know, the, the problem is, I see, I've seen many things that should never have been, should have never had a patent granted. And now a company is, you know, all this money is flowing to the attorneys who roll up their sleeves and fight this.
+ Whereas if the patent, the trademark office had just said, no, this is obvious, then we would have never had this problem. So, so, you know, and obviously here, here's rim that was, that was, that was ended up having to pay a substantial amount of money, an amazing amount of money to settle this infringement claim
+ on patents that probably would not have been valid, but it would have cost them more money to, to get them invalidated and to fight against that, that it did to just to settle.
+ So, I mean, this is, this is a problem in the industry. So, so generally companies get these patents because they want to build a portfolio in order to smoke this piece pipes with other companies.
+ Basically, they want to do cross licensing deals. And so that's sort of been the way things have been going now for many years. Microsoft was a little slow to get going on the patent thing.
+ Probably because once I really want to say probably because once they had more ethics, then they do it.
+ Oh, yeah. That's probably not fair. Burn. But for example, in 2002, Microsoft applied for 1,411 patents.
+ Okay. And by 2004, they had applied for 3,780 patents.
+ Now, I looked, I looked at one out of curiosity that was granted to them last week on May 17th, I think it was.
+ A patent just issued to Microsoft and the patent is on how to make e-ink electronic ink flow more smoothly on a tablet PC.
+ And I thought, okay, that's interesting. I wonder what they've done.
+ I read the patent and this is, it's not easy to read these things. I mean, these make end-user license agreements seem easy.
+ They're often very convoluted. Oh, my God, Leo. Talk about not obvious.
+ Well, and the other thing that happens is that, first of all, companies that get into the patent, the software patent game end up telling their programmers,
+ the software guys, let us know of anything you do that's clever. I mean, it's like it becomes a new extension of the programmer's job to inform legal.
+ This is what cracks me up.
+ Yes. Of anything that they invent. And in fact, it's interesting, because I was talking to our friend Mark Thompson at analog X about this a couple days ago,
+ because I'm pretty worked up about this whole issue. And he made a very good point, because I was telling about this particular patent that I read about the e-ink.
+ And he said, you know, what normally happens or what hopefully probably happens is the programmers actually come up with something novel.
+ But one of the other goals of a patent attorney is to get the broadest patent possible. That is, you start out with inventing something very specific.
+ But so, and there, and in the specificity, you could argue you might have something novel, you know, a programmer in all good conscience really thinks he came up with something amazing and unique.
+ But then the patent attorney gets ahold of it and stretches this thing until, you know, because he wants the biggest umbrella he can make out of this in order to in order to get as much breadth of a patent as possible because a broader patent is better.
+ And in fact, that's one of the main arguments the patent trademark office has is, and I've had this experience with the patents that I have pursued is you'll, again,
+ I'll express it like the way I really mean it, then my patent attorney just makes it so that it could be any color and it could be chrome and black and blue and white and it could even does apply to banana splits.
+ And it's like, and then I get it back. I go, well, okay, it is all this is good Steve. We brought as good. We want the broadest patent possible. So then it gets submitted to the patent trademark office. They say, okay, this is overly broad.
+ This covers, you know, too much. You need to narrow it. And so there's this back and forth negotiation until one side of the other blinks and then you end up with something that the results well.
+ So I read Microsoft's patent and I, I wanted there to be something amazing in this. It's like, okay, what is it? What's the secret for making a smooth smooth flow smoothly?
+ Turns out that Microsoft's patent involves priority queues where you put the E-ink events in a separate queue that the operating system treats with higher priority than the all non E-ink events.
+ That way the operating system will make sure to refresh the screen to show the E-ink before it does other things that it has to do, like worry about updating the time of day and dragging windows around or whatever.
+ And it's like, okay, and so then I read it again, trying to find what I had missed. Because that seems obvious to you. Leo, not only is it obvious, it's obvious to everybody.
+ I mean, and it's priority queues is the one of the fundamental architectural components of any operating system. I'm sure it predates when the IBM had them on computers with tools.
+ Any multitasking operating system would have to do it. And this is not, I mean, I looked for something that was special, something different. That's all it is.
+ I got a little perversely curious. And so I looked at a few others. There was another one where they were talking about a counter and how a counter goes negative.
+ And then when it's positive, it means one thing and then the mode changes. And I realized this was so that you could use a stroke on the tablet to capitalize the next letter.
+ And the counter would be incremented. And then you'd do the letter and then it would decrement it and put you back into lowercase.
+ It's like, oh my God, they're getting patents on this stuff. I mean, just, I mean, just bogus patents. And again, maybe once upon a time when this patent was originally created or that that is this idea happened,
+ some programmer really did have something novel. But what ends up getting issued is just a nightmare.
+ And I mean, I think it's a problem because a patent this week just causes, as we've said before, just causes real problems.
+ Well, it's just asking for litigation and it's inevitably going to go back to the courts.
+ Well, so the Supreme Court weakened this a little bit just recently.
+ Yes, actually, there was a fantastic decision. Actually, patent watchers have been noticing that the Supreme Court has recently been taking up some cases in general about patents that they have not dealt with before.
+ Microsoft won an issue at the Supreme Court level against AT&T that was trying to claim that Microsoft's admitted infringement of AT&T's voice technology.
+ Microsoft acknowledged that they were infringing in the US, AT&T was saying, and everywhere else, and internationally. And so AT&T was saying that they essentially trying to enforce United States patents on a global scale in the patent.
+ I mean, then the Supreme Court said, no, no, no, no, no, it's US patent system. You know, this is, you know, your rights AT&T do not extend beyond the United States.
+ But the other really good decision was a bizarre case. There was a company that was trying basically to patent the combination of two previously patented things.
+ They were trying, it was dealt with an adjustable gas pedal and an electronic throttle. And they put them together and said, look, this is our invention.
+ It's a spark. Wait a minute. The electronic throttle has been invented and patented.
+ The adjustable gas pedal was patented a long time ago. You can't just put those together and call that an invention.
+ But it turns out that originally the patent office said, no, it was appealed and the appellate court overturned the patent office decision and said, yes, that's an invention.
+ Now, the problem is the appellate court are patent attorneys who, of course, think more patents was more, more, more patents are more better. So then, so it went to the Supreme Court that said, no.
+ And in fact, the decision was written by Justice Anthony Kennedy, who said, granting patent protection to advances that would occur in the ordinary course without real innovation retards progress.
+ And so he's making the point that essentially we're being in general to patent happy in this country, and that's creating a problem.
+ He also said that the results of ordinary innovation are not subject to exclusive rights under the patent laws were it otherwise patents might stifle rather than promote the progress of useful arts.
+ And that's really the whole point of the balance of patent law is to promote these arts without stifling creativity and innovation from others.
+ Yes. Now, what happened about 10 days ago that made this an issue and mean for many people, there's been a ton written about this in the last 10 days on the net is that the senior editor for legal affairs of Fortune magazine, a writer named Roger Parloff, did a feature story for the May issue for, I guess it's mid May.
+ I don't remember. Actually, I got a copy of it because I wanted to make sure that there was nothing additional in the paper copy that was not online, and there isn't.
+ He did a feature story titled Microsoft takes on the free world.
+ And essentially what happened was two of Microsoft's guys, Brad Smith, who's Microsoft Chief Counsel and Horatio Guterres, who's Microsoft's Vice President of Intellectual Property and Licensing, they sat down with this guy at Fortune magazine and said to talk about patents
+ and the fact that they feel that that open source software free and open source software or F O S S as is now called. That's the acronym that's being used is infringing on a ton of Microsoft patents.
+ And in fact, for the first now, Microsoft has made noises like this before, but they've just said, you know, free software is infringing on our patents grumble grumble. Okay, this time they said the free and open source software is infringing
+ 235 of our patents. And so they put a number to it. They said that the Linux kernel violates 42 of their patents that the user interface and design elements infringe an additional 65 that open office infringes 45 of their patents
+ and that email and other open source programs infringe an additional 83. So Microsoft has clearly sat down with, you know, I mean, taken the time to go through their their own patent portfolio, which has no small job.
+ Because, you know, they've been so patent happy and they've been scrutinizing free software, the whole, you know, open source software movement and specifically delineating which of their patents are being infringed by open source software.
+ So, okay, so we have a couple problems. First of all, remember, Leo, I'm sure it was either you and I talked about it here, or you talked about it with your crew on Twitch back in November. I remember there was discussion. I'm sure you and I talked about it about
+ about this weird novel Microsoft deal. Yeah. Yeah. And we talked about it a lot on all the podcasts. Yeah, because I mean, we couldn't figure out what it was. Right. It was like, okay, what's my novel agreed to indemnify its users against lawsuits from Microsoft and ended up giving Microsoft a lot of money for that indemnification.
+ Well, and in fact, although Microsoft gave novel more because what it was. Yeah. And it seemed really strange. Why is Microsoft paying novel more than novel's paying Microsoft? Right.
+ The reason was that this was a it was light like we talked before. It was a cross licensing deal where Microsoft wanted access to novel's patents, meaning that they wanted to know that novel's networking patents.
+ We're never going to be a problem for Microsoft and novel wanted the same thing from Microsoft. So they were both they were cross licensing their patents and agreeing.
+ Okay. We're never going to sue each other on these on on this basis. And of course, this inherently extends to each company's customers because the way patent law works is is I'm violating somebody's patent.
+ Even if I bought this if I bought the software legally or am using the software legally, if in that software somewhere is somebody's intellectual property protected by a patent.
+ I the user because my software is doing that patented thing. I'm individually violating that patent. So you're liable and you may not know anything about it.
+ Right. Well, and in fact, I've got to say that that this this Horatio Guterres, it sounds like maybe he's been reading his own press releases a little bit too much. He said something that that just really made my blood boil.
+ He was quoted saying, this is not okay. And he's the Microsoft guy. I should remind our listeners who who's in charge of their intellectual property and licensing. He says, this is not a case of some accidental unknowing infringement.
+ There is an overwhelming number of patents being infringed. Well, of course, he sort of said there are an overwhelming number, but he said, you know, so he's saying the fact that it's 235 means that it's intentional.
+ It's like, what a crock. I mean, first of all, worse than that, they're not even going to say which patents are and violation you're supposed to find out. You're supposed to figure it out and come to them. Well, okay. Now, okay, that makes a couple, that makes a couple really good points for first of all. Yes, you're right.
+ They are. Everyone has been saying, okay, which 235. I mean, I'm, I'm, you know, prove it. If you, I'm willing to believe it. If you could say, show me the patents and then we can judge whether it's an obvious bad patent or whether it's a good patent, but they won't say.
+ Because let me tell you, Leo, if one of those is the smooth flowing patents, I can tell you right off the bat, they got to drop that number to 234.
+ And I think it's likely. I mean, I think it's likely that there'll be things like, you know, a stack, you know, things that, of course, all software uses, but the, and the patent shouldn't have been awarded, but it was awarded.
+ Well, and they won't even say that's correct. They Microsoft is refusing tonight to name any of the 235 patents that they are now claiming are infringing.
+ And the point was they were saying in, in, in during this fortune magazine article, they were quoted as saying, we think people need to start paying for the use of our intellectual property.
+ I mean, that's the bottom line. They're saying, just accept the fact that there's violations and you should just give us money.
+ Well, so then, so, of course, here's the problem. I mean, look at me facing network solutions, saying, okay.
+ Well, frankly, Steve, if they're, if they've patented some, some obvious things, maybe you're violating their patents.
+ Oh, well, the problem is, patents have been granted now with, with such abandon for the last decade, that there's no way anyone, first of all, can know if they're violating someone else's patents.
+ I mean, no one can know. I mean, I can't sit there and read all of Microsoft patents, all of all of Linux, all of sons patents, all of IBM's patents, and, you know, tip toe through the tulips and somehow, you know, I mean, first of all, I don't even think I could write code that would not be in violation
+ of these bogus patents.
+ The other issue that Linus Torvalds brought up is he said, well, it's going to, nobody in the open source community is going to look for these patents because looking for and the knowledge of them exposes you.
+ Well, what happens is, yes, if, if you, if in court, it can be shown that you knowingly violated a patent, then you're subjected to triple damages.
+ So you're not going to look. You don't know. Exactly. And if you, if you accept, as I think everybody in the open source community does, the software patents are bad have gone far too far.
+ And it's very risky because you may well have violated a patent because of this broken system.
+ You're not going to look. It's too risky.
+ So wait a minute. Now we're going to stand off because Microsoft's not going to tell me.
+ And I'm not going to look. What are we, what's supposed to happen now?
+ Well, and so, the, the, the, okay, so, so the problem is, here's Microsoft, obviously, the thousand pound elephant in the room, who's just sort of, who clearly said to novel.
+ Okay, look, you're the number two distributor of Linux, obviously Red Hat is number one.
+ And it's interesting because Red Hat's guys have had conversations with Microsoft and they've never been able to strike a deal, probably because the Red Hat guys.
+ Frankly, are a little more savvy about this. You have to imagine that novel is wondering, you know, whether they did the right thing when they did this agreement in November.
+ But, but so, you know, here's Microsoft threatening to throw their substantial weight around and, and basically intimidating other companies into doing these sorts of deals into doing cross licensing and,
+ and ultimately paying money for something that is, that probably is entirely bogus.
+ I mean, it is, it is a problem. Now, the good news is, I think Microsoft probably waited too long.
+ I think that, that, I mean, the reason this is coming up at all is because Microsoft, I assume, is on some level unhappy that someone can use Linux and open office and have a very useful system that,
+ that Microsoft believes, and I sincerely believe they believe in fringes their intellectual property, whether or not it actually does, and that this person doesn't pay Microsoft any tax.
+ Basically, Microsoft wants to tax free and open source software.
+ Oh, they want to do more than tax. They want to put it out of business.
+ Well, they'd like it to die and go away with or up. I mean, I don't even, that's one of the reasons I think they're not saying what these patents are. They, they want to put them out of business.
+ Well, okay. It's very clear that if they enumerated these patents, the, the free and open source software community would have a field day.
+ Exactly.
+ Attacking them. I mean, and that's just it. You end up with a distributed attack against Microsoft.
+ Good point. Good point. A distributed legal attack. Yeah. A time of four years.
+ Exactly. Because, you know, every patent would get tackled. People would be finding prior art because prior art is one thing that immediately invalidates a patent.
+ If you can demonstrate that that somewhere someone did something prior to your invention, it's called prior art and sorry, no more patent.
+ So there'd be that. And, you know, Linus would be happy to code the kernel around whatever Microsoft's 42 claimed patents are that infringe that they say the Caroline fringes.
+ I mean, so the fact. Well, if it's priority cues, I may not be able to code around it, but well, but neither in neither is that a valid patent.
+ Right. So, so, so, so here's what's so frustrating too is that the fact that Microsoft won't name the patents.
+ Prevents anyone from curing the problem that Microsoft is complaining about.
+ It's just so they really don't want the problem cured.
+ They will source software to go away. Well, yeah, or yes. In fact, I'm sort of worried because one of the side effects of the deal that it was novel is that the idea is that is that anyone who gets Linux from novel is protected.
+ Because Microsoft and novel did this cross licensing deal. So you could see that this could tend to bias people towards novel concentrating.
+ Concentrating novel as a source, which is, I'm sure novel's interest in making the deal in the first place probably was, but it seems to me that's dangerous.
+ It's a number of people who a good quality of people who worked for novel quit over this. Yes. In fact, one of the main Linux kernel guys did.
+ I mean, he just he just resigned immediately. He saw what he saw when novel was trying to do essentially.
+ Yeah. And I can't really articulate why this feels dangerous to me, but the idea is, I guess, as long as Linux is spread out as widely as it is distributed as widely as it is, there's so many different things.
+ There's so many different ways that that substantial companies and can get distributions. The broader it is the less power Microsoft has.
+ If Microsoft can do something to focus to focus the distribution of Linux through a fewer number of channels, to me, that seems unsafe for the future of open source software.
+ I think it really needs to be be kept widespread. So, you know, I mean, then Microsoft does think strategically. We've seen many examples of that through the ages.
+ So anyway, it seems really clear to me that that what they're doing is not fair because they're not saying we really want the problem solved.
+ They're really saying we've created this problem. The US government is backing us with the patent and trademark office.
+ And we're so big, you can never afford. I mean, even the US government couldn't prevail against Microsoft in the antitrust suit.
+ So they're saying, we're so big, you can't even think about fighting us and challenging us. So believe me, you don't want us coming after you.
+ Yeah. But the reason I think they waited too long is they waited this long because it took this long for the free and open source software movement to really achieve the critical mass it has today.
+ I mean, you know, there are, you know, they talk about many of their enterprise, Microsoft's own enterprise customers who have hybrid server rooms where they've got Linux servers and Windows servers that need to co operate and live and live and work together.
+ And so that, you know, that that's sort of the new model. You know, Microsoft cannot be happy that their customers are using Linux servers for some chunk of their infrastructure.
+ Now it also gets complicated because, and we've talked a little bit about this on Twitter because of the GPL, the new version three of the GPL, which makes this voucher program that Microsoft's done with novel backfire on Microsoft a little bit.
+ Well, yes, it's interesting that version two of the GPL allowed Microsoft to do this deal.
+ But what what novel did was as part of this deal in November was novel gave Microsoft some number of coupons for a, you know, basically for a free version of their Linux enterprise server.
+ Microsoft then give cells these coupons or makes them available to their customers and their customers are able to redeem them for for novel's Linux server software.
+ Well, it turns out that version three of the GPL, it's supposed to come into effect either in June or July in a month or two. It closes a loophole that Microsoft was essentially taking advantage of that exists in version two of the GPL, which is what software is now being covered by such that if Microsoft, if any
+ Microsoft customer uses one of those coupons to and redeems the coupon for a novel copy of Linux under version three of the GPL, that makes Microsoft a distributor of free and open source software.
+ And yes, and as a distributor, part of the GPL requires that all patents be licensed for free.
+ That is either they're either no patents at all or they are completely free patents. And so that forces Microsoft to essentially implicitly turn their entire patent base into royalty free licensed patents so that no user than of
+ of any version of Linux could be sued by Microsoft for eternity. I'll put even mowling and spread Smith any day, even as the lawyer who wrote the GPL three and I think he's a very, very smart guy and clearly this was a very smart move.
+ Well, it looks like, essentially, I think Microsoft had waited until now because they're really beginning to see it's so software getting traction and it's really getting it's gaining traction.
+ The bad news is they waited so long that many heavyweight companies like IBM and HP and Sony and Sun, you know, there are many major companies basically anyone that's not Microsoft that are saying, okay, this is our alternative to Microsoft.
+ So they're throwing their substantial clout behind free and open source software and they're going to defend it, let alone all the developers around.
+ So Microsoft can't tell the world what patents it thinks it's claiming are being infringed because they know their case is weak. And, and again, it's very, it's doubtless possible to engineer around the patents and cure the infringement, even if the patent
+ was ever found to be valid and Microsoft doesn't want that. They don't want the problem solved. They want this problem in order to use it as leverage. It's, it's wrong.
+ Well, you know, it's going to be interesting to watch. I have a feeling this is actually going to just kind of fade away because there's there's no way Microsoft can really pursue this without opening themselves. It's mutually assured destruction is really what it is.
+ Yeah, I have a feeling this is just a dumb move on one more dumb move for Microsoft. And yeah, I think in retrospect, Microsoft probably regrets that they had this discussion with Roger Parloff and Fortune magazine.
+ I regret what has happened. And, and in fact, I think that they in tipping their hand, they have put the whole open source software community on notice now. For example, you've really got to wonder whether any other major company will will follow in novelles footsteps
+ after this article and after so much attention has been given to this. And basically, I think Microsoft's bluff can now be called by anyone who wants to call it.
+ Very interesting. Now, I'm sure we will see a this weekend law on this with actual lawyers and so forth. And we should remind everybody that Steve and I aren't lawyers. So, but Steve obviously has a lot of experience in this field. And I have to agree with you in your analysis of it. I'll be very interested to see what Denise Howell and her crew come up with.
+ That's why we have this week in law.
+ Well, and don't forget Leo, if Microsoft actually sued, they would have to name patents. Right. Right. It's mutually assured destruction. That's what's kept this thing afloat for so long.
+ I want to remind everybody this show is brought to you as always by the great folks at nerds on site. I want to be a nerd.com. What is nerds on site? Well, it's how would you describe nerds on site? You know, I'm having a hard time.
+ As I understand it, they're a federation of individual computer service guys who, rather than operating as, you know, like Joe's computer repair. And here's my card.
+ They use the nerds on site organization as an umbrella to organize. And I mean, they have the nerds on sites guys have have conferences and it's really, really well organized.
+ Yeah, I saw nerds on site car in Vancouver. And I thought, wow, that looks cool. I'll tell you, here's how you find out what they're up to. They're looking for nerds to to really, I mean, the idea is you're an independent contractor.
+ You're in business for yourself, but you're just not by yourself. So you focus on what you care about and not the burdens of running a business. They're looking for nerds with all competencies, all skills.
+ It's not just people who will fix stuff, but it's PC and Mac experts, specialties like Cisco and Oracle website designers, programmers, project managers, even sales, trainers, of course, security experts and antivirus gurus too.
+ Especially they like those guys who like and gals who like to troubleshoot, tear apart, rebuild their own systems in their spirit time. They want people who really love this stuff.
+ If you listen to this show, you qualify guaranteed. They're all over the world. Canada, US, Mexico, England, Australia, South Africa, Bolivia, anywhere you hear this podcast pretty much.
+ And they also have a University of Nerdology with over 250 subjects like systems architecture, design software development, full on source IT departments to desktop support and so how residential IT services so you can polish your skills too.
+ If you're a nerd love working with people, find out more. Go to I want to be a nerd.com register for a nerds only meeting in your area today.
+ I want to be a nerd.com nerds on site, your chance to start your own business or to grow your business, your existing business in ways you never imagined possible before nerds on site. I want to be a nerd.com
+ I'm so glad we did this. It isn't exactly security, but you know so much about this subject and it really is important.
+ I think for everybody to know about this, this is something that's broken. And if you use software, you need to know about it and maybe stand up and say, be counted, go to Congress, do anything about this. Are they aware of this issue?
+ Well, there actually is some some congressional motion. Also, the problem is that what we really want are are less patents, fewer patents, stronger patents. The problem is the, for example, the pharmaceutical industry wants more patents, more easy patents.
+ So there are strong lobbying pressures that are that are pushing Congress in the direction away from what most people feel is a healthy patent legislation. And that's a problem.
+ Yeah. Yeah. You know, my, my feeling is that, that things that are originally invented, sort of, you know, they, they have initial value and that fades over time. Once upon a time, you know, the idea of a bitmap and a cursor is like, whoa, my God, look at that.
+ That's so cool. I mean, I remember looking at the first Macintosh and just moving the mouse around and no one had ever seen anything like that before.
+ Right. And, and, you know, and, and now it's sort of, it's sort of like, it's sort of, it gets absorbed by the ether. You know, it just becomes, it becomes so common, such common knowledge, such common practice.
+ I mean, now everybody has bitmaps. Everybody's got cursors. It's like, you can no longer get money for that. When it was very brand new and fresh, you would get money just because you had a bitmap and a cursor.
+ Now, everybody has them. So there's no more value there. And I, and I think similarly, there were, there were original innovations in the industry that, that would qualify as being special enough that the company who produced it could get money for it.
+ And, and after a while, they just became the way things are done. And so, so, you know, people who are really anti Microsoft say that, you know, Microsoft is beginning to turn to litigation because they've just, they've run out of creativity.
+ And so they're, you know, they're going to do what old mature companies do. Exactly. Which is, you know, if, if that ends up being, you know, a proper characterization, it's really unfortunate. Yeah, you, people might say, well, this is the way to all be, this is when it began, the beginning of the end.
+ And I wouldn't be surprised to see that.
+ All right, we're going to wrap this thing up. I do thank you so much for joining us. Steve, I thank you. Next week, another great security now.
+ We promise, we promise. We'll, we'll cover whatever's going on in technology and security.
+ If you want to know more, of course, go to grc.com. That's Steve's site. Shields up's there. All the free programs he does spin right, of course, his great disc recovery and maintenance utility and 16 kilowatt versions of the podcast.
+ Plus the transcripts too. So you can read along as we talk. In fact, Steve's got really extensive notes for this particular episode with lots of links.
+ So if you want to know more, this is a good one to go research at grc.com. Of course, twit.tv is the home of all these podcasts. If you want to support them, there's two couple ways you can do it. Of course, we've got great.
+ Twit merchandise from the folks at Scott eVest and think geek hats and polos and fleeces. Those new polo shirts are great for summer. And you can also support us with your donations. You're recurring $2 a month subscription really makes a big difference for us.
+ It keeps us a little baby afloat. Steve does Steve doesn't need Steve Scott. We've got lots of advertising on this podcast, but it's one of the few that does.
+ It's the donations that really keep the line. Twit.tv. Thank you, Steve. Thanks so much, Leo. Talk to you next week. Bye-bye.

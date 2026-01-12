@@ -1,0 +1,1820 @@
+ ♪♪
+ NetCasts you love.
+ From people you trust.
+ ♪♪
+ This is Twit.
+ Bandwidth for Security Now is provided by
+ CashFly at C-A-C-A-G-E-F-L-Y.com.
+ ♪♪
+ This is Security Now, as Steve Gibson.
+ Our Christmas Day special,
+ Episode 436 for December 25,
+ 2013.
+ Time traveling with Steve.
+ ♪♪
+ It's time for Security Now, wait a minute.
+ Let me change the colors, ladies and gentlemen,
+ because it's our special Christmas episode.
+ Steve Gibson is here.
+ Ho, ho, ho, Steve.
+ Yo, Leo.
+ Last one of the year.
+ We made it through 2013.
+ I can't believe it's going to be 2014 already.
+ I've changed the lights,
+ normally blue, behind us, to red and green.
+ It's significant.
+ Oh, very nice.
+ Steve did something very interesting.
+ You know, most of our other shows on this whole week
+ were on hiatus.
+ We're letting our staff go home.
+ And so most of the other shows are best ofs.
+ But Steve doesn't like to rehash old security news,
+ and frankly, what use would it be anyway?
+ Yeah.
+ So you've got something even older.
+ We have -- Yes.
+ So everyone remembers, last year I had that fun blast
+ from the past where I did the --
+ I showed the presentation I had made to soft sell
+ a software distributor.
+ Ever since I have been working with you, Leo,
+ and appearing on screensavers and call for help and so forth,
+ I've been collecting VHS tapes of those appearances.
+ And I have -- I dug into my archive,
+ and I found the first three things, essentially,
+ that you and I did together.
+ 15 years ago was the first time you and I met.
+ June 17th, 1998, on the set of the screensavers
+ in South San Francisco, when Spinrite 5 had come out,
+ and people were reporting that their zip and jazz
+ Iomega drives were being cured by Spinrite.
+ There was something called click of death.
+ Anyway, so what I have is my appearance on with you 15 years ago,
+ my hair was dark, and there was like a sort of an obvious bald spot back there.
+ It's a little less obvious now.
+ And, you know, and -- but the other thing is that the commercials
+ from then were just -- they were funny.
+ They were, like, really great.
+ And so this is a time capsule special.
+ I've got that one, then -- and then in December of 1999,
+ Kate Patello, who was your co-host on the screensavers,
+ discovered Shields Up.
+ I had just put it up.
+ I'd created it, but it wasn't well-known at the time, and it was news to you.
+ She was over getting a copy of Spinrite, and she says, "What's Shields Up?"
+ And so she clicks the button and it says, "Hello, Kate."
+ And it's like, "Wait a minute. How does he know my name?"
+ No. So this -- so the second one here of the three is the first appearance of Shields Up,
+ and you and Kate looking at it.
+ And then the fourth one was March 3rd of 2000,
+ is where I came on to your call for help show.
+ And together, we introduced the concept of port probing and a firewall.
+ I made the prediction that someday all personal computers were going to have firewalls built in.
+ And that was like, "Wow, you think so? Well, I think that's probably likely because they really should."
+ And at that time, of course, Zone Alarm was our favorite.
+ So anyway, I think we've got a really fun -- it's about an hour-long blast from the past time capsule.
+ And since I've got so many more of these, I think we'll probably be doing this, make this an annual tradition.
+ I love it. I love it. I love it.
+ I hope you're having a happy holiday, everybody.
+ And I thank Steve Gibson for many years now. We're in our seventh or eighth year doing this show.
+ We are. And we and I have been together for 15.
+ 15. I owe you a case of burgundy.
+ So now with that -- or is it Cabernet? It's Cabernet, isn't it?
+ I'm a cab guy. I bought some cabs just for you.
+ So when you come up next week, we're going to -- special, by the way -- special New Year's Eve show.
+ And next Tuesday, New Year's Eve Day, Steve will be in studio.
+ He will do security now then, instead of our normal Wednesday on New Year's Day.
+ And we'll have a little Cabernet.
+ Sounds great.
+ Meanwhile, we go back in time, 15 years.
+ This is the very earliest days of Tech TV and the screen savers watch.
+ Hey, welcome to the screen savers. I'm Leo LaPord.
+ And I'm Kate Patello. Thank you for joining us. It's a big chip.
+ Coming up on today's show, there's been -- there's been a lot of controversy surrounding problems
+ with the zip and jazz discs from I Omega.
+ Today, we're going to take a closer look. This is something you're really going to want to watch.
+ At the so-called "click death." We're going to talk to a leading authority.
+ One of the great disc gurus of all time a man I've admired for many years.
+ columnist Steve Gibson will join us. Talk about click death.
+ Let you know what you can do and what you shouldn't do about it.
+ This is going to be cool. Plus, by popular demand, we're going to show
+ you finally how to back up computer data on video cassettes using your VCR.
+ We promise.
+ Sounds like a very bad idea.
+ That's coming up later today in fresh gear.
+ Big news story, hot news story. I'm going to show you this here, folks.
+ Ladies and gentlemen.
+ There's been a miracle.
+ A miracle happened. It happened in a coffee bar, local coffee bar in San Francisco's
+ multimedia Gulch. Take a look at this.
+ This latte, unre-touched photo of a cafe latte with Bill Gates image on it.
+ Ladies and gentlemen, Bill Gates has appeared in a latte.
+ There's more. Don't go away.
+ There's more because later in the day, this latte, of course, was sitting on the counter.
+ Later in the day, it grew eyebrows and hair.
+ And he was happy, of course.
+ Unbelievable. They're worshipping at the shrine already.
+ And then shocking belief, beyond belief, a flower.
+ It started feeling decorative.
+ But later in the day, due to a tragic mishap, the latte was consumed by somebody who looked
+ surprisingly like our very own alley.
+ It's like an alley.
+ That's right.
+ Allie, you killed Bill Gates.
+ You drank Bill Gates.
+ All right.
+ We'll talk to Allie in a moment.
+ Before we get to your call, some quick news from the world of computing action.
+ Actually, it's a story that's been going on for years.
+ And it's an interesting story.
+ Executive compensation.
+ Is it too high?
+ Are people paying -- are companies paying the CEOs too much?
+ You know, I did a little search out here.
+ Okay.
+ Gilla Mille, of course, a good example.
+ Here's a guy who, in about 18 months with apple computer, lost billions of dollars for apple.
+ Took home, an executive golden parachute, worth millions and millions of apple was leasing
+ his plane from him so he could fly around in it.
+ Yeah, well, they pay people to go away.
+ There's an example of a bad thing.
+ On the other hand, you look at a company like Microsoft, Bill Gates, chairman of the board
+ of the number one computer company in the world.
+ What is his salary?
+ $349.
+ A mere -- $349.
+ Did I leave something out?
+ $1000.
+ And a mere bonus of 241 days.
+ You know, he's not 600,000 for a guy, you know, multi-billionaire.
+ Of course, he doesn't get stock options, but of course he owns about 30% of the company.
+ He does get miracle rights.
+ I think there are a lot of guys, the chairman of NBC, actually General Electric, Jack Welch,
+ $6 million a year with stock options, bonuses and salary.
+ That seems a little obscene, don't you?
+ Yeah, can we explain this a little bit?
+ These guys sit on each other's boards of directors and to prove each other's raises.
+ That's a good point.
+ That's how this gets so high.
+ It's kind of a funny yes and no question because everybody's going to say they're paid too
+ much except for the CEOs, right?
+ Oh, CEOs say we're wrong.
+ That's right.
+ No, CEOs say that.
+ In fact, companies say we've got to pay them this much because these guys are that good.
+ They add that much value to the company.
+ And if we don't pay them that much, somebody else is going to come along and steal them.
+ What do you think?
+ Here's your chance to let us know.
+ Are corporate executives, particularly CEOs, particularly in the computer industry, paid too much?
+ You give us a call, 888-989-7879.
+ Or send us an email to thescreensavers@cdtv.com.
+ And the chat room, of course, as you see at the bottom of the screen, is available by going
+ to our website, zdtv.com/thescreensavers.
+ Click on the chat link and get on in there.
+ Let us know what you think.
+ That's the fastest, easiest way to give us your opinion.
+ Are corporate CEOs overpaid?
+ Hmm.
+ I know if I were making that much money, I'd say yeah.
+ You'd say no.
+ Yeah.
+ Yeah.
+ Oh, I see.
+ Give me the money.
+ Show me the money.
+ Let's talk to Ally.
+ All right.
+ Hi, Ally.
+ She of the miraculous latte this morning.
+ Did you drink Bill Gates' face?
+ You killed it.
+ He was cold.
+ I've heard that, actually.
+ They say that about it.
+ Oh.
+ You know, it's funny, though, because every day I religiously, you know, buy my latte.
+ We know this.
+ And we have a little discussion.
+ I have a discussion with Ted who makes the latte about what the foam means today.
+ You know?
+ Mm-hmm.
+ And then finally, we had our miracle today.
+ Today, we know what the foam means.
+ Meaning of the foam.
+ Yeah.
+ Pretty amazing.
+ That's right.
+ Look at that.
+ It's a Bill Gates in a cup.
+ So do you have any?
+ You just love that.
+ It's not classic.
+ And there was no design in that, honestly.
+ That's exactly how it appeared.
+ That's exactly.
+ There was no stirring.
+ Nothing.
+ That was it.
+ That's perfect.
+ Oh, that's perfect.
+ Yeah.
+ So, Ellie?
+ Yeah.
+ Do you have, like, do we have, like, questions and stuff?
+ Like, you know, an email?
+ Yeah.
+ Oh, sure.
+ Oh, cool.
+ Yeah.
+ We actually have one from Jay in Baytown, Texas.
+ Baytown, Texas.
+ Baytown.
+ And he's actually, you know, being very courageous and building his own multiprocessor.
+ And he's been told by the locals that you can only use a genuine intel in a multiprocessor system.
+ The locals.
+ The locals in Texas now.
+ Yeah, but you know, you can't use a genuine intel process.
+ Now, I can do that because I am was born a Texan and I can twang with you.
+ Right.
+ There you go.
+ So what's the question?
+ You know, everyone's an expert when it comes to these things.
+ So what does he want to know?
+ Well, he wants to know.
+ He's going to be running NT on it and possibly, you know, NT 5 when it comes out.
+ All right.
+ It's the AMK AMD K62 going to work, going to use it in a multiprocessor.
+ Bring me the chalkboard.
+ I'm sorry.
+ Did I shout that?
+ No.
+ Fetch me the chalkboard.
+ Thank you, Allie.
+ We'll answer this question.
+ We'll take care of this.
+ This one is so all yours.
+ Bring me the chalkboard.
+ I know that processor's exciting.
+ First of all.
+ So you just go to town.
+ Hey, would they paint our board?
+ Is this a new color?
+ Yeah.
+ What color is it?
+ It's black.
+ You know what?
+ It's a blackboard.
+ No, no, no, no.
+ Square chalk.
+ I never saw such a thing.
+ All right.
+ First of all, let me talk about what multiprocessing is.
+ The idea is you have a program running.
+ Let's call this a program, all right?
+ And you have your processor, your computer.
+ It's chewing up the data, chewing up the data.
+ Multiprocessing can be two things.
+ First of all, you could have a second program running and a second processor chewing up the
+ data and then they both spit out the output to your screen.
+ So two processors working at once.
+ Or you could have one program that slices itself up into multiple processes or threads
+ and one processor takes one.
+ The other processor takes the other.
+ Still has one output coming out to your screen.
+ In theory, it's speed up your computer by twice, right?
+ Well, his friends are right.
+ The K6 does not do what's called.
+ This is called SMP, symmetric multiprocessing.
+ K6 does not do it.
+ Intel chips can do it.
+ But there's a caveat here.
+ First of all, you do have to be running a multiprocessor operating system,
+ which is Windows NT or Unix or Linux or OS2.
+ It has to be an operating system that knows about these slices.
+ And it has to be a program that knows about the slices.
+ In other words, you can't just be running Microsoft Word and Windows NT
+ and expect to get any benefit at all from having two processors or more.
+ You can, by the way, go up to eight processors on many systems, sometimes even more.
+ You need an operating system and a program that knows.
+ Now Photoshop and some high-end CAD programs do understand multiprocessing.
+ Anything else?
+ Well, quite a few.
+ But you've got to check with the vendor of your software.
+ Make sure that it will do multiprocessing.
+ What do you want to do on this home machine?
+ That's exactly right.
+ You're not going to quake.
+ You're not going to run any faster with a multiprocessor system.
+ In fact, most of the time, these are used on servers,
+ which are the big computers that handle multiple transactions at once,
+ and they're basically being used for things like your ATM machine,
+ where you've got thousands of people all at once requesting cash.
+ Then a multiprocessor makes sense because there's a lot of stuff happening at once
+ and needs to process in real time.
+ So unless you're trying to run an ATM machine at your house--
+ I think most people are trying what they think is,
+ "Oh, two processors are better than one.
+ I double my speed, ain't going to happen."
+ He's trying to impress the locals.
+ He's trying to impress those local yolks.
+ I'll say you just can't do it without a genuine--
+ Right.
+ I'll just get this vision.
+ I'll get this vision.
+ Exactly.
+ I'll get this vision of them sitting around the cracker barrel,
+ there in the general store, say, "No, Joe, you can't do it with a K6."
+ No, K6 doesn't work that way.
+ You have to have the genuine entail.
+ Thank you, Allie.
+ All right, thank you.
+ Be careful next time with that latte, all right?
+ Oh, sure.
+ I can't wait to see who we get tomorrow.
+ I'll keep you posted.
+ All right.
+ Let me know when you get Judy Garland in the cap, Gina.
+ It's gonna happen.
+ Silla, come out, y'all.
+ You haven't had troubles with your peripherals?
+ Well, it could actually be a problem with your operating system.
+ We're going to show you why when the screen savers continue.
+ ♪♪
+ The screen savers are sponsored by CDW, the number one direct seller
+ of compact IBM, Toshiba, and Microsoft.
+ Next time, give them a call.
+ CDTV presents Ask Tilda.
+ Mark from Denver writes, "I was installing some new software
+ and a screen came on that said hit any key to continue.
+ Where is the any key anyway?"
+ Mark, observe our example.
+ Relax.
+ Close your eyes and drop your head onto the keyboard.
+ Oh, are you okay?
+ Email Tilda at zdtv.com.
+ Where is it?
+ Hmm?
+ I'm waiting.
+ Need it.
+ Need it.
+ ♪♪
+ I'm not bad.
+ Still waiting for that computer system you needed yesterday?
+ No.
+ Should have called CDW.
+ Your personal account manager can even ship at the same date.
+ Hey, Dave.
+ We'll configure today and you'll have it tomorrow.
+ I love you.
+ I love you, too, Dave.
+ CDW, the number one direct seller of compact IBM, Toshiba, and Microsoft.
+ Next time, give us a call.
+ 70, 65, 56.
+ I got a lot to say about hacking.
+ Hackers have a certain kind of drive.
+ They want to know you're cold.
+ They want to get up inside your brain.
+ They want to get behind you.
+ They kind of like these creepy, tragloditic creatures hanging on your shoulder
+ trying to peer into your personal business.
+ I won't do it anymore.
+ I'm going to give up on hacking.
+ It's all clean living for the surf guru.
+ No more misbehavior online.
+ In our world, the speed and tempo of modern living are increasing at a never accelerating rate.
+ The tool which has made this possible is the high-speed digital computer.
+ The major task is to extend and augment human judgment, human imagination, and human intuition.
+ That's where we come in.
+ CDTV, amaze yourself.
+ People all around the world are demanding their rights.
+ CDTV, me.
+ CDTV, the first 24-hour channel for computing and gaming.
+ It's just an incredible phenomenon to me to see that so many people on the internet are interested in it.
+ Live.
+ CDTV, me.
+ This is like soccer to me.
+ Uncensored.
+ Anything to make my floppy disks spill.
+ CDTV, amaze yourself.
+ CDTV, amaze yourself.
+ He cuts through the techno-bounds.
+ Spam, spam, spam.
+ He gets to the heart of the problem.
+ Do you have a 56K modem now?
+ He even takes a call from Mom.
+ Can you hear me?
+ I can hear you.
+ Fine, Mom.
+ He's Leo LaPour, ready to solve your computer problems.
+ Live.
+ Call for help.
+ Weeknights, 7-6-Central on CDTV.
+ Hey, if you missed it on the air, try going online to the screensabers homepage.
+ Insightful information.
+ Use the links interaction on all this at its caffeine free.
+ Log on.
+ Check us out 24/7.
+ Wait a minute.
+ It says they have an image of Mark and Dreyus in a latte.
+ I think there's a little confusion here.
+ Mark and Dreyus.
+ No!
+ Anyway, I want to continue with call for help.
+ I just want to say...
+ What's the name of the show, Leo?
+ Go Cowboys.
+ What's the name of the show, Leo?
+ Go Cowboys.
+ Go Cowboys.
+ Go Cowboys.
+ Rah, Rah, Rah.
+ Don't mess with Texas, okay?
+ In chat room, they're talking about our conversation of the day, which is...
+ Our corporate executives paid too much.
+ And actually, they're more interested in the click of death.
+ It looks like than the corporate executives.
+ Apparently.
+ It's Bill Gates paid too much.
+ He only makes $600,000.
+ That's not a whole lot.
+ Actually, you know, somebody pointed out Jack Welch, CEO of NBC, makes $6 million.
+ Well, how much does Tom Brokaw make?
+ Can you take that head off, please?
+ I think it's rather dead shit.
+ Take off the dang hat.
+ I like that little lady.
+ That's here is a 20 gallon hat.
+ Give me that.
+ So, where were we?
+ Philip and Tampa.
+ Let's get on with the show.
+ Hey, Philip.
+ Philip?
+ Hi.
+ Hi.
+ Hi.
+ Hi.
+ Look, I have a question on Windows 95.
+ I purchased a device that has USB and I need a later version of Windows than what I had.
+ I'm using a 4.00.950A and USB version, one with, I guess, an OSR.
+ And I don't know what that...
+ I wonder if you can help me out what that means.
+ Yeah, you can't do it without OSR 2 or OSR, what does it be?
+ OSR B 2.1.
+ And you can't upgrade from A to B.
+ Microsoft doesn't offer that as an upgrade.
+ And the main reason was they were afraid that people would use the new file system, FAT32,
+ which is available in OSR 2.
+ And they would get in trouble because older disk utilities would damage the disk if you used FAT32.
+ So, Microsoft did what's called a slipstream upgrade.
+ Slipstream upgrade.
+ They put OSR 2 on new computers, but they didn't offer it to existing users.
+ So, if you bought a USB device, you are SOL, my friend, until Windows 98 comes out.
+ Now, the good news is you can buy Windows 98, upgrade, and your USB device work.
+ In fact, truth is, it didn't work very well with OSR 2.1 anyway, OSR B 2.1 anyway.
+ You really wanted to go to Windows 98 if you're going to use a USB device.
+ So, you know what? You're one of those people who should spend the 88 bucks.
+ That's the approximate street price for Windows 98 and get Windows 98.
+ Is that okay with you? Can you live with that?
+ I think so.
+ Yeah, there are sneaky ways to buy OSR 2.
+ For instance, here's a weird one.
+ You can buy a new computer, but here's a weird one.
+ There's a company called Connectix makes something called Virtual PC,
+ which is an emulator, PC emulator for the Mac, which comes with Windows in the package,
+ about 99 bucks, and the Windows it comes with is OSR 2.
+ So, if you really had to, you could go out and buy it.
+ But my point to you is that USB devices don't work very well,
+ even with this USB support built in a 95.
+ You really want to go to 98.
+ Okay, thank you very much.
+ You know, all right, folks, just ahead.
+ The click of death.
+ Have you heard of it? Well, it's a really real problem.
+ Appearing with these zip and jazz discs, we're going to have a full explanation
+ with the leading authority on the topic, right?
+ Right after this.
+ Just imagine being linked to a source of information,
+ to a global internet adventure.
+ Just imagine clarity in a world of chaos.
+ Now, there's a new television network.
+ ZDTV, your home for entertainment.
+ Explain the power of computers and the internet.
+ Creating a world of possibilities.
+ ZDTV, amaze yourself.
+ Keep, Larry.
+ Oh, hey, everybody.
+ Till the here, try this.
+ One, stretch those hands.
+ Two, tune in to ZDTV and three, log on to zDTV.com.
+ You know, ZDTV is a total computer workout.
+ News, products, gaming.
+ It's like having your own personal computer trainer on air and online.
+ Till the, a real character on ZDTV.
+ One more set, you can hit the shower.
+ Welcome back to the screen savers.
+ Leo Laport here.
+ Kate Patello is in the chat room.
+ We are going to talk about something very, very interesting.
+ And I think you'll want to watch this closely.
+ There is a problem.
+ And it's acknowledged with the iomega zip and jazz drives
+ referred to as click death or the click of death.
+ And here's what happens.
+ An audible click develops in drives, which can be fatal to the disc
+ and sometimes possibly to the drive.
+ We're going to find out a little bit more about that here to explain
+ what the click of death is.
+ A guy who's done a lot of research on the subject.
+ A man I've read and known about for years, Steve Gibson.
+ Hardware wizard disc guru.
+ Good to have you here.
+ Thanks.
+ You wrote spin right years ago.
+ How long did you write spin right?
+ It had its 10th birthday at the end of March.
+ And it's back.
+ Version 5.0.
+ Because I remember you retired.
+ Kinda.
+ Well, I left.
+ I did the column for eight years.
+ In Infoworld, the tech talk column.
+ Every week for eight years.
+ I read it religiously.
+ That's enough.
+ That's all I read.
+ That's right.
+ And you know, John left and the magazine changed.
+ And also the industry began accelerating to a point where I
+ wasn't able to get anything else done except research for the
+ column.
+ And you know, my main focus is development.
+ That's what I love.
+ I should hear on that last column.
+ Well, he's back.
+ And let's talk a little bit about the click of death.
+ I would love to talk to you another time more about all the history.
+ Because I'm an oldster.
+ But let's talk about click of death.
+ First of all, how did you get involved in click death?
+ What happened is that with version 5 of Spinrite, which
+ supports the FAT32 you were talking to the prior caller about,
+ you know, in SR2, it also supports SCSI drives for the first
+ time.
+ And zip and jazz drives, or if not SCSI, they're SCSI-like.
+ The point is that Spinrite 5 runs on any drive that exists under
+ DOS and Windows.
+ So you had to investigate these drives.
+ What happened was we got a couple people wrote to us, a couple
+ of customers called and said, hey, Spinrite 5 fixes click of death.
+ I'd never heard of click of death.
+ So I did some research and I found out that there's like, you
+ know, thousands of people that are having problems with their zip
+ drives.
+ So although Spinrite--
+ Now, by the way, we should say 10 million zip drives in use.
+ 15, I think.
+ 15 million now.
+ So 1,000 people or thousands of people is not a bad number.
+ As a percentage, I think it's not.
+ You know, I mean, Iomega has said maybe 100,000 would be effective
+ by this problem.
+ Even that's a small number.
+ Yeah.
+ When you consider 15 million.
+ So what is click death?
+ The click sound itself is no mystery.
+ That's the sound made when the disk is-- or when the drive is
+ unable to find the sector or access a sector that is looking
+ for in the disk.
+ We've heard this on hard drives ago.
+ Back in the old days, the old timer that you are, you remember
+ that--
+ Yes.
+ It's trying to read a sector again.
+ It's doing a retry and it sounds like it's struggling.
+ It's like groaning, exactly.
+ In this case, you get a clunka, clunka, clunka, which is nothing
+ more than the heads being retracted out of the cartridge and
+ then put back in to see if, like, doing it again, loading them
+ again will help the problem.
+ So the click itself is not a bad thing.
+ It's not like the drive, head, hitting the media or something
+ like that.
+ No.
+ It's just-- it's a normal thing.
+ It's trying to reread it.
+ It's just like the sound that you hear when you first put the
+ cartridge in and the heads load.
+ But when I hear this sound, should I be worried?
+ Well, if you hear the sound ever, once the cartridge is in and
+ when you're, like, trying to access your data, then you need
+ to be worried.
+ Okay.
+ Now, this is, I should reiterate, a problem that occurs on iomega's
+ zip and jazz discs.
+ Right.
+ That's the one megabyte is the jazz and the zip is the one
+ hundred megabyte.
+ Does it happen to the new two megabyte jazz discs as well?
+ No experience without it.
+ I have heard other people talking about, you know,
+ side-quest drive.
+ So it may happen to other removables.
+ Sure.
+ All right.
+ Yeah, and there's no reason that it's only specific to iomega because
+ the, again, the click sound is just what any removable media
+ cartridge would have.
+ All right.
+ So what's happening if I understand this?
+ This is, by the way, a zip disc.
+ And, boy, I tell you, I live on these things.
+ I eat them for lunch.
+ And I treat them pretty badly.
+ I have to confess, and you were talking before the show, that
+ one of the problems is people treat them like floppy disks,
+ you know?
+ Well, and, you know, the classic zip drive itself, you know, is
+ that blue box that you take?
+ You're banging around.
+ And you tend to take it around with you.
+ You know, people treat laptop computers a little too casually.
+ And I think they might be treating their drives a little too
+ cat.
+ So what's happening here is four of the redundant sectors.
+ Is that right?
+ On the disk.
+ Tracks.
+ There are four sort of secret hidden tracks called Z tracks,
+ Z as in zip, which is where the drive stores its internal
+ housekeeping data.
+ Okay.
+ It's not your data.
+ It's the drive zone data.
+ And you have no access to it from the outside.
+ Right.
+ Those get damaged.
+ It basically turns this into a coaster.
+ Outdoor stop.
+ Okay.
+ Yeah.
+ It's a high tech coaster.
+ Now, one of the things we've heard with click death, and I
+ want you to debunk this one, is that when a cartridge dies,
+ it can then contaminate other non-damaged drives.
+ Is that true or false?
+ In other words, I've had click death.
+ I pulled this out.
+ This disk is damaged.
+ Very likely that disk has some formatting damage on it now.
+ Is my drive damaged in my zip disk drive damage?
+ Yeah.
+ That drive is damaged.
+ That drive is damaged.
+ Well, if I put this in another drive, my friend's drive,
+ to see if this disk is okay.
+ Am I going to damage his drive?
+ Only in a very rare circumstance.
+ Because that was one of the things I think that really scared
+ people.
+ Was this contagion idea?
+ This typhoid mary of zip disks.
+ What happens is a bad zip disk will damage the formatting on
+ that cartridge.
+ And so, and you're hearing it click, and click, click,
+ and you're thinking, "Oh, there's a problem."
+ Then you take this disk, which itself has now been damaged
+ by the bad drive.
+ Right.
+ Stick it into a good drive.
+ Right.
+ And it clicks.
+ So, the presumption is, now that drive is bad.
+ It's not the drive.
+ But it's only clicking because it can't read this disk.
+ Exactly.
+ It's a normal process.
+ Exactly.
+ So, what happens to these drives that they start clicking?
+ What's going on?
+ Why would it damage this disk?
+ By the way, I haven't had this happen.
+ I don't know.
+ Anybody this has happened to.
+ I know thousands of people.
+ They're all -- well, that's because they're all coming to --
+ Steve, give us a minute.
+ My website is spinwright.com, and you have a whole section.
+ If people want to know more about this, and we point to it.
+ And a freeware utility on the way that'll allow you to detect
+ whether your drive might cause click of death.
+ All right.
+ So, the drive is damaged.
+ It's damaged the disk.
+ This is useless.
+ Should I then take the drive out of circulation?
+ Will it damage more disks?
+ Yes.
+ Okay.
+ So, it's now time to retire the drive.
+ Good news.
+ They're only about 100 bucks.
+ Is there any way to fix a click of death drive?
+ The problem is you ask what causes it.
+ Right.
+ When I started doing the research, I wanted to find the reason
+ and fix it.
+ Maybe do something like zip right, you know, to fix zip problems.
+ Turns out there isn't a cause.
+ It's been linked to bad power supplies, bad connectors.
+ The head's getting dirty, and there's no cleaning disk for zip drives.
+ There's no such thing.
+ Mechanical problems in the positioner.
+ There's a whole array of problems that develop in these drives.
+ That's why I backed off from trying to create a cure.
+ Instead, I created something that would test whether your drive
+ was going to have a problem.
+ So, you've created a program called Trouble in Paradise.
+ Right.
+ Y-P dot X-E.
+ I love the name.
+ What does it do?
+ Trouble in Paradise is a non-destructive test that you can put
+ a disk in any drive.
+ It will do, basically, it does reads and writes while watching
+ the drive's behavior closely to detect whether the drive is
+ having problems.
+ The drive, see, it will mask problems a lot by relocating
+ bad sectors around using these Z tracks.
+ So, it's actually smart.
+ It's doing the right thing.
+ It's a beautifully engineered drive.
+ When I got into this, I was very impressed with the engineering
+ IOMEGA had done.
+ It looks like, you know, a percentage of them that is not
+ insignificant are having problems.
+ All right.
+ So, you're going to release this when?
+ Middle of next week.
+ Okay.
+ And it will be a diagnostic program.
+ Free.
+ Free.
+ Downloadable from SpendRight.com.
+ Very small.
+ All right.
+ Gee, people still write an assembly.
+ That's all I use.
+ Only Steve Gibson.
+ [music]
+ Hello, and welcome to the screen savers.
+ I'm Kate Patello.
+ And I'm Leo LaPorte.
+ Thank you so much for joining us coming up in today's show.
+ Shields up.
+ And protect yourself from the dreaded port sniffers.
+ [music]
+ Hello, and welcome to the screen savers.
+ I'm Kate Patello.
+ And I'm Leo LaPorte.
+ Thank you so much for joining us coming up in today's show.
+ Shields up.
+ And protect yourself from the dreaded port sniffers.
+ Never mind.
+ Also, editor-in-chief, Jake Kirchner joins us with PC Magazine's top rated
+ products for 1999.
+ Very cool segment.
+ Be sure to check that out.
+ Really neat stuff.
+ Then later, the hottest digital cameras, whether you are a novice,
+ whether you are a novice or a pro gym ladder back has a digital
+ camera for you on today's fresh gear.
+ All right.
+ Today's the chat room.
+ Now, let me just give you this specific author and the title of
+ the book, a new book written.
+ The 75 Greatest Management Decisions Ever Made and 21 of the
+ Worst by Stuart Craner.
+ Names as the number one, what do you think Leo?
+ Now, we should say, by the way, by the way, this guy's not a computer
+ expert.
+ No, he's not.
+ And it's a business book.
+ Yes.
+ Not a computer book.
+ That is correct.
+ He says the number one business mistake, I'd say New Coke.
+ New Coke.
+ New Coke.
+ Incorrect.
+ Edsel.
+ Good guess, but not good.
+ No.
+ Technology related.
+ Oh, it's technology related.
+ Management decision.
+ HP's decision.
+ When Stephen Wozniak came to them saying, would you like to make a
+ computer called an apple to say, they said, no, you know what?
+ There's no market for personal computing.
+ How about that?
+ These are all really good options.
+ That's a pretty good one.
+ These are good.
+ Michael Patterson selling DOS for $30,000.
+ Yeah.
+ Kicking himself.
+ Nope.
+ That wasn't his fault because Bill kind of misrepresented the whole.
+ Of course, but that's beside the point.
+ So the worst move ever?
+ Ever.
+ Was apple killing off the clones?
+ Oh, interesting.
+ The licensing of its operating system, according to this author, was
+ the worst management decision ever.
+ We're asking you today.
+ That's a pretty bad decision.
+ Pretty bad.
+ Wait, me mad.
+ Well, we're asking you, did apple make the worst management
+ decision ever?
+ Yeah, but part of that, you know, I mean, they felt that their
+ market share was being diluted.
+ Well, that's true.
+ The licensing of Microsoft OS didn't necessarily make everything
+ take over.
+ Just so that.
+ Since they did that, obviously they've had profitable quarters
+ every quarter since then.
+ Right.
+ So it's hard.
+ I mean, you have to say that's a worst business decision ever.
+ Since it hasn't, in fact, hurt them.
+ Mm-hmm.
+ But I guess what you could say is, well, what was the opportunity
+ cost?
+ Because if they had continued licensing, maybe instead of
+ Windows, Macintosh.
+ No.
+ What a watered down.
+ The guy's wrong.
+ The points earlier were a problem.
+ Here's where you could really say the bad decision.
+ And Steve Jobs has told me this, and believes this fervently,
+ that Apple did make a very horrible business decision around
+ 1989 or 1990 when Jobs was gone.
+ It was John Scully at the time when they said, should we open our
+ license?
+ No, let's not.
+ Let's keep it proprietary.
+ Yes.
+ That might be where they went wrong.
+ I'd buy that as being one of the worst mistakes.
+ The article that I read that was linked off of Good Morning
+ Silicon Valley, check that out, folks.
+ GMSV.com.
+ Great site.
+ Great site.
+ The technology.
+ Yes.
+ They specifically said that what agreed with you, that that
+ was actually a much worse decision than killing.
+ Clearly that hurt Apple badly.
+ They could be Microsoft right now.
+ Have they allowed people to buy the operating system and put it
+ on other hardware?
+ So we don't think that was the worst management decision ever.
+ But we want to know, of course, what you think, take our
+ web poll at the screensavers.com.
+ While you're there today, folks, click, talk back and tell us
+ what you think the worst management decision ever.
+ Technology-wise.
+ I suppose technology-wise.
+ Well, you can do it in general, I guess.
+ It's New Coke.
+ I'm with you, man.
+ Yeah.
+ I'm really interested in tech.
+ I'm going to have to think about it.
+ Before the show's over, I will come up with, I think, what I
+ think is the worst computer-related decision.
+ There were some bad ones.
+ Ten says the second Jan was also a very bad management
+ decision.
+ The second Jan in the Brady Bunch?
+ Yeah.
+ I was thinking there were a couple, actually, like that, that
+ were pretty bad.
+ Oh, getting rid of pineapple lifesavers.
+ Did you see that?
+ They were saying pineapple lifesavers were not
+ why to take a line.
+ They didn't get rid of them.
+ They're voting.
+ They're voting.
+ They won't get rid of them.
+ No.
+ For watermelon?
+ No.
+ Give us a call.
+ 888-989-7879.
+ I just thought of one.
+ Probably the worst decision in the computer industry ever.
+ You put a company out of business.
+ Is that count?
+ Yes.
+ I'll tell you in a second.
+ Chat at zedenet.chat.zedenet.com.
+ That's our chat room.
+ And we are, by the way, in the screensaver's room.
+ That's where the party is going down.
+ That's a party?
+ As the young people say.
+ Is that what we say?
+ Yeah.
+ Where the party is going down.
+ Actually, the other party going down is indeed netcams
+ and wicks.
+ That's where it's actually happening as the kids
+ would say.
+ We've got a couple of parties going to actually three.
+ Hey.
+ Jennifer.
+ Scott.
+ Robyn.
+ Robyn.
+ And Shannon.
+ Robyn Scott and Shannon.
+ What are they doing?
+ See no either.
+ Heal no evil.
+ Speak no evil.
+ They said the worst management decision ever was
+ always cutting to the net cam booth to ask the top top
+ question at the top of the show.
+ Yes.
+ They would agree with that.
+ So, of course, call them up.
+ That's what we're going to keep doing it forever.
+ Give them another bit to do and earn yourself the fabulous
+ coveted screensaver's magnet as seen on our fridge.
+ Aww.
+ Curious George.
+ How cute.
+ Let's get to our --
+ Let's get one of these puppies away.
+ You want to?
+ First caller of the day on the ZD-TV 3.com net.
+ Came networked from Atlanta, Georgia.
+ It's Pete.
+ Hello, Pete.
+ Hey, how are you guys doing?
+ Pete, we're pretty good.
+ I'm tossing you a magnet.
+ Ready?
+ Yeah.
+ One.
+ Two.
+ Oh, my gosh.
+ All right.
+ Nice casting.
+ I think you flipped his eye there.
+ Did I?
+ I got it.
+ Oh, I put his eye out.
+ Great.
+ So, what can we do for you, Pete?
+ Well, it's coming towards Christmas.
+ I asked my grandfather for a present from Amazon.com.
+ All right.
+ Oh, good call.
+ It was the Philips Nino 3.19.
+ Very nice grandfather.
+ Very nice grandfather.
+ Very nice grandfather.
+ But it doesn't work?
+ They canceled the orders.
+ The only problem.
+ Oh.
+ And I'm running out of time.
+ So, I have a $200 budget.
+ And I'm looking for the best wired toy.
+ What are you looking for?
+ I mean, what kind of thing do you want?
+ I'm just looking for some fun toy under $200.
+ It's going to get me off for the rest of the year.
+ Are you in school?
+ Yeah.
+ What grade?
+ I'm a freshman.
+ Freshman in high school.
+ Yeah.
+ All right.
+ So, he had started with a Nino.
+ Nino is pretty cool.
+ So, how much is a handspring?
+ I don't think you could set it at Amazon.com.
+ Oh.
+ Fortunately.
+ So, it's a gift certificate.
+ Do you have to use it at Amazon?
+ Or can you go anywhere?
+ No, I don't.
+ We made that with cancels for the Nino.
+ Oh, I see.
+ Better than I like the Nino, I like the Palm Spring.
+ And there are three models, 149, 179 and 249.
+ I get the 179 model.
+ That comes with a docking cradle.
+ Without that, it's not good.
+ That's a good choice.
+ That's a good choice.
+ And add them later.
+ That's a good choice.
+ And that's the gift that keep on giving.
+ Because Grandpa can keep giving you stuff.
+ Yep.
+ And it's better than the Nino.
+ I would agree with you.
+ You were a Nino user.
+ I played with the Nino.
+ And I liked it a lot.
+ But once I played with this handspring with the visor,
+ forget it.
+ That's if you want to stay with the PDA.
+ You know what I really like?
+ How much is a Game Boy?
+ Game Boy would be great.
+ Do you have a Game Boy?
+ Yeah, I feel Game Boy.
+ It's not much of a rush.
+ No, PlayStation, Dreamcast.
+ Yeah, we have all that stuff.
+ Oh, okay.
+ Hey, you know, that Intel microscope is 100 bucks.
+ That's kind of cool.
+ You might be a little old for that.
+ But that's 100 X microscope that hooks up to your net cam.
+ Or your computer.
+ Yeah, I actually use a -- I'm using a video camera right now.
+ I have a whole studio right here.
+ Very nice.
+ Oh, really?
+ Yeah.
+ I'll tell you what.
+ Let's get our chat room involved.
+ Let's get our viewers involved.
+ Get our email.
+ Your budget.
+ $200.
+ You can tell what kind of cool guy he is.
+ Let's take us some stuff.
+ How about mp3s?
+ You listen to mp3s?
+ No, I have tons of mp3s.
+ Yeah.
+ You have an mp3 player?
+ Yeah.
+ Actually, I do have the Rio 300s.
+ Oh.
+ What to give the guy who has everything?
+ Yeah, I have everything.
+ Okay.
+ What's your video card?
+ I'm using an API only under 128 PCI 16 megabytes.
+ You might want to look at it.
+ Of you.
+ Do you play games?
+ Well, not many.
+ All right.
+ Don't upgrade your video card.
+ Man, you're tough.
+ You're tough to shop for.
+ Yeah.
+ No wonder grandpa gave up.
+ I'd say give you a gift certificate and just let you go.
+ Not only did the grandpa give up, we went to some other caller.
+ All right.
+ We're going to get the entire group involved by the end of the show.
+ I promise you, we will have five.
+ I count them five great technology solutions for under $200.
+ All right.
+ We're going to do it.
+ Is grandpa watching?
+ No, he's not.
+ What's his name?
+ He's named Harry.
+ Harry.
+ Why don't you tape this and you can give it to grandpa Harry.
+ All right.
+ All right.
+ And then don't tell him.
+ All right.
+ You know what to get, right?
+ Okay.
+ That way it'll be a surprise.
+ All right.
+ Thanks, Pete.
+ All right.
+ Thank you, Pete.
+ Nice hat, by the way.
+ Oh, thank you.
+ Can I tell you?
+ These are the trivia in your bookshelf at 945.
+ All right.
+ What was the question you won with?
+ I really don't remember.
+ I win those things all the time.
+ It was trivial.
+ I win those things all the time.
+ That's a screen saver's hat.
+ It's a screen saver's hat.
+ Yeah.
+ I'm actually waiting for the t-shirt.
+ If you guys could sign that, I won the super geek challenge.
+ All right.
+ All right.
+ If it's not already on its way to you, we'll find us some shiny markers of some sort that'll
+ write on a black shirt.
+ And we'll send it to you.
+ All right.
+ Okay, Pete.
+ That's worth 200 bucks right there.
+ There you go.
+ Not.
+ Thank you, Pete.
+ Take care.
+ Thanks, Pete.
+ You may be the first person who's ever actually called us with a screen saver's hat on his
+ hat.
+ That's great.
+ I'd like to see more of that.
+ Yeah.
+ Call us up with your screen saver's hat and it's more likely that you'll get on.
+ You're all seen.
+ First, I got to win one.
+ Yeah.
+ We'll tell you how to win one later on.
+ After the break, protect your ports and cook shields up.
+ Why not what I'm talking about for the screen savers?
+ What is your time now?
+ What is your time now?
+ And it's time now for the weekly windows tip.
+ The happy news tip.
+ Protect your ports.
+ Put your shields up with many, many thanks to our dear friend Steve Gibson of grc.com.
+ Check your own security by running shields up.
+ Now, this is a program he wrote.
+ This is a terrific program that he wrote.
+ Now, if you go to grc.com, shields up will show you how much information its secure engine
+ can find about you and your machine.
+ So if you go here and I have this set up, folks, so that it won't show our IP address.
+ But right above this, please stand by.
+ You'll see it'll have my IP address.
+ And it'll say I'm trying to connect to your computer.
+ Now, I will tell you immediately it knew our computer name right away.
+ And when I did this at home, by the way, the same thing happened.
+ It knew my computer name.
+ It knew what I put myself in as my workgroup.
+ All kinds of stuff.
+ All going out over the internet.
+ So this engine will run and then test your security.
+ Now, first of all, it'll say, look, preliminary internet connection established.
+ I was already able to connect to your machine.
+ And again, this is secure.
+ They don't keep any of this information.
+ They don't do anything with it.
+ They're just telling you what it is they're capable of doing.
+ And then you can scroll down a little further.
+ It'll tell you now this says unable to connect with net bios to your computer.
+ On my machine, it said, plus, I can connect with net bios to your computer.
+ So it'll go through and tell you what all of your security holes are.
+ Here we have our private names showing up, going out over the internet.
+ All this stuff.
+ So as you can see, let me scroll past that.
+ There we go.
+ A lot of things in here that can go wrong.
+ You can also go in and probe your ports.
+ When you do that, it gives you this.
+ It will show you all of the ports that are closed and any that come up as open.
+ Now, I experimented and I tried this over our firewall machine on the corporate network
+ back at the office.
+ All of my ports came up in stealth mode, which is great.
+ But they say, you know, closed is the next best thing to a stealth port.
+ It just says, I'm closed.
+ Now, the repairs are actually pretty simple.
+ And this is one of the best parts that I like about this.
+ He takes you through all the way, the adapter, the protocol, and the service binding
+ where a lot of this lies at fault.
+ You do not need the client for Microsoft networks or file and printer sharing
+ or the Microsoft family log on to get on the Internet.
+ You need those to share files with other Microsoft Windows machines.
+ But you don't actually need them to get on the Internet, so you should not have
+ the client for Microsoft networks, for instance, bound to TCP/IP.
+ So, he'll take you through all of these steps and explain all of the different layers
+ and where they should be binding and show you this is the default setup, folks.
+ If you look here, everything is bound to everything else by default.
+ That is not necessary.
+ So, he can take you through the whole process, explain what you have,
+ and tell you, ultimately, you want to have TCP/IP, for instance,
+ bound to your dial-up adapter or your cable modem or your DSL interface to your NIC,
+ and take you down from there that you can use, actually, net buoy is a lot safer
+ for any kind of internal sharing, anything like that you want to use.
+ You bind the client for Microsoft networks, the family login, those bind to net buoy,
+ and TCP/IP binds directly to your adapters.
+ Now, he'll actually take you through this step-by-step.
+ If you go here, click on your operating system, 9598 or NT,
+ and he will walk you through the whole thing depending on how you should have your protocols mapped,
+ what instructions you should follow, and what you should ignore.
+ So, please do run this.
+ He will be so glad you did, found a hole in my own security, went back, ran the test again,
+ came up clean, couldn't find anything on my machine at home.
+ Next best thing to having a firewall.
+ Check out our website, thescreensavers.com.
+ For step-by-step instructions, we have a basic article about the tip,
+ but I really recommend that you come to Steve's site, grc.com,
+ and read all of this really helpful stuff, including all of the explainers,
+ his explain this to me section about this Windows tip, check it out.
+ Thank you for doing that, Steve, that's really great.
+ Yes, thank you, Steve.
+ I was just going to look up spin-right because I was thinking,
+ "Oh, man, I need spin-right for a moment," and I found this just by accident
+ and ran it and was like, "Oh, my God, I'm insecure."
+ Yeah, it's good to know.
+ It's good to know. Good explanations too in there.
+ Yeah, combat those feelings of insecurity.
+ Thank you, Steve.
+ Hello, I'm Linna Sposto in the ZD&N Newsroom.
+ All the news about potential bugs in Windows 2000
+ didn't slow down sales.
+ Today, Microsoft said more than 500,000 copies of the OS have been sold
+ since its launch in mid-February, better than the company had expected.
+ Microsoft was an actively traded advance on the NASDAQ
+ and helped push the composite into record territory.
+ The Japanese release of Sony's PlayStation 2 had customers camping out
+ for a chance to get their hands on it, hundreds of hopeful video game fans
+ set up tent sites outside Tokyo stores.
+ Sony plans to sell at least one million game consoles
+ within the first two days of the Japan launch.
+ Well, will cell phones become the next handheld craze?
+ No, Kia's chief hope so.
+ He said web-connected mobile phones could outnumber PCs
+ linked to the net within three years.
+ More news in an hour.
+ I hope these people can help me with my computer.
+ Oh!
+ No!
+ No!
+ Hey, technician, we'll be with you in four hours.
+ You can upgrade for just $5,000.
+ What?!
+ The Universal City of The big world should be set to ID6.
+ I need to explain anything to help.
+ Leo Laporta, call for help.
+ May I help you?
+ Oh, hi, welcome.
+ Welcome to call for help.
+ Leo Laporta here.
+ This is it!
+ Friday!
+ And we've got a great show for you.
+ This is the show where we talk about high-tech.
+ We answer your questions.
+ We make it all simple.
+ And you watch this show, you might feel like you're getting smarter,
+ but I want to tell you, I want to let you in on a little secret.
+ You are already smart enough.
+ You can get all this stuff.
+ This personal confuser may seem frustrating, bizarre, and confusing to you.
+ You have every tool in your power possession right now to understand it all.
+ Just nobody bothers to do it in English.
+ They mostly do it in Español.
+ But I don't speak Español, so I'm going to do it in English, okay?
+ Here's how we do the show.
+ It's Live Monday through Friday from 7 to 8 p.m. Eastern time.
+ Live?
+ Why?
+ Well, mostly, because I want you to be able to call with your questions.
+ And that number is 888-989-7879.
+ Told free from anywhere in North America.
+ You can also email me, and you can do that anytime.
+ If you have a brainstorm during the weekend and you want to email me,
+ just send it along to callforhelp@zdtv.com.
+ And we check the mail throughout the show, so as the mail's coming in,
+ if you have something to say about something we just talked about,
+ a lot of times it's a great way for me to get more information,
+ to get corrections out on the air.
+ And it's really valuable to me, so please don't hesitate to use that email.
+ I love that.
+ And of course, the fun way to play is the chat room.
+ This is recreational, all right?
+ If you want to join us at the chat room, go to the website zdtv.com/callforhelp
+ and click on Interact, and we'll see you in there.
+ I want to spend some time in the chat room today.
+ I just feel -- I don't know why. I feel like spring is in the air.
+ Is spring in the air? Is that what it is?
+ It is just -- it just feels -- yeah.
+ Do you feel that way, Gabe? You're feeling good, aren't you?
+ I hope everybody, wherever you are, all over the world watching this show,
+ you're feeling good today because we're going to have a lot of fun.
+ Now, today, I want to ask you, wouldn't it be great if there were a program
+ that would tell you about your internet insecurities,
+ about problems going on on your computer, about people and ways people
+ could get into your system? There is such a thing.
+ And the guy who developed it, a program we've talked about before
+ called Shields Up, is here.
+ Steve Gibson, he's going to show us Shields Up.
+ That's coming up in just a little bit.
+ We're also going to talk about a way to talk with friends, family
+ and relations on the internet, a way to chat instantly with folks, okay?
+ Martin Sargent is going to give us one of his patented walkthroughs.
+ That's all coming up.
+ Right now, let's get to our very first call of the day, ladies and gentlemen.
+ And that is Tommy from Livingston, Alabama.
+ Hello, Tommy.
+ Hi.
+ How are you?
+ Love to show, Leo.
+ Thank you, sir.
+ I appreciate it.
+ I'm glad you watch.
+ What can I do for you?
+ Well, I was wondering about NetSonic.
+ NetSonic, all right.
+ We can talk about that.
+ But first, let me ask you, is it spring in Livingston, Alabama?
+ Right now, it is.
+ All right.
+ So, are you going to get in the mood with us here, the springy mood?
+ Oh, yes.
+ And NetSonic is one of the whole category of programs that are designed to speed up your
+ internet, right?
+ Am I right?
+ Yes.
+ Yeah.
+ Is it netsonic.com?
+ I believe so.
+ Let me just try that and see if it is.
+ Yes.
+ Oh, it is.
+ It's, in fact, according to NetSonic, the most popular internet accelerator software in
+ the world.
+ Wow, it must be good, mustn't it?
+ How much?
+ Have you tried it?
+ Not yet.
+ All right.
+ Let me talk a little bit about what NetSonic and all these programs do.
+ There are a couple of different ways of accelerating internet access.
+ One is by optimizing your connection.
+ Okay.
+ Programs that we've shown before like iSpeed.
+ Those work.
+ Those work.
+ Because, as it turns out, Windows 95 was shipped with the wrong settings.
+ Whoops.
+ It was shipped for settings for a local area network, not a modem.
+ So, iSpeed works on Windows 95.
+ And it can even give you some improvement on Windows 98 if you're on a modem.
+ That's not what this does.
+ This is different from that.
+ This is caching software.
+ And the design is, the idea is to speed up your browsing by keeping data on your hard drive.
+ Now, you know your browser already has some caching capability, right?
+ Yeah.
+ This is supposedly improves it.
+ And i'll have to say, i haven't used this one, but everyone i've used so far, i am unimpressed.
+ And, in fact, often it causes reliability problems.
+ Okay, this is a couple of things that i don't like, that i really don't recommend.
+ This does something called pre-fetching pages.
+ And what that means is, while you're sitting, as i have been noticed, a lot of people
+ The way you browse is you sit, you read a page, then you click on a link that was on the page, right?
+ So pre-fetching, the way pre-fetching would work is, if i had net sonic running right now,
+ It would have already downloaded this page that i'm going to click on.
+ And so it would pop up instantly because it's downloaded ahead of time.
+ Now, that works great if your behavior is, i'm always reading the page, and then i click on most of the links.
+ The drawback to it is, first of all, you download a whole lot more data than you're ever going to look at, right?
+ So it's not a good net is in.
+ I mean, it's using the internet to look at pages you're never going to look at.
+ And unless you click at these links successfully, you're not going to really benefit from it.
+ If i now go to another page, there's not going to be any caching having been done.
+ So if you have a certain kind of viewing pattern that most people don't, in my opinion, it might benefit you.
+ I don't think it's worth the added headache to put it on there.
+ I think, in fact, it can actually cause reliability problems.
+ It's free. There's no reason not to try it. Have you tried it yet?
+ No, but the actual reason i wanted it is to play a lot of ashram's call online.
+ It would not help that at all.
+ So this is basically going to make web pages pop up faster. That's it.
+ Eye speed is the kind of thing you should use for ashram's call.
+ If you have Windows 98, it may not make that much difference.
+ But neither of these programs cost anything. It's worth trying them.
+ I personally am not convinced that this is a good idea.
+ I certainly wouldn't go out and buy.
+ There are other programs that you can buy like Webcelerator. I certainly wouldn't do that.
+ So considering you're not going to get much benefit, I just leave it off.
+ Alright? Thanks, Tommy. Eye speed is available.
+ It's Eye and the word speed is available at the ZeniNet Software Library.
+ That's at hotfiles.com. And I bet you that Sonic's also there.
+ But you can also get it from their website, which is web3000.com or netsonic.com.
+ We've seen these programs. They've been around for a long time.
+ Maybe this one works better than the other ones.
+ But I'll try this one over the weekend and see.
+ But I've yet to see one that really makes any difference at all.
+ And more often than not, they cause more problems.
+ Coming up next, if internet security is your top concern,
+ Steve Gibson could be your new best friend.
+ He's the man behind Shields Up, a website that tests your computer for security problems.
+ We're going to talk to Steve about security problems and what you can do
+ and call for help continues.
+ Stuart, can I see you in my office, please?
+ That kid is sick. That hinge is very sick.
+ Get in here. Sure thing, Mr. Pink.
+ Stuart, I just opened my Ameritrade account.
+ Let's light this candle. Let's go to Ameritrade.com.
+ It's easier than falling in love.
+ What do you feel like buying today, Mr. Pink?
+ Kmart.
+ So research it. All this stuff is provided for you free of charge.
+ No cost.
+ Yeah, that's synonymous with free.
+ Looks like a good stock.
+ Let's buy.
+ Let's buy 100 chips.
+ Alright, click it in there.
+ How about 500?
+ 100, Stuart.
+ I feel the excitement you're about to buy a stock.
+ Okay.
+ Oh!
+ Fabulous.
+ That cost me.
+ Eight dollars, my man.
+ Eight dollars.
+ Eight dollars.
+ You're riding the wave of the future, my man.
+ I can listen to soda.
+ I'm sorry, Mr. Pink.
+ Have a party on Saturday night if you really want to go.
+ I'm going to try and get there.
+ Happy trading.
+ Thank you.
+ Rock on.
+ Alright, Stuart.
+ 25th anniversary special.
+ Open a cash account with $500 and get 25 internet equity trades
+ commissioned free in the first month.
+ Go to Ameritrade.com.
+ Ameritrade.
+ Believe in yourself.
+ Join the thousands of enterprising RTS painting our logo
+ at zdtv.com and you can be on TV.
+ Take a look.
+ You ought to be in pictures and honey, here's your chance.
+ Enter ZVTV's second annual Cam Film Festival.
+ Go to zdtv.com/camfest for all the details.
+ Hi.
+ It's the first show created entirely by you.
+ Catch the sneak preview of You Made It.
+ On Tuesday, March 15th at 10th, 9th Central, only on ZVTV.
+ ♪♪
+ Welcome back to Call For Help.
+ I'm Leo LaPorque.
+ Can someone pry into your computer while you're online?
+ I'll tell you, ever since those denial of a service attacks,
+ security concerns have become paramount.
+ Of course, we're doing more and more of our personal business
+ online, privacy issues become a big deal.
+ But how do you know what's a real threat, what's just hyped?
+ Joining us, Steve Gibson, the president and founder of
+ Gibson Research Corporation, grc.com, with some great ways
+ to protect yourself from computer spies.
+ Hi, Steve.
+ Good to see you.
+ Great to be back.
+ Now, we've got to tell everybody, Steve Gibson,
+ I first became aware of you years ago with Spinrite,
+ which was then and still is the best program ever made for
+ checking and testing hard drugs.
+ Still doing it?
+ Yeah.
+ This is interesting because you've kind of take a little bit
+ of a turn here.
+ Well, what's great about the grc site is you've always covered
+ stuff that's of interest to everybody.
+ Because you're such a great programmer, you can whip these
+ things out.
+ You did a CAH virus recovery program.
+ That was great.
+ I mean, there's lots of wonderful stuff in here.
+ Click of death stuff.
+ Click of death stuff.
+ That's right.
+ With the zip drives.
+ Yeah.
+ So, shields up as your latest.
+ Tell me a little bit about shields.
+ First of all, how did you get the idea for shields up?
+ Well, I was talking to some friends about security and I
+ realized that when you're connected to the internet,
+ the internet is connected to you.
+ And people don't understand that when you go to a website,
+ I mean, you're actually, your computer is connected to that
+ server.
+ Yeah, you think you're getting information from them,
+ but they could be getting information from you.
+ That's what I've done is the idea is I want people to understand
+ what the vulnerabilities were in their, you know, in the
+ normal configuration of their system and to show them exactly
+ what it is that's going on and what information is leaking out.
+ So, I created a website that, like, builds a custom page when
+ you go there, it, like, typically greets you with your name.
+ It says, you know, highly old.
+ Or greetings call for help.
+ Right.
+ How did you know my name?
+ Well, you connected to my server.
+ And I was able to, like, reverse probe your computer and show
+ you what's leaking out of it.
+ And then the rest of the site shows you what you can do to
+ lock it down.
+ This is stuff that any website can ask your computer, and in
+ most cases, well, the computer will just give it.
+ All right, now, we're not running any security software here.
+ So, we're just wide open.
+ But most people work hard.
+ Most people, either a modem or DSL or cable.
+ That's exposed.
+ We always talk about DSL and cable.
+ Like, they're really the ones at risk, but it's not.
+ No, because you can load some software into your computer without
+ knowing it, which just waits for you to connect by modem.
+ You know, I mean, the huge population of AOL users are just
+ as much at risk.
+ Because if you get one of these bad programs in your system,
+ it sits around waiting to phone home.
+ Well, we're going to talk about that in just a little bit.
+ Those are the things like Oreo and Godzilla and stuff.
+ We'll talk about that in a little bit.
+ Let's look a little bit at what ShieldsUp is telling me.
+ And maybe you can interpret it for the lay person so they can
+ understand a little bit about it.
+ This is a great site, by the way, if you want to read about it
+ and have security, you've got to read some material.
+ Thank you.
+ I don't want to panic people, though.
+ I don't want them to go all freak out and worry that someone
+ is like a vulnerability that never existed before is now there.
+ This has always been going on.
+ But with the internet increasing in popularity and more and more
+ people getting connected, it just seems like this is something
+ people have to think about.
+ Is security is important?
+ Right.
+ Okay.
+ And it's not like somebody's probably targeting you.
+ I mean, this is not somebody's out to get you, right?
+ I mean, maybe a business would be targeted, like with these
+ denial of service attacks we had a couple weeks ago.
+ The typical user, though, can be found by a scam.
+ Because they're just one IP address, sort of like one post office
+ box out on the internet.
+ And so hackers do run sweeps across these...
+ Looking for vulnerabilities.
+ Looking for openings.
+ And so the idea is to close these openings.
+ Don't make yourself a target, in other words, right?
+ Right.
+ Understand that you have a little bit of responsibility and, you know,
+ no one else is going to take care of you, except, you know,
+ yourself.
+ Well, we're on the site right now.
+ This is grc.com.
+ Already you know my internet address.
+ Is that normally public?
+ Everybody knows that?
+ Yes.
+ And people should not be too concerned about that.
+ Normally it's in your email headers.
+ If you post something to a news group, it's there.
+ I mean, technically it's the address of your computer.
+ But there really isn't a practical way of hiding it.
+ It's part of being on the internet.
+ You have to have it exposed in order for data to come back to you.
+ What's this number here?
+ That's known as your MAC address.
+ That's the serial number of your LAN adapter.
+ Your network card.
+ Your network card.
+ Now if I'm on a modem, I won't have one of those.
+ In fact, it's all zero, so I don't even bother showing it to you.
+ Okay.
+ But the cool thing about, well, from the technology standpoint,
+ it's globally unique.
+ The first half of it is a manufactured number.
+ The second half is the serial number of that manufacturer.
+ So there's no two of them that are the same.
+ Which means it uniquely identifies your machine.
+ Well, now that's scary because any company that could get that
+ information could, it's like the Pentium III ID.
+ It's like a cookie on steroids.
+ Because it can never go away.
+ Well, and any website can access it.
+ In fact, after I showed that this was here, tons of websites
+ have come to me saying, hey, how can I get that?
+ They're like, oh, well, we're not going to do anything wrong.
+ I'm going to probe my ports.
+ What is a port?
+ Why are you probing it?
+ What does it mean when you do?
+ The way a computer hooks to the Internet is it's got an address,
+ that IP address.
+ That's like your phone number.
+ Exactly.
+ Think about it like maybe your address at home.
+ So it's the address of the whole household.
+ Yes.
+ But then you've got people within the household.
+ So ports are like the individuals within the computer.
+ They're like the different ways of accessing.
+ If this were a phone number, these would be extensions.
+ Yeah, that's a good example.
+ Okay.
+ So these are all ways that I can interact with the Internet.
+ This is email.
+ This is, wait a minute.
+ Now, these are all closed.
+ But this one's open.
+ What is that?
+ Now, that's port 139.
+ A lot of people email me saying, my port 139 is open.
+ Steve says so.
+ Unfortunately, I showed everybody.
+ What does it mean, Steve?
+ So I don't have to answer all those emails.
+ It's because this is open that I was able to say,
+ greetings call for help or greetings Leo or something.
+ That's the port through which this personal information
+ is leaking out onto the Internet.
+ I don't have files sharing turned on.
+ I don't have to.
+ It's still open.
+ It's still open.
+ However, there is a way and my website goes on to explain
+ and really in detail to show people just which buttons to push
+ in order to close that down.
+ And then you'll come back and I'll just say greetings
+ because I have no idea who you are.
+ Now, we have talked about, and I know you talk about your website,
+ a personal firewall solution that's free called Zone Alarm.
+ It is free.
+ Should everybody be running a firewall of some kind?
+ Is that how important is that?
+ In the future, it'll just be part of the system.
+ It is so important.
+ I mean, it's like the wheels on the car.
+ You know, computers have not been on the Internet long enough
+ to mature.
+ One of the ways they're still immature is they don't
+ have a firewall.
+ But Zone Alarm is free.
+ So that should be an automatic thing.
+ Get it.
+ All right.
+ It's at ZoneAlarm.com.
+ ZoneLabs.com.
+ Actually, they've bought ZoneAlarm.com too now.
+ Cool.
+ Oh, good.
+ Makes it easy.
+ Makes it easy for everybody.
+ Now, let me go back.
+ We're at a time.
+ I just want to go back to Shield's Up, which is, by the way,
+ I know you put another T1 in for your appearance.
+ But every time I show this on TV, it goes down.
+ We're going to be a little slow.
+ But if I go back to Shield's Up now, it kind of worked.
+ With Zone Alarm running and I do the same thing,
+ it's going to be a different story.
+ It's closed down.
+ Yeah.
+ What will happen?
+ Because I don't know if we're going to actually--
+ You can click there right now.
+ That's blank.
+ Yeah, go ahead and click right now.
+ And it'll take you in.
+ All right.
+ We're trying to get through the server.
+ I can't wait to go home now.
+ How many people does it take to get this to happen?
+ We saturate at 28,000.
+ So all of a sudden, is that what happened?
+ I have twice that now.
+ 56,000.
+ Because of you, Leo.
+ Next time I show this up, we're going to say please.
+ Now, folks, don't try this at home.
+ Until we're here.
+ We can't get in.
+ We can't get in.
+ All right.
+ Oh, it's slowly going to do it.
+ What it's going to say is--
+ Just greetings.
+ It's going to say--
+ It won't know anything about you.
+ It doesn't know my name anymore.
+ Right.
+ It won't know about those ports.
+ It won't know my internet address anymore.
+ All of that stuff.
+ Because I'm running the--
+ You've got zone alarm running.
+ Firewall running.
+ And that's free.
+ Now, there are other firewall programs out there.
+ Yep.
+ And they're good.
+ They're good.
+ But this one's free.
+ It's free.
+ And actually, this thing does something that, as I think--
+ Well, first of all, it's unique.
+ It does it better than any others.
+ It blocks outbound communication.
+ Conditionally, the firewall is something that the corporation had
+ in some closet somewhere.
+ Right.
+ And that kept anything from coming in from the outside.
+ The big problem for the individual is like a Trojan horse program.
+ That's sitting on my computer broadcasting out.
+ In fact, here it is.
+ Yahoo Messenger is trying to broadcast out.
+ It's trying to access the internet.
+ And zone alarm clock.
+ It caught it.
+ And now, it turns out I have Yahoo Messenger running and I want it running.
+ But if it were doing that stealthily without my knowledge,
+ this would be a very valuable thing to know.
+ Exactly.
+ And the idea is, I think that there's actually a bigger problem
+ with applications you unwittingly load into your computer
+ who want to phone home than it is with the random hacker somewhere
+ on the planet.
+ Save that discussion for another time.
+ I agree with you.
+ Steve, you're the best.
+ Keep up the great work.
+ I am so glad we could get you on and bring your servers down again.
+ Steve Gibson, grc.com.
+ If you want to know more about what he's talking about,
+ there's a link right on the front there about the aurea issue, right?
+ A-U-R-E-A-T-E describes it.
+ And of course, we have a whole bunch of stuff,
+ including links to his site at our address, zdtv.com/callforhelp.
+ We're going to take a break, but I want you to test your technology.
+ It's our daily quiz.
+ Go to the website.
+ Click on today's quiz.
+ Get this right.
+ It means you're in a drawing for one year to smartplanet.com,
+ a great site for online learning our quiz question.
+ What is full duplex?
+ Is it a multi-layer image?
+ A send and receive simultaneously?
+ A ram doubler or a very crowded house?
+ My duplex is full!
+ Get to the website.
+ Give us your answer.
+ We'll talk about it when call for help continues.
+ Well, that's it.
+ That was fun going back in time, Steve Gibson.
+ I love it.
+ Merry Christmas to you.
+ I don't know if you celebrate Christmas or not,
+ but I hope you have a wonderful holiday.
+ We're not such children anymore, Leo.
+ No, my God.
+ Oh, my God.
+ Fifteen years more than my La Johnas now.
+ I've felt old even then and fat and now look at me.
+ Well, it's been fun to watch all this happen together.
+ And who knows how long we're going to go.
+ I'd rather shed a voir du poir than hair, but there you go.
+ That's the way it works.
+ Steve, we'll be back next week, New Year's Day.
+ We're going to do a very special security now as part of our 24 hours of New Year's on tech TV.
+ So watch on Twitch.tv.
+ Steve, Merry Christmas.
+ Happy New Year.
+ We'll see you next week.
+ Thanks, Leo.
+ See you then.
+ Bye.

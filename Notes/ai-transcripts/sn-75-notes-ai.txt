@@ -1,0 +1,471 @@
+ Netcast you love from people you trust this is Twitter bandwidth for security now is provided
+ by AOL radio at AOL dot com slash podcasting this is security now with Steve Gibson
+ episode 75 for January 18 2007 Vista DRM security now is brought to you by a
+ staro makers of the star security gateway on the web at www dot a s t a r o dot com
+ Steve Gibson laboring away at his lab of security at g r c dot com has come up with fortress
+ of solitude your fortress of solitude has come up with yet another great application
+ a secure but we're going to talk about that because it's it's it's time it's time but
+ before we get to that Steve let's say I I don't know I hope a lot of people heard last
+ weeks episode and if you didn't I almost want to say pause the iPod and go back to 73 because
+ old Leo dude I mean don't almost say it absolutely say it because you know I do want
+ to continue on the topic a little bit more I was sort of you know I really wanted to give
+ Peter a chance to to explain things and I really think he did there were some points
+ that I was sort of trying to slip in that I want to make sure got made because there
+ is so much hysteria now and even mainstream articles that I'm seeing are wrong about what
+ they're saying Vista DRM is so so absolutely let's assume that anyone listening to this
+ has listened to last week's interview with Peter because you know it was really fantastic
+ he's I think he made such a good case you know and I've read various critiques on the
+ web and stuff and in general I think they've completely missed his point and just to just
+ to recap I think one of the most significant points is well you could say Hollywood required
+ this but nobody made Microsoft build this into all versions of Vista and in in the last
+ analysis that doesn't seem like a very good decision I mean I think Linux and I hope Apple
+ will say you know this should be separate this should be in a box you know I think that's
+ why Apple did this Apple TV yeah it should be external to the computer you shouldn't
+ hobble everyone with his premium content copy protection well and and you might suggest
+ for example that there would be a Vista media center edition in the same way that we had
+ that with XP the reason it's not feasible is that this stuff is literally down in the
+ kernel right it it required so much change to Vista that they weren't really they weren't
+ practically able to do a DR a Vista DRM and and well actually that sort of brings up another
+ point too is that as I've been reading again I feel like for the fifth time I've read the
+ Microsoft specs I'm sure it takes five readings to be honest with you the stuff's complicated
+ and it's inner it's there's a lot of interaction among these components but it's another issue
+ that's more clear to me now is that what they've done is basically created a a heavily
+ DRMed OS that is it's not just for protecting HD it may have been it may have been driven
+ by their interest in doing that but they make a point in some of their papers that you know
+ there's been a lot of DRM that's had to be installed by third parties on prior versions
+ of Windows because Windows didn't itself have a deep enough native digital content management
+ system to to satisfy everyone well that's really been fixed in Vista so so they didn't
+ want to just have for example a media laden version that had all this stuff they really
+ want Vista to be a a digital rights management platform that that other non-Hollywood non-AACS
+ high-def video content users can now rely on for protecting whatever it is that they
+ want to put DRM on so I mean it brings all that along too.
+ One of the things I guess we wanted to do in this episode is kind of circle back and
+ talk about some of the things that we didn't either didn't raise in 73 or maybe weren't
+ completely clear yeah exactly and I have actually gotten my before we do that can I
+ just get the commercial in oh yeah please all right I hate to tease people but but I really
+ do want to mention that a star is supporting this podcast because they've been so great
+ they're back again this year and they are a wonderful product which we can really stand
+ behind that's that's kind of the reason that we were so glad to get them back for 2007 and
+ they're supporting security now yeah if it yeah exactly you know Steve asked me before
+ we went on there now we're gonna keep doing this for a while I said hey as long as the
+ star keeps paying for it absolutely this right now is the only Twitter podcast with a sponsor
+ and that's that makes you golden Steven though we thank a star makers of the historic security
+ gateway I have one and I am blown away by it it's great quality I mean thing is rock
+ solid if you if you're a smaller medium business and your network needs superior protection
+ from spam I mean listen to what it does this is one box looks like a router about the size
+ of router but it's but it's so much more it does spam anti spam anti virus a content filtering
+ of course it's an industrial strength firewall so protects against hackers it has intrusion
+ detection built in it's a complete VPN server that's what I've been using it for which is
+ fantastic I mean use all of the features but it and it's all in one easy to use high performance
+ appliance now you can try it absolutely free in your business visit a s t a r o dot com
+ or call eight seven seven the number four a s t a r o make sure if you do that that you
+ mentioned that you heard it on security now and by the way I also want to recommend it
+ for non commercial users you can download the software for free if you decide you like it
+ you can get all those additional subscription features like anti spam and content filtering
+ for a very low yearly cost much less than you're probably paying for the software versions
+ of these programs a s t a r o dot com and we thank them for their support all right let's
+ I'm sorry I didn't mean to interrupt there I just wanted to get that done and oh no no
+ problem let's get back here I'm holding the out can't the output content protection and
+ windows Vista document written by Microsoft okay in my hand and before the show I went
+ through during my fifth reading of this thing and just highlighted some some sections that
+ I want to read verbatim so that so that it's sort of like on the record and we can talk
+ about these things for example in the introduction Microsoft says and I'm just reading from their
+ document we are working actively to ensure that a Windows Vista PC supports the needs
+ of both consumers and content owners and that it works seamlessly across a broad range of
+ other devices networks and protocols as we move towards the next evolution in the distribution
+ and consumption of content we are working on many fronts to create new experiences that
+ drive the industry forward this requires the ability to respect business rules across
+ many dimensions including content coming into a PC from cable satellite over the internet
+ or on a physical media such as next generation DVDs management of the content on the PC including
+ providing a robust infrastructure that allows ISVs to add value without needing to worry
+ about supporting DRM natively in their own applications and respecting business rules
+ as content leaves the PC this paper talks about one aspect of the content protection
+ work it addresses increasing the security associated with video and audio rendering
+ on the Windows Vista PC platform that's the key is video and audio rendering I mean it
+ doesn't impact other stuff generally actually it does and in some drive and put a good light
+ on the side I know well but no but in some good ways I mean one of the one of the things
+ that I've been distressed about over the last two weeks and our two episodes is that many
+ people are swearing off Vista they're saying oh I'm never going to go to that thing because
+ I don't want to be burdened with all this I don't want all of the scary things that Peter
+ was talking about to be in the machine I own I'm distressed because as we have said in looking
+ at Vista security previous to this there are many good things that Vista is doing I mean
+ you know Paul has become Paul Therat has become a fan of Vista by using it I'm running it
+ on on one of my tablet PCs and in fact in in last week's episode you were asking Paul
+ about Vista on it on a tablet I mean they've done beautiful things and it's going to be
+ installed on all the machines that people are buying next month so I mean it's clearly
+ going to happen so so I'm I'm distressed by the fact that you know there there is no way
+ around the fact that it that Vista is also a pervasive digital rights management platform
+ I mean we're getting a lot of good from a security standpoint and the content providers
+ are getting a lot of good for their own security yeah which sometimes exactly which sometimes
+ runs against the freedom and flexibility that mean that even honest users of content would
+ like to have I I appreciate the fact that I can buy DVDs and I can recompress the content
+ and watch them on my PDA while I'm flying you know flying around the country I mean it's
+ really useful to be able to do those things I'm willing to give that up I just think that
+ the content protection should be stuck in a DVD player or an external box in some way
+ outside the computer so that we can still have our general purpose flexible computers
+ the real problem is that the content industry sees any personal computer is a threat because
+ any personal computer can be used to crack stuff well that's the end there they would
+ like to make sure that all personal computers of any stripe including Linux computers have
+ this kind of protection and to protect speaking speaking of which I I received last week a
+ the second generation Toshiba HD DVD player that's the the the HD a2 which is there you
+ know it's I had that order until LG announced the dual format so I'm waiting to see what
+ the dual form cuz then I'm thinking well maybe I should buy although I like HD DVD but maybe
+ I should just buy the dual format well and if Apple's gonna go Blu-ray there's another
+ strong driver of the Blu-ray format and HP will but so you got this new standalone player
+ and I just out of curiosity I mean this thing is phenomenal it's got it's got network configuration
+ in it because there's an ethernet connection and you can configure it for DHCP or give
+ it a fixed IP just like a PC which is for it to enable it to update its firmware in case
+ you know bugs are found in it or things need to be changed so I was curious about you know
+ what's in this thing so I flip to the back of the manual under the license information
+ and get a load of the things that are covered by the license Linux kernel yeah busy box
+ G live see open SSL open source software yes it is completely built on Linux and open
+ source software you know my my Panasonic TV also has the GPL in the back of the manual
+ because it's got Linux and open SSL open SSH in it that's so funny and so so they they've
+ used a lot of open source software but of course there are pack open source software
+ and put it in your box just don't modify my Linux that's all I care about exactly okay
+ so you made a really good point last week that open the success and the strength and
+ the power of the personal computer platform has always been because it is an open platform
+ well you can do things like that yes and get a load of this again reading from Microsoft's
+ document they even say that they say a consumer electronics device is a closed box users can't
+ load software onto it or add cards to capture content at least that is the current perception
+ of premium content providers though it might not be true for future CE devices by contrast
+ the Windows based PC is designed to be an open platform anyone can load software on it
+ unfortunately you know malware authors can too it's easy to write that's not in the Microsoft
+ document by the way I didn't think so I sounded pretty parenthetical okay sorry about that
+ anyone can load software on it it is easy to write software for it because all the interfaces
+ are well defined and published and there are many good software tools available the PC buses
+ are also well defined and anyone can design cards to plug into these buses continuing to
+ read from the document the openness of the hardware platform is essential to a vibrant
+ PC ecosystem in the current world however the industry is also working to prevent hackers
+ from using that openness to pirate copyrighted content the goal is to make the Windows based
+ PC a safer place for premium content so that content providers will be happy to allow Windows
+ base PCs to play their content the term quote premium content unquote is used in this paper
+ to refer to valuable content that needs to be protected from stealing each content type
+ has its own particular policy that defines what the user can and cannot do with it the
+ term quote high level premium content unquote is used to refer to the most valuable content
+ types such as high definition DVD and Blu-ray DVD the content industry may introduce robustness
+ rules and testing that would effectively lock out PCs from premium content by not allowing
+ PCs a license key for the encryption system used by conventional access system I'm sorry
+ by conditional access systems or HD DVD and Blu-ray DVD these productions these protection
+ schemes will be very strong huh baby in the it doesn't say that either very strong in
+ the future though don't you baby based on AES advanced encryption standard RSA and so on
+ under these future rules a PC would only be granted a license to play the content if it
+ is at least as secure as consumer elect as a consumer electronics appliance to make the
+ PC safer for premium content safer my safer I know has been working with members of the
+ PC industry to solve the technical issues in hardware and software our key partners in
+ this work have been Intel ATI Nvidia S3 and Matrox while preserving the general openness
+ of the this doesn't say that either of the PC platform of the PC hardware platform new
+ solutions must be able to resist attacks against protected content these solutions must also
+ preserve the windows experience for legitimate users particularly without jeopardizing their
+ privacy so so that's sort of yeah that sounds very good but it does but really I have to
+ say I don't know if that goal is possible that I to me the question comes down to what
+ is your personal computer an open platform or consumer electronics device well exactly
+ and so then this starts getting more specific they have it's there's an acronym soup of course
+ once again they have something called p v p dash o p m p v p stands for the protected video
+ path o p m stands for output protection management and Microsoft's document says typically p v p
+ o p m operates within the windows vista protected environment and enjoys the software protection
+ this provides the protected environment checks for any unsafe situations for high level premium
+ content and turns off playing the content if an unsafe condition is found it says to work
+ with p v p o p m a graphics card manufacturer must provide for the following one output protection
+ management capability on all board outputs at a minimum provide the ability to turn off
+ every output to device driver capability to report reliably about the out board outputs
+ and their settings three h d c p which we know is hot high def content protection or no yeah
+ uh these acronyms are amazing it's amazing you can keep them straight for d v i and h d m
+ i outputs and macro vision and c g m s hyphen a protection uh on analog t v outputs otherwise
+ outputs will be turned off by the p v p o p m software and finally the ability to pass video
+ through a constrictor that is a downscaler followed by an upscaler so that the information
+ content of premium video can be reduced when an unprotected output such as analog vga is
+ present so you know so these are the things that paul did the peter was was referring
+ to but to do this requires closing down to a to a great degree the previously open architecture
+ it says the graphics hardware manufacturer must do whatever is appropriate to prove that
+ the driver is talking to genuine hardware if a particular implementation proves to be
+ insufficient as highlighted by a hack or a valid complaint from content owners so now
+ content owners are able to complain yeah get this this is microsoft's document then the
+ related driver might need to be revoked that's the thing that bugs me yes go ahead and a new
+ driver would have to be deployed with additional h f s tests so all of a sudden your computer
+ could stop working yes yes your video driver could be revoked i mean it it's it and mean
+ and they and as Peter pointed out that could happen just because they stopped paying their
+ fee yes it's merely you know if the company went out of business it could be revoked
+ right um here in the document uh here in the document under this uh h f s and drivers supporting
+ multiple chips they they talk about the risk of a single driver supporting multiple chips
+ because if that driver were revoked it could affect much more than a single chip vulnerability
+ and literally again reading from the document it says the windows vista protected environment
+ will after due process revoke any driver that is found to be leaking premium content
+ in uh huh either itself or from the hardware it controls if the same driver is used for
+ all the manufacturers chip designs then a revocation could cause all that that company's products
+ to need a new driver and Peter pointed that out in his article that these unified drivers
+ are going to disappear was nice you go to nvidia download one file would work on any
+ nvidia card but that's not going to happen anymore right and that of course does substantially
+ increase the cost which ultimately gets passed on to the end user which is of course then
+ the real it the real reason that he was talking about the cost of vista drm um on this issue
+ of tilt bits it says micro sauce document reads tilt bits are provided in the ddi that's
+ the device driver interface as the drivers mechanism for reporting that a hacker is suspected
+ if at any time the graphics driver determines that something improper has happened then
+ it can set the appropriate tilt bit for example if the hash of an output status message doesn't
+ mass match the message if any tilt bit gets set then windows vista will initiate a full
+ reset of the graphic subsystem so everything will restart including re-authentication the
+ tilt bits are also used by the driver in the p v p u a b that's the that's another one of
+ these acronyms u a b is the user accessible bus that is to say if you had a separate graphics
+ card rather than integrated graphics on the motherboard where the where vista goes really
+ ah well then I can't say they go overboard but vista is very concerned about any non-encrypted
+ I mean the whole idea is not to allow any exposed non-encrypted content anywhere from
+ literally from soup to nuts from from original content all the way to your eyeball I mean
+ if they could pretend if they could encrypt somehow did the audio that I put in your brain
+ exactly tcp in there too because they're worried about someone you know literally using a digital
+ video camera against the screen that will be we'll talk about that nature in the 2021
+ edition of security now so they say there is no requirement regarding the circumstances
+ under which a driver should set a tilt bit adopting this mechanism is another example
+ of the hardware manufacturer showing their intent to properly protect premium content
+ yeah it was another thing that he talked about is this notion of intent yeah yep that's really
+ what they want you to do it's not merely that you've the fact the spec isn't that clearly
+ written it they just want to have you prove that you care well and it really sounds like
+ as I've read this again and again and again it sounds like they're trying Microsoft is
+ trying to help to prevent lawsuits against content leakers interesting and so the more
+ intent a hardware provider demonstrates the better their case will be against the against
+ the industry that brings a suit against them for allowing for allowing their subsystem of
+ windows to leak content so this no I mean that that's where this showing intent is coming
+ from is is you know because it actually says in this document it talks about about not
+ not doing a sufficient job and and the and the the kinds of of onus that the the hardware
+ maker or software driver author could be subjected to and then under this issue of resolution
+ constriction this document Microsoft document says in the future some types of premium content
+ through its content policy will specify that a full resolution analog VGA output is not
+ allowed oh boy and uh-huh and that the resolution must be reduced it is not practical to change
+ the actual scanning rate of the display particularly because some displays are fixed resolution
+ but what is important is that the information content of the signal is reduced to the resolution
+ specified by the content owner I just want to shoot them now I just and here's the line
+ basically a high resolution picture needs to be degraded to make it soft and fuzzy now
+ that's just for premium content although it sounds like if they're saying it has to happen
+ over the VGA does that mean if it's just my windows desktop it's soft and fuzzy well
+ okay now this is let me see if I was through here because there this is a great there's
+ a great point that you're making um oh there's there's one more thing here we'll get on that
+ okay this is under content industry agreement hardware robustness rules and then this just
+ again for anyone who's used to the open platform paradigm that that the P the created the PC
+ this reads content industry agreement robe content industry agreement robustness rules
+ sir refer to uh-huh salute refer to among other things how how a hardware manufacturer
+ lays out and generally implements circuit boards the rules are determined by the content
+ industry in discussion with implementers and are described in for example the 5c DTCP and
+ AACS documents which are referred to in this paper as content industry agreement documents
+ that's the problem not an engineer now huh a bunch of lawyers who yes thing the intent
+ of the hardware robustness rules is to make it very difficult for hackers to use the graphics
+ card or motherboard to extract video data interpretation is required all of this interpretation is
+ required for some of these documents and it is sometimes difficult to determine conclusively
+ what is allowed interpretation simultaneous translation work and out loud it's a foreign
+ language content in that that yes Microsoft says content industry agreement hardware robustness
+ rules must be interpreted by the graphics hardware manufacturer vendors should work to
+ ensure that their implementation will not be revoked for playback of a high level premium
+ content as the result of a valid complaint from the content owners so we can't tell you
+ what they might complain about but you just better be sure you don't get a complaint and
+ finally if it is found for example reported by reported by Hollywood that a graphics chip
+ manufacturer is allowing quote hacker friendly unquote cards to be manufactured and their
+ chips and with their chips and if that chip manufacturer is unwilling or unable to stop
+ those cards being manufactured then the final recourse would be the revocation of the driver
+ for that chip and I want to make you clear that means they can reach into a Vista PC remotely
+ and make that video card stop working yes I mean it's not like from now on all cards sold
+ that means my system right now how would they revoke that is it done in windows update oh
+ absolutely it would be done through Vista updating its license keys which it has to do
+ or you can't use it well that's exactly right the graphics manufacturer the graphics card
+ manufacturers have keys and they are entirely revocable at basically at anyone's whim anyone
+ who's able to demonstrate that the card is leaking content would now hopefully it could
+ be fixed in the driver so so the idea would be windows update would update your driver
+ and again driver updating is then no longer something you could voluntarily choose to do
+ or not do you would update your driver or suffer revocation the idea being that it would update
+ the driver the driver would have new keys and the old keys would would then be revoked
+ so that so no one who did not update their driver would then be able to play the content
+ the idea being the industry wants to to retroactively be able to go out and fix any mistakes in
+ software or hardware and the problem of course is you know that model says we could fix it
+ in software if in fact a a highly a highly popular card were found to be hackable so that
+ content could get out of it digital content could be recorded from it then at the discretion
+ of the content providers they could require that that card that is to say all cards of
+ that hardware no longer be able to pre to play premium content I mean it's it is complete
+ they could it's come the card would still work on the computer I just couldn't play
+ a DVD back correct oh oh okay I was a little scared I thought the card driver would stop
+ working in its entirety no and and that brings us back to that point that I referred to as
+ this as as an important segue just before we started talking about this last bit and
+ that is it is extremely important to recognize that all of this is controlled by content
+ policy on I mean that is that is bound to cryptographically signed to the digitally protected
+ content so it is a function of what the provider chooses to do so so so the idea is that that
+ yeah I just watched my screwed is what the idea is I'm really but I do want to score
+ that because I think I misunderstood it I sounded like the thing the whole thing would
+ stop working I'll still be able to use my PC in every normal respect but I just won't
+ be able to watch a hide fdvd yes the and and and that's what I was sure that's true yes
+ we're absolutely sure and I'm less up perturbed then because I never put an HD DVD in my computer
+ I'm gonna watch it on my TV well it's why I wanted to make this point why I was so important
+ to make this point is that even today as far as we know current versions of HD DVDs are
+ allowing full resolution output from component video they haven't yet it's kind of enabled
+ this bit well well yes there the policy that is bound to the digital content is not saying
+ disable component now for example my HD DVD player this brand new Toshiba that I got last
+ week it's got HDMI digital output and component video so I mean and component video has been
+ around for years many many consumer devices and projector you know home theater projectors
+ and so forth have component video and may not have the newer digital interface so you
+ can imagine that it would be very distressing for somebody who purchased this brand new
+ Toshiba HD DVD player and was watching HD DVDs to find one that simply refused to play through
+ their component outputs right so so it's not clear that this is ever actually going to
+ happen which is one of the things I wanted to make clear this is well and this is this
+ is where I know I this is where so much of the confusion has come from it is absolutely
+ the case that it is possible for this to happen but we don't know so far hasn't agreed to
+ do hasn't decided to do that yes and and even revocation it you could argue that that killing
+ off hundreds of thousands of in the field working video cards is really I mean it's
+ such a such a bad thing you really have to wonder if the if the content providing industry
+ would choose to do so they absolutely have the ability but that doesn't mean they're
+ going to yeah well I you know I don't blame them for wanting to preserve the right to
+ do so or kind of build it into the hardware I just hate the fact that we're just kind
+ of they can hold that over our heads yes so your point is don't avoid Vista merely because
+ of this the the security advantages are so great that you you probably do want to want
+ to go with Vista yes I I mean well okay in laptops for example many people are buying
+ laptops there's an integrated system with on card video it seems to me laptops are more
+ often to be some something where you could imagine in the next generation watching movies
+ then then then you know your Vista machine in front of your you know where you're normally
+ doing work so a laptop could make a very useful content delivery platform and and it would
+ be protected it'll be running Vista and you can watch HD DVD videos on it probably without
+ any problem I I really hope that all of this doesn't destabilize Vista which was a really
+ strong point that Peter made we're hearing anecdotal reports all over the place that
+ Vista seems flaky that and somebody yesterday said it doesn't play video games very well
+ he was trying to play direct X9 games and they would frequently freeze or die now we
+ still don't know why that is could be a lot of reasons and there have been reports again
+ anecdotal reports from from people who are having problems with Vista currently playing
+ movies of various sorts depending upon what type of connectors they have we know yeah
+ I think on a high high def content a lot of times will not play though the now there
+ are I want to wrap up by talking about interfaces because the last the the so-called last mile
+ in Vista is from the output of the box to your display device there is there are there
+ are analog technologies which are not protectable IE composite and that's that hold that they
+ were talking about exactly and even even component video is an analog technology now
+ Vista will apparently add macro vision and and various types of copy protection to that
+ and compliant recorders will refuse to record that content if they see those protection measures
+ have have been stuck in the the two types of video interfaces are DVI and HDMI both of
+ those are able to to carry HDCP the high def content protection which which basically allows
+ the authentication of your display device itself back to the computer so what I would
+ urge people to do in the future is when you if you are buying screens and displays that
+ you want to be future proof make sure they do provide HDCP either with a DVI connector
+ a digital video interface connector or the HDMI but even farther than that because we've
+ seen some displays that have HDMI but don't have HDCP that's true and those you will not
+ be able to play back high def content in fact that was part of the problem is that all of
+ these quote HDCP capable cards sold up to now are not right and I and and well because
+ and well and yeah about nine things I wanted to say right there again I don't think it's
+ that it won't play it but it won't play it crisp it will deliberately it'll run it through
+ yes it will not play it but it's supposed to downscale it you know yes it'll run through
+ the the constrictor and again the content provider in the policy that comes with the
+ individual content is able on us are not enabled correct as far as this require this well and
+ I've heard again anecdotally that no current HD content does actually do this I'm not sure
+ that's the case because I've heard also anecdotally and this is the problem it's all anecdotal
+ at this point yep yep people have said oh gee you know I have a a DVI connector to my
+ monitor or I have a component connector and it won't play at all right so it is possible
+ that some discs are doing this or maybe the hardware is doing it on its own recognizance
+ without requests from the disc I don't know well well Leo many people who have DVI I'm
+ completely DVI based and not a single one of my computer monitors which is DVI has HDCP
+ right because they were never intended to be you know secure content delivery screens
+ so there are computers DVDs on those screens no and but that's so you're saying that even
+ though the disc doesn't require it the hardware is correct so there you go I mean that's the
+ problem is it's such an interlocking mess that there's all sorts of reasons why it might
+ not work all related to this content protection right and and the other scary thing is that
+ again what we what what's happened is all aspects of this content delivery chain are
+ now locked in licenses and and proprietary intellectual property and a revocable certificates so
+ I mean it is a new day yeah it is a truly a big change but but but again I I do wish that
+ all VISTAs were not laden with this technology because it does seem like it's going to make
+ it twitchy we really won't know for a while but I but I again I'm I'm sorry that there's
+ been the the scramble and the concern and the the amount of FUD essentially that that has
+ come up because Vista does so many good thing security wise right I you know I would not
+ like to see people avoiding and you could argue though that the people who want the freedom
+ of doing with their content what they will are probably the people who will stay on XP for
+ the freedom and are less in need of the security things that you know random consumers who just
+ aren't in the computers and are not listening to this podcast are going to get and so you
+ know VISTAs things help those people more right that's a good point to that's right and those
+ those people probably are not going to stay away because in most cases they'll just be
+ buying a new computer with Vista right all right before we wrap up do you want to make
+ an announcement well I do want to announce that the first freeware yeah first GRC freeware
+ to to result from the security now podcast I mean this is a direct outgrowth of our work
+ here is available for download it's called secureable SECUR ABLE so it's secure able
+ with no he then in the middle SECUR ABLE you can find a link on the home page or it's just
+ GRC dot com slash secureable I like will will tell I knew you would be I did that I did that URL for you man it
+ is a very cool app it is it is it has been an eye opener for many of the people over in
+ our news group who have been pounding on it and beta testing it for me and nailing out all my
+ little typos in in the text the thing that is so cool about it is it will show people the
+ security ability of their system many people it turns out have for example hardware depth
+ capable systems certainly any who have purchased machines in the last couple years but they
+ probably don't know it the so they'll get it you'll get an output that says you could
+ turn on depth if you wanted well yes and in fact what's happened is we've learned so
+ much already about depth I am extremely excited about it my next piece of freeware is going
+ to be called deputy we already had we already had an outgrowth from this one because it is
+ really the case that I mean I can't strike I can't stress this enough that that hardware
+ depth when enabled properly which it is which is never the case by default because it does
+ create problems for people hardware depth when enabled properly is the single greatest
+ solution for all forms of buffer overrun attacks that has ever been seen I mean most
+ things that have happened in the last few years would have been stopped cold if hardware
+ depth had been enabled I mean it is a massively good thing for for personal security and the
+ good news is it's in XP after service pack to so we this is one thing I think it's the
+ single most important security measure that can be taken and sort of so certainly in the
+ future we'll be spending some more time talking about what hardware depth is and it's very
+ important to recognize also that software depth isn't depth at all it's just virtually
+ useless turn on and use secureable to find out what else what I'm terrible tell you it
+ tells you whether your chip has 64 bit capability and also whether it's got the virtual machine
+ extensions either from Intel or AMD which allow you to run much faster virtual machines
+ that is it the virtual machine extensions essentially make running VMs more practical
+ because they are they are able to run literally at full speed by taking a whole by by essentially
+ offloading a lot of the work that software was normally doing on to this the these virtual
+ machine hardware technology so it's a it's a very cool thing to and of course virtual machines
+ are good for security so so thus that connections speaking of virtual machines I just wanted
+ to mention I met with VM where Mac world Expo last weekend their beta for Mac is out and
+ it's impressive as heck and I said well how are you going to beat parallels there a third
+ the cost they said wait and see the beta is free right now there'll be another beta in
+ I think they said around May and then they should have it out about middle of the year
+ very cool yeah we'll certainly be looking at it GRC comms slash secureable to get your copy
+ of secureable S E C U R A B L E and of course GRC comms also the place to get the 16 kilobits
+ versions of this show for the bandwidth impaired and Elaine's great transcriptions if you'd
+ like to read along with Steve and of course let's not forget one of the reasons Steve
+ can do this show and write the free software is his day job which is the great and I you
+ know I'm really happy to be able to give you a plug because it's such a good program spin
+ right S P I N R I T E you can go to spin right info if you want to read any testimonials you
+ got any good letters these days from I have lots I do I got just a really short one that
+ I really like because his subject was best program ever okay and then start six exclamation
+ points and he says I would just like to thank you for saving me hours of work with your
+ spin right version 6.0 program I had a HD hard disk that I could not read sectors on and
+ it wouldn't even boot wow I ran I ran your program and it booted first try I was amazed
+ I wanted to post this on your website for others to read but I couldn't get that news
+ group program to work correctly but anyway thanks again I back this product 100% I was
+ absolutely amazed how well it worked on my totally inaccessible hard drive isn't that
+ nice so I do love to get those those little success stories those are terrific GRC.com
+ spin right is it is really the ultimate disk maintenance and recovery tool if you have
+ hard drives and nowadays we all have many hard drives so it really is worthwhile it's
+ a good idea to run spin right on them how often do you recommend maybe every few months or
+ yeah about every corner I would say because it actually does prevent a maintenance I have
+ another letter that I will get to here in a couple of weeks where where somebody talks
+ about how he purchased spin right just to support the security now podcast and all the
+ work I do at GRC and he had it around when his system died and so as it happens he had
+ it on a floppy well the way you run spin right is you run it in windows and it produces
+ bootable media so you can either make a bootable CD or a bootable floppy if you've got a system
+ that still has a floppy or even a bootable USB dongle but but the point is that if you're
+ going to if you're going to do this you really do need to have spin right already running
+ on you know that has already moved to a bootable media when your system dies otherwise you're
+ not able to use your system in order to make the bootable media at the same time you know
+ we're real good about licensing so you could certainly run on somebody else's machine or
+ on a different machine of yours in order to make the bootable media but in this case the
+ guy had already gone through that and had his his bootable version of spin right ready
+ to go stuck it in his computer and it fixed it for excellent maybe run off and do that
+ right now SPI and RITE.info and of course GRC.com Steve we'll catch you next week next week
+ is a is a Q&A I was going to say are we coming up on that yeah we're on a Q&A I would imagine
+ we'll have lots of questions about Vista DRM so and we will we may still talk 75 that's
+ not mod 4 is it ah wait a minute no we got two weeks for that I show I show us on episode
+ maybe I miscounted I thought that no you're right we're on Peter was Peter was 74 this
+ is this is five I'm sorry I'm out of I'm out of sync this is you're right absolutely right
+ next week is 76 so so I imagine we'll be fielding some questions from people and some experiences
+ and have another really great episode somebody asked me how do you get your questions submitted
+ to Steve they've been sent to me there must be a better way oh absolutely the way everyone
+ does is they go to to to the security now page is GRC.com slash security now and then
+ just after the page loads hit end or just scroll all the way down to the bottom and there's
+ a form that you can easily fill in to submit your questions and they come right to me well
+ that's easy alright hey thanks Steve Gibson once again another great show and really food
+ for thought for anybody who's moving to Vista but the bottom line is it the security benefits
+ of Vista outweigh these other concerns however it might be prudent to wait a little bit I
+ mean it comes out January 29th if you're buying a new machine it'll probably come with Vista
+ but I'm a you know I've already upgraded to Vista and I don't know some issues yet but
+ I think if you if you were on the fence at all hey wait a few weeks it's not going to
+ kill you to wait a month well and if you were thinking maybe of making Vista the heart of
+ a next generation home theater system I would make sure that you're going to be able to
+ make Vista happy make sure that your projector has a digital connection not an analog one
+ because that is subject to being shut down or fuzzified so you know consider that I know
+ that for example Mark Thompson loves loves Sage TV as as his you know like TV over content
+ on that well exactly so I mean although he does use it you would never be able to use
+ protected content unless all of your video pathway was digital and supported secure encryption
+ with certificates and so forth or you download everything for BitTorrent there you go take
+ that Hollywood I wonder how Elaine's going to transcribe the various grunts groans and
+ moans that we've done in this show I can't wait how do you don't how do you spell I'm
+ sure she'll mad at you like as Steve Gibson we'll see you next time security now

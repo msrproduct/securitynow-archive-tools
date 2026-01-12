@@ -1,0 +1,1180 @@
+ (upbeat music)
+ This is "Security Now" with Steve Gibson,
+ Episode 32 for Thursday, March 23rd, 2006.
+ Your questions, Steve's answers.
+ (upbeat music)
+ - Hello, Steve Gibson, Leo LaPoylio,
+ in Northern California, Steve Gibson in Southern California,
+ and we meet in the middle via Skype.
+ - Which is really working well for us.
+ - It is, it's remarkable.
+ You know, it has something to do with the fact
+ that you have spent some money on a good high-LPR 40 mic
+ and an M audio interface.
+ - Oh, I have a very nice microphone.
+ - Yes, and I do too, Bob Hiles is.
+ - Hello, by the way, he's gonna be at NAB
+ and they're throwing a big party this week
+ and Eric is just next week.
+ - It's so funny, I watch Letterman
+ and he's got the Hiles PR 40 there
+ and he's banging it with his pencil all the time
+ and it just bugs me to see him like whacking on it
+ with his pencils, like David, stop that.
+ - That's the way David is, he has a mic,
+ they use a sure mic for his audience warm-up
+ 'cause you know, he comes out before the show,
+ he does an audience warm-up and it's on a long cable
+ and it's all dented up.
+ You know, it has the round ball,
+ the wire cage on the top of it.
+ He is messed up and I thought,
+ why is his mic all dented up?
+ And then I saw round, he hits the, he bangs it around.
+ Of course, that's all.
+ But he's, that's part of his act is like banging on this stuff.
+ - Right. - It's pretty great.
+ So we talked about crypto last week
+ and I know we wanna tie up some loose ends
+ before we head into questions and answers.
+ - Well, yeah, there's a couple things.
+ First of all, people are wondering
+ whatever happened to the open VPN guide
+ that I have promised, it's on the way.
+ I haven't forgotten it, I haven't,
+ I mean, it's like my number one thing to be working on.
+ I had a bunch of year-end tax stuff
+ to deal with financial on over on my own GRC business side.
+ But also, I'm working with a very talented developer
+ in Russia who's got a bridging driver
+ and we're basically coming up with a custom solution
+ for open VPN which solves a number of problems
+ that dramatically improve the robustness of its use
+ and make it much easier to configure.
+ So I haven't been sure how that was gonna proceed.
+ You know, he's got other consulting he's doing.
+ I've got like an 18-page template laid out.
+ I'm fleshing them out.
+ You've, in fact, seen a couple of the graphics
+ that I sent you later. - Yeah, they do, yeah.
+ - So, you know, I mean, it's,
+ anyway, I just wanna let people know,
+ I haven't forgotten about it, it's gonna happen.
+ And it's gonna be just a tremendous reference
+ once it comes together.
+ But anyway, it's on the way.
+ He's working on it, folks. - I'm working on it.
+ Hey, Shane. - Okay, we had a guy
+ referring to last week's discussion of,
+ remember you asked me, Leo, the, like,
+ when was that secret decoder ring kind of idea first use?
+ You know, who did it first?
+ And I don't know that this is accurate,
+ but someone said that Julius Caesar did use it
+ to communicate, you know, basically used
+ a simple transposition cipher
+ where letters were shifted some number of places,
+ which is exactly what, you know, two concentric rings do,
+ in order to communicate with his generals.
+ - That's why they sometimes call it a caesarian cipher.
+ - Right. - Yeah, yeah.
+ So it's pretty old.
+ In fact, I bet it predates that even.
+ I mean, we know he used it, but I bet it predates that even.
+ I mean, it's kind of an obvious thing
+ once you have an alphabet.
+ - Yeah, you know, or if you asked your gurus
+ to come up with a way of, you know,
+ easily encrypting data that a, you know,
+ that a general who's not too clueful
+ would be able to decrypt.
+ I mean, it couldn't be too complicated
+ if some guy on horseback wouldn't be able to figure it out.
+ So- - Some barely literate guy.
+ - Yeah, exactly.
+ - All right.
+ - Well now, we had, we're going to announce today
+ the very first, I'm very excited about this,
+ security now, puzzler brain teaser
+ that relates to cryptography that comes
+ from something last week.
+ A guy wrote from the United Kingdom, Roger Cuthbert.
+ He said, "Hey Steve, I had an idea about one time pads."
+ He said, "There's an old, I don't know
+ if it's a riddle or a trick or what,
+ where you want to send somebody something securely
+ using a padlock that he doesn't have the key to.
+ So you put it in a box and you lock it with your own padlock.
+ You send it to him.
+ He adds his padlock to that.
+ So now the box is doubly locked.
+ He sends it back to you.
+ You take off your padlock.
+ So now it is still locked only with his.
+ And then you send it back to him.
+ He takes off his padlock and is now able to open the box.
+ So what was so clever about Roger thinking about this
+ is he says, "You know, why couldn't you do this
+ with one time pads?
+ You have a one time pad, he has a different one time pad.
+ So you encrypt your message using your one time pad,
+ send it to him."
+ He encrypts that encrypted message with his one time pad
+ and sends it back to you.
+ - So only he could, go ahead.
+ - Well, okay, so now you decrypt the one time pad
+ that he encrypted with your one time pad.
+ Now the message is only encrypted with his.
+ - It's half encrypted, right, yeah.
+ - Then you send it back to him.
+ He decrypts it with his one time pad
+ and now it's back into plain text.
+ So essentially every transport of the message
+ was encrypted either by yours, by both of yours
+ or by only his.
+ And neither of you had to share your one time pads
+ with each other.
+ And what's wrong with that?
+ I mean, isn't that like a really cool solution
+ for sending an encrypted message?
+ - This eliminates the problem of exchanging one time pads
+ which is the weak link in a one time pad system.
+ - Exactly.
+ So I think if you draw a picture of this,
+ it will become clearer.
+ - Well, yeah, or if you think of it using that lock box
+ analogy, you know, the idea, and what's cool about this,
+ the encryption that we've talked about,
+ we, I'm gonna run back real briefly a little summary
+ of last week, you know, the idea we talked about exclusive
+ or where you take a byte of data and you exclusive or it
+ with a random byte.
+ Another way to think about that that I didn't specifically
+ say, but it sort of makes it clear is that you have sort of
+ a, think of having a stream of bits of your message
+ and you are, and what the exclusive or does is it,
+ it conditionally or optionally or maybe inverts a bit
+ of your message.
+ So basically you are, when you exor your message
+ with a stream of random bits, basically you're,
+ you're randomly inverting your message bits.
+ And what's cool is that you can do the same thing again.
+ If you, if you reexor with the same random bits,
+ then you're going to flip the ones that were flipped before
+ back to where they were, restoring the original message.
+ - Right.
+ - Now, that's why this idea of being able to like double
+ encode a message works.
+ 'Cause your pad, bunch of random bits,
+ then you send it to the other guy.
+ He uses his different pad to flip a different set of bits.
+ He sends it back to you.
+ You use your pad to again flip your specific set of bits.
+ And then when it goes back to him and he does it a second
+ time, it flips everything back the way they actually all
+ really were.
+ So you could sort of see how it might work.
+ Now, if, if someone's confused about this exor thing,
+ the, we could fall back to this notion of a ring.
+ Remember we initiated this whole dialogue talking about
+ the secret decoder ring where you, from, from a given letter,
+ you go some number of, of letters or symbols forward
+ to encode, and then you go some number of symbol,
+ that same number of symbols backwards to decode.
+ So, so in the same way that an exor can be used reversibly,
+ you could also just use addition and subtraction on the ring
+ where you take the random number and add it to the symbol
+ to get a new one.
+ And then, for example, if he did the same thing,
+ then you've sort of both added your own random numbers.
+ Then you, when it comes back to you, you subtract your
+ random number, the same random number that you had added
+ before, and then when you send this back to him,
+ he subtracts his same random number, which will bring you
+ back to the original symbol.
+ So, anyway, that's what we're gonna leave people with
+ for one week.
+ - So, you're saying it doesn't work?
+ There's a flaw.
+ - No, I'm not saying, I'm saying maybe this is really cool.
+ - Oh, okay.
+ - So, maybe it works, maybe not.
+ People should think about it and decide what they think,
+ and we'll have the answer at the beginning of next week's show.
+ - You are sneaky.
+ Okay, Q and A time.
+ - Well, I've got the questions.
+ - Are you okay? - You have the answers?
+ - I have, I hope so.
+ (laughing)
+ - Let's go, first two related questions touching on the same
+ very important conceptual issue.
+ You mentioned that a 128-bit website encryption is safe
+ to use and near impossible to crack, but if that's the case,
+ why is it copy protection is so easily broken?
+ What's the difference between that and a website encryption?
+ Is TrueCrypt or any other crypto program open to easycrack?
+ Is, and before you answer that, let me just mention that
+ in your introduction to the cryptography episode,
+ a couple of weeks ago, you said that DRM was doomed,
+ and I agreed with you and could always be cracked,
+ but then you keep saying uncrackable voiceover internet
+ or uncrackable email.
+ - Whoa.
+ - Yep, yep, that's a really good point.
+ And it's, the reason I wanted to present these questions
+ is that there's a fundamental concept here,
+ which is crucial for people to get.
+ And that is that the reason DRM can be cracked
+ is that the device which knows how to decrypt
+ the encrypted data is right there,
+ and it's doing it in front of you in order for you
+ to get the content which is being displayed
+ or listened to or whatever.
+ - Somebody has the private key.
+ - Well, it has, it has whatever.
+ I mean, even, I mean, whatever it is,
+ it knows how to bring it back into usable form.
+ And copy protection is the same way.
+ If something is copy protected,
+ it's got to be unprotected for the computer to run it.
+ So when it's running in your machine,
+ it's in a runnable state.
+ That is, whatever it is that's been done
+ has been undone to it in order for it to be usable.
+ And that's the key.
+ So what's different with website encryption
+ is, and we'll get into this in the coming weeks here
+ when we explain how symmetric key and asymmetric key
+ and public key and all this stuff all interrelate.
+ But the idea is that you're encrypting information
+ which is going somewhere else.
+ And you know where in between, in the middle,
+ no eavesdropper has the sufficient information
+ to do the decryption.
+ But when it's coming to a device
+ which is going to run copy protected software
+ or display DRM data, that device has to know how to display it.
+ And so the point is, anything can be reverse engineered.
+ So it's, you know, anything.
+ I mean, this is how DVD encryption
+ just got cracked immediately
+ was a very clever engineer,
+ figured out what the DVD players were doing
+ in order to do the decryption.
+ He said, "Oh, here's how it's done."
+ - A very clever 16 year old engineer.
+ Yeah, they didn't have to be that clever
+ because they're doing.
+ And so he wrote DCSS which reverses that process.
+ It allows you to kind of do the same thing
+ as a DVD player would do.
+ - But for example, if you're just exchanging a,
+ like you have an opaque token that someone has given you,
+ it's like here, hold onto this and give it back to me.
+ It's sort of like a web browser cookie.
+ You have nothing to go on to decrypt that.
+ You have no traction.
+ You don't have in your computer the code
+ which is going to turn that into something that makes sense.
+ Instead, you're just giving it back if it's been given to you
+ and you just have no traction.
+ - Yeah.
+ Eric Bolt writes from Hotmail, a Hotmail account.
+ I have a wireless connection enabled
+ but it isn't connected to a wireless access point
+ or another computer.
+ For example, I'm at work with my laptop.
+ He's hardwired into the land, you know, RJ45 plugged in there.
+ His wireless connection is still enabled
+ but he's not using it.
+ Is there a security threat there?
+ Could somebody get on his computer through that?
+ - Yes, yes, yes, yes.
+ And in fact, there are several known hacks.
+ Wireless can work in two different modes
+ in infrastructure mode where you have the traditional type
+ of access we've been talking about
+ where the infrastructure is at a wireless access point
+ or base station.
+ The alternative way to operate is called ad hoc
+ where, for example, two laptops are able
+ just to talk to each other without using a,
+ instead of like talking through the access point
+ they are able to connect directly.
+ Windows XP's default mode is both
+ to allow both infrastructure and ad hoc.
+ And there have been reports that are confirmed
+ of people on airplanes whose laptops are being used
+ getting hacked on the fly, if you'll pardon the pun.
+ - Even though they're not on the internet
+ just because their airport's still on.
+ - Yes, because they're--
+ - Or their airport, that's a very Apple specific thing,
+ Wi-Fi is still on.
+ - Exactly, so it is the case that a computer,
+ even if, as it was in Eric's case here,
+ hooked into a LAN with an RJ45 hard wire,
+ if his radio is on and the computer is configured
+ to allow ad hoc operation.
+ And that's something you can change in Windows,
+ but it's really better, and that's what I always do,
+ is just to turn that off when you're not really using it.
+ I mean, it saves battery power for one thing,
+ and it's just sort of a, it's a good secure practice
+ to shut down any radios that you don't actually need
+ to be using at any time, because it's an exposure.
+ - If you had WAP turned on the, or I'm sorry,
+ WPA turned on on your client side with that component.
+ - You are gonna be safe, yes.
+ - You are safe then, okay.
+ So if you don't want to turn it off,
+ if you're using, you should just be using WPA.
+ Well, wait a minute, though, because you can't have it
+ turned on all the time, because otherwise you wouldn't,
+ on to, oh, I don't know, that's too common for me.
+ I mean, in other words, I don't turn it on,
+ you can't turn it on for all connections,
+ 'cause otherwise you wouldn't be able to get on
+ when you got to Starbucks, so it's only when you're connecting
+ with a wireless access point, that's what you want.
+ - That's a good point, and it may be that, for example,
+ someone has had to turn their security off
+ when they were doing something else,
+ when they were like away from their home,
+ in order to use an open connection.
+ - Security isn't really blanket for any connection
+ into your card, it's just saying,
+ when you connect with this access point, use security.
+ But your card is kind of promiscuous.
+ If you want to use that term.
+ Jason in Orlando writes, I just ran into something
+ I've never noticed before.
+ I'm a college student in Orlando, and I'm on a school PC,
+ still using Internet Explorer,
+ they're slowly making Firefox available,
+ but not yet, you're in mine.
+ I logged into Gmail, checked my mail,
+ then went to another site after browsing for a few minutes,
+ I had it back to Gmail, you know, mail.google.com
+ to see if I had a response, and it went right there,
+ I didn't have to pass muster, I didn't have to give it a login
+ or password or anything, it just opened my inbox,
+ I closed the window, but a new one had back to Gmail,
+ and then I had to log in again.
+ He said I simulated the thing a few more times
+ and realized that if I didn't close the window,
+ I could always just go right back in without a password.
+ I can't remember how many times
+ I left a terminal at school
+ and just clicked the homepage button for the next user,
+ and he said I'm gonna try this at home.
+ Is this something to be aware of?
+ Well, actually, I think that's a very useful bit of caution
+ for anyone using web browser-based email.
+ What he's seeing is that he's got his Google mail account
+ configured to, by default, just sort of stay open.
+ He wasn't explicitly clicking logout,
+ and on any of those pages when you're in Google mail
+ and many other web-based mail systems,
+ you can explicitly log out.
+ That invalidates your login for that session.
+ He was-- It's what's called a session cookie to say,
+ so it checks a session cookie, says oh, he's still here.
+ Well, exactly, and in fact, we will be talking about cookies
+ also in the future because there are session cookies
+ and much more persistent cookies,
+ and you can tell Google mail that you wanna stay logged in
+ on the current machine unless you log out.
+ But even if you don't have that option set,
+ unless you explicitly log out
+ and you keep that browser session open,
+ which is what was happening in this case,
+ you're still logged in.
+ So it's a useful cautionary note
+ that people should explicitly log out
+ whenever they're using a public terminal.
+ Many sites, I think the Google mail included,
+ have a little check mark under the box
+ saying public terminal login or not.
+ I'm not sure if what that's saying
+ is don't save any session cookies
+ or if it's saying don't save any long-term cookies.
+ Yeah, Google mail doesn't have that that I've seen.
+ I've seen it before on many sites
+ where it's saying is this a private machine
+ in which case just for convenience will maintain your login,
+ but it sounds like...
+ Yeah, it does sound like they may have taken extra measures.
+ Like for example, maybe it times out
+ after a much shorter period of time.
+ Yeah, yeah.
+ I have that on my fast mail account.
+ Let me just, yeah, I thought for sure
+ that Google would do that.
+ I mean, it would seem to be sensible.
+ Anyway, that's a good thing.
+ So what your recommendation is close the browser
+ or better yet, just sign out.
+ Oh no, explicitly click the log off or a log out link
+ before you close the browser window
+ 'cause you just, you know, you wanna make sure
+ your log on credentials have been with that remote server.
+ Very, very important.
+ All right.
+ And I'm just looking through the Google settings
+ and I don't see anywhere that you can,
+ there must be somewhere where you can say look,
+ don't save anything, but maybe not.
+ It is a convenience.
+ Alan Akins asks, are there any issues with using PPTP?
+ That's point to point tunneling protocol
+ which Windows uses as its VPN protocol.
+ I currently use DDWRT with a PPTP server enabled
+ and I was wondering if there are any security issues with it.
+ Is it also okay to open the PPTP port
+ which is 1753 to a Windows computer
+ and set up the Windows computer
+ to accept incoming connections for a VPN?
+ Well, he asks, are there any security issues?
+ That's a huge question of course.
+ No right answer either.
+ Okay, opening a port to Windows means
+ that it will accept incoming traffic, incoming connections.
+ And we've seen, I mean, time after time after time,
+ buffer overruns in Windows machines.
+ And so you're, if you, anytime you open a port
+ to a Windows machine, you are hoping and praying
+ that there isn't some known or unknown exploit
+ that would allow that buffer overrun
+ if there was one to be taken advantage of.
+ I mean, as we know, you put an unprotected Windows machine
+ on the internet and it's just hosed in a matter of minutes.
+ It's the really good thing that service pack two
+ for XP did for us is that they've got their own
+ little firewall running all the time.
+ So for example, for him to open this port,
+ he'd have to explicitly allow traffic through the firewall.
+ It's that firewall which is responsible for, you know,
+ making service pack two of Windows XP a much better machine.
+ Now, the one, the one architectural security problem
+ is that point-to-point tunneling protocol
+ does not have strong authentication.
+ That is, it's very possible for if somebody was determined
+ and wanted to, for someone else to be able
+ to log on to his machine remotely,
+ which is certainly not what he wants.
+ It's Microsoft just has tried several times,
+ they've strengthened their algorithms,
+ but they just don't, they don't wanna take the step
+ to provide strong authentication
+ because it's not as simple as not having strong authentication.
+ It's one of the things, for example,
+ that makes open VPN a little trickier to configure
+ because open VPN, you know, our chosen solution
+ has, I mean, industrial strength, military strength,
+ authentication, nobody who doesn't have your credentials
+ will be able to log on to your system.
+ That's not true, point-tunneling protocol.
+ - So your recommendation would be not to open that port
+ and what does that come in connections?
+ - I would call that a security issue, you know,
+ and he was saying, are there any security issues?
+ - Yes, you're created one.
+ - Yeah, I mean, if he really wants to use point-to-point
+ tunneling protocol, see, he's got a router
+ and I guess it's maybe a little safer
+ if he uses his router as his endpoint
+ that is connects using PPTP to his router,
+ that would get him into his network
+ as opposed to trusting the point-to-point
+ tunneling protocol server on Windows,
+ which just, you know, always makes me think twice.
+ - Right, are there any particular flaws you know of right now
+ or are we in between flaws?
+ - Yep, and of course, no one knows about a flaw
+ until we all know about it.
+ So you can almost, I mean, I think with any software,
+ you can pretty much say, I don't think you could ever say
+ that a software is guaranteed flawless.
+ You write software, you know, it's just too complex.
+ - It's very, very, very hard.
+ - Yeah, yeah.
+ Unless we're writing an ADA or something,
+ which nobody does.
+ - Does anybody write an ADA anymore?
+ - I think it's gone.
+ - That was something, the language,
+ the Department of Defense proposed based on Pascal
+ that was intended to be a secure language, you know,
+ much harder to create bugs in.
+ - And support big projects in team building
+ and all these other things.
+ - Yeah, it was just a big goose.
+ It was fashionable, no, nobody uses it.
+ Of course, I'm talking to a guy
+ who programs an assembly like that,
+ which probably is a good secure way to do it.
+ At least you know what's going on.
+ Allen and Des Moines writes,
+ "If the limiting factor for crypto security
+ is computing power, how about distributed processing?
+ Things like, you know, SETI at home or the folding at home?
+ Couldn't some Trojan horse fires infect millions of PCs
+ and have them all act as processing units for a crypto?"
+ Wait a minute, this is too good an idea.
+ I'm not sure I want to read this question.
+ Acting as processing units for a crypto cracker
+ and get around the processing power requirement,
+ you could create a pretty massive supercomputer, couldn't you?
+ - Yeah, well, in fact,
+ that's what the SETI at home project does, of course,
+ is they're borrowing everyone's screensaver time
+ while their machines are on,
+ doing all this number crunching signal processing
+ of signals received from outer space, you know,
+ basically a massive distributed computer
+ whose overall computing power is extremely high.
+ A number of people suggested this idea.
+ That is, you know, because one of the things we talked about
+ last week was that, you know,
+ it's only a function of computing power.
+ If you had long enough or fast enough,
+ brute force attacks can function.
+ The thing that renders that infeasible
+ is the scale of difficulty
+ as the number of bits that are used in the key increase.
+ I've got a table here and I'll just give you a sense
+ for how quickly these numbers get big.
+ And the point is that, for example,
+ we glibly talk about a 128-bit key,
+ but it's not, for example, twice as hard as a 64-bit key,
+ it's the squared as hard, it's the total number
+ of combinations squared more difficult.
+ So, for example, if a given computer
+ at a given speed took two seconds
+ to crack a 40-bit key,
+ that same computer would take 35 hours
+ to crack a 56-bit key.
+ Wow.
+ One year to crack a 64-bit key,
+ 70,000 years to crack a 64-bit key,
+ 14 years to crack a 112-bit key
+ and 10 to the 19 years to crack a 128-bit key.
+ So, you'd have to get a lot of computers
+ in your little cluster to solve that one.
+ There aren't that many computers.
+ I mean, so my point is that's the rate
+ at which computing the computing burden
+ for brute force cryptographic cracking.
+ That's the rate at which it scales as key length goes up.
+ And for example, just for the hell of it,
+ I'm using 256-bit keys in my open VPN system,
+ because why not?
+ I mean, now we have computers that can handle
+ that length with no trouble at all.
+ And I mean, the Lord knows how many years that,
+ I mean, it's the point where, you know,
+ your home will be attacked and ripped apart by someone--
+ Someone of the sun. Exactly.
+ You can stop worrying about being your encryption message
+ being stolen, worry about the sun exploding,
+ 'cause that's only a few billion years off.
+ Yes. I use, I just created a new key
+ for my PGP signing, and I use a 4096-bit key.
+ Well, now, that'll be the public key,
+ which is different than the bulk crypto.
+ Right, but that's why-- That's way big, Leo.
+ But, and it used to be that you would choose a smaller one,
+ 'cause of the computational penalty,
+ but you don't have that anymore, right?
+ These things, these computers are so fast.
+ So is the default key still 128-bit or--
+ 128-bit is really safe,
+ and that's what SSL is using for its crypto.
+ And I mean, it's 10 to the 14 years, we're safe.
+ Right, right.
+ No matter how many, you know,
+ steady computers we commandeer for crypto.
+ And notice that all that work would only crack one key.
+ If you did all that, you would crack one key.
+ As we're gonna be learning in coming weeks,
+ the new technologies which use public key technology,
+ sort of piggyback per session symmetric keys
+ like we've been talking about.
+ So they're changing all the time.
+ And in fact, I've got open VPN set up,
+ and this is what I'll be explaining to people,
+ how it's changing the key automatically,
+ periodically, even during a connection.
+ So it's just give up.
+ I mean, you just no longer have to worry
+ about the security of this stuff.
+ And if you update your key every year,
+ you're probably safe.
+ Andy from Chicago, Illinois' rights.
+ Boy, we gotta get, we gotta quite a few here.
+ We're gonna start moving a little faster.
+ My ISP Cyberonic recently switched back-backbones
+ and issued new IP addresses to subscribers.
+ What I've learned since is that the range of IPs I'm now in
+ was recently in the Bogon address space.
+ It's just, he says a new vocabulary word for him.
+ This is causing big issues with anything going upstream,
+ web mail, FTP, web dev,
+ and some sites have trouble loading images.
+ I've contacted the admins of some of the sites
+ who come to the conclusion,
+ the packets are being blocked somewhere in root.
+ I'm not certain where to even start looking for solutions.
+ Any ideas?
+ Well, this is really an interesting question.
+ I thought it was, it was really fun.
+ First of all, a Bogon for, you know,
+ he was talking about this being a new vocabulary word,
+ a Bogon is the measurement of Bogosity.
+ So, or Bogusness.
+ So, it's like, it's the quantum.
+ You can have so many Bogons worth of Bogosity,
+ you know, technically.
+ I have said before that we're not running out of IPs
+ on the internet and that there's even a lot of IP space
+ still not being used.
+ Remember that we've talked about how, for example,
+ anything beginning with a 10, you know,
+ 10.anything is, is we know is reserved for private networks.
+ So, that's a Bogon.
+ So, yes, that is one of the Bogons.
+ What happens is internet routers are configured
+ to drop any traffic which is destined
+ for the so-called the Bogon space,
+ which is a term that the network engineers use.
+ Get this, 40% of our current internet IP space is Bogon.
+ 40%, 40% is non-routable, unused space.
+ - So, that's the 10 dot, the 128, or 192.168.
+ - Well, in fact, even looking at just,
+ yes, exactly, even looking at just the first byte,
+ anything beginning with a zero, a one, a two, a five, a seven,
+ 23, 27, 31, 36, 37, 39, 42, 48, 50, 77, 78, 79, 89 through 123,
+ 127, which of course is a no, like the local host range,
+ and then 173 through 187 and 197.
+ - If all of those are just, they don't exist.
+ They're Bogons.
+ - How did Andy get a Bogon IP address?
+ - Well, what happens is, he must, what happened was,
+ someone somehow convinced I can to give up
+ one of these big networks.
+ The problem is, all over the internet,
+ there are routers configured with this Bogon space,
+ and firewalls, and all kinds of equipment
+ that just have these like hard-blocked.
+ - Don't let anything in from that address
+ 'cause it's not a real address, so.
+ - Exactly, so essentially the problem is
+ that a recently allocated IP region
+ is no longer Bogon space, but it's taking
+ the rest of the internet some length of time
+ to get the message, to get the news.
+ Meanwhile, equipment will just be dropping his traffic
+ and there's nothing he can do about it.
+ - Wow.
+ - I mean, it's annoying.
+ - Wow.
+ - So, as this happened frequently, the Bogon IP addresses
+ are reassigned to the real world?
+ - No, not frequently at all.
+ I mean, the people who keep these things allocated and assigned,
+ I mean, these IPs are just precious treasure on the internet.
+ And of course, as we know, the emergence of NAT technology
+ that allows corporations to run many computers
+ on few public IPs and even individuals, you know?
+ I've got one public IP on my cable modem
+ and I can run a whole network as do all of our listeners.
+ So, you know, of many computers.
+ So, the pressure has been hugely reduced
+ thanks to NAT routers.
+ And so, you know, there are, there's like 40%
+ of the net is still unallocated.
+ - So, you can appeal to ICANN and the RIRs and say,
+ "Look, we're using this and please."
+ - You've got to make a, yes, you have to make a really good case.
+ And if you make a really good case--
+ - But then you just have all this legacy hardware
+ that's not going to be updated and--
+ - You're going to have some pain for a while.
+ While network administrators all over the net go,
+ "Oh, look, this is no longer a Bogon address in the IP space."
+ - We have our first question from the Amish country.
+ We don't get a lot of questions from the Amish country.
+ I'm not sure why.
+ Dave, just a joke.
+ - Do they have computers?
+ - I know.
+ - Dave Solon in Amish country, "Manheim PA rights."
+ I have a question for you regarding hotel lands.
+ I was recently at a hotel where you could hook up
+ to their cable modems for free access.
+ The cable coax line from its TV was split.
+ So, one line went to the TV, one to the cable modems.
+ They actually had a cable modem in each room.
+ - Isn't that neat?
+ - I'm guessing this hotel didn't have their own land.
+ And this might be a little safer than plugging into a hotel
+ where you simply plug into their network.
+ Is that true?
+ - Yes, it is true.
+ I had never heard of a hotel giving every room
+ its own cable modem.
+ - Now, I should say that I have heard of hotels
+ doing this, they aren't actually doing that.
+ They have their own private network,
+ which provides both TV and data.
+ And they're putting decoders in the room.
+ - Ah, okay.
+ - I think it's more likely what was happening.
+ - Even so, if they're using traditional
+ doxis style cable modems, that is the universal standard
+ for cable modem technology,
+ that is an encrypted signal over the coax.
+ - So, that modem would be kind of a barrier
+ to anybody trying to look at you.
+ - Exactly.
+ So, the things we've talked about,
+ the dangers we've talked about before
+ of people easily, for example, sniffing your traffic
+ and playing games, I can't say for sure
+ that they would be defeated
+ because you'd have to really look at the network
+ to see, for example, how ARP traffic was being handled
+ within that network.
+ It might be that these cable modem-like things
+ are just really bridges, which are bridging the LAN
+ through the coax segment.
+ That's a possibility.
+ But it is potentially more secure
+ than just unregular 10-based T-style LAN
+ that we see in most hotels.
+ - That's interesting.
+ - Yeah, I thought it was cool.
+ - Point.
+ - In fact, staying on that subject,
+ another listener has asked if I want a secure connection
+ in a hotel, can I just carry my NAT router with me?
+ - I like that one, too, a lot.
+ 'Cause it was like, well, we've talked so much
+ about how secure NAT routers are,
+ that is what security they provide.
+ So, someone thinking about, okay, hotels are a problem.
+ How about if I just use my own NAT router?
+ The problem is, that would secure you
+ sort of within your own room, where you're already secure,
+ but your traffic then would still be communal
+ on the public side of the NAT router.
+ So, you would, unfortunately, it provides no security
+ from inter-room eavesdropping sorts of things,
+ which is the problem in a hotel setting.
+ One thing it does give you, though, of course,
+ is a very good firewall, in the same way that a NAT router
+ always blocks unsolicited incoming traffic.
+ So, it would potentially firewall your computer,
+ if you didn't already have a software firewall,
+ it'd be useful for that.
+ But it wouldn't completely protect you
+ from the types of inter-room LAN problems
+ that we've talked about in recent weeks.
+ >> Hmm, in fact I do that, because when I go to,
+ I carry my airport express, I'm in a hardwired hotel
+ to give myself kind of my in-room airport,
+ and I use-- >> So, you can sit on the bed
+ with the laptop-- >> Yeah, exactly.
+ Yeah. >> And I use WPA.
+ But it's important to remember this,
+ once it gets on the other side of that router,
+ it's just unencrypted plain old traffic,
+ just like I did. >> Right, right.
+ >> That's why I use Hot Spot VPN, thanks to you.
+ >> Exactly.
+ Pat Deary and many other sharp-eared listeners
+ have mentioned during episode 29,
+ that was our Ethernet insecurity episode.
+ You said-- >> You said, Steve.
+ >> I did. >> I'm pointing at you.
+ The ARP cache poison occurs when a malicious computer
+ sends out a false ARP response to two other computers,
+ making the malicious computer the man in the middle.
+ My question is, do the two computers
+ just accept the responses blindly?
+ Even if they didn't send out a request,
+ couldn't this be avoided?
+ If the two computers in question only accept responses
+ for requests they send?
+ That was a neat idea, and many listeners had it.
+ That is the idea being that the way ARP is implemented today,
+ it's trivial for a malicious machine
+ to send unsolicited responses to computers,
+ to cause them to change the MAC address with the IP
+ that it was previously associated with,
+ in order for them to send their traffic through it.
+ And so people said, hey, wait a minute,
+ what if computers just ignored responses
+ that they didn't send?
+ Well, that kind of could work, but then you get a problem
+ of the bad guy responding first before the good guy
+ to a valid ARP request with their response.
+ And then you would ignore the second one,
+ but then you've got the problem of not being able to detect
+ IP collisions on a LAN.
+ You want to be able to detect when two machines have the same IP.
+ I'm sure, Leo, with all the networking you've done over time,
+ you've seen the little Windows dialog box that comes up and says,
+ wait a minute, there's another machine with the same IP somewhere.
+ So the problem is really not tinkering with the protocol,
+ but the problem is a lack of authentication.
+ And the right way to solve it, we'll
+ be talking about it downstream.
+ There are some forthcoming specs.
+ I think it's 802.1x begins to do this,
+ where we get authentication of endpoints on a LAN, which
+ will begin to solve this problem.
+ And that's the right way of doing it.
+ Instead of trying to play with a protocol,
+ then you get all kinds of weird side effects and things
+ break in bad ways.
+ OK.
+ But it would kind of be like a router rejecting stuff
+ that didn't initiate.
+ Yeah, it's very much the same sort of concept.
+ Yeah, but there are issues with it.
+ Kevin, the problem is the problem in this case
+ is because there's no authentication,
+ you don't know that the first answer you get is not the bad guy.
+ Oh, that's right.
+ Of course.
+ So you just interrupt.
+ Excuse me, I'll take this from here.
+ I got this.
+ I got it.
+ Let's see.
+ Kevin Hooper writes from his Hotmail account.
+ I had some suspicious activity yesterday.
+ When I loaded drivers, and for a USB video capture device,
+ and then Microsoft anti-spyware flashed a LSP layered service
+ provider warning--
+ that sounds pretty dire.
+ Subsequent behavior of zone alarm only increased my anxiety.
+ It disabled it spontaneously.
+ What's that?
+ What's an LSP, particularly when you're
+ talking about a USB video capture device.
+ And what should a user look for when
+ using a layer inspector, like the add-on from Adaware?
+ Well, we haven't--
+ I don't even know what he's talking about,
+ but you're the spy working, so I'll let you--
+ well, a layered service provider
+ is a feature that runs up in the user's space.
+ There's user space and kernel space.
+ And so there are kernel drivers that run down there
+ that interface with the hardware up
+ in where the programs themselves run in so-called user space.
+ There are DLLs that get loaded in order for user applications
+ to talk to the network.
+ Microsoft, in their infinite wisdom--
+ Infinite wisdom, yes.
+ --created something called a layered service provider
+ as a feature of Windows.
+ What it allows you to do, essentially,
+ is it allows any software--
+ and then, of course, there's no protection for this,
+ no authentication, no notification, nothing.
+ It allows any software to insert itself as a shim
+ in the networking traffic, sort of up in the user space.
+ It's sort of a poor man's network interface ability.
+ The bad news is spyware is using this in order
+ to intercept browser and email traffic and to insert its own
+ and basically play all kinds of games.
+ So people like the Adaware guys have--
+ they're like aware of this being another vector of attack
+ for spyware.
+ And they're now keeping an eye on sort
+ of the chain of processes in the so-called layered service
+ provider stack, because you're able to have multiple service
+ providers that like sort of link to each other
+ and bad stuff inserts itself in there.
+ So essentially, it's sort of one more--
+ More vectors.
+ One more vector of vulnerability that Windows has.
+ And so apparently, in this case, maybe the software
+ was buggy to this guy installed.
+ Or he just has a lot of software like Adaware and Zonalarm
+ and Microsoft anti-spyware that are all now watching
+ the layer service provider stack for any changes
+ and alerting him if something changes.
+ He apparently installed something benign.
+ So he should say, OK, this thing is a layered service
+ provider, shim, installing piece of software.
+ Now I know.
+ So that's what it means.
+ Wow.
+ There's a pattern here in the way Microsoft works.
+ I mean, essentially, they're enabling
+ without really thinking about it,
+ just putting these in that let people do anything they want.
+ Yes.
+ I mean, it's just the way they operate,
+ the way they implement.
+ Now, in fairness, this is old stuff.
+ It's still around, like so much other of Microsoft's old stuff
+ for the sake of forward compatibility.
+ So this stuff has been around since before security
+ was really an issue, which we could argue for Microsoft
+ has only been in the last couple of years.
+ So I don't know that they would do it this way now.
+ One would hope they wouldn't, but we are stuck with it.
+ And the malware has found it.
+ And it's just a simple way for malware
+ to get itself running in basically in every process
+ that the user uses that communicates with the internet.
+ This LSP stuff is potentially really bad.
+ Wow.
+ Anthony from Albuquerque asks, I recently--
+ did you have to look up Albuquerque when you typed that,
+ by the way?
+ I think I probably did.
+ I just put it into Google.
+ And Google says, did you mean this?
+ You mean?
+ Oh, yeah.
+ That is probably the single hardest to do this, Bill.
+ I recently relocated that.
+ My new place I have a DSL connection with an ISP
+ that is issuing private IP addresses.
+ We're going to have to start limiting people to three or four
+ acronyms per message here.
+ I have a DSL connection with an ISP that is issuing private IP
+ addresses.
+ This is that 192.168.1 to me.
+ I had to change my router configuration to issue 192.168.0.
+ Something in order to get online.
+ Everything's working OK, except BitTorrent.
+ I'm thinking the ISP is either actively throttling BitTorrent
+ traffic, which is very common now.
+ Or preventing a good connection by not having the BitTorrent
+ ports forwarded the way I have to on my own router.
+ I'm using a Xerius, but my ISP is not
+ on their list of so-called bad ISPs.
+ I changed my BitTorrent port as also recommended by a Xerius
+ that hasn't helped in my troubleshooting.
+ I also discovered my dynamic DNS is no longer working properly.
+ As the IP it receives is an external IP in a router somewhere.
+ OK, another 192.168.
+ Is there another way around this ISP's shenanigans
+ to get Dine DNS and BitTorrent working?
+ OK.
+ How does this even work?
+ This guy is hosed.
+ The ISP is using a router to connect these other--
+ they're not giving you a real IP address.
+ That's exactly right, Leo.
+ And I've seen this before, and it's beginning to happen.
+ ISPs may be who can't get a large enough public IP
+ space for all of their customers.
+ They're beginning to run NAT themselves and then
+ issue private space 192.168.x.y IPs to their customers.
+ Now, this guy was able to get his router to work
+ because he was smart enough to know
+ that you have to have different networks on either side
+ of the NAT router so that it's able to know which traffic
+ to route across.
+ So for example, his ISP in this case
+ was issuing 192.168.1.something.
+ And that was the default subnet inside of his router.
+ So he had to change that, and he was able to work.
+ But he still has the problem that his traffic from his own use
+ is not going public until after it crosses his ISP's router.
+ I could ask a lot of issues coming out of something like that.
+ Well, you can't run servers.
+ You see, his BitTorrent client is trying to be a server.
+ Exactly.
+ And there's no way to run a server without explicit port
+ forwarding.
+ And the ISP can't forward ports to everyone.
+ They would only be able to go to one particular user.
+ We'd be able to use video chat either, right?
+ I mean, there's a lot of things that would break.
+ As I said, this guy is seriously hosed.
+ I mean, this is why ISPs don't do this very well.
+ I mean, you'd think this would be then their advantage
+ to do it, but it would cause so many problems.
+ It's convenient for the ISP.
+ But basically, you end up being a client only to the internet,
+ and all kinds of stuff will no longer work.
+ So complain to the ISP, and if they don't fix it,
+ you're going to have to go somewhere else.
+ If I would go somewhere else, if there's any way he can change ISPs,
+ that's the first I just don't even consider complaining.
+ I can see a small rural ISP doing this because they're small.
+ They don't have a big enough pool.
+ Essentially, they become kind of in-house, like renter of access.
+ But you can't do--
+ I mean, a lot of things break.
+ A lot of things.
+ Yeah.
+ Chris Peterson, our last question.
+ Chris Peterson of Billings Montana asks, can anyone's machine--
+ can anyone's machine just be hacked during an argument
+ online the other day?
+ A belligerent kid said he was just going to hack into my machine,
+ and he was going to get what he wanted from it.
+ And so there, I assumed he was bluffing.
+ He didn't seem that smart, but could a really talented hacker
+ crack into anyone's machines?
+ In other words, is any machine vulnerable?
+ The good news is no, no.
+ It's not like in the movies where you just decide, OK,
+ we're going to go hack into this computer system somewhere
+ and get whatever we want to from it.
+ I mean, the bad news is many systems
+ are so complex that there are ways in.
+ But in some cases, that requires social engineering,
+ where you get the secretary of the bosses out of town
+ to flip his keyboard upside down and read you his password
+ on the bottom of his keyboard or something like that.
+ I mean, there can be ways in.
+ But fundamentally, if it's not as if all computers have sort
+ of like have a soft boundary, and if you just poke at them
+ hard enough, you'll be able to stick your spike all the way
+ through their crust.
+ I mean, it just doesn't work that way.
+ So that's the good news.
+ On the other hand, there are so many holes and exploits
+ in operating systems these days that there's no guarantee
+ that you're safe either.
+ You've been watching, of course, OSX has been having its share
+ of trouble and safari and so forth, although they're talking
+ about OS X having problems because it has a lot
+ of old Unix programs and Apple hasn't been
+ assiduous about making sure the patches are applied.
+ But I haven't seen any widespread exploits.
+ I mean, it seems more theoretical.
+ But it's something to keep in mind always
+ that unless you are actively hardening a system,
+ there's always the chance that you're hackable.
+ And if you're a good hacker, you probably
+ have in your toolkit a few of these well-known exploits
+ that are out there.
+ Well, and I would say if nothing else,
+ yeah, I would say if nothing else,
+ the notion of needing to keep your software patched
+ and current has now arrived for Mac users the way
+ it arrived years before for Microsoft Windows users.
+ Although I think most Mac users is kind of by default turned
+ on that there's a software update feature.
+ They did it before Microsoft did it, and it's automatic.
+ And I think most Mac users have it turned on.
+ I think there's a bigger issue, and I was guilty of this.
+ We kind of tend to run as administrator, which, of course,
+ if you've ever used a Unix system that is very potent,
+ you never run as root.
+ But both Windows and Mac users tend
+ to run as administrator.
+ On Windows, you almost have to, because there's
+ so many programs that won't run otherwise.
+ On the Mac, you can, in fact, very conveniently, very easily
+ run as a limited user.
+ Well, in fact, from the Unix world,
+ the idea of being root, as it's called, is so powerful
+ that from day one, programs have all assumed
+ they would not be running as root.
+ They would create their own like a news account
+ or an Apache account or whatever that would run
+ with limited resources.
+ So the heritage of Unix has that fundamental security
+ awareness advantage, where things really do work just fine,
+ not being root, and you only briefly
+ have to do that from time to time for special true maintenance
+ things, whereas, as you say, Leo, under Windows,
+ all kinds of stuff is just broken.
+ The heritage is the opposite of assuming
+ that you have all power.
+ Exactly.
+ And that's exactly the difference.
+ It's just how people are used to working.
+ Our programs are used to working.
+ Steve, we are through the questions.
+ Well done.
+ I think we will resume then.
+ Next week, we'll come back with our answer
+ to this week's puzzler brain teaser.
+ Why can't you send messages back and forth using
+ that double lock approach with a one time pad?
+ Or can you send them back and forth?
+ Does that work in order to give you
+ a really cool encryption system?
+ It seems to me that if it worked,
+ that it would be more widely used.
+ So I'm thinking--
+ And it's got to be something wrong with that.
+ And so the question is what?
+ People can think about it for a week.
+ And we'll give them the answer at the beginning of the show
+ next week.
+ And I'll talk to you then, Leo.
+ Oh, don't forget.
+ Go ahead.
+ Now I was going to say that we're
+ going to talk about the second family of symmetric--
+ we ran out of time last time.
+ And all we were talking about so far
+ is what's called stream ciphers.
+ That is the idea being that you have a message.
+ And for example, you use a pseudo random number generator
+ or even a one-time pad to generate
+ a stream of randomness that you mix in with your message
+ to create a stream that cannot be decrypted.
+ And then you reverse the process to get it back.
+ That's one family of encryption.
+ The alternative is called a symmetric block cipher.
+ And that's really-- I mean, there we're
+ going to see when I quickly run through a list of them,
+ like two fish and blowfish and AES and Rhindol and those things.
+ Those are things people have heard of.
+ And those are really today's workhorse encryption.
+ So that's for next week.
+ That's for episode 33.
+ Meanwhile, we're reminding everybody
+ that they can get 16 kilobit versions of this
+ and all our other security now podcasts, plus transcripts,
+ thanks to Elaine on Steve's site, grc.com/securitynow.html.
+ This program is-- and all of Steve's labors
+ have brought to you by his fabulous program, SPINRITE,
+ which is the ultimate disk maintenance
+ and recovery utility.
+ I just recommended this the other day to somebody.
+ It's a must-have if you work with hard drives.
+ And you can find out more about that now at SPINRITE.info,
+ a brand new site just for you.
+ SPINRITE.INFO.
+ We also want to thank our good friends at AOL
+ for providing us with the bandwidth
+ and for broadcasting this show on their podcast channel
+ on AOL Radio.
+ That's AOL.com/podcasting.
+ And thank our donors who make this show possible without you.
+ We couldn't produce security now and all the other fine twit.tv
+ podcasts.
+ If you're not yet a regular contributor,
+ we encourage you to visit the site twit.tv
+ and press one of those donation buttons.
+ The donation, as little as $2 a month,
+ really makes a big difference in keeping us running.
+ And frankly, now's a good time.
+ Our expenses are high, and I'd sure
+ appreciate a little help here.
+ So that's twit.tv, twit.tv, and you'll see those PayPal
+ donate buttons right there on the front page.
+ Steve Gibson, we'll see you next week.
+ Ride our Leo thing.
+ Take care.
+ We'll see you all next Thursday for another "Security Now."
+ [MUSIC PLAYING]

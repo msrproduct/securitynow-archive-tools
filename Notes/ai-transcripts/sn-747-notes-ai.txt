@@ -1,0 +1,1352 @@
+ Well, we come to the end of 2019. What a crazy year for security. This has been
+ No, I know I look like Steve Gibson. I'm this is Leo report
+ Steve Gibson is here. We're gonna look back at the year 2019 with our best of show right after this
+ Security now comes to you from the last past studios in Petaluma, California
+ Securing every access point in your company doesn't have to be a challenge last pass unifies access and authentication
+ To make securing your employees simple and secure check out last pass dot com slash twit to learn more
+ Podcasts you love from people you trust
+ This is twit
+ This is security now episode 747 for new years eve Tuesday, December 31st 2019 the year's best
+ I think you could probably say that the year 2019 was the year ransomware
+ Got even bigger. We'll probably say the same thing for the next five years running
+ But there was a lot to talk about in 2019 including
+ And this may have happened to you Steve Gibson explains why your printer keeps printing out advertisements for Pewdiepie
+ I believe it or not leo
+ on this first cast
+ Of the new year. We're going to talk about yes
+ Pewdiepie oh Pewdiepie
+ this time
+ Chromecast users
+ have had
+ Pewdiepie
+ pushing
+ Video content interrupting their viewing whoa
+ If you can believe it or not get a look yes on reddit someone posted tv randomly switching to some pewdiepie video
+ He posted every 20 minutes or so my tv switches to some crappy youtube video about pewdiepie
+ with eddy said
+ rap music and a pound chromecast hack hashtag
+ All anyone know how to stop this it's driving me bonkers
+ Now google's response to this from the from grace from google the google community manager
+ grace wrote hi everybody
+ We know how frightening this is
+ The good news is your chromecast hasn't actually been hacked in quotes
+ Rather somebody was able to cast to your chromecast
+ Due to an opening in your home network. Oh, yeah, that's a great comfort
+ This is the result of your router making some smart devices including chromecast
+ publicly reachable
+ No, actually it's a consequence of chromecast telling your router that has universal plug and play enabled
+ That it would like some ports mapped to it pretty please
+ Okay, so it is both, you know, it is universal plug and play how many times what must we say, you know the
+ I will say that the instant it appeared on this podcast. We said turn it off
+ This is really bad
+ Turn it off
+ And we know that xbox people were that was a hardship for them because you know arguably
+ This was created so that xbox would be able to have ports mapped into it
+ So anyway, what we have is the return of hacker giraffe remember that
+ Twice now
+ Leo once while you were gone
+ Then the second time that for you the first mention on this podcast of pewdiepie
+ Was his second hack of a greater number of printers which are exposed on the internet all
+ Sending out the what what there was like the number two youtuber was some
+ Yeah, it's a it's a
+ Alien Indian channel T power or something. Yeah, it's just starting to beat pewdiepie and
+ Right, right, right. Okay. So by the way pew. I think pewdiepie his t-series has
+ Yep, that's it's bleed to pewdiepie. That's what it was. It was t-series. So anyway on the fact for
+ The hacker giraffe.com
+ They asked themselves what's going on if you came here because you're a victim of cast hack
+ Then know that your chrome cast slash smart tv slash google home
+ Is exposed to the public internet and is leaking sensitive information
+ related to your device and home
+ What information is leaked
+ What wifi your chrome cast slash google home is connected to
+ The bluetooth devices it has paired to how long it's been on what wifi networks your device remembers
+ What alarms you have set and much more
+ What can hackers do with this remotely play media on your device rename your device?
+ Factory reset or reboot the device
+ Force it to forget all wifi networks force it to pair to a new bluetooth speaker
+ Or wifi point and so on
+ What can't hackers do?
+ He says assuming that the chrome cast google home is the only problem you have
+ Hackers cannot access other devices on the network
+ Or sniff information besides wifi points and bluetooth devices
+ They also don't have access to your personal google account nor the google home's microphone
+ They do have access to the noise level in the room. However, which is interesting
+ Then the the faq that they wrote for themselves asks themselves. Who are you?
+ Your friendly neighborhood hacker giraffe
+ We just want to have a bit of fun while
+ While educating and protecting people. Of course, this is breaking the law, but what the heck
+ And protecting people from open devices on the net on the internet. We were also behind the printer hack and printer hack too
+ Why are you doing this? We want to help you and also our favorite youtubers
+ Mostly pewdiepie
+ We're only trying to protect you and inform you of this before someone takes real advantage of it
+ Imagine the consequences of having access to the information above
+ What do you want?
+ Well, fix your device and also subscribe to pewdiepie
+ on youtube also
+ pyrocynical dolan dark and
+ and
+ grande
+ GRA. I'm not gonna. This is why you're never gonna never gonna succeed on youtube
+ Gotta be able to read these
+ Wow
+ Don't forget good old keemstar
+ Okay
+ How do I fix my device?
+ He says disable up&p on your router and if you're port forwarding forwarding if you're if you're port forwarding ports
+ 8,000 and eight
+ eight four four three
+ eight double nine
+ Then stop forwarding them. Well your chromecast stop working if you do that
+ No, okay, uh, thank you. Any way to show support. Yes. I he says I hacker giraffe have other things to do
+ Use my free time. You please go
+ Yes
+ Use my free time teaching people cyber security and ethical hacking. Okay
+ Uh, if you want to support personally
+ Or enjoyed this hack. Oh, yeah, it was enjoyable
+ Consider becoming a patron on my patron page and I by the way, I went and it had been canceled or closed
+ So I don't think that
+ worked
+ so, uh
+ Okay, so if you go to the page that is listed in this in the
+ Show notes cast hack dot the hacker giraffe.com
+ you get a
+ a
+ status page
+ total exposed devices
+ 72,000
+ 341
+ Of those
+ 8,254 were renamed
+ And 65,283 that is the balance
+ Have been forced to play video
+ So more than 65,000
+ Chromecast or smart tv devices
+ received this this annoying youtube video
+ Um, that uh that same number of 72, 341
+ Breaks down as 1542 were google home devices
+ And the remaining 67,049 were smart tv's or chromecast devices
+ so
+ Anyway, google
+ Did google did say
+ That this was the fault of youth p&p
+ being enabled
+ That this grace from google continued after blaming it on up&p and I don't
+ Because this is as chromecast saying open ports to me, please
+ She she wrote to make your network more secure
+ You can disable up&p to avoid any unwanted content being played on your devices
+ How convenient
+ The instructions are different from router to router
+ So we suggest checking with the manufacturer of your particular device, however
+ This may affect other apps and devices that use up&p to function
+ Meaning chromecast doesn't really need it, but we thought what the heck let's open supports because why not?
+ so um
+ What I would note the there's been coverage of this
+ um
+ It's
+ as we have mentioned before
+ the port mapping done by the up&p api
+ Typically is hidden from the user so as not to confuse them like wait a minute. I didn't map these ports
+ So they don't appear in the ui
+ What I would recommend if first of all remember that grc the first time this it became apparent to me
+ on the podcast leo that universal plug and play
+ was
+ being
+ enabled externally
+ It was like okay. Wait a minute. Let's check for that. So although this doesn't require an external
+ Presence, but you know our shields up service has still has from that from that day on a quick chest
+ Test for external access
+ That's what the bad guys are using for for proxying traffic and setting up bots and so forth
+ And now turning around and using it to look inside people's networks
+ So you absolutely want that disabled form external access, but this is
+ Internal use and it is the case that as grace notes
+ um
+ That
+ That there may be some things you are doing on your network that
+ Will stop working if you disable it
+ typically however
+ It is possible to manually configure the ports to the devices that need it
+ The problem with having universal plug and play enabled is there's and this is what the first point
+ We made about it when it first hit our radar was it is there's no authentication
+ There's no username no password
+ Nothing it is wide open so that anything
+ Inside your network has access to it if it's enabled and can can do anything it wants to with your route
+ behind your back
+ I mean it just it's
+ Unconsciously bad it always was and and we keep seeing instances where it's biting people
+ um, and you know, so
+ Uh, the point is that if you disable it, you should did you should reboot your router
+ The universal plug and play mappings are typically dynamically made they are not statically
+ stored in non-volatile memory so a reboot should flush them but turning it off won't necessarily
+ Close these holes because it'll prevent new ones from being mapped
+ But probably leave the existing ones in place
+ And if you're going through all that take the time to check with the that the router's web manufacturer's website
+ With the version number remember that we've seen already an instance where the router itself
+ Wasn't aware that there was a newer version so even a router that if that that is is trying to check to see whether
+ It should update itself may not have the latest information about what is available for its own
+ Uh firmware so check the manufacturer
+ Um always update to the latest
+ Uh shut down universal playing play universal plug and play if you believe you can and then do a reboot in any event
+ So that if you're trying to close things down you have a chance of doing so
+ And don't forget to subscribe to pyrocynical dole and dark and grande
+ That's right get props to pewdiepie and cool. I'm star
+ So, uh also
+ Uh
+ Ooh, sorry i threw you i apologize
+ I said one last by the way pewdiepie is beating
+ But it's t-series, but it's really close as of seconds ago
+ Wow, yeah pewdiepie has uh, um
+ About 400,000 more subscribers. He's got 80 million subscribers by the way. It's it's amazing the number
+ Although probably those aren't real people or maybe they are. I don't know how it works
+ Yeah, he's got he if you if you really care he's got 80,000 224
+ 80 million 224,368 subscribers to t-series t-series 79 million
+ 486,000 103 subscribers
+ I know you're glad now now. I was just doing that to give you time to find your place. Go ahead. And I did thank you
+ You're welcome
+ Uh, what's annoying is that google knows about this
+ They have known about this for years
+ Uh, there are a number of youtube hacks
+ From dating from 2014 showing chrome cast being commandeered like, well
+ Play something on your neighbor's chrome cast
+ You have to be in physical proximity or can you do it anywhere in the world?
+ Any well, not
+ At least this way here you can do it anywhere in the world because it's publicly open and that's what this guy did
+ This hacker giraffe to how many was it is 72,341
+ Video devices were played of or found of those more than 65,000
+ Had been forced to play video
+ Do you show Dan to find that how would you find that?
+ Um
+ Showdamp may very well because that we know that that's the tool he used to find the
+ Printer exploits before so he may have just said, oh, what else can I do to push PewDiePie?
+ Because after all it's neck and neck with with t-shirt
+ That's actually t-series. I don't see series
+ To our listeners who are or maybe you know, uh, well, yeah, are we know we have listeners of all ages
+ We have people who say hey, how do I get started in security?
+ I want to you know, I want to consider a career. What do I do?
+ Or maybe you've got some free time. Maybe you're living with your folks. So you're in high school and
+ Uh, and you're what i'm thinking it'd be fun to see if you could uh earn some extra cash on the side
+ It is truly possible to have a career
+ If you're good in bug as a bug
+ As a bug hunter and getting bug bounties
+ Uh, i've got in the in that uh, it was just a it was a picture that was uh covered in hacker ones posting
+ We have a picture of 19 year old sontiago lopez
+ Who has just crossed the one million dollar mark
+ from
+ Purely one million us dollars. He is the first
+ bug bounty hunter
+ millionaire
+ Just from finding and reporting security vulnerabilities through hacker ones bug bounty program
+ I I noted at the top of the show that we don't know
+ If maybe he's made actually more money than that because he's sold some really tasty ones to his imperium who knows
+ Um, he's got an interesting twitter feed. I would commend people to go poke at i've got a link in the show notes also
+ uh
+ And last friday march first the bbc ran an interview with sia
+ sontiago titled how one teenager is making millions by hacking legally
+ Uh, their byline said this or their their little summary said this 19 year old sontiago lopez from argin
+ Uh, this is sorry 19 year old sontiago lopez from argin tinnia
+ Argin i have a problem pronouncing that argin
+ Tina argin tina g yeah one more syllable and then it's supposed to argin tina. Thank you leo
+ He's the first million he's the first millionaire bug bounty hacker, which means he gets paid
+ This is the bbc's talking. Of course. We all know they are gets paid to find glitches
+ In the software of some of the world's biggest companies mr
+ Lopez made his money on the world's biggest ethical hacking platform hacker one
+ Bbc news joe tidy has been has been to see how he spends the money
+ Thus the bbc story that I think our listers may find interesting and I have a a link as I said to that in the show notes
+ and also
+ hacker one did a report
+ Uh published on february 1st so a little over a month ago. They said
+ Today the hacker one community hit 45 million dollars in bounty payouts
+ Join us as we celebrate the hackers who are making the internet a safer place
+ Every single day
+ The party is going to last the whole way to a history making
+ 50 million
+ in bounty payouts
+ And in there in this posting that I have or their pdf that I have a link to
+ They started off by by defining hacker
+ So they show you know hacker and how it's pronounced phonetically declaring it to be a noun
+ And for their definition, which I really like they said
+ One who enjoys the intellectual challenge of creatively overcoming limitations
+ And I think that's a great definition of a hacker
+ One who enjoys the intellectual challenge of creatively overcoming limitations
+ And again, I would commend this report to our listeners who might be interested
+ They had they have a lot of of of like bios and
+ And details about the hackers. I'll say I'll share just the top of it. They said
+ Welcome to the age of the hacker hackers are heroes
+ They're in it for the good and there is more opportunity than ever before
+ We share some of their stories and celebrate their impact in this the third annual hacker report
+ The hacker report details the more than
+ 300,000 individuals that represent our hacker community today
+ It highlights where hackers live what motivates them and what their favorite hacking targets and tools are
+ Where they learn why they collaborate and much more
+ in 2018 alone
+ Hackers earned more than 19 million dollars in bounties
+ Almost the entire amount awarded in the years prior
+ combined
+ So it's on a ramp
+ And while the most successful find it very lucrative
+ It's about so much more than money
+ Many are finding career building opportunities through bug bounties, which companies hiring
+ from with
+ Bug bounties with companies hiring from within the hacker community
+ At a faster clip than ever before and that's a point i've made
+ um like there are some very
+ beautiful
+ Pieces of work where i've thought to myself boy, you know if i were in the hiring business still i
+ Ask this person for a job. They are good
+ They say companies are utilizing bug bounty reports and hacker engagement
+ as an enhanced resume of proven skills that will impact company goals and security efforts from day one
+ The generosity and camaraderie of hackers continues to impress
+ With more effort emphasis than ever before on education collaboration and giving back
+ As hacking grows in popularity training continues to be a focus with more than 600 hackers joining
+ Registering to join the ranks at any given day
+ In-depth training modules such as hacker one capture capture the flag challenges are in demand
+ They say the past year
+ We saw incredible individual performances such as hackers earning
+ $1,000 for one vulnerability and the first hacker
+ Santiago passing the one million milestone
+ One million dollar milestone. We also saw unmatched collaboration while hackers acting as teams to report over
+ 250 valid customer vulnerabilities
+ They say hackers represent a global force for good
+ Coming together to help address the growing security needs of our increasingly interconnected society
+ The community welcomes all who enjoy the intellectual challenge to creatively overcome limitations
+ Their reasons for hacking may vary
+ But the results are consistently impressing the growing ranks of organizations
+ Embracing hackers through hacker powered security
+ I like that hacker powered security leaving us all a lot safer than before
+ And they did note that top earners top hacker earners can make up to 40 times
+ The median annual wage of a software engineer in their home country
+ respectively
+ so
+ I
+ I think what we're seeing is we're seeing a c change here
+ hacker powered security
+ And you know if you've got skills
+ with a z
+ I think you ought to consider it. Where does one get its money from?
+ Deprived there and it did there hired them
+ Yes, so so bounties are posted by like ge and
+ And tesla and others to say we are
+ Formally inviting people to try to find problems in our products and if found we will pay
+ But why go through hacker one why not just go directly to ge does hacker one keep a cut
+ There no, well, they they do keep a small cut, but they're a clearing house
+ And they so so they've got the hackers registered with them and they're able to then post
+ Opportunities of of like you know, here are things that ge
+ Would be interested in having you attempt to find vulnerabilities in
+ And and here are the payouts for from ge on various classes of vulnerabilities that you find
+ And they get so five percent of something for that service exactly exactly and so so so they're like the
+ The clearing house and they put the hackers together with those
+ Offering bounties to have their basically hacker powered security have their security tested and improved
+ I just think it's it's a win. It's really a business idea actually on that part
+ Yes, totally see that for the the right kind of guy
+ Who's you know eclectic and doesn't want to work for the man
+ And and you know has faith and confidence in their own skills
+ It's something you could start part-time while you're you know in high school or going through college
+ See if you've got what it takes
+ And just like this podcast that is not running out of material lord knows
+ We're at the two hour and nine-minute mark at this point
+ So
+ It is very clear the world is not going to run out of bugs ever
+ One of the big stories of
+ 2018 was the mariah botnet
+ Uh, in fact, as I remember mariah took over routers and took down the playstation network and other servers
+ During the holiday season last year
+ Well mariah didn't go away in 2019 in fact according to steve
+ It was bigger than ever
+ The mariah botnet is
+ Alive and well and more scary and capable than ever
+ um
+ Will remember that the that is considered an iot malware
+ It broke the d-dos attack size record
+ In 2016 when it was used to attack brian Krebs forcing him
+ like off the net also the french web host. Oh, uh, oh vh
+ Was attacked and then all and then most famously the dns provider dine dns
+ Was forced off the net and of course
+ Because that that d we all depend upon dns
+ To varying degrees that caused a ripple effect and all kinds of other sites
+ Disappeared as their dns expired and it couldn't get refreshed from the from the from their assigned dns provider if it was in this case dine dns
+ so
+ mariah
+ Has been updated to target a new crop of devices including two
+ Which are often found inside enterprise networks
+ Where as we know bandwidth is often more plentiful than it is on consumer iot
+ networks mirror i now knows how to infect webcams routers
+ dvrs
+ as well as many other internet content devices which typically ship with default credentials as we know and
+ typically
+ They're running never updated and thus woefully outdated versions of linux
+ yesterday morning
+ Palo Alto networks unit 42. I love it that they call their sums themselves the unit 42 or they posted
+ News of a new mirror i titled new mirror i variant targets enterprise wireless presentation and display systems
+ So i've edited this down a bit for length and clarity
+ But they basically wrote the mirror i variant that unit 42 discovered is notable for targeting different embedded devices
+ like routers network storage devices
+ network video recorders and ip cameras
+ Using numerous exploits against them specifically unit 42 found this new variant targeting
+ We present wipg 1000 wireless presentation systems and
+ lg's super sign tv's they wrote both these devices are intended for use by businesses
+ This development indicates to us a potential shift to using mirror i to target enterprises
+ attack code
+ Exploiting a we present command injection vulnerability was published in 2017
+ While a remote code and execution exploit for the lg super sign tv's has been available since last september
+ After being packaged into this new mirror i variant the exploits become much more likely than previously
+ To actively be used to compromise their vulnerable devices
+ And this is not the first time mirror i has been aimed at enterprise networks last september palo alto networks reported that mirror i was found targeting the same
+ Apache struts vulnerability that hackers exploited to breach equifax
+ So in addition to this newer targeting this new mirror i variant incorporates 11 new exploits
+ In its multi exploit kit the new and has four sets of new credentials used in brute forcing device sign on
+ So mirror i is still alive and well
+ It had 16 previous
+ Previously seen
+ Exploits it added 11 so it's gotten way more competent and it is still out there scanning the internet
+ Looking for new victims and unfortunately finding them
+ It uses a
+ An HTTP flood to do
+ DDoS attacks and
+ And and it is a worm so once it gets
+ A beachhead it then starts scanning for other available devices both inside and outside of its network
+ So you know doesn't look at the internet is going to be getting rid of mirror i anytime soon
+ And we're just going to you know be stuck with this thing and it's going to be
+ You know causing more havoc
+ Teams from the gras university of technology whom we have spoken of before
+ k u luven
+ And cybers technology have been added again
+ Uh, and if we ever wanted as i mentioned at the top of the show, I'm a perfect example of bruche nier's sage observation that attacks never get weaker
+ They only ever get stronger. Oh, we have it here
+ What these guys have done quietly although they've known for a year none of us have
+ um
+ They have been sitting probably impatiently on this
+ um
+ Is a truly significant advancement
+ to
+ um
+ the practicality
+ of
+ What was the mostly theoretical attack on speculation and micro architectural
+ performance boosting
+ That we began talking about right from the start of last year
+ so
+ The the term micro architecture is all throughout this
+ um, so let me just explain the architecture is what
+ The code that runs on the processor
+ sees so it's you know, it's the registers, uh, it's the
+ Uh, the stack
+ the
+ Various execution units, you know, the the it's it's the view
+ That the that the processor provides to the code
+ It was quite a while ago that that stopped being the only architecture in the chip
+ um
+ especially for the intel
+ Chips because the instructions are so complicated that as they as they became as they kept adding new features
+ they
+ The the the idea of designing this instruction set implementing the instruction set
+ As gates just as simple logic became
+ impossible, especially when they started wanting to get really fancy
+ so
+ What happened was they created a processor inside the processor. They're you know, the the so-called micro code
+ So that runs the micro code runs on the micro architecture
+ Which is this this?
+ This processor running at the clock speed
+ That is given to the chip. They've you know, three gigahertz or whatever it is and and that processor
+ Essentially implements the instruction set that the outside world sees
+ so
+ And that's how
+ When micro when when intel produces a an update to the firmware of the chip that that's the micro code
+ That implements this and so so that's what so that
+ So for example when they talk about micro architectural data sampling vulnerabilities
+ what what the what the lid that's been torn off of
+ of the intel architecture unfortunately is
+ that
+ that there are all kinds of
+ Because you have a processor in a processor because there's there's a whole another dance going on
+ separate from the one that's public
+ All of the attention up until now has been on the security of the public
+ Processor that is it's been scrutinized and it's been looked at and it's been validated as
+ secure nothing leaks at that level, but
+ What what we what as soon as we started looking past that
+ We got the specter and meltdown problems at the beginning of last year. So
+ so
+ This is just you know, this is so tasty for researchers
+ no one who's really into this has been able to put it down and
+ What what has what came to light?
+ Last Tuesday morning as this podcast was already
+ set up and ready to go
+ was
+ Essentially, I would say it's more than the next shoe to drop. It's it's an anvil dropped because
+ what was
+ What happened was the the change from
+ theoretical to?
+ Absolutely proven
+ This is probably why intel was really in a panic that intel is known of this for a year
+ and
+ So the good news is you know, they've taken responsibility. I would oh my god
+ I would do anything to be a fly on the wall of I mean like to know
+ Really what has been going on inside their meetings because
+ I mean it has to be
+ some some you know
+ Serious discussion about you know how they got into this position and how these problems occurred, but anyway
+ um
+ What we have now
+ after more than a year of trouble
+ Is the so-called it's sort of been generalized
+ to micro architectural data sampling vulnerabilities
+ and to
+ That original work which first brought us meltdown
+ we have on this site CPU dot fail
+ Has
+ Zombie load that we had fun just saying
+ Last week we have something called ridl
+ Fallout and store to leak
+ forwarding
+ each of those
+ Is a different exploitation of subtle features of intel processors
+ Which have been produced over the last eight years since around 2011
+ Which makes which as a consequence
+ Make it extremely difficult for it the processor
+ To keep its secrets
+ As it was always designed to that is I mean until the beginning of last year
+ We had these processors sitting on servers
+ in cloud environments
+ with vms sharing a single core among
+ any random set of
+ of
+ parties whether
+ whether
+ Friendly to each other or not
+ um
+ That all changed at the beginning of last year because it turns out that it is
+ It was at that time it was theoretically possible
+ A couple examples were shown mostly. It was done like oh, you know goodness
+ Here's a problem. We need need to fix this before it's too late
+ Well, what we got just last Tuesday
+ in the form of
+ firmware updates for the micro architectures
+ At some significant
+ Performance hit i've seen some benchmarks that look like it takes maybe 10
+ to 12 percent off the top which is a chunk of performance
+ Because unfortunately as we've seen in order to prove you know, these these problems are
+ are a result of
+ of the past
+ Of other threads of execution leaving trails leaving hints
+ In the micro architecture which clever researchers are able to pull or able to tease out
+ Over time and and again these attacks have only gotten better
+ A co okay, so zombie load i'm not going to go into infinite detail
+ But I want because I just want to give our listeners a sense for this zombie load
+ uh
+ resurrects
+ private browsing history and other sensitive data
+ It allows the leakage of information from other applications from the operating system
+ Across virtual machine boundaries in the cloud and from trusted execution environments
+ The ridl attack allows the leakage of information across various security domains
+ From different buffers such as lined fill buffers and load ports
+ Those are micro architecture attributes that are not surfaced at the processor level
+ But they're they're all part of the plumbing that's going on behind the scenes
+ Our idl demonstrates attacks on other applications
+ The operating system virtual machines and trusted execution environments
+ So there's a lot of overlap between these but they are different there are different types of attacks against
+ against different facets of the micro architecture the fallout attack
+ allows reading
+ uh what the operating system recently wrote
+ and figuring out the memory position
+ Of components of the operating system
+ Thus strengthening other attacks in other words. It helps to defeat
+ K a slr kernel address space layout randomization
+ And finally the store to leak forwarding
+ exploits cpu optimizations
+ introduced by
+ Another i our micro architectural component the store buffer
+ To break to also break address randomization
+ Monitor the operating system or to leak data when combined with some aspects of specter
+ Specter created these these gadgets which were were
+ Way a little pieces of code which were used
+ Store to leak forwarding is able to reuse some of these specter gadgets essentially making the attacks
+ stronger
+ Microsoft for their part last tuesday on may 14th
+ wrote
+ uh on may 14th intel published information
+ About a new subclass of speculative
+ execution side channel vulnerabilities known as
+ micro architectural
+ Data sampling and of course now we know the data being sampled
+ Is somebody else's data if you happen to be sharing
+ It an intel processor with somebody else
+ Microsoft said an attacker who successfully exploited these vulnerabilities
+ May be able to read privileged data across trust boundaries
+ In shared resource environments such as exists in some cloud services
+ Configurations these vulnerabilities could allow
+ One virtual machine to improperly access information from another
+ So this is you know sounds like a repeat of what we've been talking about all of last year
+ In non browsing scenarios on standalone systems
+ An attacker would need prior access to the system or an art or an ability to run
+ Especially crafted application on the target system to leverage these vulnerabilities
+ What they didn't explicitly say is that code running in a browser
+ Is able to determine what the browser has been doing
+ So it's a potentially significant
+ um privacy violation
+ Just using a browser at the browser level
+ So they allocated or I should say the the cve system allocated for different cve's
+ um
+ Micro architecture store buffer data sampling which was given the acronym ms bds
+ micro architecture fill
+ buffer data sampling mf bds
+ micro architecture load port data sampling
+ mlpds and micro architectural data data sampling of uncasurable memory
+ mdsum
+ so
+ Over on the cpu.fail site
+ They did a little q&a to sort of help demystify this
+ They asked am I affected by this bug the answer most certainly yes
+ Are these software bugs? No
+ These bugs are in the processor software can work around these bugs which costs performance
+ Future processors will have integrated fixes and that is no doubt true
+ They ask can I detect whether someone has exploited this leakage against me
+ They say we have no data on this the exploitation
+ Might may not leave any traces in traditional log files
+ Can my av detect or block these attacks?
+ They said while possible in theory. This is unlikely in practice
+ These attacks are hard to distinguish from regular benign applications
+ However, they write your av may detect malware which uses the attacks by comparing binaries after they become known
+ They ask has this been used in the wild and they answer we don't know
+ So that they wrote a 16 page detailed paper that i'm not going to drag us through
+ and i've already pretty much explained what i had here in the
+ That i quoted from the abstract at the top of the paper
+ They conclude though saying with zombie load
+ We showed and then this is in the in these 16 pages in zombie load
+ We showed a novel meltdown type attack
+ Targeting the processors fill buffer logic zombie load enables an attacker to leak recently loaded values
+ Used by the current or sibling logical CPU
+ We show that zombie load allows leaking across user space processes
+ CPU protection rings virtual machines and sgx enclaves
+ We demonstrated and they did this
+ The immense attack potential and that's what has changed if i mean the takeaway here is this went from being well
+ Okay, you know, yeah in theory, this could happen this
+ This research changed this to
+ Making these practical attacks. They said we demonstrate the immense attack potential by monitoring browser behavior
+ extracting aes encryption keys
+ establishing cross vm
+ covert channels
+ And recovering sgx ceiling keys in intel's secure enclave
+ Finally, we conclude with that we conclude that
+ disabling hyper threading
+ Is the only possible workaround to mitigate zombie load on current processors
+ so
+ For what it means to us as i said
+ This is this is primarily a further collapse in
+ inter thread isolation
+ Inter thread isolation only matters if you've got if you have one way or another
+ A system has a malicious thread running on it
+ um in the case of a user's machine
+ Um a malicious thread we would call malware in that case. You've already got malware on your system and so you're in trouble
+ Um, you know that this this could be a way
+ Of a for malware to extract encryption keys from your system like for example
+ If you were using bit locker and depending upon bit lockers
+ Encryption of your hard drive
+ It would be possible for malware to reach into the kernel to get the key that it would not otherwise have access to because it would be well protected
+ Um, and then you know
+ Make off with it or send it somewhere use it do whatever whatever it wants to
+ So
+ But in general once you've already got a malicious thread on your system
+ You've you're already in trouble
+ The real problem as i've mentioned is in the cloud environment where you might very well have a
+ a huge
+ heterogeneous environment with a a data center full of servers that are that are just
+ Mixing and matching and running anybody's code on any piece of hardware, you know moving vms about
+ Without any concern. That's the way a lot of these systems are set up now
+ The problem is a bad guy gets in there on a system that has not been mitigated against this set of problems and you've got trouble
+ Um, I know under
+ Linux with these patches applied and a state-of-the-art Linux
+ I've seen some benchmarks that look like it takes about as I said about 10 to 12 percent of performance right off the top
+ Um, it looks like it's a it's a larger hit on the later processors because the later processors
+ More thoroughly take advantage of of sophisticated micro architecture in order in order to speed things up
+ So as I said, my subtitle was speeding up is hard to do basically. I mean, I don't know what intel is going to do
+ um, there probably what it means is
+ That we're going to have to build into our operating system
+ Some some explicit flushing or or maybe an an additional level of blinding
+ Between threads
+ Right now there is very little thread isolation between hyper threads because hyper threading is basically a second set of registers
+ That you just you do a very fast context switch from one bank of registers to the next
+ Uh, it was a clever very inexpensive
+ Way of of allowing a processor to continue running when it would otherwise have had its thread stall waiting for something
+ Intel said hey wait a minute, you know, we'll almost no additional logic
+ We can create a lightweight a lightweight context switch
+ Just by you know creating a second logical thread on the same hardware. Yes, they were right
+ But boy, you know, you don't want to have that other thread sharing the same core, which is what happens
+ You don't want to have it be malicious. So
+ So already we had this notion at the
+ Architecture level of context switching. That's you know, that's what we do is you know when when we push all of the threads on the stack
+ and then load
+ load the uh, all the registers from a different
+ Thread that has been been stopped. That's a context switch
+ What I think we're going to end up seeing is intel having to in order to save
+ You know the the fundamental design of their chips and and implement a system, which is secure
+ We're going to have to get something liked like a context switching mechanism at the micro architecture level
+ um
+ It should have always had it. Nobody was looking and and nobody was this clever
+ About and I guess really appreciated how much information could be obtained from little
+ Subtle variations and timing at this point
+ Uh, it really breaks the barrier between certainly between hyper threaded
+ A pair of threads running on the same core and of course as we know now since cores share caches and we're able to probe cash contents
+ Um, nothing is safe. So
+ Uh, uh, at a cost of performance today. We're getting for we're getting firmware updates
+ Um
+ Microsoft has said they're only going to be doing it for windows 10. So, um, if you are running windows 7
+ In an environment where you're at risk and again, there's a bunch of caveats in an environment where you're at risk
+ Then it's worth updating your bios. I mean, I guess in general
+ It's there's no reason not to update your bios is one of the is available from your manufacturer
+ But unless you are in an environment where you really are running
+ Um, threads that have a high have a probability a likelihood of a reasonable possibility of being malicious
+ If that's not your environment, all of this is
+ Interesting and it's being fixed for you, but probably not a source of it should not be a source of great concern
+ Good
+ Yes, and I wonder with it when they fix it with hardware mitigations if they can do it without penalty
+ I think we're going to get performance back. Yes, because I mean this really did catch them off guard and
+ I mean, I'm as I've said before I'm amazed they can fix this with firmware changes
+ I mean that suggests that the chips are way more programmable than I would have imagined
+ And so the fact that they can actually add
+ You know like what amounts to major features basically there are there are feature registers
+ That only the kernel has access to sometimes you only have a lot like access at the bios level at boot time
+ And then it's all locked down
+ Um, but they're adding bits that were never assigned to feature registers
+ Which are controlling?
+ Significant aspects of the micro architecture. I'm amazed that they can do that in microcode
+ I mean, it's like the whole thing really is deeply programmable, which surprises me
+ Well, so I mean all they're doing is saying don't do speculative execution in effect, right?
+ Yeah, but they never had a reason not to
+ Why exactly exactly well, I mean what it tells you is that a lot of the way processors work is not in the processor
+ It's in the microcode, which is programmable, right? So, I mean, I'm being this is a very stupid way of looking at it
+ But maybe they just did a branch around the speculative part like there's a chunk of code that that says well
+ Let's see if we can figure out ahead of time what he's gonna do just jump over that stuff keep on going
+ Don't try don't attempt it and the reason I ask if hardware fixes can still give you
+ the you know the performance is
+ I imagine they're just going to eliminate speculative execution in the hardware, which would give you a hint
+ Unless they come up with something other than that
+ Well, all they have okay knowing what they know now
+ They could segment
+ Right the history we've talked about this before because the problem is a leak of information from one thread to another
+ If you don't make that possible
+ You hide it then you don't have to worry about yes
+ If the context switching goes deeper into the architecture than just at the architecture level
+ If the context switching is pushed into the micro architecture then at a cost of significantly more complexity
+ You get performance and you get
+ Interthread isolation and that's what we need
+ Marcus Hutchins is free
+ Free at last
+ It was two years ago
+ This this coming Defcon
+ Uh after the annual 2017 Defcon security conference as Marcus was I guess he was
+ He described himself as still sort of suffering. He was hung over and intoxicated
+ From partying the night before he was walking through the Las Vegas airport. That's when they get you
+ Yeah
+ Yeah, have your guard down. Yep, uh preparing to return home to the UK that he was nabbed by
+ uh law enforcement
+ Uh and of course he had been for many years a reformed
+ Gray or black hat, I guess
+ Um, I don't think he ever actively participated in
+ in malicious hacking, but he did
+ write some
+ You know in his in his youth
+ Uh as as an adolescent he wrote some malware
+ um
+ Anyway, he was nabbed
+ Uh and held on charges of computer hacking fraud and abuse
+ Uh, it wasn't long before he was released on bale from jail
+ But he was he had I think he had an anc a an ankle
+ Uh tracker, so he was working with attorneys and we've talked about him several times over the last couple years
+ As his case has moved through the legal system
+ um
+ And he's been working with a defense team and appearing at various legal hearings from time to time
+ Um
+ We know that he had outgrown
+ That those earlier
+ Uh, you know, he's sort of sketchy adolescents
+ Uh where he was doing some things that were you know
+ Not on the up and up
+ And let us not forget
+ That what initially brought steve jobs and steve wasniac together
+ Was their interest in what what was known as blue boxing
+ Which were these
+ Little boxes which generated different sets of tones than the normal touch tone tones
+ Which were used to sidestep the long distance
+ Uh telephone billing that the united that the us telephone system used for making free long-distance phone calls
+ So, you know, even our
+ Contemporary tech heroes, uh, were you know, not always on the up and up
+ Anyway shortly before
+ his arrest
+ He was studying that as marcus was studying the alarming emergence and rapid propagation
+ of the
+ Incredibly prolific and dangerous wanna cry internet worm
+ And in his research
+ He serendipitously halted its progress
+ Uh, and we've talked about this many times by
+ By looking inside the code
+ Seeing that there was it's a kind of an odd
+ DNS query that the worm was making
+ He went when he looked up what the that that what the dns domain was that it was querying
+ He found it was unregistered. He thought okay. That's weird. I wonder what this what it's doing with that dns address
+ So he registered it and in the process of it no longer being unregistered
+ Just that act
+ Halted the worms propagation it and we never really understood in detail like we never had a
+ A clear understanding of why it's believed that it that was a kill switch
+ Which marcus as I said serendipitously
+ Set in order to cause the worm to stop propagating
+ and
+ It turns out that this was taken into account us district judge
+ Joseph peter
+ Uh, stat muleur said that the malware hutchins helped stop
+ Was much more damaging than the two programs he created
+ And thus sends him only to time served with a year of supervised release
+ So marcus is free to return to the uk
+ Um, he tweeted on july 26th, which was uh last friday
+ He tweeted first heading into court now
+ No matter what happens. I love y'all
+ And then a short time later he tweeted sentenced to time served exclamation port
+ Point incredibly thankful for the understanding and leniency of the judge
+ The wonderful character letter you all sent and everyone who helped me through the past two years
+ Both financially and emotionally that was at 11 25 a.m. Last friday
+ So, uh, he's free to return to the uk
+ us authorities still need to decide
+ Whether he's but now barred from returning to the us due to his criminal record unquote and of course
+ In my opinion barring him would be really dumb
+ But on the other hand we did say us authorities so
+ You know, we'll see what happens
+ So that's good news a nice outcome and it would be nice if he were free to return
+ You know, he his presentation at at at black hat
+ Uh, or defcon was about what he had just done with ruanacry and so
+ After you know demonstrating. Hey, he would I mean he had been doing other
+ You know white hat hacking things. He was you know
+ Uh, uh, his his as we know his twitter handle would was malware tech blog
+ Uh, and so you know he was he was blogging about you know
+ How to stop this stuff now and uh, anyway, so the you know, this was the right outcome
+ And uh, it would be nice if we let him come back to to future black hat and defcon presentations
+ So of course, the biggest story of uh 2019 and 2018 and probably 2020
+ Is ransomewhere and the summer brought some massive ransomewhere attacks
+ It got to the point where I had to say to steve. Okay
+ enough
+ We know ransomewhere is a problem. This was probably the straw that broke the camels back the massive texas
+ ransomware attack 23 cities listens
+ the news as of friday
+ From texas was government agencies. Nobody knew what government agencies, but we knew there were 23 of them
+ Were all hit
+ With a will now we know it cities we'll get to that in a minute
+ a were all
+ simultaneously hit with a well coordinated
+ simultaneous
+ and effective
+ ransomewhere attack last friday august 16th
+ 23 texas entities the majority of which are local governments
+ Were hit by a ransomewhere attack on friday that texas officials say is part of a targeted attack
+ launched by a single threat actor
+ Details still remain scant about the specific agencies hit by the ransomewhere attacks
+ Which began on the morning of august 16th as well as exactly which systems were impacted
+ However, the texas department of information resources d i r
+ as of saturday night
+ Did say that responders are actively working with all
+ 23 entities and who knows how many were attacked that didn't get infected but 23
+ different things different
+ networks different agencies now. We know it's actually 23 cities
+ Uh, we're brought down by a massive coordinated attack
+ um, so
+ This d i r the department of information resources is currently working as of saturday night
+ To bring their systems back online
+ Uh, and that the state of texas systems and networks itself were not
+ Impacted so what we do know is that these 23 agencies were knocked offline
+ And presumably encrypted by this simultaneous attack i checked
+ yesterday
+ in local reporting and like of like i don't know the texas gazette or something and
+ It didn't have any more information still
+ The texas department of information resources website
+ Posted a statement saying that quote currently d i r the texas military department
+ And texas a and m university system cyber response and security operation center teams
+ Are deploying resources to the most critically impacted jurisdictions
+ Further resources will be deployed as they are requested
+ When pressed for additional details, the texas d i r declined to elucidate any further
+ Stating quote due to security concerns
+ Unquote, I I or
+ Read embarrassment perhaps
+ Saying only that they were smaller local governments. Yes 23 of them
+ The d i r did not provide information about which systems are down
+ How systems were first infected and the specific amount of ransom
+ You know that's going to be adding up
+ In their reporting of this threat post reached out to representatives from dallas houston and austin for comment
+ On whether they were impacted by the attack
+ While representatives from dallas and austin have not yet responded
+ One of their emails down a spoke person from houston told threat post that as far as we know
+ Houston has not been affected
+ I think they would know if they had been according to a statement sent to threat post quote
+ The city of houston is aware that a ransom wear attack has affected several local government agencies throughout texas
+ We are in contact with the texas state operations center and will monitor the latest developments
+ Whoo the mayor's office of homeland security and the it services department will continue to proactively work to secure and protect the city's assets
+ However, the d i r said that at this time
+ And not surprisingly given what we know evidence gathering
+ Indicates the attacks came from one single threat actor
+ Alan liska
+ Who is a threat intel analyst with recorded future we've mentioned we've spoken of them a number of times they're a
+ You know in the middle of the thick of things
+ Security firm told threat post that the attacks signify an important shift
+ In the ransom wear threat model
+ Typically state and local governments have been targets of opportunity for ransomware attacks
+ With the gangs behind these attacks reuke and sam sam
+ Appearing to stumble on to previous
+ State and local government targets. However, or that is you know stumble previously onto them
+ However, this instance this incident he says appears to be the first
+ Where a string of governments were actively being targeted in an attack. He said this is the first time
+ There's been an attack against several local governments in a state. He says this is big
+ It's a game changer. This will change the model going forward for attackers
+ And that will be a problem for governments
+ Alan also noted that one advantage texas has is it has a coordinated incident response
+ The response team is centralized for cities and counties in emergencies
+ Which makes it easier when there is a problem like this to find and reach out to a main contact
+ There's someone to call
+ Um, so as I said, I said I looked for any update
+ As I was putting these notes together yesterday
+ Everyone is being quiet. We're not they're now saying that it's 23 individual cities across texas
+ but
+ That's all we know
+ and I
+ I shudder to think of of the ransom that is being requested. I mean, well, you know
+ Say there are some cities that do have current current backups in our previous reporting of this over the last few months
+ we've noted that
+ recovering
+ from
+ an attack like this
+ Is sometimes more like without paying ransom is sometimes more expensive than if you pay the ransom
+ And you are able to decrypt the systems in place
+ just just due to the due to the logistics of
+ of having
+ Systems which have been there who knows how old they are what software they have on them
+ You know how how recent the backups are whether the backups were online and therefore
+ Themselves also got encrypted in the process. It's a mess. I mean this really is
+ uh an interesting
+ Really significant new problem for for us municipalities
+ Let me just it's just not exaggerating to to to say that
+ So last week we talked
+ Uh a lot about the interesting blog that um that Ian beer at google's project zero
+ made where uh, he told us about basically what they characterized as
+ non discriminating
+ Waterhole attacks on a small number of servers
+ Targeting specific groups and leo you had some so some information that had just been been made public
+ I guess it was in in uh crunch at it, but tech crunch. Yes
+ Alex stamos was tweeting about this and he suggested and I think he's probably right that
+ Google gave this information on background to tech crunch because apple confirmed it
+ Ah, okay. Yes. And in fact, we have some interesting code
+ Actually in the show notes that are that that result of from some additional research. I think it was risk iq
+ Uh that was able to provide additional detail. So anyway, so what we know is but last week google published
+ This their blog about vulnerabilities that apple fixed. Oh, oh i'm sorry what what apple posted
+ in there at the end of last week in their newsroom posting
+ Was they said
+ What I just got a big bright screen on my face uh windows 10 is back up for just rebooting
+ Yeah, no ad it did that about five times and yeah, it gave me like we're updating and stuff
+ Okay, so i'll turn that big bright screen off. Anyway, so so google said last week
+ I mean, sorry apple apple posted the following last week
+ Google published a blog about vulnerabilities that apple fixed for ios users in february
+ They said we've heard from customers who were concerned by some of the claims
+ And we want to make sure all of our customers have the facts
+ apple wrote first
+ The sophisticated attack was narrowly focused
+ Not a broad based exploit of iphones on mass
+ As described so apple was pushing back about some of what google was saying
+ They wrote the attack affected fewer than a dozen websites that and we'd heard 11
+ That focus on content related to and i can't pronounce this. Uh, what's the name of the muslim community?
+ It's u i g h you the weaker the weaker is weaker. Yeah, community
+ Uighurs community. They said regardless of the scale of the attack. We take the safety and security of all users extremely seriously
+ They wrote google's post issued six months after ios patches were released
+ Creates the false impression of mass exploitation to quote
+ monitor the private activities of entire populations in real time unquote
+ Stoking fear among iphone users that their devices had been compromised
+ This was never the case wrote apple
+ They said second all evidence indicates that these website attacks were only operational for a brief period
+ Roughly two months not two years as google implies
+ They wrote we fixed the vulnerabilities in question in february working extremely quickly
+ Which of course you and i leo made a point of of noting last week to resolve
+ The issue just 10 days after we learned about it when google approached us
+ We were already in the process of fixing the exploited bugs
+ Which we didn't know of if that's the case. They said security
+ this is apple is a never-ending journey and our customers can be confident we are working for them
+ ios security is unmatched because we take end-to-end responsibility
+ For the security of our hardware and software
+ Our product security teams around the world are constantly iterating
+ To introduce new protections and patch vulnerabilities as soon as they're found
+ We will never stop our tireless work to keep our users safe
+ So that was their blog posting which
+ A lot of a lot of those in the tech community were a little put off by they weren't really super happy with with the tone
+ of what apple uh of apple's response
+ Last week the head of threat research for risk iq told i told zd net
+ For their reporting on this that the attacks were indeed
+ Very targeted and that google was wrong in its initial assessment
+ Uh, he later shared some thoughts in a public tweet and
+ Provided with us with some code very targeted in their regard is well
+ It could only have affected the one billion people who are in china
+ Exactly
+ Exactly
+ So yeah, of course, you know as as we know that was the group
+ We now we have reason to believe that it was and I think you had said this also last week lee of that
+ It was china that no doubt the chinese government that had
+ That that had infected some of these sites that was that was looking to pursue some of these groups
+ Um, the javascript which was posted as part of uh, risk iq's research
+ That you know actually shows them
+ pulling the um pulling the the country of the user
+ Through javascript looking for a match of the country equal to china
+ And if it's a chinese person
+ Located an ip address based in china
+ Then it injects some additional javascript onto the page after all of this after waiting 60 seconds
+ Which then performs this this hack of
+ iOS devices
+ So and actually I learned a little something from looking at this javascript code. There's a cool site ip.nf
+ Which uh
+ If you visit if you just put ip.nf into your browser
+ It pulls up a description of the api that this site
+ Provides and if you put ip.nf/me.json
+ What you get back is a little bit of jason, you know javascript object notation
+ Where some information about you based on your ip is shown and when I did it. It was extremely accurate
+ Uh in its in its location
+ And what the script does is it it offers a little bit more
+ parameterization its ip.nf forward slash m e dot jason question mark
+ Callback equal jason's j s o n s which gives a more detailed result
+ Uh of a sort of a full jason hierarchy
+ And the then the javascript parses that in order to get the country
+ Of origin of the user from which the user is connecting out of the jason
+ And if in you know in my case, it said united space states and no doubt for people in china
+ It comes back saying china
+ Of course smartphone security probably
+ You know the most important kind of security for most of us our whole lives are on our smartphones
+ And I was you know a little skeptical when apple announced touch id a fingerprint reader and then face id
+ But they've proven it can be done. It can be done securely
+ Samsung not so much
+ Well, and speaking of fingerprints it turns out that the thank you for the segue jason turns out that the
+ the sexy ultrasonic finger reader
+ Used by samsung's flagship s 10 and note 10 smartphones
+ Can be spoofed with a three-dollar screen protector
+ Uh at least one that's not made by samsung
+ This recently came to light. Although it was not the first time it was observed
+ Uh, but it made news when a british woman claimed and others
+ Including samsung have since confirmed that after fitting her new phone with a screen protector
+ She was then able to unlock her s 10 using any of her fingerprints
+ Including ones not enrolled in the phone's authentication system
+ And since that made her curious
+ She reportedly then asked her husband to try the same thing and his thumbprints worked too
+ As did the same trick on her sister's samsung phone. So obviously something was wrong
+ samsung's initial response when confender with this was
+ We're investigating this internally. We recommend all customers use samsung authorized accessories
+ Specifically designed for samsung products
+ Then last week in comments to roiters
+ samsung admitted the problem was real and said it would release a software patch now
+ That's going to be interesting because this seems like a technology problem. Anyway, they said
+ We are investigating this issue and will deploying will be deploying a software patch soon
+ We encourage any customers with questions or who needs support downloading the latest software to contact us directly
+ So
+ Okay, the issue with the s 10
+ And screen protectors was first noticed when the smartphone was launched back in february of this year
+ Um, but the issue failed to acquire critical mass
+ Unlike earlier designs, which used a dedicated sensor
+ The Qualcomm ultrasonic technology used by samsung
+ Is embedded behind the screen and uses high frequency sound ultrasonics
+ Which are modulated by the pressure of a user's finger against the screen glass
+ It was noticed however that covering the screen with a screen protector could in some instances
+ Create an air gap that could interfere with the integrity of the system's ultrasonics
+ samsung's advice
+ Which still seems a bit flaky to me is to use its brand
+ Screen protectors that use they say
+ special adhesives that eliminate the possibility of any gap
+ so
+ To my mind this whole technology seems sketchy at best. Yeah, I I would say
+ that ultrasonic
+ trans glass
+ thumbprint
+ reading
+ Is not compatible with screen protectors
+ That is to say, I I mean
+ I think the technology is marginal
+ And like when you put your fingerprint right you press your finger directly on the glass
+ the idea that you can
+ read an image
+ through the
+ The display technology and all of its intervening electronics
+ with some ultrasonic sensor behind there
+ and get an image to me that's already amazing
+ then the idea that you're going to introduce
+ an additional
+ uncontrollable layer of goo
+ Which is to say adhesive and then a plastic laminate
+ in between
+ The the glass that is being read
+ To me, I mean, I wouldn't be at all surprised if this update
+ Actually checks to see if they are able to get an image
+ And refuses to operate if there is no image
+ Obtainable that is to say if in fact there's an air gap then
+ You're not going to actually get anything that looks like a fingerprint and and so probably the technology
+ That existed just took whatever it was getting and said
+ Okay, that's your you got a weird thumb lady, but fine
+ Uh, and then just used it but when in fact it wasn't a thumb
+ It was an air bubble that it was resolving and so anybody else pressing on it got the same air bubble
+ So
+ Maybe what they're going to do is be a lot more
+ Discriminating about
+ Does this actually look like a finger or not?
+ Right and then and just say, uh, no
+ and then say, you know buy a real screen protector or
+ Sorry, where maybe they'll just decide our technology is not compatible with screen protection
+ Good luck get a good case. Um, I don't know. Yeah, we'll see how that goes
+ Yeah, and to me it to me it feels like they've hit a bump a big bump in their fundamental
+ Um, biometric technology and really this sort of speaks to the larger issue that I just sort of wanted to address
+ which is that
+ You know
+ We're we're always talking on this podcast about
+ the the trade-off between convenience and security
+ you know a long
+ impossible to memorize
+ password is incredibly inconvenient and
+ Incredibly secure
+ If you otherwise manage it correctly if it is really long and full of gibberish
+ You know if it's it's high entropy uses all the available characters
+ That's a really really that's really strong protection and and
+ and
+ It can although it isn't used to identify someone because
+ Because we're not we can't prevent them from using monkey one two three
+ If it actually were a like if it had
+ 256 bits of entropy
+ It could be used to securely authenticate someone. I mean it's that good
+ Whereas notice that
+ That the biometrics we're using today. They're not identifying someone. They're confirming
+ a presumed identification
+ That's a far lower bar
+ to
+ to meet
+ For example, one you know time-based tokens that you know that the six digits that change every 30 seconds
+ Similarly, they don't identify you. They only confirm your presumed identity
+ Which again is a much lower bar to meet so
+ So the biometric systems that we have today
+ They're making a go-no-go decision. You know they assume
+ They they like who it is they've been trained on someone's face
+ And so they're looking out at the person going hmm
+ Does this look like granny or not and
+ and making a go-no-go decision so
+ So we're what we're asking for is far lower
+ Determination determinism
+ than
+ Having them look out and go oh, that's john from down the street and then like loading his account or something no
+ You know, this is a simple. Yes. No decision being made and even so
+ It is very problematic. Do you know jason and I didn't track the the technology in the pixel 4
+ We know because I was following it when apple came out with their face id
+ All this fancy 3d camera stuff how they like paint a dot grid
+ An IR dot grid
+ Out on the person's face in order to make it
+ To require it to be 3d
+ And then they they like do a full like multiple stereo vision
+ Rendering thing that does the pixel 4 have all of that. Yeah, the pixel 4 is the first
+ Pixel to do that actually and I think that was part of
+ I mean for what I understand that was part of the reason why google got rid of the fingerprint
+ Sensor altogether because they felt confident enough in that collection. So it's very similar to apples approach
+ It sounds like one of the main things that's missing from the pixel 4 in the apple approach is the eyes open
+ detection
+ Which is a pretty yeah, and you know, you would not think you would not think given all the awesome
+ Technology that google has in that phone. I mean I watched their presentation. I was like holy crap
+ I mean, there's a lot of stuff in there
+ You think it could tell whether someone's eyes are open or not. I mean a dog can well
+ Yeah, what's interesting also, but maybe this doesn't have anything to do with the eyes is there's another setting in android settings called screen aware
+ Or something like that
+ And it's a setting that when it's activated it can tell when you're looking at your phone in order to keep the display from timing out
+ But now that I say that like it might just be that you're facing the phone not that your eyes are open
+ Um if it's your eyes are open then it's like, okay
+ Already got the detection going on like and that sounds like that was a pre pixel 4 thing
+ Too, right? Yeah, the phones have had that for a while some phones have had that. I don't know that the pixels had that though
+ Oh, okay. Yeah, I think that's a new feature of the pixels. So interesting, but yeah
+ Yeah, I wouldn't be surprised if uh, you know in light of this with the um
+ with the ultrasonic fingerprint sensor
+ Allowing anyone's fingerprint to let someone in based on this the screen protector that's installed
+ If samsung then ends up going in you know, maybe they're already working on this
+ Going in the same route as as apple and the same route as as google with the pixel 4
+ And this just becomes another reason why they then get rid of the the fingerprint sensor and go iron face
+ Do I remember leo saying that he was not happy with the performance of the s tens sensor look like it does take a while to
+ Yes to operate. Yeah. Yeah, I think leo and I share the same opinion and it wasn't just the s 10
+ In display. Well, no, sorry. It was the note 10 and the s 10 both have the in display
+ A fingerprint sensor and it's the ultrasonic of course different from what we've seen a lot of other in display fingerprint sensors b
+ Which was optical and like the one plus seven t and seven plus or seven pro
+ They have an optical in display fingerprint sensor that is super responsive and super quick and works almost every time
+ The s 10 and the note uh 10
+ In my experience and I think leo would agree is just really like it. It works half the time
+ It's hard to get it just right. It's you know, you do it and it's like press a little harder press a little
+ It just it doesn't work nearly as effectively
+ Interesting. So it's supposedly the better more secure solution. Yeah, so though you are able to do an in screen optical sensor
+ That's cool. I didn't know I didn't realize that there were those around. I agree. That would be great
+ But but again
+ Everybody's got a camera already looking out the front of the phone
+ The problem of course is that it's 2d and you absolutely need to have 3d in order to
+ You know up the ante and try to determine whether this is a live or or you know static
+ Person so right, you know, so everybody's being and who knows
+ I mean we've already seen like 3d modeling of faces and all kinds of other stuff that you're able to to do
+ Once you've got 3d camera technology looking out at you
+ So it just sort of seems like that's the direction everyone's going to go in
+ And of course the other problem
+ uh that we didn't talk about but we have in the past when we're discussing biometrics is is
+ A super super complex long password
+ Which can be used to uniquely identify you and is incredibly robust and secure
+ Can be changed
+ You cannot change your face. You cannot change your you cannot change your fingerprints
+ So on the one hand your face and your fingerprint are something you always have with you
+ The problem is there's something you always have with you
+ And like for life rather than just you know for your current excursion from the house
+ so uh
+ I always tend to fall back on on like multiple points of authentication like I always wondered why
+ If if the fingerprint sensor on a phone is so ubiquitous and now you know now we're kind of heading out of out of that trend
+ It seems like getting rid of it, but if it's so ubiquitous, why can't I have it so that I'm using my fingerprint sensor when I enter my my pin
+ And those combined to say hey, he knows the right digits and his fingerprint is the right one
+ This is the right person if people really want to be just that extra level of secure or fingerprint sensor along with face face scanning
+ Why can't they both combine and I I feel like now that I'm saying it that we've talked about it before
+ One of the points that maybe you mentioned is if one of those things is out of whack it makes it incredibly difficult for you to ever get into your device
+ Maybe that was you. I can't remember. Maybe it was something else, but yeah
+ Yeah, and in fact, I do remember you and I talking about that and that's the that's the other problem is that we've got
+ You got multiple factors
+ And they're all a little bit soft
+ So right you know, so you have on one hand you don't want to false
+ Positive so you so you don't want to allow somebody in who should not get in
+ Nor do you want a false negative you don't want to prevent the authorized user from getting in when they want to get him
+ I mean, that's very frustrating. I remember I think it was the very first
+ Was the very first touch ID something that apple did just wasn't working that well when when they first released it
+ I was like, uh
+ You know, and like, you know, it was required. I think it was the very first touch ID or maybe I
+ I later figured out how to over train it and I think that's what it was
+ I was able to over train it and then bring its reliability up where I wanted to uh, where I wanted it to be
+ but but again because it's a
+ Heuristic system that's inherently making a judgment call
+ Does this look enough like the person i've seen before because of course our faces are changing subtly?
+ over time, our hands pick up damage from the environment cuts and scrapes and things sometimes
+ You know, so it's am I sure enough about who this is?
+ But if it was a super high entropy password, it's not a matter of being sure enough
+ It's like holy crap. That's got to be the person because nobody else could get down
+ Yes could could get this right, right? And so so
+ You know what we're dealing with you know, the the more soft decisions we make
+ the the
+ softer the overall
+ Compound decision becomes and that means that that we become more likely to false positive or false negative
+ And that doesn't help anybody either. So
+ You know, I
+ It really it seems very clear that biometrics is the future people want the convenience
+ the only thing I would suggest to people and we've said this on this podcast before is
+ Give your phone to other people stick your phone and other people's faces see if it unlocks for them
+ Have other people challenge your fingerprint reader gets do know develop some some a priori
+ Real-world experience with how robust this is. Yeah, I mean, I don't think enough people do that
+ You know, you know, you know, nobody tell nobody asks someone else to like try guessing my password on my phone
+ That's just you know, we know that's not going to happen
+ But you know, it'd be really interesting to get some actual sense
+ For for whether you know other people whose faces will open your phone
+ I love this next story. Oh my god. Yes, it's such a great story. So
+ Five months after returning his rental car
+ The the brief renter of the car
+ Still has full remote control
+ He can track the vehicle
+ Remotely lock and unlock it and start and stop its engine
+ So the story is that when
+ Masamba Sinclair rented a Ford expedition from enterprise last May
+ He was excited to connect it to
+ To connect with its
+ Ford pass
+ The Ford pass app allows drivers to use their phones
+ To remotely start and stop the engine lock and unlock the doors and track the vehicle's precise location
+ What could possibly go wrong?
+ So he's 34 years old
+ And he told the people I think it was ours who was doing the reporting on this he said
+ I enjoyed it
+ And logged into Ford pass to be able to access vehicle features from my phone
+ Such as locking and unlocking and starting the engine. I liked the idea of it more than I found it useful
+ He says the UI looks good and works well
+ So today
+ Sinclair's opinion of mobile apps and rental cars is decidedly less favorable
+ That's because
+ Five months after he returned the vehicle on May 31
+ His app continues to have control
+ Over the car despite multiple other people having since rented the SUV in the intervening months
+ Ford pass
+ Still allows Sinclair to track the location of the vehicle lock and unlock it start and stop its engine
+ Sinclair has brought the matter to Ford's attention
+ Both through its website and multiple times on twitter so far
+ Ford has done nothing to end his access
+ He said
+ All it took for me to initially connect was to download the app and enter the VIN
+ That's you know the VIN number on on the engine then he says then
+ Confirming connectivity through the infotainment system
+ There might be a way to disassociate my phone from the car itself
+ He says, but that hasn't happened yet and it's crazy to put the onus on renters
+ To have to do that anyway
+ He says I have had no problems at all and I've even unlocked the doors and started the engine
+ When I could see that the vehicle was at the mazula airport rental parking lot
+ Wow, so we have in the show notes three of his tweets the first on joan june fourth
+ He says to app ford. He says I can still track and unlock the expedition that I rented last week via the Ford pass app
+ Huge safety concern for all future renters. I submitted a solution via ford new ideas
+ There's a new idea to solve this and it was denied
+ This needs to be fixed. He has in all caps and then he had he posts a
+ Pick the next day he tweets. It's day five since I returned my rental
+ And now someone else has rented it out
+ Do I need to start remotely unlocking it until they also start to complain?
+ please fix this exclamation point and
+ Looks like a week later june 14th. I returned to this car
+ He's tweeting to ford. I returned this car two weeks ago
+ And you've shown no willingness to allow rental companies to remove my access to unlock it and start the engine
+ Maybe i'll just start randomly unlocking it
+ Hopefully he doesn't hopefully don't do that
+ Yeah, don't do that
+ Ford pass is offered as we know by the ford motor company and is available for both ios and android devices
+ It's one of several apps for connecting to ford vehicles
+ the less than intuitive means for unparing a vehicle and phone
+ Not to mention the difficulty in knowing a device remains connected
+ represents a serious
+ Security and privacy risk and not to mention to renters but to people buying
+ a vehicle second hand imagine you buy it, you know from car max or something and
+ Don't know or particularly care that the the previous owner still has access
+ Um while ford said infotainment screens will indicate when a device is paired
+ It's obvious that multiple enterprise employees and renters. Okay. This was remember. This is what six months ago
+ Multiple enterprise employees and renters have continued to miss the warning
+ Even now after the reporter of this
+ Discuss the problem with both enterprise and ford representatives
+ Sinclair's access still has not been revoked
+ Sinclair said i've been opening the app and tracking the vehicle almost every day
+ To see if my access is still there and sure enough. I can see exactly where my old rental
+ affectionately named the beast he wrote is
+ At any given moment this means that I can not only find this rental car
+ Whenever I want but I can also unlock the doors and help myself to anything that might be
+ Inside since proximity and this is me thinking now since proximity to the infotainment system
+ Was required initially to complete the initial pairing
+ Authorization and authentication
+ And since occasional proximity
+ Would be expected would be an expected characteristic for any actual car owner
+ It would seem to me that a useful security trade-off would be to have a device be forgotten
+ If it hasn't been within physical proximity
+ Of the vehicle's infotainment system for I don't know what a week or two
+ I mean it sounds like repairing isn't that burdensome and
+ You know a car owner they're going to be in their car every day, right?
+ Or you know, maybe they only drive it on the weekends. Okay, so make it two weeks and after two weeks
+ Forget the thing or or maybe after one week
+ make like flash a warning and say
+ You have you know this device has not been near the car for the last week
+ Please confirm you want to keep it paired. So make it a you know an affirmative
+ Statement of of pairing endurance, right? And if you don't do that it unpairs. I mean, it's nuts
+ Yeah, I'm curious about this forecast thing because this actually
+ Reminds me of like a question I've had when I do rent a car and they have the infotainment system
+ And I want to play my music through the bluetooth
+ So that requires pairing so then as a renter you end up pairing to this thing
+ And maybe you know, maybe you choose not to share your contacts with the system
+ I usually don't do that. You know, don't share the contacts because hope that seems like a really bad idea
+ But I'm sure a lot of people just say yeah, whatever connect it and then they don't think to remove it
+ So I mean and I I guess there should be some sort of mode in these things for rental car agencies for them to you know
+ On their turnaround because even what you're talking about steve is somebody rents at the very next day
+ That still doesn't prevent this other third party from locking the door or turning off the vehicle at the wrong time or whatever
+ It's a liability
+ There needs to be some easy way for them to be able to deactivate that if that doesn't exist already
+ Maybe it does and they're just not using it
+ Well or in in in the rental mode
+ It would be reasonable to turn down the the forget the device delay to one day
+ Right because you know and anyone who's renting a car is in it like, you know, yep a lot
+ So and if not
+ Oh, oh boo-hoo if you're if your device
+ I mean, besides who wants to unlock their doors remotely. I mean, okay, maybe who wants to start the engine remotely?
+ Uh
+ Okay, it's called outside. I don't get understand. Maybe these are all like gee whiz doohickey
+ You know, yeah, I have it because the because i'm on the internet, you know, right my car is an iot
+ Well, we already know what a bad idea that is
+ As you can see on security now steve covers
+ everything from
+ Security breaches hacks things to watch out for to of course privacy and uh, we plan to do
+ All of that again in 2020 steve has a great agenda of things to cover
+ You'll get the latest
+ News about security and steve will also explain a lot of technologies that frankly for most of us are
+ Kind of mysterious. That's what steve's so great at we'll be back next week
+ I hope you will too, and we thank you so much for letting us be a part of your listening all year long
+ I'm leo la porta behalf of steve gibson happy new year and we'll see you in 2020
+ You

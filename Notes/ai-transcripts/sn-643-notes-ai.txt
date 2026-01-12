@@ -1,0 +1,576 @@
+ Happy holidays everybody, Steve and I are taking the week off, but we have a very special
+ encore presentation of Bitcoin, the history, the story, how it all worked.
+ This is back long, long ago, in 2011, when Bitcoin was worth about $1 each, Steve explained
+ it all.
+ Bandwidth for Security Now is provided by cashfly at CACHEFLY.com.
+ This is Security Now is Steve Gibson, Episode 643, recorded December 5, 2017 for air on
+ December 26, 2017.
+ The story of Bitcoin.
+ Security Now is brought to you by GoToWebinar, a trusted webinar platform with over 55,000
+ customers, who have hosted over 2.7 million interactive web events to connect with their
+ audiences.
+ For more, visit GoToWebinar.com/podcast.
+ It's Security Now, time, happy holidays everybody, Steve Gibson.
+ You're looking fine in your Santa hat, I'm your little helper, Elf, with the jingle bells
+ on.
+ We're not here right now because Steve's getting his teeth cleaned and I'm on a catamaran
+ somewhere in the British Virgin Islands.
+ Yeah, Henry and I are going on a little sailing adventure, but as always, we like to bring
+ you a holiday episode and this is a very timely one, actually, it's timely for Henry because
+ yesterday, he's noted as many have the rise in price in Bitcoin and he's got two burning
+ questions for me.
+ One, he wants to invest in Bitcoin.
+ He says, "Oh God, I said please don't."
+ He says, "I know, you can help him with this."
+ He says, "I got a guy who go to school with a Colorado who's made $600,000 on Bitcoin,
+ and so he's going to help me dabble."
+ Oh dear.
+ And then he also knows that I like you have a Bitcoin wallet somewhere.
+ You've got a little more than I do in there, 50 Bitcoins worth hundreds of thousands of
+ dollars.
+ Mine, mere tens of thousands of dollars, seven Bitcoins.
+ So he keeps saying, "Where's your wallet?
+ Where's your wallet?"
+ Oh, break into it.
+ Give me 10%.
+ Ha, ha, ha.
+ So I think Henry needs to understand a little bit more about how Bitcoin works.
+ Well, yes.
+ And if we have listeners who've been listening from day one, they will recall, may recall,
+ that in 2011, I think it was February 8th or something, it was episode number 238, was
+ on Bitcoin cryptocurrency.
+ And no one really knew what it was.
+ It was kind of like, "What?
+ Cryptocurrency?"
+ Of course, here we are now nearly eight years later, nearly seven years later, and it's
+ a thing.
+ I mean, there's nobody who doesn't know what it is.
+ My mom asked me a few months ago, she said, "Honey, do you know about Bitcoin?
+ I thought, 'What?'
+ Mom."
+ And because someone that she knew wanted to invest in Bitcoin and wanted to know what
+ she thought.
+ And it's like, "Okay, well, if my mother is asking me about Bitcoin, then it's arrived."
+ Yeah.
+ It's kind of like me and Henry, actually.
+ Yeah, exactly.
+ So back then, I brought myself up to speed on what cryptocurrency was, and specifically
+ the first cryptocurrency, the Bitcoin, and the whole Satashi...
+ Satoshi Nakamoto?
+ Satoshi Nakamoto.
+ Right.
+ Yeah.
+ Who was apparently, we believed, we didn't know really where he was or who he was, but
+ his name was on the white paper explaining about the notion of this.
+ So I learned about it, and on that podcast, number 238, which was titled Bitcoin cryptocurrency
+ laid it all out, explained what it was, how it worked, and I was jazzed about it.
+ I was very excited because in my analysis of it, I was in awe of the foresight that this
+ inventor apparently had, the idea that the future trajectory of the rate of Bitcoin production,
+ it mining, as it's called, was already foreset, that is, we knew exactly how difficult it was
+ going to be, and the algorithm of mining adjusted itself dynamically in the presence of anticipated
+ growing compute power so that the number of Bitcoins produced was on an already following
+ a foreordained trajectory, and there would never be more than a certain number, and they
+ would become increasingly difficult to produce with time, creating built-in algorithmic
+ rarity, and that all of this was created, it was enabled by software, by these algorithms,
+ which had been designed.
+ So in the podcast, I laid it out, and since then, because it's now been what, six or seven
+ years, I keep seeing people referring, like in Twitter feed, referring others back to
+ that podcast.
+ It's like, if you want to understand Bitcoin, go listen to this.
+ And so I thought, okay, here we are today, it's a thing, and Bitcoin at the time, I don't
+ remember, it's like maybe worth 50 bucks for a Bitcoin or something, I mean, I started
+ a computer running with a Bitcoin miner, it was just an i7 machine, not a super powerful
+ thing, it was an old cute little machine, no GPU, just a standard Intel processor, back
+ then, Bitcoins were easy to mine, it wasn't not a hard problem to solve, so it happened
+ very quickly, in fact, I woke up the next morning, and my little miner that had been
+ running while I was sleeping made 50 Bitcoins, and I remembered coming back on episode 239
+ with you saying, hey, I got $25.
+ Exactly, that was just it, it was just like, okay, you know, and the problem is, I don't
+ know really where they are now, I mean, I'm horrified to think that I may have formatted
+ that drive, I don't know, I kind of think I moved them to a different machine, because
+ there's a wallet, right, and it's in the wallet, the wallet is an encrypted database that actually
+ doesn't just have your information, it has the entire blockchain in it.
+ So the first thing, if you found it, you would have to do is run the Bitcoin software and
+ download like 50 gigabytes of blockchain, it's kind of gotten out of control, yes, which
+ is kind of one of the problems, but what was then worth a few dollars, and this is the
+ other, I mean, this is really the reason I wanted to revisit what is Bitcoin and cryptocurrency
+ and the blockchain and the mining algorithm and all that, is now a Bitcoin, it's dancing
+ around just shy of $12,000 for one, it's like at 11,700 something as we're recording this,
+ and it did cross the 12,000 point, but then dropped down a little bit, but it's just gone
+ well, exponential, so I thought it would be really fun for those who are trying to cash
+ out, I might add, although I've said that all along, and who knows really, right?
+ Is it a bubble, is it a rarity, I just like, you know, well, you know, I am wondering
+ kind of where they are, but so anyway, for the holidays, for our special episode, I thought
+ let's, especially for all of our listeners who joined us after the early February of 2011,
+ you've never heard this unless you went back and deliberately listened to it, so we're
+ now presenting you with the episode from early February 2011, Bitcoin cryptocurrency for
+ your holiday listening.
+ And just a program note, we are going to take the obviously, the news part of it out, and
+ you might note a different voice, Tom Merritt was hosting, because I was on vacation.
+ So it's also a little hello to Tom Merritt, a host of the Daily Tech News show, and he
+ and Steve, in fact, I came back and mystified about Bitcoin, and I still don't know anything,
+ so I'm going to listen with you.
+ Perfect.
+ On your catamaran, you can be, well, and actually, I guess Henry wants to know, so you can play
+ the podcast for him, and then you'll both know.
+ So our big topic today is Bitcoin, call this a cryptocurrency.
+ Well, it's really, really clever, you know, the reason that I just, I sort of fell in
+ love with this for the moment is as I plowed in, I just got a big kick out of the way that
+ the many problems associated with a, with a sort of a floating currency, meaning a currency
+ that doesn't, it isn't anchored by any central bank.
+ There's no state sponsorship for it, it's, it's, I mean, it's a, it's a real thing.
+ Anyone who's interested, and I would encourage our listeners, if, if this podcast and what
+ they hear about it, make some curious, go check it out.
+ You just put Bitcoin into Google, and you'll start seeing pages of stuff.
+ And about two years ago, the project was registered a little over two years ago by a Japanese
+ cryptographer Satoshi Nakamoto, and it's, it's an open source project on source forge.
+ So none of this is, you know, black art stuff.
+ The goal is to really solve, I mean, to offer it an honest to God, you know, non hobby level,
+ but, but industrial strength, internet based, peer to peer currency, where real value can
+ be exchanged between two parties without any intermediary being involved.
+ And that's one of the trickiest things because you've got all kinds of problems.
+ First of all, where does the currency come from?
+ You know, what creates the currency?
+ How much currency is flowing through the system?
+ How do you monitor that and regulate it?
+ How do you prevent it from being inflated?
+ How do you peep, how do you keep people from fraudulently creating currency?
+ How do you keep someone from, if they have some, from reusing the same currency?
+ All of that has been solved with this system in, in some very clever and very new ways,
+ which is what, which is really what captivated my attention on this.
+ So there was, wait a minute.
+ So we have currencies, we have euros and yens and dollars.
+ How can you invent a currency?
+ What makes that work?
+ Well, okay.
+ So think about it, a currency is, is nothing really but an agreement among the parties
+ that this synthetic thing has value.
+ You know, once upon a time, you know, when we, when the dollar, when the dollar was anchored
+ to a gold standard, the idea was that there was gold backing up dollars and, and, and
+ and so when you had a so-called promissory note, it was a, you know, it was equivalent
+ to X amount of gold.
+ And we were, of course, famously taken off of the gold standard.
+ The problem was we needed more money than we had gold.
+ So we had to disconnect in the, in the case of US dollars, we had to disconnect US dollars
+ from gold because we needed to, we literally needed to create more money than, than we
+ had gold to back it up.
+ It's, it's kind of an incredible innovation in human society when you think about it,
+ that this works at all because, you know, because it started out, you were carrying
+ around your chickens because you just wanted to trade what you had a value for, you know,
+ what the blacksmith had.
+ That got it convenient, so gold became a good standard because everybody valued gold and
+ everybody had kind of had the same value of gold, but we've gone from that to this sort
+ of agreement that, well, I'm going to, I'm going to agree that a dollar's worth of work
+ is worth a dollar's worth of merchandise.
+ And, and it doesn't have to be backed by anything.
+ We'll just, we'll all agree that that's the way to pay stuff.
+ So I guess that's what all they have to do is get enough people to agree that this currency
+ is valuable.
+ Correct.
+ Well, and notice also that we chose gold because it was scarce.
+ We didn't use water, for example, you know, because you just go over to a stream and dip
+ your bucket in and now, and the problem is, of course, anybody could go do that.
+ So, so water.
+ There's a famous scene in one of the Douglas Adams novels where they decide leaves will
+ be their currency and it has the same problem.
+ Well, of course, money grows on trees, right?
+ Right.
+ And so, so we chose gold because it was scarce.
+ And, you know, famously in the, in, in, in the days of, you know, individual gold miners,
+ they'd go out and try to find it because they would, basically they were creating more currency
+ to put into the system at a, at a controlled rate.
+ And initially, when there was lots of gold around, we were digging it up and, and, and
+ turning it into bars and coins and so forth.
+ And over time, it became increasingly difficult for us to, to find more gold.
+ So it became increasingly scarce and its value has increased.
+ So, in some ways a, a virtual, we have a virtual currency with the dollar and the Euro and
+ all of these.
+ In some ways that that is a little more fair because someone can't just go out and find
+ a bunch of money, unless they're robbing a bank, I guess, but, you know, you can't just
+ go digging in the hills and luck into a bunch of money.
+ It has to be earned in some manner.
+ Right.
+ So what we, what has been created with Bitcoin has all of these attributes there.
+ There is this concept of a, of Bitcoins, the currency in, in, in, in the same way that the
+ abbreviation for US dollars is, is USD and euros is EUR.
+ Bitcoin's abbreviation is, is, uh, BTC Bitcoin BTC.
+ And this, so this network of computers exists now on the internet peer to peer.
+ You can go to Bitcoin.org and download a program for Windows, Mac and Linux, which is open source
+ and install it on your computer and tell it to start generating Bitcoins.
+ It is literally start making money.
+ So you are making money out of nothing.
+ Well, just by being a member, I mean, how, how does this, this is sounds like some sort
+ of, uh, bit torrent situation where you, it sounds wacky, but yeah.
+ So, so you are making money.
+ The way you make money is by, is by processing transactions within the Bitcoin system.
+ So, and this is, this is complicated, but unfortunately it needs to be complicated in
+ order to be robustly secure, which it really is.
+ There is a, in the FAQ at Bitcoin.org, or org in the FAQ, there's a link to the original
+ PDF that, uh, that Satoshi wrote that describes in greater detail how this works.
+ But the idea is that you want a, you want a transaction trail of every single transaction
+ between two parties that has ever occurred and they're occurring all the time.
+ Now this is not just, this currency is virtual, but it has been anchored now to real currencies.
+ There are, there are websites that, that will trade real currencies for Bitcoins.
+ Um, they, they, at this point in time, about two years after it was, it was launched, um,
+ the current, the, the, the current, um, uh, currency trade of US dollars for Bitcoins is
+ about one to one.
+ I think it's like 93 cents for a Bitcoin and there are organizations which accept Bitcoin
+ payments.
+ Uh, the EFF, the Electronic Frontier Foundation, um, uh, accepts donations in Bitcoin currency.
+ There are, there are programmers who will work and, and accept payment in Bitcoins.
+ There's a, there's a, I think it's called trade, a trade link at Bitcoin.org that is
+ shows a page of lists of, of all the, of the currency exchanges that exist now.
+ And then a growing number of organizations and, and companies that will, that will accept
+ Bitcoin currency as real, our specialist, I hope you're enjoying this special edition
+ of a security.
+ Now I know I am.
+ I wasn't here for that original show.
+ So it's fun for me to, uh, learn, listen and learn and we all have a little bit of Bitcoin,
+ don't we just lying around?
+ It's fun to know how it works, but first, before we go on a word from our sponsor, go
+ to webinar.
+ I've done go to webinars and really had a lot of fun.
+ It's a great way to present, whether it's for training, sales presentations, um, you
+ know, uh, I mean, I, well, anytime you would teaching, you'd need one to many online.
+ Go to webinar allows up to one to six presenters with their video and the, or their screens
+ or their apps, talk to pretty much an infinite and unlimited number of people, uh, both live
+ and on demand and that's part of the fun of the webinar, go to webinar platform is when
+ you do a go to webinar, they were, it's recorded automatically.
+ You can make it available for viewing anytime and it can be just as interactive as when you
+ were doing it live.
+ For instance, they have, uh, great polls for audience interaction up to 20 per webinar,
+ up to 20 questions each.
+ You'll probably want to prepare one or two for your webinar ahead of time, maybe to generate
+ sales leads or just to, you know, kind of get whether people understand your stuff,
+ but you can even do them on the fly.
+ So as you're going along, if you think, gosh, this is like, with Bitcoin, it's complicated.
+ Are they understanding or maybe better understanding your audience as they attend and those polls
+ not only appear in the live webinar, but they also appear in the on demand webinar.
+ So your audience continues to be engaged and interact with you.
+ Even if you're not really there, go to webinar has great reporting and analytics.
+ People appreciate that, a great way to get qualified sales lead and metrics and maybe
+ most importantly data so that you can make your next webinar better.
+ Easy to start.
+ Custom email invitations, confirmations and reminders, automated email templates.
+ You could do it all from your iOS or Android device.
+ You can even edit sessions and track performance on your iOS or Android app.
+ They have a great one end to end AES 128 bit encryption.
+ Number one in customer satisfaction.
+ I think it's a great platform.
+ I think you should try it for your next presentation.
+ Go to webinar.com slash podcast, turn your next presentation into a conversation.
+ Go to webinar.com slash podcast.
+ We thank them so much.
+ They kind of came to us late in the years that we'd like to sponsor the best ofs and
+ we said, yeah, I like that idea.
+ Thank you.
+ Go to webinar.
+ Now, we continue with Steve and Tom.
+ So I got, no, I just still sound all that.
+ Okay, let's back up a little bit here.
+ If I can just create by running the program money, aren't we running into the leaves and
+ water problem where we just get runaway inflation and the currency is valueless?
+ So yes, except that it's all controlled.
+ It is the way it functions is that new coins, new bitcoins are generated on the network when
+ a node, and for example, if you're running the program, you are one node when a node finds
+ the solution to a hard problem.
+ Now, this is really very clever the way this works because it prevents people from being
+ able to create currency at will.
+ Back in '97, I think it was 1997, someone named Adam Back came up with a concept for
+ anti spam, which he called proof of work.
+ The idea was that spammers function because they're able to just spew out email at virtually
+ zero cost.
+ It doesn't cost them anything to send out email.
+ So as a consequence, we're all being deluged with email, which it's expensive for us to
+ receive, not expensive for them to send.
+ So Adam said, what if we come up with a way of making it expensive for someone to send
+ email?
+ And the way we do that is we create a computational burden, which we don't have the technology
+ to short circuit, where they have to do a substantial amount of work in order to sort
+ of validate an email.
+ And on this show, we've talked about hashing a lot.
+ Hashing, of course, is a valuable technique that takes an arbitrary length input and turns
+ it into hashes it down into a digest of a fixed length.
+ So imagine like take SHA 256, which is the secure hashing algorithm, which produces a
+ 256 bit result.
+ Imagine if in order to qualify for sending email, you have to hash the email header such
+ that some number of the first bits out of the 256 bits are all zero.
+ So if you just hash an email header at random, the most significant bit has a 50% chance
+ of being a one or zero.
+ So you increment a sort of a fudge factor and then hash it again until you get that first
+ bit that's a zero, but say that to qualify, the header has to have a hash where the first
+ 20 bits, for example, are all zero, well, it's going to take two to the 20 operations
+ to guarantee that.
+ So an average half that number of hashes have to be tried.
+ So the idea is this forces someone to do a huge amount of work trying to fudging the
+ header in order to get all like the first X number of bits of the hash to be zero.
+ So in practice, you could set the difficulty so that it might take somebody two seconds
+ to do the work on a one gigahertz PC.
+ But that would mean that it takes a spammer two seconds per email, which is vastly more
+ computation time than it takes them now.
+ And so on an individual basis, you don't notice that that much exactly.
+ But if you are trying to send, you know, vast amounts of, you know, which I guess could
+ negatively impact legitimate bulk email, like newsletters and things like that too.
+ And actually, that's exactly why the idea did not take off was that it was still, while
+ yes, it would be burdensome for spammers, it exactly, as you said, there are legitimate
+ mass mailers.
+ And if we, you know, if we did anything to allow them through, then the spammers would
+ come through too.
+ So it had to be all or nothing.
+ And it was too much work for, for legitimate mass mailers.
+ But it was a really interesting concept.
+ And Satoshi borrowed that concept from, from that Adam back proposed back in 97 for this.
+ So here's the way it works.
+ The, the system is, so imagine that there are among all these peers, there are people
+ exchanging value, they're exchanging bitcoins, a Bitcoin exchange is somebody wants to send
+ somebody else some Bitcoinage.
+ So they have a, the whole system works with a, a symmetric key system, a public key system
+ where they have both a public key and a private key.
+ They take some amount of Bitcoinage and, and put their public key and sort of associate
+ their, or include their public key in the transaction.
+ So the public key of the person, it is, it is being sent to.
+ And then they sign it with their private key.
+ So, so what that creates is that creates a transaction that only they could have originated
+ because they're the only ones who have their private key, which they keep secret.
+ That transaction is broadcast into this peer to peer network to all the nodes in the network.
+ And everyone's transactions are broadcast.
+ Now it's easy for anyone to verify that transaction because they know the public key of the signer
+ and that allows them to verify the signature.
+ They can't sign it themselves, but they can verify the signature.
+ So, so that allows them to verify the transaction.
+ Now what we have to do is we need to prevent that the person who's just depleted their
+ Bitcoinage by giving some away from giving the same Bitcoins away again.
+ So, and that, so that's clearly one of the hard things to solve about this.
+ So the way we do this is over every so often all of the all of the transactions which have
+ occurred since the, okay, there's sort of a problem of chicken and egg here because I
+ have to explain multiple things at once for this thing to hang together.
+ There is this notion of blocks, a block is a collection of transactions which have been,
+ which have been sort of adopted by the network.
+ And the block which is this collection of transactions is the thing which work is done
+ to create in the same way that I was talking about work being done to, to, to create this
+ special hash for email headers, a, the, the work being done to create this block is what
+ all the nodes on the network are busy doing.
+ So all the nodes receive transactions and the, the, a, a block is chained to all the previous
+ blocks by taking the, the hash of the previous block as, as part of the next block, which
+ means that essentially you have a forward moving chain of, of blocks, which are, which
+ are linked by the, by the, by the hash of the previous block, there is a genesis, what's
+ called the genesis block, which was created on January 3rd of 2009.
+ So just a little over two years ago when the system began, there was an anchor block which
+ is embedded into the, all of these nodes in, in, into the code in the nodes, when a, when,
+ when someone downloads the program and turns it on, they, they, they go to an IRC chat room,
+ that is the, the, the, the code autonomously goes to an IRC chat room, joins the room,
+ and that's how it learns about all the other nodes or many of the other nodes on the network.
+ And then interconnects to them and receives the entire history of all previous blocks,
+ that is this, this, this block chain anchored by the genesis block, all the way to the
+ most recent block that anyone has created.
+ So and in it sounds like it could become computational, computationally extensive over time though,
+ right?
+ Again, yes, except that there's another clever thing that turns out there's a way to compress
+ these so that, so that once the blocks are old enough and no one cares about the individual
+ transaction details, then you no longer really need to care about them.
+ The idea is you, you need the transaction details long enough to, to make sure that nobody,
+ so, so the transaction details are available in the network so that no one is able to reissue
+ the same bitcoins again, but, but at some point, then it becomes impossible for them
+ to because it, because the blocks become old enough and you do not need to, it turns out
+ you're able to compress these blocks and make them a lot smaller.
+ So and I think the growth rate is estimated at something like 4.2 megabytes per year would
+ be the maximum amount of storage that this architecture requires.
+ So it ends up really not being very much over time.
+ So, so what happens is there, there's this, this sort of chain of blocks.
+ Now all the nodes in the network are competing with each other to create the next block.
+ And it's the node which wins, the node which first does the amount of work required to,
+ to essentially create the next block that, that earns 50 bitcoins.
+ And so, and, and, and this all sort of scales in the right way, I'll explain in a second.
+ So, so all of the nodes are cranking away, they're, they are taking all the transactions
+ which have not yet been encased in a block and, and they hash all of that along with the
+ hash of the previous block, which that anchors them together and means that you're not able
+ to, to, to, to create a block that isn't linked to the prior one, hash it all together and
+ then, and then the, there's a certain amount of difficulty, which is of finding the a block
+ that functions by, by exactly as we were talking, having a hash with some number of, of zeros
+ from the left end going down. And at the moment, I think that number is 12 at this point in
+ time, you have to, you, so, so all the nodes are, are, are, are tweaking a little fudge
+ factor in the hash, trying to find, trying to build a block, which has 12 zeros at the
+ leading part of, of this 256 bit, SHA 256 hash. As soon as a node finds it, it declares
+ success, broadcasts that to the network. Remember that while it's extremely difficult to, to
+ find the, the, the, um, the pattern that makes the hash, it's incredibly easy to verify it,
+ you know, verifying the hash just requires, you know, doing the hash of the block and
+ seeing that, oh, look, somebody did create a block that's got all those zeros. And the
+ first transaction in every, in any block is paying yourself 50 bit coins, but it's only,
+ but if you can make that block valid, that then that transaction in the block of paying
+ yourself 50 bit coins is validated by the network. So, so, so the, we've actually had
+ two blocks created since we started explaining what blocks are, by the way, forgive a little
+ estimate of how there are people out there using this. Yes. In fact, there is a, there's
+ a site called, I think it's block track block explorer is the one that I'm at. That's the
+ why I keep in track of this. Yep. Block Explorer allows you, it's a website that is participating
+ in this peer to peer network, which allows you to go look at the history of all the blocks
+ that have been created so far. Now, is this, is this a worry that all of your finances
+ are now going to be in public? Can people look at this and figure out how much money
+ you're spending and who you're giving it to? Well, that's one of the other beauties is
+ that the, the only thing which is known, this is a completely anonymous currency system,
+ the, I mean, like more anonymous than anything else, the only thing that is known is a, is,
+ is your public key. So, when, when you, when you download this software and fired up on
+ your machine and started running, the first thing it does is to create a key pair. And
+ so you will see, for example, if you find the EFF Bitcoin donation, they show their public
+ key and, and there are various other organizations that accept Bitcoin, they show their public
+ key. So, so when you look at the, at the history of transactions, all you're seeing is this
+ random ASCII gibberish, which is, you know, the, the public key converted into ASCII and,
+ and people keep their private key private, but there's no way of knowing who anyone who,
+ who is behind any public key and you, the, the, the big, the Bitcoin client will happily
+ produce key pairs till the cows come home. You can make more key pairs anytime you want.
+ So you're not even, there's no, not even any way to track somebody by like, Oh, look,
+ there's the same guy who did a transaction here. He did it here. Only if you did not
+ create another public key, would that be the case? But you are free to create new, you
+ know, essentially the, the public key is a represent is a temporary, pure binary representation
+ of you, which you're free to retire and create a new one anytime you want.
+ I just, I just downloaded it and started it. It's not creating. It says I'm not connected.
+ It's not creating anything. Is that because I'm not in idle time, it has to be idle to
+ start generating those coins automatically? Well, yes. And okay. So many things have happened
+ in the last two years. First of all, this began to get traction and people began having
+ fun with this. The way the system works is, and I need to get this right, is the the the
+ coin creation rate is is 300 coins per hour within the entire system. And your CPU, your
+ CPU speed, the ratio of your CPU speed over the total CPU speed within the entire Bitcoin
+ network determines the probability that you will be able to solve the puzzle of of of
+ creating one of these blocks. So it's estimated, for example, that it would that at this point,
+ I think it was December 2010. So about two months ago, there was there were enough nodes
+ actively cranking away that it would take you about a year to generate 50 Bitcoins. That
+ is so so you're not going to see it happen quickly. Now, what happened is, as these things
+ started getting valuable, sort of started becoming worth something where you I mean,
+ you can actually trade if if you happen to get lucky and your node solved one of these
+ solved the most recent block that everybody was working on before anybody else, you'd
+ get 50 Bitcoins. Today, there is a an exchange that will transfer that in US dollars, for
+ example, into your PayPal account. So you you actually can make money. Now, you can imagine
+ then that people said, wait a minute, this seems like a good idea. Well, there's something
+ that's much more powerful than even multi core CPUs. And that's GPUs, graphics processing
+ units. Now Google bit Bitcoin space minor, M I N E R as in a gold miner. What's happened
+ is that there are people on the net that have built Bitcoin creating boxes with as many
+ graphics processing units as they can get with fans cooling them, they're overclocked,
+ they're pouring free on over them. These things are running 24 seven like oil derricks. So
+ drilling for Bitcoin, they really are there. They're they're literally they're literally
+ creating Bitcoin edge. Now, the cool thing is all of this was anticipated in the original
+ system. Because the immediate response to the Bitcoin network of the presence of of massive
+ Bitcoin computation power, which essentially allowed the people who had these machines
+ to to be printing money, you know, minting bitcoins with a much greater probability than,
+ you know, that somebody who just had a had a CPU running along, the system automatically
+ changes and changed the the problem difficulty in order to stabilize the rate at which coins
+ are coming into the system. And here's the deal. There will never ever ever be more
+ than 21 million bitcoins created. The way this works is that the difficulty of this problem
+ that is being solved, that is this hashing problem where you're trying to find leading
+ zeros in the hash, it's it's adjusted continuously by the network. So that in the first four
+ years of the Bitcoin network, and we're two years in now, in the first four years, half
+ of that total number of bitcoins will be created. That is 10,500,000 bitcoins will be created
+ in the first four years. In the second four years, half again, that is for only 5,250,000
+ years four through eight. In years eight through 12, that is the next four years. Again, that
+ amount is halved. And so it the the rate of of coinage creation will be decreasing exponentially
+ leveling off so that it so that in the far future, only 21 million will ever be created.
+ So we have a we have a controlled and known in rate of inflation within the system. It's
+ and it makes sense because initially, as the system is coming online, as as goods and services
+ are being made available and are trading within the system, you want to have more currency
+ being pumped into the network so that you have bitcoins to trade, but you don't want
+ it to go forever. Now, the problem would be, of course, if we absolutely cap the total
+ number of coinage at 21 million, then and there there comes, you know, a much greater
+ demand for this. We the tendency is to want more. Well, the solution is that you do you're
+ not forced to trade in integer amounts of bitcoins. That is the the UI right now gives
+ you two decimal digits of of coinage. So you're able to create, for example, you you could
+ exchange 0.01 of a Bitcoin and the but the technology supports eight decimal digits.
+ So right now, we're only using two. So so that allows for deflation over time because
+ we're we're absolutely capping the the total number of coinage at this 21 million mark.
+ And we know that it's going to be declining over time. And it doesn't matter how much
+ GPU power is put into the system. This system adapts so that the problems being solved scale
+ the difficulty scales up to balance the amount of processing power in the entire network.
+ And some people have commented that the the question then becomes, are you spending more
+ money on electricity and cooling for these crazy Bitcoin generating engines than the money
+ you produce. And over time, it looks like that will be the limiting factor. You know, it's
+ like, yay, I mean, I've, you know, created this insane work machine to create bitcoins,
+ but gee, you know, my electric bill went up more than the money that I'm making.
+ And PG&E isn't taking bitcoins yet. So if there's also a cool site that I got a kick
+ out of called the Bitcoin faucet, the Bitcoin foster trying to use that they the rate limit
+ has been exceeded. I think everybody's going to get there. Explain what it is. It is, it
+ is just a fun way that somebody can get some free bitcoins. People who have them can donate
+ them to the site. And, you know, the guy thanks you very much. And as long as he's got enough
+ supply, he'll give you some bitcoins at the moment. When I look before the podcast, he
+ was giving 0.05 bitcoins per visitor. If he went his balance of available bitcoins that
+ he's able to distribute for free is high enough. He increases that. But if he falls below a
+ certain mark, he decreases it in order to conserve his supply. There is a there's an online buyer
+ and seller escrow service where so that two people are able to agree that they're each
+ happy with the exchange of whatever it is they they they exchange for example in the
+ real world in order to allow a Bitcoin transaction to occur. There are a number of of online
+ exchanges. You're able to where you're able to buy and sell bitcoins. There's there's
+ online charts where you could look at at the at the rate at which bitcoins are being bought
+ and sold and their and their relative currencies. This is available in a huge number of currencies
+ and a whole bunch of languages. And and essentially it is extremely cool crypto, which I mean,
+ this has been pounded on and looked at and it looks to me like the guy has has solved
+ the problems and has created a virtual currency that floats all by itself that is completely
+ private that I mean, you know, obviously you you you need somebody who's going to agree
+ with you that you want to, you know, exchange this coinage, but this thing exists and it's
+ taking off and I wanted our listeners to know about it. Oh, yeah, very cool. Really fascinating
+ stuff. I've been playing with it while we've been talking to I have no balance though and
+ I can't the faucet is off right now, but at least I'm connected finally. So I hope so
+ it did you did find your network. Yeah, I finally found the network. I have no connections
+ yet though. One of the things they one of the things they recommend if our listeners want
+ to play with this is you need you will get much better connectivity. If you do port forwarding
+ of port 8333 from from through your router, which typically most people have or your firewall
+ to the application. Okay, that way other nodes that are that are informed about you are able
+ to make incoming connections to you. And it's not just you making outgoing connections to
+ them. And that'll allow you to participate in in the network. But I'm I would encourage
+ our listeners to poke around as you have been Tom. There are pictures of these people's,
+ you know, GPU boxes that they've made with with you know, with all these fans all over
+ them and discussions about the giga, let's see giga hashes per second in the network.
+ I'm trying to think I've made some notes about it somewhere about the oh, the average rate
+ of block creation. Oh, yeah, one one eighty six giga hashes per second is the total network
+ hashing strength. That is there are one point, 186 billion hash operations being performed
+ within the entire network trying to solve the problem of the next block creation. The one
+ who does gets 50 bitcoins. Oh, and that all that that number also decreases over time.
+ So that it's for the first 210,000 blocks, the value is 50 bitcoins per block that if
+ your computer solves the puzzle before somebody else's, then for the next 210 blocks, that's
+ cut in half to 25 bitcoins. Then for the next 210,000 blocks to 12.5 bitcoins and a six
+ and a quarter bitcoins and so forth on down. So this whole system is designed to to scale
+ correctly and basically create, I mean, it create a secure stable currency with with,
+ you know, real world value, which it has now. I mean, you can sell, you can buy and sell
+ bitcoins. You know, if you were, if you want to do, you could take a hundred dollars and
+ go buy some bitcoins and they know their, their electronic currency, you could then send
+ those anonymously to someone else and they could cash them in to their own currency or
+ back into dollars or whatever they want. I mean, this exists now and it looks like it's,
+ it's like bulletproof and the, the, the PDF explains the, they really thought through what
+ bad guys can do. The only, the only attack which is known on the system would involve
+ somebody with massive computational power spoofing the chain because this, it's this
+ chain of blocks which provides the integrity for the system. But the longer the chain gets
+ and the more good nodes there are, the more impossible it becomes for anyone to, for anyone
+ with massive computational power to spoof the chain. So the other thing that has happened
+ is there's this notion of pooling individuals have become a little disenchanted with the
+ fact that, you know, they've got their quad core I seven cranking away 24 seven. They haven't
+ made any money yet. They liked the idea of printing money. The fact is over time, this
+ is not going to be feasible. That is the way to get rich is, is, is not to print money.
+ This is, it's like gold miners, you know, like during the gold rush you ran out and you,
+ you hope to go strike it rich and find a vein of gold and make money over time. That just
+ became less and less feasible because the ground had been picked over and there just
+ wasn't gold to be found. Similarly, ultimately, this will be, you know, it's when the coinage
+ enters the currency and begins to flow, you know, people will be using it as a store of
+ value. But anyway, what I was saying was that people who have been disenchanted, they're
+ joining pools of users where they'll all be working together on and pooling their CPU
+ resources and then sharing the proceeds appropriately. So you may not get 50 bitcoins, but you may
+ get two and a half because you are one, two and a half out of 50th of the CPU resource
+ in a pool that, that collectively solved a block. So it, so it's a way for people to,
+ you know, see some, you know, have some of the fun of, of, of creating coinage out of
+ thin air by, by doing the work that makes the whole network go. And anyway, it is, it is
+ that it is the, the work that has to be done, the difficulty of doing the work that keeps
+ bad guys from being able to spoof the system because there just, there isn't any, there
+ isn't any way to shortcut this, this hashing of the blocks is just brute force work. And
+ as more, as more good, like, you know, GPU based systems come online, that hugely raises
+ the bar that bad guys would, would have to scale in order to, in order to, to spoof because
+ now as the consequence of sort of this phenomenon of using GPUs to create bitcoins, you know,
+ the network is scaled. So the rate of coin creation has, has, is still tracking exactly
+ what it should. But, but the amount of processing time being required to make that happen has
+ just gone through the roof. There's bitcoins in them that are Internet's
+ stuff. Anyway, just really, really fascinating. And I mean, it works. We have, we have a,
+ a state free crypto secure anonymous real currency now that, that exists. Check it out
+ at Bitcoin.org. It's really fun to play around.org. Not.org. Yeah. There's no piracy in the Bitcoin
+ world. Thank you, Steve so much for explaining that. That was really fascinating. I, I can't
+ wait to poke around with this a little more. I think I'm going to have to do the port forwarding
+ that you were talking about to get it. Well, no, I've got one connection now. So I, it seems
+ to be slowly, I guess that's what I'd say to new people. If you're looking at this, be
+ patient. Give it some time to connect. You might try the port forwarding trick. What port
+ was it again? 8333. 8333. All this is documented in the FAQ at Bitcoin.org. And the other thing
+ that happens is when you connect, the first thing that happens is your node needs to download
+ the history of prior blocks. So that'll take a while, but you'll see progress things and
+ so forth. And there is a, on, on the UI, there is an option to say, you know, start making
+ Bitcoins. Yeah. Start making money.

@@ -1,0 +1,1123 @@
+ (upbeat music)
+ This is Security Now with Steve Gibson,
+ Episode 19 for December 22nd, 2005.
+ VPNs, the final chapter.
+ (upbeat music)
+ - The final frontier. - The final frontier.
+ Steve Gibson, happy holidays to you.
+ Thanks for joining us for even though we're so close
+ to Christmas for this is the Security Now episode.
+ You helped us out on Twit2 on Sunday, that was nice.
+ - We're doing it a little bit early this week
+ to give people some clearance from the holidays.
+ - Give me some clearance.
+ - We're not gonna miss a beat.
+ We'll do one this week and then of course,
+ Episode 20 will be next week,
+ which will be our mod for Q&A episode.
+ - Right, our usual, we answer your questions,
+ so get them in to grc.com/securityn.html at HTM.
+ That was not a good thing to do.
+ - Oh God, after last week's Hamachi,
+ I used to be saying, oh yeah, I'm keeping up,
+ I'm reading everything that's coming in,
+ I am so buried under stuff.
+ - Yeah, that's all right, people have to do,
+ I'm sure understand that you can't respond to everything
+ and we'll try to respond as many as we can.
+ - I can't even read everything at the moment,
+ it's just been phenomenal.
+ - Well, before we get into the final chapter of VPNs
+ and we're gonna talk about OpenVPN this week,
+ let's follow up on a few things from previous weeks,
+ some corrections updates and Hamachi updates.
+ - Yeah, some errata.
+ First of all, everybody is writing to me
+ about this article from earlier in the year,
+ talking about cracking Wi-Fi protected access,
+ cracking WPA.
+ And I mean, people keep posting this link to me,
+ I meant to bring it up last week,
+ but as you know, I forgot my little errata notes
+ at the beginning of the show, so we had to wing it.
+ WPA has not been cracked,
+ WPA is not prone to cracking.
+ All this, the article is at informit.com
+ and it was back from May, I think,
+ or maybe it was March.
+ No, yeah, it's March, so nine months ago,
+ it's a two-part article that goes into excruciating detail
+ about brute force attacks on WPA.
+ Well, that's what we've talked about.
+ We know that WPA is susceptible to an offline
+ brute force attack, that you can capture a couple packets
+ and then take those home with you
+ and pound on that data,
+ trying either dictionary attacks or every possible key,
+ which is why the passwords page at grc.com was created
+ to give people these really nasty, long WPA keys
+ that nobody is gonna be able to end up
+ in any reasonable amount of time recreate.
+ So I want everybody who's been concerned
+ about what this article means, and by the way,
+ I mean, I don't blame anyone for being confusing.
+ This thing was deliberately created,
+ it seems to be extremely confusing and alarming,
+ but WPA is not cracked, there's no simple way
+ to breach it as long as you use a really good passphrase.
+ - It's kind of a shame, I guess informit decided,
+ well, let's go for the big headline,
+ get a lot of attention, a lot of traffic to our page,
+ but everybody, no, I mean, many protocols, not all,
+ but almost all protocols are subject to brute force attacks.
+ That's, you know, bad password, no security, we know that.
+ - Yeah, and what you hope is that it's not subject
+ to anything else, which is clearly the concern
+ that this article raised.
+ Now, also, that we have already begun to see
+ the emergence of WPA brute force cracking tools
+ floating around in the hacker sites.
+ So that's something else that I saw in the last couple of weeks
+ is there are, we're beginning to see that emerge.
+ So, as we've told people before, WPA is safe
+ as long as you use a really good passphrase.
+ - grc.com/passwords and you can get a good one.
+ - All right, now, one other little loose end
+ was we've talked about the problem of distributing
+ those super secure passphrases
+ and talked about the idea of using just a standard little
+ USB, you know, drive dongle.
+ One other thing occurred to me,
+ and that is that those little mini CDRs would work.
+ You could take maybe 10 passwords
+ and just burn them on a CDR.
+ There, they're gonna be in volatile.
+ It's easy for you to move them around
+ from machine to machine.
+ Every machine that you run across
+ is gonna have a CD-ROM drive now.
+ And that way, it's extremely simple to move
+ this really long password
+ that you wouldn't want to have to type in manually.
+ - Of course, the CDR is, you're not gonna change it very often,
+ but I guess that's kind of the idea anyway.
+ And that's the whole idea is you don't want to change
+ this super, super bizarre password.
+ And in fact, that's why I was suggesting
+ you might put 10 of them on there.
+ You might start off just using the first one.
+ If for any reason, you, for example,
+ had to disclose it to a friend who came over, you know,
+ for example, move them onto your WPA network
+ by giving them that password.
+ Then if you wanted to, you might feel more comfortable
+ switching to your number two password
+ that's already recorded on the CDR throughout your network
+ so that you've essentially obsolete at that first one.
+ You've removed it from being able to have any access
+ to your network.
+ - We were talking about that at the meetup
+ comes something kind of related, which is this reverse,
+ this cracking of the MD5 hashes.
+ Somebody put out a CD or a disc, I guess it was a hard drive
+ with all of the reverse hashes, right?
+ So you could do a reverse lookup?
+ - Well, yeah, it's called a pre-computation attack.
+ And we're seeing that both for MD5 and SHA1.
+ The idea is that those are very secure hashes.
+ They have been weakened a little bit
+ through recent cryptanalysis, but they're still, you know,
+ they're widespread in extreme use everywhere.
+ What's happened is hard drives have gotten so big
+ and so cheap, and of course the internet has happened.
+ What's going on is that people are pre-computing
+ the hashes, they're doing basically a brute force in reverse.
+ Well, they're doing a brute force use of the hash forward
+ and they're storing the value and its corresponding hash
+ on a hard drive.
+ Then what you do is you go to a website
+ that's got this massive database of pre-computed hashes,
+ you give it the hash, it gives you the password.
+ So it hasn't cracked the hash, it's just done them all.
+ - That's pretty amazing.
+ - Well, once again, that's why a good long random pass phrase
+ or password is the best solution
+ 'cause they're not gonna brute force something like that.
+ - Exactly, it's gonna be way down after the end
+ of the life of the universe before they get to it.
+ Now, also in a prior episode, I mentioned the idea
+ of creating a secure connection to webmail.
+ That is we were talking about SSL
+ and the very beginning of our VPN conversation,
+ how if you're using an SSL connection to a remote server,
+ your communications cannot be eavesdropped on.
+ - That's how Yahoo mail works and a number of other clients
+ and you can even use a pop client that way
+ if your ISP supports it.
+ - Exactly, but in the case of webmail,
+ some people were having problems doing this with Google
+ because it turns out that Google has a funky way
+ of bouncing you from your log on page
+ which is secure to a non-secure session
+ once you've logged on.
+ So I did a little poking around and it turns out
+ that if you use the proper URL among many ways
+ of getting into Google mail, for example,
+ if you use HTTPS colon slash slash mail.google.com
+ or HTTPS colon slash slash gmail.google.com
+ then for whatever reason, you'll get a secure connection
+ when you're actually logging on
+ and it will bounce you to a continuing secure interaction
+ with the server subsequently, but other ways of entering
+ bounce you over to a non-secure connection.
+ So if you use HTTPS colon slash slash mail.google.com
+ or gmail.google.com, it will see that you want
+ a secure connection and leave you that way.
+ - Good to know, all right.
+ That's what you should bookmark and use that every time.
+ - And in the last little bit of stuff
+ that I have been meaning to say for weeks
+ but keep forgetting, you got your notes now.
+ - I do, baby.
+ I'm home.
+ We've never told everybody who's listening to security now
+ that GRC runs and has for years
+ an extremely useful set of security related news groups.
+ Our new server is news.grc.com.
+ And if you, this is not a web based forum.
+ It's real, you know, use net style news reading
+ but most web browsers, you know, i.e. and opera
+ and I presume Firefox do have built in use net news readers.
+ - So, actually Firefox does not.
+ But there are, well, it kind of does.
+ It's got a funky way of doing it
+ but you can add an extension like Sage or Fizzle
+ to give it that capability.
+ - Okay, well, I'm not a big fan of web based forums
+ because I've become addicted to like real use net style news
+ where you've got lots of news groups.
+ You've got well threaded, very clearly threaded dialogues.
+ You can see which postings you've read and so forth.
+ My favorite client is free and that's gravity.
+ The gravity and news reader for Windows
+ that people can find on the net.
+ And there are other ones.
+ - Actually, I wanna correct myself.
+ I was talking about RSS.
+ People use Thunderbird for a news group reading
+ as opposed to Mozilla or Firefox.
+ Yeah, but you like gravity.
+ That's a good, I'll put a link in the show notes to that.
+ - I like gravity.
+ Also on our main navigation bar at grc.com
+ at the top of the home page
+ or the bottom of every page,
+ the far right link there is called discussions.
+ We have a page at grc.com/discussions.html
+ that will give people some sort of some foundation in this.
+ I have a step by step guide for setting up internet explorer
+ or I guess it's Outlook, is it?
+ Oh yeah, I'm sorry.
+ It's Outlook Express that has is both email
+ and has the news reader.
+ So I take them through a step by step.
+ We have a little bit of some fancy stuff going on
+ for the way you log on that I explain
+ because we have something that no other news reader has
+ which is an ability to allow people
+ to securely cancel their own messages.
+ I create a hash of their username and password
+ that they use for logging on
+ so that they're able to securely delete
+ their own postings if they want to
+ without anybody else being able to.
+ Anyway, there's a bunch of technology
+ I've actually been working on for years
+ for our own news groups.
+ So I wanted to tell people among our listeners
+ I know from the feedback we get
+ we've got real security junkies here
+ and there is a really super community of people
+ who hang out on news.grc.com, my news server there
+ and in fact the discussions page does allow you
+ to use a web reader, a web interface
+ to just sort of browse around the news groups
+ if you weren't sure you wanted to go to all the trouble
+ of setting up a news reader and participating
+ you're not able to post from there
+ but you can browse around and look at see
+ what the news groups are.
+ Oh, and I just created a security now news group.
+ - Great.
+ - That is there, it's been there for a few days
+ so it'll be entertaining specific dialogue
+ relating to whatever we're talking about on security now.
+ - So grc.com/discussions.htm.
+ You can read them online if you wanna participate.
+ We'll put a link to Gravity, Steve's favorite news reader
+ but there are many, many choices of course.
+ - And if you've got Outlook Express with Windows
+ you've already got a news reader built in.
+ - That's cool.
+ - Okay.
+ - Homachi, let's finish up from last week
+ 'cause that was very popular.
+ - Yes, now the good news is a lot of people
+ fell in love with this.
+ Alex Pankratov, the Homachi's chief lead developer
+ the guy that I was talking to for several weeks
+ before talking about this last week
+ sent me a link for from his delicious server
+ that shows all the people that are linking
+ and there was a phenomenal reaction
+ to a number of people who are interested
+ in Homachi following are talking about it last week.
+ I've got one posting here that someone sent
+ of a few hours ago who posted to our site saying,
+ I do a lot of traveling and I've always had issues
+ with using the wireless connections at hotels.
+ I was so happy to have heard about Homachi
+ that I had it installed and running
+ before I finished listening to your podcast.
+ You are right, Homachi rocks.
+ - Very easy on Windows, a little more tricky.
+ I did it on Mac.
+ You have to download some additional software
+ and do some configuration but I started using it right away
+ and I love it.
+ - Are you talking about Homachi on the Mac?
+ - Oh, I'm sorry.
+ Something else.
+ - You're talking about, you're talking about OpenV.
+ Forget I mentioned that, I'll edit that out.
+ So Homachi is very cool and there is no Homachi
+ for the Mac but that's coming.
+ - Yeah, so he said, you're right, Homachi rocks.
+ I'm leaving for Europe for a three week vacation
+ and now using Homachi and an open source VNC.
+ I have a way to securely connect to my home PC,
+ transfer files, browse the web and check email.
+ - Wow.
+ - So there's an example of the good news.
+ Now, there were some disappointed people
+ who for example are behind very restrictive corporate firewalls
+ or behind like ISP proxy servers.
+ So it's important to say that good as Homachi is,
+ there certainly are Homachi hostile environments
+ where you're not gonna be able to use Homachi.
+ Unfortunately, those people who were really excited
+ by last week's podcast about Homachi
+ and downloaded the client hoping that they would be able
+ to immediately connect to their home machines.
+ In some cases, they were, in some cases,
+ they found that for whatever reason,
+ for example, their corporate firewall.
+ I saw some posts where their corporate firewall
+ allows traffic out through port 80 and 443.
+ - And that's it.
+ - Oh, only.
+ - Geez.
+ - For example, DNS goes to the corporate DNS server.
+ SMTP and POP for transferring email
+ or in fact, maybe IMAP goes to the, again,
+ the corporate local mail server
+ and they have no access to anything
+ other than ports 80 and 443 for browsing the web.
+ So in that scenario, they're gonna need a different tool.
+ The good news is we've got a different tool
+ which we will be talking about.
+ But so there were people for whom Homachi was not,
+ you know, the holy grail that we've been talking about.
+ - Hey, if I were a corporate IT guy,
+ I think blocking all ports but 80 and 443
+ sounds like a pretty darn good idea.
+ - Oh, I agree.
+ I would do that.
+ - In fact, some people took exception
+ understandably to my saying last week,
+ "Hey, you know, you could run this at home
+ "and on your desktop in your company
+ "and get access to what you were doing."
+ - Well, and get access to your home.
+ And of course, the reciprocal works from home,
+ you could get access into your corporate network.
+ People were annoyed that I, as a security person
+ or security conscious person, was suggesting the use of this
+ for accessing corporate networks remotely.
+ And so your point is well taken, Leo.
+ You would hope that a corporation already has dealt
+ with this because, you know, it's been possible
+ for a long time using all kinds of techniques.
+ - And we're not advocating doing an end around
+ on your IT security 'cause the next zotob worm,
+ if you're the vector that brings it into the corporation,
+ they're not gonna like you too much.
+ - That'd be bad.
+ - That'd be a bad thing.
+ One other note I got from a good friend
+ and Pearl Wizard, Randall Schwartz,
+ he's the author of "Learning Pearl"
+ and really a great guy.
+ Had a couple of questions for you.
+ First of all, he said, how much he's not open source?
+ How can we trust it?
+ - Ah, well, that's a very good point.
+ I mean, it's one of the things that made me anxious
+ and continues to make me anxious.
+ I'm gonna end up probably over on OpenVPN,
+ which is how we're gonna wrap up this episode
+ of "Security Now."
+ But Hamachi is, I'm convinced that Alex
+ has really designed this system
+ exactly as he's told me he has.
+ He's got years of experience with security,
+ implementing IP sectionals, classic VPN solutions.
+ I couldn't feel any better about this than I do,
+ short of doing a complete source audit
+ and build, verify, and all that,
+ which is just not practical.
+ So it's certainly the case, though,
+ that, well, I mean, we're trusting Bill
+ when we use Windows.
+ - But that's why a lot of people say
+ use open source security software
+ and only open source security software,
+ 'cause you don't know what government backdoors
+ are in there and so forth, things like PGP,
+ you know what's in there.
+ - Well, that's certainly the case.
+ And in fact, I think you made a comment,
+ I don't remember if it was before the podcast
+ or under your breath that it was like,
+ Alex Pankerov sounds like a Russian.
+ - Who is this guy?
+ - KGV.
+ - Who are we?
+ - Well, and in fact, it's why I went around and around
+ with him to make sure, for example,
+ that the asymmetric key pair generated by the client
+ was never given, at any point was given to the server
+ or left the client so that it wasn't necessary
+ for us to trust the Hamachi server.
+ And, you know, I'm sure Alex has told me the truth,
+ but I have no proof of it.
+ So listeners should certainly be aware of that.
+ And he points out and I'm sure we'll talk about it
+ at some point that the next version of OpenSSH 4.3
+ will support ad support for tunneling.
+ Essentially, you can set up an OpenVAPN type tunnel
+ using SSH, which will be nice.
+ - It'll be nice, but again, we have to be careful
+ with details because OpenVPN has done something very correct
+ that Hamachi has also done very correct,
+ which other solutions have not.
+ And that is, because it's open, I assume it's OpenSSH,
+ so it's a TCP tunnel.
+ And we've talked before about the problems of tunneling TCP
+ through TCP, whereas Hamachi is UDP based
+ and OpenVPN in its default configuration is UDP based.
+ And that's a better transport protocol
+ because you don't have the problem
+ of two reliability guaranteeing protocols
+ like TCP interacting with each other in a bad way.
+ - And as you pointed out,
+ that's one of the reasons people don't like VPNs.
+ They seem slow and sluggish
+ is because it's TCP over TCP.
+ - Well, the other problem is yes,
+ that TCP optimizes its packet size
+ so that it doesn't fragment as it crosses the internet.
+ The problem is if you encapsulate TCP in TCP,
+ you're making a larger packet
+ because you've got the already maximum size TCP packet
+ enclosed in another packet that has inherently made it bigger.
+ So you often have fragmentation problems
+ which can be very severe,
+ meaning that every packet hits the first router
+ that is not able to forward that overly large packet.
+ It cracks it in half
+ and the internet never reassembles those.
+ So suddenly you've got twice as many packets,
+ twice the opportunity for packet loss and retransmission
+ and twice the number of packets coming back in
+ that then need to be reassembled
+ and some routers will not
+ because there have been a history of fragmentation attacks.
+ Different ways of using fragmented packets
+ to get through firewalls
+ because for example, a firewall that doesn't have
+ the whole packet can't really check it
+ as thoroughly as it would like to.
+ Many firewalls drop fragments
+ because fragments are not supposed to happen.
+ So this is one way that VPNs
+ can not only have low performance but actually fail.
+ - Good to know.
+ All right. - Anyway, one last issue
+ with Hamachi is relative to remote desktop.
+ I was jumping up and down last week
+ about how I was able to log on to my desktop remotely
+ from home from Toronto.
+ - You showed us.
+ It was so cool. - Yeah, exactly.
+ I mean, and thankfully remote desktop
+ is a very efficient protocol.
+ Hamachi has a problem,
+ or I guess actually remote desktop has a problem.
+ If the Hamachi client is running
+ with the same user on your desktop
+ that you are trying to log in as remotely,
+ you get this user already logged on sort of collision,
+ apparently.
+ Alex has responded to this
+ and over in the Hamachi forums,
+ there is discussion and the resolution of this problem.
+ It turns out that if you run Hamachi as a service,
+ then it runs as the system process
+ as opposed to on your desktop as the logged in user,
+ and then you're able to log in remotely.
+ So for all the people who have had problems
+ getting remote desktop to work as easily as I did,
+ I actually was running it as a system process, as a service.
+ So it was logged in as the system
+ and not as the user I was logging into it as.
+ - Is that dangerous?
+ - It's got a system-- - You are trusting it
+ because it has more privileges in your system.
+ - Right.
+ All right, we're all caught up, right?
+ - Any more?
+ - The one last issue with Hamachi.
+ - We may have to put open V and up to the next week.
+ No, go ahead.
+ - Well, but Hamachi's important
+ and it's gonna be one of our enduring solutions, I'm sure.
+ Some people are using Hamachi on their own internal networks
+ and have said, "Hey, I've got all my systems
+ "running with Hamachi.
+ "Do I need WPA anymore?"
+ Well, that's a really good question.
+ If you were sure that you're using Hamachi
+ for your file sharing and to link things together,
+ I could argue that that really replaces the need
+ for internal Wi-Fi encryption.
+ Remember, however, that you do have the problem
+ of people using your network
+ and being able to mess with your systems.
+ You still, even if you've got Hamachi
+ interconnecting your systems,
+ you still have your non-Hamachi IAPs available.
+ So there's two problems.
+ There's the problem of you using the non-Hamachi IP
+ by mistake, if you weren't really careful.
+ And the fact that all the non-Hamachi,
+ the regular native IPs, are still available.
+ So it's really not okay not to use WPA.
+ I would not recommend it.
+ However, one of the cool things about using Hamachi
+ within your network, especially if you've adopted
+ one of the multi-net router approaches
+ that we've talked about, for isolating networks
+ from one another, people who have done that in the past
+ have written to me saying they've got problems
+ because they were like file sharing
+ and printer sharing breaks across routers.
+ And that's the case because Windows normal file sharing
+ broadcasts will not be moved across routers.
+ Hamachi does forward broadcasts
+ and people have reported that using Hamachi,
+ now they've got their file sharing back
+ even in complex multi-router configurations.
+ - And we also met a number of gamers who use Hamachi.
+ This might up to now have been the most popular use
+ of Hamachi to turn a LAN games into WAN games,
+ which is very cool.
+ - Right.
+ - Yeah, we won't say, we won't name the person
+ who told us all about that.
+ - Nope, because of his high ranking security clearance.
+ (laughing)
+ - In the military.
+ - We won't.
+ - That's enough.
+ - Okay.
+ (laughing)
+ - But I think it's, that's actually a gamers
+ were the first to really get the value of Hamachi, I think.
+ - Yep.
+ - Yeah.
+ - All right.
+ Shall we talk about our subject for the week,
+ which is open VPN?
+ - Not quite.
+ - Oh, there's more?
+ - There's one more.
+ - One more thing.
+ - I have to talk about IPig.
+ The worst named, but very compelling looking VPN solution.
+ I just started playing with yesterday.
+ A number of users wrote to me about it.
+ I tracked it down.
+ It's www.iopus.com.
+ I-O-P-U-S dot com.
+ The trouble is for some reason the guy who did this
+ shows a picture of a silver hardware wireless router
+ on the page for IPig.
+ And several times I went there thinking,
+ "No, no, no.
+ "I'm not looking for a hardware solution.
+ "I don't want an I-fandom style thing.
+ "I'm looking for a client and server software package."
+ Well, that's what this is.
+ It's got nothing to do with hardware at all.
+ So I'm not sure why he shows a hardware router on the page,
+ leading people to think that, unfortunately,
+ that's something to do with what his IPig software is.
+ Is it like a software version of a hardware router?
+ - Okay, it is extremely cool.
+ I ran his server.
+ He has a free server and a free service.
+ I ran his server on my system.
+ I installed his client on my laptop.
+ I then connected to my...
+ Oh, I then I also had to forward a port
+ from my router through to the listening port on my server.
+ So there is that aspect that anybody
+ who's gonna be running a server on their land
+ needs to be aware of.
+ Hamachi avoids that by doing outbound, directed,
+ nat traversal.
+ So that's not a problem.
+ But anyone using OpenVPN or using IPig
+ will need to open a port and forward a port
+ through their router, also through their firewall,
+ if they've got one,
+ so that the program is able to answer incoming calls.
+ I then, using this free client and server solution,
+ I connected to my server.
+ I ran remote desktop.
+ I connected to my file shares.
+ I talked to other machines in my own private land
+ and accessed the internet back out
+ through my internet connection.
+ I mean, it is the holy grail that we were looking for.
+ Unfortunately, it's called IPig.
+ - And it's not free.
+ - It is free. - It's free.
+ - It's completely free.
+ His server side unit will allow you to define five accounts
+ and presumably have five users simultaneously using it.
+ I can't imagine why that's any practical limitation.
+ He also has a free service.
+ You can use his server with a five gigabyte limit
+ for an account.
+ And which is, I mean, would last you years
+ if you were just using it for email,
+ if you were trying to do something
+ like using BitTorrent or something,
+ that would be a problem.
+ You would burn out that account before long.
+ He's thinking of going to a paid service
+ like $29.95 per year for hundreds of gigabytes,
+ which solves that problem.
+ So it's really an interesting solution.
+ You use the free IPig, which I hate saying,
+ but there it is, IPig client.
+ You connect to his server.
+ I mean, it's a simple download.
+ You connect to his server.
+ You've got encrypted access from any hotspot
+ out to the internet and it's free.
+ - Well, is this better than open VPN or I mean,
+ public VPN or hotspot VPN or one of the commercial services?
+ - What he's doing is he's redirecting.
+ He runs a little driver in the client
+ that redirects your traffic through the connection
+ the client has made to your server.
+ Then it goes out over the internet.
+ Now, the problem with this is that the traffic
+ is gonna be prone to proxying and not problems.
+ Unless he's dealt with that.
+ I've got a dialogue open with him now.
+ His name is he's a neat guy in Germany.
+ They're based in Germany, Matthias Roth.
+ I was concerned about the security aspect,
+ so I opened a dialogue with him.
+ We went back and forth actually this morning.
+ And if anyone wants to go to the IPig forums,
+ they'll see my posting and the thread
+ between Matthias and myself talking about exactly
+ what the security protocol is.
+ 'Cause I did some packet sniffing last night
+ and I saw that my username was in the clear,
+ followed by a 256 bit token.
+ And I was concerned that that might be the key.
+ He uses 256 bit AES encryption, which is very strong.
+ And over the course of the morning,
+ going back and forth with him, he's gone to sleep now,
+ 'cause he's in Germany.
+ And we're gonna continue our discussion
+ when he wakes up in the morning, his time.
+ Anyway, he did everything correctly.
+ His system is prone to the same kind of brute force
+ or security attack that WPA is,
+ or any pre-shared key technology is.
+ But it's very clean, it's very simple,
+ and it looks fine to me.
+ So you download his free IPig client,
+ you connect to his server, you've got wherever you are,
+ hotspots, hotels, you name it,
+ you've got up to five gigabytes per account of access.
+ You would then have to delete the account
+ and create a new one, and you've got five gig more.
+ I'm hoping this works for him,
+ and that people will instead, once he offers a four fee service,
+ we'll consider using that.
+ The other cool thing is, using the same technology,
+ anyone can download his free server,
+ set it up in a Windows machine.
+ Ah, this is only Windows.
+ So that's one difference from OpenVPN at Hamachi,
+ is at the moment at least, it's only a Windows platform
+ based solution.
+ So you'd run the IPig server on your system,
+ change the default port, he defaults to 11888.
+ The first thing I did was move it somewhere else,
+ because you would never want to be running any service
+ like that on the manufacturer's default port,
+ so that if some vulnerability was found
+ at some future point in his server,
+ you'd have people scanning the net looking to attack you
+ and get into your system that way.
+ So running on a different port, forward that,
+ through your router, and you can connect to it just the same.
+ And when you do, you have access to all your machines
+ in your network, as well as access out to the internet.
+ So it's a really interesting solution.
+ I haven't spent nearly as much time with it as I have
+ with Hamachi, and again, there is the question
+ that I've raised that he had to go to sleep,
+ so he hasn't answered yet, is what about protocols
+ which are NAT, router, and proxy sensitive.
+ For example, in the FTP protocol,
+ several of the connection setup includes your IP address
+ and port number of your machine.
+ Well, since this has been redirected
+ through a different machine, those packets
+ are no longer gonna be correct.
+ NAT routers that are aware of this,
+ they will reach into, they'll see that you're doing FTP
+ based on ports and looking at the protocol.
+ They'll reach in and adjust those packets
+ to reflect the fact that the IP has been changed.
+ I don't know if he's doing that.
+ It's a big job if he is, and there are other protocols
+ like SIP and the H.363, the various teleconferencing protocols
+ that also embed ports and IPs in their packets.
+ So it might be that this isn't a universal solution,
+ but certainly for web browsing and mail
+ and many other things, it's worth a try,
+ and it's free and the security looks fine
+ as long as you go to my passwords page
+ or just invent a really nasty long key,
+ he's got everything else worked out well.
+ So again, I think people should take a look at it.
+ >> Change the default port, use a nasty key.
+ And we should say that, yeah, as bad as IP is,
+ at least it's an acronym for the IOPUS private internet gateway.
+ So there's a reason for it.
+ It's bad, but there's a reason for it.
+ >> The logo has a pig's nose with a key hanging from it.
+ >> That might be worse than the name, but it's free.
+ >> It's free and it looks great.
+ And I'm going to be working with Matthias in the future.
+ I will get answers to these questions that I still have.
+ I'll talk about it, I'm sure, next week,
+ and have an update for people.
+ But it really looks like a very nice solution.
+ >> All right, now we're more than half an hour
+ to the podcast and we haven't really gone
+ to the meat of the matter, so let's do that now.
+ >> Well, the good news is there is too much meat
+ for us to get to on OpenVPN.
+ OpenVPN is probably what I'm going to end up using
+ and what you're going to end up using.
+ >> It's the holy grail?
+ It is, for many reasons, the holy grail.
+ It's not client-free.
+ We know no client-free solution exists.
+ We tried that using Word, or I'm sorry, Word,
+ using Windows, PPTP, IPsec, L2TP, all the acronym soup stuff.
+ We realized that VPN net routers are good
+ for talking to each other, but really not designed
+ for talking to rowing hotspot users
+ and that those protocols tend to get blocked
+ with a high degree of probability.
+ OpenVPN is an open source project located over at SourceForge.
+ It uses a UDP tunnel, which is the best transport
+ for moving tunneling protocol
+ if you're able to get UDP from your client to your server.
+ It is multi-platform running on Linux,
+ on the BSDs, on Windows, on the Mac,
+ so it's a beautiful multi-platform solution.
+ The other cool thing is, thanks to its open nature,
+ it's been ported many places.
+ For example, an open VPN server is part of Monowall,
+ which many people are already running
+ on their little discarded PC running Linux
+ and they're using it as their firewall
+ or gateway in their home network.
+ So open VPN can be installed or turned on in Monowall
+ and you've got remote access to your internal LAN.
+ It's also supported by the OpenWRT project,
+ which means that people who are downloading
+ different firmware for their Lynxis and other routers
+ will be able to essentially put an open VPN server
+ in their little plastic retail box
+ and again, access their network from remotely
+ much as we were hoping people would be able to
+ in the Holy Grail.
+ And finally, there's a very nice service
+ that you, Leo and I have both been using now
+ for a couple of weeks, which is called HotSpot VPN.
+ HotSpot VPN uses just the OpenVPN system
+ right out of the box.
+ What they provide is about a $10 a month service
+ where they provide the internet connectivity
+ for anyone using OpenVPN out on the road.
+ - So OpenVPN requires you to run a server
+ that your client can log into,
+ but you can subscribe to services
+ that run the server for you.
+ - Yes, very much like Hamachi, OpenVPN
+ when installed on your system creates a virtual adapter.
+ Now that's important because that's the only clean way
+ I've seen of solving this packet fragmentation problem.
+ You're able to tell the adapter
+ that its maximum segment size is smaller
+ than what's truly the maximum segment size for the network.
+ So that when TCP is setting its protocol up
+ and generating packets, it'll be making smaller packets
+ which then the protocol encapsulates
+ in its transport tunnel in order to send over the internet.
+ So you end up with, oh, and it's using UDP,
+ so maximum VPN performance.
+ I don't think anybody will see a slowdown
+ using HotSpot VPN.
+ I've certainly noticed none.
+ - And I was using it too,
+ and I was actually very impressed by the performance.
+ It seemed like it didn't slow it down at all.
+ Yeah, on my Mac.
+ - Yes, and for example, someone behind a corporate firewall
+ that is allowing TCP 80 and TCP 443,
+ they would be able to use OpenVPN
+ to get to their machines at home
+ because it would look just like
+ unless the corporate system was actually running a proxy
+ where it's accepting their true HTTP connections
+ and then regenerating a request outbound
+ which certainly could be going on.
+ But if it's just using port filtering,
+ they'd be able to access their network from home.
+ So what I like about it is it's a widely multifaceted solution.
+ It's available cross-platform,
+ it's available in many forms,
+ and we have a reasonable priced HotSpot VPN service
+ that will allow road warriors
+ to encrypt their connections out of the danger zone,
+ out of the hotel and out of a Wi-Fi environment,
+ out to the HotSpot VPN location.
+ I believe he's got, I've spoken to Glenn,
+ who's the founder of this Open of the HotSpot VPN solution.
+ He's got networks, I think, on both coasts,
+ and he's considering putting another network,
+ perhaps in an international setting,
+ in order to continue to do some load balancing.
+ But it's a very wide application domain.
+ The downside, and of course there is one,
+ is it is anything but one click,
+ whereas Hamachi, if it works for you,
+ is amazingly zero configuration.
+ And even IPEG, if it can work for you,
+ will probably be a fantastic solution
+ for people for whom that works.
+ OpenVPN is a much more complex product.
+ It's, I would consider it the Swiss Army knife
+ of VPN solutions.
+ You configure whether you want TCP or UDP protocol,
+ what port you want to run on,
+ and, I mean, well, that's just the beginning.
+ I mean, it's better.
+ >> I want to clarify something just so people understand
+ that the commercial providers like HotSpot VPN,
+ they're providing the OpenVPN service.
+ In fact, they make it pretty easy to configure.
+ That's one of the reasons you pay them.
+ But that's not, when you talk about OpenVPN,
+ you're talking about the free software that they use,
+ which is more complicated to set up on your own.
+ >> Yes, and in fact, I don't want to scare people away
+ from HotSpot VPN.
+ I was very impressed.
+ >> That was on Windows.
+ That's just, you run an installer and that's it.
+ >> I mean, literally, it installs exactly the same stuff
+ as if you were to download it from SourceForge,
+ except that they've done all the work
+ of pre-preparing your asymmetric public key certificates.
+ It's all part of the bundle.
+ So you sign up for HotSpot VPN,
+ you get a link in a return email,
+ you click the link, download a package,
+ install it on your machine,
+ and you literally click an icon on your taskbar,
+ and you're connected securely to their servers.
+ It is that simple.
+ They've done all of the work.
+ >> I installed it on a Windows machine
+ and a Mac machine.
+ >> Very easy on Windows, a little more complicated on Mac
+ 'cause you need a second solution called tunnel blicks,
+ and you have to configure that a little bit.
+ What does it take to do OpenVPN yourself?
+ What are the steps to do that?
+ >> Well, that's really what I'm not gonna talk about today.
+ 'Cause it's so complicated.
+ >> Well, yes, what I'm gonna do is,
+ a lot of people have said,
+ okay, enough already on the VPN topic.
+ And in fact, it doesn't make sense for me
+ to try to explain in detail
+ how to install OpenVPN oneself.
+ I'm only gonna be using all the online documentation.
+ I'm gonna put up on my show notes
+ for this episode 19,
+ a list of all the online available documents.
+ So anyone who is intrepid and wants to go ahead
+ and mess with OpenVPN,
+ knowing that we've vetted it enough to know
+ that it really does work
+ and it really is a terrific solution,
+ anyone who wants to is welcome to.
+ What I'm gonna do in the background now
+ is I'm gonna put together somehow,
+ I'm gonna distill all that
+ into some simple, easy-to-use how-to guides.
+ >> That's kind of what's lacking
+ in the OpenVPN documentation.
+ >> Yes, it really is.
+ Well, the problem is these guys who developed it
+ are all excited about all the bells and whistles they've got.
+ I mean, there's all kinds of stuff
+ where if you drop your connection,
+ you may come back with a different MAC address
+ because the adapter signs a MAC address on the fly,
+ so you would have an old MAC address in the ARP table,
+ but there's a command line,
+ a switch you can put in to automatically flush the ARP table
+ and reconnect, blah, blah, blah, right.
+ So I'm gonna work through all that nonsense.
+ I'm gonna figure out, okay, here is exactly what you have to do.
+ Here's some scripts, here's some guides,
+ here's some screenshots, follow these instructions
+ and you'll be set up with like the optimal configuration.
+ And the good news is there is a really good optimal setting
+ where you can connect into your system remotely
+ and with what's called a bridge
+ as opposed to a routed connection.
+ The bridging connection essentially extends
+ your local LAN ethernet, including the ethernet broadcasts
+ across the bridge to your machine.
+ That means that all file and printer sharing works,
+ non-TCP protocols work, like if you wanted to use net buoy
+ for your, if you were really security conscious,
+ that would work through the bridge and ARP traffic works.
+ So for example, you're able to participate on the LAN
+ and automatically route back out to the internet.
+ So I mean, it is, it's a high configuration,
+ holy grail solution.
+ I'm gonna work to, and I wanna make it clear
+ that at the time that we're recording this Leo,
+ these guides don't exist, but that's what I'm working on.
+ I'm gonna nail this stuff down for myself
+ and I will share everything I learn along the way
+ and distill some simple how-to approaches
+ that figure out exactly what to do to make it work.
+ - So if you can do that, then OpenVPN would be your choice.
+ Are there any drawbacks to OpenVPN?
+ Besides the complexity of installing it and getting it right.
+ - Let me think, you do have to have a static incoming port
+ that will accept connections from known and unknown people.
+ - Can you use Dine DNS or some other solution
+ if you don't have a static port?
+ - Well, now that's a static IP, I'm in a static port,
+ I'm sorry, okay.
+ - Right, and you actually do that by opening up
+ your firewall, port forward.
+ - Well, but I'm just saying that, you know,
+ Hamachi doesn't require you to have any static port forwarding
+ through your router or your firewall, any solution
+ where you're running a server on your LAN,
+ whether it's iPIG's server or the OpenVPN server,
+ it will absolutely require that you run a port forward through.
+ Now, I don't think it's a problem 'cause this thing
+ is very well hardened, it's been scrutinized,
+ it's open source, but again, you want to pick
+ some wacky port that only you know,
+ so that's unlikely to be found.
+ Just, you know, a little obscurity doesn't hurt.
+ You also would want to run a dynamic DNS
+ and many of the contemporary routers
+ now allow you to set up a dying DNS account
+ and they will maintain that for you.
+ - That's the static IP we were talking about.
+ - Exactly, so that if your ISP did change your router's IP
+ and you were away from home, you'd be screwed,
+ you wouldn't have any idea what IP
+ to use to connect to your home network.
+ But if your router supports dynamic DNS
+ or you run a client on your own machine,
+ which will do the same job,
+ then you'll always have your own domain name,
+ you know, bobshomenetwork.dinedns.org or whatever,
+ which will always be pointing to your router's IP,
+ making sure that you're able to access it remotely.
+ - It's a lot better than trying to get your spouse
+ to run IP config, trust me.
+ (laughing)
+ - Well, and you would also want that
+ if you were using the IPig solution.
+ I encourage people to take a look at IOPIS's IPig.
+ It's badly named, but it really worked well for me
+ in my brief run-through yesterday.
+ And so far the security architecture looks very solid.
+ - Details on how to use OpenVPN
+ will be available on your site in the show notes.
+ - Excruciating details.
+ - What do you anticipate?
+ You're not gonna work on that through Christmas, are you?
+ - That's all I'm doing.
+ - Steve. - I'm working on it.
+ - Open, I'm rolling up my sleeves.
+ - Steve, you're the kind of guy
+ that goes to a Chinese restaurant on Christmas day, aren't you?
+ - I am, in fact, Sam Wu, my favorite place
+ is Open 365 days a year.
+ On Thanksgiving, on Christmas, on New Year's, you name it.
+ - So you're looking for help with the matcha,
+ you're open VPN.
+ Christmas day, we have a date at Sam Wu's.
+ - No, don't leap or steal alone.
+ (laughing)
+ He'll be reading a little science fiction,
+ I hope, and taking a break.
+ - So, but I will be setting up a Linux machine
+ from scratch and doing the Linux machine.
+ - Wait, wait, wait, wait, wait.
+ You're gonna set up a Linux machine?
+ - Well, I'm sorry, I met free BSD.
+ - Okay.
+ - The news group server that I talked about
+ at the beginning of the show, news.grc.com,
+ that's a free BSD Unix machine.
+ Free BSD is my, you know, Linux slash Unix style platform
+ of choice. - I was getting famous
+ for a moment there.
+ I thought the world was coming to an end.
+ - Oh, I do it all the time.
+ I love free BSD.
+ - Yeah, free BSD is great.
+ And we Mac users know a little bit about BSD
+ 'cause that's what's underlying, Darwin.
+ - That's right.
+ - Okay, are we complete now?
+ Do we have everything we need to know?
+ - I think we're done.
+ (sighs)
+ - The VPNs have been covered.
+ I so decree it. (laughs)
+ - Now, what we'll do is we will touch on this.
+ I mean, VPN. - It's not going away.
+ - Exactly, VPN is a core topic for security now
+ and for us.
+ You know, you and I roam around, we're telecommuters,
+ we want security, so listeners don't need to worry
+ that they're questions that they've asked
+ are never gonna be answered.
+ - No, no, no, no, yeah.
+ - We're never coming back here.
+ I mean, and as we live here, this is where we live.
+ - Yes, I mean, VPN is a core technology.
+ We're not gonna drop it as I learn more about IPG,
+ as I learn more about OpenVPN and I'm posting things,
+ we'll be touching on it, but we've got a whole bunch
+ of cool stuff lined up for the beginning of next year
+ and security now.
+ And of course, next week we'll do our Q&A
+ and we'll talk about some more of the users' questions.
+ - Well, and I also see why we needed to do the early chapters
+ to get to this part because there is so much to understand
+ about what's going on, the pros and cons, the negatives,
+ the security risks, you have to understand that
+ before you can even have a conversation about VPN.
+ So that was well worth it.
+ - Yes, and that was exactly our intent.
+ And of course, we're gonna talk early on
+ about security architecture.
+ What is an asymmetric key?
+ What is a symmetric key?
+ And so one of the things that users need to be aware of
+ is that we're deliberately creating a foundation here
+ that will allow us to explain once it's necessary
+ about OpenVPN certificates and how they work.
+ It wouldn't make a lot of sense to talk about it now,
+ but once we've really explained how this stuff works,
+ it'll all come together.
+ - If you want more information and that step-by-step
+ on how to configure and run OpenVAP and grc.com/securitynow.html,
+ those are the show notes and some people are confused
+ by the little icons, click those little icons.
+ They all do something.
+ There's transcripts there, there's a 16 kilobit version
+ of the show, which I know people love, I'm not sure why,
+ but they love that low quality, low fidelity version.
+ - Well, it's 'cause the file size is so small.
+ - It's such a small, I understand.
+ I'm just giving them all of this.
+ And because we work so hard on audio quality here.
+ And for more information about all this stuff,
+ Steve's the guy, and don't forget those news groups,
+ the grc.com/discussions.
+ - Leo, I mean, we've got hundreds of really good people
+ who hang out there, and the Usenet style news reader
+ is such a joy to use.
+ I'm sure, you've used a lot.
+ - I still use it, oh, absolutely.
+ - It's just a great way to have dialogues and conversations,
+ and we do now have a security now news group
+ on the GRC news server.
+ - That's great.
+ If you want to download the full version, of course,
+ you can always get it at thisweekintech.com.
+ We do thank the folks at AOL Radio for broadcasting
+ security now on their podcast channel,
+ and providing the bandwidth for the security now downloads,
+ because there's a lot of downloads.
+ And at some point, we're gonna try to put this all together
+ in an anthology, maybe a CD.
+ We've started to get requests from corporations
+ who want to distribute them to employees and so forth.
+ So we'll work on that as well.
+ Next week, your questions, Steve's answers.
+ Have a great and happy holiday, Steve.
+ - Thank you, too, Leo.
+ - Thank you so much for all the work you've done on VPNs.
+ This has been really fascinating,
+ and it makes me feel good when I open up my hotspot VPN
+ and know that I'm safe now on the road.
+ - That's what I'm using. - Yeah, that's just great.
+ I'm Leo Loport for Steve Gibson.
+ We hope you have the best of holidays,
+ and we'll see you next week on security now.
+ (upbeat music)

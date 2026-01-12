@@ -1,0 +1,906 @@
+ Netcast you love from people you trust this is Twitter bandwidth for security now is provided by AOL radio at AOL.com slash podcasting
+ This is security now is Steve Gibson episode 80 for February 22nd 2007 your questions Steve's answers numbers 16
+ Security now is brought to you by a starrow makers of the a starrow security gateway on the web at
+ www.ast aro calm
+ It's kind of a landmark security now. I'm Leo report Steve Gibson is joining us from his fortress of security in beautiful Irvine, California
+ Hello, Steve. Hello. Leo great to be back with you also joining us the podcast dog
+ Can you hear him?
+ Why is he always starts barking right when the show begins?
+ A little terrier across the street from me and he just we'll probably have little we'll probably have listeners starting to count the barks
+ I heard 319 barks last. Oh, are you kidding? It'll be a Wikipedia article how many barks there were in this week's to it
+ So
+ We're gonna do because it's episode 80. It's a mod for episode
+ We're going to do our questions and answers the 16th of these but before we do that
+ I think we want to cover some stuff from previous episodes got a cool bunch of interesting Arata first thing is the
+ Shortly after we closed down the recording last week of the really really well received episode on
+ Backtracking email spoofing and in fact, we've got a bunch of Q&A issues of really great questions that people had about some of that
+ Because there was a huge amount of interest in that anyway shortly after we we stopped recording
+ I was puttering around I don't remember exactly why but I looked at the headers of some of my email and I
+ realized with one of those those classic tone like
+ Events that the header that I had been always referring to as received by was just received colon
+ Right, and I was confused but with something else and it's like oh my god
+ Talking about I will ever not not a single person. I thought I was just gonna be held up a tardin
+ Tardin feathered, but no one mentioned that everyone was was happy to have the content
+ So we weren't holding you to that literal words
+ It was the it's the thing in the header that says what was received by as well exactly
+ But as an assembly language programmer Leo, I know I got to count my
+ Out of eyes you can't you can't leave anything out
+ Yeah, cuz yeah
+ Well, it was funny because I should have said something because as we were doing the episode
+ I was looking at my headers. I knew exactly what this I could have said. I didn't know that it mattered to you
+ Nobody was confused. I was made self-conscious of it
+ So I immediately made a note in the errata for this week to confess my mistake. There is no buy
+ It's just received received. Yep
+ Also, I subscribe to the sans
+ Security Institute newsletter, and I thought it was interesting that there is a new malicious JavaScript
+ Exploit which can alter DNS settings on routers with default passwords and this basically
+ relates to my continual drum beating about scripting is bad scripting is bad
+ I mean wonderful and convenient and useful as it is as I've said over and over
+ I'm nothing's gonna fatigue me from saying this is that you are
+ Accepting code from a remote server when your browser has scripting enabled
+ So I want I want to do a couple comments to flesh the out this particular
+ Example of of a new problem
+ Sans writes that malicious JavaScript placed on websites could be used to change DNS settings on home routers
+ That are still using default passwords once the change has been made the next time the router is rebooted
+ The user would be redirected to spoofed possibly malicious websites
+ Research indicates that about half of router owners have not changed the password from the default
+ Now this is really interesting because for example, I have not changed I confess what my password from the default Gibson
+ I have a shocked because I'm all closed to the outside
+ I deliberately said, you know block when requests and and and kill off any WAN side
+ Administration so there's no way anyone can get at my router from the outside
+ But if I were not surfing with scripting disabled as of course, I am
+ What happens is you the this new exploit which is actually very clever the script that runs in your browser
+ Goes out and tries to find your your local router
+ Then logs into it all behind your back and without you knowing this is going on and
+ Modifies its settings
+ So it's you know, it's it's very clever
+ It's like a hack from the outside
+ Which you invited in because you've got scripting running on your browser a couple of things
+ I would say there though first of all this was a hack created by Symantec
+ It was a proof of concept hack. So I don't think it's in the wild. Well
+ Right, it stands has two editors who who who commented that I thought and I thought that their comments were interesting too
+ The the first one says this is a clever attack exploiting the weak default configuration of most consumer home network products
+ Those consumer products tend to walk the user through a wide open setup
+ Right and then at the end they say if you want to turn security on click here
+ But it might ruin performance or totally screw up your network and quote and we don't have to support it
+ It's what they exactly where we really don't want you to exactly
+ It says the Wi-Fi alliance has started an effort called Wi-Fi protected setup
+ Right to make it easier for default configuration of Wi-Fi networks to be secure
+ The same thing should happen for the rest of the consumer of consumer network products
+ Then the second editor appends to this
+ Although this attack focuses on consumers illustrates a major trend
+ I'm seeing he says in the cases I'm investigating
+ browser scripts are a scourge with implications beyond the browsers in which they run
+ recent browser script attacks that I've investigated he says as well as the attack described in this article
+ Involve a browser requesting content from a website where the attacker is posted a malicious script
+ The website shoots the script back in a web response that causes the browser to take some action on the infrastructure on
+ Which the browsing machine resides that that is to say we you know inside of your network
+ He says the browser is used in effect as a remote control sentinel
+ Inside the organization's firewall to manipulate its infrastructure such as routers internal applications, etc
+ Controlled via browser scripts. We are seeing this in some advanced attacks today
+ But watch for this vector to increase massively in the next year or so
+ To defend against it. You may want to disable browser script support in your browsers associated with critical components of your network
+ Or enable them only for important web servers that you've added to your trusted zone
+ So well, I
+ I'm not a big fan of this here because I have to say first of all the scripting the Java scripting exploits
+ We've seen are of this nature. They're not putting a Trojan horse in your system. They're they're modifying your router and things like that
+ right and
+ Second of second of all. I mean turn off scripting and say goodbye to the net almost every site including our site uses Java script
+ Yeah, it's I mean I use I've used I tried for a long time. I use the Firefox. No script extension
+ And I still do but it causes reliability issues and it's a big pain in the butt and you end up approving it on most sites anyway
+ Yeah, I mean Leo the problem is that scripting is not safe
+ I mean, it's just not yet. It's so useful that it's difficult to fly without it
+ I guess my question is how not safe. I mean JavaScript is is pretty sandboxed. It's not
+ It can't do you can't erase it at a file on your hard drive. Let's say. Oh sure can I mean not well not by itself
+ But JavaScript for example on IE is able to invoke active X controls
+ Which then completely empower it to break through the sandbox and do anything it wants to I would submit the problem
+ There is active X not JavaScript. I I wouldn't disagree
+ I mean that's a big problem. The other thing is I'm surprised to hear you haven't changed the default password
+ We've been saying for a long time that there are a couple of basic things you should always do on a new router
+ One of which is change the fall password turn off universal plug and play
+ And turn on well, yeah, if you're on well, and and in my defense. This is not a router on my network
+ It's on an ice. It's on my cable modem, which is like a backup
+ Connection that I use sparingly, but that's true. Yeah. Yeah. Yeah, I change all my passwords right away
+ And we do say that a lot
+ So I guess I mean in this case there's a very clear fix that doesn't have anything to do with JavaScript
+ Your point is that JavaScript's dangerous, right? Right? Right. Okay. Um,
+ I was about to say moving on as Kevin always says on dignity
+ I've been spending way too much time listening to him and Alex
+ We talked weeks ago about what about muesliks 64 and the postings over on doom nine about
+ Decrypting HD DVDs. I'm only gonna in this errata section mention that those guys have continued to go crazy
+ There is an amazing thread over on the doom nine site
+ I'm we will have a link to it in today's show notes if anyone's curious in in continuing to follow that they're like
+ covering process keys and volume IDs and basically just really pulling HD DVD
+ encryption apart and developing a broad base of understanding and all kinds of
+ Additionally clever hacks for ways to decrypt HD DVD content kind of reminds me of a feeding frenzy
+ It's like people are just dying to crack high-def DVDs
+ Probably just because it's there. Yeah. Well, it makes them mad that that that you know, they say they came back with quote a better
+ That's the problem with with any kind of copy protection. It just it just raises
+ Riles up the masses they get upset and they get and they're gonna crack it. Yep
+ Also, the other thing that we were swamped with this week were people asking about the about
+ Basically my reaction to and wanting me to talk about the the Google white paper that they I believe it was a use nicks
+ It was like just recently released in the last week essentially
+ Google did a huge study on hard drive reliability
+ based on the
+ hundreds of thousands of hard drives that Google has in its massive Internet services and and
+ Internet indexing system
+ And it was really funny. I mean I was gonna talk about it from the beginning
+ I made a note in the errata a few days ago
+ It's like I ought to mention this because one of the most shocking things about this was that hard drive reliability is
+ Much worse than even I thought remember a couple weeks ago
+ I mentioned that I was surprised by a seagate specification that talked about the reliability
+ Being zero point three four percent per year meaning one in three hundred drives
+ It turns out that after a couple years Google is seeing more like eight percent failure per year
+ Wow, but anyway, so many people wrote and said Steve, you know
+ We know you're really supposed to only be talking about internet security or PC security
+ But you know the the the reliability and lack of failure of our hard drives is kind of important too
+ Right, you know, couldn't you talk about it?
+ And I got so much email from people that and since I obviously have a lot of knowledge about this stuff through my experience
+ What's been right next week? We're gonna talk about this Google paper again
+ I will post a link in this week's show notes to the PDF
+ So anyone who's interested can can grab it and read it beforehand or you can just put something like, you know
+ Hard drive reliability into Google's own search engine and it'll find that link for you also
+ Anyway, you know so many people wanted us to talk about it. I thought, okay
+ I'm not gonna turn into a spin right commercial
+ I'll just we'll talk about what Google found because it's it's really interesting and they did a beautiful study
+ Using this large sample base of hard drives that they've got
+ Well, I'm all for making it a show. I mean, I think this is this is your area of expertise. Why shouldn't we?
+ I also wanted to mention that and I picked this up from your pod one of the other podcast Leo
+ Where you and maybe was Amber? I'm not sure mentioned that I that Google is now gone public in other words
+ You you no longer need someone else to invite you
+ Because I remember that one of our Q&A is a couple a couple sessions ago
+ Someone asked hey, you know, I'd like to use Google and Gmail
+ But how do I get invited?
+ So I wanted to just make a note that it's no longer necessary to be invited anybody can get a Google mail account and take advantage of Google mail
+ And well worth it. I might um I also noted that spin that shields up crossed 48 million
+ Downloads there was a big milestone for shields up. We got a party for 50 million. Yeah, that would be that's a serious number. Yeah, no kidding
+ And finally I've had a bunch of people that I've never mentioned before
+ Tell us that they really enjoyed the the peter hamilton book that that I there was pandera star and then there was
+ Um, well the one you the one you recommended to me was falling fallen dragon
+ Pandora star and jus unleashed is this unleashed exactly and in fact several people said they liked pandera star so much
+ They were now waiting for
+ Judas unleashed to come out and paperback. I bought the hardcover
+ I I did too. I couldn't wait
+ The the the thing I wanted to mention was I just finished my third reading of fallen dragon
+ You know, I have to say having now read uh pandera star and uh halfway through juda shut judas unleashed
+ And uh fallen dragons is the best of the three it is
+ Yes
+ So I wanted to tell our listeners that if they liked if they liked pandera star
+ I mean, I I I read it already twice
+ I had for it had been long enough now that I'd sort of forgotten the details and I just really enjoyed reading it again
+ So I I will recommend fallen dragon by peter f hamilton as it's the great. I you know
+ It's not one of those things that you want to hurry through all of his stuff is sort of literary in nation so or in in nature
+ sort of sort of uh
+ Dickensian, I guess you would say it is you know with lots of character development, but just a really good. It's so great
+ I mean, it's it's it's a fully full fledged universe
+ If you like sci-fi
+ I had never heard of peter hamilton till you told me about him and I remember and I was in toronto and I bought fallen dragon that day
+ And then I got it in the mail from you the next day
+ Right
+ But you know it didn't go to waste I led it to a friend who's a sci-fi fan who loved it
+ We're turning people on peter hamilton right and left and then I did just I mean the middle of a judas shot judas unleashed
+ But you know, it's funny because you'll get pandera star and that in itself is 900 pages
+ And it's a weed. Yeah, and you figure well. Hey, at least it's gonna end it doesn't end
+ At the end of the 900 pages
+ You've got one character going over a waterfall. You've got the aliens approach and and and for more
+ Rejudice, it's like it's like it is a it is a well in fact his bigger volume. That's not even the biggest one the
+ Uh, I'm blanking on the name the it's his famous
+ Uh, I have a really three volume hardback that became that became six
+ Paperbacks, oh my the night the night's dawn trilogy is the name of it. Do you recommend that?
+ Um if it weren't so darn long. I mean, it's really interesting some fantastic sci-fi ideas real
+ I mean neat stuff, but boy does it go on and on and on so
+ So we'll bring it so a desert island the next time for people who have time
+ I mean, it's you know like for non tv watchers who really enjoy reading
+ I don't think there's anything better than then then peter hamilton agree. I agree
+ Hey, you said we're not gonna do an ad for spin right but yes, we are
+ Let's do an ad for spin right everybody's favorite hard drive maintenance utility and uh in a dis recovery
+ And if you're one of those poor people one of those eight percent a year
+ That really brings it home doesn't it you need it something it it really does
+ Um, it is uh steve's bread and butter
+ We that isn't really an ad because we just do it because we love it
+ But I do want to make sure people know about it. You can read the testimonials at spin right dot info
+ S-p-i-n-r-i-t-e dot info or biocopy as you as everyone should at grc.com
+ I did and while I was browsing through um these
+ Questions in order to pull 12 together which we're about to start on I ran across a really neat one
+ That where the guy used the web the security now web page to send his testimonial to me rather than sending email to you know
+ Sales or support at grc.com
+ And I just read the first line. He just said spin right saves a business
+ So I got a kick out of that and I'll I'll share I'll share that with our listeners at some future time
+ Yeah, or just go to spin right dot info. Let's get to our questions. We've got 12 goodness as usual. It's a
+ Episode 80 divisible by four. So that means it's time to read a question
+ For steve and you said that uh our our episode on spam
+ Stimulated some email and some questions and you're you're absolutely right. We got we got quite a few
+ Um, let's start with the first one from chris mackemy of taft california
+ He says in episode 79 you talked about spoofing email headers. I wanted to know
+ How do I look at or find the headers in the email? I get
+ No, it's a great question from a from a practical standpoint on i'm a udora user and
+ It's funny because the button is labeled bla bla bla on udora as in yeah
+ Yeah, yeah, you know business stuff you really don't need to see
+ But you know, so you click the bla bla bla button on udora and it will show them to you
+ But of course
+ Probably the majority of people are using outlook or outlook express
+ And so I did a little I just fired up one of my xp machines where you know you get outlook whether you want it or not
+ Thank you microsoft
+ And uh, you if you right click in the in the in the upper pane
+ Where it shows you your list of email and go to the bottom of the pop-up menu the context menu that comes up
+ There's a there's a properties item under properties
+ You can choose the details tab and what it shows you are the headers and there's also a button there that that says um
+ Uh message source and if you click that it opens another window with the entire source of the message
+ Although probably just looking at the headers is enough
+ But so right click on the item go to properties and then go to details and that's where you'll find your headers in outlook express
+ Most I would I would say all email clients
+ Uh without knowing that it's all but it's probably all do give users some way to find your headers
+ You might check under their help or just browse through, you know, like the the edit menu or the messages menu or whatever menu
+ They've got to see if there's something about, you know, show all headers or show head or something like that
+ It's probably discoverable by anyone who who wants to track that down. Oh, yeah, it's always there somewhere. Absolutely
+ Joe McDaniel of Tallahassee, Florida
+ Go Seminoles
+ Did you add that or did Joe say oh he did
+ Right. I was like they love their football in Tallahassee. I don't know who I don't know who's in Florida
+ I don't even know what sport that is
+ Uh, well, I'm probably this time of year. It's basketball. Anyway, he says I was looking at your password page
+ That's grc.com/passwords or password or password.html or any variety of thereof
+ Yeah, you got this nailed and a question occurred to me. I use it all the time
+ That's why Steve if a strong hashing algorithm is being used to hash the user's input down to a cryptographic key
+ Okay, I'm gonna have you explain that but is there any advantage or disadvantage to using a password that contains the full printable
+ ASCII character set versus one that only contains hex characters in other words
+ Is a password containing the full ASCII set more robust
+ Than a password containing only the hex set
+ You must know dollar signs and esterisks and all the other stuff. Right. This is this is a great question
+ Because it gives people a way to think about
+ It's one of the ways I have always approached problems
+ So first of all to to back up a little bit. He's talking about how on grc's passwords page
+ You get this, you know, many different forms of strings. I have like a full ASCII characters
+ I have one that's zero through nines a through z's
+ Um, and then there's one which is only hex and so presumably maybe things are able to digest the hex strings more easily
+ Um or with less confusion. He's wondering would there be a reason to use the the more complex fuller
+ character set strings
+ The way I often solve problems is I what when I like trying to get my handle on
+ The answer to that sign of that sort of question is I'll I'll take it to one extreme or another
+ And so for example
+ The idea being that if you if you're using hex characters
+ Then you're oh you only have four bits of data for every character you're using because you've got zero through nine and a through f
+ A total of 16 characters in the alphabet and so you've got four bits of data per character
+ Well, if you use full ASCII, you've got seven bits for printable ASCII
+ So you've got many more bits per character that that you're then stringing together
+ Well
+ So going to hex means fewer bits per character
+ Well, let's take that further and say that we only used zero and one characters
+ That is essentially one bit per character
+ And we had passwords that are 64 characters long
+ Well, that means that we've all we've essentially reduced the the space of possible passwords
+ To two to the 64th that which are then being hashed down to the cryptographic key
+ So by taking it to an extreme you can see that that having a smaller alphabet
+ Does limit the number of possible
+ Passwords that you could be using and therefore you could argue that it's less secure because if somebody was going to brute force it
+ They they'd they'd have a smaller world from which they were trying to brute force your password
+ And somebody might for example glance at your password in the clear and notice that's all ones and zeros ago
+ That's easier for me to crack than something that looks like your typewriter broke
+ Which is you know, what what what what what the full character set looks like?
+ So the answer is yes having and using the full ASCII
+ Character set that gives you seven bits of randomness per character. So it's seven times 64
+ That's going to end up giving you more security than using more limited character set passwords
+ I guess
+ The question is does it make a difference? I mean two of the 64th is still quite a few
+ Yeah, it doesn't really matter
+ Okay, great. Thanks a lot
+ I mean, it's one thing to say binary, but but I mean it's not like your your your only two choices. You do have a few more choices
+ That's absolutely true. He also says it's using if it's doing hashing. Isn't that
+ Uh even processing it more and making it completely random and you can't do a brute force on a hash, can you?
+ Well, no, in fact what's happening is we're taking the large, you know, for example, just a seed, right?
+ Well, wpa for example, which is what most people are using these these half these passwords for
+ Wpa takes what you give it and hashes it down to a 256 bit key
+ So you want to give it more bits than it's going to be hash down to rather than fewer bits
+ So if you did give it 64 characters of four bits, well now you've you've only you're only giving it
+ 256 bits which are being hashed to 256
+ So basically that would be creating a mapping there could be some overlap between the input and output
+ So it's it's better just to give the hashing algorithm as rich a source of entropy as you can now that makes sense
+ Brian the hammer he probably prefers to hammer of san diego has his thinking cap on he says
+ I just listened to the spoof spam email mess episode last episode
+ Where you discussed how fake received headers are used to try and mask the true entity of the male's origin
+ You describe how this sort of spoofing doesn't hold up under close scrutiny due to the fact that
+ Each SMTP server will use the ip address of the server. It receives a message from
+ however, what if a spam bot?
+ Were to initially add two received headers to the outgoing message the first header would make it look like the message originated from grc.com
+ The second header would make it look like grc.com. I pass it on to some other
+ SMTP server the second spoofed header would of course include the actual ip address of the grc.com
+ smtp server wouldn't this make it almost impossible to tell that the message did not originate from grc.com in other words spoof
+ The received twice
+ Yep, that in fact many many people to the great credit of our listeners many people
+ And that's why i've included several questions that relate to this in in today's q&a
+ Really thought this through and came up with some clever wait a minute
+ How about this sort of ideas and and this is a perfect example
+ I was saying that you know that the that a single header would be spoofed. So they said hey, what if you spoofed two
+ You know because then if someone was was was smart enough to look at the first one and go well
+ That might not be right. They might not be smart enough to look at the second one
+ So so the answer here would be to to scrutinize the chain
+ Remember that we were talking about how email moves from SMTP server to SMTP server
+ And basically the received headers. I'm not calling them received by anymore. The received headers would show you
+ A chain which at some point is probably broken and it's the break in the chain
+ That would tell you wait a minute. Here's where this thing really came from
+ So
+ So he's right that adding a second spoofed header or more
+ Could make the task of figuring out where it came from more difficult
+ But if a discontinuity were found
+ In this chain of received headers that would be a key that something wasn't right somewhere
+ So you'd still know something was wrong probably yes, but that's the point is that this is to fool people who aren't really
+ That's savvy or exactly and I mean it would be really good if people or servers
+ Really scrutinized the whole chain and said wait a minute. This is fishy. Yeah, exactly
+ Tom in courtland New York raised his antenna and then asked I have a question about Wi-Fi recently
+ I took my university laptop home instead of a presentation. I started the system
+ Instead of a presentation oh ahead of it. I'm sorry. I was misreading it
+ It's head of a presentation period. I started the system period the laptop is wireless
+ It automatically connected to an open hot spot in my building titled. Oh, this is the free public Wi-Fi question
+ I like this one. I am certain he got he got a
+ Something a hotspot saying free public Wi-Fi. I'm certain there's no free public Wi-Fi and recognize this to be likely a scam hotspot
+ But I noticed it quickly I shut the system down immediately
+ Even though I shut it down so quickly and there's not any personal data on the machine am I at any risk
+ Is it likely the hotspot was even able to do anything nefarious considering the quick shutdown?
+ Do you know the answer to this Steve because I do
+ Go for it. This is actually not a scam
+ When I first got this question on the radio. I said but you probably planning on saying which is it probably is a scam because there's no free public Wi-Fi
+ Yep, um, it's a it's actually a bug in windows
+ Did you know this no
+ Yeah, it has to do with
+ And I've also seen that so I was wondering in that any I've seen it coincidence planes
+ Uh-huh because if you've ever logged into a
+ An access point called free public Wi-Fi it has something to do with infrastructure
+ Wi-Fi, I don't know the exact details and I'll find right where you go
+ I know where you're going machine to machine instead of machine to a access point
+ And this is actually in a way spreading like a virus because one guy apparently did it, right?
+ And then other people saw it and joined it. There's nothing there
+ You can't get any internet access from it. So they forgot it, but it persists
+ It's in your system. It's like crept into your registry somewhere
+ Shows up on other systems and it is now spread across the land
+ And it's there quite a few places where you will get online and see something called free public Wi-Fi
+ It is a windows machine in infrastructure mode that at one point logged on to another windows machine in
+ infrastructure mode with free public Wi-Fi
+ Uh as one of the hot spots that it'd been to
+ It's a I'll find the I'll find the article because I did some research when this person asked me the question on the radio
+ I answered it as you i'm sure we're going to answer which is yeah, it's probably not a good idea to join such a thing
+ Right, um, we can say a little bit more. Although I think that's you know, very cool news
+ Fascinating. Yeah, we can say a little bit more about this issue in general. That is for example if you if you were to
+ Find that your machine had automatically connected to a hot spot that you were suspicious of
+ first of all
+ Um answering his question. It's probably not the case that just the act of connecting
+ Could be a problem so long as you've got probably you're using windows xp or maybe vista
+ But one way or another you've probably have a personal firewall on
+ So as we know
+ Today's exploits generally are people going out through a firewall asking bad stuff to come back in
+ Or in the case of a of a Wi-Fi people for example doing non encrypted email log on where their username and password are going out in the clear
+ In both instances the user is doing something with the computer and somebody running a deliberately running a malicious Wi-Fi hotspot
+ Would be monitoring that however with a firewall up just the the act of connecting to even something malicious
+ As long as you recognize it and shut down is probably not
+ There's like no opportunity for you to be infected in the normal case
+ Yeah, and and and to add to this it is a bad idea in general to log into ad hoc networks
+ Right, uh, there's a difference and you can tell whether it's a
+ infrastructure
+ Network or an ad hoc network and an infrastructure one is with a Wi-Fi
+ Base station and you know like at the coffee shop and so forth the normal style ad hoc is coming off of somebody's computer
+ So you really probably don't want to join a network off somebody's computer
+ That would be just be very trusting the the reference i'm going to put on the website is from
+ Dwight silverman's tech blog in the houston chronicle. That's where I saw it first
+ He it's a it's a great story
+ And it just it's it's a bug in windows microsoft says they plan to fix it at some point in the next xp service pack
+ But that who knows when that's going to be unknown whether it's in vista
+ Interesting, isn't that weird? Yeah, it's cool christy trick of westerville, Ohio has been watching some tv
+ He writes I was watching tv the other night. I happen to see the new mac commercial. Oh, I love that
+ Yeah, uh
+ It makes fun of the vista user account control and the commercial the windows machine says
+ What is it receiving a connection request except or deny?
+ And it goes on and effect i'll find it while you answer the question
+ Well, I feel so quite funny after thinking about it for a moment the mac does the same thing
+ I own both the pc and a mac and i've used both vista and os 10 quite a bit
+ They both require approval for system wide changes installing software and other similar actions if anything
+ The uac and vistas more relaxed because it doesn't require a password it only seems more aggressive because the desktop fades away
+ That's right and the uac windows running in the foreground
+ But I believe the effect is the same. I wonder what your opinion is on the subject is one better than the other
+ You know bill gates was incensed about this commercial. No kidding. Yeah, he said they lie
+ How do they allow to lie like this because he makes the same point? It's it's we're just copying what apple's been doing for years
+ Okay, now you know better than i do leo because you have a lot more mac experience than i but
+ Doesn't the vista uac the user account control seem more in your face seem to actually require more
+ Yes, this is what i want to do acknowledgments than the mac it does uh, yeah
+ And it and i think some of that ad comes from the early beta versions of vista when it would do it
+ All that it was so bad. It would take four clicks to get anything done
+ The actual shipping version of vista is much
+ Less intrusive. I don't mind it and again as a mac user i'm used to some of this already
+ I don't think it's if it's more it's not much more
+ Right and it's not more intrusive now if it's not asking you for a password
+ That means you're running as an administrator and you right want to rethink that strategy
+ You might want to start using a limited user account on vista
+ On the other hand if you do that then you will be asked for a password every time one of those pops up
+ Well, not every time but every time there's a system change
+ There are certain rules about when it needs a password when it needs to be an administrator to make the change
+ Frankly, that's what the mac does as well and i think that's good. Let me play as long as we're talking
+ Hello i'm a mac mac is issued a citation cancel or allow allow and i'm a pc
+ You're returning mac's agitation cancel or allow allow
+ Okay, why excuse mac is asking question cancel or allow allow
+ He's part of vista my new operating system pc's have a lot of security problems
+ So he asked me to authorize pretty much anything i did you're pointing out vista's flaws cancel or allow allow
+ I could turn him off but then he wouldn't give me any warnings at all and that would defeat the purpose
+ You were coming to a sad realization cancel or allow
+ I mean, it's a funny ad, but I think chris is absolutely right. Uh, this is something apple's done for quite some time and frankly
+ I'd say it's the number one reason that mac's are have been more secure than xp. Well, yes and and you know all serious
+ It's a genuous of apple to make this ad frankly
+ Right in all seriousness. Um one of the things i have said and we will do
+ User there's like there's much more technology going on in user account control than just that dialogue
+ So we will be doing a security now episode about the vista's user account control
+ And really going on there because there's a lot of technology there
+ But you know this comes back to the fundamental security rule that we talk about often which is there there isn't a way
+ to achieve security
+ in the existing structure without requiring
+ Some trade-off with user convenience. I mean the the browser scripting problem that you and I always
+ Yeah, we always tussle with is exactly that as you know
+ You want scripting on turning it off and and selectively enabling it is a pain in the butt
+ But it's the only way to browse without scripting on
+ And while still be able to go to some sites and and similarly the problem with windows is that
+ Malware has access to everything going on in your system
+ And of course this dialogue popping up is to give you some opportunity to intercept
+ Malware doing things behind your back to make sure that this is something you're really asking to be done
+ And there's no way to do that without asking you. Yeah in the current model unfortunately. Well
+ And I don't find it onerous. I don't find it a pain in the butt
+ It's a reminder to me that I'm doing something that's modifying the system
+ I think it should ask and we got a good commercial out of it. Anyway, it's hysterical
+ I mean, it's a very funny commercial Tony Chen of Orlando, Florida wants to know how to best perform long-term
+ Data archiving he writes I work as a eunuch sis admin where security is only one aspect of my job
+ It's been noted many times in the podcast that due to the high
+ Aerial density that's the number of bits per square centimeter of today's hard drives
+ They're constantly throwing out errors that the drive controller controller or firmware is correcting on the fly
+ That's that ECC you talk about Steve, right?
+ Do these errors only occur when the drive is powered on in the words of a drive sitting unused
+ Outside a computer in a box for instance is the drive protected from degradation
+ Maybe but not humiliation assuming it's stored properly without the firmware to constantly correct it
+ I've automated backups to hard drives. Oh, he's worried about archiving things off drive
+ For fear they won't be recoverable on a dead dvd are at least with a hard drive
+ I can use disc warrior on OS 10 or spin right to recover some if not all of my data
+ So I guess what he's saying is his way his method of backing up is to and I know people who do this
+ Backing up on a hard drive put it in the shrink wrap and stick in the corner. Yep. Is that better than putting on a dvd?
+ Okay, well, this brings up a couple issues
+ There was some interesting dialogue on twit a few weeks ago that I caught that I thought was interesting because
+ All the studies that I have read have said that recordable media
+ is
+ More reliable for example than pressed media
+ That is that pressed media for example traditional dvd's, you know regular consumer video dvd's
+ Have been shown to have a long term oxidization problem with their surface
+ Which due to the different process used in recordable either cdr or dvd are
+ Um, that those those photo based
+ Technologies do not have and so properly stored
+ What everything that i've seen says that recordable media has more reliability over the long term than
+ Non recordable media just from a disc, you know, an optical disc stand together. We said it the other way around. I probably i exactly the way around
+ Yeah, okay. Um, okay. So now in terms of long term hard drive storage. The answer is
+ Once upon a time there was a problem with something called stiction
+ Stiction was a phenomenon where the head would
+ essentially molecular bond
+ To the hard disk surface because they were both so smooth
+ The head was so smooth the heart and the disc platter was so smooth that if you turn the drive off over a long period of time
+ You would end up with the with the the head literally just sort of welding itself to the hard drive
+ Wow, and in fact, that's one of the reasons that heads park on the inner area of the disc
+ They go to the inside spindle for two reasons one is that if the disc is bounced by mistake
+ You can imagine that the platter edges are going to be oscillating wildly out on the out on the on their perimeter
+ But because they're anchored at the spindle in the middle. There's not much motion in there
+ So you'd much rather have your head on the inside
+ Near the spindle mounting where there's not going to be much oscillation if the drive is bounced
+ Then sitting way out on the outer edge flying back and forth and up and down
+ Secondly the from a mechanical standpoint the starting torque of the spindle motor
+ Needs to be much less to make sure that any station is broken
+ To get the head loose of the platter as the drive starts up
+ You can also imagine from a from from a just a standard mechanics of physics standpoint
+ If the head is way out on the perimeter and if that's where it's sitting
+ It's got a much greater mechanical advantage to keep the disc from starting up
+ In order to overcome the the friction between the head and the disc platter
+ Thus heads are now parked on the inside of the drive as a much better place for them to stay
+ You I haven't heard of stiction being a problem for a long time
+ Back when spin right was young and people had this problem
+ The the common wisdom was you powered your computer up and then you bonked the hard drive
+ With this with the handle of a screwdriver
+ Literally to give it a little bit of a knock in order to shake the head loose from the platter
+ And many times that worked for people
+ but
+ With current technology and new drive and head lubricants, that's just not a problem anymore
+ So but I still hear my hard drive with a screwdriver
+ Bonk it with a screwdriver. I used to love that
+ Keep those keep those bits from getting to to set in place
+ It works it does work in the old days it did yeah
+ And it was the best thing to tell people oh you got stiction hit it and people go what?
+ So this is one of the one of the advantages of using for example ace a current
+ Technology removable firewire or usb drive is you are able to plug it in do some backups
+ And just stick that drive on the shelf to answer his question
+ You know in the reasonable term like 10 20 years
+ It is
+ There's no reason that a drive would would age
+ In a way that would cause it to become less reliable when it's just sitting on the shelf doing nothing
+ You want to you know, make sure you don't subject it to temperature extremes for for long-term storage
+ But the drive would be much more stable that way than if they were in constant use
+ Where as google has shown and we will be talking about next week
+ Reliability really does start to suffer after a couple of years. So sitting sitting there
+ Uh, well, you know, I mean cosmic rays hit it and stuff
+ But it's not gonna you're not gonna lose enough data make it worth. Nope or something to worry about
+ You affect the I think Alex Lindsay tells a story of somebody who uh, you know hard drives have gotten so cheap
+ The video editor people who will just when the project's edited and done. They'll just take that drive
+ Wrap it up put it aside. That's the backup. Yep. Yep. Eden Lee of Beijing China by way of Arizona
+ Has been paying attention. He asks I'm a long-time listener first time emailer
+ I was listening to your latest episode about determining the origins of spam
+ By using the received email headers you mentioned that it was possible to determine that someone had faked a message
+ From grc.com by putting in the domain name for the first received header
+ However, because the ip address of the connecting machine was included
+ It was possible to prove your domain did not relate the message the domain name doesn't match the number
+ Since the sending agent can add whatever headers it wants. Can it just fake a path with a valid ip addresses from grc to itself before sending it out?
+ It's kind of similar the earlier question
+ To the malicious center would look entirely valid since it controls the headers in this case
+ It would appear that grc had sent the message to the sender and the sender was just doing its duty by relaying it to the next server
+ So kind of like a man in the middle attack you put grc first and then put yourself in there underneath
+ Yes, is there any recourse against this? Am I missing something?
+ He is not missing anything and this this one wins the prize for the cleverest
+ hack around
+ The way of that we talked about last week of backtracking and determining a spoofed email
+ Now one thing that the vulnerability of course
+ So first of all just to quickly summarize is rather than having a header like saying that this originated from grc.com
+ That sort of just is is there
+ and then the second header in a row would be
+ added by the
+ SMTP server
+ that the
+ that the spammer
+ Connected to so that that server would would would be able to see the connection from the spammer
+ He's saying intelligently fake the very first spoofed email header
+ So that it says grc.com connected to
+ their ip address
+ So that there so that the chain I was talking about when I answered a related question earlier
+ The chain of headers would be unbroken and it would literally look like grc
+ Had used some random consumers machine
+ Somewhere else as an email relay and that it was then relaying it and sure enough that works
+ Of course the giveaway is if you looked at the ip range or did a reverse dns look up on the ip
+ You would see you know some Comcast dot net ip or or you know
+ Basically a a consumer looking ip rather than a regular server
+ So you would never send it to a that
+ You will use that to relay your mail
+ It is it is a clever hack for getting around this notion of an obviously spoofed
+ Received header, but i'll tell you why it's probably never happens because nobody looks that closely anyway
+ There's no reason for a spammer to worry about it
+ Exactly why go to the effort
+ Right there's no I mean if we all started looking at our headers, I guess
+ But we don't and it doesn't matter the spam still gets through
+ jeff p is st. lou
+ St. Louis mazure that is is learned or has learned to become more cautious on the net
+ He says listening to security now
+ I've also learned to question things when they don't seem right, which is what i'm doing now
+ I recently logged onto my work laptop at home connected my vpn to do some work
+ I opened an internal web location HTTP colon slash something that has always worked in this manner to my surprise
+ I get a charter communications search page. That's his internet service provider. It says page not found I tried again
+ Then another internal site another no luck in the past week. I noticed on my home machines
+ That 404 errors have been redirected to charter
+ I thought they were probably starting to proxy web traffic or been doing it, which has now made it easy to see however when
+ On the vpn, I thought all traffic would be tunneled to the corporate server. Why is charter seeing it?
+ It still gets that charters served error page
+ Even when he's on vpn, how's that possible? I did go to grc with and without the vpn connected
+ It did report two different ip addresses
+ From what I know I can't explain what is happening. I can't either is interesting can charter proxy
+ HTTP traffic when it's connected to the vpn
+ Any ideas?
+ Well, we know that it cannot that is to say that that if if you're
+ Trying to go through a vpn or your your traffic is going through a vpn to your remote destination
+ That that no one can proxy that connection in the way that is happening
+ That is you ought to be able to get a connection into your your corporate network
+ And it would be an encrypted tunnel that is impenetrable
+ Listening to this the the two things I would ask jeff to check would be his browser's proxy settings
+ There have been various attacks where where proxying was turned on so if his browser is is not just using his
+ Raw internet connection, but is for some reason running through a proxy
+ It might be possible depending upon the way his vpn is configured for him to still be using his raw non vpn
+ Traffic and that's when he thinks he's going to his internal site
+ He's actually going to the external internet and then charter is saying wait a minute
+ We are now unable to find this and giving him an error message
+ So the first thing I would look at is the proxy settings on his browser
+ Secondly check your hosts file this you know this happened in the last week or so and it's new behavior
+ It's possible that something may have crept into the hosts file and is messing up the dns resolution
+ On his system basically trying to intercept traffic and route it somewhere else
+ There's one other thing I would mention a number of I've seen this on a number of vpn clients
+ And i'm actually just launching a couple now just to see um
+ Allow you to route web traffic not through the vpn
+ Deliberately, yes, so uh in fact you'll see a check mark in the settings
+ That says something like route all traffic through vpn and that's genn that I would suspect is being unchecked or it would say
+ Uh, do not route a web traffic through the vpn clearly. It's not being routed through the vpn
+ Right, so but I but I think that it's not necessarily something nefarious
+ I think that that is a setting in some vpn clients
+ Well, then certainly look for that jeff and that makes sense because uh if you're surfing the net and you just want to surf the net
+ As opposed to using the corporate network for transferring files
+ You might not want to go through the overhead of going all the way to your office
+ Well and moreover, they might by policy they might not want you to use that much bandwidth over there
+ Over there of their vpn server. They might want to reserve they might want to reserve that for email and just you know internal corporate stuff
+ Excellent point. Let me just i'm just gonna look at my I have a sisco vpn
+ Uh client running here, and i'm just out of curiosity. I i'm pretty sure i've seen this as a choice
+ In a lot of uh, I absolutely have what when you talk about that the the name on that setting it saying seems very familiar
+ And i'll bet jeff's gonna go. Oh, that's exactly what it was now
+ He raises another interesting thing which I think we should talk about and you're seeing this more and more
+ Um when you use a company's dns servers
+ It's possible to configure them to handle a 404
+ Yep
+ And in fact, of course, you know, we we know that what was it vera sign that got famously in trouble
+ Because they ended up redirecting unknown domains to their own, you know commercial advertising page
+ Essentially and and you know the whole internet community got very upset with that
+ Yeah, that that was wrong because they're just a registrar. They're not your right net service provider
+ Um the same thing happens with open dns if you use in fact, I think that's how open ds dns monetizes itself
+ If you use the set of your isp's dns server if you use open dns one of the advantages of it is
+ Open dns does a does a very good job of trying to guess
+ What you were trying to say when you type in an address
+ So it can fix a mistyped address if you type cmo instead of dot c om
+ It'll fix it, but also if you type a 404 it'll give you actually a very useful search page. So it can be a positive
+ Uh, but it but that's important to know that many eyes are starting to do that and they do have that and they have that power
+ Yeah, and they do it because they put ads on there, right? That's what vera sign was all about
+ Ted hollifornia has been thinking about email spoofing who hasn't
+ I have a question regarding the spam backtracking episode you had mentioned that in some cases
+ The received headers and email can be many
+ Based on how they're routed to the final destination
+ Is there a chance that more than one email header could be spoofs say 10
+ Or 20 or 30 headers before you'll find the source of the zombie machine
+ Wouldn't it make sense to throw in a number of headers from which spam could be coming from in a red herring style attack
+ Yeah, I mean that there's another creative approach is to literally bury yourself in
+ A whole bunch of spam headers now again. It's the it's the last header in that group
+ That is going to be the real connection point
+ To the email as it moves to its first SMTP server because the destination SMTP server will add
+ The the top received header to the existing pile of them
+ But and so there's no way for a spammer to bury its received header among others
+ But it certainly could confuse the issue just by having a bunch of them
+ And you know just make some poor recipients eyes cross when he you know
+ Things he's going to be tricky and and look at the email headers and just sees this whole nest of them
+ There's there's two morals to take away from this one is that SMTP is hideously insecure
+ I mean it just makes it does nothing to validate headers
+ Zero, right and just yeah, I mean anything you could do anything you want
+ But I think also spammers don't even bother because so what?
+ So what if you figure out it spoofed?
+ Well, yes, and in fact, we're probably like guilty of being so much
+ Overboard on the technology relative to the value of the content of the junk that's being sent out
+ Right, I mean if I mean it's phenomenally amazing to me that spam still works
+ I mean that you know these spammers are making
+ Reportedly an amazing amount of money just by spewing all this junk out on the net
+ It's like who clicks on that stuff on the last analysis. That might be the best way to fight spam is not to
+ Not to do it
+ Don't buy anything from them. Unfortunately. It is so cheap to send this stuff, especially now that we've got spam bot network
+ Yeah, they're free. Yep. Well, you have to pay some hacker, but that's about it
+ Yeah, and in fact, don't even when you know, I think people a lot of people say oh, well, let me click
+ I can click the unsubscribe link, right? No
+ Yeah, no, all that does is all that does is validate that you exist
+ No, don't click anything
+ Todd's service of riverside, California has crucial files he wants to protect
+ I'm very tempted he says to use one of these online backup sites
+ To back up the files from the computers at my house
+ Making DVDs at regular intervals is a pain and I have to move them off site in case the house catches fire and melts all my pretty backup disks
+ Well, he's got the right idea. I think off site backups really important
+ He says I do fear these online backup sites
+ How do I protect my data from them if I back up all my computers data these online sites can't the operators?
+ Look at my files. I've got financial information on one of my pcs
+ My daughter is writing novels on another. Can I trust the encryption on these online backup sites?
+ Can I add my own encryption and not give them the keys?
+ That great question. I love the question. Yeah, I mean, um, you got it. I mean
+ You got to trust some of these guys though, right?
+ Well, you know, I would add one more thing and that is if they have the ability to decrypt
+ Then they could be legally compelled to do so. Ah
+ And and that's the I I ought to tell you. I mean I actually have the domains crypt keepers
+ Dot com because I've been interested in the idea of providing secure
+ You know online backup services. Not like I have. I'm believe me. Oh, it's not on the list of things
+ I'm gonna do but I just I grabbed those domains a long time ago because I like this idea
+ I don't know if it ever makes economic sense with hard drives becoming so cheap and with things like
+ Bitlocker and of course true crypt being available, but you know, it is always doing it is an interesting alternative
+ So to answer Todd's question again, I it's not so much
+ That I would worry about malicious intent on the on the part of the backup sites
+ But we know especially with everything that's been going on with the patriot act in the us and concerns about you know
+ What what subpoenas can be issued? I would be very concerned about even a reputable company
+ Being subject to a subpoena and compelled to decrypt somebody's off-site backup
+ Undercourt order. So what you want is you want a technology where you are absolutely sure
+ you're giving data to people and there's no way they can use it that the data is just an opaque blob and
+ Thinking about the answer to this question. I thought hey, you know true crypt would be a perfect solution
+ You configured true crypt in that mode where it uses a file as its container
+ So and then you mount that as a drive you see a drive from from your perspective
+ On the outside the operating system just sees a file that one file is then what you keep synchronized
+ With your off-site backup facility
+ Anytime if something happened you would be able to get that file back and apply your true crypt
+ Passwords in order to decrypt it. Only you in the world would be able to make any sense of that file
+ And it's it's just a cool solution because basically you see a drive letter
+ Everything that you're storing there is encrypted in that container
+ Always stored as we know the wake true crypt operates always stored in an encrypted fashion never in the clear
+ And so that one file
+ Anybody can have it essentially and in fact as we talked about a long time ago when when we were talking about true crypt
+ It's it's exactly what I do for my precious cargo
+ I I burn true crypt containers onto
+ DVDs and send them to my attorney and to my mom and you know
+ I just know that that stuff is out of here
+ I can always get it if I need to but you know if their home or office was burglarized
+ I've lost nothing because nobody else can make use of that data. I become a kind of fan of these off-site backups effect
+ Carbonite was which is one of them and a really good one. It's a sponsor of the radio show so disclaimer there
+ Um, but the the reason I like that is because it's in the background. It's doing it all the time
+ It's always backing up and I'm backing up podcast. I mean I use it because I back up
+ Our our raw tracks are the shows and the podcast so that nothing gets lost. You know, I've lost some podcasts and that's been very embarrassing
+ So this has been a boon. I don't care if somebody
+ Some government agency wants to hear the podcast. So I'm not gonna encrypt that but it makes sense to do that for your financial data
+ I am looking at carbonites
+ Privacy statement and certainly before you use any of these services you should read their privacy statements and make sure they're verified by an independent third party
+ Um, but one of the things they say is, you know, they do encrypt they encrypt with SSL
+ Um, and they have secure, you know, they have all the security on the facility and stuff
+ But it says carbonite will not share your encrypted files with any third party unless such action is necessary
+ To comply with the government or court order legally compelling us to do so
+ So, I mean, I'm sure every one of these services has
+ A statement like that right and so the the from the consumer watch standpoint
+ You simply give them a pre encrypted blob and there's nothing they can do
+ Nobody can ever do anything with it. They'll comply with the court order. They'll give the court order the unencrypted data
+ We're moving their encryption, but the court can't do anything. Now the court can come to you
+ That's that's between you and the court exactly mark frouchy and rockville maryland is wondering
+ Uh, how do spammers get our email addresses in the first place?
+ Could it be that our fens family and colleagues are unwittingly turning our addresses over to the spammers and malware writers?
+ You know, we had never really talked about this and and I know that a lot of people
+ Probably have a sense for how this happens. Um, I have some experience myself running an SMTP server
+ Which i'll share, but one of the things that makes me cringe leo more than anything else is when
+ Someone uses so someone I know who has my
+ Cherished and protected email address uses a website to send me something, you know, like oh
+ You're valentine has sent you a valentine state guard
+ Or mom don't do that. Yeah, yes
+ Yeah, because they're there deliberately giving your email address to some website that now has it and lord knows
+ What they're going to do with it from there. Yeah, and it may be evights fine. I'm sure it is or or e greetings
+ But you know who knows and just mom didn't check
+ Yes mom didn't read that privacy policy
+ So this is true. That's probably one way, huh? That's uh and certainly websites are being scraped
+ The other thing we knew from from the way
+ grc's email addresses used to be getting out is
+ We would be getting lots of spam to our support and sales email accounts
+ Even though those were those were scrape protected on our website
+ What was happening was people who had written to grc support or or sales?
+ They would get some malware on their machine that was scanning their machine for other email addresses
+ And combining them into a master database
+ So it's certainly the case that malware one of the things malware has done
+ Is like mailed stuff out. Well, we know many viruses like this in the old days
+ That you'd you'd get your machine infected with and they would send themselves to everybody in your address book
+ So that same kind of that same kind of scenario is now being used by spammers
+ The one thing I would add as a as an operator of an SMTP server
+ I've watched the traffic on my server carefully and it's phenomenal
+ I mean doing packet captures. You will see remote SMTP spam servers connect to
+ Any other SMTP server, you know twit or grc or amazon or anybody and just sit there guessing
+ I mean literally alphabetical dictionary lists of names. They just go, you know, albert@grc.com andrew@grc.com
+ You know anyone at grc.com and they just go through the list
+ So the one thing I would say to anybody is if you ever change your email address again
+ Change it to something
+ Unguessable, not something that's probably going to be in someone's dictionary somewhere
+ Because I mean back when I was just Steve at grc.com. It was not pretty leo
+ No, no, I get mailed leo's hair at leoville.com. Oh, no, I get several thousand messages a day
+ leo's hair is an account that you have where you have a
+ Wildcard account. It's anything well
+ What happens is the mail service that I filters my spam. I use a commercial company called mail route
+ Knows what my canonical my good addresses are
+ And only forwards me mail to those good addresses, but it gives me statistics on all the other addresses
+ I see and besides an and sally and I get some de leo's hair
+ My only my thinking is some somebody didn't like me added it to some mailing list somewhere in ever since i've been getting stuff
+ So maybe it was my mom. I don't know mark. Jim at thrington of autowa, canada writes our is this our last one?
+ No, we got it. This is a we're gonna have a this is number 12
+ But we have a we have a closing comment using comment
+ I've been a long time fan of grc from reading the interesting security articles and trying the freeware programs to using shields up
+ I've listened to every single security now podcast from the very beginning
+ And I have bought and used spin right six to keep my hard drives working. This is the kind of guy we like
+ My question is how good is port knocking as a security measure to selectively allow connections to closed ports in a router
+ A port knocking. This is something i'm starting to hear about now a little bit
+ Thanks for doing a great job with the podcast and look forward to hearing more. What is port knocking?
+ I am so high about port knocking. It is a very very cool solution
+ It's it's had some bad press because people are attacking
+ Weak implementations of port knocking saying that port knocking is bad, but there it's just very clever
+ And in fact, I've been considering using it in some fashion for my own security because it's it can be
+ Really bulletproof. The idea is you've got a you've got a router with all ports closed
+ If you want from the outside say that you're a telecommuter
+ And you want access into your network with port knocking
+ You would send a pattern of packets a sequence of packets to
+ specific ports
+ On your router a sequence only to you and not only do you like the route
+ It would exactly right and it could be as long an arbitrary as you want it to be of course
+ You know as we know the longer the sequence the less chance anyone's gonna be able to guess it blah blah blah
+ And with 65535 possible ports that is to say a 16 essentially 16 bits per port
+ If you just did four packets now you're at 64 bits
+ And if you do eight packets you're at 128 bits of equivalent security the idea being that the router
+ notices
+ The sequence of
+ Packets that it's rejecting remember you have your router running in full stealth mode. So it's blocking these packets
+ But that even though it's blocking them it can still sense them. It's still receiving them
+ So you send a specific sequence of packets from your IP your router or some software running behind it
+ Maybe for example reading the router log in real time
+ It sees a given IP
+ Has sent a matching sequence of packets and it says oh this must be somebody who knows the secret knock
+ And so it then alters the router's configuration on the fly to allow inbound traffic from that IP
+ I mean, there's just nothing wrong with this leo. It's a tremendously clever idea
+ I bet I'll have to ask I bet it's kind of thing a star. Oh is a security gateway would implement
+ Be oh, yeah, they might do it. They're they're very up to that. You know the new seven came out
+ This is a commercial by the way right now
+ Those of you who was a smooth segue leo
+ By the segue no it just made me think of this and I thought well
+ Let's do the star of course has been a sponsor of the show for quite some time now last 30 episodes something like that
+ And uh and through the rest of this year and we're just really thrilled
+ They did just update to release seven and i'm wondering of their newest of their star of security gateway software
+ And i'm wondering if that's what they added so much new stuff
+ Including and we talked about this before transparent transparent email encryption and decryption
+ So it happens at the the gateway. So users don't even have to worry about it. It's automatic
+ uh digital signatures. It's based on s-mime or open pgp
+ Uh really slick. There's also a secure remote access via ssl built into its vpn. So that's much easier
+ Ssl vpn is so slick. Uh, so now ipsec l2 tp over ipsec ppt ppt tunneling with ssl
+ Uh, you got it all
+ In fact, uh, I think it's the only uh utm appliance on the market with this kind of uh flexibility and vpn and remote access
+ You can cluster them. So you can scale. I mean it just goes on and on try at v7
+ In your business free trial is waiting for you all you have to do is go to a s t a r o dot com and now
+ The best news for you non commercial users and i'm really pleased to hear this
+ They continue to offer the home use package absolutely free, but now with version seven
+ Not only do you get the software absolutely free
+ You get the base license all subscriptions and a starow up to date
+ the complete set
+ Free they use to charge 79 euros a year for this. It's now absolutely free that's limited to 10 ip's 10 users and a
+ I'm sorry. My phone keeps ringing a thousand concurrent connections, but basically, uh, this is such a good deal
+ Try a starow v7 and if you're a non commercial user, you've got to check it out as t a ro
+ Dot com or you can call a starow and get a free trial of the starow security gateway appliance in your business 877 the number four
+ as t
+ A ro and I will ask them about port knocking because I wouldn't be surprised
+ Anyway, uh port knocking. Is it is that something that's brand new because I hadn't heard about that till very late?
+ It's it's it's been around for the last year or so you you need something on the client side to generate the knocks
+ And that's kind of tricky because you'd really like to use
+ Well, you like to use some sort of raw packet technology, but there are ways to do that with udp packets where you're able to aim them at
+ Your ip on the fly. Um, and so you need you need something at each end. I just think it's very clever
+ I mean what you could also do is just use a single packet containing your own
+ Basically a password as long as you want and just when the router sees any packet
+ It takes a look at it and it checks to see whether it's your magic authentication
+ Let me in packet and then takes off from there that my name a little more risky because couldn't somebody intercept and catch that
+ Ah, they could accept that there are then what you would do is to take care of that
+ You would base the details actually i've given this some thought leo you would base because i mean i really
+ Aren't you you're gonna do it i'm thinking about it. Um, what you would do is you would base the content of the packet
+ On your current source ip and port perfect
+ So you have the ip address or something
+ Yes, exactly and nobody could spoof
+ No one could get a connection that spoofed your ip because they would be at a different ip
+ And and would never be able to it was so basically it would really allow traffic only from that remote ip
+ Unbelievable kind of a cool idea a closing comment from an abbot listener paul fissure with the hues in illinois
+ He says in episode 79 of security now you mentioned the two-thirds of all mail on the internet is spam
+ That's what we're hearing from a lot of different sources including yep
+ Some of the companies that actually filter this stuff
+ He says you probably have access to better information than i do
+ But i thought you might be interested in another data point the mail servers at our company
+ He uses huge 35 000 plus worldwide users has a spam rate of get this
+ 99.7
+ percent
+ That is 99.7 percent of all email bound toward our email servers is identified and blocked as spam
+ We get very few false positives and very little complaints from users are receiving unwanted spam in their mailboxes
+ It seems unbelievable, but that's what our servers have seen for some time
+ I really enjoy the podcast hope you continue and i'm also happy that you could force leo to do one every week
+ He knows that i'm a lazy bones. It's the one twit podcast i can always rely on fortunately
+ I have no stories for you about spin right i own a copy, but i've never had to use it
+ I'm hoping i just just owning it will keep my drive from going bad. Yes, it's you've terrorized your drive
+ That's right. I have to drive knows you got spin right in your body. I'll say, okay. I give up. I give up. I'll keep working
+ I keep working. You know actually his number matches my number. Yep. Um, but I think when then they say 70 percent of all
+ The males worldwide is spam that's a that's a conservative number. I think so too. I'm much more like 99.8 or 9
+ Right. It's it's in fact. I think it's a hand point nine percent. It's awful
+ Yeah, but fortunately the good news is there are good technological solutions that can that get rid of this
+ You know good filtering solutions that get rid of most of the spam
+ Most spammers don't make much of an attempt to hide their spam and those that do get through but
+ Yeah, because they're just on the shotgun
+ You know profile just like we're gonna send this to as many gazillion people as possible and a few of them will get through and that's
+ Gonna pay the bills
+ Sons of guns
+ Well, Steve we've come to the end of another mod four episode boy. This was fun so much interesting material
+ Yeah, we've had some great feedback from from the q&a people and I liked I ran across a number piece of email that I
+ That I sort of liked as this closing comment thing so that we may add that as a as a future security now
+ Just so we can begin to you know when when they're relevant and interesting include some of our listeners
+ We do a listener mail in every episode of the daily giz was and it's it's in many ways the one of the most fun parts of the show
+ So I don't use the great idea and next week
+ We're gonna talk about this amazing study that google did on the on what they discovered about the reliability of their
+ monster hard drive
+ Farms that they've got that runs google
+ By popular request I was gonna make a little mention of it this week, but so many people wanted more coverage. I said, okay, let's let's do that
+ Oh, absolutely. I mean, this is an area where you're you're probably one of the top experts in the world
+ So it's it's absolutely something we should talk about
+ Steve we've come to the end of the fabulous episode, but it's not over you can get more at grc.com
+ That's Steve site where you'll find spin right but also all of his great free security utilities now the 48 million user
+ I don't think any and there are not many people who could say that anything they've done have 48 million users
+ And I have to say that's a really clean number
+ I I go to the the the trouble on shields up of maintaining a list of the most recent
+ 4k that is 4,096 users
+ So anyone who's poking around the site
+ you know using shields up for you know like half of house you know several hours half a day
+ I am not multiply counting them if their IP is already in the list
+ I just I just move it to the top of the list and and only
+ So so basically I'm only counting you know really people who are gone
+ Long enough to have their IP fall off the most recent 4,096 users
+ So I mean it's it's a really good number and you're right 48 million is very cool
+ That's just amazing
+ Also, we've got 16 kilobit versions for the bandwidth challenged and Elaine's great transcription
+ So you can read along if I could better wrap this up so Elaine will have time transcripted
+ Before we get it on the on the internet grc.com
+ Thank you so much for being here Steve Gibson. We thank you for listening and we'll see you next time
+ on security now

@@ -1,0 +1,618 @@
+ bandwidth for security now is provided by AOL radio at AOL.com slash podcasting.
+ This is security now as Steve Gibson, episode 39 for May 11th, 2006, buffer overruns.
+ Security now is brought to you by Astarro, makers of the Astarro Security Gateway on the web at www.astarro.com.
+ Steve Gibson is on the line and we are ready to talk about one of the number one, in fact,
+ I think the prime cause of security flaws in software today.
+ Hello, Steve. Hey, Leo, great to be with you.
+ It's great to talk to you.
+ Things are going very well as summer has come and the sun is shining and I'm moving offices
+ and I'm, if you only saw how everything is teetering on chairs and table tops and I've
+ clued together a little recording set up so we can get this done.
+ Well, we're on episode 39 and 52 is within sight.
+ That's amazing.
+ Our first full year of security now.
+ Are you running out of topics?
+ No, actually the user feedback is fantastic because it keeps me thinking about things
+ and if I don't take the topic directly, it gives me an idea for something else.
+ So I've got an outline that I maintain, like whenever something occurs to me, I write it down
+ because I don't want to get away from me and I think we've got lots of things to talk about
+ and, you know, people from the feedback I'm seeing, people are really enjoying this, Leo.
+ So I'm so glad we're doing it.
+ Great news.
+ Well, today we talk about buffer.
+ You can either call them overflows or overruns.
+ Yeah, I guess overrun is probably technically a little more accurate.
+ As you mentioned, it is the, this buffer overrun is the, this pernicious problem that,
+ that it is the way so many of the contemporary security flaws are exploited, essentially.
+ And now this is going to be one of our heavier duty episodes.
+ This one of those, okay, now focus.
+ Have a cup of coffee now, but, but I promise as we have achieved before that if, if people
+ listen carefully and, and get what I'm talking about, there, there's another one of those aha
+ experiences here, people by the end of this are going to understand why it seems so difficult
+ to, to write secure software with exactly how these sorts of exploits occur.
+ So I'm, I'm really excited about this, this number 39.
+ So what is a buffer overrun?
+ Well, we need to start and lay a little bit of foundation here.
+ One of the, one of the things that, that is happening is programming in general is becoming
+ incredibly complex and, and programming is moving towards a, a sort of a component model
+ where, where programmers are no longer writing everything themselves from scratch.
+ They're, they're inherently in order to, in order to develop the kinds of programs that, that are,
+ are interesting to people, they're, they have to use other people's work.
+ You know, it's like, you know, the standing on the shoulders of giants and, and, and
+ reaching higher than you could by yourself.
+ The problem is those giants may not have been concerned about security.
+ So you're in, you're more and more, as we move forward, people are, are using other people's
+ code, code written by, you know, like whether it's, it's, it's libraries or it's a, an, an
+ increasingly, um, all encompassing operating system underneath you.
+ I mean, you know, we all know just from our own experience that, for example, XP is huge.
+ Even Linux is growing.
+ I think it's, it's grown four times larger in the last five years.
+ That is Linux has.
+ I mean, the, so I mean, and, and the reason is all these new services and features and facilities
+ are being added that programs running on top of them can use.
+ And then of course, in the windows world, we have this whole new dot net thing that has come
+ along recently.
+ And so there's a whole another programming environment.
+ And, and so, so essentially what happens is a programmer ends up relying upon the function
+ of many subsystems that they themselves did not write.
+ And so they're, they're having to assume and presume, I mean, they have to that those things
+ are working correctly.
+ So in many cases, it's not even their fault.
+ Although their application, which relies on these subsystems ends up bearing the brunt
+ of responsibility because, you know, it was, you know, their application that had the problem,
+ even though the actual flaw may have been sort of somewhere else or in their communication
+ with these other subsystems.
+ So, so this, this component programming model that we see more and more often is part of the
+ problem.
+ You know, my programs, the stuff I write are pretty simple.
+ And, and I happen to be sort of a dinosaur, as we know, writing these things in assembly language
+ to a much lesser degree, I depend upon other things because I'm, I'm writing simple programs.
+ And I'm sort of staying away from, from, you know, these really huge projects, which are
+ really no longer feasible for one person, you know, we're talking in, in modern corporations,
+ producing programs, you know, they got teams of programmers.
+ And, and there's another problem is when, when it's just me writing a program, I know all aspects
+ of what I'm writing, I've, I've got it outlined, I've got it in my head, you know, it's, it's
+ I wrote it all.
+ So there's, there's no communication problem between me and myself.
+ But in team efforts, you do have sort of a, you know, this person will be writing this
+ chunk of the system and somebody else will be writing another chunk, which is very different.
+ And these, these separately written chunks have to interact.
+ Well, they'll produce specifications typically for, for the way their parts fit together.
+ But mistakes in that communication, it's like, oh, I thought you were going to do this.
+ I mean, and the problem, of course, is when these mistakes are not found, there's presumptions
+ that people made.
+ And again, these, these, these boundaries between separate pieces of work, whether it's a commercial
+ component library, or it's something that somebody else in your own organization working
+ on the same project wrote.
+ Any kind of misunderstandings can cause sort of a mismatch and what we're going to look
+ at here in detail is exactly, I mean, really exactly how that happens.
+ But, but so it, it really does, it does sort of blur the lines of responsibility and it
+ explains why even with the best of intentions, I mean, even people now focused on security,
+ if other portions of the system were written without a focus on security, which really
+ does require a special sort of mindset, or if they were written before security was an
+ issue and they're still being used, this is a problem.
+ I mean, so, I mean, a perfect example is, you know, at the beginning of the year, we all
+ tumbled around on that Windows Metafile issue and, and assuming, you know, Microsoft's stance,
+ they understood now that what they were doing before should absolutely no longer have still
+ been done, but it was still being done.
+ So there was old code that had been moved along from, you know, from Windows 98 and NT
+ up into modern times where security is a much bigger issue today than it was before.
+ And there was a gotcha, you know, in the process.
+ The other thing that goes on with programming, I want to discuss this just before I get into
+ the details of, of how the stack and buffers and things work, is, is the programmer's mindset.
+ I know, as a programmer, that what I'm trying to do is, is get my code to work.
+ That's a completely different mindset than somebody who is attacking my code, trying
+ to find a way for it not to work.
+ But, and I know, for example, you know, when I'm, when I'm writing text, you know, I wrote
+ the, for example, the, the tech talk column every week for eight years, for informal magazine
+ years and years ago, I would write a column and I would hand it to a couple of, of, of
+ friends of mine or, or actually they were employees and have them proof it.
+ The point is, I can't, I can't proof my own column because I know what I meant.
+ And my eyes won't see the words that are wrong.
+ They, you know, they just won't.
+ I can read it three times really carefully and not see the mistake.
+ Someone reading it who doesn't have sort of an emotional buy-in will read and say, Oh,
+ Steve, you, you meant this word and I look and I go, Oh, how did I not see it?
+ But it's, it's, you know, it's, it's ego buy-in.
+ I want it to be accurate.
+ It's, it's, I know what I meant.
+ And so my brain just sees it as I meant, not as I wrote.
+ Well, exactly the same thing happens with code, maybe even to a greater degree due to
+ the nature of, of how complex the practice is.
+ And of course, it's a complexity that is what intrigues programmers.
+ It's why many, you know, so many of us really enjoy programming is it's, it's an, an intellectually
+ engaging thing.
+ But, but what I find when I'm debugging a program that, that isn't working is I can
+ stare at the code.
+ It looks just fine to me.
+ I mean, no matter how much I look at it, it looks fine.
+ So it's when a debugger, you, you single step through the code and you see it do the
+ wrong thing that, I mean, you stare at it and you go, Oh, I mean, suddenly, like, you,
+ I mean, you have to have your face rubbed in the problem before you get it.
+ I mean, it's, there's that level of sort of like assumption of correctness.
+ It's, it's a, it's an interesting experience for a programmer to have where, you know,
+ when the debugger just says, look moron, this is wrong.
+ And it's like, Oh, why, you know, how did I write it that way?
+ Why didn't I see it that way?
+ But just, it's the kind of thing that happens all the time.
+ So, so my point is that it is anyone writing code is trying to get it to work, you know,
+ in most situations, they're in a team, they're under deadline pressure, you know, this program
+ is always take longer to write than anyone expects, just because that's the nature of
+ the beast, you know, people are putting in long hours and, and, you know, they're, they're,
+ they're desperate to, to check that code in and say, okay, I'm done with my part or,
+ or this is now working.
+ And so everything about that process is getting it to work as opposed to looking at how to
+ break it, which is a, a fundamentally different, I mean, radically different way of looking
+ at the same code, and that, of course, is the perspective of the, the malicious hacker
+ who is, is trying to find a way into a system, trying to find a way to break code is the
+ hacker is looking at it, not thinking how wonderful it is that it works, they're specifically
+ looking for ways to get it not to work, ways where assumptions, which the programmer had,
+ or the team, or the programmer communicating to something they didn't write, you know, a,
+ a third party object or, or modular component, where those assumptions have broken down.
+ And in those, in those little interstices, you can, you can get a foothold and, and cause
+ security problems.
+ Now, that's literally what it's about.
+ Well, that's a programmer calling saying, thank you for making all these excuses for
+ me, Steve.
+ Steve, I could tell you're a programmer, but really it also is a mistake and a fairly serious
+ mistake.
+ And, and sometimes I wonder why they're still making these mistakes.
+ Well, it's funny because Steve Balmer, apparently, who's now the president of Microsoft, apparently,
+ well, it does and, and there was one famous outburst.
+ I don't remember exactly when it was.
+ I think it was, it was after XP, you know, remember a Microsoft claim that XP was going
+ to be the most secure version of Windows that had ever been created.
+ And, and I objected as a security person to that statement because you can't claim that
+ something is going to be more secure.
+ History has to judge that retrospectively and decide whether or not it was true.
+ And of course, until service pack two, which really, really made some major changes to
+ XP, Windows XP was the least secure Windows that had ever been created.
+ I mean, all kinds of problems that arose from all the new code that had been added
+ to XP.
+ I mean, it's, it's inevitable.
+ So anyway, so apparently Steve Balmer once went into a group of programmers and, and
+ screamed out loud, you know, why can't we fix these buffer overruns and, and, and, and,
+ and so let's talk about exactly what this is, how it's possible for hackers outside of,
+ of a system to, to basically inject their code into the system to, to understand this.
+ It's necessary, I mean, at the level of detail that I think people will really be fascinated
+ by.
+ It's necessary to understand something known as, as the stack.
+ Um, you know, computers have memory and it's possible to, to ask the computer to give you
+ a block of memory, sort of borrow it from the system for your own uses, for whatever purpose
+ to light, like to store data in to, to accept input from a user to assemble something that,
+ that you're going to send out for whatever reason, a, a, a so-called buffer of memory.
+ And then when you're done with it, you, you, you free it or release it back to the system.
+ Well, there's a, there's an architecture that is developed in our contemporary computers
+ where, which is, which is known as the stack.
+ And what the, what the stack is, I don't find it actually useful to use the, the sort of
+ the stack of plates in the cafeteria model, you know, the idea being that you put plates
+ in this little spring loaded thing and the, and the plates go down and then you take them
+ off and, and they pop back up.
+ I mean, that's sort of the, the analogy that is used sort of in, in a crude way, but it,
+ it doesn't give us what we need in order to understand what happens with buffer overruns.
+ Well, it is important though that just so you understand that it's a last in first out stack.
+ I mean, that's how data goes in and goes out.
+ It's not kind of in order, but, but actually, I mean, well, okay, the way it really works
+ is the, is the reason there's really a problem.
+ Oh, I saw.
+ All right.
+ Okay.
+ I know where you're going.
+ All right.
+ So, so, so what, what the stack is is a, it's a, a large region of sort of uncommitted memory.
+ So, so think of when a program is, is started up the, the system, the operating system gives
+ this running program, its own stack, which is what, and so just call it a stack as sort
+ of an abstract term.
+ What it actually is, is a, is a, a long buffer, actually a, almost a bottomless buffer that
+ you don't need to worry about running out of.
+ If people want to picture this, think of like maybe a, I don't know, like an, an unwound
+ long roll of toilet paper or, or just a really long banner, for example, oriented vertically
+ from the top down and, and for, for reasons that we'll see in a second, memory is allocated
+ in this stack from the top downwards.
+ So when, when the stack is empty, that is, it doesn't contain anything, there's a pointer
+ to the very top of the stack, it's at the top because there's nothing above it.
+ And, and if the program wants to allocate some memory from the stack, what's, what it's
+ very simply done, this, this stack pointer, as it's called, is moved downwards by the
+ amount of memory that the program wants to allocate for its use.
+ The pointer is pointing to the next available space.
+ Right.
+ And, and so if the pointer is moved downwards to, by a certain amount, then, then what the
+ pointer is now pointing at is the, is the beginning of that amount of space that was
+ just allocated on the stack.
+ So if you visualize this, this, this, this pointer being moved down like by, by, by a thousand
+ bytes, then, then from that point upwards, there is now a thousand bytes, the beginning
+ of which is pointed to by this pointer.
+ So, so the way the system works is many different things use this stack sort of all of the same
+ time.
+ Then we'll purpose scratch pad.
+ So a, a, a, the program might move it down and to allocate some space, then move it down
+ a different amount to allocate some more and down a little more to allocate, you know,
+ it's like three different regions of buffer.
+ And then as these things are no longer needed, the pointer is moved back upwards, back up
+ toward the very top where the stack would then again be empty.
+ So, so it, it's a very convenient system from, from a, from a programming standpoint, and
+ it's inexpensive in terms of the, the technology being used, that is to say it's, it's virtually
+ instantaneous to move to just to change the value of this pointer by a certain amount.
+ And because it's so efficient, it's the system which has come into, you know, virtually universal
+ practice in modern computers.
+ It's used very heavily in subroutine calls, you save a context, you jump into the subroutine
+ and then you could pop the context back out and well, in fact, that's a perfect segue
+ to, to explaining how, how a subroutine is, is, is essentially called or invoked, which
+ is where this becomes a critical problem.
+ Now, you manage it by hand because you're an assembly language programmer, but compilers
+ do this all automatically that the, the, the C programmer doesn't see the stack particularly.
+ Right, they're, they're not at all aware of it, but, but it's still happening in the
+ background and is the source of vulnerability.
+ What, what happens when a program is running along and, and wants to call a subroutine,
+ a subroutine sort of just being sort of a, a chunk of code, which has been written and
+ is standing by to perform a certain function, and, and that code might be called by many
+ different other locations in the program.
+ For example, it's say, say that it was a little piece, piece of code to, to turn everything
+ into uppercase.
+ And you might want to do that if you're searching for something and it's much faster to search
+ all uppercase or off, all of a known case than it is to do a mixed case search.
+ So you might want to just turn a, a, a buffer of text into all uppercase and in many places
+ in your program, you would have the occasion to do that.
+ So you only write this, this code to do the uppercase conversion once, and then you, you
+ call that function, that subroutine whenever you want that to be done for you.
+ So that, so that's sort of an example of, of the power of a subroutine or a function
+ call is that it, it, it provides resources that the program can use wherever it is.
+ Well, when you, when you call this code to execute the function, the, the code somehow
+ needs to return control to you, it needs to come back to where you called it from.
+ And, and since you might be calling it from many different places in the program, that,
+ that, that, that, that return to you can't be sort of fixed, it can't be hard coded,
+ it has to be, it has to be dynamic.
+ So the way the system handles a, so called a subroutine call or a function call is when
+ you, when you call the subroutine, the, the address of the next instruction below that
+ call is put on the stack.
+ It, it's, it's pushed on the stack as we say, meaning that, that stack pointer is moved
+ down just, just by four bytes by, by 32 bits and at that location, the address of the next
+ instruction below where the call was made is stored, it's called the return address,
+ the return address exactly.
+ And so then the computer jumps to the location you have called the subroutine and, and begins
+ to execute the code.
+ Now the subroutine will use the same stack you're using, that is, say that the subroutine
+ for its work, for example, it's going to, it's going to take the, the text buffer, you
+ give it and, and create a new buffer that's going to be lower, that's going to be uppercased,
+ for example.
+ So it could take the stack pointer and move it down by however much memory it needs and
+ then use that region of the stack from where the stack pointer now is upwards as long as
+ it wants.
+ When it's, when it's done using it, it puts the stack pointer back where it was.
+ And in order for the subroutine to return to you, it, it literally executes a, an instruction
+ called return.
+ And that, that instruction pops that return address off the stack, meaning it moves the
+ pointer back up.
+ Now it has those 32 bits that were stuck, that were, that were saved there, which is
+ the instruction address of, of the location below where this subroutine was called from.
+ So the, the processor jumps to that address and continues executing sort of seamlessly.
+ So in the, in the main flow of the code, you, you call the subroutine to, for example, uppercase
+ a buffer.
+ It does whatever work it needs, maybe borrowing some of the memory from, from, from, from,
+ from the program's stack as a scratch pad for doing whatever it's doing.
+ It then, it then releases that memory, which puts the stack pointer back where it was when
+ it first got control.
+ Then the subroutine returns using the value stored on the stack, returns to where it was
+ called from.
+ So, so that's the whole mechanism.
+ Now, how does this break?
+ How does it fail?
+ Um, and a, a really interesting example is where, where some programmers are paying attention
+ to the sign of their data and others are not positive or negative, whether the non positive
+ or negative.
+ Exactly.
+ In, in binary, let's talk a little bit about how sign is handled because that, that'll
+ factor into this.
+ And then people are going to have one of those aha experiences it pretty quickly.
+ Um, in, in binary numbering, um, all bits being zero means zero.
+ And as you begin increase, as you begin turning the bits on in the binary sequence, the, by
+ sort of universal agreement, that represents increasing values in a, in 32 bits, which
+ is what most of our processors still are, those who haven't moved up to 64 bits, but
+ we'll take the 32 bit case in, in this instance, in 32 bits, you have up from, from basically
+ zero to a value, a little bigger than four billion.
+ And then you get to all ones.
+ And then if you add one more to that, it sort of, it overflows or wraps around back to zero.
+ Well, that's a so called an unsigned value.
+ And it's, it's regarded, for example, in, in C as it's called a Uint, an unsigned integer.
+ And it's always positive.
+ It can't be negative.
+ Yeah.
+ Well, exactly.
+ Because every bit combination between zero and that maximum four billion, that represents
+ a positive value from zero up to that four billion quantity.
+ But in many instances in, in programming, it is useful to have a signed value.
+ That is where you do have negative, you're able to represent negative quantities as well
+ as positive ones.
+ So the way this is handled in, in the actual storage in the computer is that this four
+ billion space that 32 bits gives us is chopped in half.
+ Half of them are positive from zero to two billion, and the second half are negative.
+ And actually it goes from negative two billion back down towards zero.
+ So, so for example, if we, if we, if we count up towards with a signed, assigned counter,
+ we count up towards larger values, we'll get to something above two billion.
+ And if we go one more, what happens is, and actually that maximum value has the top bit
+ being zero and all the rest are ones.
+ We then add one more to that, which, which all these ones overflow, making the top bit
+ a one, and actually that's called the sign bit in a signed number.
+ And it's so, so when that, when that top bit is a one, that means that the rest of the
+ bits represent a negative quantity.
+ So, okay.
+ So imagine that some code, a program, wants to accept some data from another program, from
+ a user, from a script running on a web page, from wherever.
+ It wants to make sure, though, that the data that it's receiving will fit within the buffer
+ that it's allocated.
+ And so, say the, the programmer says, okay, say that it's a URL that, that is going to
+ be accepted at this part of the code.
+ The programmer thinks, okay, how long can a URL probably be?
+ Well, maybe a thousand characters.
+ You know, that's a really long URL, even by today's standards.
+ So, so the programmer allocates a thousand character buffer by moving the stack pointer
+ down, as we've seen, and then has access to the thousand characters from where the stack
+ pointer is upwards.
+ So that's sort of the programmer's scratch pad area.
+ Now, the programmer say that this URL has a length, it's provided with a length and,
+ and then the data.
+ Well, the programmer checks the length that is declared to make sure that it's, it's less
+ than a thousand characters long to make sure that the data will fit within this buffer.
+ And if so, then, then the programmer might call another subroutine to copy the provided
+ data into the buffer.
+ Well, if the programmer made a mistake, and just, just not even thinking about it, was,
+ was thinking that the value being provided was, was a, a signed value, which really doesn't
+ make any sense, because you, you, it makes no sense to have a negative length on data.
+ Data's always going to be an unsigned length.
+ So, but just because the programmer's used to typing int, int, int, which stands for integer,
+ which is inherently a signed value, instead of uint, which is unsigned integer.
+ If the programmer declared this value as expected, or sorry, expected that the value were going
+ to be signed, or just didn't think about it, then if somebody malicious declared the value
+ to be negative five, then when the programmer compares the length to the length that that's
+ being declared for this URL to the buffer size, he's allocated 1000, you know, is negative
+ five less than a thousand?
+ Well, yes, it is, if it's a signed value, because negative five is less than a thousand.
+ So, so the programmer says, "Okay, this URL I'm about to store will fit within my thousand
+ byte buffer."
+ So he hands the programmer, now calls a subroutine to copy the data from wherever it's coming
+ into his buffer.
+ So he provides the negative five, and the, the, the address of the buffer to a subroutine.
+ So now, the subroutine, which somebody else has written, knows that lengths cannot be
+ negative.
+ I mean, that makes no sense.
+ So in the subroutine, the length is handled as it really should be as an unsigned value.
+ Well we know, because we just looked at how, how values are stored in binary, a negative
+ value, is if it's treated unsigned, is actually a very huge positive value.
+ So, so the subroutine, which has been asked to copy the URL, sees a really large value
+ as the amount of data it's supposed to copy, which it says, "Okay, if that's what the guy
+ who called me wants me to do, that's what I'll do."
+ So the, the subroutine copies this URL that might be, for example, 4k.
+ Because they, the, the, the, the, or, or say that the value was shown as, as, as minus 4k,
+ but, and, but the, the program, the original program, did the comparison, said is, is minus
+ 4k less than 1k, the, the buffer size.
+ Yep, that's less, no problem.
+ Well the program, the, the subroutine, which is doing the copying, realizes this is unsigned.
+ I mean, treats it as an unsigned value, which means it's a really huge value.
+ That program copies the data way more than the program that called it expected.
+ For example, 4k worth of data, trying to fit it into this programmer's provided 1k buffer.
+ So the problem is because they're thinking of it as an unsigned, or as a signed value,
+ but it really is an unsigned value.
+ They're, it's, it's too big for them.
+ Exactly.
+ And some clever hacker somewhere realized that the code that was calling this copying
+ subroutine was written inaccurately and that a, for example, telling it it was negative
+ 4k would slip by its guard.
+ It would get under--
+ Actually, the way they find this out is by trial and error.
+ They just try it until they find something that breaks really.
+ Yeah, very often.
+ And so, so now in our model, we've, we've called a subroutine and it has written more
+ than the 1k that we expected.
+ Now remember that to, to create this 1k buffer, we moved our stack pointer down making a region
+ above the stack pointer that is a thousand bytes worth available.
+ Well, if this, if this more than 1k is copied, if like 4k were copied, it would fill up the
+ 1k and continue on upwards, overriding all kinds of, I mean, whatever else was on the
+ stack above that location, really, I mean, wiping things out.
+ So at the, at that point, control is returned to the program that called it, which doesn't
+ realize anything really bad has just happened.
+ It finishes up its work and releases that 1k buffer it allocated, which, which moves
+ the stack pointer back up by a thousand bytes.
+ But now, instead of the next thing on the stack being the return instruction, remember
+ that if this is going to then return to whoever, whoever called it, it's going to, the stack
+ is, is popped and there's a, the value on the stack is the address to be returned.
+ Well, that's been overwritten maliciously on the stack so that the return value is no
+ longer accurate.
+ If the, if a programmer who was trying to exploit this did his job correctly, what's
+ there is instead the address of other code right there on the stack, which will then
+ get executed.
+ Oh, very clever.
+ And that's exactly the way somebody from outside a computer system could take advantage
+ of a little mistake, you know, just literally the letter U for unsigned was left off of
+ a variable declaration in C. And since C, as you mentioned Leo, C handles these things
+ for programmers, when C sees that it's an int comparison, as opposed to an unsigned
+ integer comparison, that's the way C compiles the code, which causes this negative value
+ to slip under the radar of a programmer who was really trying to do the right thing.
+ They were trying to say, don't copy more than a K, making sure that the URL is a K byte
+ or shorter.
+ But in fact, because of this missing unsignedness, a sub routine that did the copying thought
+ it had permission to copy for K. And sometimes it's even worse.
+ I mean, sometimes the programmer uses an unchecked string copy without a range on it and just
+ kind of blast data in there by accident.
+ So there.
+ Well, you're right.
+ You know, it's certainly the case that maybe the programmer wasn't checking at all.
+ As you said, that can happen, but even when you're like trying to do the right thing,
+ it's possible to end up with code, which is insecure in a very weird way, because think
+ about it.
+ As long as you provide a positive length, it's going to work.
+ You could try to give him 4K, a positive 4K, his code would say, nope, exactly.
+ That's too big, but because of this mistake of just sort of handing responsibility off
+ between different parts of the system, it's possible to find these.
+ And so literally code was written onto the stack, which is then executed.
+ And at that point, your computer is in the hands of a hacker.
+ It is potentially taken over.
+ And this is the way all those worms that we used to be having code read and nimdah and
+ all these things where no, no, I mean, and those, for example, were mistakes in Microsoft's
+ Windows server that had these kinds of vulnerabilities that allowed worms to just literally inject
+ their own code without the system's knowledge or permission into the operating stack of the
+ server and then run that code and take it over.
+ It's pretty impressive, though, accomplishment, even on the hackers part, because it isn't
+ just kind of randomly sticking code in there.
+ They've got to figure out where to put it.
+ They've got to figure out where the return address would be and make sure it jumps into
+ another area where it's their code.
+ I mean, I imagine there's a lot of trial and error in there, and they're very clever
+ at doing that.
+ I mean, this is advanced programming to be a hacker like this.
+ There's no doubt about it.
+ I mean, you have to do this.
+ You have to know the system at a level below, certainly below the so-called script kitties
+ and even really below the level of most C-style programmers who are taking advantage of the
+ convenience of the C language being an abstraction of the machine.
+ And it's that abstraction that allows their code to be portable among different architectures,
+ where the compiler is doing all of the detailed work.
+ Well, hackers, in order to exploit this level of flaw, I mean, they're absolutely operating
+ down at the machine level and I mean, truly knowing what they're doing.
+ It's very impressive and amazing that it happens so often given that all of the things
+ that have to go wrong and all of the things that have to go right to make it work.
+ Well, it's again, you know, harkening back to the beginning of this podcast where I really
+ wanted to give people, I mean, not to make excuses, but to mean, honestly, to explain
+ why these problems keep happening.
+ It's just this is a, you know, programming is a complex task which is becoming increasingly
+ complex and we're relying on many more subsystems that we didn't ourselves write.
+ So inherently, you make assumptions about how something you're going to use, some subroutine
+ library, you know, the operating system, whatever, about, you make assumptions about what it's
+ going to do and when those don't quite match up, that creates a little opportunity for error.
+ And, you know, programs literally have to be perfect in order not to have any bugs like
+ this.
+ And it just, it's incredibly difficult to make them so it is, it's remarkable.
+ Well, once again, you've explained the inexplicable, well, one bit of good news I want to talk
+ about just briefly to wrap up this topic is, is something was, which was introduced in
+ Windows service XP service pack two, which is, is the acronym is DEP DEP stands for data
+ execution prevention.
+ And it's one of the things sort of in answer to Steve bomber's war cry or, or frustration
+ cry about why they can't solve this problem.
+ Because one of the things that's interesting is the stack that we've been talking about
+ is really only for storing data.
+ It's not for storing code.
+ Now, back in the dawn of Windows, literally Windows 3.1, way back, you know, the early
+ Windows before we had graphics accelerator chips, the very clever guys who wrote GDI,
+ the graphics device interface portion of Windows, they, in order to make the display work quickly,
+ they would put code on the stack.
+ That is literally the Windows would write a program to move data quickly from one place
+ on the screen to another back before the hardware in the display adapter would do that for them.
+ So there, there, there are some history of code running, I mean, good code, deliberate
+ code running on the stack, but in general, and certainly much more so in modern times,
+ the stack should really only contain data.
+ It ought to be temporary variables.
+ It ought to be subroutine return addresses, as we were talking about, or, or, or buffers
+ that are being allocated by the program for its temporary use, which it then releases.
+ So there really isn't a reason to allow the stack to be executable.
+ Well, a very cool feature in the latest processor hardware from AMD and Intel is available to
+ essentially mark the stack as non-executable code, that was some non-executable memory.
+ So that, so that if a buffer overrun occurred and the processor attempted to jump into the
+ data on the stack, they would immediately throw up a system exception and not allow that to
+ continue, thus completely, completely shutting down the whole buffer overrun problem.
+ Now this data execution prevention has been available since service pack two.
+ Only the newer Intel and AMD hardware supports it.
+ There's a sort of a weaker software-only version which, which can be turned on, which
+ provides some protection.
+ The other problem is that there are some programs that won't run if, if their stack is locked
+ down and not allowed to execute because of some of the tricks that the programmers or
+ the compiler are playing.
+ So, so there's a little bit of a, of a transition phase here where, and, and Windows handles
+ that, because if you've got one of these, these DEP enabled processors and you've got
+ it turned on, you, you are able to make exceptions for known programs that have a problem with
+ this.
+ Anyone who wants to know more about it can, can just Google data execution prevention
+ or DEP and, and learn about it, it'll take you right to Microsoft's pages where you can
+ see how to turn this on if you haven't messed around with it.
+ It is a, it's a really nice step forward which is going to, you know, reasonably help for,
+ you know, this whole class of security troubles and, you know, if we had it years ago, things
+ would be a lot better than, than they have been, but at least, you know, we, future hardware
+ will support this.
+ Future software can be expected to be compatible with it and, and I'm not making excuses for
+ programmers again.
+ I mean it, we do make mistakes, they're just so hard to prevent, especially when it's not
+ even in our code.
+ It's some code that we're relying on that somebody else wrote.
+ So this is a really nice sort of prophylactic measure to protect your system from, from
+ remote code injection exploits.
+ Yeah.
+ Also, by the way, there are versions of, of this for a Linux and some versions of BSD.
+ So, and, and it's built into the hardware of the processor, although the operating system
+ has to enable it.
+ Exactly.
+ Yeah.
+ Well, great stuff, Steve.
+ I really, I appreciate you're taking the time to make this clear.
+ It's something that, you know, I've tried to talk about in the past.
+ We've had experts on the shows trying to explain it, but you did the best.
+ Very well.
+ It's, you know, as, as a programmer and because I'm down at the assembly language level, I'm,
+ I'm dealing with a stack on an intimate basis.
+ You make your own stacks, your own stack frames.
+ Well, hey, by the way, I don't know if you saw it in the, uh, uh, show notes or the comments
+ to our show notes from a last episode, but there was a great, uh, did you read the unlived
+ phalanx wrote a really nice, I guess you did, because you responded to it, a really nice
+ comment about Spinrite.
+ He says, I just wanted to write in here about how amazing Spinrite really is.
+ I had a hard disk with a tax refund and a recent insurance claim go completely bonkers
+ to the point where the moment you turn on the computer, it would crash and was no longer
+ accessible by any other means and under four hours, Spinrite restored the drive to full
+ working order and allowed me to save every single bit of information on the drive.
+ Whoo.
+ So when you hear Leo talk about Spinrite, he isn't just plugging a friend, he's telling
+ the honest truth.
+ And I, I am.
+ Spinrite is the single best disk recovery and maintenance to ever written.
+ I saw that.
+ I just, I, you know, I mean, obviously Spinrite supports me.
+ So I'm, I, I love it and I depend upon it.
+ But I, we, we, we get this email from people like that, though, the posting that you just
+ read from last week where, you know, I mean, they really needed their stuff saved and I
+ just, I just really warms my heart when it does.
+ Yeah.
+ Well, I'm able to help people like it.
+ You can see more of these testimonials at Spinrite, S-P-I-N-R-I-T-E dot info.
+ And of course, you can get your copy of Spinrite.
+ Everybody should have one from G-R-C dot com.
+ That's where Steve hangs his hat.
+ We also find at G-R-C dot com, uh, the show notes for this show and all the past security
+ now's including 16 kilobit versions for the bandwidth impaired and Elaine's great transcripts.
+ She came back from her trip safe and sound, I hope.
+ Yep.
+ And she's ready to make a transcript of this one transcribed some more.
+ Welcome home, Elaine.
+ We're glad we made it back.
+ Uh, and that again is G-R-C dot com slash security now dot H-T-M.
+ We, of course, what I think are, are wonderful sponsor, the, uh, Ostero corporation, makers
+ of the Ostero security gateway software.
+ You can get it at A-S-T-A-R-O dot com.
+ There's a free version for home users, um, which is fantastic.
+ If you've got an old machine, put it on there and it turns your system into a firewall that
+ is, that bar none the best.
+ They support open source.
+ It's open source.
+ So it's great.
+ Uh, they also sell hardware.
+ I have their Ostero 120, their gateway and it's, it is really great.
+ Highly recommended.
+ A-S-T-A-R-O dot com.
+ I said Ostero and they want me to say Ostero.
+ So I'm going to say Ostero.
+ I think as long as people go there, they probably won't be complaining much.
+ Ostero.
+ Hey, Steve, thank you so much.
+ What are we going to do next week?
+ I haven't even looked at my notes, but I'm sure we'll have something good.
+ Well, you know, folks, keep posting comments and suggestions and questions for Steve because
+ as, as always, I think he's inspired by the things you, uh, you ask and suggest to him.
+ Actually next week will be episode 40.
+ Yep.
+ So we'll be your questions and answers next week.
+ Ooh, that's right.
+ Perfect.
+ Well, there's the answer to that question.
+ That was a simple one.
+ Thank you, Steve.
+ Have a great day and let the brain cool down a little bit now.
+ I think ice baths would be a good thing.
+ I know I need a button.
+ Thanks.
+ And we'll see you next Thursday on Security Now.

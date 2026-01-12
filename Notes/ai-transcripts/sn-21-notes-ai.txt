@@ -1,0 +1,444 @@
+ [MUSIC]
+ This is Security Now with Steve Gibson, episode 21 for January 5th, 2006, the WMF vulnerability.
+ [MUSIC]
+ Hey, I'm Skype today because we're going to do a little conference call.
+ Steve Gibson joining us from Irvine.
+ I'm in Northern California and soon to join us.
+ Ilfak, you know, we're talking about the Windows Metafile WMF vulnerability.
+ Steve, why don't you recap the story so far?
+ And I have to tell you, Leo, that with this new microphone,
+ even Skype sounds pretty good.
+ You sound really good.
+ Hello.
+ With your PR40.
+ Yep.
+ Okay, so the Windows Metafile vulnerability is something which was
+ came to light due to its exploitation.
+ The good news is that the people who figured this out did not go stealth with it.
+ Although, on the other hand, of course, we don't know how long this might have been used secretly
+ before it came to light of public attention.
+ And that's an important point because this is what we called this a zero-day vulnerability.
+ In other words, the exploits emerged immediately.
+ But in fact, it was the exploits that introduced us to the vulnerability.
+ It wasn't Microsoft that announced it or was it?
+ Or was it as a security firm that announced it?
+ Who first discovered it?
+ Was it Sans Institute or?
+ The timing was so close.
+ I don't know.
+ Although, certainly Microsoft did have a notice up on, I believe it was on the 27th.
+ On Tuesday, the 27th, they put up a notice saying that they realized there was a problem.
+ It was in active exploitation and they then set about fixing it.
+ So we really don't know how long the exploits have been going on, frankly.
+ No.
+ I mean, in fact, there have been people, sort of the conspiracy theorist people, who wonder,
+ you know, that the NSA or CIA or, you know, shadowy government bodies might not have access
+ to our machines with, you know, knowledge or not of unknown and still undisclosed vulnerabilities.
+ Because this is like a backdoor, not an intentional backdoor.
+ But it's very, it gives you that functionality.
+ It's essentially a backdoor into Windows that Microsoft didn't mean to put in there.
+ It has been there as far as, as long as we can tell.
+ Actually, as we know, it's a backdoor that they did mean to put in there.
+ This thing was designed in.
+ It's not a mistake.
+ It's, it's always been there.
+ And someone realized, hey, we can use this to run whatever code we want on users' computers.
+ It was done in a day, I guess, and we've talked about this before, when programmers assumed
+ the benevolence of their users and so gave them capabilities, not assuming that their users
+ would be malicious.
+ But, of course, now we all, all programmers are, are trained to assume that users are
+ malicious and to make sure they don't include this kind of code.
+ It's a whole different mindset today.
+ When the vulnerability was discovered on Tuesday, Microsoft offered a kind of a rude fix for
+ it, which was essentially to unregister a DLL.
+ Turns out that wasn't a very good fix.
+ And very quickly, a fellow named Ilfak Geilinov stepped forward.
+ Who was Ilfak?
+ Ilfak has actually been known within the developer community for quite a while.
+ He's the lead developer for a company called Data Rescue.
+ He's largely responsible for an amazing disassembler called the IDA disassembler, which is really
+ highly useful for anyone who's trying to take a blob of code to which they do not have the
+ tools and figure out how it works and so, like, for people who are disassembling and reverse
+ engineering viruses and other kinds of malware, it's a very powerful tool for giving them a
+ look into unknown code.
+ I wonder if he used his disassembler to figure out what the WMF interpreter was doing.
+ I have no doubt that he did.
+ In fact, I will be if I end up writing a patch for Windows 9X.
+ Interesting.
+ Well, we're fortunate enough.
+ He lives in Liege, Belgium, and it is after 10 o'clock at night there, but he were fortunate
+ enough to be able to talk to Ilfak right now.
+ So let's dial him in via Skype.
+ Hello, Ilfak.
+ Hi.
+ Hi.
+ This is Leo.
+ Nice to see you.
+ Steve is with us.
+ Hi, Ilfak.
+ Hi, Steve.
+ And we all are good.
+ I'm so glad that you could join us for this.
+ Ilfak, the one thing that I've seen mixed issues about is whether this is a, whether this
+ vulnerability is created by a buffer, overrun bug in the Windows Metafile processing, or
+ is it just taking advantage of a feature which is working correctly and has always been there?
+ It is the latter, the second.
+ It's not a buffer overflow.
+ It is some things that is by design.
+ So the design of this WMA files allows to specify a code sequence to be executed.
+ And this code sequence is in the file itself, so anything can be happened.
+ And Windows makes no check on what that arbitrary code is.
+ It just allows you to execute any code at all.
+ Does the code have the same privileges as the running user?
+ Yes.
+ Wow.
+ So if your running is an administrator, that's where the issue occurs.
+ If you were running as a limited user, would you have a problem?
+ Well, you will still have problems like, for example, this malicious code could destroy,
+ could delete your files or do something bad to your data.
+ Anything you could do.
+ Yeah.
+ But of course, when you're running as administrator, that includes installing a Trojan horse or
+ other malware.
+ Yeah.
+ Everything can be done to your competitors.
+ Yeah.
+ So this means that this code, or this feature rather, has always been there.
+ And that I mean, like for 15 years at least.
+ And that so suddenly someone realized had basically had an inspiration that they could
+ use this long standing feature working correctly in Windows in order to leverage attacks against
+ users who opened images.
+ Yes.
+ Oh, they just found it by chance by just looking at the code, the specification of these WMA files.
+ And they thought, okay, that's something we can do with the, we can do anything with the computer.
+ If you feed it, specially crafted WMA file.
+ It's really amazing that this whole has existed for so long.
+ Do you think anybody knew about it before but was keeping a secret?
+ Well, I think that since the feature exists that since long ago, there were people knowing about it.
+ But they were not looking at it as something to explore it.
+ Oh, this feature is my design.
+ So it can be used for good, not only for bad things.
+ What do you think Microsoft will do then with this patch in order to eliminate this without
+ breaking any applications that may have actually been using this in the way it was intended?
+ Oh, it's a very, very tough question.
+ I wonder what Microsoft will do with this.
+ I don't know, really, I don't know because the feature itself is the vulnerability.
+ So in fact, what does your program do?
+ Is it completely disable Windows Metaphiles?
+ No, it doesn't disable the files.
+ It just disables one single function in these files.
+ It's the function that executes this arbitrary code.
+ So that's presumably something Microsoft could do.
+ Yeah.
+ I wonder if it would break a lot of software.
+ Have you heard reports that your patch is causing problems for people?
+ Yes.
+ There were some reports like an old printer does not print anymore or something like that.
+ I heard about problems with printing related problems.
+ So there might be some broken applications.
+ Well, in fact, that was something that you expected and talked about early on when this
+ began to spread that is when your patch began to be used last weekend was that it was clear
+ that this involved printer related aspects of Windows Metaphiles.
+ Yes.
+ I put a warning on my blog saying if you apply this patch, there might be some bad consequences
+ like printing problems or something else.
+ I cannot tell, I cannot tell, but there might be bad problems.
+ In fact, you fixed the problem for Windows 2000 and Windows XP.
+ But as I understand it, the problem also exists for Windows 95, 98, and ME.
+ Is that true?
+ Oh, there were different opinions about this.
+ And I still don't know for sure if these systems are vulnerable or not.
+ They use completely different code.
+ XP and 98 systems are different in this.
+ They use different GDI DLL library.
+ So I just cannot tell if they are vulnerable or not.
+ But most likely they are not.
+ Now, your vulnerability checker does say that the system, when run on a 98 system, that
+ it may be vulnerable.
+ But then it may be.
+ I just, you know, I don't have the computer with 98 and I cannot check myself.
+ That's, that's, that's.
+ What's interesting is that Microsoft has just reissued their standard, their standard policy
+ page.
+ They've moved the nine X and ME systems off of that, which were previously listed.
+ And in the FAQ section, they're saying now that they are, they don't consider this to
+ be a critical vulnerability because they haven't found an explicit way that this vulnerability
+ could be used.
+ And presumably it means they're not going to be patching the nine, nine X and ME systems.
+ Since no one knows if you're vulnerable, it's kind of a little bit scary.
+ What I've told people on my site is that if Microsoft doesn't fix this, I will.
+ In fact, how did you come to know about this vulnerability and how did you write the
+ fix so quickly?
+ I learned about it as everyone else from the news, just on the internet.
+ And I thought that it was a really dangerous vulnerability this time because it just goes
+ through the browser and that's all.
+ Microsoft did a kind of a very broad patch, but recommended a very broad patch, which
+ is just to unregister the DLL.
+ Did you feel that that was inadequate and decided to do something better?
+ Well, since the problem itself is not in this unreached DLL, I felt that it might not be
+ enough in all cases.
+ That's why I developed my patch.
+ Well, and you were, of course, completely correct.
+ The shell image viewer DLL, which is the one that Microsoft was recommending be unregistered,
+ it was a sort of a quick workaround that Microsoft felt comfortable recommending early on.
+ But it was even then well known that there were other ways you could get windows to
+ parse a file that turned out to be a Windows Metafile.
+ Even if it didn't have a WMF extension, because Microsoft's looking inside the header of the
+ file, and it was clearly not a good recommendation, although it may have been all Microsoft could
+ do at the time.
+ Right.
+ In fact, how many people downloaded that file from your site before hex blog was shut down?
+ That's a difficult question because my site went down and I could not even check my logs.
+ Oh my.
+ So you don't know?
+ No, I don't know exactly.
+ Steve, you've downloaded, you've had at least 200,000 visits to the page, yes?
+ Yes, we have actually now we've crossed a quarter million.
+ Our episode number 20 show notes crossed a quarter million viewings earlier today.
+ It's at 252,711.
+ So, I mean, this has clearly been.
+ I mean, I've been seeing more site traffic myself at GRC than I've seen in a long time.
+ And interestingly, Tuesday was even busier than Monday, and Wednesday was busier than Tuesday.
+ Today, it's quieting down and slowing down a little bit, but it's really, I mean, it's
+ the word spread.
+ The need for this has been, you know, really widespread.
+ In fact, did you expect that what has happened was going to happen?
+ That there would just be this incredible demand for what you wrote just basically for yourself,
+ right?
+ I mean, I didn't expect anything like that.
+ I just looked at this as a technical problem.
+ I wanted to solve it like to protect my computer and to present it to others.
+ And it's up to them if they want to use it, if they don't want to use it again.
+ It's their choice, I respect it.
+ But it turned out to be much bigger than I thought.
+ Well, in this point, PC Magazine, E-Week, Steve Gibson, and many others have recommended the
+ ill-fact patch.
+ As far as I know, it's the only effective patch out there.
+ You are updating it.
+ It looks like you have updated it.
+ You're now at version 1.4.
+ Tell me about the updates.
+ Do they change the functionality of the patch?
+ No, they don't change anything in the patch itself.
+ So if the very first version of patch works for you, there's no need to install or reinstall
+ anything, it works pretty well, and it's the same protection as in the first version.
+ The first version, on the last version, will give you the same protection.
+ The only difference is that the first versions were not compatible with all systems.
+ And each new release was adding the support for a new version of the operating system
+ like Windows 2000 or ESP2 or something like that.
+ That's the only difference between the releases.
+ Well, in fact, that was how you and I first communicated, was you and I worked to add Windows
+ 2000 compatibility to your very first release.
+ Yeah, yeah, yeah, exactly.
+ Well, we want to thank you on behalf of the entire Internet community, of fact.
+ Obviously, what you've done is you jumped into the fray when Microsoft was unwilling to,
+ and frankly, risk liability doing so.
+ And I think it's very brave of you, and I think it's a really great contribution.
+ So thank you very, very much.
+ I've run it, and I know everybody else who's listening has.
+ Yes.
+ Thanks, Novak.
+ I'm certain it's of any help.
+ Well, and certainly, we now know that there are literally hundreds of websites that are
+ distributing images trying to take advantage of this exploit.
+ And who knows how many computers your patch has actively helped prevent being taken over
+ by whatever malware was being used by this exploit in order to move it into people's computers.
+ Oh, we don't know, but let's hope that we have protected as many countries as you could.
+ Well, of course, that raises the issue that if you were already infected, running ELFEX
+ patch isn't going in any way, remove any malware on your system.
+ It's just going to prevent further infections, but your infection is still there.
+ Yeah, and of course, it raises an interesting point.
+ People keep asking, "How do I know if I've been infected by this?"
+ And they misunderstand what the this is, the exploit is sort of like creates an open door
+ that allows anything else to be carried into your computer.
+ So it's not so much that you're being infected by this exploit as much as, you know, it's
+ being used to install, Lord only knows, what, into your machine.
+ And even if you close the barn door, the horse may well be gone.
+ ELFEX, I know it's late in Liège, so we thank you so much for joining us.
+ Thank you Steve.
+ Thank you, Lord.
+ And once again, thank you for the great job you did.
+ Thank you.
+ ELFEX wheeling off.
+ Take care.
+ Good night.
+ Good night.
+ Great to talk to ELFEX.
+ And I didn't want to scare him, but I did raise the issue.
+ You know why Microsoft is slow to release these, of course, is the liability issues if the patch
+ goes wrong or is perceived to go wrong by people.
+ Well, and it has happened before, that they've come out with a security patch which has broken
+ other things.
+ They did one in fact that we've referred to in a prior podcast where they messed up some
+ aspect of segment size.
+ I can't remember exactly what it was now, but for example, it caused VPNs that the corporations
+ were using to suddenly break after the corporations deployed the patch.
+ So yeah, I mean, it's really understandable.
+ Now, we should mention that by the time anyone hears this, Microsoft's final, real official
+ patch for Windows and for this whole Windows Metafile vulnerability will be publicly available.
+ Let's talk about that because it leaked out earlier, right?
+ It leaked out Tuesday night, actually.
+ And normally Microsoft waits till the second Tuesday of the month for their patch cycle.
+ So you're saying on Thursday, the fifth, at what time they're going to release the official
+ patch.
+ It's at 2 p.m. on the West, which of course is 5 p.m. Eastern, just about as we record
+ this in fact.
+ Right.
+ Well, a little bit after we're recording it, it'll be made available.
+ And this will be the official patch.
+ I was notified that it was available Tuesday.
+ I quickly grabbed it.
+ I took great pains, of course, to check the digital signature chain to make sure that
+ this was, I mean, really, truly from Microsoft.
+ And I verified that the root certificate that was anchoring the trust chain, of course,
+ we'll be talking about all of this stuff in podcasts very quickly, I mean, very, very
+ soon here in 2006, I verified that it was the same root certificate that had signed other
+ patches, official patches from Microsoft.
+ So the only way for that to be true is if this file that I had downloaded from some file
+ archiving site was truly signed by Microsoft.
+ Let me ask you, did you run the patch?
+ I did.
+ And did it fix the vulnerability?
+ In other words, did the tester that ELFAC has written come up clean?
+ Yes.
+ It fixed the vulnerability, and what was interesting, what I wanted to verify for everyone was
+ that there wasn't any problem interaction between what ELFAC had done and what Microsoft
+ has done.
+ Right.
+ Because, and of course, I did review the source code when I was working with ELFAC on this
+ last weekend.
+ So I knew that, I mean, I knew to expect no problem, and so my advice had been to go
+ ahead and install Microsoft's patch when it's available, and then remove ELFACs.
+ See what his does is actually it suppresses the vulnerability.
+ It doesn't actually patch the files as you and I talked about in our, in our special
+ edition of episode 20 over the weekend, is it, it just prevents this from happening without
+ actually modifying, physically modifying the file, it makes some in-memory changes that
+ just sort of kills that function that ELFAC was explaining is something deliberately
+ that's always been part of Windows Metafile.
+ So his program loads on boot and runs in memory, blocks it, but Microsoft's will actually
+ patch the, presumably will patch the underlying file, at which point you would want to uninstall
+ ELFACs patch.
+ There's no reason to have that running in memory.
+ Correct.
+ And, and the other thing that was really interesting is that Microsoft's file, the, the version
+ of the new GDI 32 DLL, which is the file, the single file that's changed, it was dated
+ Wednesday evening of last week, meaning they really did jump on this immediately, and we're
+ able to fix it.
+ Yes.
+ It seems like it'd be a simple thing to fix, you just, you know, you turn off that arbitrary
+ code execution.
+ Well, I mean, and, and that really is the issue.
+ It's, and I don't yet know, and ELFAC doesn't know.
+ I don't think anyone knows until we look at the code or until Microsoft formally states
+ what it is they've done.
+ I mean, they have actually had to turn off on perhaps turn off a feature, which Windows
+ Metafile Processing has had from its inception, and some GDI printers will expect.
+ Well, yes, which is certainly a feature that's going to have some interaction.
+ Now, I, I received a blurb because I've been in the middle of all this here for the last
+ week.
+ Nothing else has been done over at GRC except, you know, deal dealing with this.
+ And I may, in fact, find myself writing a patch for Windows 9x and ME users if Microsoft
+ doesn't address it, as it looks like they're, they're not planning to, which is, which is
+ distressing a lot of people.
+ Well, they've ended up, I think they're, I have line on those products.
+ They don't, they don't, well, probably support it.
+ Actually not.
+ No.
+ I check, I check that out.
+ And they are officially supporting 98 and ME through June of 2006.
+ They had, they had originally said they were going to end it.
+ I think sometime in 2004 and there was such a hue and cry from people saying, Hey, wait
+ a minute.
+ We're still using these things and the code's buggy.
+ We need you to keep it current.
+ So they said, Oh, okay, fine.
+ And, but so arguably they really should patch Windows 98, but apparently they have no plans
+ to.
+ Well, we'll see.
+ I mean, they may.
+ Anyway, do what today.
+ They do it later.
+ I heard a quote from someone who actually it was a, it was a press person who forwarded
+ to me something from Microsoft's website.
+ It was a, I think a PR person that he was speaking with saying that as a consequence
+ of this, they're going to be reexamining other things like this.
+ And he said, you know, what do you make of this, Steve?
+ And so, you know, decoding it from, you know, PR speak, it sounded like exactly what Ilfak
+ has said.
+ And now this all sort of makes sense.
+ They may have looked in the past at, at opportunities for buffer overruns, but this was not a buffer
+ overrun.
+ This was written in the days when nobody was thinking about security.
+ It made sense.
+ It made sense to write a feature that if the file format is corrupted or fails, you have
+ a, you're allowed a fallback routine.
+ And it sounds like if they did it in this, they may have done it in many, many other
+ situations.
+ Well, and what's really interesting is that the image itself, or that is to say the windows
+ meta file itself contains the code which you can cause it to execute.
+ So it was, I mean, it was literally like by design an image file would contain executable
+ code.
+ Well, I guess, I'm just guessing reading tea leaves that the idea was you'd have, you
+ would put some sort of fallback routine if the GDI calls weren't, I would imagine an
+ issue was if the GDI calls weren't supported, maybe there were various versions of GDI.
+ And if a printer didn't support the calls necessary to render the image, then you could
+ have a fallback routine in the image, something like that.
+ Yeah.
+ And I bet you that that's a, that's a technique that Microsoft has used widely, which means
+ hackers are going to be looking for other areas to exploit.
+ And there may be many.
+ Well, certainly with our current understanding of security, no one in their right mind would
+ create a file format, which can take, you know, executable code, literally where you
+ could put binary code in.
+ Now, you know, there are, you know, people having all kinds of problems with scripting.
+ And I know that, you know, PD, we've seen PDF files and had problems and PDFs are, you
+ know, executable, post script style code.
+ So, you know, these kinds of powerful technologies, you know, with the power comes security concerns.
+ One wonders if Adobe used a technique like that in the PDF file format for a failback
+ routine.
+ Well, it couldn't have been binary executable because of course, PDFs have always been cross
+ platform.
+ They've been able to run their interpreted text, basically.
+ Exactly.
+ Whereas in the case of a Windows Metafile, this was, you know, Intel binary code where
+ something just said, oh, start running here, and Lord knows, wow, it's been an amazing
+ week.
+ Well, Steve, I'm glad that we were able to cover this.
+ I know it wasn't on our schedule.
+ We were going to talk about other issues, but we'll come back next week.
+ What will we talk about next week?
+ Next week, we're going to talk about we're going to lay some foundation for basic Internet
+ technology, you know, how, what are packets, what is routing, what is the IP address space.
+ We'll talk about IPV6 and what it means, sort of lay some foundations for a number of different
+ things you want to be able to talk about in the future.
+ So sort of like, you know, nail down some terminology.
+ Once again, barring any nasty exploits of any kind, because of course, we always cover
+ those first.
+ That's what this show is all about.
+ And for what it's worth for people who are listening to this that have Windows 9X or
+ ME, if it turns out that Microsoft is not going to fix this and there is a problem and
+ it seems to me that there is, I'll be coming up with some sort of a solution for it.
+ Stay tuned.
+ We'll put a link in the show notes to Steve's site talking about this vulnerability and
+ offering eelfax patch, although again, by now, you won't need it.
+ You can run Windows Update and Microsoft Windows will automatically be patched using an official
+ Microsoft fix, they plan to ship it on January 5th at 5 o'clock Eastern, 5 p.m. Eastern.
+ But again, you can go to grc.com/sn/notes-o20.html, I should say 020.html if you want to know more,
+ or just go to the grc.com and go to the show notes page, you'll find a link there.
+ Now Heil powered for your enjoyment.
+ You ran out and got a PR40, huh, Steve?
+ Yeah.
+ Well, you sounded so good when you switched yours.
+ And I thought, okay, I've got to have one as big as Leo.
+ Steve, you should have asked me.
+ I'm sure Bob Heil would have sent you one as a fan.
+ Ah, final mind.
+ Alright.
+ Well, thanks to Bob Heil and Heil's sound for my PR40 anyway.
+ And of course to AOL radio and the AOL podcast channel where this show appears and they provide
+ us the bandwidth to make it possible to offer you security now, absolutely free.
+ Every single Thursday, Steve Gibson, we'll talk again next week.
+ If not sooner.
+ Righto.
+ Thanks for joining us.
+ Thanks Leo.

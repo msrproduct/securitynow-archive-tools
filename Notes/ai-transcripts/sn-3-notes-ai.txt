@@ -1,0 +1,585 @@
+ (upbeat music)
+ This is "Security Now" with Steve Gibson.
+ Episode three for September 1st, 2005, Nat Raunters.
+ (upbeat music)
+ So let's talk about Raunters,
+ 'cause this is something you schooled me
+ in some time ago and convinced me
+ that a software firewall wasn't as good,
+ even though you're the guy
+ who really put zone alarm in the map,
+ wasn't as good as a hardware router.
+ - Well, yeah, I guess the point is
+ that a software firewall,
+ while it's running in your machine,
+ it's victim to anything that your machine is.
+ And we know for sure that many malware
+ now deliberately knows about software firewalls
+ and has taken actions to shut them down.
+ So, while a software firewall is certainly a good thing
+ to have for monitoring outbound flow from your machine,
+ what few people recognize is that a Nat router,
+ the same kind of Nat router that many people have
+ for so-called IP sharing,
+ where they have one IP on their cable modem or their DSL
+ and they want to share it among many machines,
+ that makes inherently an extremely good hardware firewall.
+ Nothing is able to come into the across the router
+ that isn't expected because the way it works is
+ that the router needs to know
+ when packets do arrive,
+ which machine behind the router
+ that is in your own private network
+ is expecting to receive it.
+ Since they're all sharing that one IP,
+ the router has to have some way
+ of figuring out which one asked for it.
+ The way it does that is that it watches the packets
+ leaving the network.
+ It watches the, any machines on the land
+ sending data out onto the internet.
+ When packets leave, it makes a note of that packet,
+ where it's bound for and it changes the IP on the packet
+ to its own public IP and gives it a port.
+ So that when data comes back from that remote server,
+ it looks in this table, so-called connection table
+ to try to find a match.
+ When it's able to match it up,
+ that tells it which of the machines,
+ 'cause you might have, you know,
+ you could have 15 of them behind your NAT router.
+ It tells it which of the machines
+ originated that traffic in the outgoing direction
+ so that it knows how to route it in the incoming direction.
+ - So that's what a router is doing.
+ It's saying the data came from X.
+ When it comes back, I send it to X.
+ That's called routing.
+ - Exactly. - How does that protect me?
+ - Well, the way it protects you is
+ that hackers that are scanning the net
+ or worms that are infecting the net,
+ that are just sending out data,
+ or remember for a while there was that
+ the Windows Messenger spam,
+ where people were getting these pop-up messenger dialogues
+ all the time, all of that,
+ worms, hackers, scanners, messenger, spam, all that,
+ those are unsolicited packets,
+ meaning that they're coming from some random IP
+ and port number,
+ and they're just scanning across your IP range
+ of your ISP,
+ and that traffic tries to reach your computers.
+ Well, the beauty of having a NAT router
+ as like your first line of defense
+ is any of that stuff coming in,
+ the router thinks, oh, maybe this is expected.
+ Maybe it's been solicited by a computer behind the router.
+ So it checks its table, it will not find an entry there
+ because it's coming from any of four,
+ yeah, exactly, it's coming from any of other four billion IPs,
+ there literally are four billion possible IPs,
+ and so it ignores it, it just throws it away.
+ - Is that all a firewall does?
+ - That's really all a firewall does.
+ - So just by the virtue of the fact
+ that it can't route a packet, it didn't expect,
+ it's blocking everything unexpected, it's a firewall.
+ - Yeah, even if it doesn't say so in the box,
+ even if they don't say this is a router and firewall?
+ - Exactly, any NAT router is also a firewall.
+ - Now, this raises a couple of questions.
+ First of all, are all broadband routers NAT firewalls,
+ on NAT routers?
+ - I don't think I've ever seen one that isn't.
+ - That's how they work.
+ - Yeah, that's essentially, that's why people buy them,
+ is they want to share one IP, one public IP,
+ among multiple machines.
+ - So if it's able to do that, it's blocking stuff.
+ The second thing, and this is the one
+ that people come up with most often when I tell them,
+ oh no, you've got a very good firewall with your router,
+ they say, but it's only looking at incoming traffic.
+ What about outbound traffic?
+ - Well, and that's a really good point.
+ It permits outbound traffic all the time,
+ which is why you still, it still makes sense,
+ to have a personal firewall running on the computer.
+ You know, people want security to be perfect.
+ They want it to be an absolute black or white thing,
+ and it's just not.
+ So the more security you have, the better.
+ And so a hardware firewall,
+ one of the nicest things about a NAT router
+ is that if you have a computer with a personal firewall,
+ I mean, that's just directly on the internet
+ with no NAT router, you'll very quickly get used
+ to seeing all these pop-up messages
+ as your software firewall is saying,
+ oh no, you're being attacked, I'm blocking this,
+ I'm blocking that, here's somebody attacking you,
+ blah, blah, blah, you know, the personal firewalls
+ running on computers tend to be very noisy
+ because they're trying to sell you
+ on all the benefit that they're delivering.
+ They're saying, look at all the good I'm doing for you,
+ this horrible stuff would have actually reached
+ into your computer if I, the software firewall,
+ hadn't blocked it.
+ Well, it's just nonsense.
+ You know, I coined the acronym IBR
+ for internet background radiation.
+ It's just like static on the net.
+ There's always, this stuff's always gonna be happening.
+ Well, in fact, we're never gonna get worm free now.
+ There's worms out, and it's common knowledge
+ that if you take an unpatched Windows machine
+ and stick it on the internet, within minutes,
+ it's compromised and it's got spyware and malware
+ crawling in it because the net is just now crawling
+ with this stuff, we're never gonna get rid of it.
+ It's just, it's part of the net ecosystem.
+ So you're always gonna see these background radiation.
+ Yes.
+ Unless, of course, you put on a router
+ and then it suddenly gets silent.
+ It's very quiet.
+ Well, that's exactly what happens
+ as I was gonna make the point,
+ is that if your computer with a software firewall
+ is right on the internet with no other protection,
+ then the software firewall is popping up all the time.
+ If, however, the moment you put a router
+ on your internet connection,
+ everything else still works,
+ but your software firewalls go quiet.
+ They do not complaining anymore.
+ They're not popping things up
+ because nothing is coming inbound
+ that's gonna get past the router.
+ So you said a software firewall
+ protects you against outbound traffic.
+ Why would there be any outbound traffic?
+ Isn't that my machine?
+ What's coming from my machine?
+ Well, of course, that's the benefit
+ of a software firewall is that malware
+ can get into your system
+ and use your internet connection without your knowledge.
+ So if your machine already is infected,
+ the software firewall can notify you
+ that something's going on under your nose.
+ - Exactly.
+ - In fact, that's how you discovered spyware.
+ - That's exactly right.
+ I was beta testing the very first pre-release version
+ of zone alarm and I had something on my machine
+ which just completely surprised me.
+ I think it was PK zip for Windows,
+ briefly had some adware that,
+ I mean, it wasn't malicious spyware.
+ It was just adware that was bundled in.
+ And I had installed it
+ 'cause I was wondering how it compared to WinZip.
+ And I thought, well, I'll give this a try.
+ Well, it brought some advertising software along with it
+ which without my knowledge or permission
+ was using my connection and connecting to remote servers.
+ I don't know that it was doing anything bad.
+ I doubt that it was, but the fact that this was happening
+ said, whoa, there's a need for knowing what's going on.
+ - So you said something interesting.
+ You said it's not a bad idea to have both a hardware router
+ acting as an inbound firewall and software firewall
+ to protect you from outbound traffic.
+ You need both?
+ - I think it makes sense to have both.
+ - There is a downside to software firewalls.
+ You mentioned one which is that bad guys can turn them off
+ if they're sophisticated enough.
+ But the other is it does add to the complexity
+ of your system, you're running system level software
+ that can cause problems and takes up CPU cycles and memory.
+ - Well, and yes, and I'm all for not adding stuff
+ you don't need, which is why one of the upcoming
+ positive features of the Windows Vista OS
+ is they've finally added an outbound filtering capability
+ to the XP firewall, which will be on by default
+ and users will begin to have this sort of functionality
+ we've always had to add add-ons in order to get.
+ It'll be built into the OS.
+ - So just inherently more stable.
+ - The current Windows firewall isn't as effective?
+ - No, in fact, the current Windows firewall
+ is very much like a little net router on your own system.
+ It allows outbound traffic to flow without being fettered
+ at all, but it does block incoming traffic.
+ So it's sort of like having a little net router right there.
+ But of course, all the hackers know how to turn it off.
+ - Is it fairly easy to do?
+ - Oh yeah, it's quite trivial actually to turn it off.
+ - That's too bad.
+ - And that's an inherent problem with a software firewall,
+ but I don't see that changing anytime soon
+ because to change Windows architecture
+ would be just a huge, a huge revamp of the OS.
+ - So if you've got a router,
+ no point in using the Windows firewall,
+ it's not giving you any additional protection,
+ but you might want to run something like zone alarm.
+ My personal favorite right now,
+ I think you really want to tell me about it
+ is the Seigate personal edition, the free Seigate firewall.
+ - I like Seigate, actually my favorite too
+ are the Kerio or the tiny personal firewall.
+ - Tiny's very good, yeah.
+ - And Seigate just got purchased by Symantec.
+ So it's gonna be gone here before long.
+ I don't even know if you can still get it.
+ - So tiny or Kerio, is it K-E-R-I-O?
+ - K-E-R-I-O, all right.
+ So those are two, and they're free?
+ - Yes, they have free and then they have commercial editions,
+ but the free ones work just fine.
+ - I have to admit, I don't run an outbound firewall,
+ I just trust that my net router's protecting me.
+ And I guess if you're pretty sure you're not infected
+ by spyware or malware of some kind, that's probably okay.
+ Actually Leo, I don't either.
+ - Oh.
+ (laughs)
+ - You make me feel better 'cause I don't want
+ that additional complexity and--
+ - But see, I also don't have anti-virus or anti-spyware.
+ - But you're very careful about what you do.
+ - I'm, yeah, the term would be anal.
+ I mean, I am so careful.
+ Nothing could make me open a file attachment in email.
+ I mean, just nothing.
+ I also do something which is uncommon,
+ which is to surf with IE.
+ I still use Internet Explorer, but it's locked down
+ so there won't run any scripting or do anything
+ unless I explicitly permit it on a per-site basis.
+ - We have the instructions that you gave me some time ago
+ for doing that on my radio show website.
+ I will put a link to that in the show notes
+ so that people can, it involves trusted zones
+ and protecting yourself that way.
+ And it's kind of a pain in the butt,
+ to be honest with you, Steve.
+ - I know.
+ (laughs)
+ - But I guess that's the nature of security.
+ - It really is.
+ There isn't a way to be out there exposed on the Internet
+ and be safe.
+ So you've just got to keep your guard up.
+ - So we've talked a little bit about,
+ and just to recap, the fact that a router
+ makes a very good inbound firewall.
+ If you want further protection, a software firewall
+ will protect you against outbound traffic.
+ There is an exception though.
+ Routers, in order to do some things on the Internet,
+ you have to poke a hole in the router.
+ - Correct.
+ Does that compromise your security?
+ - Well, it potentially does.
+ And in fact, it's the one caveat and the caution
+ that I try to always remind people about.
+ And that's this thing called universal plug and play.
+ This was a standard that Microsoft created,
+ which first appeared in XP.
+ And of course, it had all kinds of problems and exploits.
+ In fact, that's why I created my unplug and pray
+ freeware to shut this off on the XP side.
+ But that's different than shutting it off on the router side.
+ What unplug and play, I'm sorry,
+ but universal plug and play,
+ which is what it's called on the router does,
+ is it allows any computer behind the router
+ to ask for holes to be opened up
+ so that this unsolicited traffic
+ that we were talking about,
+ the router being so good about blocking,
+ to allow the unsolicited traffic
+ to actually pass through the router,
+ even though it's not a conversation or connection
+ that has been initiated from behind the router.
+ So it is a hole that traffic is allowed to come through
+ and then routed to a specific machine.
+ This is important for some, in some cases,
+ for peer-to-peer file sharing,
+ but mostly for things like instant messaging clients,
+ where you wanna be able to be part of a peer-to-peer network,
+ and you wanna be able to receive incoming messages
+ into your network.
+ The problem, of course, is that instant messaging
+ is replete with all kinds of malicious software,
+ malware, spyware, viruses,
+ there's all kinds of problems,
+ and security problems with instant messaging
+ that users need to be aware of.
+ So contemporary routers have all,
+ they all have something called universal plug and play.
+ If you don't know you need it, turn it off.
+ - This is essentially what it's doing
+ is automatically port forwarding.
+ It's automating the configuration of the router,
+ but there's no security associated with it.
+ You don't get a pop-up, you get no notice whatsoever.
+ And in fact, even if you look at the user interface,
+ how you're able to go to a virtual website
+ and web pages the router creates,
+ you can look at that and it doesn't even show you
+ what port forwarding has been configured
+ by the software behind your back.
+ It may be turned on without your knowledge, without warning,
+ and there's no way of knowing what was turned on.
+ - Correct, yeah.
+ - If I turn off UP&P in my router settings,
+ does it turn off all the forwarding that's been done?
+ - I would turn it off and then I would restart
+ or reset the router so that it's gonna
+ come up fresh and clean.
+ - Oh, interesting, because it may in fact
+ retain some of those port forwarding settings.
+ Now frequently people will do port forwarding intentionally.
+ If I wanna use BitTorrent or an MSN messenger,
+ I will, in order to use it,
+ I will have to do some port forwarding.
+ I will have to open up some holes in my router.
+ But at least I'm doing that explicitly.
+ - Well, in fact, yes, when you and I were using Skype
+ for these conferences before,
+ I had to deliberately open a port through my router
+ so that a friend, actually it wasn't you
+ that I had a problem with, it was someone else
+ who had a VPN router that wasn't peer-to-peer friendly.
+ And so I had to open my side up so that Skype was able
+ to hook us up directly, we were able to get
+ a good connection.
+ - Oh, interesting, okay.
+ So there are times when this is, you do do this,
+ but at least you've done it explicitly,
+ you know it's being done and it's not some malware
+ that's doing it, it's you.
+ - Well, that's exactly the problem,
+ is that malware will start becoming,
+ and as far as I know, there isn't any yet,
+ but we might as well be ahead of the curve this time.
+ Malware will start issuing UP&P commands
+ to reach out to people's routers,
+ as routers become more popular,
+ in order to open holes back into the malware,
+ so that, for example, traditional Trojans
+ are able to operate, 'cause a Trojan
+ that would normally be functional
+ will be blocked by a router.
+ No one will be able to call into the Trojan
+ as they used to.
+ - Well, so I'm gonna now extend our list
+ of things that you should do.
+ So we said you should have a router,
+ you might wanna have a software firewall as well.
+ You should, on this router,
+ you should turn off universal plug and play.
+ - And then restart the router?
+ - Restart the router, and one more thing I'll add,
+ which I know you would add,
+ but is that you should change the password on the router
+ because all of them have default passwords,
+ which are well known.
+ - Well, and that's the other thing too,
+ is that some routers have an option
+ for WAN management.
+ That is, WAN stands for Wide Area Network,
+ as opposed to LAN, which is the local area network.
+ In other words, some routers allow you
+ to have administrative access from the internet side.
+ And you, unless you really know that you need that,
+ you'd absolutely wanna turn that off.
+ So if you, is you browsing through your router configuration,
+ you see WAN management is enabled,
+ absolutely turn that off.
+ - And it's often enabled by default, it seems.
+ - It is, and it's just crazy.
+ - I think that what happens is a manufacturer
+ wants as few support calls as possible.
+ So they really configure these to be as loose
+ and open as possible because they don't want people
+ to call and say, "Well, I can't do this."
+ - Right, but of course you don't wanna be able to do that
+ unless you have a specific name.
+ There's one other thing that people often do,
+ and have problems with routers,
+ and that is run a server, particularly game servers,
+ but there are other kinds of servers of web server
+ that you might wanna run.
+ And routers are gonna get in the way
+ of those as well, aren't they?
+ - Well, that brings up a really interesting issue
+ because that's the so-called the DMZ,
+ the demilitarized zone, as it's called on routers,
+ and the idea is that you can designate one of your machines
+ to be the machine that unsolicited traffic goes to
+ on purpose, or as we've said,
+ you could just forward specific ports.
+ For example, you were just saying,
+ people might wanna run a game server.
+ The problem with that is, and it's a serious security issue,
+ is that the router is essentially making that machine
+ part of your LAN, that is, you're allowing unsolicited traffic
+ and trusting this traffic to come into your LAN
+ aimed at a specific machine, but once it gets there,
+ if something were malicious that got into that machine
+ you deliberately opened, that machine has access
+ to all the other computers in your network.
+ It's on your LAN.
+ So one trick that I have never seen anywhere
+ is you can actually use two NAT routers.
+ You're able to put NAT routers in series
+ so that for example, you'd have an external NAT router
+ and an internal NAT router.
+ And you might wanna put this link on the show notes,
+ it's www.grc.com/ NAT/ NAT.HTM.
+ I've put together a page where I've drawn some diagrams
+ to make this a little more clear
+ and explained it carefully because it's a very cool idea.
+ The idea is that you could put your game server
+ on the external NAT, on the NAT that's connected to the internet.
+ And then rather than putting the rest of your computers
+ on the same NAT router, put them on their own NAT router
+ and then hook that second NAT router to the first one,
+ essentially in series.
+ So the first one's passing all traffic through,
+ but the second one's blocking traffic
+ from those computers you wanna keep off the DMZ.
+ Well, and it's also, so no longer is your game server
+ on your LAN.
+ It's separated as well.
+ It's sort of on like WAN2.
+ It's sort of on a separate network.
+ And again, you're able to access the game server
+ because you're going upstream.
+ You're going through the NAT outbound
+ which is where the game server is
+ on the outside of your second NAT, but it can't get to you.
+ So if something were to compromise it,
+ you're safe.
+ Another cool application would be
+ if you wanted to mess with wireless,
+ but you were still, you know, you had like first generation
+ wireless technology with web security,
+ which is actually an oxymoron.
+ As opposed to the WPA security,
+ which is really good security,
+ what you could do is you could have your wireless router
+ on the internet and then have a standard non wireless router
+ which runs your main network, your wired network,
+ and you plug your second router into the wireless router.
+ The beauty of that is that no wireless traffic
+ is then able to reach into your network
+ because that second NAT router
+ blocks everything trying to come into it.
+ So conceptually, these both are the same idea,
+ which is that anything that's at risk
+ is isolated from the rest of your network
+ by this second router, which provides a barrier
+ against these at risk routers or computers.
+ - Right, in fact, you can sort of think of a NAT router,
+ sort of like a one way valve.
+ Data can flow out of it without any trouble,
+ but unsolicited data is unable to flow back in.
+ It's sort of like a backflow valve.
+ It won't let the data come in the other direction
+ and you can chain them.
+ You can put them in series and come up
+ with interesting network topologies
+ to really increase the overall security of your system.
+ Say, for example, you were a family
+ and you had a bunch of teenagers
+ all with their own computers.
+ - I salted them.
+ - Well, no, no, actually, well, essentially,
+ and then you got mom and dad's adult computer
+ where the banking and the stock portfolio
+ and all that stuff is, you connect it
+ to the family router through its own NAT router,
+ giving it its own little one way valve.
+ It's able, you know, the adult computer,
+ mom and dad's computer could still get out to the internet,
+ but nothing that infects the kid's computers
+ and their LAN has an opportunity to come back into you.
+ - That's a really useful metaphor for how a router works.
+ It's a one way valve.
+ Outgoing traffic's allowed,
+ but unknown incoming traffic is always blocked.
+ And then if you conceptually understand that,
+ then I think it makes sense.
+ This more advanced description of DMZs and so forth
+ makes a little bit more sense.
+ - Yeah, it's very cool.
+ - Steve, great stuff.
+ And I will, this time put together a list of links
+ on the show notes which are available at thisweekintech.com.
+ Reminder to folks who subscribe to all of our podcasts,
+ this week in tech security now, radio Leo,
+ the report report and the KFI podcast,
+ that we've moved them off feed burner
+ and onto their own RSS feeds
+ so that you probably won't have to do anything.
+ Most RSS software is gonna be smart enough.
+ Feed burner has an automatic redirect.
+ The feed software that you use will, in all likelihood,
+ see that redirect and change the URL for you.
+ If it doesn't, just so you know,
+ the new feed for this podcast is Leo.am/podcasts/SN
+ for security now.
+ And of course, we're still hosted and gratefully hosted
+ by AOL's podcast channel on AOL radio
+ at aolamusic.com.
+ Without them, there'd be no way we could do
+ these podcasts pro bono.
+ But they've absorbed the costs of the immense amount
+ of bandwidth we don't have to.
+ Thank you AOL.
+ And thank you Steve for another great description.
+ I think routers are one of the most important tools
+ in the security arsenal.
+ And I think everybody should have one
+ if you have a broadband connection, get a router.
+ I feel bad for people with dial up because,
+ I mean, there's the Wi-Fi and there's some dial up routers,
+ but they're very expensive.
+ Well, the only advantage really is they're not on
+ the net 24/7, so they're only connected briefly.
+ And of course, routers have come down
+ so that they're below 50 bucks now.
+ It's a great little security appliance.
+ Even if you only have one computer connected
+ to a DSL or cable router, it's pretty much a must-have.
+ Right.
+ Oh, and another nice feature of security now,
+ Steve Gibson has decided to put the bill for transcripts.
+ So does that mean we'll have full text of each podcast, Steve?
+ Each podcast, about 24 hours after it goes public,
+ will have both a text and a ready-to-print PDF file
+ that are very small and allows people
+ just to get him a text if they want to.
+ Wow, that's really great.
+ I mean, it underscores that this is really
+ a pro bono effort on your part to just get the word out
+ about security.
+ And that's one thing you've done all along with GRC.com.
+ So the web page is grc.com/securitynow.
+ .htm.
+ .htm.
+ Thank you, Steve Gibson.
+ We'll see you at GRC.com and back here again next Thursday
+ for security now.
+ [MUSIC PLAYING]
+ [MUSIC PLAYING]

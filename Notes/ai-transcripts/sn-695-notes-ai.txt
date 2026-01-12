@@ -1,0 +1,1442 @@
+ It's time for security now. Steve Gibson is not here. Well, he is in spirit
+ He's taken the week off as I hope you are too, but we know we didn't want to let you down
+ So we have put together for the Friday. This is the first time Steve's ever let us do this some of the best clips
+ The best highlights and most interesting pieces from the year gone by now without further ado the best of 2018
+ Netcasts you love from people you trust
+ This is Twitter
+ This is security now episode 695 for Tuesday Christmas day 1225 2018 our best of 2018
+ Security now is brought to you by literally cash fly make this the last month your CDN bill gives you a headache
+ Join the thousands of others who trust cash flies reliable network and just for security now listeners get up to
+ $5,000 in service credits when you sign up by December 31st and my grade in 2019 learn more at security now
+ cash fly calm well, Mary Christmas happy new year
+ Everybody Leo Laport here Steve Gibson has the day off. He has the week off
+ It's not easy to convince Steve to take the week up or hoping that if he takes some time to himself
+ He could finish squirrel get back to spin right six and all the things we've been waiting for we sure
+ Steve we'd sure like to see those under the tree this year and maybe
+ 2019 anyway, it was an amazing year for security now
+ The I remember when Steve and I first started talking about doing this show 15 years ago
+ Hard to believe Steve was concerned. There wouldn't be enough security news every week to fill a half hour
+ Well, the show's grown to two hours every week and there's still not enough time
+ Man, we had a lot to talk about one of the number one stories of the year
+ story that continues even to this day the problems Intel's having with speculative execution watch
+ All right, Steve you have a picture our picture of the week. Yes
+ Is more it's more what I was expecting when I said last week
+ That the the consequence of being forced to flush the
+ Page look up tables to me was mind-boggling, you know
+ I'm old-school and I don't really believe any of this works. I've I mean just it's like no that can't get off the ground
+ So, you know, the idea is as I was explaining last week
+ the virtual memory mapper in Intel architectures is this three-level lookup table where the the
+ The address that you're
+ Fetching isn't the actual physical address at all. It's an index into a table
+ Which is in index into a table which is an index into a table and and you need all of those in
+ Order to figure out what the value is and you do cache the result and those tables are cached and that's what's called the TLB the
+ Translation look aside buffer because the there's this notion in in general in computing that
+ Something you've done recently you are more likely to do again than not and the classic example is looping if you are looping
+ Over some code that means you go back to the top and you do it again with different values or for, you know
+ Different inputs or something but but so that says that oh look I'm rerunning
+ Instructions that I recently ran so this is why the whole concept of caching makes sense
+ we have we have dynamic memory the main motherboard, you know the whatever it is four eight sixteen gigabytes of
+ main ram
+ because due to the
+ Technology it has
+ It fell behind a long time ago in keeping up with our processors
+ They just no one has been able to make main memory
+ Go fast now, we've talked about little interesting ideas
+ There's some cross wire technology that HP is kind of trying to get off the ground Intel has it to
+ Across point so maybe we'll see something dramatic happen
+ But so far main memory isn't is compared to the way our processors have just leaped ahead in speed
+ It's the laggart so
+ so it's necessary to
+ To use this notion of
+ Reusing something or hoping that you're going to be able to reuse something you recently
+ Slowly fetched from main memory
+ Again, so all of these modern chips have on chip caches and you mentioned L2 L1 L2 L3
+ They're in they're in a hierarchy
+ the the ones closest to the chip are the fastest and the smallest and
+ There's a next level further back and then a third level and they each get larger and
+ Sometimes slower but out but also it's more of a function of access patterns when you've got multiple cores now
+ You've got different processor cores all competing with each other for sharing this common pool of cash
+ All which is trying to provide just arrange to feed these hungry chips
+ Data as quickly as they need it so so also shared are these
+ virtual memory lookup tables and so what I was saying last week was you know the idea that
+ Crossing from the user land user code to the kernel
+ Would require the flushing of that?
+ incredibly
+ Valuable because it's so slow to get it to load it the idea that it would force the flushing of that cash
+ Was just like I know as I said, I don't really believe any of this works to start with
+ I've sort of reluctantly agreed that okay Wi-Fi seems to be working but somehow at
+ Ridiculous speeds, you know and when modem started going to 56k it's like what no modems go at 300 bod or maybe 12
+ But you know not 56k, but yeah, they somehow did
+ so
+ Okay, so this picture
+ Demonstrates what what happened on one of three of epic games servers?
+ When they installed the meltdown
+ Mitigation and this is much more in keeping with with what with what I expected
+ So you can't see it, but there are three chart lines
+ There's green orange and blue as there's a little index down in the lower left a little key showing them
+ and so and what what you see is this sine wave which anyone who's run a big server is familiar with that's the
+ diurnal cycle of
+ Of CPU being busy you notice it it hits a nader
+ It they're all kind of lowest around 4 a.m. And I'm not sure if this is you know you
+ UTC or or what time zone but but then it also peaks all pretty much on the opposite side of
+ The day and so that's just sort of generally people are sleeping and then they're waking up and doing stuff. Well
+ That sudden jump is
+ One of the three processors the green trace
+ where meltdown mitigation was applied and
+ It's about two and a half times if we if you look at at the low point there of all the traces a little just before 4 a.m
+ It you can see that crosses right around 10% and now if you look up at the green line
+ It's more than 25% it's like maybe about 27% whereas the other guys are at 10
+ so that's as that's I mean that's
+ in for their use case the meltdown mitigation
+ Jumped their processors utilization of CPU utilization
+ by about 2.7
+ which
+ I believe based on the severity of the need to discard this slow to acquire
+ Cash data every time you switch between the kernel and and the user so
+ Anyway, this is the kind of picture that I that is what I was expecting
+ Rather than this, you know, we've heard all 1% or point something or maybe five or I was like, okay
+ You know again if you it is completely a function of what you're doing
+ We would talk about kernel mode access you need compared to how much user mode
+ Well, actually it's how much crossing it's the boundary crossing
+ Right, so if you go into the kernel and you read read read read read and then you exit the kernel
+ Right, then there's that one swap then
+ But if you go back and forth, that's when you get the biggest hit right where because you don't want user mode
+ To have access to kernel mode information. So you flush the cache
+ You go into user mode and then you go back to kernel mode. Do they flush it twice?
+ They flush it when you go back in the kernel mode. No, you wouldn't need to then
+ Correct. You don't you don't need to well, you don't need to flush it when you go from the kernel
+ I mean what when you go from the user to the kernel because we trust the kernel, right? There's no malware there
+ It's user code
+ Looking at the residual
+ From being in the kernel and so it's when when you switch to the user that the kernel needs to remove it's
+ What I described last week as footprints, you know because essentially
+ And this comes back to that statement I made in any setting where and caching is a perfect example
+ It's not speculation. We'll we'll talk about that in a second
+ But in any setting where short-term performance optimizations have global effect a sufficiently clever task
+ Can infer the recent history of other tasks by observing its own performance in other words
+ So caching is a short-term performance optimization
+ And if the cache is global that is every it's if everybody gets the benefit of it
+ then
+ clever tasks
+ Can figure out what's in the cache and what isn't by making a fetch
+ And observing how long it takes observing its own performance
+ and so so the the 20,000 view the 20,000 foot view here is
+ is that
+ What we the way we've been cruising for the last several decades is
+ We've been creating faster
+ performance
+ by
+ creating
+ Processors that are increasingly clever about
+ optimizing
+ What they expect to have happen next
+ but that expectation whether it's cache or whether it's
+ specular
+ Architecture that we'll be talking about speculation
+ That that inherently
+ inherently
+ Allows these kinds of problems
+ And so that's why this is as I said before this is
+ Industry shaking. I mean this again. This has always been sitting there
+ Nobody really worried about it until now everybody's worrying about it. So
+ And we don't know who knew about it and when I mean we learned it now, but who knows
+ Although it feels like this is and and this is the other thing i've been speculating on
+ And I can't remember if it was Bruce schnire or brine curbs talked about the synchronicity
+ The fact that two different teams simultaneously discovered this
+ I would guess security researchers
+ Kind of run down similar avenues 14 actually four teams
+ Well, if you broaden the window a little bit within a couple months and that that was Bruce talking about this through so and there is
+ You know, there is a security community. There's conferences
+ There's papers being published everybody's reading everything
+ And so it's not like there's been no cross-pollination at all
+ So it may have been for example that last summer somebody did something or you know
+ Like cash timing is that that's now a thing and rome hammer maybe something exactly so there's sort of there
+ You know, there is something kind of in the air
+ Where individual researchers will you know, kind of think huh? I'm going to spend some time thinking about this
+ You know and and and because they're often researching in a silo
+ Within their own group or their own team or their own university or their own corporation
+ You know, they're and they're wanting to produce results that are you know proprietary until they're not until they're publicly disclosed
+ Especially if it's something like this where they have to you know whisper what they found to
+ The parties who are affected there. There's not they're not going to be talking about it
+ So it's it's it is interesting but not surprising that that suddenly this just kind of all happened
+ It was probably set up by you know, again
+ Just sort of what was in the air in the last few years and eventually bound to happen
+ Intel has just reversed its so-called advice
+ To all of its OEMs saying stop stop stop stop
+ Patching anybody's firmware
+ We made a mistake in in last week's firmware and I don't remember if we touched on it last week, but there were
+ it was it it's hard to
+ Nail them down they're saying something as fuzzy as may
+ Cause reboot issues or may make your system reboot more often
+ It's like wait a minute more often than never often
+ More often than what you know, you know in other words this causes a catastrophic crash
+ Of your system, but they don't want to use those words. Yeah, so
+ Yesterday the newsroom of intel sent out
+ Quote as we start the week
+ I wrote writes in first person this newsroom
+ Mr. Sona. Yeah, uh, yeah, I
+ Want to provide an update on the reboot issues. We reported
+ January 11th
+ Okay, so that was 12 days ago
+ But 11 days ago yesterday
+ We have now identified the root cause
+ for broadwell and haswell platforms
+ And made good progress
+ There leo they're making good progress. Wow. Well, uh in developing a solution to address it
+ Over the weekend and walwork. I'm you can just imagine there's like a lot of late nights over there at intel
+ Over the weekend. We began rolling out an early version of the updated solution
+ to industry partners for testing. Oh, so everybody was awake and
+ We will make a final release
+ Available
+ Once that testing has been completed
+ Okay, but not now not yet
+ Based on this we are updating our guidance
+ For customers and partners
+ We recommend that oem's cloud service providers system manufacturers software vendors and end users
+ Stop deployment. Oh my god
+ current versions
+ And those of you have already installed it. Oh gee, we're sorry
+ Oh, and actually that's happening del has announced in following the guidance that they will be offering previous
+ versions of the firmware immediately
+ Because like to just because now intel is scared everybody that reboots might happen any minute
+ So this is though, but it's haswell and broadwell system. It's not coffee lake kb lake. It's not the more modern systems
+ It's oh, no, it's no. No, it is they haven't they haven't gotten to those. Oh, great. Oh, yeah, it's everything
+ so it's okay, so
+ They're saying stop deployment of current versions as they may introduce
+ Get this again higher than expected
+ reboots
+ What? Well, okay, like i'm not expecting any so
+ I guess a reboot which is unexpected
+ Well, which you didn't you know control alt delete, you know to make happen or pull a plug out or something
+ Anyway, may reboot and they say other
+ unpredictable
+ System behavior now by its very nature
+ Unpredictability is something you are working to avoid in your processors
+ so
+ Yeah
+ Then they say for the full list of platforms see the intel.com
+ security center site
+ which is very busy lately
+ some researchers
+ at a
+ Security firm in Tel Aviv named check marks
+ took a look at tinders ios and android mobile apps
+ And we're surprised to find that it lacked
+ HTTPS encryption if you can believe it or not
+ anyone sharing
+ the same Wi-Fi
+ as a tinder
+ an ios or android mobile tinder device or tinder app user
+ Can see your tinder photos?
+ Add their own into the photo stream and track what you do on tinder
+ um
+ They're not using encryption to keep the photos safe from
+ Anybody who wants to eavesdrop and although apparently they are using encryption for
+ encrypting the actions of a tinder user
+ the
+ encryption is spotty
+ and it turns out that
+ that
+ Even looking at the encrypted stream it is possible to ascertain what the user is doing
+ so uh check check marks produced a proof of concept app called tinder drift
+ which is demoed on youtube which reconstructs
+ any tinder users online session of what they see and the way they respond to what they see
+ essentially unmasking
+ any person's behavior who is using tinder on shared you know on a shared
+ uh ethernet medium like Wi-Fi so although again the swipes and matches
+ are encrypted check marks explained and proved um hackers sharing the same
+ uh
+ Wi-Fi are able essentially to completely unmask
+ everything that is being done uh
+ The it turns out that the specific patterns of bytes that represent a left swipe a right swipe
+ a super like whatever that is and a match are all
+ clear
+ But even though technically they're encrypted nobody at tinder really gave the security of their application
+ much thought apparently or any real concern concern over protecting the privacy of their users
+ um the verge in their coverage asked tinder to respond to this
+ and so tinder did respond saying that the unencrypted photos are profile pictures
+ and tinder is a free global platform so the pictures are quote available to anyone
+ swiping on the app anyway of course what isn't free and global are are the individual tinder
+ users choices and reactions to those unencrypted unprotected photos which this research demonstrates
+ was poorly concealed so i'm glad again this is i mean we just keep seeing example after example
+ maybe we just talked about it with it with tavis and blizzard and here now check marks
+ in Tel Aviv and tinder um where we we have to have oversight we have to we have to have an
+ environment where it is where security firms and researchers are able to examine these things
+ and and i'm thankful that they're willing to volunteer their time and do so you know they bring
+ some some beneficial positive press to themselves for doing so and in the process you know it's
+ benefiting the users of these applications for which it's clear not enough attention has been
+ given to security hello security now listeners i want to tell you uh a true story on this holiday
+ a true story of a young podcast network looking for a way to get our shows to you with minimal fuss
+ minimal expense uh minimal trouble we stumbled upon i was very lucky actually
+ a guy named matt levine one of the founders of cash fly approached me i think it was at a podcast
+ expo said we should be we should be working together i said well tell me about it cash fly
+ is a CD and a content distribution network and we've been on cash fly now ever since then
+ about 10 years more than 10 years not 1 3 a.m phone call the CD ends down not one moment of
+ concern about the bill logging in you know have you ever done this if you have a CD and anybody
+ delivers content to customers whether it's a an app a podcast whatever you you probably know this
+ feeling of gosh are we gonna go over our monthly allocation this month what are we gonna do well
+ we had a really successful show lots of people downloading the app oh no and you're logging in
+ your CD and how did we go over the capital good not with cash fly they work with you to tailor
+ your plan to your yearly usage trends it smooths out all the peaks and on average customers who
+ switch to cash fly save 20 percent by the way cash fly the nicest people in the world an expert
+ team of smart easy to talk to agile techs they can answer all your questions of first time you
+ will not be put inside a corporate phone tree no they care about you they care about their customers
+ and they guarantee get ready for this 100 percent availability with their bulletproof 100 percent
+ SLA i will vouch for that not what we haven't we literally pump petabytes worth of data through
+ cash fly every single month every show when you download the show audio or video you get it from
+ cash fly through our cash fly CDN that means the server is close to you it's fast and we haven't
+ lost a single bit 10 years a decade not one bit lost i love you cash fly you will love cash fly
+ too cash fly has been building trusted CDN relationships since 2002 since before podcast listen to if
+ you don't believe me listen to ours technica ours technica's director of technology quote
+ sometimes we have spike events sound familiar spikes in traffic generating 15 to 16 million page
+ views whoa with cash fly you don't see an issue the CDN just absorbs it our customers
+ commend us on that and i commend cash fly on that same experience a decade without a bit lost
+ you're gonna love cash fly so here's my invitation to you let cash fly give you some sanity back
+ their special offer has been extended just for twit listeners you go to security now.cash fly.com
+ okay that's a special URL they know then you heard it on security now so it helps Steve helps me
+ security now.cash fly.com it will help you too because you will get up to five thousand dollars
+ in service credits but you have to sign up by the end of the year by December 31st and you have to
+ migrate sometime in 2019 sign up by the end of the year migrate by 2019 and up to five thousand
+ dollars in service credits and of course they'll go through your bill and they can explain to you
+ why cash fly is better it's better that's why security now that cash fly.com we thank cash fly
+ as always for their support you've heard it at the beginning every every podcast for 10 years
+ bandwidth for security now is provided by cash fly at cac h-e f-l-y dot com security now
+ cash fly.com thank you cash fly. oh back to the show. The Wyoming and New York's governors had both
+ signed some executive orders and just as we were starting the podcast news came that the California
+ Senate had passed I think it was 21 to 12 a similar some similar legislation the idea being that
+ that states have a lot of power over you know what happens within their borders and while
+ even though the major ISPs were lobbying hard to prevent states from going their own way
+ relative to net neutrality it turns out there's there are strict limits over what the federal
+ government can do because for example states have control over their purse and they can decide
+ how they want to spend their money so what happened was that we had a a bill that that passed through
+ California's Senate that is now moving on to the assembly and and I just checked my notes it did
+ pass 21 to 12 however this is this looks like it's just the beginning there are also a group of
+ 22 state attorneys general that have have gathered together and filed a suit against the FCC it
+ turns out that it it turns out it's not possible much as the FCC would like to simply change their
+ own rules there are there's laws that govern what the FCC is able to do and it's necessary for
+ the FCC to demonstrate that conditions have changed sufficiently since an original law was put in
+ place for them to use that to justify subsequent change and that hasn't happened since the net
+ neutrality law was was brought up the they've called the open internet order in 2015 so it turns
+ out that that 22 states have joined together in a an action against the FCC to challenge the you
+ know adjectives much noticed decision just to toss that 2015 decision out but more importantly the
+ EFF of course our friends at the electronic frontier foundation are very much involved in this
+ they posted a sort of a response to California's action sounding a little annoyed apparently they
+ were involved in the in the lawmaking and for whatever reason I don't know anything about what's
+ going on behind the scenes politically but the legislation which California has passed so far
+ they worry would not stand legal challenge Ernesto Falcon writing for the EFF said that there were
+ there were much stronger things that California lawmakers could have done and he enumerated three
+ which are really interesting so I wanted to share them with our listeners because this gives us a
+ sense for just how much clout states actually do have over what goes on inside their borders
+ first Ernesto writes that California spends hundreds of millions of dollars on ISPs including AT&T
+ as part of its California broadband subsidy program he says the state could require that recipients
+ of that funding provide a free and open internet to ensure that taxpayer funds are used to benefit
+ California residents rather than subsidizing a discriminatory network he writes this is one of
+ the strongest means the state has to promote network neutrality and it's missing from this
+ legislation which just passed which was SB 460 secondly he writes California also has oversight
+ and power over more than four million utility polls that ISPs benefit from accessing to deploy
+ their networks in California oh it says he says in fact California is expressly empowered by federal
+ law to regulate access to the polls and the state legislature can establish network neutrality
+ conditions in exchange for access to the polls he says again that is not in the current bill passed
+ by the senate and then third each city negotiates a franchise with a local cable company and often
+ the company agrees to to a set of conditions in exchange for access to valuable taxpayer-funded
+ rights of way California's legislature he says can directly empower local communities to negotiate
+ with ISPs to require network neutrality in exchange for the benefit of accessing taxpayer-funded
+ infrastructure he says this is also not included in the California bill so I thought you know I just
+ I wanted to do some more digging into this because of course this has been a big topic of hours and
+ of huge interest and the the voting public has demonstrated overwhelming support for the concept
+ of net of net neutrality which for reasons of the way Washington works with power brokers and
+ lobbying and money isn't what our government has been doing but it looks like at the state level
+ you know there is very very strong capability of of enforcing this locally so as I noted at the top
+ I think we're far from losing this as a consequence of the nature of this so-called industry of iPhone
+ cracking we don't have definitive information from Celebright and and we're not going to
+ but all of the evidence suggests that Celebright may now be able to unlock
+ from iPhone 5 through iPhone 10 I mean inclusive all of them there was some good coverage in Forbes
+ Thomas Fox Brewster writing for in his security column for Forbes he says in what appears to be
+ a major breakthrough for law enforcement and and again with caveats that you know we don't know
+ absolutely positively for sure but it's worth just putting it on everyone's radar and a possible
+ privacy problem for Apple customers he writes a major US government contractor claims to have
+ found a way to unlock pretty much every iPhone on the market Celebright the Israeli based vendor
+ that's become the US government's company of choice when it comes to unlocking mobile devices
+ is this month telling customers its engineers currently have the ability to get around the
+ security of devices running iOS 11 that includes the iPhone 10 a model that Forbes has learned
+ was successfully rated for data by the Department of Homeland Security back in November 2017 so last
+ November most likely with Celebright technology he writes the Israeli firm a subsidiary of Japan's
+ Sun Corporation hasn't made any major public announcement about its new iOS capabilities
+ but Forbes has told was told by sources who asked to remain anonymous as they weren't
+ authorized to talk on the matter that in the last few months the company has developed
+ undisclosed techniques to get into iOS 11 and is advertising them to law enforcement and private
+ forensics folk across the globe indeed he writes the company's literature for its quote advanced
+ unlocking and extraction services offer offering now notes the company can break the security of
+ quote Apple iOS devices and operating systems including iPhone iPad iPad mini iPad pro and iPod
+ touch running iOS 5 to iOS 11 so then Thomas's column goes into much greater detail citing
+ interesting but you know necessarily hearsay accounts of various models of iPhones being
+ accessed but as always you know without absolute definitive detail but of course that's because
+ Celebright protects these secrets as much from Apple as it as like from their own customers
+ you know they could probably put this in some software they might be able to package it in
+ something that they sell but Apple would be first in line to purchase it through through a cutout
+ and figure out what Celebright is doing and assuming that they really wanted to fix the problem
+ so the way this works is phones must be physically sent to Celebright for them to work their magic
+ and then they either unlock and extract or provide some means subsequently for after the phone is
+ returned probably for forensics reasons to allow the authority that had had that device in their
+ possession to then get access to it so again this is hearsay and rumor seems to be pretty well
+ sourced however so who knows you know what they're doing what what in they may have found
+ but it does look like if this is to be believed there may be a way in given you know this sort of
+ extreme access where you have to have you know it has to go to Israel in order to in order to be
+ cracked the picture I have in the show notes is of yesterday's rerecord breaking attack showing
+ basically a timeline of prior attacks one and I can't quite read it looks like maybe it's 2001
+ can't see it was anyway it's 24 gig that it was like whoa 24 gig oh what um and then a few years
+ later 100 gig Leo oh my god you know 100 gig and then a few years later 309 oh three times more
+ more than three times more than 100 309 a few years later now we're up to about looks like about 2016
+ 650 gigs okay you know wow now yesterday yesterday 1.7 okay so I could say it as 1700 gigabits per
+ second or 1.7 terabits per second is where we are a a internet melting DDoS attack as I mentioned at
+ the top of the show this is the result of a devastating service being exposed publicly what's
+ really curious is that this had been noted a couple years ago in some of the black hat Defcon
+ style conferences it might have been one of the two of those someone just sort of noted in passing
+ that and it may have been that no one thought anyone was crazy enough to have this publicly
+ exposed but there's a service on Linux platforms called Memcache or because it's a service Memcache
+ D for Damon meaning that it's running in the background it is a very simple very fast cache
+ the idea being that because you might have a very complex SQL database query after performing
+ a complex lengthy SQL database query you might want to do some short-term caching
+ so it could be in RAM or it could be on the hard drive depending but the idea being that
+ you've you've performed some extensive query you may need it again you don't want to go back and
+ and reissue the query so you use this sort of this intermediate cache where you use a you use a
+ key or a tag and the data so it's it's very simple you can't do any fancy queries you can just say
+ here's a blob stored under this index and so this Memcache says okay and and it is accessible
+ over both TCP and yes I did say both both TCP and UDP well we know what that means
+ if it's publicly exposed the problem with UDP is there is no provision for verifying the source
+ IP of a query as we've often discussed with TCP you need to there is it this the famous three-way
+ handshake a sin for synchronized goes in one direction a sin with an ACK acknowledging the
+ receipt of the sin goes in the other direction and then finally an ACK acknowledging the receipt
+ of the second sin makes the third the third interchange of the three-way handshake
+ the constant the an interesting side effect is that is it both endpoints have to tell the truth
+ about their IP addresses in order to receive each other's acknowledgments otherwise it doesn't
+ happen so TCP cannot be spoofed UDP is used for lightweight internet traffic where you simply say
+ give me something like give me an IP address for DNS and DNS is UDP and DNS has been used in so
+ called amplification and reflection attacks it's amplification because a tiny query can generate
+ a large response so what that means is that an attacker is able to send little DNS queries to
+ a DNS server which will respond with much larger replies thus amplification but because it's UDP
+ nothing prevents the the instigator of the attack the person sending the UDP packet from
+ lying about their IP they put the IP of the intended victim the target in the UDP packet
+ so that this the DNS server that receives it believes that guy was asking for a DNS address
+ and so the larger the larger response goes to the victim of the attack thus
+ it is the attack is reflected off of the DNS server and amplified a reflected amplification
+ attack using UDP well there's a but there have been a bunch of different types of UDP services
+ exposed and used over time they all pale in comparison to this one of course 2018 I hope
+ you're enjoying by the way hello this best of security now the first time Steve's ever let us
+ do this holiday best of it's kind of fun to get back and think about all the security nightmares
+ we've suffered through over the year 2018 it was an election year and of course everybody was very
+ concerned about election security Steve had this to say for the sake of just not leaving
+ something out that probably doesn't really matter um well at where I guess it matters because it
+ just demonstrates sort of how nothing is happening like that should there was what made the news
+ is it the US Department of Homeland Security has designated election systems as a sub-sector
+ of the country the US's critical infrastructure um after the intelligence community broadly
+ concluded last year that Russia had tried to interfere with the 2016 US US presidential election
+ as a consequence there's it turns out there's something that I was really never very aware of
+ that they're called ISACs which are abbreviated as the abbreviation for information sharing
+ and analysis center which I you know is our tax dollars here in the US apparently spinning around
+ in circles and getting nothing done oh man uh let's look at this website I have a link here in the
+ show notes national isax.org forward slash member hyphen isax isacs um and so there's already a
+ bunch of them who knew um for and I'll just give you I'll read down to the eyes in alphabetic
+ order automotive aviation communications defense industrial base downstream natural gas
+ as opposed to upstream natural gas I guess electricity emergency management and response
+ financial services health care information technology okay and then that gives you an idea
+ so who knows what this is I mean it just it's bureaucracy uh at its finest um and the problem of
+ course is that so the idea is that states and localities are supposed to become members of the
+ election systems isac and I don't know what happens then I mean the problem is and we've
+ been discussing voting machines for years which arguably are based on last year's black hat and
+ defcon horrifically insecure and I mean we've talked about unauthenticated what remote Wi-Fi
+ access evil made access where there's a like an active USB port on the side and you can just kind
+ of sally up next to the machine and slip your slip it a view a thumb drive and take it over
+ remotely and make it reboot and dump its contents out and we were talking earlier this year about
+ the problem that that the black hat and defcon conference organizers are having for this
+ coming summers events because now the people who had traditionally been reselling these machines
+ are being illegally threatened by though their their machines manufacturers against reselling
+ with attorneys writing them fraudulent letters claiming that it's illegal to resell them
+ and you know this certainly after a while we're approaching the end of year 12 now and
+ it's if nothing could be more clear to us and our audience than that this whole process is
+ completely bassacwards I mean completely broken what there should be is the kind of process that
+ we'll be discussing that that that adopted and ratified TLS version 1.3 which is a standard
+ that that industry and academia together worked on polished refined argued over fought over
+ wrestled to the ground tested implemented and and just absolutely nailed and now it is being
+ adopted that's that's the process that we should have for something very in many ways sort of similar
+ to that has that shows many similar characteristics to voting automation it the idea that that debold
+ pronouncing the name correctly this time could could offer for sale a black box that that people
+ adopt and use for something as important as voting where it's all this is our proprietary
+ technology and and you can't see inside but trust us no no I mean and it's just it's insane that
+ this is you know that unfortunately this aspect of capitalism has been allowed to take hold and
+ be employed in in the US or any you know election system it ought to be an open standard developed
+ in full view and then yes I have no problem if then companies want to compete on implementing
+ the standard which is created which is what we do now where we have other standards
+ though the standard is open you you implement the standard you it is verified that you have done
+ so correctly and then you're welcome to sell your hardware that runs the the system that has been
+ universally agreed upon and pounded on you're welcome to sell that fine but you know this notion
+ that oh you know we've got the greatest security experts and after all we're us who cares anyway
+ so nothing is happening and I don't I don't know how like how long it's gonna take for for anything
+ real to happen but as long as we allow closed architecture voting which is what this has become
+ you know I mean and this is why now you know they're saying okay well let's get a paper trail
+ okay well okay I guess that's better but it still seems a problem medical so you know this is a
+ problem we know how to solve but unfortunately commercial interests in this country are preventing
+ its proper solution so who knows when that'll change but however you know creating a new
+ bureaucracy to talk about it doesn't seem to me like we're moving in the right direction day
+ April 17th I guess as a consequence of the fact that April 15th fell on a Sunday that must be why
+ yeah and Monday is was like Emancipation Day in Washington DC so oh okay so you know in the US
+ for those who are not in the US are so-called internal revenues service the IRS this is our tax
+ filing deadline date for that 2017 calendar year and and one of the the headlines I got I got a
+ kick out of said that the IRS's e-filing system is wait for it overtax uh-huh uh-huh uh-huh that just
+ sounds like clever headline writer because what I saw was that the IRS didn't know why it wasn't
+ working they don't know so it may not be overtaxed it may be something under attack yes yeah um so
+ basically our our us e-filing system which which one would expect to be heavily used is not been
+ working well all day and as we know it is extremely difficult now nowadays to to keep a system online
+ that you read that for which there's any reason for bad guys to want to have not be online there
+ there's um so many ways now with DDoS amplification attacks and the ready availability of things that
+ can attack in order to launch these attacks that I mean as we've been talking about we're a 10 year
+ old and in Columbus, Ohio right yes yes it doesn't have to be in nation states mounting an attack against
+ the IRS in the US and probably isn't it's just somebody who says hey you know this is the the time
+ that all of that lots of people are going to be trying to be filing their taxes at the e-filing
+ website so let's just take those guys offline and uh if that's the case I mean we don't know
+ but uh I guess there was some IRS person was giving testimony in front of Congress and they
+ know that's kind of not a big high-profile issue just some meeting somewhere and one of the one
+ of the Congress uh people said so uh do you know that the e-filing system is offline right now
+ and he's like oh uh well yes we're looking into that and uh we expect it to be backup later today
+ which which apparently they have no idea what's wrong oh and the other it's been eight hours at
+ least the last time I checked and it says that it's a planned outage no that's not true no no I
+ know I saw a screenshot that seems stupid if you plan an outage on tax filing day wouldn't that be
+ bad planning oh man I wouldn't put it back to them it said April 17th 2018 planned outage so
+ which basically means it wasn't planned but they're there they have a but the message was planned
+ to appear and declare that it was planned unbelievable so yeah the echo was a breakout product not too
+ long ago it was the center of Amazon's new voice assistant market and um even at that time there
+ was a worry that the devices are listening to us and now we actually know well of course they are
+ yeah so um a group named checkmarks has successfully demonstrated a persistent listening skill
+ for the echo as we know uh the echo is extensible they uh amazon produces and publishes an api
+ which developers can use in order to create new skills which users can download and add to their
+ echo in order to do things um what they did was created a proof of concept which to me seems sort
+ of like wait a minute you mean it's vulnerable to that um they created a a calculator app which
+ appears to be a voice driven calculator okay that's you know I guess that's a skill um but when it
+ launches it spins off a secondary background non-terminating task which causes any such skill
+ enhanced amazon voice assist device because there's a bunch of different ones you know different
+ sizes and shapes now to indefinitely record all surrounding audio eavesdropping on users
+ conversations while also streaming the audio to a third party server somewhere so I mean it's like
+ everyone's worst fear about what could happen if you have an internet connected
+ microphone you know in your like deliberately in your midst presumably located somewhere like
+ that's not in the closet it's out where everybody where it can hear everybody because that's what
+ it's supposed to be doing um they reported the issue to amazon and the company has addressed the
+ problem though not very robustly in my opinion uh they're in the in the reporting of this they said
+ they now regularly scan for malicious skills that quote silently prompts or listens for
+ unused for unusual lengths of time then kicks them out of their official store and I don't know uh
+ to me for something as important as the security this feels like an immature and not very well
+ thought out API um no skills that is you know these add-ons should have any such access
+ like direct access to the system's microphone um rather any skill should register its microphone
+ usage and access policy whatever that is um and its needs as part of an unhackable signed
+ policy packet which you know amazon approves then the developers incorporate into their skill
+ and then it can't be hacked afterwards and then the device's API should grant
+ the skills requests which are filtered through and enforced by the previously declared and
+ approved policy I mean it's like this is how you solve that problem these are not hard things to
+ do and I'm just sort of I'm surprised that in this day and age a obviously security conscious
+ company could produce an API that allows a skill to establish a background task which leaves the
+ microphone running and streaming data to the internet it's like how how do you do that right
+ right yeah I mean my understanding was the voice activation part was tied directly to the operating
+ system and it did submit information to amazon but you're right why would a skill ever need that
+ because the skill is triggered by a voice prompt it's it's not as if it's running waiting for the
+ voice prompt right right I just like okay let's hope they get this right um and probably I mean
+ what they would have to do now would be to re-engineer the API with additional security
+ maybe taking the lessons that they've learned because I'm sure they've learned some lessons
+ since its release and just do it v2 API and over you know give developers some time to migrate their
+ skill to the v2 um and then just shut down access to the version one API that is obviously not
+ secure I mean the idea of oh uh we didn't realize that uh skills could listen persistently and stream
+ audio over the internet so we're gonna periodically scan to see if that's happening what
+ no we can't keep people out of your home but we'll drive by every once in a while to see the
+ lights are on right see it's perfect everyone's still breathing happily my lord now I got an echo
+ early on um and um I hook it up every once in a while because there are some projects that I love
+ doing with the echo however one of the very first things that I did when I got one was I set up an
+ AP running through a tap connected the echo to that AP and what concerned me was all the outbound
+ traffic that I saw when I was not doing anything how noisy it is and that that really really concerned
+ me now it's gotten better so obviously they've they've improved their software um but I'm betting
+ if I were to slap the the echo back on this tap and run one of those skills I'd I'd be very
+ enthusiastic about the data that I'd be receiving
+ um okay uh it's being called glitch GLITCH and GL is in caps in in the name of this as in
+ web GL a group of researchers at the university in Amsterdam have developed a new startlingly
+ effective remote attack against android smartphones using the user's web browser and the device is
+ built in GPU via JavaScript and the web GL API so what this means is they have demonstrated
+ that a user of android visits a particular website. JavaScript is delivered and runs either
+ under Chrome or Firefox it run that they they tested it under both and get this in two minutes
+ the attack is so potent that with oh and I should mention this is row hammer uh within two minutes
+ their phone is compromised so it's a it's the first row hammer attack to leverage GPUs to leak
+ the computers memory contents and allow bad guys remotely to compromise a phone we've talked we've
+ been talking about row hammer for quite a while remember that it is a it leverages a essentially
+ noise noise in RAM access to cause a bit to flip in the actual memory grid of dynamic RAM
+ as a consequence of it it's sort of being a malicious access pattern and it turns out that
+ GPUs are far more effective than CPUs the reason we haven't seen this on desktops before is that
+ GPUs have their own memory on lower end devices like smartphones and tablets the GPU shares main
+ memory with the CPU so by leveraging web GL which gives the JavaScript extremely accurate timing
+ information they're able to perform a cache attack with GPU because the GPU has a much shallower
+ cache than the CPU does in order to compromise the device within about two minutes so
+ what's not clear is whether there has been some fuzzing in the web GL support on those browsers
+ they're all there had been some fuzzing in timing in in response to meltdown and specter earlier this
+ year under the the cert org page I went looking to see specifically whether Mozilla and and Google
+ with Chrome had responded and nothing was there although in digging around I saw some reference to
+ perhaps this already having been taken advantage of but nothing yet posted publicly so it's not clear
+ certainly both companies know and I'm sure they will be making they will be arranging to limit the
+ the timing accuracy of web GL and essentially that's the that's the crucial thing as we have
+ been seeing a lot lately to determine whether to for you essentially for row hammer to be used
+ to to penetrate caching is you have to be able to sense whether a particular access was was
+ cached or not and for that you need to know with very good accuracy what what the timing was so
+ anyway we do have again another instance of uh our famously often quoted and I think it was
+ Bruce snire who said attacks never get worse they only get better ah trip down memory lane with
+ the row hammer attack actually row hammer is an interesting story because once the bad guys
+ figured out that you could do those kinds of timing attacks on on hardware and as of course
+ as you see even with android uh they they everybody there was a field day for all the security research
+ trying to find you know the security flaws from uh timing attacks and I don't think we've seen the
+ end of that in even in 2019 I expect many more row hammer style attacks well I think we should
+ lighten things up don't you a little bit uh this is uh one of the funnier stories of 2018
+ HTTP error 418 no really it's funny listen uh we've actually had Leo a real world occurrence
+ of HTTP error 418 I'm a teapot how can I do that now can I make it happen here
+ to to to to to our reminder listeners uh it was April 1st not surprisingly of 1998 when
+ RFC and Leo you probably want to look this up RFC 23 24 so it's it's it's an it's an official
+ I E T F dot org document RFC 23 24 it is the HTC PCP uh protocol which is the hypertext
+ coffee pot control protocol and we're we're all familiar with the the infamous uh
+ HTTP 404 that's the you know the page not found uh you don't normally see the 300s
+ like a 301 or 302 because those are the redirects that's where because you don't see them because
+ your browser normally does them for you you click on a link to content that is moved somewhere else
+ and what you get back is uh is a 301 redirect which then your browser season goes oh that content is
+ over at this URL and it and you go there instead well this introduces the brew method
+ you got posts of course but this is brew yes in effect the RFC begins under rationale and scope
+ it explains very seriously there is coffee all over the world increasingly in a world
+ in which computing is ubiquitous the computers want to make coffee it's also a when method
+ so when you're adding milk you can say when oh it says coffee brewing is an art but the
+ distributed intelligence of the web connected world transcends art thus there is a strong
+ dark rich requirement for a protocol designed espresso Lee espresso Lee espresso Lee
+ for the brewing of coffee coffee is brewed using coffee pots networked coffee pots
+ require a control protocol if they're to be controlled naturally so the hypertext coffee pot
+ control protocol which you have been exploring Leo in the RFC beautiful 23 24 dated April 1st
+ 1998 so what happened for seven hours yesterday many developers using NPM I'm not kidding
+ the node JS package manager yes I use it all the time yes yes we're receiving an error message
+ error 418 I'm a teapot the trouble was seen by those teams operating behind a proxy
+ that was appending the port specifier colon 443 to the domain name on its way across the proxy
+ out onto the public internet well that says say SSL isn't it that's that yeah but it was confusing
+ the NPM registries servers which resulted in them returning an error 418 I'm a teapot declaration
+ yep somewhere someone decided to return that error for unforeseen conditions
+ and it actually did happen in the real world so so great yes I'm a teapot lives
+ well past 1998 so awesome Adobe flash cannot die soon enough
+ what once again a actively exploited in the wild zero day had come to life they announced
+ an emergency patch last Thursday I don't know it's like in other words you know when malware
+ you know of flash you would have to say when malware has a large reputable publisher
+ I mean that's what this is this is just ridiculous okay so adobe's own summary
+ for this update said adobe has released security updates for adobe flash player for windows
+ mac ox so mac o s sorry linux and chrome even chrome's built-in flash player was vulnerable
+ these updates address critical vulnerabilities in adobe flash player 29.0.0.171 and earlier
+ successful exploitation could lead to arbitrary code execution in the context of the current
+ user adobe is aware they write of a report that an exploit for and then there's a vulnerability
+ for their for their flash player to 2018-5002 exists in the wild and is being used in limited
+ targeted attacks against windows users these attacks leverage office documents with embedded
+ malicious flash player content distributed via email in some of the coverage of this leo
+ I saw some some observers saying well browsers have hardened themselves proactively against
+ flash so now the the the the miscreants have figured out another way to leverage the continuing
+ existence of flash even those browsers won't use it any longer but it's still present in people's
+ systems in order to exploit them and look at this exploitation path i have the the picture
+ here in the show notes it's like yikes um the user opens a weaponized office document
+ which contains a flash active x embedded object that reaches out to a remote server
+ to obtain a flash exploit which is retrieved using public key crypto and and then executed
+ which decrypts itself and then in step seven uses a a an exploit in flash load or load bytes
+ to load and trigger the exploit which then reaches out again to the same server to download shell
+ code which is then able to execute on the user's system so remind me again why it is exactly
+ we're waiting until 2020 the end of 2020 through 2020 to finally be rid of this internet menace
+ called flash i mean you know we have routers infected half a million routers infected with
+ self-destructing firmware ready to be triggered onward from Moscow yet yet you know how difficult
+ could it possibly be for adobe to push out just one last update to self-destruct all remaining
+ instances of flash in the wild and make everyone safer it's just like my goodness you know it's
+ it's only now being used by websites that still want to use it to display video yet we've seen
+ that this slow end of lifing doesn't work on the internet it's all and we you know we've we've
+ covered multiple instances where chrome it's only by refusing to allow things to run any longer
+ that people are creating well published deadlines that people have been forced to move away from
+ technology that well you know it's working so let's not change anything except it's it's it's
+ presence there is is hurting everyone so anyway i just had to rant again on this another occasion
+ of a of of a zero day being exploited by of flash by virtue of the fact that it's it still exists
+ in people's machines and what adobe is going to have to do to be responsible i mean i guess we're
+ going to have to wait till the end of 2020 but they need to have itself destruct if they're saying
+ we're not we're going to no longer support it then please adobe kill it shoot it in the head
+ just you know just end of flash goodbye that's what we need uh cedric uh cotchen uh at in macafees
+ advanced threat research team uh came up with a clever hack and we've seen things like this leo
+ with with voice assistance before where and i'm sure that there have been some some for ios
+ where features are added without fully vetting all of the possible ways that they can be abused
+ turns out that in windows 10 cortana can be abused um until last tuesday this is another of the
+ things that microsoft locked down so um uh this this one is a not a remote problem because it
+ involves cortana but a local one it turns out that if you say if you activate uh cortana
+ and uh and she comes alive on a locked machine so the machine is is powered on but locked so that
+ it's not supposed to do anything turns out cortana is still listening so anyone can come along and
+ activate cortana it turns out that you can either either phonetically or use the keyboard to start
+ typing you can type while cortana is listening for more verbal command and these guys came up with a
+ multi-stage means to make a long story short of running an externally provided power shell script
+ from a usb drive that's plugged into the machine that ends up getting registered with a system uh
+ cortana is able to see it and when you ask for a search it gets its context its contents are
+ indexed which allows you to bring up a file which in this case is a power shell script which is the
+ first stage of the attack it's then possible to get that to execute code your own hacker provided
+ code from the usb device and uh and go as far as for example completely taking over the locked
+ session and even changing the system's password uh on a locked machine the the blog posting that
+ mackephie put up uh was titled want to break into a locked windows 10 device ask cortana um so that's
+ yet another thing that last tuesday's uh patch round fixed uh fortunately and uh and they noted
+ that because they felt that this was you know now it now there's full details published it takes no
+ advanced hacking ability in order to to abuse this so um they were suggesting and i would
+ absolutely concur uh if you do not update to if for whatever reason you have not updated to last
+ tuesday's patches that fix this by all means disable cortana on when the system is locked
+ and i would argue that's just sound security practice um there are just too many opportunities
+ for this kind of exploit on a system which should just be shut down and not listening
+ to anybody while it's locked so i i would say even after having patched the the june updates i
+ would that i don't unless you have a compelling need to have cortana listening while your system
+ is locked i think it makes a lot of sense to disable that and had you done so already this would
+ have never been a vulnerability um i expect there will be uh some people uh getting up to some antics
+ uh with this one because it's just it's so easy to do as we know um and this has been in the news
+ a lot recently increasingly local police and other law enforcement agencies have been obtaining court
+ orders to compel local cell carriers to disclose the location data of of people they suspect of
+ crimes um but significantly these have not been probable cause search warrants as permitted
+ under the fourth amendment to the u.s. constitution they simply been requests from courts for the
+ business record documents of cellular carriers and in previous decisions that it's been um held
+ that business records are subject to court order and can be obtained uh by law enforcement for
+ whatever purposes they wish okay so um there was a a burglar ring operating uh i think is in 2011
+ they were they were caught the ring leader was a guy named timothy ivory carpenter who um
+ who was accused of planning these crimes i guess some of his other uh cohorts
+ fingered him as the boss and so uh he got in trouble um
+ he petitioned uh you know mean they so so he was first convicted uh from oh i i i i should explain
+ that the the fbi after they got his name got a court order to cause the cellular carrier in the
+ region to turn over the records of his cell phone location which did identify him as being present
+ in the location and time of four the burglar burglaries he was found guilty in court
+ sentenced and for like a huge number of years more than a several lifetime as i recall um
+ he appealed and uh the appeal was heard the appellate court said nope we think this is proper
+ so sorry about that and it went to the supreme court that the decision of the supreme court
+ uh a day or two ago came down and overturned what the appeals court and the lower courts had said
+ and the this was interesting enough and i thought would be interesting enough to our listeners that
+ i've pulled together sort of a a summary of this uh because i wanted to go over you know exactly
+ what this is that was decided uh chief justice robert delivered the opinion of the court
+ um uh and uh from the document which i've excerpted from it reads this case presents the question
+ whether the government conducts a search under the fourth amendment when it accesses historical
+ cell phone records that provide a comprehensive chronicle of the user's past movements
+ um and so okay so i'll skip over what we already know from a technology standpoint
+ but i'll just say that it opens with a clear and perfect succinct explanation of cell tower
+ location how the increasing popularity of cellular communications has caused providers to increase
+ the density of towers and thus increases the accuracy of tower based location approaching that
+ of gps especially in urban areas and i do have in the show notes at the beginning of this a link
+ to the pdf of the full it's a 158 pages i think it was or that might have been in one of the other
+ pds it was like at least 119 of of the opinion anyway so so here's the summary of the decision
+ it reads cell phones perform their wide and growing variety of functions by continuously
+ connecting to a set of radio antennas called cell sites each time a phone connects to a cell site
+ it generates a time stamped record as cell site location information csli wireless carriers
+ collect and store this information for their own business purposes here after the fbi identified
+ the cell phone numbers of several robbery suspects prosecutors were granted court orders to obtain
+ the suspect cell phone records under the stored communications act wireless carriers produced csli
+ that is the cell site location information for petitioner timothy carpenters phone and the government
+ was able to obtain 12,898 location points cataloging carpenters movements over 127 days
+ an average of 101 data points per day carpenter moved to suppress the data arguing that the
+ government's seizure of the records without obtaining a warrant that is to say a search warrant
+ supported by probable cause violated before the amendment the district court denied the motion
+ and prosecutors used the records at trial to show that carpenters phone was near four of the robbery
+ locations at the time those robberies occurred carpenter was convicted the sixth circuit affirmed
+ holding that carpenter lacked a reasonable expectation of privacy in the location information
+ collected by the fbi because he had shared that information with his wireless carriers
+ co so what was what what the supreme court held is one the government's acquisition of carpenter
+ cell site records was a fourth amendment search they say which is to say qualifies under fourth
+ amendment protection and a search warrant with probable cause needed to be obtained in order
+ for the cell site records to be had they wrote before the amendment protects not only property
+ interests but certain expectations of privacy as well then they cite a previous case cats versus
+ the u_s_ thus when an individual quote seeks to preserve something as private unquote and his
+ expectation of privacy is quote one that society is prepared to recognize as reasonable unquote
+ official intrusion into that sphere generally be generally qualifies as a search and requires
+ a warrant supported by probable cause then they cite previous case smith versus maryland
+ the analysis regarding which expectations of privacy are entitled to protection
+ is informed by historical understandings quote of what was deemed an unreasonable search in seizure
+ when the fourth amendment was adopted unquote and again a previous case carol versus u_s_
+ these founding era understandings continue to inform this court when applying the fourth
+ amendment to innovations in surveillance in surveillance tools then they said next paragraph
+ B the digital data at issue which is personal location information maintained by a third party
+ does not fit neatly under existing precedence but lies at the intersection of two lines of cases
+ one set addresses a person's expectation of privacy in his physical location and movements
+ and then they refer to u_s_ versus jones where five justices concluded that privacy concerns
+ would be raised by gps tracking then they say the other addresses a person's expectation of privacy
+ in information voluntarily turned over to third parties then they cite um u_s_ versus miller
+ and also u_s_ versus smith so there's so and this comes back a couple times these smith and miller
+ cases where expectation of privacy in records of dialed telephone numbers conveyed to a phone
+ company and those were found that those were found not to be protected that is there was no
+ expectation in dialing in using a telephone dialing numbers then they say for uh the next paragraph
+ C tracking a person's past movements through csli partakes of many of the qualities of gps monitoring
+ considered in that jones case where it was decided that gps uh uh tracking uh had privacy concerns
+ it is detailed and so so so so they're saying csli partakes of many of the qualities of gps
+ monitoring it is detailed encyclopedic and effortless effortlessly compiled at the same time however
+ the fact that the individual continuously reveals his location to his wireless carrier implicates
+ the third party principle of smith and miller given the unique nature of cell site records this
+ court declines to extend smith and miller to cover them a majority of the court has already
+ recognized that individuals have a reasonable expectation of privacy in the whole of their
+ physical movements allowing government access to cell site records which quote hold for many
+ americans the privacies of life unquote and their site riley versus california contravenes that
+ expectation in fact historical cell site records present even greater privacy concerns than the gps
+ monitoring considered in jones they give the government near perfect surveillance and allow
+ it to travel back in time to retrace a person's whereabouts subject only to the five-year retention
+ policies of most wireless carriers the government contends that csli data is less precise than gps
+ information but it fought the data accurate enough here to highlight it during closing argument
+ in carpenters trial at any rate the rule the court adopts must take account of more sophisticated
+ systems that are already in use or in development and the accuracy of csli is rapidly approaching
+ gps level precision the government contends that the third party doctrine governs this case
+ because cell site records like the records of smith and miller are business records created and
+ maintained by wireless carriers but there is a world of difference between the limited types
+ of personal information addressed in smith and miller that's the the phone dialing and the exhaustive
+ chronicle of location information casually collected by wireless carriers the third party
+ doctrine the third party doctrine partly stems from the notion that an individual has a reduced
+ expectation in information knowingly shared with another smith and miller smith and miller
+ however did not rely solely on the act of sharing they also considered the nature of
+ the particular documents sought and limitations on any legitimate expectation of privacy concerning
+ their contents in mechanically applying the third party doctrine to this case the government fails
+ to appreciate the lack of comparable limitations on the revealing nature of csli nor does the
+ second rationale for the third party doctrine which is voluntary exposure hold up when it comes
+ to csli cell phone location information is not truly shared as the term is normally understood
+ first cell phones and the services they provide are quote such a pervasive and
+ insistent part of daily life unquote that carrying one is indispensable to participation in modern
+ society citing riley uh versus us second a cell phone logs a cell site record by dent of its operation
+ without any affirmative act on the users part beyond powering up and so they they trim this a
+ little bit saying this decision is narrow it does not express a view on matters not before the court
+ does not disturb the application of smith and miller or call into question conventional surveillance
+ techniques and tools such as security cameras does not address other business records that
+ might incidentally reveal location information and does not consider other collection techniques
+ involving foreign affairs or national security the government did not obtain a warrant supported
+ by probable cause before acquiring carpenter's cell site records it acquired those records pursuant
+ to a court order under the stored communications act which required the government to show reasonable
+ grounds for believing that the records were relevant and material to an ongoing investigation
+ that showing falls well short of the probable cause required for a warrant
+ consequently an order issued under um uh 2703 which is what was cited before is not a permissible
+ mechanism for accessing historical cell site records not all orders compelling the production
+ of documents will require a showing of probable cause a warrant is required only in the rare case
+ excuse me where the suspect has a legitimate privacy interest in records held by a third party
+ and even though the government will generally need a warrant to access csli case specific exceptions
+ for example exigent circumstances may support a warrantless search and they provide some some
+ sightings reversed and remanded so bottom line uh and good news for individuals in my opinion
+ is that uh the supreme court ruled that that the the acquisition of csli data that is the the
+ entire history of an individual cell cell phone movement back through time as far back as five
+ years can only be acquired by law enforcement if they have probable cause and are able to get a
+ search warrant from a court in order to uh request the uh the acquisition of those records from the
+ cell carrier so i think the supreme court did us right in this case and i'm glad that um that
+ this will happen we've there have been recently an an increasing number of instances i don't think
+ i've talked about it on the podcast but i've i've i've encountered it in in reading where uh law
+ enforcement is just making sweeping requests for for cell phone location information uh without
+ you know just asking a court to say hey uh we're able to have this so from now on they'll need to
+ show probable cause before before getting it and i think that's probably a good thing
+ hey if i could interrupt just for a moment every year we do this and we thought this would be a
+ good time of the year uh to do our annual survey kind of a gift if you will to us if you like what
+ we have done every once in a while we do these surveys we try to get to know our audience better
+ and since your techies this one focuses particularly on uh if and how you might use collaborative
+ software at work that's we're trying to find out right now this is a very short survey six minutes
+ at best probably a lot faster we and i i know this is so important to security analysis so i
+ really want to underscore this we do not collect any personal data for it we're only from it we're
+ only looking for uh general sense uh from our audience so here it is if you've got a moment it
+ would be a gift to us thank you twit.to/survey12 okay we'll wait a few minutes while you do that
+ no we're not gonna do that you but when you get a chance you can do all your listening right and
+ meanwhile back to the best of first time steves ever let us do this the best of security now 2018
+ happy holidays everybody from everybody the twits staff well we have a great crew
+ they work hard but we have to give them a little time off on the holidays so we thought we'd do a
+ security now best of even forcing steve to take some time off i bet you he's not i bet you he's
+ writing the next episode we do security now every tuesday 130 pacific 430 eastern time 2030 utc
+ 21 30 utc and i hope you'll come by we won't be here january first it's new year's day but we
+ will be back january 8th and uh i suspect the security flaws will be back as well the next segment
+ is uh something we talked a lot about on all this shows kind of a problem uh when you wear a fitness
+ tracker sometimes it's possible to see where you are there was a big problem at the pentagon and
+ then the nsa got into the act watch um our our listeners will recall that i think it was in 2016
+ we talked about the the strava fitness tracking app which was just sort of publishing all of the
+ positioning information of its users because everyone kind of thought that would be cool
+ to look at maps of where people were using their app unfortunately it turned out that there were
+ people on secret military bases going out for a jog around camp who were being logged and
+ you know satellite looking maps had this strava uh fitness tracking data overlaid on it and suddenly
+ there was a little sort of suspicious a lot of activity in areas of the desert where nothing was
+ shown on the maps and so anyway we talked about it at the time well it turns out that some investigations
+ carried out by reporters from a dutch newspaper uh day correspondent and uh online investigations
+ group belling cat have found another instance which caused polar uh the well known um i think
+ they're dutch aren't they um no uh no not i don't remember polar is finish finish finish yeah that's
+ right yeah um so they call they have what what they found has caused polar to suspend its global
+ activity mapping feature it's kind of not polar's fault but well anyway so here's what happened
+ the two groups of reporters discovered that polar flow which is one of polar's apps was allowing
+ anyone access to a feature called explore which is polar's activity map the data exposed on this map
+ included a user's past activity you know running biking routes and so forth but included the user
+ the user's personal details such as their heart rate various fitness attributes and more
+ um uh well what polar did was they made the mistake of exposing the username and personal
+ details of each individual for each individual activity and route um and it upon digging into
+ it deeper it looks like the user needs to explicitly allow that information to be shared but they
+ probably didn't understand fully the consequences the reporters tracked down were able to thanks to
+ this disclosure the real world identities of specific intelligence and military personnel
+ the journalist used this feature to search the map for the location of known military bases
+ and intelligence agencies headquarters and training grounds they were then able to identify
+ the people who reported fitness activity history at those locations and in several cases
+ the researchers were able to identify the user names which led back to real world identities
+ either because the military and intelligence agents used their real names for the polar app
+ or because they reused user names that were associated with them elsewhere and the
+ reporters were able to make the connections um oh and also in in in some cases the same routes which
+ they ran while jogging on base also contained the jogging and biking routes in other locations
+ for the same person which then allowed that linkage exposing what looked like their users home address
+ so again in response to these revelations polar immediately shut down the global
+ activity mapping feature but they then did seek to clarify that this polar flow app
+ does not expose the user's activity and username by default polar said that these details are shared
+ only based on an opt-in system and the data exposed via its activity map had to be willingly shared
+ only by or had had to be and was being shared only by some of its users with the majority of
+ their users data remaining private so i guess i would say that this is clearly
+ a privacy concern and anybody who is is is using this really needs to have it be made clear i mean
+ there's there's some tension here right polar much like strava wants to
+ brag about how many people are using their their stuff it's every it's people all over the world
+ look at how busy everybody is getting fit and healthy um the flip side is i mean there it is
+ an information disclosure and so people i think who are saying you know yes i i want to
+ you know others to be able to see my little red lines where i'm running and or my username
+ and other data i want to share that really need to be made aware of the the downside consequences
+ from a privacy standpoint i don't think you can blame blame polar flow for that i mean you yeah
+ maybe it's good for polar to show many people use their app but that's the point of it is is uh and
+ you know apples does the same thing with their activity rings you can share with other people
+ and then you compete with them and so forth um do you share it um with specific people in the
+ apple case though yeah because this was because this was shared globally yeah but this was a global
+ and so there were two things that were wrong i mean there clearly if you're an nsa intelligence
+ officer and you're publicly sharing your run route you need to be kind of go back to school and
+ learn some upset that's right but uh there seems to have also been a problem you were absent for
+ that day yeah of training when you said uh what uh uh but you know i mean it's actually not a surprise
+ there's a lot of military folks in great shape and so they're exercising so you know clearly they're
+ at fault for making it public the problem really also was there was an api that was exposing this
+ and they used sequential index numbers for customers so you could just query the api and get this
+ information and that's clearly polar's fault that's so a poor a poor design from an anatomy uh and
+ anonymizing stamp yeah yeah but uh i mean there's lots of apps that you know runkeeper does this too
+ where you share your run and people like to do that and they like to you know so yeah they probably
+ shouldn't be doing it if they're in a secret location uh probably not if your location should
+ not be disclosed especially since this whole thing came up already and you know yes exactly two
+ years ago it made the news and it couldn't have been even even any more specific it was a running
+ program it was exactly the same right so wanna cry oh man refuses to die this is the last year version
+ too gosh yeah so uh as we'll remember wanna cry was the uh uh the the weaponization
+ of a flaw in version two of windows smb the server message block also known as windows file
+ and printer sharing um that was believed well we know that it was leaked by the shadow brokers
+ we believe it was an internal nsa exploit originally named eternal blue so it was it so eternal blue
+ was taken and weaponized as ron as wannick ri which was a a very very destructive uh crypto malware
+ which was the uh the thing that let us spread over the network right that was yeah the the smb
+ exactly it was it was the the the the propagation mechanism here's my t so i tell you you go up to
+ girl and you say it pro tv and chill if she doesn't say yes she's not the right woman
+ i'm just sad no all right okay the good news is with that t-shirt she can really see you coming
+ it's a little red all right so sorry uh it's struck again over the weekend it's expected to shave a
+ quarter billion dollars from a major taiwanese semiconductor manufacturers revenue as a consequence
+ of it bringing down bringing to a halt multiple semiconductor manufacturing fabrication facilities
+ across taiwan uh the company is that cleverly named taiwan semiconductor manufacturing company
+ we just call it t_s_m_c_ t_s_m_c_ uh not only is it a major supplier of parts for apple a_m_d_ and
+ vidia and qualcom but it's taiwan's largest company so big guys i didn't know why wow yeah they make
+ the a11 ship for the iphones and ipads right right and so there was some concern that this would be
+ a supply chain glitch for maybe apple and others it's unclear i mean it was it was relatively
+ short i mean they were able to get things back up but they but they wrote this virus outbreak
+ occurred due to misoperation during the software installation process for a new tool
+ which caused a virus to spread once the tool was connected to the company's computer network
+ so yeah um now uh uh so it's taken a chunk out of their revenue although they're there you know a
+ major uh company they're forecasting revenue in the quarter to be a rat was there original
+ forecast was eight point four five billion dollars so i'm knowing that it was eight point five five
+ so it's expected to drop by at least 200 billion to eight point four five so anyway uh it's anyway
+ so they're they're saying the revenue hit could be as high as 256 million in other words a quarter
+ billion but still you know they're eight and a half billion so they'll be okay um but what's
+ interesting is it's not clear how this happened because it didn't just spread you know it destroyed
+ their systems it encrypted their systems and uh and we'll remember that it was our friend of the
+ podcast Marcus Hutchins aka malware tech who who was looking at this immediately upon its
+ appearance on the internet and saw in the code that for some reason this wanna cry malware was
+ was checking for it was making a DNS query and so but the DNS domain that it was querying was
+ unregistered so all of these queries were coming back as no such domain name so he thought huh
+ wonder what that's about and he registered the domain name and immediately wanna cry stopped
+ and so what we what we surmise is that this was a a deliberate kill switch which was put into the
+ malware by its authors as a means for them to shut it down if for some reason they wanted to
+ well it's still in place and the the as we know uh you know I coined the term internet background
+ radiation to talk about the fact that there are many of these worms code red and nimda still live
+ on some systems and they're out there pinging around looking for new victims uh similarly wanna
+ cry is still out looking for other systems to and to encrypt but its check for that DNS domain is
+ succeeding which prevents it from doing so so uh we don't know about the details of this uh this
+ Taiwanese manufacturer TSMC's internal network but it might be that they've got strict controls over
+ DNS what DNS queries are allowed to be made to public DNS servers or they might have some sort of
+ you know border protection that's pre that's preventing all but some explicitly white listed
+ domains we don't know but what we do know based on the information we have is that if this was
+ monocry it would not have done anything if it had been able to get resolution of that DNS so
+ maybe it was a variation of wanna cry that has had the kill switch neutered so as not to use it any
+ longer no one knows you know really what happened but anyway that's that's the story is that this
+ thing wanna cry is still uh you know delivering its destructive payload you know wherever it can
+ and at least this instance the hacker news reported on some research that the AP the associated press
+ did which it's probably this is maybe a little inflammatory clickbait but it's worth pointing
+ out to our listeners uh the statement was google tracks you everywhere even if you explicitly tell
+ it not to and there is some truth to it uh what the AP found is that preventing google from acquiring
+ long-term tracking data requires more than turning off the obvious location history function
+ what what what the hacker news wrote was every time a service like google maps wants to use your
+ location google asks your permission to allow access to your location if you want to use it for
+ navigating they say but a new navigation but i'm sorry but a new investigation shows that the company
+ does track you anyway the AP revealed that many google services on android and iphone devices
+ store records of your location data even when you have paused the location history on your mobile
+ device disabling location history in the privacy settings of google applications should prevent
+ it is argued google from keeping track of your every movement as its own support page states quote
+ you can turn off location history at any time with location history off the places you go are
+ no longer stored that's not true as the AP explains quote from the AP for example google stores a
+ snapshot of where you are when you merely open its maps app automatic daily weather updates on
+ android phones pinpoint roughly where you are and some searches that have nothing to do with
+ location like chocolate chip cookies and kids science kits pinpoint your precise latitude and
+ longitude they write accurate to the square foot and save it to your google account during
+ their coverage to demonstrate the threat of this what they consider i mean again clickbait but
+ worth understanding of this google practice the AP created a visual map of the movements of
+ a Princeton postdoctoral researcher uh uh doctor a car who carried an android smartphone with
+ location history switched off to prevent location data collection however the researcher discovered
+ that the map includes records of doctor a car's train commute on two trips to new york and visits
+ to high line park Chelsea market hell's kitchen central park and harlem to protect the privacy
+ of doctor a car the publication did not plot the most telling and frequent marker on the map
+ his home address according to the researchers this privacy issue affects around two billion
+ android users and hundreds of millions of iphone users across the world who rely on google maps
+ or search in response to the ap's investigation google issued the following statement quote
+ there are a number of different ways that google may use location to improve people's experience
+ including location history web and app activity and through device level location services
+ they say we provide clear descriptions of these tools and robust controls so people can turn
+ them on or off and delete their histories at any time uh jonathan mayor whom we've uh spoken of years
+ past uh often a Princeton researcher and former chief technologist for the fcc's enforcement
+ bureau argued if you're going to allow users to turn off something called location history
+ then all the places where you maintain location history should be turned off
+ he says that seems like a pretty straightforward position to have so for what it's worth to stop
+ google from saving time stamped location markers users need to turn off another setting and that's
+ that web and act and web and app activity which is enabled by default and stores a variety of
+ information from google apps and sites to your google account once disabled it will not only stop
+ google from storing location markers but also prevents the company from storing information
+ generated by searchers searches and other activities so anyway uh if i just wanted to point this out
+ it seemed a little over the top in the the way it was being described but it's certainly reasonable
+ if somebody wasn't really paying attention and thought that just turning off location history
+ shut that down completely you also need to go into your google account
+ and turn off web and app activity which does not just record activity but where that activity
+ occurred hope you're enjoying our best of security now we're taking a couple of weeks off
+ as i mentioned we'll be back january 8th i bet you that steve is not playing fortnite right now
+ but a lot of you are i mean really isn't it a fortnite christmas uh except on android where
+ fortnite turns out to be surprisingly hackable uh last week we talked about they the so-called
+ man in the disc attacks again maybe it was next last week of the week before anyway in the last
+ couple weeks um this was the vulnerability which had come to light where many apps were staging
+ themselves in external storage uh which many android devices have it's it's a shared resource
+ and that i mean it's that sharing of the resource that creates the problem because many apps have
+ access overlapping access to that shared resource creating the so-called man in the disc attacks
+ so it turns out that the extremely popular um first person is a first person shooter leo i've
+ never looked at what it actually is i just know it's battle royale you go in and a hundred other
+ people go in and last man standing wins yeah okay kind of a first person shooter special
+ so yeah so google takes a 30 cut of all revenue generated by apps downloaded through the google
+ play store and as uh you have often observed on the twit network leo i've heard you talking
+ about fortnite actually it's about fortnite itself is free but they make money like a ton of money
+ selling other stuff in the game yeah so over on ios with uh where fortnite has a player base of
+ it's estimated between 125 and 150 million users so i think that i think that's maybe across both
+ platforms during the first ten days of season five the ioe the ios release netted epic games the
+ publisher of fortnite two million dollars per day two million dollars per day so the total mobile
+ revenue on ios between its march 15th release in the end of july was 150 million dollars um
+ since there's no other method of distributing apps in the apple ecosystem other than the apple store
+ epic games had no choice but to hand over a piece of their action to apple but not so on android
+ epic games has elected to bypass google and the play store and to teach how to and encourage people
+ because there's no other way to obtain this latest fortnite how to sideload fortnite by downloading
+ an apk from fortnite's own website so this of course requires instructing people to push past
+ all the sideloading warnings present on android devices and the big worry among the security
+ community is that this could have the effect of encouraging and normalizing the sideloading process
+ and behavior and pave the way to additional fortnite clone malware and of course we've
+ previously talked about how fort there were fortnite cheat add-ons that have been malicious and have
+ hurt people um so it turns out that on top of this that is that fortnite has decided to sideload
+ in order to not give google a piece of their substantial action on the android platform
+ because it's possible um fortnite is one of the apps vulnerable to this man in the disc attack
+ that we've been talking about which the researchers at checkpoint recently made clear um google
+ maybe being a little miffed at fortnite for encouraging sideloading did not give epic a 90
+ day window to fix after it became after it came to light that the fortnite installer was vulnerable
+ to hijacking through man of the disc attacks um in there in google's posting they wrote the fortnite
+ apk which is calm.epicgames.fortnite is downloaded by the fortnite installer to external storage
+ and then i've in the show notes i just clipped out a chunk of of directory listing showing uh
+ the all of the entries there and then google continues saying any app with the right external
+ storage permission can substitute the apk immediately after the download is completed and the fingerprint
+ is verified they write google writes this is easily done using a file observer the fortnite
+ installer will proceed to install the substituted fake apk on samsung devices the fortnite installer
+ performs the apk install silently via a private galaxy apps api this api checks that the apk being
+ installed has the package name calm.epicgames.fortnite but does nothing else consequently the fake apk
+ with a matching packet name package name can be silently installed if the fake apk has a target
+ sdk version of 22 or lower it will be granted that as this potentially malicious fake apk
+ will be granted all permissions it requests at install time this vulnerability allows an app
+ on the device to hijack the fortnite installer to instead install a fake apk with any permissions
+ that would normally require user disclosure okay so in response unhappily epic but immediately epic
+ released version 2.1 and as i said epic is clearly unhappy with google's short notice they said in
+ actual is Tim Sweeney at epic who tweeted we asked google to hold the disclosure until the update
+ was more widely installed you can see why that's not going to happen though uh-huh yes uh i should
+ a minute because it's out there it's happening exactly exactly so they so uh Tim Tim uh said
+ they refused they google refused creating an unnecessary risk for android users in order to
+ score cheap PR points is what Tim at epic tweeted google defended google defended their timing saying
+ that their own instrumentation had shown that most fortnite users had already updated to version 2.1
+ so anyway the much has been made of of this uh and uh a lot of coverage in the press
+ has has been unhappy with epic's decision i mean it's difficult to be when you consider the amount
+ of money that epic is talking about on the other hand they're only making the money because google
+ has created the platform and i think you're risking your customers safety to make some more money and
+ no was there already an exploit in the wild i mean it seems to me that the reason google had to
+ go public well i don't know i mean it is to tell people to stop sideloading or maybe there wasn't
+ there were no exploits going on well well this doesn't prevent sideloading it was that fortnite
+ loader no i understand but i mean the reason they exposed it is because people were actively
+ at risk right now right yes yes yes exactly yes i mean there were there people taking my sense
+ was that were already it had already happened that there were some it was essentially a zero day yeah
+ yes so you got to tell people so they stopped doing it until it's fixed yes yes yes and and
+ immediately get the word out i mean imagine if google didn't tell anybody and people were getting
+ affected right and left oh well we wanted responsible disclosure so that the epic could fix it well
+ that's not responsible that's irresponsible i think right yeah epic's just chopped cheese because they
+ did the wrong thing and they got bit well and you know as we talked about when we were talking about
+ this whole man of the disc problem google does clearly state that for example app should do what epic
+ 2.1 now does which we are exactly now does but they've always said this you know that if you're
+ going to use external storage make very sure that you're actually installing the the apk or whatever
+ it is you know like that you can trust what it is that is in that store and epic just wasn't they
+ were like oh there's no download and some more fortnight stuff and let's just suck it right in and
+ you know this really did open them to the hack and of course the security community is upset because
+ the problem is this you know sideloading is dangerous because you are training people to push past
+ all of the warnings that google has saying uh you know we haven't been able to check this we don't
+ know what this is you're loading you you need to be really sure and here epic is widely distributing
+ to to i mean you know tens of millions if not more users their app not only was it insecure but they're
+ they're encouraging the circumvention of the google play store so you're interested to see how this
+ plays out sonar scoop uh snoop snoop oh snoop yeah you see why do i yeah you and i both did that no i
+ totally did it before the show i was what is the sooner i think it corrected the sooner scoop which
+ for the sooners uh it was a sports site and i was like i just for the Oklahoma sooners football
+ team and i was like this is not right so i'll tell you this is this is the best time of year
+ for the podcast because we've got the usenix conference and we've got black hat and deaf
+ con i mean it is just security conference heaven uh so this is another piece of research that was
+ shown at the three weeks ago now baltimore usenix security conference um in the show notes i have
+ a picture from their research pdf which they published as part of the the conference proceedings
+ it shows the back of a samson galaxy s4 with the microphone that you would uh with with the
+ microphone at the top of the phone and the speaker on the back oh i'm sorry the the microphone at
+ the bottom that you normally talk to and they'll and a speaker at the bottom and then on the on
+ the other picture is a my is a top located microphone and a top located speaker so the top one is where
+ your ear normally is and you obviously the bottom microphone is where your mouth normally is but
+ for to to increase noise cancellation uh and the the utility of the phone they put both the microphone
+ and a speaker also on the opposite ends so you've got a top microphone a top speaker a bottom microphone
+ and a bottom speaker well the next page of the show notes i show their simplified diagram of what
+ that means that means you can ping from the top speaker a ultrasonic sound that the user will not
+ hear which will be received after some length of time based on how far away the person is and the
+ the rate at which sound travels will be heard by the upper microphone similarly you can ping from
+ the bottom speaker and it will bounce off the underside of the user's finger and back into the
+ bottom microphone in other words classic sonar and now to triangulate you really would want
+ the sensors to be mounted on adjacent corners of the area that way if you get you if you take the
+ two distances you know so so they're on it's called triangulate because there the two sensors will lie
+ on one edge of a triangle and then the distance that they're each sensing uh informs it of the
+ this the length of the other two lengths of the triangle allowing it to uniquely determine
+ the apex of the triangle not containing the sensors thus triangulation we don't have that
+ here we've got you know kind of arbitrarily located sensors so it's less than ideal but their research
+ demonstrates that they are able to to not perfectly but to significantly determine the instantaneous
+ position of a user's finger which is in contact with the screen so so so reading from their abstract
+ at the top of their research they said we report the first active acoustic side channel attack
+ speakers are used to emit human inaudible acoustic signals you know like bats and the echo
+ is recorded via microphones turning the acoustic system into a smartphone sonar system the echo
+ signal can be used to profile user interaction with the device or example a victim's finger movements
+ can be inferred to steal android unlock patterns in our empirical study the number of candidate
+ unlock patterns that an attacker must try to authenticate herself to a samsung s4 phone
+ can be reduced by up to 70 percent using this novel acoustic side channel so no not reduced
+ to zero but you know it's reduced by more than half the attack is entirely unnoticeable to victims
+ our approach they write can be easily applied to other application scenarios and device types
+ overall our work highlights a new family of security threats so in terms of details
+ they they used a dictionary of 12 unlock patterns okay so not the not the universe of
+ possible unlock patterns they just you know they were looking for does this kind of work at all
+ so they they used a dictionary of 12 unlock patterns in their tests which contained 15 unique
+ strokes the data collected from 12 volunteers uh was fed into a into into an AI learning machine
+ model for classification of each stroke and as expected the classification accuracy was
+ significantly higher when input simultaneous input from both micro microscopes was can microphones
+ was considered the researchers reduced the average number of correct candidates
+ from the 12 unlock patterns to 3.6 that's average in some instances the analysis eliminated all
+ guesses and revealed the single correct pattern uniquely I looked at the research and I won't go
+ into any more detail here because everybody gets it but I have a strong gut sense that we're going
+ to see this evolve this it's it uses sensors available in our devices it could certainly be used for
+ benign purpose like you know moving your hand around in front of an app in order to do something
+ and having the app respond it's not super high fidelity again the sensors are not located
+ exactly where you want them where was it the apple when it was a the amazon phone they had like
+ some funky sensor in each corner of the screen for a while didn't they Jason and they yeah
+ and that was meant to kind of change the parallax of of what you were looking at it was it was
+ meant to kind of like you know from the four points be able to know where in your perspective
+ and shift accordingly so like to to see your face so that they could change the screen in order to
+ make it look more depthy it was a lot of hardware for our very minimal application purpose but no
+ what this reminds me of is if you remember it was like three or four years ago google io google
+ had shown off something called project solely which was also like yes yes yes and i am so jazz
+ by that where you like you do like you know like like push buttons and turn knobs and things oh
+ yeah i really want to see that happen i haven't really heard much about it since then and i think
+ their their idea was that it would possibly be integrated into like wearables like smartwatches
+ of some sort so that you wouldn't have to touch it but you could still do the controls
+ and then there's also something else that i read about called what was it it was called finger
+ io which there's a demonstration and that that's that seems a little bit more in line with what
+ sonar snoop is all about yeah and uh uh uh solely was uh em radiation so it was it was it was very
+ low level electromagnetic radiation that gave it extremely high resolution in return for having to
+ have a lot of processing behind it but but anyway this is i thought this was very cool very clever
+ something no one had thought of before and i wouldn't be surprised if we see this uh evolving in the
+ future this feels like something that uh could be taken from this initial research out to its next
+ level so uh props to these guys at a nice piece of research yeah no matter what you call it i'm
+ curious on a on a device specific perspective because like you were saying you know every every
+ phone has a microphone and a speaker in a different location and so you know for this to work on a
+ broad spectrum of android devices like i imagined those locations like create different hurdles as
+ far or different requirements for where exactly on the screen your finger is at any given moment
+ if the speakers and microphones are over here versus over there does that then narrow down you
+ know the accuracy differently and so for example one one thing that's if somebody wanted to be clever
+ they could create a game which which you know inherently requires you to move your finger around
+ and touch different areas of the screen oh to learn why yes while you're playing the game it's doing
+ sonar on you and you don't know it's calibrating yes yep that's that dang it that's that's too wise
+ that's too smart and you know what that'll probably happen but this only really from a security standpoint
+ it seems like this really only works if you're doing like a swipe pattern right would it would
+ it be would there be any indication that it would work with like tapping in a pin or something
+ along and that and that's exactly what i mean when i say this feels like first gen yeah and so
+ you know they demonstrated the concept is viable and so i wouldn't be surprised if before long they
+ could turn this in to read you know read keystrokes on a keyboard totally well that's another thing
+ that's kind of reminded me of the whole thread from years ago about uh people being able to listen
+ to someone typing on a keyboard uh and being able to reconstruct what they're typing based on the
+ sound of those keys clapping yeah that's just bizarre but it's true yeah yeah oh the stuff is
+ crazy i think the thing that has received the the least attention but it is certainly significant
+ about this facebook breach when you hear 50 million accounts were compromised and and they've and
+ another 40 like one level removed may also have been you sort of think oh look you know like mass
+ mass collection breach of some sort you know that's what we're used to like when a when a web
+ service loses its database it's well you know how many of just like randomly chosen records out of
+ total got loose what's significant about this is that uh this particular breach
+ was absolutely targetable by its nature and in fact uh uh um Mark Zuckerberg and uh uh Cheryl
+ Sandberg's accounts were both targeted uh and potentially compromised so so the point is that
+ that the people who discovered this had to do a lot of work it's a it's a
+ sophisticated attack um it means so so somebody was poking at facebook for some period of time
+ because facebook is facebook and the the ability to perform the attack
+ occurred in july of 2017 right so like 17 18 i guess months ago 17 months ago um so um quite
+ a while ago that's been there for all this time the only way this account what the breach was
+ discovered was a a side effect of the way it works is people apparently logging in and and
+ essentially what you're able to do and i'll explain a little bit you know what we know of how
+ you're able to cause an unauthenticated login of someone else in order to bring their login
+ token current and it was the the sudden increase in the background continuous and certainly high
+ level of that happening but it suddenly spiked and so the facebook people said you know the
+ engineers said wait a minute why uh are we suddenly seeing a dramatic increase in the rate of people
+ logging in and that's what tipped it off but we don't know over like over what period of time
+ this thing occurred and and it was and the point is that it's completely stealthful
+ unless someone notices that like by looking at their own account wait a minute somebody logged in
+ from somewhere else and and left a breadcrumb behind or uh or something gets changed okay so
+ the the crux of this is a is a feature that's sort of scary but it's also certainly useful i remember
+ i guess i was if it's when i was playing with my with trying to get a hold of and under get a
+ handle on the way facebook's view viewability stuff works as i said leo i i do have a facebook
+ page i don't use it i don't think there's anything posted on there um but i need i but i created the
+ account in order to see other people's and also when i wanted to explore the facebook privacy and
+ security settings because i've talked about them a couple times and so certainly one of the things
+ that is very useful because in any in any in any environment where you want to curate who can see
+ what is you want to test that you want to view your own page as if you were someone else and
+ well that's impersonation and it turns out that facebook understood that this was dangerous and so
+ but they also understood they needed to offer the the feature so you've always had
+ this view as feature which would allow you to to cause facebook to show your page as if you were
+ someone else and you get to specify whom so if you said with this if you said i want to see mark
+ zuckerberg's view of my facebook page on some level there's been the invocation of mark zucker
+berg's identity into like viewing your facebook page so so that was part of this is that is this
+ the way view as works then it turns out that there's a a video tool a video upload capability
+ which allows you to send somebody like a you know like a birthday greeting upload a video and it's
+ it's that tool which which acquired a bug in july of 2017 which caused it to incorrectly manage
+ the identity tokens that it was having to juggle in the the authentication of the of different
+ people such that the bad guys were able to to in a multi-factor
+ attack to leverage view as and the mistake in this video upload tool in order to obtain a current
+ logged in authentication token for and here it is anyone they want it which is what makes this
+ so scary is this thing has been in there has been in place since july of 2017 we don't know
+ that it hasn't been used that it hasn't been known who knows how many mysterious breaches or
+ people's pages being changed or mischief or what has been gotten up to during that time because
+ again it wasn't you know zuckerburgs was compromised sharrows account was compromised so clearly
+ before they began a much higher speed wholesale rifling they were going after high profile targets
+ it seems so that's now been closed facebook has understanding the nature of the breach
+ is able to go back in their logs see this being done and then what happened on friday was that
+ 50 million people actually 90 million people suddenly found themselves logged out of facebook
+ and it was like you know because then and everyone's used to like facebook leaving you
+ persistently logged in because it's convenient well and as we know what that means is that that you
+ have a cookie in in the form of an authentication token from facebook which your browser presents
+ whenever it it pulls any resource from facebook which authenticates you as being logged in
+ as as you on this browser so those were all all of those authentication tokens were immediately
+ invalidated and consequently people had the login again um now the the reason the sort of the other
+ shoe here to drop is that it's bad enough that a bad guy could obtain an authenticated session
+ for anyone they wanted now that that's what this means i mean for since july of 2017
+ if anybody who knew about this could obtain a valid logged in session for anyone they wanted
+ but what that means by extension is that the now unfortunately very popular login with facebook
+ can be abused because it means that your browser contains a valid facebook login token for for
+ anybody you have targeted which means when you log in with your facebook account you're logging
+ in with their facebook account meaning that you're able to log into any other third party service
+ that where they have an account recognized by facebook so for example under single sign on or
+ of single sign on in wired magazines coverage of this they said the debacle also underscores
+ broader concerns about single sign on which friday turned into the ultimate object lesson in the
+ inherent trade-offs between security and convenience can white the director of the open crypto audit
+ project said single sign on schemes are great but the downside is if a single sign on gets breached
+ you're hosed um so wired says sticking with a single more secure sign in does make sense
+ especially for use on sites that don't have the resources or inclination to invest heavily in
+ security development actually none of that's true but because i mean that because well anyway
+ but just like you want your passwords to be unique so compromising one doesn't expose them all
+ account diversity is also vital online no matter how ironclad a particular sign-in scheme is
+ then they said quote you don't want a situation where there's one breach and your entire online
+ identity is gone says uh the same guy uh can white so anyway that's what happened it was it was
+ longstanding it was i mean and again that this is it's hard to do what facebook is doing at the
+ scale they're doing it the i would argue that view as is necessary and terrifying i mean it is
+ and is inherently it is inherently a horrifying from us from a implementers you know security
+ standpoint i mean it is a real pucker factor because boy you know you really got to get it right
+ and it looks like largely they did but in one place they missed something and someone found a
+ little way to wedge themselves in and leverage something which is i mean and facebook obviously
+ is as we all know is really staggering at the moment under or been like you know you've deleted
+ you just said it Leo you've deleted your facebook account i mean they're they've been staggering
+ under all kinds of of privacy issues as a consequence of being you know what is it two billion users
+ two and a half and being so two yeah being so popular so um and oh i i i i would argue against
+ Zuckerberg who said uh he called it a arms race it's like no i mean you know i mean it's hard
+ to get it right i absolutely agree and here i empathize with them that that you know if you're
+ going to have the ability to show different classes of users different views of you of your
+ content then you need to be able to audit that which means you need to be able to say
+ what would so-and-so see of my page and it's like yeah yeah yeah yeah okay uh you know scary
+ but but it is actually a perfect example of i mean i already hate OAuth can i consider it a
+ horrific collage because as we as we know and we've talked about users don't understand that when
+ you log in with google or log in with facebook or log in with twitter or whatever the reason those
+ services are happy to provide this referral service is they're tracking you they're they're
+ knowing everywhere you're logging in and adding it to their compilation of your profile and you're
+ giving you know you're updating your information about them and and as we've just now seen if that
+ service suffers a breach anywhere you have used them you're now subject to you know i mean you
+ they they've extended the blast radius beyond their own perimeter to everywhere else so anyway
+ it's one of the reasons why when i first told us all about squirrel years ago i said it's a two-party
+ solution it is it's secure single factor you know it's like you don't the only reason you need
+ multi-factor is none of them are secure enough so you need lots of them in order to increase the
+ to increase the security if you have secure one factor then it's all you need and the beauty of
+ it is it's just two-party the problem with this log in as is you're bringing in a third party
+ which and here's an example of it going wrong so anyway that's what happened with facebook
+ and again i i don't think i i'm not saying oh this is a a glaring problem i mean i would argue
+ that's the the the reason they're already in hot water those are clearly that has been
+ facebook's policy problems that have come home to roost here this was a really obscure bug
+ and anybody can make a mistake you know they did they did get it fixed quickly and to our listeners
+ i would say take this opportunity to go use the facebook tool which they provide of where has
+ have logins to your account occurred from which devices and from which locations just make sure
+ you recognize them all because that's worth doing and also you know eliminate any applications
+ that you've given permission to use your facebook account that you're no longer using as we've said
+ that kind of periodic audit can be a good thing to do yeah maybe this is just a wake up call
+ is there a safe way to use single sign-on solutions like that oauth solutions
+ um we the problem is users are not given enough control right there ought to be a way
+ to evoke the otherwise persistent relationship that is that is connect of the connection between
+ the the authentication token that you give the third party and the site you're visiting
+ facebook did also uh kill all of those those referral tokens essentially which was good
+ but but it's the problem is it's done behind the scenes and it's so it's it's
+ meant to make the system easy to use but because because users are not given visibility into it
+ it's not something it's it's easy to do it's better just not to have it in the first place
+ used to be you could do your own oauth i remember you could have your own site but
+ i don't know how that would work if a site didn't know about it yeah remember you're able to put a
+ token on a page on your server and bounce and bounce you through that would be so much better
+ i guess it wouldn't help average the average joe but yeah yeah that's the problem the average
+ joe is going to have a solution here pretty soon that's called squirrel squirrel did google hide a
+ quote major unquote google plus security flaw that exposed users personal information
+ the headlines about this were breathless yeah uh google hid major google plus security flaw that
+ exposed users personal information google plus shutting down after bug leaks info of five hundred
+ thousand accounts google to shut down google plus after failing to disclose user data breach
+ google is shutting down google plus after a secret potential data leak google plus to shut down after
+ cover-up of data exposing bug okay so what happened um given what google's own security research
+ auditors found which is who found this back in march and given all of the deliberately privacy
+ constrained information google had at their disposal which is not much because they were
+ deleting it on purpose to protect users i think they've acted responsibly and appropriately
+ the the controversy here is that the wall street journal caught wind of this
+ of this discovery of theirs back in march which google fixed because there and didn't say anything
+ about at the time because google despite looking for any evidence that anybody else
+ knew of this bug was unable to find it since their logs were incomplete they they didn't they
+ couldn't be absolutely sure it had never been used but they had no reason to believe it had been
+ so uh yesterday uh the uh the vp of engineering posted under project strobe
+ says that the the posting is protecting your data improving our third party apis and sun setting
+ consumer google plus and of course we've talked about google plus i know you guys
+ are used to love it yeah yeah but you know kind of just was one of those things that
+ never got off the ground that was there you know they really put all their uh all the wood
+ behind the arrows there uh they even gave people um bonuses one year based on google's uh social
+ success because they were trying to stop facebook but it just it didn't take off and then once
+ something neglected as any social network does it became spam and porno yep yep uh and very much
+ like my space which is like yeah okay yeah so from their announcement i pulled a few relevant bits
+ so they they wrote at the beginning of this year we started an effort called project strobe
+ a root and branch and i'm thinking what is that like soup to nuts i guess so but that's
+ a root and a corporate term of art that's what that review of third party developer
+ access to google account and android device data and of our philosophy around apps data access
+ so that's all good this project they wrote looked at the operation of our privacy controls
+ platforms where users were not engaging with our apis because of concerns around data privacy
+ areas where developers may have been granted overly broad access and other areas in which our
+ policy should be tightened so like you know a very what we want from google focused self-imposed
+ audit of their stuff so they say they continue our review showed that our google plus apis
+ and the associated controls for consumers are challenging to develop and maintain i don't really
+ i don't didn't dig in enough to know what that means that sounds like you know corporate speak
+ for we didn't do it right or it's it's hard to do it right i don't know apis are hard
+ yeah tell me anyway underlying this underlying this as part of our project strobe audit we discovered
+ a bug in one of the google plus people apis okay so now here's what we know they wrote users can
+ grant access to their profile data and the public profile information of their friends to google
+ plus apps via the api the bug meant that apps also had access to profile fields that were shared
+ with the user but not marked public so this was these were meant to be kept private so they were
+ user provided fields that were that the user was not meant that did not intend to share publicly
+ i'll give you an example what those are because as soon as this came out i went to my google plus
+ profile which i set up ages ago and there's mostly public stuff your links your you know
+ stuff and there were two things in there that were private one was my personal phone number
+ and one was my address i have no idea why i put my personal phone number and address in there
+ uh because it weren't publicly viewable but maybe there was something i think it may have been for
+ account recovery at the time could be or there were layers of sharing i think there were i can't
+ remember so worst case i mean nobody's putting a credit card number in there worst case yes and
+ actually you can't right uh google explains this data is limited to static optional google plus
+ profile fields and they said including name email address occupation gender and age
+ then in their posting they gave a full link and it is worth noting that there is some
+ additional stuff that's a little more worrisome um the full list contains a lot more uh there is
+ birthday profile photo relationship status current and previous employers with dates places
+ previously lived uh and skill sets yeah but again well why will right i don't know why you put those
+ in if they're super secret i'm right that's a i'm not sure maybe there was some incentive to do that but
+ so so google says it does not include any other data right you may have posted or connected
+ to google plus or any other service like google plus posts messages google account data phone
+ numbers well except in your case where well i put them in yeah yes i have one public number and
+ one private number in there right or or g-suite content then they say we discovered and immediately
+ patched this bug in march of 2018 we believe it occurred after launch as i should mention that's
+ 2015 so it had been present for years as a result of the apis interaction with a subsequent google
+ plus code change they said we made google plus with privacy in mind and therefore keep this apis
+ log data for only two weeks which in this case turns out to have been a double-edged sword
+ they say that means we cannot confirm which users may have been impacted by this bug however we ran
+ a detailed analysis over the two weeks prior to patching the bug meaning they had those two weeks
+ of previous log data and from that analysis the profiles of up to 500 000 google plus accounts
+ were potentially affected thus so then that's a key word our analysis showed that up to 438
+ applications may have used this the so-called people api and then they conclude we found no
+ evidence that any developer was aware of this bug or abusing the api and we found no evidence
+ that any profile data was misused so i i i think they have behaved responsibly unfortunately
+ um look what happens when when an uncritical reading of the details gets loose and so
+ given that and and and apparently the wall street journal reported that they got a hold of internal
+ memoranda which suggested that that google was concerned that uh soon dar would be yanked in front
+ of a congressional committee a la facebook and the the abuse of facebook's private information
+ and all kind of lumped into one mess at if back in march they had said we found a bug
+ that we have no evidence was misused but it could have been and it could have affected
+ up to half a million google plus users private data again an uncritical understanding of this
+ he even now led to those headlines so i think google did the right thing um i you know it would
+ be nice to have had all of the logs of that but then that could have been a problem i mean like
+ even a potentially bigger problem so you know i don't think as i said it's a double-edged sword i
+ i come down on the side of thing in the google given the situation did the right thing
+ we were unable to stop talking about for better or for worse the windows 10 october 2018 update
+ the infamous build 1809 uh has another problem uh so as we know the good news is it's still not
+ really re-released yet so they found this uh in some preview build 18234 also nine is known as
+ 19 h1 who i've not been tracking all this cryptic 19 h1 is the next one okay so this is 1809 is the
+ one that was supposed to come out now yes September 2018 that now you're talking about 1903 basically
+ which is 19 h1 the first half of 2019 so that's uh that's that's in the insiders are getting this now
+ okay you know there's something wrong with the process at microsoft this is actually getting
+ to be problematic i mean seriously and and we know leo we're looking for that in that new era of
+ enhanced productivity you know was that was that what they were advertising in the most secure version
+ of windows ever that as we well remember there are a number of articles recently saying the problem
+ really is the way microsoft does this which is they've got a code base they do these short like six
+ weeks sprints to add a feature so they spent a long time thinking of the features they in six to
+ eight weeks they create the feature there's no testing at that point they lay it into a testing
+ version which they then test for a long period of time this is how they did it when they did
+ three-year releases but they're still doing this now for these biannual releases oh and
+ it's not an effective testing process they need a better way of testing before they get them into
+ these beta releases that may be there may be a structural problem here we'll talk about tomorrow
+ on windows weekly i'm sure so as we know when the content uh those of us who are power windows
+ users uh and who understand zip files when the content of a zip file extraction would cause
+ the overwrite of an existing same named file within the archive the user i know leo get are you sitting
+ down the user should be prompted about the pending overwrite yeah that's right a file naming collision
+ and asked whether to replace or skip the extraction of the colliding file it turns out
+ that build 1809 uh is reportedly and reproducibly either overwriting existing zip file content without
+ notification or silently failing and doing nothing so the good news is this problem has been
+ caught before what well what i wrote now i'm not sure i saw it it's been caught before the full
+ formal rerelease of build 1809 uh but it was reported as being in 1809 i assumed it was the
+ pre-release people yeah um a recent tweet by an it staff engineer at microsoft on the windows insider
+ program team indicated that this problem has been resolved back on october 6th with the windows
+ insider preview build 18234 which is 19 h1 huh so let me fix it for the next generation
+ yeah well they clearly had to fix it now and i know that this is just i'm kicking this dead horse
+ one last time but in some recent reporting over on computer world i noted that microsoft's forensic
+ analysis revealed that as many as 1500 instances of build 1809's pre-release testers had their files
+ deleted and complained oh without microsoft noticing microsoft said it was one percent one one hundredth
+ of one percent yeah what you just say what percentage 1500 by number oh okay that might fit that
+ might fit because a lot of people try these builds you know this is a they did uh they did and uh but
+ a lot got bit and microsoft said oh but we we we missed that one also i should just note that i
+ after talking about this for last the last few podcasts uh in between then and now i updated the
+ machine i'm talking to you on leo this this this camera that i'm looking at uh is running windows 10
+ it was running windows 10 home which is what came pre-installed on the little windows 10 box that i
+ just grabbed uh just a little turnkey box anyway it's now running pro all right because i'm an msdn
+ subscriber so it doesn't cost me anything to update so i updated the pro since i definitely
+ decided that i want to begin hanging back from each month's security updates as well as the biannual
+ feature unquote update right uh you know there's nothing i need that much each month it's worth being
+ bit like this and you know i'd i'd rather let them you know i think that the security release we would
+ know within a week if it was causing problems so you know i've set that to you know give me two weeks
+ and i i think i set it to 30 days for the feature uh update because we would know by then if it's
+ something if you really should put it off further so uh again and and as i mentioned windows 10 home
+ does not give you the option to delay to defer these you take them when they make them available
+ i hope that our listeners uh consider after you know this painful if october this set of
+ october surprises uh you know considered deferring as i now have enough i mean so much so that i
+ switched to to the pro version just so that i you know i could have that feature it seriously
+ seems wrong that microsoft is you know making is being stingy about that now we're going to make
+ you have pro if you want to you know defer like my god okay oh windows 1809 the gift that just keeps
+ on giving i think they they finally did ship 1809 and they followed by solved all the problems
+ but of course guess what microsoft's gonna be right back at the table in the spring they're
+ currently calling it uh what is it uh 2019 one h i suppose at some point it'll transmogrify
+ into a 1903 those are those date-based code names we've talked a lot about that on this show we've
+ talked a lot about it on windows weekly and uh just cross your fingers the 2019 doesn't bring
+ more windows flaws i hope you've enjoyed security now i think it's probably the most important show
+ we do certainly for those of you who are security professionals or just regular users trying to
+ keep yourself safe online we really appreciate everything steve does i want to thank karsten
+ bondi for putting all of this together he found all the best of uh clips and our editors who edited
+ this one is it uh do you know colleen might know anyway thank you to our editors for putting these
+ together they work hard so they can take a little time off and be with their families i hope you're
+ being hope you're with your family on this holiday season and i'm glad that you consider us part of
+ your holiday family thanks for watching all this time 13 years of security malan well here's to 13
+ more steve says it's going to continue until episode 9.99 maybe we can work out and get them to go into
+ four digits happy holidays everybody happy new year here's to a safe and peaceful 2019 we'll see you
+ on january bye bye

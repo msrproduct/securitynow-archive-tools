@@ -1,0 +1,901 @@
+ Netcast you love from people you trust this is great bandwidth for security now is provided
+ by AOL radio at AOL.com/podcasting this is security now with Steve Gibson
+ episode 96 for June 14 2007 your questions Steve's answers number 20
+ security now is brought to you by Astaro makers of the Astaro security gateway on
+ the web at www.ast a r o dot com and by nerds on site looking to grow your IT
+ service business find out how nerds on site can help visit I want to be a nerd
+ dot com it's time to talk security with our friend Steve Gibson from his secure
+ highly secure and unknown workplace somewhere in Southern California tempest
+ protected here he is Steve Gibson hello Steve hey Leah great to be back with you
+ again and this is a question and answer session and we do this is our 20th
+ our 20th question and answer session and people really I get lots of good
+ feedback from people in fact now they're writing notes in saying okay this is
+ for and they're like telling me which one they want to appear on it's like okay
+ it doesn't quite work like that however I bet there are few people who want to
+ appear on the next one we do which will be episode 100 oh yes yeah that's right
+ that's a Q&A yeah is a hundred evenly divisible by four not if it's a leap
+ year I think it is yeah we're gonna do that in a second I want to do want to
+ thank the folks at a star because they are our longtime sponsors over a year
+ now they are a great security company one of the best known and one of the
+ things I really like about a star is they're based on open source they're
+ based on Linux they use the best of breed and open source and a commercial
+ software so you get a really great solution take a look at version 7 you get
+ all sorts of new features there's web filtering for content antivirus anti
+ spyware instant messenger and peer-to-peer control you get network
+ protection like firewalls of course remote access VPN and intrusion
+ protection you're protected against spam and phishing there's dual virus
+ protection for email transparent encryption at the source I mean it goes
+ on and on and all of this in one little box looks about looks like a router but
+ boy it's sure a heck of a lot more than a router you want to find out more you
+ can get an a star security gateway for a free trial in your business just call
+ eight seven seven the number four a st a ro and the new version seven has a new
+ home use package free of charge including the base license and all
+ subscriptions plus a star up to date absolutely free absolutely free there
+ are some limitations ten IPs a thousand concurrent connections that should be
+ enough for you so basically you don't have to purchase the home user
+ subscription bundle anymore for 79 euros they're giving it away these are good
+ people making a great product that really does the job that's why so many
+ people trust a star that's why we trust a star I would encourage you to use them
+ AST ARO dot com or call eight seven seven the number four a star
+ shall I just what what a thousand concurrent connections on the whole
+ that seems like that should be enough I don't think I don't have that many on
+ GRC server no isn't that fun there that's what I love about these guys I mean
+ they're just you know they're not they're not trying to take take anybody anybody's
+ money I mean it's just it's just really great but I do encourage you to buy the
+ product because you have to for commercial use and it really is great I
+ guess having all those home users really gives you a good test bed too you know
+ anyway let's let's get on here I've got a PDF open that contains a couple a
+ couple mailbag oh oh good all right I didn't even know we did mail bags on a
+ Q&A days I thought we're already answering questions but we have a mail
+ bag we might as well do it's quick it's just too it's just two things just an
+ Alcorn of Cleveland Heights Ohio writes he had a number of neat points he said
+ a couple of quick comments on your fourth factor episode first I'm glad
+ you're covering these authentication issues too many people assume that a
+ username and a password is to factor authentication including a government
+ agency that lost a laptop and assured the public that it was secure because it
+ was protected by two factor authentication man yeah meaning the
+ meaning the normal Windows log on oh man I hope that was not disinformation I
+ hope that was just ignorance or maybe not actually which is worse it certainly
+ sounded good then he then he says there is a wonderful add-on for Firefox
+ called password maker it allows you to use a single password and it hashes your
+ password and the domain name of the site you are currently on yeah to create a
+ unique random looking password for each site since the hash is created the same
+ way every day every time you can get your password from any computer with the
+ browser or use the online JavaScript version if you are on a different
+ computer I use something similar from Zarate Labs same exact idea yep and I
+ like it and for what it's worth there is also an add-on for IE they don't have
+ screenshots of it they've got screenshots of the Firefox version on
+ on password maker but I just wanted to I thought that was a cool thing and I've
+ heard about it so I wanted to relay that from from Justin our listener that's a
+ good way to do it and then he says when talking about the PGP web of trust there
+ are two things you didn't mention actually there's a lot of things I didn't
+ mention because I was trying to keep it somewhat simple and and you know
+ maintainable he says you can choose how much you trust each signatory of a
+ certificate if you know people who just sign anything presented to them you can
+ trust them only a little if you know people who are very careful you can trust
+ them a lot then you can sum up the trusts of people who signed a given
+ certificate I added that part of for clarity to determine if you trust the
+ certificate of a new contact also when determining whether to sign someone's
+ key you should verify the key fingerprint to make sure you're signing
+ the correct key and not one that was presented to you by a man in the middle
+ and of course he's absolutely correct about all of that so you know there was
+ more complexity a lot more actually to the whole mature implementation of the
+ PGP web of trust specifically this notion that you you get different sort of
+ point credits for who signed it and how much you trust them you then can like
+ create rules in your system that'll automatically decide whether this is
+ trustworthy enough or not right right right and then Christopher Adams also a
+ security now listener he wrote we have Albuquerque's largest Christian home
+ school association meeting next week at the church I work for and right on cue
+ the laptop that contains all the data for this event crashed he says the
+ backtop was stored in the North Pole with Santa where the Easter money and the
+ keeper elves are keeping it company what he's saying is there's no backup we or
+ either that or when we went to look for it we couldn't find it oh boy so he says
+ now there were no problems with the hard drive just a problem with the power
+ adapter so we simply needed the data quickly so we could move on with our work
+ I pop the drive into a USB enclosure and sure enough the drive failed and so he
+ says parens I guess having the power abruptly cut on a regular basis was not
+ good for the laptop drive and actually I chose this one because this fee that
+ this actually perfectly fits with one of the questions in the Q&A so he says
+ after fighting through numerous error performing in-page operation errors and
+ learning that the solution was to buy a new hard drive I quickly put the hard
+ drive in a lap in a desktop case via a nifty five dollar adapter along with a
+ CD containing spin right four and a half hours later the service of the 60 gig
+ laptop drive had been refreshed and it now worked perfectly wow he said I've been
+ anxiously awaiting a moment like this where spin right paid for itself and I'm
+ happy to say it was worth every penny wow and we bought four copies for a site
+ license exclamation point that's great so he had actually written this to sales
+ and so he said at GRC and he said thanks everyone I cannot describe how much this
+ has helped us and it is a great case study for when I propose a file server
+ with RAID and a backup system instead of relying on individual hard drives that's
+ what I like about you Steve you don't mind reminding people that they wouldn't
+ need spin right if they would just back their stuff up yeah I mean I'm I'm happy
+ to be you know the the solution that saved them the one time they desperately
+ needed it and to suggest you know you know I hope to be able to help them a
+ second and a third and a fourth time and of course we've got owners whose spin
+ right who who's whose butts have been saved by spin right throughout no it's
+ it's 20 year life but it really for mission critical stuff you don't want to
+ rely on a single spindle because they're as we continually prove they're just not
+ safe enough spindles die let us let us get to our questions shall we we have
+ so many of them are our typical 12 our typical 12 starting with Mark Brown of
+ coming Georgia who says I listened to episode 90 that was the one we did on
+ multi-factor authentication the first three factors and I wanted to know how
+ to check for the certificate when I'm going to my banking site to make sure
+ I'm really on the correct site so he's in his browser he's gone it was banking
+ site how does he know yep now we've talked about this many times but I don't
+ think this is something I could say often enough because I'll tell you Lee I
+ mean you know me I'm I'm not running AV I'm I'm behind that I'm I don't do
+ scripting my guess my point is you know I'm security conscious but I feel that
+ I'm I'm generally pretty safe well having said that one of the things I
+ always do when I'm find myself about to enter my credit card information
+ somewhere is I first make sure I've got HTTPS and that the browser thinks I'm
+ secure then I right click on the page choose properties and then choose view
+ certificate to make sure that you know that I mean just to verify that no new
+ phishing scheme has come along which is spoofing this page and I always do
+ this on PayPal because of course the larger the target is the more likely it
+ is to be spoofed and so I make sure that this certificate is that I'm viewing
+ for the site is HTTPS call and slash slash www.paypal.com so you want to right
+ click on the page then tell the browsers you know look at the page
+ properties then click on view certificate to see the certificate then the one other
+ thing you want to do is look at the at the chain of trust that is look to see
+ who signed that certificate because if it's Boris Badenoff that signed it then
+ the certificate means nothing the certificate is only as as useful as the
+ entity that is vouching for it specifically you know someone like Equifax
+ or or or Verosene or or or somebody who is a standard signing authority if your
+ own for example if your corporate if you're if you had a browser had a corporate
+ certificate installed in it then your corporate proxy could be decrypting
+ your connection looking at it and then re-encrypting it and so that's
+ something you might want to know so you want to make sure that that your
+ certificate has been that is the certificate of the of the site you're
+ presented with has been signed by an authority you trust and that you've got
+ a certificate for that site and that will verify you're actually connected to
+ where you think you are now it's a little different slightly but not
+ significantly different in Firefox you still right click you see and by the way
+ that you have to be at HTTPS right and otherwise there won't be a certificate
+ correct so you're so I went to Amazon.com normally it's HTTP I added the S now
+ I'm at HTTPS Amazon.com I right click on the page and am in Firefox select page
+ info and then click the security tab and you can view the certificate from there
+ and it's it's a RSA data security are they okay I think we trust them we trust
+ them and we trust them that's where you get yours from right or is it Verisine I
+ I've always been using Verisine it's like yeah why not I'll stay with them yeah
+ very good question though and I think it is well worth saying again and again
+ Paul Dixon of Phoenix Arizona is concerned about biometrics he writes I'm
+ of the opinion that gathering biometric data for identification purposes should
+ be illegal it's fine you have the data on your notebook locked with your
+ fingerprint but can you or your estate survive if the data becomes inaccessible
+ if you're in an accident where you lose a body part are you prepared to not being
+ able to access the disk contents of course backup would help but what about
+ changes since the backup disk recovery is going to be extremely costly
+ alternatively if you're separate from your notebook no one would be able to
+ access your data until you're rejoined not even trusted family can we help can
+ help I've been told by someone who no longer has fingerprints it's quite
+ common for nurses to lose their fingerprints the fingerprint scanner
+ might must be the caustic chemicals are using a fingerprint scanner that might
+ not be very useful for them then there's a problem whether to replace a replaced
+ fingerprint scanner your notebook will scan your finger in the same manner see
+ raises some interesting questions I'm not sure you're making it illegal is that's
+ if that's the going a little far but he's well yeah it makes a good points he
+ really does now so I wanted to bring it brings up a couple things first of all
+ for what it's worth the fingerprint scan for example that I use for my
+ laptop is a convenience measure if I'm unable to authenticate with my
+ fingerprint I can always fall back to a password doesn't eliminate the password
+ exactly so so it's so it's basically the if my fingerprint matches what it
+ expects then it's providing the password to the BIOS in order to unlock the
+ machine and to unlock the hard drive and on this note I wanted to mention that
+ when I was doing some research into this stuff a couple weeks ago I discovered
+ Hitachi has announced and will soon if not already they are shipping the I mean
+ the galactic perfect solution for laptop hard drive it has bulk AES 256
+ encryption built-in to the hard drive so that it's not just locking the hard
+ drive you have to give the hard drive anytime you power it on a the the
+ cryptographic key that it will then use for all communication with the magnetic
+ surface which which means I mean this is what you want which means that that
+ all the data on the hard drive is always encrypted not just locked by a lock in
+ the hard drives own BIOS where you could have a data recovery company get past
+ that and then access I mean we're talking strengths that is that is
+ absolutely transparent they're doing bulk encryption that does not slow down
+ the drive at all that is it's on the fly encryption to the surface I'm I mean
+ this is exactly what you want then if you lose control of your laptop it's like
+ well that's too bad but at least nobody can get to the data but what about
+ Paul's point where that nobody can get to the data what if something happens to
+ you and your family needs to see the data well for example in the first place
+ you know when for example I authenticated a number of my fingers just in case if
+ something did happen to my right to my right hand I can authenticate with the
+ other and being me you know I sort of alternate consciously just to make sure
+ that both of my my index fingers stay you know it stay happy but again in the
+ worst case I've got a password I don't want to because I as you know I've got a
+ super strong password so I'm not gonna be typing that in easily all the time and
+ in fact because my fingerprint can help me type in my super strong password I
+ was able to use a much stronger password than I would normally have
+ bothered to so I mean and again you know you could certainly you know you could
+ answer Paul's Paul's concern just by knowing that you always have the password
+ as your backstop for your fingerprint I think you didn't know that so that's
+ good to know I didn't know that yep and that was the point I wanted to make that
+ and the friend to remind or I forgot to mention this Hitachi drive and I've been
+ wanting to because oh baby I mean that'll be that'll end up being standard
+ equipment on laptop drives before long and it really provides us with the
+ security that we need yeah interesting John Everett writes from Virginia I just
+ finished listening to your sequel injection security now podcast when you
+ get to the part about how a hacker could get an improperly configured machine to
+ divulge a list of all usernames and associated passwords I had to write and
+ ask do people really stand up production websites that record passwords and
+ plain text uh-huh I'm no security expert but I thought the days of a password
+ file he's this is these are the Unix passwords PASWD file or equivalent we're
+ long gone isn't it standard practice now to hash the password plus some salt
+ into a key that's stored they call these encrypted password ashes so even if a
+ hacker got a list of usernames in the keys that wouldn't be of immediate use
+ because you can't enter the key directly into the website maybe you were glossing
+ over this aspect in the podcast any any case I hardly agree with you
+ sequel injection remains a frightening vulnerability on the web you were
+ giving that as an example it's not the only thing you can do with sequel
+ injection well correct but he's he's the point I wanted to make the reason I
+ brought this up was that that the insecurity is not only in the SQL
+ injection problem but in exactly what he says that is to say a a what when he
+ talks about there are well known ways to do this right he's absolutely correct
+ it doesn't mean that you know random Joe PHP programmer who just bought PHP for
+ dummies and and it turns out that book is unfortunately correctly named in his
+ case absolutely name it doesn't it doesn't mean he's gonna do it right
+ because he's the coder he can do anything he wants he can store them in a text
+ file and and and and look them up you know have they have the passwords in
+ plain text and so it's in and this is the the message that I that I want to
+ remind people of it is incumbent upon the developer to implement security the
+ nature of web 2-0 stuff is that this is a responsibility of the developer and you
+ know there are no there are no requirements nothing in the language
+ suggests it if you have a developer who isn't aware of storing hashed passwords
+ and then comparing the hashes rather than the passwords which does create
+ exactly the enhanced security that John's talking about you have a programmer who
+ just doesn't know about that then you're not gonna have it so yes it's just one
+ more area of insecurity right Thomas Brock of Santa Monica wonders as both a
+ longtime spin right user and employee of a large computer security company I
+ really enjoy listening to you and Leo I have used and developed for Windows
+ machines since Windows 2 386 edition I purchased my first Mac about a year ago
+ I really like it one thing I've never wrapped my head around though is the
+ keychain every time I get a something wants to access your blah blah key chain
+ I always click a lot because I don't know what's going on could you please
+ explain the Mac OS 10 keychain and Leo this one is for you thanks no warning
+ well I think keychain is actually one of the nicest features of OS 10 it is a
+ secure store of your passwords when you use Safari on the web it stores the
+ passwords in this secure store the store is unlocked by default when you log
+ in if the keychain has the same password credential that you use when you log in
+ it will automatically unlock the keychain so so that's nice you can change the
+ keychain password or conversely change your master login password to your
+ account and then you'll have to provide a separate login to open up the keychain
+ always what he's talking about is a second layer of security with I think is a
+ very valuable layer of security when you change a program a program hasn't been
+ used before with keychain when you update the program or reinstall it the
+ first time it tries to access the keychain and this is one of the reasons the
+ Mac is more secure the Mac says this program wants to access the keychain is
+ it okay to do so so just as with all of these alerts windows - with the UAC you've
+ got to pause when you see that message and say hmm why is the keychain being
+ accessed who's doing it yep it doesn't make sense so for if you if you if you
+ if by the way most Mac programs do use keychain any program that has a password
+ for instance like Safari will use keychain so here's here's kind of what
+ happens you you updated Safari using you know the Apple update and you use it
+ the first time you launch Safari it says Safari wants to access the keychain is
+ this okay now you think well I just updated Safari I use Safari Safari use
+ keychain yeah okay go ahead and I think that's the that's the point on all of
+ these you these alerts is you've got to think about who's asking for permission
+ yep in fact it's funny you know you and I were talking before we began
+ recording that I just updated my Skype from 2.0 something or other to 2.6
+ something or other and sure enough I got exactly this dialogue saying hey Skype
+ wants to access the keychain do you want to you know give it permission to do so
+ now and in the future and it's like okay yep I know why it's asking so let's go
+ ahead and you can safely say no in which case Skype won't provide your
+ password for you automatically right so I think in you know this is actually kind
+ of a response to your previous question Apple has I think done passwords right
+ they don't in store passwords in clear text on the drive they store it in a
+ secured store that is highly secure using strong encryption and that's what
+ this keychain facility is and it's a very useful facility there's a lot of
+ features in there people don't know about it will generate secure passwords for
+ you automatically automatically store them it's it's like a password utility
+ the kind you'd go out and buy but it's built into OS 10 I think keychain is is
+ really cool where you get into trouble is when you've changed your password
+ on your master login or you move a keychain from one system to another then
+ people get annoyed by it because it keeps asking for a password you can also
+ change the default behavior normally keychain will stay logged in the entire
+ time you're logged into your system you can change that you could say after 30
+ minutes ask again oh very nice probably not a bad idea to do that well and you
+ know clearly that the OS 10 also has a keychain API that the applications are
+ aware of and are able to access and Windows has nothing like that if you know
+ I think this is a great idea if you open the it's in the utility applications
+ utility folder keychain access you can see all the programs that use keychain
+ and what they're storing in there very nice and that's where you would also
+ change your your preferences and they have a first aid and so forth you can
+ clear the log you can synchronize the login password there's a lot of key
+ keychain settings you can change as well I think I think this is really great it
+ uses certificates it's it uses standards this is an example of where Apple has
+ done things right and as a result this is one of the things I think that makes OS
+ 10 more secure well I would say that Thomas Brock got a beautiful answer to his
+ question well good I made it up as I was going on Bob G of Auburn Alabama is
+ worried about the health of his DVR in Q&A 19 you talked about how the drive
+ in a Tivo constantly spins more than that it constantly writes exactly it's
+ constantly recording yeah the DVR that Charter Cable uses is a moxie box DVR
+ works similarly to a Tivo it would have to if it has the ability to pause live
+ programming that's how it does it during the podcast you said something about how
+ a user should be careful when turning off a DVR to reduce the impact on the
+ drive because we have short power outages of 15 to 20 seconds in my area oh
+ that's nice yeah I've gotten UPS's for my desktop PCs and network equipment should
+ I get one for the DVR I asked when I was installed it was told no well of
+ course he was told no because you know people look at it and think of it as just
+ sort of a consumer appliance right and and I just so I put this in here when I
+ ran across Bob's question because you know I'm and I've even defended it once
+ because I think we had another listener who said I really don't think it's
+ it's recording all the time right well we've we demonstrated that it must be
+ because it's storing 30 minutes and the Tivo or and other DVRs don't have nearly
+ that much RAM so it's got to be recording it on the hard drive let me I just want
+ to point something out because I think this is really important there it is
+ perfectly possible to hear a question like that say well let me find out and go
+ research it but I like how you work you you use logic you thought about it and
+ this is I think what distinguishes somebody like you from a rote
+ computer expert you understand kind of the rationality of this and you're able
+ to think about it and quite quickly say oh no there's no way it could because
+ this is how it would have to work and I like that I mean we could verify it and
+ I know it's true because it's it's completely logical yep so he does want a
+ I mean if he's concerned about this a UPS makes a lot of sense I know the these
+ devices can survive obviously some power outages because there's no on-off switch
+ on them you you plug them in and they're just on and just like a cable box is
+ pretty much on all the time in fact even when you turn your cable box off it's
+ still showing you the time of day and it's on inside it's waiting you know good
+ because we know when you plug them in they take about you know five minutes to
+ boot themselves up and loading their their code from the you know over the
+ cable so so these things are going all the time and we do know that if you
+ suddenly power down a hard drive when it's in the middle of writing it will
+ destroy the sector or sectors that it's on top of and you know that's gonna give
+ a little a little road bump at that point when when it comes around now they're
+ built to be tolerant of that but over time these this adds up so I would say
+ give yourself a UPS and maybe after you put it on a UPS if you can often these
+ cable boxes have all kinds of security funky you know triangular headed screws
+ and things but of course I've opened mine up and modified them extensively if
+ you can take the drive out and well unfortunately I don't mean didn't mean
+ this to be a spin right commercial but I don't know of anything else other than
+ spin right that would do the right thing and that is run it on spin right may
+ maybe Bob already owns a copy spin right in which case definitely run it on
+ spin right to clean the drive up after you put your DVR on a UPS and you'll be
+ in good shape from there on you know thinking thinking about this I would
+ imagine that and I don't know for a fact that the DVRs would use a journaled
+ file system they don't in fact I can only speak for the Tivo because I know
+ Tivo cold and it isn't a standard EX T2 using riser or something huh yep
+ Linux file system it isn't and it's an old version an old kernel of Linux and
+ a small one that's not a big fancy one I remember now exe3 and riser and other
+ file systems are journaled always 10 is journaled and TFS is journaled let this
+ is a bonus question doesn't that give you a little bit more reliability in
+ cases like this kind of what the what the the problem is all of these systems are
+ trying to be error tolerant but they're relying on the drive to be the sole
+ store of of their state what NTFS system for example guarantees is that the the
+ way it writes the file system it's that the file system structure will be
+ maintained but not the data and nothing can solve the problem that when you pull
+ the plug and power fails during writing the sector that that sector cannot have
+ a proper checksum at the end so it's good and there may be some power glitch
+ happening so it the system is not going to be happy about it when it
+ re encounters that again and so so NTFS in fact this is something people don't
+ understand NTFS protects its structure but not the user's data that's not
+ protected right so a journal system writes the data out in a batch is that
+ what it means to be journaled yes and the idea being that it's it's creating a
+ journal of changes so that if something happens it's able to roll back to a to
+ a point where the system was in the hard drive and file system were in a
+ consistent state ah and and it may then be able to roll forward from the journal
+ given if it's if the journal is also being written to the hard drive it can
+ roll forward to recreate the transactions which may have been damaged
+ during the the problem that it that occurred while it was journaling so it's
+ more robust but not impervious to problem well and and again nothing can
+ solve the problem that power failure failure during a sector right will make
+ a bad sector absolutely will and then when the system encounters it again the
+ question is what does it do right and that happens to be that's one of the
+ things that's been right fixes it it like fixes all the checksums on all the
+ sectors on your drive trusting now of course when you're playing back stuff on
+ a DVR a bad sector here there just means a glitch in the video it's not the end of
+ the world it's not but of course either they're cumulative and here in in in
+ Auburn Alabama where Bob says he gets out out of just constantly you know it
+ will add up and I'll be I believe he'll end up seeing some problems on the other
+ hand you can just tell this cable company hey this thing went bad give me
+ another one he's only written it exactly yeah Lars Solberg listens in Norway he's
+ been comparing podcast advice he's a bit confused by some apparent discrepancies
+ well we're always right so I'm just gonna say that right now I'm alone well what
+ in doubt yeah I'm a longtime listener of the security now podcast I also listen
+ to a bunch of other podcasts one of them started talking about data backup and
+ how long time archival data can be safe on a hard drive that was turned off just
+ sitting in the closet or a safe so I thought well I already know this Mr. Gibson
+ already told me right but they said on one of Norwegians biggest IT podcasts
+ that a hard disk drive is gonna live longer if you keep the power on then if
+ you use it as a backup solution I clearly remember you and Leo talked about this
+ but I've been searching and reading through the text versions I can't find it
+ have I been dreaming can you clarify how long will a powered off hard drive live
+ that's a great question and I think what's happened is Lars got a little
+ tripped up in some detail of what we're talking about which is why I thought
+ this was a great question because Leo I actually get a huge number of people
+ wanting to talk about backup solutions and it's something I've been avoiding
+ because we're security now and I don't want to be you know too much pandering to
+ you know spin right and backup stuff but at some point we're gonna have to do a
+ show on hard drive backup solutions because it's a it's a question that we're
+ getting all the time in this case the danger that a hard drive has well okay
+ first I should say we're both right the the major Norwegian biggest IT podcast is
+ right and we were right because what we neither of us we're talking about is
+ power cycling that's the danger for hard drives is turning them off and on and
+ off and on and off and on I work to minimize the power cycling on all of my
+ computers where if I know for example that I'm not going to be using a computer
+ for several days then I'll turn it off but I will never turn a machine off if I
+ know that I'm gonna be back on it in another hour because it's the it's the
+ thermal heating and cooling heating and cooling power on power off power on
+ power off that's the problem so I presume the the guys who did the
+ Norwegian podcast we're talking about keeping a drive running all the time
+ being better than powering it on and off that's absolutely true I was talking
+ about putting the drive on the shelf which obviously keeps it powered off all
+ the time and that's better than powering it on and off so either extreme all the
+ time running like you know the drives at level three on GRC servers are on all
+ the time or all the time off much better than power cycling constantly the heating
+ and cooling is bad for it really is now if you I know a lot of people do this in
+ fact a lot of video production facilities because hard drives are cheap and big
+ we'll just put data on them they'll wrap them up and bubble wrap and throw them
+ in the closet do you have to worry about things like
+ Stiction bearings kind of getting gooey things like that if they're not used for
+ a long period of time well decades maybe I mean but you know I mean for really
+ really good archival storage all the studies show that hard drives will last
+ a long time but also recordable DVD recordable media there there's I
+ fact I bought a bunch the other day it was it was an archive grade DVD that is
+ a goal it's you know gold gold it will only record at 1x it won't let itself be
+ recorded any faster than that and it is it is built for 100 year storage and you
+ know made very stable so so certainly decades I think are safe I've got
+ old original version one IDE drives that I use for testing new versions of
+ Spinrite and I don't and I don't dust them off very often but they still fire
+ up when I when I use them so problems like Stiction I think have been
+ largely solved and taking a drive and just putting it on a shelf for many many
+ years is the best thing you can do for it it'll it'll still be there when you
+ plug it in again as long as you still have an interface that's compatible with
+ exactly I think really the truth is in back in the case of backup no backup
+ lasts forever and and and as you point out no medium will always be readable so
+ probably the prudent thing to do if you do have something you want to keep a
+ hundred years is every decade or even more often you want to copy it to a more
+ modern medium yet because it for example try to find an SD controller yeah yeah
+ you know you can't do something that didn't last very long with that still try
+ to find a SCSI controller these days right I mean it doesn't take long you got
+ some stuff on zip discs good luck uh-huh orb good luck I mean that's the
+ problem with this stuff is it changes a decade is probably even too long maybe
+ every every five years then you refresh the data you make sure it's good you put
+ on something that's more modern that you can read and I would guess that as time
+ goes by these archival solutions get better and better and of course the
+ point is if this stuff if this data is really that important then you do need
+ to be aware of it and to give it the attention it deserves it if it's that
+ important most stuff isn't I can't not much of what I do would is worth saving
+ a hundred years you know and I've got I have original I have drives from that
+ I've pulled from old machines carefully labeled you know here's in 1980 once I
+ know my C drive it's like you know yeah maybe maybe a walk down nostalgia lane
+ would be you know interesting yeah when you're really it's clearly nothing I
+ need on that drive your MS dot MS does dot sys file you're well remember the
+ days when we actually knew what all those files were Leo
+ yeah wow look at that it's an auto exec dot bad file Bruce in Gilbert
+ Arizona worries about sticky fingers he says Steve I have a question on the
+ security of a fingerprint scanner on a laptop you state it's all you use to
+ protect your laptop for login and to decrypt your drive or to boot up I've
+ read that these scanners are pretty easy to fool with a copy of a person's
+ fingerprint somebody somebody did a test and you could make it out of Play-Doh and
+ it worked pretty well I've read that these scanners oh I we just said that
+ would it be easy to get the person's fingerprint from a lost or stolen
+ laptop merely by dusting it for prints sounds like a CSI episode your
+ fingerprints would be all over from handling it you can also tell which
+ finger is which by the prints left on the keyboard home keys if that made any
+ difference yeah interesting idea what do you
+ think Steve there are two classes a fingerprint scanner the the scanners
+ which have a a large rectangular array where you push your fingerprint against
+ it are inherently insecure for exactly that reason you you can get a you know
+ make a Xerox from a static Xerox copy from an image and push that on the
+ scanner and it'll go wow this guy's got a high contrast thumb but it'll work
+ what what what I like the only fingerprint scanners I trust are the
+ dynamic ones not static where they have either a two or four pixel high optical
+ array and actually they're not even optical they're actually capacitive the
+ fingerprint yes the fingerprint scanners that you see now on laptops that are
+ that little strip just a bar yeah yeah the little bar that you wipe your
+ finger across they're not optical they're capacitive they work on the same
+ principle as those studfinders where where you know though those yellow
+ studfinders you scan them across the wall and it's able to tell when the
+ density behind the wall increases those are that uses a capacitive technology
+ which is the same thing that that these that these dynamic fingerprint scanners
+ use so for example you could not swipe a Xerox of the image over the scanner you
+ actually have to have a 3D creation of the fingerprint so not only does it have
+ to be 3D but it's got to be dynamic you got to move it across this scanner and
+ so using this several pixels worth of of of I'm sorry keep saying pixel well I
+ guess they are pixels they're they're not optical scanner pixels they're
+ capacitive scanner pixels so using using that strip it's able to track the
+ motion seeing the image move from one row to the next so it knows how far and
+ how fast your finger is moving but it's not using light it's using the
+ differences in capacitive reactants in your finger which is much harder to fool
+ so not only dynamic but capacitive and that's a pretty secure way to pick up a
+ fingerprint fascinating Alex Banks writing from Los Angeles asks back in
+ episode 68 68 wow Q&A a listener want to know about dual quad core Intel
+ processors you and Leo commented this is probably overkill and that dual dual
+ cores are sufficient what about heavy VM applications when the these are the
+ virtual machines we talk so much about things like parallels and VMware with
+ the additional processing power greatly enhanced VM performance well there this
+ is an interesting question from a couple points first of all the big load in VM
+ is RAM because virtual machines essentially have to just take a chunk of
+ RAM out of this out of the hosting system and commit it to their own OS that is
+ when you're running for example parallels on a Mac and you're running
+ Windows there isn't a practical means for Windows to share the main system
+ memory in its virtual machine with the hosts memory it has to have all whatever
+ it is hundred I'm sorry 512 megs or a gig or whatever so heavy VM uses that is
+ where you got multiple VMs they're all going to be grabbing a static chunk of
+ memory from the main system so really memory is the problem there now having
+ said that of course the more processors you have the better except that what you
+ quickly run into is resource starvation in other places than processing power for
+ example you can end up where as I said you don't have enough memory or you just
+ can't get you can't get enough access to the hard drive right because you've got
+ processors that are doing so much that suddenly they're not the bottleneck so
+ you know as in any any examination of a system it's always the weakest link or
+ the biggest bottleneck that causes the problem I mean that's I owe I mean
+ frequently that's I owe yes that's exactly the the direction I was going to
+ go in this when I when we were being DDoSed being hit with not distributed
+ denial of service attacks you know six or seven years ago I did some some study
+ of what it would take to build a system that could respond to that and it turned
+ out that the PCI bus was instantly bottleneck that is I couldn't get no
+ matter what fast code I wrote in the processor no matter how fast the
+ processor was or how many of them I had I could not get a useful amount of band
+ width across the PCI bus to the network adapter the PCI bus was the problem so
+ so again it's at some point you just end up with too much engine and not enough
+ wheel I like that I love that in fact that you're you used to drive so you know
+ what that means too much engine is not a wheel I don't know what it means but I
+ like it you see I have to say I have a quad core Mac Pro run parallels all the
+ time runs swiftly beautifully and I don't think having an eight core which is
+ what he's talking about the the quad quad the dual quads I don't know if an
+ eight core would make much of a difference frankly I built a machine not
+ long ago that I think I referred to here I did get a myself a quad core Pentium and
+ boy is it fast for compressing for compressing media yeah oh my goodness I
+ mean it is it will spoil you in a heartbeat where I mean as long as you've
+ got a media compression technology that understands multiple cores and multiple
+ threads I mean it's just shocking how fast it is because there you are
+ massively compute bound of course now I'm going to get a call from the city at
+ home guys who are going to say we come on get your screen saver going Gibson we
+ want to use those quad cores on to to find the aliens well that's what they
+ found with with the PlayStation 3s which have these new cell processors and
+ effectively I think they have eight or nine cores they really do very well with
+ these distributed Apple computing applications hey they they rack up CPU
+ cycles fast well in fact I've been messing around with avid liquid 7 doing
+ some some DVD production from my homeowners association and many of the
+ special effects systems that software itself requires that you use a you know
+ a powerful video card because what they're doing is they're now offloading a
+ lot of this work into the GPU the graphics processing unit because these
+ these are our graphic systems have become so powerful now yeah and I run all the
+ time a little CPU meter in my menu it's a Mac program called menu meters and I
+ rarely I have to say peg it but it is when you do things like rendering you
+ know transcoding video things like that where it really is processor intensive
+ right it's hard though to get for processors pegged I have to say for two
+ point something gigahertz processors that's a lot a lot of processing power
+ yeah continuing on Mike in Long Island has been experiencing email grief my ISP
+ provides email via pop an SMTP as most do however they've caused much grief of
+ late due to much grief due to the following situation the email addresses
+ that my wife and I present to the world are in the form of my first name at last
+ name dot net this domain is owned and maintained by my brother for various
+ members of our extended family as well as some of his customers however he's not
+ in a position to provide storage merely forwarding mail that goes to that
+ addresses then forwarded to the real address given to me by my ISP problem is
+ my ISP seems to have some sort of anti spam policy in place and appears to be
+ bouncing some emails that are referred through this family domain yep yeah
+ I'm very curious because I do the same thing evidently some sort of hamfist
+ attempt to protect me well it's not hamfist it's you're gonna see more and
+ more of it actually uh-huh we're still they refuse to admit they're even doing
+ so making it impossible for me to convince them to whitelist this domain
+ I'm considering signing up with an email hosting service like fast mail and
+ referring my emails there in the hopes of better results can you recommend any
+ other courses of action what's going on Steve well it's exactly as you said Leo
+ it is it is ISPs finally beginning to to do what they can to minimize email
+ you know abuse in the form of spam he the the problem is there is no good
+ solution for him except to use a an ISP that would be friendly to the idea of
+ receiving this relayed mail we've talked about before they the the SPF
+ framework where which is becoming increasingly popular or even Yahoo uses
+ domain keys I think Google is able to use both the idea being that
+ that you authenticate the server as the source of your email so so the problem
+ is this guy is trying to send email from his ISP that has a different domain than
+ the ISP for example if if I were Steve at Cox.net and I would be using Cox's
+ SMTP server to deposit my mail it would then connect to another server somewhere
+ then say hi I'm I'm this I'm SMTP dot Cox.net with mail from Steve at Cox.net
+ well due to this new anti-spam and the spam approach the remote server would
+ say I really want to make sure that you're a qualified sender for email from
+ Cox.net and and Cox would say yes you know I know that's what I'm doing I'm
+ gonna stand behind any Cox.net email now what Mike in Long Island is doing is
+ he's sending email from you know through Cox's server so now when his email tries
+ to go somewhere else that somewhere else is saying wait a minute is this a
+ valid source of mail now the good news is I don't know what what his brother
+ who's who's providing this forwarding service what capabilities his brother
+ has but potentially if is if if this were a problem with SPF SPF is a DNS
+ based authentication system if his brother has control of the DNS for this
+ hypothetical domain last name.net his brother could put an SPF record add a
+ tech an SPF text record to the last name.net domain authorizing Cox.net as a
+ valid emitter of email for the last name.net domain so it's very possible that
+ this problem could get solved by essentially at the last name.net domain
+ adding some SPF records to allow essentially to permit Cox to be a sender
+ of this guy's email. Microsoft has a wizard that will create this SPF record
+ that you add to your DNS so if you want to know more about that do a Google
+ search for sender ID framework record wizard and on Microsoft.com and you can
+ fill it out and then it gives you this little snippet and you just drop it in
+ your DNS yeah of course you have to have access to the DNS to do this right and
+ so and and this was I was never quite understood this by the way Microsoft
+ describes this and actually has diagrams and stuff at Microsoft.com /
+ sender ID I never understood this so which end does it do both ends need this
+ modified SPF record it's the sender end that needs somebody to represent that
+ that it's a valid sender so for example when when email is trying to go to a
+ remote server the remote server sees first name at last name.net yeah the
+ remote server then asks for the text records of last name.net yeah to find
+ out who last name.net has authorized as an originator of outbound email. So it
+ would say Cox.net as or whoever is cable provider is as one of the authorized
+ senders. Yeah I need to do that because I use Leo at LeoVille.com but it doesn't
+ come from LeoVille.com it comes from other and so it's actually what I do in
+ the reply to field is I use the the real you know ISP address in the reply to
+ which sometimes confuses people because they say well what is this I'm sending
+ it to right right and in fact it mean the the good news is the the that the SPF
+ protocol is very rich you're able to give IP ranges you can give network
+ addresses you can give domain names you can do you know comma separated lists
+ you're able to really specify in a very nice and rich fashion what set of
+ machines on the internet you you know are allowed to be senders of email from
+ your domain and it's it's really cool huh and really complicated and one of
+ these days I'm gonna understand it and I'm gonna fix it but meanwhile if you don't
+ get email from me it could be that's why at least you tried at least I tried
+ it's just bounced around just bounced around the net awhile yeah I mean I am
+ completely sympathetic with the ISPs but so many of us now use this kind of
+ forwarding technique yeah it's just I don't know what there's I don't know we've
+ got to find a way down in Wyoming Michigan and if that's not confusing
+ maybe his question will be I know it's that accused me go wait a minute
+ Wyoming Michigan sure enough there is a there is a town with the state name in
+ Michigan I've been hoping to hear some follow-up on EI's blink program now that
+ there's been a few weeks to test it out does it work as advertised how much does
+ blink slow down a system if at all any noticeable failings or is more testing
+ required I have to defer to you Leo I know that you had installed it for a
+ while I just haven't gotten around to it and so I wanted to put for Dale and
+ everyone else who's probably wondering the same thing I wanted to say I don't
+ know yet it's a lot like a firewall in the sense that when it sees outbound
+ traffic it doesn't know about it asks for permission so you get those pop-ups
+ initially I have done very limited testing on just one or two machines here's
+ what I found so far it does seem to slow the machine down appreciably as you
+ would expect it's doing a lot of security it's doing a lot of stuff it is it can
+ be intrusive in the sense that it's a very strong firewall so for instance I
+ was using a synergy KVM system that uses ethernet to to pass a mouse back and
+ forth between two different systems that of course was immediately blocked and I
+ had to go in and say okay no I want that port to be open but it does seem I mean
+ now here's the problem and I'm not equipped and I don't know if you are but
+ to test you know the the how well it provides security I mean I'm just saying
+ I didn't get any bugs while I was using it but there are suites you know leak
+ tests suites and so forth you do one I know Steve and there's other ways to test
+ these things against viruses and against attacks and against leaks and I haven't
+ done that so I don't know well I do know from looking at some of the feedback in
+ in our in the GRC security now forum which is I will again commend to our
+ youth to our listeners you need to have a a news group reader configured to news
+ dot GRC dot com to get there but it's it's a fantastic news group I mean I
+ depend upon it to for sort of a real dynamic real-time feedback from the
+ group of people who both listen to this podcast and hang out you know on our
+ news group server they immediately jumped on blink and there were you know
+ there was I had good reports and bad reports there was someone who complained
+ that blink didn't like the protocol that his news group reader was was using some
+ of the packets were being flagged as potentially hostile by blink so there
+ was an instance of a false positive some people perform did notice a performance
+ hit others whether there was one or not didn't notice or or or complain so and
+ there was one problem that is that apparently in some independent analysis
+ is says is is blink did not fare well in the classic leak test tests because it's
+ really not trying to compete in that category you know it's it's working to
+ prevent bad stuff from getting in rather than trying to after something gets in
+ create containment for something that that gets in so you know the leak tests
+ that are checking it for like cross-process vulnerabilities and and and code
+ injection exploits there are programs that will do a much better job of that
+ because that's what they're trying to protect against whereas blink is saying
+ you know we're gonna protect you from unknown vulnerabilities and the bad
+ news is that's a hard thing to test you know I mean I know that the EI guys have
+ a suite of junk that they then they they blast at their machines typical users
+ don't so it is hard to independently verify it exactly as you said Leo yeah
+ the tests you're talking about I think are from a to say my to sec M A T O U S E C
+ dot com and they rated blink very poor along with a lot of well known firewall
+ programs including zone alarm free and say the Komodo is the free Komodo COMODO
+ is the best anti leak detection and unfortunately what has happened is
+ Komodo while it's the best it has been written to be the best right it's
+ designed for leak tests it is exactly they they went in and they solved they
+ they deliberately fixed every type of exploit right that was being tested for
+ so it doesn't you know it doesn't really mean anything except that it's the best
+ solution for leak tests it doesn't say anything about what would happen if if a
+ bad packet and an exploit came in through a protocol that you were
+ deliberately allowing right and took over your machine that's what blink blocks
+ and as far as I know nothing else does right yeah that's that difficult it's so
+ hard to test security application it's just really tough and I don't even
+ attempts to do it I would I would say if you my my impression of blink is if you
+ have a a relative who is you know you really want to lock this person down
+ maybe it's a teenager who uses file sharing software maybe it's your mom
+ who's just not that sophisticated and they can tolerate a little bit of slow
+ down blink is probably the best way to just kind of lock their machine down
+ well and and given its track record which I I think is is proven where it is
+ preemptively blocking things months I mean many months you know not quite
+ years but but chunks of years in advance of they're being fixed I think it's
+ still valuable protection Brandon writing from an undisclosed location asks a few
+ weeks ago I remember hearing an episode that talked about a program that would
+ show hard drive usage by program but I can't remember the name do you remember
+ what that was I really do and it's something I rely upon it's free it's
+ called space monger S-P-A-C-E-M-O-N-G-E-R he wants the free version which is
+ version war it got up to version 1.4 and then Sean the program's author
+ decided okay I'm going to start again I'm going to really do an amazing one
+ which is not free it's version two point something or other I find that the free
+ 1.4 is everything I need what I love about it is that it gives you a a
+ graphical map of the of your hard drive where you can see using a series of
+ nested rectangles where your hard drive space went you know it's like wait a
+ minute I have 120 gigs drive and now I've only got 10 gig free where did it go
+ and so with this thing you instantly see for example those nine DVDs at 4.7
+ gigs each that you ripped on your hard drive and then forgot about because
+ they're sitting there occupying a huge rectangular chunk of your screen and you
+ go oh and right click on it and delete them right there so it's a very cool
+ tool and it's free and I you know I just love it spacemonger.com or I think it's
+ spacemonger and into Google it's called old spacemonger that's the 1.4 and he
+ I'm sure he wishes I weren't telling everyone it's all they need but
+ unfortunately he wrote a really good one before he tried to obsolete it and it
+ just works beautifully and it's free there are a number of other programs that
+ do this kind of thing in fact there's that open source one on source forge I'm
+ trying to remember the name of it yeah but Leah I don't like it are you try to
+ you it's not nearly as nice okay yeah it just it doesn't that I was using
+ something called disk mapper from the guy who originally created instant
+ recall I think that was the tool it was it was something it was an old DOS app I
+ was using as my my my general repository of all information really cool tool and
+ he came out with it with disk mapper which I purchased years ago but it really
+ hasn't kept up and for you know again this thing is free and it just works
+ perfectly spacemonger and there are equal programs on OS 10 as well as matter of
+ fact but I don't remember their names either somebody called the radio show and
+ I've been trying to find them ever since a number of people you made them
+ mail them and now I've forgotten again so anyway but you've got one
+ spacemonger Jeff B being irradiated by his city somewhere in Tennessee writes
+ this long but terrific note I'm wondering what you guys think about the
+ ever-growing implementation of public Wi-Fi the thus the irradiation that I
+ get it now yeah both by cafes and such as well as entire cities I keep hearing
+ about places that are putting it up for the public to use but I rarely see anyone
+ talk about the security or lack thereof well you must accept it on show yeah or
+ my radio show or any of the other that just plain bugs me to be honest worse yet
+ it's almost like some places try to cover up the security implications just to make
+ the whole thing look better case in point my town is implementing a citywide Wi-Fi
+ access my town is doing the same as a matter of fact it's been boasted about
+ on the news and newspaper is a great way to attract more businesses to the area
+ and such and I think that's true sounds like flawed logic but whatever anyway I
+ got tired of the total lack of the security aspect being covered and I
+ responded to a story about it on the local newspapers website in the comments
+ section pointing out some of the implications to not being particularly
+ careful one on public Wi-Fi ways to protect yourself I was careful to sound
+ polite and helpful but despite other comments showing up mind never did only
+ one praising it ever appeared people are thinking and being fed that it's just
+ the best things and sliced bread who then thinks it's fine to go and do
+ everything they do at home over and having no idea that all normal traffic
+ can be snooped in general along with more directed methods such as art
+ poisoning SSL man in the middle attacks etc etc even various folks that think
+ they're being careful by not doing things such as begging don't realize it
+ every time they load a page they're throwing cookies out at every HTTP
+ request to a site depending on the site that makes it incredibly easy then to
+ hijack their accounts also shall I go on also they pointed out in the paper that
+ this city Wi-Fi isn't made to replace their home internet in one sentence toward
+ the bottom of the article but you know as well as I do as soon as people could
+ pick it up from their homes they'll drop their cable DSL in a heartbeat I don't
+ know if I have a point this message other than expressing my utter dismay at the
+ lack of protecting people's privacy but obviously it's not just a local problem
+ and it's only gonna get worse as more places think it's a great idea to slap
+ some Wi-Fi right Peters up around town in effort to make themselves seem more
+ technological or whatever nonsense sign at the end yeah yeah Jeff B we're not
+ sure where he is probably out on a sidewalk somewhere in Tennessee he has a
+ good point I mean certainly we talk about it a lot I probably talk about it
+ every other show on the radio show because that's really the best platform I
+ have for getting information out about securing yourself and Wi-Fi I mean the
+ radio show is listened to by a much more general audience and this is if you
+ listen to security now we don't have to tell you about this stuff yeah and I
+ guess I mean it must be the case that any really public Wi-Fi system that is
+ spread like that it's in there's no protocol so for security right it's it's
+ an all open system and unfortunately unless the users use VPN tunneling in
+ order to tunnel themselves through a secure tunnel out of the wireless domain
+ onto a wired backbone which then goes to the internet everything they do is wide
+ open and his you know his point about grabbing HTTP session cookies is a
+ really a good one because it's so easy to hijack someone's session if the server
+ is relying on a cookie to identify them and those are unless they're over an
+ SSL connection to the website those are in the clear and I mean easily sniffable
+ right and then you could use it to have a path because password could be there
+ well I just imagine the horror stories we're gonna start hearing after this
+ becomes widespread Leo and you know people are just sitting there sucking in
+ public traffic you know everywhere in a city and go into town although I know
+ that a number of these providers are looking and I'm not sure how it works
+ but they're looking at ways to make these things more secure well I've had a T
+ mobile account for a couple months now and I have to say I was very impressed
+ first of all I was obviously very skeptical when I went to the whole notion
+ of a public Wi-Fi public hotspot but they do nothing but full WPA encryption
+ that is you cannot set it up open you cannot use it with web they have their
+ own little client and it is WPA so but that's a paid service yes it is and
+ that's the key there and if you're gonna do an open hotspot which is what
+ municipal Wi-Fi frequently is yep that is inherently insecure unless they've
+ come up with something to make it more secure but I don't know you know I mean
+ I read about this everywhere we talk about it all the time I don't think the
+ message gets out to most people I don't know that's a very if it's an
+ interesting question yeah I mean the only thing I could see that would be
+ practical because you know you really we know now that web is so badly broke
+ within it takes a minute to crack would would be some my actually there isn't a
+ good solution because even if everyone had a WPA key if it was the same WPA
+ key you just log in and get and be able to decrypt all the traffic then so you
+ would need the enterprise class WPA where you're doing per client passwords so
+ that you so that no two clients on the same access point are using the same
+ key but now you're talking a seriously expensive infrastructure yeah I don't
+ know what you do I think the really the word does need to get out and maybe free
+ or inexpensive Wi-Fi security has to be made available you know hotspot you know
+ VPN has to be made available if a city's gonna do this set up of VPN yeah but
+ then again you've got people who won't bother and you know if you let them get
+ on the net without security I think we're gonna maybe go through a period where
+ there's a lot of pain and this gets a bad reputation before it finally gets
+ fixed because again I think the barrier to entry the barrier to entry for a wide
+ adoption has to be very low or people won't use it and very low means open it
+ means insecure it means insecure exactly well once again with that we have come
+ to the end of 12 good questions and and and even better answers you've done it
+ you've done it again Steve I don't know how you do it I chose the questions oh
+ that's how I think that helped well I I'm glad we did talk about it all of
+ these subjects as usual fascinating stuff you learn so much we'll do this
+ again and we're getting such great great great great great questions from our
+ listeners so I do want to continue to encourage people to go to the bottom of
+ the page the ever lengthening long page security now at you know grc.com/security
+ now find your way to the bottom and there's a form anyone can fill out and
+ unfortunately some bots are doing that now - oh man I have to do that I have to
+ fix some to stifle the bots use a capture or something every time you
+ actually that that's gonna be one of our future podcasts is titled are you
+ human yeah yeah there's some interesting things going on to verify that it's a
+ huge problem here's cool things at this path cat podcast this podcast as usual
+ brought to you by the good folks at nerds on site at I want to be a nerd
+ calm they're growing they need more nerds we need more nerds that's the call
+ going out from nerds on site all over the world they need more nerds listen to
+ this Canada US Mexico England Australia South Africa Bolivia and on and on and
+ I was just in Vancouver the other day and I saw one of them driving by in those
+ cute little nerds on site at neuron site they have Volkswagen bugs and they just
+ so they're so cute the these are people who are experts in a lot of different
+ fields PC Mac Cisco Oracle you name it nerds on site needs it fix it technicians
+ website designers programmers project managers they need people in sales they
+ need trainers they need security experts anti virus gurus especially
+ especially those nerds who troubleshoot tear apart and rebuild their own
+ systems just for fun if you're one of those people you need to be a nerd nerds
+ are independent contractors so you'll you'll be in business for yourself but
+ just not by yourself you focus on your passion and not the burdens of running
+ a business find out more fact sign up to to go to a nerds only meeting in your
+ area today at www dot I want to be a nerd dot com I want to be a nerd dot com
+ nerds on sign we thank them so much for their support of security now can you
+ believe it'll be our hundredth episode the next time we do this yeah very cool
+ we're gonna have to do something special well you know I've been talking about
+ having a special plan but I'm a little worried about time getting away from me
+ I've been asked to keynote a conference at Harvard on spyware wow in a couple
+ weeks and what the plan I had for the special hundredth episode is gonna take
+ a lot of time and other things have been burning up my time until then so worry
+ about it we're not doing anything special for Twitter either it will get
+ there we get these milestones the milestone is in and of itself the
+ success well it'll be fun to be there at a hundred in four weeks Leo
+ we're gonna beat you though what's gonna be I know I know you you thought you might
+ it was a horse race well who knows anything it happened it's not it's not
+ done yet how far behind our four behind by the time this comes out we're
+ recording this a little early but the time this comes out to it will have
+ not done yeah sorry sorry Steve how well wait till we get to 200 we'll lap
+ all right for more information about the things we talk about and of course
+ 16 kilobit versions for the bandwidth impaired transcripts to for those who
+ like to read along you can go to grc.com that's Steve's website where you'll
+ find all sorts of information about security now that's grc.com/security now
+ you'll also find shields up his great program to test and his own leak test
+ program to to test firewalls all the great security programs he offers for
+ free and his bread and butter the great spin right the ultimate disc maintenance
+ utility grc.com Steve have a great week we'll see you next Thursday you know
+ Leo that you mentioned my own leak test utility mine is the dumbest one of
+ them all and he's proud of it folks it is it is so dumb and it is the number one
+ most downloaded thing I have is that funny I mean you know I'll come up with
+ some new security thing and it'll for a couple weeks it'll be number one and
+ then it slips back right down and leak test just sits there just being I don't
+ know who's downloading it but I mean it's so dumb well now you know why the people
+ like Komodo and the other firewalls are tuning their firewalls to be resilient
+ to leak tests it's because of you people really do care people there's
+ something about leak tests the people get it and they want it whatever it I
+ don't know what it does but I want it yeah well believe me they got it six I
+ don't know I don't even know what the count is now but it's still you just
+ phenomenal number I should have charged for it Steve yeah friend of mine said
+ just get a dollar for each one it's like look you don't understand the amount of
+ overhead associated with getting a dollar I mean it's exactly yeah it's
+ really substantial in fact it's funny one piece of email that I read while I was
+ preparing for this Q&A asked me a really interesting question that I think I
+ think I actually do a whole episode on he said you know Steve you've mentioned
+ several times that you wrote your own e-commerce system from scratch what are
+ you most proud of and least proud of that is like did you make any bad
+ mistakes and I did make one that's really kind of funny and he said and you know
+ what are you most proud about that's really an interesting question but it
+ wasn't something that I can cram into a few minutes and I think people would
+ find an interesting so we'll probably we'll do that one of these days I think
+ that'll be a great subject let's do it well I'm most proud of bringing hundreds
+ of thousands of people to show every week I think it's a really great public
+ service and I thank you so much for doing it we will be we'll adjourn but we'll
+ be back reconvene next week for more security information okay Steve and in
+ the meantime Lee I'm not letting you go in the meantime I had the chance to
+ bring up the download page leak test has been downloaded six million six hundred
+ six more than more uses than shields up no no shields up is 50 million isn't it
+ yeah yeah still if you charge the buck six million six hundred and sixty one
+ thousand eight hundred and ninety two times wow and and about a thousand a day
+ wow just a mind-boggling everybody who is you has used shields up to send Steve a
+ dollar what no no no why I spin right because it'll be there when you need it
+ there you go that's that's how we keep Steve in the in the 20 benti latte's
+ there you go all right we'll talk to you next time Steve out of you

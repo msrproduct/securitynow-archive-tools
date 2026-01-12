@@ -1,0 +1,451 @@
+ Netcast you love from people you trust this is Twitter bandwidth for security now is provided by AOL radio at AOL.com slash podcasting
+ This is security now with Steve Gibson episode 98 for June 28, 2007. Internet Identity Metasystems
+ Security now is brought to you by Astarro, makers of the Astarro Security Gateway on the web at www.ast A-R-O.com
+ And by nerds on site looking to grow your IT service business find out how nerds on site can help visit. I want to be a nerd dot com
+ Time for a little security it's always nice to have a little security when you go out on the net. You can never have too much security on security blanket. Mr. Steve Gibson some some call you a wet blanket to sometimes take the fun out of our surfing but it's always good to know what the dangers are
+ Mr. Security blanket Steve Gibson. Hey, you're actually not here right now. Let's hope that moniker doesn't exist. You're in you're at Harvard have it right now. Yeah, they asked me to come out and keynote the kickoff of a conference symposium there that's being hosted at Harvard law on spyware. And so I said, yeah, that sounds like fun. I'm going to be on a panel and and start off the conference.
+ One day is on Wednesday. So it's already happened. Yeah, it's already happened. But of course, Wednesday is the day you and I are normally recording our podcast for airing the following Thursday. So we're recording this one early.
+ But that's fine. Well, I have a you will have already given your speech and have been a great success. But I'll tell you now I have a great time. And, you know, I think Harvard's doing a lot of really they have the Berkman Center, which is an amazing center for the Internet.
+ They're doing a lot of really good stuff in that area. Good for them. Well, the Internet turns out not to be a fat after all amazing who to fuck it. It's here to stay now today. And I don't want to scare anybody away.
+ We're going to talk about Internet identity meta systems. Yes, that's a mouthful. But actually it plays perfectly into the idea that the Internet is not a fad because and it also follows on what we've been talking about recently about the issues of authentication
+ because this goes sort of the next step in that chain is sort of more robust identity and even identity with content, which we alluded to a little bit before.
+ So that's our topic for today. Right stuff. Before we get into that, could you mind if I talk a little bit about a star? Oh, do please. They are our sponsor, our most esteemed sponsor. We're very happy to have them on the show.
+ They've been here now for over a year. And it's a good relationship because one of the reasons I like a star is they use open source software to make the best security products there.
+ And don't just take my word for it. They've won so many awards from CRN magazine, SC magazine, PC magazine, these top of the line, best of the year awards.
+ These star security gateway. That's their kind of flagship product. It's a whole piece of hardware about the size of a router. It's not not huge. It doesn't look like a big old server or a big old security gateway.
+ But let me tell you what it lacks in size. It makes up for in power, a best of breed and open source and commercial software with covering every bit of security.
+ I mean, you get email security, anti spam, anti fishing, dual virus protection, checking every incoming email, transparent encryption.
+ You get web filtering. I'm a content filtering and anti virus filtering spyware to even control peer to peer and instant messaging clients.
+ You get network protection, the best in breed firewall, remote access, VPN and intrusion protection, all in a very easy to use robust package and you don't have to take my word for it. You could try it absolutely free.
+ Call 888 the number four, a Staro 884 ASTRO for a free in office trial of the star security gateway. You can really see it at work.
+ It is an amazing thing. The new version seven has so many nice new features like the SSL based VPN.
+ IPsec L2TP over IPsec PPTP tunneling all through SSL makes it so easy to implement. I mean, I can go on and on, but just try it yourself. I think you'll like it.
+ Download a copy for non commercial users and put it on a beige box. You got great security, great protection, including all the antivirus and stuff.
+ Anti spam. That's that's a great way to go for your beige box. AST a R O dot com. And if you're in business, get a free trial at at 888 the number for a staro AST a R O dot com.
+ We thank them so much for their very positive contributions whose security now.
+ Do we have any letters or email you'd like to take care of an addenda before we get to the meat of the matter.
+ Do I got a couple interesting notes in the mailbag Matt Sharp in OK now. I assume that his hands did not slip on the keyboard when he was typing.
+ Where in the UK he is A B E R Y ST W Y T H. Wait a minute, I have to write that down. A B E R. Yeah. Y ST W Y T H. Give it a shot Leo.
+ Well, I of course that's a berry Saint Eve. I buy that and it and it is a very well known. It's probably I don't know where it is. It's probably Welsh. You could probably put it in Google and be looking down at the top of his head. I should. Yeah, right.
+ Because it's probably just him. You know, I'm going to put that in Google and see that's very interesting. Abbabra Saint. Oh, meanwhile, he says he says, Hi there, Stephen Leo. I love security now and I'm a regular listener. Believe it.
+ I believe in one of your recent shows. You mentioned how to ensure that the web page you are visiting is secure by checking for HTTPS. The padlock and that the signing authority is trustworthy.
+ However, I have a question about that last detail. How can the average user know whether the certificate is signed by a proper authority? I have seen.
+ He says, I have seen IE seven showing its green bar on eBay and PayPal, which is great because you know you really are safe. But what about all other sites that are signed by Authority X? Is there. Well, I don't think X. Well, anyway, you know, of course you didn't mean X literally.
+ Is there any good way to know who is trustworthy and who isn't? Good question. Well, it's a great question, but this really brings home a peeve that I have that green bar is really cool.
+ And it costs any site that wants to provide it $1,500 a year. You won't be seeing it on my site. It really that really frosts me, Leo.
+ Your sign has what they call their 128 bit SSL with E. V. You know, it's like the tech reline additive with E V now with E V exact exactly right. It stands for extended validation.
+ And all it is is nothing. All it is is a is a certificate that they rake you over the coals because if you're a hacker, you wouldn't have 1500 bucks to pay for this.
+ Leo, I would buy it if I had to buy it once, but that's a one year certificate. If you go for two years, oh, they give you a discount. It's only 2695. That is $2,695 for two years.
+ And then it explains why not seeing a lot of green bars on the just really bugs me. It's like, Hey, I want that. I'm, you know, I've got 128 bit certificate, but it won't light up green unless I pay them a lot of green.
+ That's a scam. Oh, really. It is such a scam. That just really bugs. And by the way, I completely mispronounced it. And I'm not going to try to mispronounce. Oh, believe me. It is Welsh, though. It's it's mid Wales main seaside resort.
+ A Barry Stwyth or something. It's in the heart of Cardigan Bay and it is the town of 50 pubs. So Barry Stwyth, I think that's exactly how you would say this looks like a Barry Stwyth.
+ I don't it's but it's in Wales and nobody can only the Welsh can pronounce Welsh names. I'm afraid. So I'm not tempted.
+ You did a good job and to actually and her to hand to and her to answer Matt's question, having gotten my rant off my chest. God, that just bugs me.
+ The essentially the the way certificate chains work is that the route certificate, which is the signing authority has to be installed in your browser.
+ It's funny that he mentions this also because about a week ago, I don't remember what led me to it, but I looked through under XP with IE seven, the list of signing authorities.
+ Oh my God, Leo, the thing just scrolls on forever. It's it's phenomenal certifies the certifiers. Well, exactly. I mean, certainly Microsoft is ultimately in control of the certificates for their browser.
+ Presumably the guys behind Firefox are gathering those together and opera and Safari and everything. I mean, the browser vendor can, you know, set up the certificates that they want their their browser to accept.
+ So, you know, to answer his question, you you just can't normally get a random bogus certificate into a browser without deliberately installing it yourself. And I have never heard of a situation where malware goes about doing that one hopes that the operating system
+ and browser take some pains not to allow that to be an automated process, or you could imagine that you could start getting, you know, bogus route certificates. On the other hand, there are there's a mechanism called a CRL certificate revocation list, which if such a bogus certificate
+ appeared, there are mechanisms for causing them to be revoked, you know, as soon as they are found. So it's, you know, basically that part of our connections, the whole SSL stuff has been engineered, you know, very well by by our vendors.
+ So it's really, you know, not a big problem. But boy, it bugs me that I can't have a green bar without, you know, spending. And I think only the biggest merchants are going to have green bars and I have to say it's going to really eliminate the usefulness of this.
+ You know, I talked to somebody at Yahoo, the other night at a party, and they are implementing a site key system, much like the Bank of America site key system. And I said, well, you really only listen to our podcast.
+ There seem to be some issues with the usability and not merely usability because I hate psyches, but frankly, the security offered by a psyche. That's the image that your bank displays and you're supposed to recognize it. So forth. Fortunately, Yahoo is not going to make it a must, but I'm a little disheartened to see them adopting.
+ You know, the bank has to do it, I guess, is by law, but Yahoo doesn't. And I'm a little disheartened to see them adopting stuff like that.
+ Well, what you're bringing up this issue of a site key plays right into today's topic as it happens. Oh, good. But I wanted to mention we had another reader, another reader, another listener, Richard Collette in Beaumont, California. He said, Hi, Steve.
+ I was just listening to you and Leo on the Tech Guy podcast. And so I'm sure he means, I guess you do a podcast of your Tech Guy show.
+ And since you appear every week on the radio show, he's hearing your segment on the radio show on the podcast.
+ Right. Yes. And so he says, I heard you guys talk about passwords. I thought I would share, I thought I thought I would share with you how I create passwords.
+ And the reason I'm bringing this up, Leo, is here's one I've never heard before. He says, I take the model number and serial number of my monitor, put them together.
+ And I have a, and I have a very unique, complex and unforgettable password. If I forget it, I just turn my monitor around.
+ Wow. This can be done with any device that is within arm's reach of your computer. If you want a unique password for each site, you can put the domain name part in the password as well.
+ He says, parens, I put it between the model and the serial number. As long as you don't forget the device you have used as the root of your password, you will never lose the password.
+ Just don't tell anyone what the device is. Because I can just look at the back. And actually, it is pretty, it's pretty neat because, you know, I mean, not that passwords have to be absolutely unique, but serial numbers are going to be unique within a given family and model number of a monitor.
+ So he's come up with a way of creating a complex, unguessable, probably alphanumeric blob, which if he should forget it, he can always recover it again.
+ Right. So I thought that was kind of neat. Very clever. Very clever. And then I have, speaking of clever, I have a one very short little blurb that I just got a kick out of this guy.
+ He's a listener, Harvey Russ. And he says, he starts off says, OK, this was an emergency, my T my Tivo puked.
+ Oh, no, that's terrible. And I loved it that he's like, OK, you know, his Tivo dying is more of an emergency than his PC dying.
+ He says, my Tivo puked. The week knees tech support page said that the problem with my Tivo looks like a disk failure.
+ Well, I have the fix spin right six. Yes, I resurrected the pair of disks in my series two Tivo using the handy dandy trusty spin right.
+ Steve, thank you for your knowledge and hard drives and technology in general. I've been using spin right since version 1.0, your faithful follower in technology, Harvey Russ.
+ Lovely. Lovely. Thought that was neat. And I just got a kick out of my Tivo puked. Forget about my computer. I need my shows record.
+ That's a Linux disk. So it works fine on Linux. It does. In fact, what happens is on series one Tivo's.
+ And I'm not sure about series two, but I think it may be the same. Those are bite swapped systems, meaning whereas whereas on Intel based systems,
+ we have what's called little Indian format where the least significant bites come first on certainly on the power PC that was used in the original series one Tivo.
+ And I think also in series two, those are big Indian systems where the most significant bite comes first.
+ This is important because when spin right looks at the partition table on the drive, it will not find it on on Tivo's because the special signature word at the end of the partition table, which is a 5 5 a a will be swapped and it'll be a 5 5.
+ So spin right says, well, your disk is blank. Shall I go anyway? And so obviously Harvey said, please. And spin right took off and just did the whole drive from front to back and resurrected his Tivo.
+ Very interesting. Oh, yep. Works on works on Tivo's. All right. Now you've got me with this title and I have no idea what it means. So maybe you better. Maybe you would best explain. Mr. I'm going to I'm going to explain.
+ It turns out that Microsoft has a guy whose title is identity and access architect. His name is Kim Cameron. And he wrote such a nice setup for this that I'm just going to read it. This is in one of his blog postings.
+ And as I was doing some research for this, I mean, I could hear my own voice saying these things is that these will not be unfamiliar concepts for anyone who's been listening to our podcast for a while.
+ But he just does such a beautiful job with it that that I want to lead in with that. He says, the Internet was built without a way to know who or what you are connected to.
+ Excuse me. Since this essential capability is missing, everyone offering an Internet service has had to come up with a workaround.
+ It is fair to say that today's Internet absent a native identity layer is based on a patchwork of identity one offs. As he puts it, you know, everyone just doing their own things basically.
+ Exactly what we've been talking about the authentication issue. Yes. He says, as the web increases, so does users exposure to these workarounds. I'm sorry, as use of the web increases. So does users exposure to these workarounds.
+ Though no one is to blame, the result is pernicious. Hundreds of millions of people have been trained to accept anything any site wants to throw at them as being the quote normal way, unquote, to conduct business online.
+ They've been taught to type their names, secret passwords, and personal identifying information into almost any input form that appears on their screen.
+ There's no consistent and comprehensible framework allowing them to evaluate the authenticity of the sites they visit, and they don't have a reliable way of knowing when they're disclosing private information to illegitimate parties, i.e. like fishing exploits.
+ At the same time, they lack a framework for controlling or even remembering the many different aspects of their digital existence. People have begun to use the Internet to manage and exchange things a progressively greater real world value.
+ This has not gone unnoticed by a criminal fringe that understands the ad hoc and vulnerable nature of the identity patchwork and how to subvert it.
+ These criminal forces have increasingly professionalized and organized themselves internationally.
+ Individual consumers are tricked into releasing, banking, and other information through fishing schemes that take advantage of their inability to tell who they're dealing with.
+ They are also induced to inadvertently install spyware, which then resides on their computers and harvests information in long-term farming attacks.
+ Criminol organizations exist to acquire these identities and resell them to a new breed of innovators, expert in using them to steal as much as possible in the shortest amount of time.
+ The international character of these networks makes them increasingly difficult to penetrate and dismantle.
+ Fishing and farming are now thought to be one of the fastest growing segments of the computer industry, if you can call it that,
+ with an annual compound growth rate, get this Leo of 1000% of 1000%.
+ That makes sense, though. It's growing outrageously.
+ It absolutely does. He says, for example, the anti-fishing working group, Fishing Activity Trends Report, February 2005, now this is the two years ago, yes,
+ sites an annual monthly growth rate in fishing sites between July through February of 26% per month, which represents a compound annual growth rate of 1600%.
+ Without a significant change in how we do things, this trend will continue.
+ It is essential to look beyond the current situation and understand that if the current dynamics continue unchecked, we are headed toward a deep crisis.
+ The ad hoc nature of the Internet identity cannot withstand the growing assault of professionalized attackers.
+ A deepening public crisis of this sort would mean the Internet would begin to lose credibility and acceptance for economic transactions when it should be gaining that acceptance.
+ That's a big cost of this stuff. Is email and the Internet become less useful?
+ Well, in fact, I've heard reports. I'm sure you have Leo and our listeners probably have or know people who have stopped using the Internet because they've been put off by it as a consequence of all this.
+ Yeah, very scary.
+ And so he concludes by saying, "But in addition to the danger of slipping backwards, we need to understand the costs of not going forward.
+ The absence of an identity layer is one of the key factors limiting further settlement of cyberspace.
+ Further, the absence of a unifying and rational identity fabric will prevent us from reaping the benefits of web services.
+ Web services have been designed to let us build robust, flexible, distributed systems that can deliver important new capabilities and evolve in response to their environment.
+ Such living services need to be loosely coupled and organic, breaking from the paradigm of rigid premeditation and hard wiring.
+ But as long as digital identity remains a patchwork of ad hoc one-offs that must still be hardwired, all the negotiation and composability we have achieved in other aspects of web services will enable nothing new.
+ Knowing who is connected with what is a must for the next generation of cyber services to break out of the starting gate."
+ Now, this is coming from Microsoft.
+ I hope that this doesn't mean another proprietary single sign-on initiative from them.
+ They've said they're supporting OpenID, haven't they?
+ Well, that's where we're going today with the podcast because, of course, many people will be familiar with exactly what you were alluding to,
+ which is the hopefully defunct, if not still on its way toward "defunction."
+ And always having achieved dysfunction.
+ Passport.
+ Passport.
+ I mean, I tell you, for a while, you had to create a passport account to be an MSDN subscriber, which I am.
+ You know, I pay my 2,500 bucks a year to receive DVDs of Microsoft's latest and greatest, and it just irked me.
+ That's still true, by the way.
+ Yes, exactly.
+ Although, I guess I just must have one installed now.
+ It's automatic, and it's automatic.
+ But, I mean, talk about a dead-on-arrival solution.
+ The problem of, of course...
+ But not misguided.
+ No, no, no, not misguided at all.
+ Microsoft was right.
+ The problem is, thank goodness, there are some things which are proving to be bigger than Microsoft.
+ Right.
+ And, of course...
+ Good, this is right.
+ Yes.
+ You know, even we were talking last week in one of our errata about SPF.
+ Or was that today, earlier?
+ The sender provider framework.
+ Yeah, that was, I think, last week's podcast.
+ Okay, right.
+ I can't remember.
+ You know, it's blurring together.
+ The whole SPF deal.
+ Microsoft tried to come out with their own that they were going to license and said, "Oh,
+ well, but it'll be a free license."
+ And, fortunately, the industry, again, email is bigger than Microsoft.
+ And Microsoft ended up having to compromise and basically, you know, meld their solution
+ and sort of, they didn't really want it to admit it, but, you know, they ended up adopting
+ that protocol and saying, "Okay, fine.
+ You know, we'll do something that is interoperably compatible."
+ Now, the real catalyst for today's topic was something that has appeared in VISTA, which
+ has the strange name of card space.
+ Hmm.
+ And, in fact, I say strange.
+ I think it's a bad name, especially when it was originally named info card for several
+ years during development.
+ It was called info card, which actually, I think, is a better name for it.
+ Maybe it wasn't available.
+ They couldn't get a trademark or, you know, who knows why they ended up changing it from
+ info card.
+ That was, you know, the internal project name, but it's called card space.
+ What it is, is essentially Microsoft's version of what we talked about a couple of weeks ago
+ with OpenID.
+ You'll remember that OpenID promises, and the good news is it is delivering on this promise,
+ because it is so cool.
+ It promises to allow people a means for having a single authentication system, which is completely
+ open source.
+ And, in the case of OpenID, it is URL based.
+ You give your identity as a URL to a page which you control.
+ Either an identity provider provides it to you.
+ You have your own page on MySpace, or what's the one you like now?
+ Oh, Facebook.
+ Yeah.
+ What's the one I like now?
+ Let's see, who knows, by the time there's errors, it could be anything.
+ And so the page you control is looked up, and the identity server you have assigned is
+ then the URL for that is obtained.
+ The site you're wanting to authenticate with then sends your browser over to there, where
+ you authent, along with some other information that it provides, you authenticate with that
+ third-party service, then it sends you back to the original site you wanted to authenticate
+ to, having signed essentially the package that the first site provided.
+ And so that's a way of using a single point of authentication among many different services,
+ and it's very cool.
+ The problem is, it really doesn't provide a mechanism for providing those sites with granular
+ information, which about you, which you are able to control.
+ And it's sort of inelegant.
+ Your browser is bouncing around the internet, and it's not quite as seamless as it could
+ be.
+ There are means to cache credentials and to involve more scripting to make that process
+ more transparent, but still it's really not seamless.
+ Well, what Microsoft has done, and the reason this is called a meta system, is they learned
+ from their mistake with Passport.
+ They said, "Okay, oops, why did that not work?"
+ Well, everyone would immediately say, "Well, because it was yours."
+ And sorry, Microsoft.
+ We're sort of stuck using Windows and other stuff that you provide, whether we like to
+ or not.
+ I mean, and a lot of Microsoft stuff is as good as anything else, but we don't want to have
+ to.
+ We want choice.
+ And so what Microsoft did was they created a meta system, which explicitly allows other
+ sorts of authentication frameworks to be put underneath the user's experience.
+ And I would be less enthusiastic about this if it were only on Vista, because, you know,
+ I'm not there yet, and I know a lot of the world is waiting for the first service pack
+ or longer.
+ The good news is it will be this card space technology will be backported to IE7 on XP.
+ And there's already support for it, for example, in the open source community on Linux and
+ in Safari and coming for Firefox.
+ So what is it?
+ Okay.
+ What this thing essentially does from a, let's talk about the user experience first, then
+ we'll talk about what's going on underneath in a card space environment.
+ That is to say, running on Windows or in Safari, and by the way, it is Safari on the
+ Mac that you, that there is a card space compatible experience now because there's no IE on the
+ Mac anymore.
+ So they don't.
+ Correct.
+ So you say that I'm an eBay auctioneer, and I have an eBay auctioning client that I use
+ for managing my multiple auctions on eBay.
+ So I want to authenticate myself to eBay.
+ So I launch my client, this eBay-aware client.
+ It connects to eBay and gets from eBay a list of authentication parameters given that
+ eBay were a system that supports this technology.
+ So essentially it says, what protocols do you support for authentication?
+ It asks, what trusted ID providers do you support, like Thought, Veracine, and so forth?
+ And what information would you like from us?
+ So there's a protocol established that allows the client running on my system to basically
+ sort of get an authentication requirements package back from somebody we want to authenticate
+ with all transparent to the user.
+ What happens then is the, there is a hardened, secure UI system or subsystem in Windows called
+ card space, which the client is able to hand this packet to.
+ Card space then presents a, essentially, a very simple and elegant UI to the user.
+ It pops up and it looks like a series of credit cards.
+ These are cards that, so think of cards as an abstraction for an identity that contains
+ some information.
+ So what happens is that the packet goes to card space.
+ Card space looks at all the cards that reside on this user's computer.
+ These may be cards that were issued by the government, by banks, by, or, and even by the
+ user themselves, you're able to create your own cards.
+ You don't need, they don't have to come from some certifying authority somewhere.
+ So, this packet says, okay, eBay trusts Thought and Veracine and Equifax or something and
+ would like to have our email address as the token it uses to identify us.
+ For example, logging into eBay now, you give it your email address and your username and
+ a password.
+ So card space looks at the cards it has, finds the intersection between those cards and what
+ eBay has said it wants and presents that subset to the user.
+ The user is able then to choose the card that they use for logging on to eBay, which will
+ be among those in the subset.
+ What then happens is that the card space system goes to the provider like Thought or Veracine
+ and sets up a secure connection and says, please get the user's email address associated
+ with this credential.
+ So, this is a key aspect of this that personal information doesn't even reside on the user's
+ computer.
+ That's held securely and doesn't have to be held, but in this case is by the provider
+ of the identity.
+ So, the bank or the government or whoever has issued this credential actually has the
+ information.
+ All that's in the card are some tokens saying basically the user's email address, maybe
+ your street address, your mailing address, your phone number, basically any information
+ that you want associated with that credential can be, but the content of it is kept outside
+ the machine.
+ So, it is not available for compromise because it's not stored locally.
+ Merely sort of a tokenized representation is.
+ So, the provider sends this back to the user's machine.
+ At that point, and here's one of the critical aspects, the user is always provided with
+ a screen showing that essentially which information is going to be disclosed.
+ In this case, it would just be his email address, but one of the requirements for this system
+ is that users always have complete control.
+ The idea being this is not a system designed for the other party's benefit.
+ This is designed for the end user's benefit.
+ The end user selects the card and sees what information is going to be disclosed before
+ anything that identifies them leaves the machine.
+ So, essentially, although there's a lot going on behind the scenes, it's a very simple transaction.
+ You fire up your eBay client up pops a screen with a few cards on it.
+ You click on the one that you use for logging into eBay.
+ Next thing you see is a confirmation screen saying, "Is it okay for us to send the following
+ information to eBay?"
+ Oh, and get this.
+ There's even now an RFC, an internet request for comments document, for how to securely
+ embed logos that is corporate logos in X.509, which is the standard for security certificates,
+ so that you also see eBay's logo with enough crypto wrapped around it that there's no way
+ for it to be spoofed.
+ I see the logo helps a lot.
+ I think that's important.
+ Oh, I really do, too.
+ Yes.
+ Because, I mean, it's sort of like what you were talking about with site keys.
+ The idea being that it's something visual that the user can lock onto and remember and just
+ sort of expect.
+ He wants to see eBay's logo when he's about to click on a card and say, "Yes, I want
+ to send this information to eBay."
+ So he just says, "Yes, send it."
+ So card space returns this to the client, that returns it to eBay.
+ All of this, of course, is wrapped in seriously strong crypto.
+ We've covered that aspect of these transactions many times in our past podcast so that our
+ listeners understand that all of that is possible.
+ It's very possible to authenticate and to protect this stuff so that the channels at
+ each stage of the protocol are secure.
+ So from the user standpoint, it's a very straightforward transaction.
+ But this does more than open ID in its basic form.
+ Open ID, as we've talked about before, is merely authenticates you, but it does provide
+ you the luxury of not having to create individual credentials on every site you want to visit.
+ You have a single point of authentication and it's all under your control.
+ Well, the good news is Microsoft formalized their endorsement and support of open ID as
+ an underlying protocol for the so-called meta system.
+ Good.
+ I'm really glad to hear that.
+ Well, it's perfectly, though, because what it means is that open ID is already taking
+ off and card space was just born, and it would likely again be still born much as passport
+ was if they hadn't learned their lesson and really taken their hands off this thing and
+ did the right thing.
+ Now, you'll remember that I think it was on the tech guy podcast and your show last week.
+ I mentioned how I prefer Google checkout to PayPal from an ease of use standpoint because
+ Google checkout does contain and provide to the vendor my whole little packet of information
+ that I've authorized them to make available so that I don't have to fill out the form.
+ Well, this is the same sort of benefit here.
+ You can create your own info cards and say, okay, that's where they're coming from.
+ That's where card space comes from, right?
+ You have a space of cards.
+ Yes, exactly.
+ And I've seen it.
+ Microsoft has a nice little animated Windows video file that shows you this thing in use.
+ I mean, it is really a nice user interface if this thing succeeds and because it's built
+ on top of open source and open ID and in fact, this thing is open enough that there is an
+ Apache module in full open source.
+ I mean, everything sitting there that allows it to be a client of Microsoft's window card
+ space system.
+ So nothing has been nothing.
+ I mean, they've really learned their lesson, nothing has been kept away from the open source
+ community so that I really am excited about this.
+ I think this has a very good chance of succeeding.
+ So it doesn't supersede anything existing.
+ It just co-exists using open ID as kind of the underlying kind of common core.
+ Well, it doesn't actually use it.
+ It can.
+ It supports it.
+ Yes, exactly.
+ The idea is that they've defined a number of things.
+ For example, they call the relying party or RP.
+ The relying party is the entity that wants to receive the credentials.
+ They call the identity provider or IP that party that provides the identity.
+ And of course, you have the user sort of in the middle there, which is arbitrating the
+ conversations that go back and forth.
+ And the crypto is used in order to allow all the parties to authenticate each other and
+ to provide this in a secure fashion.
+ But it turns out that thanks to the evolution of XML, there's something called SAML, which
+ is another open standard, the security assertion markup language, which is an XML derived protocol,
+ essentially, that allows this information to be conveyed and encrypted in a secure fashion
+ that allows these parties to conduct open source dialogues of this kind of information.
+ So essentially, what it will mean is, as this spreads, as IE gets an add-on, I'm sure it'll
+ be an active X add-on to IE, and there exists one now for Safari running on the Mac.
+ It's available under Linux.
+ Apache's got a module, Firefox will have one, this will provide a very clean sort of
+ a front-end, which is arguably easier to use from a user standpoint than having to have
+ sort of a funky look in URL that you use to identify yourself.
+ And it sort of manages multiple identities at the same time.
+ And there's nothing that says you always have to authenticate with the same identity.
+ You could just, you know, citizens' users are able to be their own IPs or identity providers.
+ You're able to create an identity, you know, for example, over on slash dot or over on
+ ebay or over in random blogging.
+ And so, you know, again, the beauty of this is that we stay in control, but there are
+ things that are very powerful, for example, ebay that is a so-called relying party that,
+ you know, that RP, it could also be an identity provider.
+ If for example, we wanted to prove how, you know, how trustworthy and what our ebay integrity
+ is.
+ Remember that ebay has that whole voting system and feedback system where sellers are able
+ to demonstrate, you know, what good sellers they are and buyers are able to demonstrate
+ what good buyers they are.
+ Well, imagine that you'd like to establish your identity as someone trustworthy over
+ on ebay, over on some other site.
+ This system essentially allows ebay to securely package your credibility, your, you know,
+ your, your, your identity that you have earned over time there and export it to any other
+ site that that you ask them to export it to.
+ You can have them create the credential, which they're standing behind to allow you to essentially
+ not have to have your identity fragmented all over the internet, but be able to pull
+ it together.
+ Well, it seems like a good solution, especially since it's integrated into Vista.
+ Yes.
+ Exactly.
+ It'll just, it'll just be built in and we, what I like about it is we don't have to,
+ given that this takes hold, we don't have to, you know, move to Vista for it because we
+ will have it in IE seven running under XP, which is, you know, where I'm finally comfortable
+ and I'm in no hurry to go to Vista.
+ It does concern me though, because I'm, as a Mac user kind of left out in the cold.
+ Well, I guess I can use Safari.
+ That's right.
+ You told me that.
+ Yes, you absolutely will.
+ And there is.
+ I've, I've seen screenshots of the Safari plugin, which is in beta now, but is running
+ and is successfully processing credentials.
+ I hope they put that on the iPhone.
+ So it's going to be another step forward, Leo.
+ Yeah.
+ Yeah.
+ Very good.
+ So card space.
+ That's what Microsoft calls it.
+ But Steve just likes to call internet identity meta systems.
+ And I hope you've enjoyed this, this trip down meta system lane.
+ If you want to know more, of course, go to Steve's website, grc.com.
+ You can get a 16 kilobit version of this show for the bandwidth impaired and transcripts
+ along with Steve's a great program, spin right, the ultimate disc recovery and maintenance
+ utility.
+ And of course, all is free software.
+ Do want to also remind you that we are sponsored by nerds on site, the good folks who want
+ you to join them to build your business nerds on site.
+ And I want to be a nerd dot com.
+ They're growing.
+ They need more nerds, or geeks, you can use the word geeks.
+ They're looking for folks with competencies in all areas, PC, Mac, Cisco oracle, you name
+ it.
+ They needed fix it technicians and website designers and programmers and project managers.
+ No matter what area you're, you're in in technology, they can use you sales, sure, trainers,
+ security experts, naturally, anti virus gurus.
+ If you're one of those types who likes to troubleshoot, tear apart and rebuild your own
+ computer in your spare time, you ought to be a nerd independent contractors.
+ You're in business for yourself, but not by yourself.
+ That's kind of the key.
+ They help you make your business work.
+ You focus on your passion and not the burdens of running a business as seven countries now.
+ And I think more all the time, Canada, US, Mexico, England, Australia, South Africa, Bolivia,
+ they've got a university of nerdology, so you can hone your competencies while you're
+ doing your favorite thing in the world.
+ If you're a nerd, you love working with people, go to www dot I want to be a nerd dot com
+ and register for a nerds only a meeting in your area.
+ That's I want to be a nerd dot com, Stephen Iron nerds were honorary nerds, although I
+ don't have the cute little Volkswagen beetle I saw in Vancouver with the nerds on site logo
+ on it.
+ That's what I want.
+ That's cool.
+ And those guys are neat.
+ They're really great.
+ I want to be a nerd dot com.
+ Thanks for supporting security now.
+ So Steve, have a great time at Harvard.
+ I'm going to we're going to a week from the time people are listening to this.
+ We're going to answer for episode 99, the intriguing question.
+ Are you human?
+ Ha ha.
+ And how do we know?
+ That's great.
+ I love it.
+ All right.
+ We'll talk again next Thursday and every Thursday.
+ Coming close to episode 100, just a couple more to go for Steve Gibson.
+ I'm Leo LaPorte.
+ Thanks for joining us.
+ We'll see you next time on security now.

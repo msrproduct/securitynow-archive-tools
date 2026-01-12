@@ -1,0 +1,888 @@
+ (upbeat music)
+ - This is security now, episode 15 for Thanksgiving Day,
+ November 24th, 2005, part two of our continuing series
+ on virtual private networks.
+ (upbeat music)
+ - Steve Gibson and a very good afternoon
+ and a happy Thanksgiving to you.
+ - Yeah, thank you.
+ - We're actually doing this the day before Thanksgiving.
+ Are you going to do Thanksgiving?
+ Do you do Thanksgiving?
+ - Oh yeah, I've got plans down here with some friends
+ to hang out and relax a little bit.
+ - My mom's in town, we're gonna have a big Thanksgiving
+ and I'm supposed to be making stuffing right now.
+ But no, I'm making a podcast.
+ Security now is more important than stuffing.
+ Last week, we talked about VPNs, virtual private networks.
+ And we did the theory of VPNs.
+ In fact, I had a number of emails saying,
+ quick, get to the practice.
+ What are you doing with them?
+ So, shall we recap last week?
+ - Yeah, I also want to mention a little bit
+ on the continuing saga of Sony.
+ The news is now the Attorney General of Texas
+ has filed suit against Sony, the EFF,
+ who were considering filing suit,
+ that is the Electronic Frontier Foundation,
+ have filed suit, and there are reportedly
+ six class action suits, also now pending.
+ - Wow, and what I thought very interesting,
+ the Recording Industry Association of America said,
+ no, no, that was, Corey Sherman,
+ who's the CEO of the RIAA.
+ - Yeah, defended this.
+ - Yeah, defended it.
+ He said, no, no, no, the only issue was,
+ there was a security flaw,
+ but they were just doing copy protection.
+ No big deal.
+ We plan to keep doing this, you know, wasn't perfect,
+ but they, but he said, he said Sony did a good job
+ of making up for it, of the recall,
+ and he said they're doing the right thing,
+ and you know, no problem, what's the problem here?
+ - On Twitter on Sunday, I mischaracterized
+ some email that I received from Amazon
+ that I wanted to just fix,
+ because I'd read a bunch of BBS postings
+ and various blogs and things after receiving this email,
+ and I made a comment that they were saying
+ that Amazon sent me email saying that the CD was defective.
+ - Yeah.
+ - Actually, when I went back, I thought,
+ oh, I really need to make this clear,
+ that I got email from Amazon,
+ because I purchased a CD specifically
+ with the Sony DRM root kit stuff on it
+ in order to experiment with it myself.
+ They followed up, and I thought it was,
+ I was very impressed, actually, that Amazon did this,
+ and said, their email reads,
+ "The Sony CDs listed above contain
+ XCP digital rights management DRM software.
+ Due to security concerns raised about the use of CDs
+ containing the software on PCs,
+ Sony has recalled these CDs and has asked Amazon.com
+ to remove all unsold CDs with XCP software
+ from our store.
+ Since you purchased this CD from Amazon.com,
+ you may return it to us for a full refund
+ regardless of whether the CD is opened or unopened.
+ Just visit, bah, bah, bah.
+ Thanks for your understanding.
+ We hope to see you again at Amazon.com.
+ - That's actually a very good explanation, I think.
+ - Yeah, it was very clear and very thorough.
+ And anybody who isn't in the loop on this
+ would have received email like this
+ if they had purchased one of these CDs,
+ and in that fashion, be brought up to speed,
+ at least to some degree.
+ It's like, oh, wow, now what do I do?
+ - Yeah, I think that's fair to both sides
+ in an accurate description of it.
+ I hope other retailers maybe kind of take a page
+ from Amazon's book because, of course,
+ the recall is global.
+ - Well, of course, Amazon has the advantage
+ of being able to look at their database
+ of everyone who purchased the CDs in question
+ and send them retroactive email.
+ If you buy something from good guys or best buy or fries
+ or wherever, there's no way for other retailers,
+ you know, physical retailers to get ahold of you.
+ - So if you've got one, bring it back.
+ And they're supposed to take it back.
+ - The other thing I wanted to mention
+ before we continue with VPNs is,
+ I've gotten a lot of great feedback from people
+ who are loving the little passwords page that I created.
+ I've been so bogged down with VPN research
+ for this podcast that I haven't been able to finish
+ the page, although it's fully functional.
+ I'm adding application notes to the bottom.
+ So I just wanted to remind people about
+ if you just put in grc.com/passwords,
+ you get a page which generates really high security
+ passwords for whatever purpose you have.
+ - All right, and that's free and available
+ for anybody who wants to use it.
+ And it's that 63 or 64 character password
+ that Steve recommends for people who are using WPA
+ on a wireless network.
+ - Right, well, and even for example, VPN shared keys.
+ - Oh, you could use it for that, too, sure.
+ - Or, yeah, I mean, just sort of--
+ - Anything you need is 64.
+ - Any purpose.
+ - Or take what you need and leave the other one as well.
+ - Well, yeah, in fact, the passwords are
+ what's called maximum entropy passwords,
+ meaning that at any point, the next character
+ is equally probable to be anything within the alphabet,
+ which means that shorter chunks of those passwords
+ are just as good that is in terms of just as random
+ as the whole thing.
+ So if you've got something that only allows you,
+ for example, I have a router that only accepts
+ a 49 character pre-shared key for VPN setup.
+ It's like, okay, you give it as much as it'll take.
+ The number of people sent me notes with other password
+ generators are lots of programs out there.
+ In fact, OS X includes, in its key chain application,
+ a random password generator.
+ And I'm sure they implemented it well, although one,
+ the problem is one doesn't know.
+ And Steve's taking great care to make sure
+ this is really random.
+ - Well, it only displays itself over a secured connection,
+ and the page is post-dated in 1999,
+ so that no proxy will hold onto it,
+ thinking that it might still be good
+ and serve it to somebody else.
+ So I did what's possible in terms of preventing anyone else
+ from ever seeing the passwords that the page provides.
+ - If you are creating a password in OS X,
+ open the key chain access application,
+ press the plus button, and you'll see next to the password,
+ there's a little key, you can press that,
+ and that gives you the password assistant.
+ And Steve, you'll like this.
+ They give you a variety of different choices.
+ Memorable, letters and numbers, numbers only, random,
+ and FIPS 181 compliant.
+ I presume that that's some sort of high quality.
+ - Standard. - Standard.
+ And they have a little slider for length,
+ and they even give you a little bar
+ that shows you the quality.
+ So I think that this is probably a pretty good one,
+ although it only goes up to 31 letters,
+ so you'd have to double it up if you wanted to use 64.
+ - That's strange. - Do it twice.
+ - Where they got 31 from, but that's the maximum number.
+ So last week, Steve, we established
+ that if you are, you know, for home use,
+ you wanna turn on WPA encryption,
+ and that's gonna give you a safe connection
+ with your wireless network at home.
+ And we also raised this specter, this problem,
+ when you go out and you're using a hotel,
+ or a hotspot that doesn't have any encryption,
+ it is of necessity open, that everything you do
+ is now suddenly back in the open and insecure.
+ And we talked a little bit about VPNs
+ as one way to secure this.
+ Can we, let's just go back a little bit
+ and explain the issue and why VPNs are helpful.
+ - Great, first of all, I'll mention relative to WPA,
+ there've been a lot of questions, great questions
+ that people have sent, which we'll be addressing
+ in next week's divisible by four security now,
+ podcast number 16, which will be our Q&A episode.
+ - Right, okay, so hold your questions until next week,
+ actually send them, but we'll answer them next week.
+ - Right, but now we're on the road,
+ our WPA is not helping us at all, 'cause I'm using,
+ I'm using the holiday in, and it's got an open access port,
+ and now what do I do?
+ - Exactly, so the idea is in a network
+ where you have control, we've really covered clearly
+ the issues of securing your own environment.
+ The question now is, what happens when you're out on the road?
+ You're in a hotel, we know from empirical evidence
+ that about half of the hotels use a hub
+ rather than a switch, because hubs are a lot cheaper
+ and the hotel doesn't care, in order to network
+ all of the rooms.
+ A hub means that somebody in any room in the hotel
+ running a packet sniffer is gonna see all the traffic
+ from all the hotel guests using their broadband solution.
+ So actually I misspoke, it's not just wireless,
+ it's wired connections in the hotel too.
+ - Yes, every connection.
+ - And the problem of course is that typical email protocols
+ are in the clear, not only for the login,
+ but for the text of the email.
+ So when you go to a hotel, and I mean at most people,
+ what they're doing is they're checking their email,
+ they're wanting to make sure that they're staying current
+ with any email that they've had come in.
+ It's over POP or IMAP, you know, port 110
+ or they're sending out through SMTP on port 25.
+ Anybody sniffing that, we'll see their username,
+ their login, their password, and the contents of their mail.
+ So, and of course the same is true
+ if you're in an open Wi-Fi hotspot
+ where you're taking advantage of somebody's kindness
+ to use their open wireless.
+ Again, as we know, that means there's no encryption.
+ - And unless you think this is,
+ oh, well, this is only a temporary thing.
+ If once they get your email password and login,
+ they can get it from now on until you change it.
+ So, you know, you could go home
+ and they're still reading your email
+ until you change your password.
+ - And I mean, some people might think,
+ well, that's not a big deal, but I mean,
+ you can be any cookies that are sent back and forth
+ or allow someone, for example, to impersonate
+ your automatic logon onto Amazon or eBay.
+ - Oh, good point.
+ - Which is cookie-based.
+ - Right.
+ - So, they don't even need your username and password
+ because as we know, when you come back to Amazon
+ or back to eBay or one of these sites
+ that uses persistent cookies to identify you,
+ they just say, hi there, Steve.
+ You know, click here if you're not Steve.
+ They do that by using a cookie
+ which is in the clear, not over a secure connection.
+ So, this allows somebody else to impersonate you.
+ I guess my point is, this is really a serious security issue
+ using non-encrypted communications in a public setting
+ where there's one way or another
+ for your traffic to be sniffed,
+ either in a network with a hub or wireless
+ which is inherently sniffing.
+ - Okay, so we now see the problem
+ and we all are exposed to this.
+ I mean, I do this all the time.
+ How do I secure my traffic?
+ What are the options open to me?
+ - Certainly, there are some protocols like,
+ like we talked about HTTP as opposed to HTTPS.
+ With HTTPS, the S stands for secure.
+ That creates a, what's called an SSL tunnel.
+ When you connect to the server,
+ there's a secure negotiation which occurs
+ and essentially any traffic that then travels
+ over that connection is encrypted.
+ It only carries the normal web traffic,
+ but for example, it's the way e-commerce is able to accept
+ your personal credentials, credit card numbers and so forth
+ without that being a security risk.
+ - Okay, so that's good.
+ - Exactly, and for example, there are some email systems
+ where you're able to use a similar
+ an SSL connection for email.
+ The problem is those are protocol specific.
+ They're only for specific applications
+ that you're running which are sort of preset
+ to operate in a secure fashion.
+ So in general, if we step back from those examples for a second,
+ what they have in common is this establishment
+ of a secure tunnel.
+ We started talking about this last week.
+ The idea being that a connection is established
+ between two points.
+ Then any traffic which you're sending back and forth
+ is encrypted and then placed in a packet
+ which is sent to the other end.
+ It is expecting this, so it takes the wrapper off of that
+ and then decrypts the traffic in order to get
+ what it was that you originally sent.
+ Essentially, it means that anybody sniffing your traffic
+ and even someone who was able to intercept your traffic,
+ the so-called man in the middle would be thwarted
+ and would not be able to in any way gain access
+ to the content of what you were sending.
+ I mean, it's the perfect solution for this kind
+ of mobile use of an otherwise insecure environment
+ in a secure fashion.
+ - I wish we could do it all the time.
+ - Well, that's really the goal and over the next few weeks,
+ we're gonna talk about strategies and approaches
+ and I've sort of set myself a holy grail.
+ I know where I wanna get but there's a lot of history here
+ that I wanna talk about because there are sort of
+ halfway measures and other solutions that are useful too.
+ - All right, so I don't wanna get you out of order here.
+ So, we wanna get that holy grail set up at some point.
+ Can we talk about that down the road
+ and talk instead now about the easy stuff?
+ - I think we should.
+ One of the, one of the--
+ - Yeah, I wanna protect people now, you know.
+ - Yes. - Yes.
+ - Well, or in the meantime, at least make sure
+ people understand what dangers they're facing
+ if they're not protected. - Right.
+ - One of the oldest approaches is something called SSH tunneling.
+ SSH stands for secure shell.
+ It comes from the Unix world
+ as does so much of this technology.
+ The idea being that when you are remotely administering
+ a Unix machine, in the old days you would use Telnet,
+ which is just a, basically it's sort of a terminal window
+ where you're typing text into the window
+ as you're typing at the text is sent to the computer
+ and it's just like you are sitting in front of it
+ at the console entering those characters
+ and then the things it would display on the screen,
+ instead it sends back to you
+ and it's displayed on your remote screen.
+ - Yeah, well, I have that capability on my Mac.
+ I mean, that's something I could set up as SSH tunneling,
+ although I've never really got it working exactly.
+ - Well, actually that's Telnet that I was talking about.
+ - Oh, Telnet, okay.
+ Well, Telnet's the insecure SSH.
+ - Exactly. - I see, okay.
+ And it was the lack of security of Telnet.
+ - I get it, oh, sorry, I didn't mean to interrupt you.
+ - It's okay.
+ It's the lack of security of Telnet,
+ which induced people to say, okay, we've got a problem here.
+ If I log on to my Unix machine remotely,
+ my root username and password, for example,
+ are going over the net in the clear.
+ So anybody that was sniffing the traffic
+ would be able to get my log on credentials
+ as God of that remote machine.
+ So they said, okay, we need to come up with a solution.
+ What they came up with is actually
+ an extremely robust solution called Secure Shell or SSH.
+ The idea is it's very much like what we just discussed
+ with SSL, the Secure Sockets Layer,
+ which is used, for example, with e-commerce,
+ or any time you're doing HTTPS over your browser,
+ the Secure Shell SSH creates an endpoint to endpoint tunnel,
+ and at that point, your log in,
+ anything after that's connected, is completely encrypted.
+ It is very, very securely encrypted.
+ - Now I use that from now on.
+ I've been using that for the last couple of years
+ to get into my website, once I realized Telnet was insecure,
+ and that works really well.
+ And it's very much like Telnet.
+ You get a terminal session and everything.
+ - Well, in fact, it's identical.
+ You would not know that you were running
+ over secure connection in any way.
+ Basically, it's transparent.
+ And in fact, transparency is one of the keys
+ of this whole notion of tunneling.
+ The idea being that you could be in a Telnet,
+ in an insecure Telnet session,
+ you're typing and you're seeing what you type.
+ The same thing happens with an SSH session,
+ except that unbeknownst to you, visibly,
+ everything that you type looks just like noise,
+ completely, completely scrambled dust
+ going through the internet to the far end.
+ - So that's SSH login versus Telnet.
+ Now, what is SSH tunneling?
+ - Well, now that's an interesting sort of,
+ I have to say Cluge, because that's really what it is.
+ Now, say that somebody wanted a secure connection
+ for traffic which would otherwise not be secure.
+ For example, email.
+ Normal pop account to port 110 is username and password
+ and all the contents back and forth of your email
+ is in the clear.
+ Say that you were traveling around
+ and you wanted some way to protect that,
+ even though that protocol itself is not secure.
+ What you can do is you use what's called an SSH tunnel
+ and we're gonna be a little techy here.
+ It's not something for the faint of heart,
+ but it is a very well proven and effective approach.
+ The idea is your SSH client running on your computer
+ is able to support this, what's called, tunneling.
+ You instruct it to listen for connections
+ on an unused port of your own machine,
+ like maybe port 1111, for example.
+ I mean, I'm just making that up.
+ It could be anything from one to six, five, five, three, five.
+ Any one of the local ports.
+ So you tell this sort of a little server
+ running on your machine to listen for anything connecting
+ on your own local port 1111,
+ and when that occurs to accept the connection
+ and send any traffic after encryption
+ down that SSH connection to a receiving server
+ at the other end, to an SSH server
+ to which you've already connected.
+ So essentially, you've got two connections.
+ You've got the secure connection across the internet
+ from your SSH client to a remote SSH server.
+ And then you've got a second connection
+ that is not secure, but it's just within your own computer.
+ You tell your email system rather than connecting
+ to a remote server on port 110,
+ which is a normal pop port remotely.
+ Instead, you tell it to connect to your own computer,
+ often called the local host,
+ and sometimes referred to with an IP address 127001,
+ you tell it to connect to this local host port 1111.
+ So when you check your email now,
+ your email client connects to a port in your own machine,
+ it has an insecure dialogue to that port,
+ but everything that it sends into that port
+ gets encrypted and sent across the internet,
+ and everything returning encrypted gets decrypted and returned.
+ So what this does is essentially,
+ it creates a secure connection
+ where there was no protocol security beforehand.
+ - That's why it's called a tunnel.
+ I mean, you're essentially establishing a new highway
+ from your computer to another computer,
+ and you just have, but the problem with this is
+ you have to tell each client,
+ okay, don't use 110 anymore, you gotta use 101,
+ and then when your tunnel's not there,
+ it's not 101's not gonna work,
+ so you have to reconfigure it.
+ - Yeah, I mean, it really is,
+ it's something that people who are spitting the propellers
+ on top of their heads are able to get to work,
+ but exactly as you said,
+ if you were doing this with a laptop,
+ when you were traveling,
+ you'd have to establish this SSH connection
+ to an SSH server,
+ the other thing is, you'd have to have an SSH server somewhere.
+ Now, if someone were a Linux or a Unix guy,
+ they could be running an SSH server at home
+ and then create an opening through a router
+ or their firewall to allow SSH traffic to come in.
+ - The good news is, that's not so hard.
+ On Mac, for instance, you can do it very easily
+ with this system preferences,
+ there's under the sharing preference pane,
+ you just turn on the SSH server.
+ The problem is you have to then open up a hole in your,
+ you have to forward the port through your router
+ for that to work.
+ - Right, and we know that--
+ - And incoming traffic's gonna be a problem,
+ I don't know how you do incoming traffic at all.
+ - Well, in fact, all the traffic coming from the outside
+ would then be routed through that port.
+ Now, that's normally port 22.
+ One of the first things you would do for security
+ is you would wanna move that to some other port number
+ because SSH is often attacked because it's well-known port.
+ - And while it is fairly secure,
+ there have been holes in it in the past, so you can't--
+ - Of course, and that's the problem that you run into
+ when you're running any server on your own network.
+ - Right, so just for Apple users, just so they know,
+ in the sharing preference pane, you turn on remote login
+ and that will turn on an SSH server for you,
+ and then you'll have to port forward to make it work.
+ But by default, it uses port 22,
+ so I guess that may be not the best advice anyway.
+ - So yes, you'd wanna tell the server to run on
+ a different port if you were getting into this that way.
+ But returning to the point that you made,
+ when you're out roaming around and you've established
+ this SSH tunnel, and you've got this SSH tunneling server
+ on your roaming computer, exactly as you said,
+ you'd have to configure your email client
+ to use a different port that it normally would
+ in order for this SSH server to intercept it.
+ But not only port though, but also IP.
+ You're telling it, don't go out to my normal pop server,
+ which is located somewhere on my ISP.
+ - Use local hosts. - Instead,
+ yes, connect to my own machine, this own machine
+ right here, which has a special SSH server,
+ which is essentially redirecting that port traffic
+ down the tunnel.
+ Furthermore, it would only work, everything we just described
+ solves the problem for one single protocol.
+ That is, just getting your email from your ISP
+ to your computer.
+ If you wanted to send email, now you need to do the same thing
+ for essentially for SMTP, run another tunnel on another port,
+ tell your email client again to send mail
+ to the local host address on this port,
+ and that would need to get intercepted and rerouted similarly.
+ - The way people usually do this is with a series of scripts.
+ The SSH command line is long and abstruse.
+ But once you've got it working, you just run the script
+ and it turns them all on.
+ - Well, it would create all of your local port services,
+ but you'd still need to reconfigure all your clients.
+ - Although I suppose if you just, you know,
+ you always used it, it would be okay.
+ - That's a good point.
+ If you always ran in that mode,
+ then you would just leave it that way all the time.
+ I've been tempted to do this because I, in fact,
+ do run SSH all the time, and I have SSH open
+ so I can log into my computer as a terminal,
+ and I've been tempted to create some tunnels
+ just to see if this works.
+ But so it's free, not easy, but it is free,
+ and it does work, and it's secure, right?
+ - Yes, it's extremely secure.
+ SSH is able to operate with very strong certificates
+ using public and private key cryptography.
+ So I mean, it's as secure as anything can be.
+ It's a well thought out solid protocol
+ that will definitely allow you to move traffic
+ between two endpoints that nobody can sniff
+ and have access to.
+ - So that's SSH tunneling.
+ - That's SSH tunneling.
+ Are there other ways we can do this?
+ - Yes.
+ - Okay, shall we talk about those,
+ or do you want to save them for later?
+ - Let's talk about SSL solutions.
+ - That might be the easiest way to do this,
+ and you're already doing SSL.
+ - Well, yes, SSL is, now that's back to secure sockets,
+ much as web browsers that are running over
+ secure connection are tunneling their HTTP traffic
+ through this secure tunnel.
+ The real difference with SSL, I think,
+ is that it's got such a strong browser orientation
+ that many solutions are browser based,
+ which hugely simplifies configuration problems.
+ For example, does GoToMite PC run over an SSL connection?
+ - It does, as does anonymizer.
+ In fact, any solution that is trying to sell itself
+ to consumers is likely to use SSL
+ for the simple reason that that port 443 is almost always open.
+ - Well, you don't have to have any router configuration.
+ - Well, exactly, anybody who's gonna be using the web
+ needs to be able to switch over to a secure web connection,
+ and that'll be over port 443 and SSL.
+ - So it's the same thing you're using
+ when you go to your bank or your buy a book on Amazon,
+ or any, that's the same SSL, it's secure, it's HTTPS.
+ - Right, secure socket layer.
+ - Okay.
+ - Now, the thing that's interesting about this
+ is that many of these solutions will download an application
+ like a Java applet, which your local computer knows how to run,
+ and essentially, they'll provide the client side for you automatically.
+ - Now, that's interesting.
+ Because you already have an SSL client, your browser.
+ What you need is an SSL server on your home system.
+ - Well, you need a, when you're using this,
+ this, some sort of a remote system, for example,
+ you go to a library, you log on to go to my PC.
+ What go to my PC does is send you an applet
+ which runs on that browser locally
+ to be the client side of the solution.
+ - Oh, that's, let me clarify then.
+ I don't need a client to use SSL with my bank.
+ That's built into the browser.
+ - Well, actually, the browser is a simple text client.
+ There's sort of a way to think of it.
+ - So if I want more capabilities
+ than I may need to download additional software
+ on the client side.
+ - Or the browser will automatically run Java.
+ - Java will do it.
+ - Exactly, so the idea would be that the service
+ would provide you with an applet in Java
+ which any browser knows how to run.
+ - So I put this on my home PC.
+ I log into it with my browser.
+ I will have to open ports to do that, yes.
+ - Actually, no, you're not putting anything
+ on your home PC.
+ - Oh, I'm not.
+ - Your browser logs into the service
+ and the browser downloads it just the same way
+ like you download Flash or something.
+ - I know what the confusion is.
+ I'm still going for this holy grail
+ of me running the server.
+ You're saying I can't run the SSL server.
+ I have to use a third party service to do this.
+ - Well, it's a good thing you mentioned that
+ because I found one.
+ - Oh.
+ - So normally I would go through somebody
+ like publicvpn.com or boingo.
+ There are a lot of places that do this
+ that basically offer an SSL server that I can use.
+ But we want to do this cheap or free.
+ So we don't want to pay a monthly fee.
+ This is that holy grail you're going for.
+ We would like to do it.
+ So we run it on our own home system
+ and surf through our own home connection.
+ - Correct.
+ Now, certainly there are people for whom go to my PC
+ or any--
+ - Anonymizer.
+ - Exactly.
+ Anonymizer.
+ Any of these publicvpn services would make sense
+ because they don't even have to have a home.
+ - Right.
+ - I mean, they're using it wherever they are
+ out roaming around.
+ - In fact, that's better in some ways.
+ You don't have to leave a home PC on.
+ You don't have to make sure your connection's always blah-blah-blah.
+ And you may have a slow connection at home.
+ You may not want to use your home connection.
+ - Correct.
+ - Right.
+ - For do-it-yourself people,
+ there's something called SSL Explorer,
+ which is a very interesting looking solution.
+ It's hosted by SourceForge.
+ If you just put SSL Explorer into Google,
+ it'll take any of our listeners directly there.
+ - I'll put that on the show notes too.
+ It's a SourceForge project.
+ So it's free and open source, okay.
+ - What's interesting about it is that they,
+ essentially they do what we've been talking about,
+ except that instead of the server
+ and being something that you have to subscribe to,
+ and which inherently means you're paying,
+ I don't know, $10, $15, $20 a month,
+ whatever for the service,
+ you run the server out of your home.
+ So the idea is some machine,
+ whether it's a Linux box or a spare Windows machine,
+ or maybe your main Windows machine,
+ it's sitting at home and is the server
+ for you to access remotely.
+ So when you're out and about,
+ essentially you connect to your home's IP address,
+ and of course there are now all the routers
+ are supporting dynamic DNS,
+ which essentially gives you a normal domain name,
+ which will track any changes to your home router IP,
+ so you don't have to worry about the IP changing
+ and you being caught by surprise.
+ - Oh, I didn't know that.
+ I'd been still recommending dinedns.org
+ and some of these other sites.
+ So your new routers do this.
+ - Yes.
+ - Oh, I didn't know that.
+ - Well, in fact, the way they do it is with Dine DNS,
+ but they're Dine DNS clients.
+ - They run the client on the router
+ instead of on your system.
+ - Exactly.
+ - I see.
+ - So the router has the responsibility for it,
+ and when it notices that it's addresses change,
+ it will contact Dine DNS and say,
+ "Hey, here's a new IP address for this domain."
+ - So what's wrong with this?
+ This sounds like the Holy Grail right there.
+ This sounds like the way to do it.
+ - Well, it's close, I'm still not happy
+ because there's another step that I wanna go to,
+ but this is why, Steve, why aren't you happy?
+ - Because it does mean that it's,
+ again, it's a little more techy.
+ You need to have a computer dedicated to this,
+ or as you said, on and running all the time,
+ on your home network.
+ - Right.
+ - You need to be able to run a client-side Java applet
+ in a browser.
+ It might be that a library has their browsers locked down,
+ for example, so that you're not able to run
+ applets of any kind on the browser.
+ Although, again, if it was for your own use,
+ for you to use in a laptop as you were traveling around,
+ then you're gonna be in good shape.
+ The key is that the connections to it are over SSL.
+ It's extremely easy to configure.
+ There's good documentation about this SSL Explorer,
+ and for somebody who's interested in experimenting
+ with this kind of solution,
+ I think it's, I mean, I'd spent the afternoon reading the docs
+ and taking a look at it.
+ I'm very impressed with what you're able to do.
+ You're able to access your files remotely.
+ You're able to run your desktop using
+ the standard remote desktop protocol,
+ which is very efficient.
+ So you're able to, like, essentially,
+ operate your home computer as if you were there,
+ very much like GoToMyPC does.
+ - That's cool.
+ So, run SSL Explorer.
+ It's currently Windows and Linux-only.
+ Mac version, as soon as the new Java is available for the Mac.
+ And you can do, and you can surf the net.
+ You could do everything you want.
+ But you have to leave this machine on running this software.
+ - Yes, and at the client end,
+ it's completely browser agnostic.
+ It just uses Java.
+ So, for example, you could go to a library,
+ you could use a hotel's internet service down off the lobby.
+ You could use your own laptop and your own browser.
+ Essentially, it allows you to access your home network
+ in a completely secure fashion
+ and do all kinds of things.
+ Transfer files, map drives, access your regular desktop
+ on the computer, and it's absolutely free.
+ So that's really why I like it,
+ as opposed to using some sort of a subscription service.
+ - So there you have the easy, or not easy,
+ but there are two ways to do it.
+ Neither of them is the perfect way,
+ but you could do it with SSH tunneling.
+ That's really geeky and hard to set up.
+ On the other hand, pretty transparent ones is working.
+ SSL might be a better way to do it.
+ And if you don't mind paying one of the SSL services
+ like hotspotvpn.com or publicvpn.com,
+ or go to my PC or anonymizer, it might be a good choice.
+ And if you want to save money and do it yourself, SSL Explorer.
+ But none answers Steve's holy grail.
+ The holy grail of computing.
+ And what is that?
+ - Well, the holy grail,
+ and this is where we're gonna spend some time
+ in a couple of weeks,
+ so we'll just leave this as a bit of a teaser.
+ The holy grail is no software installed on the client machine
+ for any version of Windows and Linux and probably Mac,
+ although we'll need to see whether Mac supports
+ one of the protocols required.
+ The idea is you have nothing but a residential VPN router
+ installed in your home.
+ We've already talked about NAT routers
+ and how great they are for security.
+ There's an additional feature that is now offered
+ by the same residential routers called VPN.
+ That is a virtual private network endpoint.
+ The idea being that Windows already has VPN technology
+ Windows 2000 and XP has it
+ and they have a free download for 98ME and NT4.
+ So the idea would be you use the built-in software
+ and Windows to connect to your VPN router,
+ which means that that's then a secure connection
+ and it's all protocols.
+ It's actually, it'll run through POP and SMTP
+ and web browsing, anything you do
+ is running through this virtual private network tunnel
+ to your router at home.
+ Once there, you have access to your home network
+ if you've left any machines on,
+ but even if everything's turned off at home,
+ except the router sitting there glowing
+ in the corner by itself,
+ then you're able to use that router
+ to get out to the internet.
+ - That's the holy grail.
+ I agree with you.
+ I like this.
+ However, it's not that easy.
+ - It's a configuration night.
+ - And we're going to hold that discussion
+ for another episode because that alone
+ could take us half an hour.
+ Next week, we'll answer your questions.
+ If you have questions, go to grc.com/securitynow.html
+ or suggestions.
+ We'll just respond to our viewer mailbag next week, right?
+ - Well, I have hundreds already.
+ - I don't say anymore.
+ - Oh, we've got plenty.
+ But that's what we're going to do.
+ Barring a major security issue in the news,
+ that's what we're going to do every fourth episode.
+ - Yep.
+ - That's what's coming up next.
+ And then in episode 16, and then in episode 17,
+ we will, we hope, be able to explain
+ how to set this holy grail up.
+ This VPN router costs around 100 bucks,
+ easy to set up, and you're good to go, you're golden.
+ - Many people may already have them.
+ If not, they could probably upgrade their routers
+ firmware to get the additional functionality,
+ or maybe sell their old one on eBay and buy a new shiny one.
+ The beauty is you pay then nobody any money every month.
+ - Right, it's yours, and you run it.
+ And meanwhile, I'm going to try to get SSH tunneling up,
+ (laughing)
+ just to show it can be done.
+ (laughing)
+ - Cool.
+ - Maybe I'll have something to rest.
+ Then I've spent nothing to do that.
+ We'll see if that works.
+ Good luck.
+ All right, Steve, if people want to know more,
+ they should go to the website.
+ You'll have full notes here at grc.com/securitynow.htm.
+ That's also where you find the written transcripts
+ and the 16 kilobit version of the show.
+ The 64 kilobit full fidelity version is available
+ via podcast, of course, and you can use
+ your favorite podcast client to get security now.
+ We're on all the different networks and channels
+ and so forth, but we'll just go to this week
+ in tech.com and you can find a direct link.
+ That goes through AOL.
+ We do thank the folks at AOL Radio
+ who put us on their podcast channel
+ and provide the bandwidth for security now at AOLmusic.com.
+ Thank you guys.
+ Before we go, Steve, I just want to mention one thing
+ and I know anybody who listens to security now
+ knows enough not to open email attachments.
+ That's kind of the fundamental basics,
+ but just because you will be the go-to person
+ for your friends and family,
+ there is a email scam going around,
+ email purporting to be from the FBI or the CIA
+ or the US Postal Service.
+ I'll read you the FBI one.
+ Dear sir, madam, we've logged your IP address
+ on more than 30 illegal websites.
+ Important, please answer our questions.
+ This list of questions is attached, FBI.
+ And the CIA one says we can help disinfect.
+ So if you get an email from the FBI or the CIA
+ with an attachment, don't be dumb enough to run it.
+ Of course, it's a phony, both the CIA and the FBI
+ announcements and their web pages saying we don't do that.
+ We don't send out emails.
+ Don't open attachments.
+ You'll get the sober virus.
+ It's gonna send itself out to other people
+ and open your system to Trojan access,
+ including probably spam servers.
+ It'll zombie your computers.
+ So you know better, gang, 'cause you listen to security now,
+ but tell your friends and family if they get an email
+ from the FBI or the CIA, just delete the email.
+ - Yep. - Delete the email.
+ - I did receive one of those by the way.
+ - Did you? - Yeah.
+ - We're all getting them.
+ According to message labs, I think there were,
+ that message labs has intercepted over two million of these.
+ So what that tells me is that people are opening it.
+ - Yep.
+ - Which is kind of hard to believe in this day and age
+ that somebody would actually buy that.
+ But you know what's scary and you go, oh, the FBI, oh.
+ - It's like the reason we still get spam is that it pays.
+ - People buy things from spam ads.
+ - You're right, if nobody ever bought anything.
+ - All right. - All right, Steve.
+ Thank you very much.
+ Happy third Thanksgiving and have a good turkey day.
+ We'll talk again next week.
+ - Thank you very much. - All you're doing now.
+ (upbeat music)

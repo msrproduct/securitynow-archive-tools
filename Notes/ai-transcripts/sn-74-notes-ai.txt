@@ -1,0 +1,774 @@
+ This is Twit.
+ Bandwidth for Security Now is provided by AOL Radio at AOL.com/podcasting.
+ This is Security Now with Steve Gibson.
+ Episode 74 for January 11th, 2007, Peter Gutman and the cost of Vista content protection.
+ Security Now is brought to you by Astaro, makers of the Astaro Security Gateway, on the web
+ at www.astaro.com.
+ It's time for Security Now with the fabulous Steve Gibson, and this is in some ways is a
+ part two.
+ Last week we talked about some pretty tough stuff, content protection, the new AACS content
+ protection that's going to be part of Vista, part of any high-def DVD player you have.
+ All of this was kind of prompted by an article that was just spread like wildfire over the
+ Christmas break.
+ Right, well, it generated a lot of controversy because it became clear from the article published
+ by Peter Gutman, who's in New Zealand, a New Zealand-based, very well-known, good reputation
+ security analyst.
+ He took a look at the consequences of essentially putting this AACS, the Advanced Access Content
+ System, which has been assembled by a number of hardware companies in order basically to
+ appease the interests of Hollywood in order to say, "Look, this is the way we're going
+ to protect the next generation of content."
+ As we saw last week, and the reason we spent last week's episode was to create some historical
+ context for the legislative side and the technical side.
+ Basically, AACS is a phenomenally complex technology that involves state-of-the-art
+ encryption, it involves some stuff you just can't even get your mind around.
+ I will never try on security now explaining the subset difference tree system for allowing
+ keys to be revoked by keeping those specific players from being able to perform the decryption.
+ It's mind-numbing what they've done.
+ It's one thing for that to be in an HD DVD player, and in fact, we've already seen consumers
+ have seen the consequence of that when they stuck a DVD into their first-generation players,
+ it would take up to or in some cases more than a minute for the player and the disc to negotiate
+ all of the crypto going on just internally within the player.
+ And Leo, I was thinking about how you had commented that when you stuck your HD DVD on
+ your Xbox 360, it didn't take long.
+ And I realized...
+ Well, it's got faster processor.
+ Exactly.
+ It talks faster.
+ Yeah.
+ That's a monster.
+ It's got three gigahertz power PC, Sarah.
+ Exactly.
+ Yeah.
+ So it's a very different platform there than a typical consumer drive where they're trying
+ to keep the cost as low as possible.
+ So anyway, I'm excited.
+ We're going to have Peter joining us here in a moment from New Zealand because we wanted
+ to talk to him, get his side of this, talk about what the paper that he wrote is about.
+ And I just wanted to sort of give a little bit of a preface and explain that basically
+ Microsoft has decided that they want Vista to be able to deliver this kind of content.
+ And what Peter's paper is about is the essentially the cost of delivering this content.
+ And what it means is that so many aspects of our PCs, which have been fully documented,
+ been public domain, been, you know, anyone could develop a display card.
+ For example, that's no longer the case.
+ If you're going to be, if you're going to have any foot in this next generation game,
+ you have to sign up and apparently pay hefty license fees just to participate.
+ And if you don't, if you don't get certificates which are subject to spontaneous revocation,
+ if you then subsequently misbehave, or in fact, I read one of the ACS organization documents
+ that said that you could be revoked if you fail to pay your annual dues.
+ Your card would stop working in my PC.
+ Exactly.
+ It would literally the hardware that the consumer purchased could be shut down.
+ Never buy a card from somebody who's about to go bankrupt.
+ That's a very cool thing is nuts.
+ This is just nuts.
+ We're going to talk to Peter in just a bit and get the details.
+ But I want to do think before we get there going here, I want to thank a Staro Corporation
+ our sponsor for security now.
+ They really support us with financially and they make this show possible.
+ And so if you could do us a favor, if you're a smaller, medium business, looking for some
+ real protection.
+ I mean, not just anti hacker or firewall.
+ We're talking spam, viruses, VPN and intrusion protection, content filtering too.
+ This is an industrial strength firewall.
+ This is a complete protective device, it's a simple, easy to use appliance and you can
+ try it for free.
+ Just call a Staro, A-S-T-A-R-O dot com, eight, seven, seven, the number four, A-S-T-A-R-O.
+ And they will set up a free trial of a Staro security gateway in your business.
+ We've talked to many, many people who've done this and are very happy that they heard about
+ a Staro on security now.
+ And by the way, if you're a non-business user, you can also download the software for free.
+ W-W-W-W dot A-S-T-A-R-O dot com, we thank them for their support.
+ So let's call New Zealand.
+ Let's talk.
+ What do you think?
+ Let's talk to Peter.
+ Great.
+ Let's just start off the interview by asking you about your background.
+ I mean, you're a fairly well-known security researcher.
+ I gather a computer scientist as well.
+ Yeah.
+ So my background is it's actually a bit of both academia and industry.
+ I have an open source security toolkit, which is available under a dual license.
+ So it's both GPL or commercial.
+ It's a sleepy cat license, if you're familiar with that.
+ And people can choose what they want.
+ And when I'm not working on that, I get to play with any kind of security stuff that
+ happens to interest me.
+ So, for example, with Vista, just before Christmas, I had a bit of spare time.
+ And some people have been talking about this in private, and I started going out and looking
+ at the specs and was kind of frightened at what was in there.
+ And so I thought, you know, I should maybe do a write-up of this in analysis to let people
+ know exactly what's hiding inside Vista.
+ In fact, it was because of Peter's crypto toolkit that he and I first had a dialogue.
+ It's funny.
+ When I was sending email back and forth to him, it was disappearing into one of my folders,
+ and it took me back to a conversation Peter and I had had briefly back in 2002, about,
+ you know, five years ago.
+ And I was asking him about the licensing terms for his toolkit, because I was looking around
+ for something that I could trust and, you know, to sort of use for core crypto stuff.
+ And so we had a dialogue back and forth.
+ And of course, Peter's also done some work in secure hard drive erasure, and he has an
+ often quoted piece of work that talks about how to deeply erase magnetic media.
+ And so, of course, from my background with Spinrite, there was another connection there.
+ So I've seen Peter's name around a lot.
+ And in my case, someone, I think it was in the GRC News Group, posted a link to Peter's
+ article.
+ And as I mentioned on our podcast last week, I printed it out, didn't have a chance to
+ read it before taking off to travel for the holidays.
+ But I was on the, I was on an airplane flying home.
+ And by the time I was on the second page, I was just riveted by the content.
+ And of course, you know, as we talked about last week, essentially, there's a next generation
+ crypto system for protecting high value content, which is known as AACS, and what Microsoft
+ has done is they've decided they're going to make Vista be a valid, secure delivery platform
+ for AACS protected content.
+ And so basically what Peter's paper does so well is to open people's eyes about, I mean,
+ the real world consequences of turning Vista into a sort of a next-generation DRM platform.
+ For those of you who haven't read it, it's called a cost analysis of Windows Vista content
+ protection.
+ Let me just give you the executive summary, and then we can go point by point through
+ some of these things.
+ Or the executive executive.
+ I know.
+ I love the short, short version.
+ But let's start with the little longer version.
+ Windows Vista includes an extensive reworking of core OS elements in order to provide content
+ protection.
+ That's that AACS you're talking about for premium content, typically HD data from Blu-ray and
+ HD DVD sources.
+ Here's the gist of it.
+ Providing this protection occurs considerable costs in terms of system performance, system
+ stability, technical support overhead, and hardware and software costs.
+ And these issues affect not only users of Vista, but the entire PC industry since the
+ effects of the protection measures extend to cover all hardware and software that will
+ ever come into contact with Vista, even if it's not used directly with Vista.
+ For example, hardware in a Macintosh or on a Linux server.
+ Then the executive executive summary, the Vista content protection specification could
+ very well constitute the longest suicide note in history.
+ You read all of that stuff Peter?
+ There's a lot of material online from Microsoft, I mean they're not keeping this a secret.
+ No, well the best paper is the first one I've given the reference is the output content
+ protection at Windows Vista, which was presented at the Winheke conference in 2005 by Dave
+ Marsh, who is the program manager for as far as I can tell for DRM inside Microsoft.
+ And that goes into an extraordinary level of detail about all this stuff.
+ But yeah, they have a number of other public papers that describe what they're trying
+ to do.
+ One question I had was that I read the AACS specs and I got sort of a, I think a relatively
+ good handle on what AACS is.
+ I didn't see in the specs anything about this notion of constriction.
+ And I'm wondering if that's something that Microsoft has done to sort of try to appease
+ the content owners while not completely disabling non, non-securable outputs.
+ Right, well the thing is they're terrified about the analog hole.
+ Well, not so much Microsoft, I think Hollywood is terrified of the analog hole.
+ And so they're desperately trying to make sure that, you know, they can't close it entirely,
+ but they can at least make the quality of the content that goes through the analog hole
+ so poor that it's not worth copying.
+ Right.
+ And I have some sense from, I know that you mentioned in your paper that you have other
+ sources that have required that they remain anonymous and in fact you went to the length
+ of deliberately restating some of the things they told you, trying to maintain accuracy,
+ but you know, really to protect their identity.
+ Right.
+ And so the one thing I'm wondering is, can you give us some sense for where this is coming
+ from, that is how much of it is pushed from Hollywood and how much of it is Microsoft
+ sort of trying to deliver something maybe that no one really wants?
+ I think it's a bit of both.
+ I mean, Hollywood have this huge wish list of stuff that they've been pushing for years
+ and years and you know, people have analyzed the technical side of things and said that
+ what they're trying to do is impossible in terms of closing the analog hole and making
+ content uncopiable, you know, there's a wonderful quote from Bruce Schnier saying that trying
+ to make content uncopiable is like trying to make water not wet.
+ I love that.
+ And there's a whole lot of legal CYA in there in the specifications where they say, you
+ know, device manufacturers must demonstrate their commitment to the party line rather
+ than saying you must do this, this and this, they say you must demonstrate that you strongly
+ committed towards cognitive protection.
+ And I think probably what Microsoft is doing is the same thing, they want to demonstrate
+ to Hollywood that they really, really committed towards cognitive protection.
+ That's a lousy specification, not telling you what to do with just saying prove it.
+ Right.
+ Prove you care.
+ Yeah, but you know, the problem is a lot of this I think is driven by legal worries.
+ And so if they say you must do this and then it gets broken, they're in trouble.
+ And they can't be specific.
+ Right.
+ They can't afford to be specific because if they end up being wrong, then they liable.
+ And I guess one of the things that is not immediately obvious even in, well, I guess
+ your paper sort of began me thinking down this direction, but then reading the AACS stuff
+ and looking at all of the, at the revocation technology, which has been bundled into this,
+ and it's very clear that while Microsoft is bearing some responsibility, there's a tremendous
+ onus also put, for example, on graphics card makers.
+ I mean, they're hugely incentivized to make their cards perform and their drivers perform
+ really at a level of quality that we've never asked from them before.
+ Right.
+ And that's particularly nasty for them, you know, because they're not given any hard
+ and fast rules.
+ They're just told that you'd be to show a lot of compliance and if it's not enough,
+ you can guarantee that you'll be in hot water.
+ Well, you know, Paul Therat, who does a Windows podcast for us, made the point, I'd like
+ to hear you address it, that this, the alternative for Microsoft is to be a second-class citizen
+ in terms of supporting content.
+ You play by Hollywood's rules or you don't play at all.
+ What's your response to that?
+ I think that's very much a read-hearing and, in fact, I've been updating the document
+ constantly to cover this and I addressed it in a very recent release.
+ Microsoft owns, I don't know what it is, 95% of the market or so on and particularly for
+ desktop OS's, they own pretty much the entire market.
+ They could quite easily say to Hollywood, you know, we're not going to put this stuff
+ into the operating system because it severely degrades the performance and reliability and
+ so on and so forth.
+ Take it or leave it.
+ You know, this is assuming that Hollywood relies entirely on Microsoft.
+ Sorry, that Microsoft relies entirely on Hollywood.
+ Well, Hollywood relies entirely on Microsoft.
+ If Microsoft's degree refused to do this, Hollywood can't afford to ignore 95% of the
+ market.
+ So I think there's a bit of a read-hearing.
+ Companies like Apple, people who make Linux distributions, could safely ignore this content
+ protection and say, well, you know, we don't have to do it, let Microsoft do it, we won't
+ do it.
+ Right.
+ And that's, you know, so the example you cited of the suicide note, that was actually
+ taken just a sort of a bit of a background information.
+ That was taken from the British Labor Party's 1983 election manifesto, which someone said
+ was, you know, the longest suicide note in history, the Microsoft suicide notes a bit
+ longer.
+ But the thing is that was so bad that their opponents actually printed it out and used
+ it as propaganda for their own cause.
+ And so, you know, it could well be that Apple's going to go and point out some of these really
+ nasty things inside the buster and say, you know, look at how bad this is by our computers
+ and our operating system instead.
+ So we think the Linux people are going to use it for propaganda to make Linux good.
+ Right.
+ So this is a technical podcast.
+ So I think we should probably, Steve, you know, walk through these various consequences
+ of this copy protection scheme, especially since we've already talked about a ACS in detail
+ last episode.
+ Right, I think that the point that Peter's paper makes so well is that -- and this is
+ actually how he and I began corresponding via email -- is that the PC has traditionally
+ been an open platform.
+ I remember very clearly when I got my very first real IBM PC with a big 10 megabyte hard
+ drive, the technical reference manuals you could get with it had the schematics of the
+ machine and the source code of the BIOS just provided by IBM as part of the package.
+ And that really sort of came from Apple because the Apple II had the same thing.
+ And it really kick started the PC revolution.
+ Oh, well, I mean, you know, my first PC application was a little thing called Flickr Free, which
+ replaced a chunk of the IBM PC BIOS because it was so poor at scrolling the CGA, the
+ color graphics adapter card.
+ And so I was hugely empowered by the fact that IBM had left the platform so open.
+ And of course, you know, everyone remembers how the PC just exploded with all this add-on
+ software and hardware.
+ And of course, IBM famously sort of backed away from their open stance when they created
+ that horrible micro channel architecture, which was pretty much stillborn.
+ But still, I mean, ever since then, the PC has been fully documented.
+ You could get specs.
+ You could find, you know, sample code.
+ I mean, it's just been this tremendous environment.
+ And what really what really upsets me is to do what Microsoft has decided they're going
+ to do requires closing down major chunks of the architecture.
+ Well, let's start with section one, disabling of functionality.
+ And you talk about how Spidif will no longer work with the protected content.
+ You talk about how if you bought a video card that supported HDMI digital video with HDCP,
+ you're going to have to buy another one because they didn't really work when they first came
+ out.
+ So the problem with that is in order to HDMI is basically slight variation of standard
+ DVI output that you have on things like LCD flat panels.
+ In order to protect that, you have an encryption mechanism called HDCP.
+ And to do that, you need to put encryption keys onto your video card.
+ The problem is that it costs money to put these individual encryption keys onto each
+ video card.
+ So to reduce costs, the card manufacturer simply emitted them.
+ So, if you bought a supposedly HD-ready video card, it won't work because it doesn't handle
+ the encryption.
+ If you spend money on Spidif, it won't work because it has to be disabled because there
+ is no protection on it.
+ And that's the nasty thing with a sort of audio fanatics or anybody who basically wants
+ to produce high quality audio from a PC where you have some sort of digital interface and
+ maybe even optical output connected to some, you know, expensive amplifier or whatever.
+ And because there's no protection involved in the audio output, it has to be disabled.
+ Now we should make that clear.
+ It's disabled only when you're playing back protected content like an HD DVD or a Blu-ray
+ DVD.
+ I mean, it's not always disabled.
+ It's not always disabled.
+ No.
+ On the other hand, it's problematic because then if you look at the window speaks, sorry,
+ the microphone speaks for the content protection, let's say you're playing, you're making a
+ Skype phone call and in the background you're playing some, you know, pretty good content
+ music or some kind.
+ Because that all goes through the same sound output system, that it kind of infects everything.
+ So the particular content infects every other content that happens to be going through the
+ system at the time.
+ We in fact wouldn't be doing this interview now because I used optical outputs.
+ So they'd be shut down.
+ Well, they're not exclusively shut down again reading the speaks.
+ I think probably what most manufacturers would do is just shut it down.
+ But what the speaks say is that depending on how much particular content is present,
+ you partially shut it down.
+ So for example, if you're playing particular content and it's very quiet, then some of
+ it will be shut down and if the volume increases, more of it gets shut down.
+ There's also this issue and this is to prevent the analog hole I gather of disabling or really
+ reducing quality of other outputs so that if you don't have HDCP, you can watch it, but
+ it's really only for a EI.
+ Right.
+ That Microsoft say that any display device that has a resolution of more than 520K pixels
+ which in practice is a resolution of about 800 by 600.
+ Yeah, it's everything.
+ Have to have its output degraded.
+ Now if you look at the VISTA specs, in order to run ERO, you need a resolution of 1024 by
+ 168.
+ So basically it means that anything connected to a VISTA machine running the ERO interface
+ will have its output degraded.
+ When will the output be degraded?
+ It's this premium content present.
+ Unless you have an HDCP enabled card?
+ You need an HDCP enabled card and an HDCP enabled display.
+ Ah, so my display isn't going to work.
+ Right.
+ So it's, well, even then, so what Microsoft defeat is you have to put a piece of hardware
+ into your video card called a constrictor which basically downscales the video to some
+ extremely low resolution and then upscales it back again.
+ So effectively you get a very low quality output.
+ But because this requires custom hardware or custom drivers or whatever, stuff that the
+ manufacturers haven't actually been able to put into their cards yet, it seems that at
+ the moment when people are trying to play HD content or premium content, they simply
+ don't get any output at all.
+ Great.
+ So it was my feeling, and I guess this is from something I read in some forums, that
+ in fact the current HD DVDs would play, for example, on a consumer HD DVD player even
+ out of their component outs because the policy that goes along with the content was not yet
+ so restrictive that the policy makers were saying we're not going to allow analog output
+ to happen.
+ Right.
+ Yeah.
+ Because they're so afraid of consumer rejection.
+ I mean, obviously if you put an HD player into some huge plasma screen, it's been thousands
+ of dollars and you put a disc in it, it doesn't play.
+ You're not going to be very happy.
+ So at the moment, yeah, they're turning off this constriction.
+ However, how Windows handles this is another matter.
+ If you look at, I've been reading a pile of web forums about this, and the thing you see
+ over and over again is I bought a computer, it came with an HD drive, I put the disc in,
+ it didn't play.
+ So maybe Windows doesn't honor that or doesn't handle it that well.
+ Well it's interesting because I have an Xbox 360 also from Microsoft with an HD DVD drive.
+ It doesn't have HDMI out, doesn't obviously have HDCP.
+ It plays high quality over component outputs and looks great.
+ I guess you just haven't enabled it.
+ I mean, here's a Microsoft product where they haven't made that compromise.
+ You think that though, Vista will.
+ From the reports, you know, from beta testers and so on, from the reports we've been seeing,
+ I mean, it's, you know, it's really hard to predict the future because it hasn't been
+ officially released yet.
+ But from reports from beta testers, a standard complaint is that they put the disc in the
+ drive and it doesn't play.
+ Let's talk about some other consequences of this copy protection.
+ Some of these are serious to a limited audience, for instance, open source hardware support.
+ It's now going to be very difficult to write an open source driver for any of this hardware.
+ Right.
+ Yeah, so one of the things they require, one of the things you've worried about is someone
+ creating a, some emulation of a hardware device.
+ So you emulate perhaps in software or perhaps in hardware, a sound card or a video card
+ or whatnot and then Vista sends the decrypted content to your artificial sound card, your
+ artificial video card and you think got direct access to it.
+ The reason why they're worried about that is because this is exactly what people have
+ done in the past under Windows XP.
+ They've created sort of loopback devices or whatnot and Windows has sent the content
+ to some loopback device or some artificially created device driver that pretends to be
+ the real thing.
+ You could capture keys and things like- Well, not so much capture keys, capture content.
+ The content itself.
+ Right.
+ And so to disable this, they require something called HFS, sorry, HFS hardware functionality
+ scan, which means that the device driver has to probe the hardware and try to determine
+ whether it's genuine hardware or not.
+ So it executes undocumented features or, you know, exercises some sort of undocumented
+ functionality or pokes around inside the thing in such a way that hopefully it can't be faked
+ by a malicious piece of hardware.
+ The problem is in order to do this, you can no longer document the internals of the device
+ because if you did, then someone else could write an emulator for the device that pretends
+ to be the real thing.
+ So you can't publish specs and you can't publish source code?
+ Right.
+ Now, again, the language in the speakers kind of wish you washy, it doesn't say you can't
+ publish any specs at all.
+ It simply sees that some aspects of the device will have to be kept proprietary, but that's
+ kind of nasty for anyone writing open source software because, you know, if you've got
+ a graphics card, you need to know exactly how it works in order to write the drivers
+ for it.
+ And if half the thing is undocumented, it becomes very hard to support properly.
+ Isn't it possible that just the undocumented part will be the premium content playback
+ and everything else will be documented and then you could still write a driver for Linux,
+ for instance, but it just wouldn't play back high def movies.
+ Well, there's nothing—there's no—it's not that you could partition a card into one
+ specific premium content, but everything else is public.
+ What they're requiring that you do is that you exercise, and again, the specs of vape,
+ but some sort of functionality of the card, the graphics rendering engine is an example
+ like in several cases.
+ And to determine whether it really is a genuine card or a copy of the thing or an emulator
+ that someone's created, and, you know, leaving the whole graphics rendering engine undocumented
+ is a pretty nasty denial of service on anyone who wants to write open source drivers for
+ it.
+ Well, and the other thing that I think is really interesting and Microsoft spec makes
+ us very clear is they have this notion of a user accessible bus and the—essentially,
+ if you have a separate graphics card and they make a big deal about the difference between
+ an integrated graphics subsystem on the motherboard where you don't have a bus exposed and this
+ notion of a separate graphics card because, again, that bus is an opportunity for someone
+ to snoop the bus and capture content as it's going from the motherboard up to the graphics
+ card.
+ So there's a whole—and a whole other level of technology where essentially they're doing
+ a modified AES-128 encryption on the fly at high bandwidth, which turns out to be very
+ difficult to do.
+ Right.
+ And I think the three—the three models for that is if you've read the book Hacking
+ the Xbox, the guy who first sort of broke the security on the original Xbox.
+ Right.
+ Attached a FPGA-based logic analyzer to the system bus, and so they're trying to encrypt
+ the system buses to stop exactly that sort of attack.
+ It's kind of interesting if you read through the specs and you think back, okay, what
+ are they trying to defend against?
+ You know, here was a published attack and presumably they worried about exactly this
+ kind of attack and so they're taking these very unusual and probably excessive measures
+ to try to defend against them.
+ And the problem is that, you know, again, from Microsoft's own documents that current
+ processes simply don't have the horsepower to do both video processing and encryption
+ of high bandwidth content.
+ The other thing that I found interesting was that VISTA introduces this notion of a so-called
+ protected environment where applications or that is to say processes running within what
+ Microsoft calls the VISTA protected environment are inaccessible to a much greater degree
+ than existing applications.
+ For example, in XP would be the idea being to prevent people from sort of the outside
+ of this protected environment from being able to snoop into other things running on the
+ same system.
+ Right.
+ And that's one of the sad things about this whole VISTA DRM effort, but put a huge amount
+ of work into creating this particular environment.
+ Now, imagine if they'd used that to protect against viruses and malware and droop, and
+ so forth.
+ Exactly.
+ Exactly.
+ It's one of the things that I think I may have commented on last week was that as you
+ read this, you get a sense for this phenomenal amount of industry which has gone into turning
+ VISTA into this platform that can play HD, DVD, and various types of other source forms
+ of high definition protected content.
+ I mean, it's not something that it's clear that a majority of VISTA users will even take
+ advantage of, yet even so, all that work was done, instead of all these other features
+ that we were supposed to be getting in Longhorn that were stripped out, and they've basically
+ burdened the operating system with all this technology.
+ Well, ironically, they've made it more susceptible to malware.
+ These tilt bits.
+ Talk a little bit about the tilt bits, Peter.
+ Right.
+ What tilt bits are is the name's taken from pinball machines, we had tilt teams to monitor
+ physical interference with the device.
+ Yeah, if you pick up the machine and get the ball in the hole, it's tilted.
+ Right.
+ And so Microsoft have done or required that hardware manufacturers do pretty much exactly
+ the same thing.
+ The nasty thing with this is that, well, to put it bluntly, it makes your hardware and
+ your system a lot less reliable.
+ The typical PC is thrown together out of all sorts of random bits and pieces with different
+ tolerances and half apart to made by the cheapest possible manufacturer, so a lot of them are
+ cheap and nasty.
+ So they're designed to have a certain amount of tolerance for voltage fluctuations and
+ strange bus signals and bugs and device drivers that set hardware bits wrong and so on and
+ so forth.
+ The problem is that if you do get these strange voltage fluctuations or strange noise on the
+ system bus or whatever, that could also be a sign of attack and so Microsoft have said
+ that hardware has to monitor for any of these peculiarities and if they're found then it
+ sets these tilt bits in a register somewhere.
+ If the policy is tilt bits and if any of them are set, it reacts in some vaguely specified
+ but somewhat drastic manner.
+ Do you want to shut down or crash or put up with your screen?
+ Well, so what the specs say is that you're trying to find the exact quote because it's
+ vague enough that you're going to have to quote Microsoft rather than try and figure
+ out what does that mean.
+ When I say that it initiates a complete receipt of the graphics system and it also mentions
+ it's a restart.
+ Now, I don't think it's a restart of the PC as a whole, presumably it's just a restart
+ of the graphics subsystem.
+ Yes, and it requires a re-authentication of the whole system to be self-consistent internally.
+ Right.
+ So I think the effect is going to be that if any of these tilt bits get set, there will
+ be some drastic amount of processing and change of system state going on in VISTA and I don't
+ know exactly how noticeable it's going to be whether it takes five seconds or ten seconds
+ or half a second or whatever, but whatever the case, if some slight glitch is detected
+ then VISTA is going to do some serious reconfiguration of system state for some fixed
+ amount of time, which as you point out makes it just prime for a denial of service attack
+ from malware.
+ Right.
+ Well, yeah, I mean, if you want to call for the disturbance in the system then just trigger
+ one of the tilt bits and watch VISTA drive itself nuts with doing a restart of the subsystem.
+ But even then, you know, someone mentioned on a blog and I think this was quite a neat
+ quite, it was something like, yeah, quite tilt bits are quite clearly insane.
+ And they are.
+ What hardware manufacturer would voluntarily make me have we less reliable and less stable?
+ Does it?
+ What tilt bits are going?
+ Does all of this content protection, okay, it affects reliability.
+ Does it also slow the system down?
+ I would imagine it does because you've got this huge layer of bloat sitting in the intercepting
+ all audio and video output and content output and processing.
+ This doesn't come for free.
+ I mean, again, from the specs, they have to sit there continuously polling and checking
+ hardware and checking tilt bits and checking all sorts of other things.
+ Right.
+ I was just going to say that the spec does require that software drivers at every 30 milliseconds,
+ which is essentially, you know, 30 times per second, are going out and polling the hardware
+ in order to maintain an intimate relationship with the hardware in order to try to catch
+ anybody playing any games.
+ I mean, so even when your system is not actively doing something, you've got drivers that are
+ busy making sure that nothing continues to happen.
+ What you're describing is an operating system that is essentially insanely paranoid.
+ I mean, it's just gone off.
+ That's true.
+ 30 times a second.
+ Are they hacking me?
+ Oh, I mean, that's crazy.
+ Right.
+ It really is now there's one other aspect that has occurred to me since we last talked
+ about this.
+ I'd love to get Peter's opinion.
+ People listening to this so far and our last podcast might be thinking, okay, so Vista's
+ not going to let me watch, you know, HD, this new fangled content.
+ But what's also occurred to me is that Vista is sort of retroactively going to become hostile
+ to many of the things that people used to be able to do.
+ For example, ripping DVDs, decrypting DVDs, you know, where the technology does exist
+ for that, suddenly there's the ability to prevent that from happening.
+ And that does seem to be what Vista is doing.
+ So it's actually it's actually backing people away from things they were able to do historically
+ under Windows 2000 and XP taking things away.
+ Right, although, you know, someone else pointed out that the Vista content protection is both
+ thoroughly obnoxious, but it's actually going to be a major driver towards piracy.
+ You quote, "Muslick 64," the guy who came up with the crack of HD DVD.
+ Right.
+ That was his incentive.
+ Yeah, the reason why he was doing this isn't because he's a pirate, but because he bought
+ a system with all the HD components and he couldn't play back his video.
+ So, you know, if you're an average guy and you've gone out and bought a system with an
+ HD player and, you know, high-resolution monitor and so on attached, you put on a desk and
+ it won't play.
+ What are you going to do?
+ You're going to go out in the internet and find some software to crack the copy protection
+ because it's preventing you from playing legitimately purchased content.
+ So it could actually be a huge incentive towards piracy and towards bypassing the copy protection
+ because it's so obnoxious that people just want to get it out of the way.
+ Peter, you know, one other thing that I keep asking myself is we know just do the nature
+ of physics, as you said in your white paper, it is impossible to do what Microsoft is trying
+ to do.
+ That is, there is no absolute control over the remote delivery platform, so it's going
+ to end up one way or another being cracked.
+ Right.
+ And the people who have the most incentive are more the commercial-grade pirates that
+ are really mass-producing pirated content, we know they're going to come up with a way
+ around this.
+ So, to me, this seems like a huge amount of burden to put on, you know, people's grandmothers
+ who are never going to pirate this content and they're doing it even though it can't
+ be effective.
+ Right.
+ Well, again, you've got the fact that you have to show a certain level of commitment
+ to the cause.
+ They can now go back to Hollywood and say we've done the best we can towards, you know, showing
+ that we're on your side.
+ Give us the premium content.
+ So it's really not about who are they trying to target.
+ It's saying to Hollywood, you know, no one to the best of our ability is going to be
+ able to use PCs as little media piracy systems the way they have been for the last 20 years.
+ Now, saying paranoia really comes from Hollywood, not from Microsoft.
+ It's hard to tell what goes on inside Microsoft, but you know, if you read the technical speaks,
+ I think any technical person that reads those specs would say, you know, this is never going
+ to work and half of the stuff is nuts.
+ On the other hand, it could well be high-level managers who don't, inside Microsoft who don't
+ understand the technology and who completely agree with Hollywood and who think, you know,
+ we should do this even though other people have told me it's impossible.
+ We're going to do it anyway.
+ You made such a good point, Steve, when you said that they're doing this for a subset
+ of PC users, far from the majority of PC users, and yet we're all saddled with this.
+ In fact, Peter, you say at the end of your document, you know, a $50 cheap Chinese-made
+ set-top player in the long run, it'll do a better job of playing back this high-def
+ content.
+ Why don't we just extrude all of this extraneous material from our PC and get it out of there?
+ We don't need it.
+ Right.
+ Exactly.
+ Why are we trying to turn the PC into a high-def media device?
+ I guess the point that Peter's making overall, I mean, his paper was talking about the cost
+ of Windows Vista content protection, is that, you know, we know that Vista is going to be
+ selling starting next month in February of '07.
+ We know that people buying new machines are going to have Vista on it, so we know that
+ a year later, there's going to be a huge install based Vista.
+ We know that there will be people wanting to upgrade their XP systems, which are strong
+ enough to run Vista to have the latest and greatest, or maybe this will sort of mute
+ that enthusiasm for upgrading to some degree, depending upon the kinds of things people do.
+ So, you know, this is going to happen anyway, but in order to implement all the technologies
+ Microsoft has, it really does insert cost throughout the entire infrastructure.
+ The whole Windows PC infrastructure becomes more expensive.
+ Right.
+ Well, the scary thing is it's not just Windows, you know, because the hardware manufacturers
+ have to make these changes and they don't really keep what operating system it's going
+ to run on.
+ It's going to affect everybody.
+ Your graphics cards will become more expensive across the board, even if they're never used
+ with a Windows PC, because they still need to have these changes made only for Windows
+ Vista.
+ So, really, it's interesting, I mean, you could say let's take this out of Windows, but in
+ fact, by just putting it in Windows, it's now in everything we use.
+ Right.
+ Because, you know, again, if Windows, you know, if they own, I don't know what, 1995% of
+ the market.
+ That's it?
+ The graphics card and sound card manufacturers have to handle that, and so they have to put
+ this Vista specific stuff in there, even if, you know, Mac OS X or Linux, the free BSD
+ completely ignores it.
+ We'll put a link to Peter's article, of course, on our webpage.
+ It's a long URL, so I'm not going to give it out on the air here, but you can go to
+ our show notes and read it, and I do recommend reading it.
+ As technical as it sounds, it's easily read and digested, I think.
+ Has Leo, has John Dvorak weighed in on this issue at all?
+ Yeah.
+ Have you heard from Joe?
+ No.
+ In fact, we'll probably talk about it more.
+ We're going to get, actually, we're trying to get a rebuttal from Microsoft on Windows
+ Weekly and find out what they have to say.
+ I don't expect anything substantive from them, but we want to at least give them a chance
+ to say something, and, you know, I think it's pretty clear that the proof will be in the
+ pudding.
+ I mean, as Vista comes out on the marketplace, if all of these things happen, as Peter has
+ predicted, and I see no reason why they won't, but if it all, if this all happens, you're
+ going to see a rebellion and may be, you might be right, Peter, this might in fact be a suicide
+ note because nobody wants their computer bricks.
+ That's the new term we're all going to have to learn.
+ And I think Peter made a real good point too, which has been on my mind, and that is when
+ you look at all the effort, Microsoft has gone to to protect us from Hollywood or Hollywood
+ from us or whatever way it goes, imagine if instead they'd put that industry into protecting
+ us from spyware and malware.
+ Well, they have done the job, I'm sure.
+ You know, I think ultimately the consumers will be the voters on this one and they'll
+ vote with their dollars.
+ And I have to think, if I'm a business guy thinking about moving to Vista, and I see this,
+ I'm going to have some real second thoughts because there's no benefit at all to business.
+ A business doesn't want HD content on their computers.
+ Now Peter, if you don't have drivers, if like from the business model, if you had a basic
+ PC with no HD DVD drive and drivers, you know, security, certificated drivers, no fancy graphics
+ card that had all this stuff, you know, would Vista's content protection system just sort
+ of like never get activated?
+ Is it in there but just completely passive and there's no tilt bits that are going to
+ be a problem?
+ I think probably the nastier aspects probably wouldn't be activated.
+ So again, the specs are vague on just how much of the stuff is actually active at any
+ one time because a lot of it is so deeply built into the OS.
+ I think a large chunk of it is probably going to be there no matter what and yeah, that's
+ deliberate.
+ Obviously if you have one version of Vista, it doesn't have the Condi-Protection active.
+ The different version of Vista that does, everyone's going to use the unencumbered version.
+ You have to put them all of them.
+ Well, in fact, I have read through the Vista output content protection document and it's
+ very clear exactly what Peter was saying from an architectural standpoint, whole huge subsystems
+ have been completely redesigned and moved around from like kernel mode to user mode.
+ And there's this whole notion of a protected environment now to keep things from working
+ the way they have before.
+ So there will certainly be side effects of those kinds of deep architectural changes
+ that we wouldn't have needed except that Microsoft decided they wanted to do this.
+ Well, and you have to wonder if that's why Vista took so long.
+ I mean, this attention to this kind of stuff didn't happen until a few years ago.
+ I can imagine Microsoft sitting in 2004 saying, okay, Vista's ready to go and hearing from
+ Hollywood.
+ Well, hold on there, guys, and imagine it would have taken a year or two to get this stuff
+ working right.
+ And in fact, historically, we've seen that a lot.
+ I was talking last week about how the fights over the content protection for digital audio
+ tape, that tape, it delayed its introduction into the consumer market by many years and
+ people who know about the industry feel that it may have been all of that that just killed
+ it.
+ And it just never had a chance to happen.
+ We've also been getting lots of complaints from people, admittedly running beta versions
+ of driver's for Vista, that the driver's are less functional than the XP drivers, the best
+ stable, and so on and so forth, lots and lots of complaints, and I know from sort of off
+ the record comments from people working for device manufacturers, they're spending a huge
+ amount of effort into getting all this content protection stuff into the device drivers and
+ they're frantically trying to get drivers out.
+ Must be driving them crazy.
+ Yeah.
+ Yeah, it's driving them nuts and obviously they're not getting any value out of this.
+ For some large graphics manufacturer like A.K.I. or Nvidia, they're getting absolutely nothing
+ out of putting all this crippling into their own drivers, but they have to do it because
+ Microsoft has said so, and so they're typically with Windows XP, it's got a pile of built-in
+ drivers.
+ With Vista, the release to manufacturing, a lot of the drivers weren't ready yet at the
+ time that was released.
+ So, probably the first thing that happens once you install Vista is you have to go online
+ and download drivers that actually work a bit better.
+ Or support this high-def content protection.
+ Well, and in fact, I've been running Vista now for several months and I don't use it
+ continually, but when I do fire it up almost all the time, it says, "Oops, there's some
+ new updates ready for your machine.
+ Go get them."
+ Right, and you can see that even with playing back non-predictor content in online forums,
+ you can see complaints about it dropping frames and audio stuttering and so on and so forth.
+ Maybe it's just because it's beta drivers on the other hand, it could also be because
+ all this content protection gunk is getting in the way of simply playing back the content.
+ Peter, you're a little bit like Paul Revere.
+ I don't know if you know the story of Paul Revere in the US saying the British are coming,
+ the British are coming.
+ Vista is coming, and really it's only until it's out in widespread use.
+ We really know what the true consequences of this decision on Microsoft's part are, but
+ I have a feeling there's a lot more to be said about this and we'll be hearing a lot more
+ about it in the months to come.
+ We thank you so much for joining us on security now.
+ Okay, you're welcome.
+ Really great to talk to you.
+ Thank you, Peter.
+ Thanks, Peter.
+ Thanks.
+ Peter Gutman, again, who is at the University of Auckland in New Zealand, a well-known security
+ expert and a guy who has really stirred up a hornet's nest and we haven't heard a lot
+ from Microsoft about this.
+ These are good hornets, Leon.
+ Yeah, these are angry hornets, but it is really a good thing for him to talk about this.
+ I have some concern because, you know, this is his opinion, although pretty factually
+ backed up.
+ Well, Leo, I have read all the Microsoft docs.
+ I have read all of the AACS docs.
+ Certainly Peter is taking the approach of this is a bad thing, an expensive thing for
+ Microsoft to have done, but I can independently vouch for the factual accuracy of what he
+ has said.
+ This notion of them saying that the screen should be made fuzzy.
+ If it's not protectable, that outputs need to be shut down.
+ I mean, I have read that myself in documents directly from Microsoft site.
+ So all of this stuff is actually, I mean, is absolutely accurate.
+ We'll see.
+ I mean, of course it's accurate.
+ I'm not denying that in any way.
+ I just think we won't really know what the price for this is for a few months, but I
+ think it will become clear the question is, what are we going to do about it?
+ Well, and, you know, Peter made some great points.
+ He's been very active out in the blogosphere and certainly he's been the focus of this
+ because of his paper, and he talks about, and I have also seen separately, people saying
+ that something seems wrong with Vista relative to its ability to robustly play media.
+ So you know, that is a playback media, so it may be it's going to take a while for Microsoft
+ to get this working smoothly and that they've broken it in the meantime.
+ Steve always a great pleasure.
+ You could find more details, including a transcript of this great conversation at grc.com.
+ I'm going to dig this show so that people can, I think this is the kind of thing people
+ on dig and slash that we'll want to know more about.
+ Peter hasn't done a lot of interviews, so it's a chance to really hear it directly from
+ Peter Gootman.
+ You can help us by going to dig.com and digging this story.
+ And if you want more information, as I said, transcripts 16 kilobit versions, notes, they're
+ all on Steve's site, grc.com.
+ That's not the only thing there though.
+ That's where you also find Spinrite, which is Steve's fantastic program for hard drive
+ maintenance.
+ I thought it was funny and recovery.
+ It was funny that you'd initially talked to Peter over about hard drives.
+ Yeah, exactly, you know, our paths have crossed in many different venues.
+ Lots of happy customers.
+ You can go to Spinrite, s-p-i-n-r-i-t-e.info to read the testimonials.
+ I think that will tell you more than anything Steve or I could say about the value of the
+ program.
+ We've got a hard drive to really get Spinrite.
+ G-r-c-i-k-o.
+ Okay, Steve.
+ Well, yeah, another week, another episode is in the camp.
+ It is.
+ And we'll see you next time on Security Now.

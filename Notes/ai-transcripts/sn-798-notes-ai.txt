@@ -1,0 +1,596 @@
+ Hello everybody live long and prosper this is Steve Gibson and it you don't buy it do you
+ I even got the mustache just for this occasion Steve's not here we're giving him the week off
+ because it's time for it's an annual tradition our best of episode some of the best moments from
+ security now in 2020 coming up next with me Steve Gibson all this year security now has come to you
+ from Twits LastPass studios securing every access point in your company does not have to be a challenge
+ LastPass unifies access and authentication to make securing your employees simple and secure
+ even when they're working remotely check out lastpass.com/twit to learn more
+ podcasts you love from people you trust this is Twits this is security now with Steve Gibson
+ episode 798 for December 22nd 2020 our year's best stories hello everybody it's Leo I don't
+ know how Steve does this mustache thing tickles it tickles we're giving Steve the week off
+ you know he he takes no time off the man works his butt off not only you know with us with his
+ with his products spin right and and all the research and stuff he does for his website grc.com
+ but he spends you know hours putting together the security now show every week and the funny
+ thing is about Steve he he never wants to take a day off he never wants to miss a show so I've tied
+ him up and put him in a closet so he can't be here today because the guy needs a week off and we're
+ going to take some of the best moments from the year 2020 starting with the story of and this was
+ a bad one clear view AI and their face recognition technology so last week we talked about the clear
+ view AI company who were doing the facial recognition uh and bragging that they scraped
+ the web for three billion face prints and made them available to 600 police departments so they
+ could identify people within seconds since then clear view has increased their collection of cease
+ and desist letters which is not exactly what they are hoping to be collecting from major
+ u.s. social media players the first one they they received was from twitter a couple weeks ago
+ when twitter told clear view to stop collecting its data and to delete whatever it had in addition
+ facebook has similarly demanded that clear view stop scraping photos because the that action
+ violates facebook's policies and now google and youtube are also both telling clear view to stop
+ violating their policies against data scraping clear views take on this is defiance uh the
+ ceo hon ton fat was interviewed last wednesday morning on cbs's this morning news show uh he told
+ listeners to trust him he said the technology is only to be used by law enforcement and only to
+ identify potential criminals ton fat claims that the results which is which is not encouraging are
+ ninety nine point six percent accurate i guess though you wouldn't want to be miss i you wouldn't
+ want a false positive to misidentify you as a bad guy so i guess accuracy is is a better thing um
+ and he also claimed that it's his right to collect public photos to feed into his facial recognition
+ archive he said there's also a first amendment right to public information so the way we have
+ built our system is to only take publicly available information and index it that way
+ and we by the way there was a recent supreme court decision having to do what was a supreme
+ court but maybe ninth circuit court having to do with scraping of linkedin in which they ruled
+ yep you can't stop scraping if it's public information yep can't stop it in fact i have that i have a
+ mention of that here uh so we know from last week when we talked about this that in in illinois
+ at least with their bippa the biometric information privacy act uh you know it's illegal there uh and
+ youtube's statement read quote youtube's terms of service explicitly forbid collecting data
+ that can be used to identify a person clear view has publicly admitted to doing exactly that
+ and in response we sent them a cease and desist letter um as for facebook uh facebook said last
+ tuesday that it has demanded that clear view stop scraping photos because the action violates its policies
+ um uh uh facebook said we have serious concerns that clear views practices which is
+ with sorry serious concerns with clear views practices which is why we've requested information
+ as part of our ongoing review how they respond will determine the next steps we take which i'm sure
+ facebook intended to sort of sound ominous um and uh uh taunt that defended clear view as being a
+ google-like search engine he said google can pull in information from all different websites
+ if it's public and it can be inside oh sorry excuse me if it's public and it can be inside google's
+ search engine it can be in hours as well google disagreed saying that clear view isn't at all
+ like their search engine google said there's a big difference between what we do and the way
+ you're shang-hying everyone's face images without their consent most websites want to be included
+ in google search and we give webmasters control over what information from their site is included
+ in our search results including the option to opt out entirely google said clear view secretly
+ collected image data of individuals without their consent and in violation of rules explicitly
+ forbidding them from doing so so the question is when is public information not public which brings
+ me to the point you raised leo back in 2016 a company called high q which i recall we talking
+ about at the time a san francisco startup was marketing two products which depended upon
+ whatever data linkedins 500 million members had chosen to make public there was the for the first
+ product they called keeper which identified employees who might be ripe for being recruited
+ and skills mapper summarized a linkedin members skills in that instance high q was a massing
+ public information grabbing the same material that anyone could get from linkedin without having to
+ log in so any browser would display the same information high q was vacuuming up organizing
+ and reselling and when sufficiently analyzed inferences could be made to alert companies for
+ example when their pivotal employees might be interviewing for another position and you can do
+ much more as we know with this kind of advanced informatics yeah and that interesting you you
+ put a flag to be notified when when any of your employees linkedin profiles indicate maybe they're
+ you know uh taking that that longer lunch break was a little more than a lunch break
+ okay so in the case of high q linkedin sent a cease and desist letter alleging that it was
+ violating serious anti hacking and anti copyright violation laws and linkedin cited the computer
+ fraud and abuse act the c_f_a_a_ the digital millennium copyright act that did the dmca that
+ we've talked about so much and california penal code uh section 502 c whatever that is linkedin
+ uh which which when this is a little interesting aside had been exploring how to do the same thing
+ with its own data that high q had achieved also noted that it had blocked high q from accessing
+ its data and as you mentioned it was just this last this past september in 2019 an appeals court
+ told linkedin to back off and that it had no legal right to interfere with high q's profiting
+ from its users publicly available data the court protected data scraping of public data
+ in what at first looks like a major legal precedent but it's actually a lot less clear
+ our friends at the electronic frontier foundation wrote quote while this decision represents
+ an important step to putting limits on using the c_f_a_a_ the computer fraud and abuse act because
+ you know the concern has been that it's being abused uh to intimidate researchers with the
+ legalese of cease and desist letters the ninth circuit sadly left the door open to other claims
+ such as trespass to chattels or even copyright infringement that might allow actors like linkedin
+ to limit competition with its products so essentially the ninth circuit didn't go as far
+ as our e_f_f_ folks wished it had but in this case at least it said hey uh you you linkedin
+ are not lawfully allowed to prevent somebody from visiting your site with automated scrapers
+ and obtain whatever information has been made public by your users um and of course the problem
+ is the at the c_f_a_a_ the computer fraud and abuse act is broadly written and subject to
+ multiple conflicting interpretations across different federal circuits this makes it likely
+ that the supreme court will ultimately be forced to resolve the meaning of terms which are not
+ really clear the c_f_a_a_ says for example without authorization well people want to take
+ without authorization the way that they want to uh in this of course is bad this this occurs with
+ broadly uh written legislation that just ends up having to it's a problem for everyone and ends
+ up having to get resolved in the courts um the e_f_f_s_ surveillance litigation director there is
+ there is such a person this sort their surveillance litigation director jennifer lynch said that clear
+ view is the latest example so now we're talking about clear view the the the facial scraping people
+ uh that doesn't sound right facial well anyway uh is the latest
+ yes you get that done soft uh yeah it's covered by insurance is the latest example of why we need
+ laws that ban or at least pause pending more clarification law enforcement's secret of use
+ of facial biometric recognition she cited many cases of what she called law enforcement's
+ and clear views specifically abuse of facial recognition stating quote police abuse of facial
+ recognition technology is not theoretical it's happening today law enforcement has already used
+ live face recognition on public streets and at political protests and of course as we've observed
+ before this is all being enabled by the recent incredible reductions in cost the cost of processing
+ power has crashed the cost of mass storage has collapsed the cost and presence of ubiquitous
+ networking communications just doesn't cost anything anymore to send data all you know massive data
+ all over the place we didn't have this 10 years ago and leo uh although the podcast will run out
+ by the by 10 years from now uh we'll still be around and we'll see what what we have 10 years
+ if anybody recognizes us this year was full of attempts by congress to thwart encryption to end
+ section 230 to really turn the internet upside down and all of course began last year uh with the
+ end of net neutrality this year we had a new enemy the earn it act steve explained why it's a real
+ problem okay now leo uh i know your pea if you should i'm not sure if you should take your blood
+ pressure before or after this one i know all about this one we've been talking about for a while it is
+ oh and what's sad is they're sneaking this through during this covid crisis because they know that
+ nobody'll pay any attention to it i even saw um uh one of them i think dick bloomin's all say we
+ don't i'm so disappointed i am too we don't mention anything about encryption we're not talking about
+ encryption uh well you better explain okay so it truly does appear that our government uh
+ embodied by crypto naive politicians maybe willfully so is one way or another going to figure out how
+ to break into the encryption protection assets of american citizens the most recent effort dubbed
+ on a boy the the earn it act yeah is gonna earn it is almost despicable okay first of all earn it
+ is the most tortured abbreviation we've encountered in some time it's a retro nim
+ oh my god they come up with the name and then they say what it stands for they figure it
+ ever has that been more obvious than now it stands for eliminating abusive and rampant neglect
+ of interactive technologies we've been neglecting them i think lindsey was so proud of himself
+ okay so get a load of them it's lindsey graham and dick bloomin's all the yeah a load of this
+ yeah uh what is it that strong data encrypting companies would be earning
+ the legislation proposes to strip the to strip the protection provided by section 230 of the
+ communications decency act from certain apps and companies which would then hold them responsible
+ for user uploaded content unless they provide a means for lawful access to their encryption
+ protected content that in other words they're holding ransom the because these are unrelated
+ issues yes yes they're they're completely independent they are they're ransoming
+ this necessary section of of this section 230 of the communications decency act
+ which social media companies have to have uh and everything about this is slimy so in other words
+ the legal protections that currently serve they're in place to hold all of our online social media
+ companies harmless for whatever their users post would now need to be earned by allowing law
+ enforcement to have decryption access sadly urnit is a bipartisan effort having been introduced by
+ no surprise anti-encryption crusader lindsey graham and also richard bloomin thaw and other
+ legislators who continually use the specter of online child exploitation to argue for the
+ weakening of encryption remember that we discussed this back in december end of last year
+ while grilling facebook and apple lindsey threatened to regulate encryption
+ unless the companies gave law enforcement access to encrypted user data while pointing
+ to child abuse he said quote you're going to find a way to do this or we're going to do it for you
+ we're not going to live yeah we're not going to live in a world oh did you hear about how the
+ our illustrious doj it gets isn't isn't the loop here anyway we're not going to live in a world
+ where a bunch of child abusers have a safe haven to practice their craft period said lindsey end of
+ discussion close quote so the eff notes that one of the problems with the urnit bill among many
+ is that the proposed legislation offers no meaningful solution to the problem of child
+ child exploitation in other words it's got nothing to do with it the eff wrote
+ quote it doesn't help organizations that support victims it doesn't equip law enforcement agencies
+ with resources to investigate claims of child exploitation or training in how to use online
+ platforms to catch perpetrators rather the bill's authors have shrewdly used defending children
+ as the pretense for an attack on our free speech and security online it's a straw man
+ uh-huh if passed the legislation will create a quote national commission
+ on online child sexual exploitation and prevention okay is that an acronym it doesn't look like it
+ tasked with developing on here it is best practices for owners of internet platforms
+ to quote prevent reduce and respond to child exploitation online but as the eff maintains
+ best practices would essentially translate to legal requirements they said if a platform
+ failed to adhere to them it would lose essential legal protections for free speech meaning section
+ 230 it turns out that the best practices approach arose from a pushback over the bill's predicted
+ effects on privacy and free speech they had to get extra slimy pushback that caused its authors
+ to roll out the new structure the best practices would be subject to approval or veto by the attorney
+ general currently william bar who has himself already issued a public call for backdoors
+ the homeland of the secretary of homeland security who has made a similar call
+ the chair of the ftc the federal trained commission ditto again everybody wants uh encryption bypass
+ cnet talked to lindsey barret who's a staff attorney at george town uh law institute for public
+ representation communications and technology who said that the way that the bill is structured
+ is a clear indication that it's meant to target encryption he said when you're talking about a bill
+ that is structured for the attorney general to give his opinion and have decisive influence
+ over what the best practices are it does not take a rocket scientist to concur he said that this is
+ designed to target encryption if the bill passes the choice for tech companies comes down to either
+ weakening their own encryption and endangering the privacy and security of all their users
+ or forgoing section 230 protections and potentially facing a liability wave of lawsuits a senior
+ legal counsel for the aclu said the removal of section 230 liability essentially makes the best
+ practices a requirement the cost of doing business without those immunities is too high
+ so bravo use slimy snakes the thing that makes us slimy is if they were to be forthright and
+ propose a bill look we don't like um the fact that bad guys including predators child predators
+ can hide behind encryption let's make encryption illegal if they were to propose that bill
+ which is really what they want everybody we we'd all stand up and say no no so they're sneaking it in
+ they don't mention as bloomin thaw pointed out it was mentioned encryption it just has the impact
+ it's actually clever yeah but it points out that there isn't i don't think and they've run up against
+ this before the will in this country people understand why breaking encryption is a bad thing
+ so they're not gonna they're gonna sneak around us so we all have to sit up and take notice
+ section 230 has been under assault for one for a long time and that's another big problem yes
+ yes it gives it gives uh these online companies the same kind of protection the phone company has
+ at that you cannot prosecute AT&T if a bad guy plans yeah calls you up and says plans let's plan
+ an attack on the united states you can't say oh that's AT&T's fault it's not AT&T's job to listen to
+ every phone call and make sure nobody's planning sedition and no we don't want that no yes we don't
+ want that in our society it'd make the phone company untenable it wouldn't use it so well that's
+ the other side of this is you can't stop encryption it's done right right so this is pushed just
+ pushes it on the ground eliminates protections for us normal people honest people and uh and and
+ makes it possible for bad guys to get into anything we do as well such a bad idea there is a petition
+ you can sign i mean i would go out and do that let them know that they didn't fool us well and
+ the problem is by by by so cleverly cutting this pie the way they have where they made the cut one
+ also wonders i mean clearly this will be challenged it'll go through the courts it'll it may end up
+ getting uh up to the supreme court and again it's like oh would you know would it get overturned or
+ not i mean uh zoom go boom um based in san jose california zoom video communications ink provides
+ as we know a video conferencing focused communications platform using desktop and web browser clients
+ so you get cloud video conferencing online meetings group messaging there's also some some
+ group and private chat features in there in virtual online conferences um while all of the online
+ conferencing systems have seen a significant jump in their usage once this outbreak of the coronavirus
+ driven coven 19 disease forced virtually all physical meetings of any kind into cyberspace
+ for whatever reason zoom was the system that most caught on maybe it sounds fun uh i don't know
+ apparently was due to nearly instantaneous word of mouth spread you know what do you use i use
+ zoom okay i'll use it too uh and so it went uh and it's relatively easy to use um however
+ creating something of a stress test for zoom the past month has shown that it's less easy to
+ use it securely that not using it securely can have immediate and often embarrassing consequences
+ that for many purposes it may not be practical to use it securely just because of logistics uh
+ and also some potentially serious bugs have surfaced as a consequence of the greater scrutiny
+ which has been brought to bear so to get some sense of scale zoom's usage has skyrocketed
+ from 10 million daily users before the coronavirus last december to now 200 million daily users
+ uh so a 20 fold user increase uh and that's resulted in a 535 increase in daily traffic
+ to its download page just in the last month the company itself went public a year ago last April
+ and its stock price recently peaked in mid-March at more than twice what it had been in december
+ so it doubled while the rest of the dow stocks crashed uh in the last few months
+ um the most apparent problem was that in the rush to move online many of zoom's useful security
+ features initially went unused um as we know adding a password to anything especially if it's
+ optional makes that thing's use less simple even though it makes it somewhat more secure
+ so and passwords on zoom conferences are optional so early on everything from boardroom
+ meetings to a schoolroom classes to online yoga were quickly placed online with initially without
+ passwords uh those organizing the meetings apparently gave little thought to the possibility
+ that anyone would want to crash the party uh you know and there's like a zoom meeting code
+ which i guess they figured was obscure enough but oh what a mistake that was uh and you know even
+ if a password was added to a meeting um both the meetings code and it's protecting in quotes
+ password must still be provided to everyone wishing to attend so when a school district
+ posted its zoom based meeting codes and passwords on their public website
+ well uh stand back the world now has a new term zoom bombing uh and it's become a sub industry
+ of its own uh and in retrospect it was completely foreseeable that now we have every board teenager
+ now also stuck at home on the internet just itching to cause some and here comes my favorite word
+ mayhem uh uh arse technica briefly some things up last thursday writing with the corona virus
+ pandemic forcing millions of people to work learn and socialize from home zoom conferences
+ are becoming a default method to connect and with popularity comes abuse enter zoom bombing
+ the phenomenon of trolls intruding into other people's meetings for the sole purpose of harassing
+ the attendees usually by bombarding them with racist or sexually explicit images or statements
+ arse wrote a small sample of the events over the past few days and they had three
+ and attendee who disrupted an alcohol anonymous meeting by shouting misogynistic and anti-semitic
+ slurs along with the statement alcohol is so good according to business insider meeting
+ organizers eventually muted and removed the intruder but only after more than half of the
+ participants had left second example a zoom conference hosting students from the orange county
+ public school system in florida there was disrupted after an unvided participant exposed himself
+ to the class and third an online meeting of black students at the university of texas
+ there was cut short when it was interrupted by visitors using racial slurs so you know
+ the typical hijinks but a problem when you're trying to do all this online and it's possible
+ to be have these meetings interrupted and not only can online conferences be held on the internet
+ but zoom bombing raids can also be organized using the internet's social media tools just as easily
+ zdnet wrote the internet is rife with online communities where users can go and share zoom
+ conference codes and request that pranksters connect and hurl insults play pornographic material
+ excuse me or make death threats against other participants in a practice called zoom bombing
+ or a zoom raid they said these zoom bombing incidents had rapidly increased to become a
+ favorite pastime for all the teenagers stuck in their homes during quarantines from a niche
+ prank that started on a derelict discord channel zoom bombing they wrote has now spread to enormous
+ proportions being so rampant these days that the fbi sent a nationwide alert last week urging
+ companies schools and universities to take steps to secure their zoom channels but as zoom bombing
+ became more popular more pranksters wanted to join in the fun and more users wanted their friends
+ zoom meetings disrupted as the old saying goes they wrote where there's a demand there's always a
+ supply over the course of the past week the number of places on the public internet where a zoom raid
+ can be requested from a gang of bored teenagers has exploded there are now more than 30 public
+ discord channels there are at least three subreddits and multiple twitter accounts where zoom conference
+ codes and passwords can be posted to be broadcast to the internet and there are threads on at least
+ three hacking forums where users are either sharing zoom conference codes or techniques to discover live
+ meetings some examples of discord posts revealed by pc magazines report uh root reporting include
+ quote can anybody troll my science class at nine fifteen or i have a class in 30 minutes that i'll
+ send a link for or my friend's going to give me the code to her high school pre-calc class
+ tomorrow morning so as i noted above zoom does provide for password protected meetings but when
+ an entire class of teenagers at home are provided with the zoom meeting code and it's accompanying
+ password it's easy for any of them to post those credentials anonymously to get their virtual
+ classroom disrupted by a friend or anybody on the internet now fortunately the zoom system
+ does offer some additional controls to control and prevent such disruption zoom offers a virtual
+ waiting room where wannabe participants can be held staged and vetted before being admitted
+ into the conference and once all vetted participants have been added essentially once a virtual
+ roll call is complete zoom conferences can be locked to prevent anyone else from wandering in
+ late very much like locking the classroom door once class has begun and it's also possible to
+ prevent anyone other than the host from sharing their screen with the conference which only makes
+ sense though it's not currently the default since the system was originally meant to be open and
+ friendly and collaborative um so this is what's going to have to happen moving forward and of course
+ all that requires much more hands-on management it's not nearly as simple as publicly posting
+ the access codes and everything works smoothly but welcome to the internet uh that's the way it's
+ going to have to be um and that's the usage side's tip and i should mention that since i posted the
+ show notes i just checked with twitter uh and there's a at least one person who read through
+ this already who's uh an admin at a company who is using zoom and gave it the thumbs up he said he
+ appreciated and liked everything that i had had suggested so uh it looks like this is good advice
+ so as i said that's the usage side uh which has immediately become necessary for managing the
+ rampant abuse of zoom meetings uh not surprisingly as i said at the top there were some technical
+ service some problems that have surfaced as a result of more scrutiny being brought to bear
+ last wednesday a piece in ours technica stated that quote users of zoom for windows beware
+ the widely used software has a vulnerability that allows attackers to steal your operating
+ system credentials uh they were quoting researchers so perhaps that's what the researchers said
+ it wasn't exactly true though it's definitely a serious vulnerability or it was uh it would be
+ more correct to say that it was a credential impersonation attack uh the zoom chat window
+ could be used to send targeted windows users a string of text that represented a network resource
+ on the windows device they were using the zoom app for windows would automatically
+ convert these unc that's the universal naming convention strings such as backslash backslash
+ attacker dot bad domain dot com backslash c dollar sign uh c is the default share the default
+ windows share for your main c drive the zoom app would convert these into clickable links
+ if the target clicked on those links in the chat on networks that are not locked down
+ zoom would send the windows user names and the corresponding network ntlm v2 hashes
+ to the address contained in the link that is out onto the public internet to the attacker
+ attackers could then use these credentials to access those default shared network resources
+ like c colon uh outlook servers storage devices whatever um and this is caused by the fact that
+ a windows network will accept the ntlm man the ntlm hash when authenticating a user that leaves
+ the networks open to smb relay attacks that can be used to gain unauthorized access to various
+ resources these attacks don't require cracking the hash to reverse it to its plain text password
+ replaying the existing hash is sufficient for authentication and as i've said many times before
+ microsoft has never really managed to make any of its in-house protocols secure
+ which is why none of them should ever be exposed to the internet um okay so
+ it's worth noting that since all of this is happening over port 445 any zoom user
+ who is behind an isp who is already already proactively filtering the typical range of
+ highly abused ports i'm a cocks cable user all a minor filtered um so those are typically ports 25
+ you know smtp ports 137 through 139 old school file and printer sharing and 445
+ the new smb port uh those are typically all blocked so many home users were were never in any danger
+ they will always have been protected from the remote ex ex exploitation of this flaw
+ because they hackers not able to get back in uh but it's way better not to have this problem
+ and immediately upon having it brought to their attention zoom repaired and updated their client
+ to close this hole so problem solved but it was there for a while and spooky um and of course
+ there's more it's been revealed that zoom conference connections are not truly end-to-end encrypted
+ as they claim and that zoom is able to see all of their conference content unencrypted i can
+ understand this since hosting a massive conference with true end-to-end encryption would be a bit
+ tricky all of the participants would need to be sharing a common symmetric key that zoom itself
+ didn't have access to obviously that can be done uh and zoom didn't have to do it the way it did
+ but in anyway instead what's happened is each conference participants data stream is encrypted
+ to zoom but decrypted there and subsequently re-encrypted to all other participants
+ i think in general that's how a conference a system would have to work you can't do end-to-end
+ encryption if you're going to have a central server right and somebody somebody's going to mix it
+ yeah you you are able to uh and apparently in some instances there's does but if you turn on value
+ added features then uh it doesn't happen okay so um also in subsequent research by citizen lab
+ uh they found that zoom was also vague about the type of encryption being used and that the keys
+ generated for cryptographic operations were being delivered to participants in a zoom meeting
+ through servers in china even when all meeting participants uh and the zoom subscribers company
+ were outside of china uh apparently that was a mistake they did some quick footwork and explained
+ it away and said it's been fixed but it was happening for a while and the audio and video in each zoom
+ meeting is encrypted and decrypted with a single AES 128 cipher used in ECB mode which is shared
+ among all participants as we know ECB mode is electronic code book uh that is not a chaining cipher
+ each block is independently encrypted without dependence upon anything that came before
+ the result is that patterns present in the plaintext are preserved through encryption
+ which is considered to be a serious security weakness zooms original privacy policy also came
+ under criticism because it was possible for zoom to collect extensive data about its users videos
+ transcripts and shared notes and share it with third parties for profit whoops on march 29th zoom
+ tightened its privacy policy to state that it doesn't use data for meetings for any advertising
+ but it does use the data when people visit its marketing websites including its homepages zoom
+ dot us and zoom dot com zooms ios app like many apps which use the facebook sdk was found to be
+ sending analytics data back to facebook even when the user doesn't have a linked facebook account
+ zoom later removed that feature zoom came under the lens for its attendee tracking feature
+ which when enabled let's a host check if participants are clicking away from the main zoom window during
+ a call on april second it permanently removed the attendee attention tracker function zoom was found
+ to be using an undisclosed data mining feature that automatically matched users names and email
+ addresses to their linkedin profiles when they were signed in even if they were anonymous or using a
+ pseudonym during their call if another user in their meeting was subscribed to a service called
+ linkedin sales navigator they were able to access the linkedin profiles of other participants in
+ their zoom meetings without those user's knowledge or consent zoom has now disabled that feature
+ vice magazine discovered and revealed that zoom was leaking thousands of users email addresses
+ and photos and letting strangers initiate calls with each other it turned out that was because
+ users with the same domain name in their email address get this leo users with the same domain
+ name in their email address that is using lesser known email providers other than gmail outlook
+ hotmail or yahoo which zoom had special case were being grouped together as if they worked
+ for the same company whoops zoom has selectively blacklisted those domains though the whole thing
+ seemed like a bad idea to me last friday the washington post reported that it was trivial to
+ find video recordings made in zoom by searching the internet for the common file naming pattern
+ that zoom automatically applies to video recordings these videos were found on publicly accessible
+ amazon storage buckets it's not a biggie since that was relying upon obscurity rather than any
+ security but still researchers have created a tool called z war dial that searches for open zoom
+ meeting ids finding around a 100 open and non password protecting protected meetings per hour
+ the good news is zoom has been response has been responding to each and every one of these issues
+ quickly and it does appear that given its existing feature set it can be used and put to good purpose
+ so long as tight control is maintained over those who are allowed to participate those although
+ exerting such control might be difficult for very large meetings you know in a typical virtual
+ classroom that ought to be workable their use of a es 128 in ecb mode is a red flag
+ from a strict security standpoint it basically means that zoom implemented its own cryptographic
+ system which is not you know it's obviously to any obvious to anyone looking at it not very
+ secure i can see the benefits of using ecb mode for a multi-way conferencing system it makes things
+ much easier allowing late comers to more easily join into the fray but users should not assume
+ that they have truly secure end-to-end encryption apparently no one using zoom really does but with
+ that caveat okay for many people it doesn't matter you know for an otherwise public class
+ classroom or a yoga class it's entirely sufficient of course covid-19 was a big topic for all of us
+ all year long uh steve did a really i thought thoughtful breakdown of how the contact tracing
+ api on uh on apple and android worked but ultimately i think he realized as we all did and in fact
+ it's proven to be true that contact tracing apps probably are never going to work i believe it's
+ doomed um as i mentioned at the top of the show some academics who have modeled the system
+ have determined that to be effective 80 8 0 of all smartphone users would need to voluntarily
+ opt into using the app and that's never going to happen 80 percent uh as we saw the instant
+ the apple google initiative was announced both the non-technical and sadly the technical press
+ went berserk over the privacy implications even highly technical individuals who should have
+ known better spoke out with errant frightening and unfounded warnings before they understood
+ how the system worked this podcast looked at the systems technology carefully and understood
+ exactly what and why the apple google team had designed it as they did and we found that the
+ api itself absolutely protects the user's privacy but in practice that doesn't matter at all
+ that is the fact that it's you really can trust it for one thing as we've discussed since then
+ health officials really do have a need to collect real-time geographical location data as part of
+ a workable system adding the where you were when it happened would go a long way toward making up
+ for a lack of pervasive use of an application for example if only a few people in a large gathering
+ were app enabled and it was determined from the app that that was the most likely infection
+ event then a call could be put out for other non-app-enabled people who were also present at that
+ event to take the necessary precautions as we noted previously the importance of knowing where
+ which apple and google scrupulously avoided using has already occurred to the state of utah
+ who has created a much more useful solution which is also necessarily much more invasive
+ even though it was thoughtfully designed with things like immediate user deletion of all data
+ and short-term self-expiring location data the simple truth is a short term sacrifice of privacy
+ is required for spreading events to be located and managed even fully human mediated contact
+ tracing is by definition a short-term sacrifice of privacy someone whom you've never met and don't
+ know anything about needs to interview you to determine everything you're willing to share
+ about where you've been what you've done and who you've been in contact with for the previous two
+ weeks and that better be complete yeah yeah don't lie that's that's a massive imposition on one's
+ privacy right you know but it's what's necessary it's what works you know and i learned uh in doing
+ the research about one of those new features in google the google says that people are constantly
+ clearing their web browser histories and that's just cyber many people apparently really don't want
+ anyone else to know where they've been and what they've been up to um and at least when interviewed
+ by a human contact tracer someone can choose to elide anything they're embarrassed to share
+ but you can't do that with an app so how many people are going to voluntarily install what
+ amounts to spyware as we well know many people also have an inherent mistrust of the government
+ and its motives we've already seen people worrying that this might just be the start of more pervasive
+ monitor i mean even handy on mac break weekly was worrying about that the start of more pervasive
+ monitoring with statements like i'm not quoting andi i had this already written if they are allowed
+ to do this they'll always want more and why would they ever want to stop and so forth so
+ no it was a noble idea i loved the cleverness of the technology it was fun to dissect it and
+ share its operation with our users but it's clear that as a voluntary initiative it's never going
+ to get off the ground so i just you know i to me the idea that of states using a more
+ invasive technology as i noted really does make up for the fact it goes a long way toward making
+ up for the fact that just not that many people are going to take advantage of it but for those
+ who do who are involved in events where an infection is present if you know where and when
+ then you're able to move that from cyber into physical and after all that's what human contact
+ tracing is is you know physical contact monitoring so yeah i just i just think there's just no chance
+ for for software based apps if they are voluntarily installed and Bruce snire brought up the really
+ excellent point about and i don't know if rich niers a post a few days ago about i did not just
+ the he agrees with you he says it's just it's just it's not going to it's just they don't work because
+ of the potential for false negatives or false positives people aren't going to trust it
+ and it's just going to it's just not going to work we need human contact tracing now i think
+ these apps could be a useful adjunct to help it because one thing i don't remember where i've
+ been everywhere i've been in the last 14 days yeah having that a map of that that maybe only i see
+ or whatever that would be used with a jog your memory yeah there's a lot of things that could be
+ useful but as constituted apple and google have done such a good job of protecting our privacy
+ they've made their apps pretty much useless to human contract tracers and we know that human
+ contact tracing is what's you need extensive testing and tracing period so yeah yeah uh
+ unfortunately and i maybe it suffers a little bit from i think the apple google approach maybe
+ suffer a little bit from just you know being developed by techies without contact from actual
+ health officials who would have said wait we need that we have to know where where this happened
+ it's not useful uh that's exactly what snier said he says a tech will always respond with what tech
+ knows how to do because they want to help but that's not necessarily what needs to be done it's just
+ what they can do and i think that's that i mean i agree they did it very well but it's just
+ from a health perspective health uh official perspective it's not uh sufficient yeah i would
+ love as i mentioned when we talked about utah i would love for the state of california to do an
+ invasive health monitoring app and i would load it and well they're not using the google api they're
+ not they're they're gonna do their own thing the problem in my opinion is i agree we need testing
+ and we need human tracing it the the countries that that's been done and it has worked it's worked
+ very well it's eliminated covid-19 cases just killed it just killed it uh but that's not i don't think
+ it's ever gonna happen in the u.s we just we're not gonna sit still for that we won't even wear masks
+ i agree this is a country founded on individual liberty and it's inconsistent with what is necessary
+ to stop the virus that's why there's all the emphasis on well let's get a vaccine because they
+ know there's nothing else that's gonna work uh right and what that means is many many many more
+ people will die we'll have many more you know go back inside it's it's not over and then coming
+ out and going back and this it's gonna be a bit of a seesaw for for a little while
+ um yeah i think that's right yep we should just talk about twitter i think everybody by now leo
+ knows that there was a big event that happened on wednesday of last week um twitter's the one
+ thing that's missing from the most up-to-date information i've seen is any sense for who did it
+ and i'm sure that's if they have any idea that's embargoed because they're not wanting to met
+ getting the way of law enforcement or whatever forensics they may have the new york times finger
+ to a guy named kirk oh i haven't heard i mean i don't think they've a so that's the identity he
+ assumed they haven't associated that with a real person but there is a great new york times
+ article where they talked it's interesting because kirk before he perpetrated this
+ was reaching out to a bunch of sim swappers these are guys who aren't exactly malicious they make
+ money by hacking single-letter twitter domains or or but they call og domain short clever twitter
+ domains and selling them to the highest bidder like uh at six at six or at y right yep yep but
+ these guys so kirk was talking to them saying look i can do these things you know how much would you
+ pay but they got bored apparently according to their story anyway and they didn't follow up
+ but then shortly thereafter he did use his admin console to perpetrate this spammy hack
+ so is he a twitter employee we think no oh you didn't okay got to read the story because what
+ and twitter has not admitted to this whether it's true is unknown but there seems to be good
+ evidence that the way kirk got this twitter only says socially engineered our guys right is he got
+ into their private slack channel where twitter had pinned the credentials for the god mode interface
+ oh wow that's that's a good one oh man so all he really has to do is say hey let me in here slack
+ channel yeah it's like your password on the blackboard it's supposed to know when the camera crew is
+ gonna come in and do an interview can you believe it now that's the new york time story and i think
+ that it's well sourced because they they got screenshots from these guys and they got a lot
+ of stuff from these guys to verify that they were talking to this guy and so forth but twitter has
+ not confirmed so isn't that fascinating well i'm glad to have glad that that you know we talked
+ about this because you had more up-to-date information all i had was there yeah twitter's
+ note from friday and you know they talked about 138 accounts and of the 138 45 were you know messed
+ with and then eight people there was there had some internal tool called your twitter account or
+ something that was used eight times so you know me and they're they're painting the best picture
+ they they can um you know it's funny too because i i got an email from jason in the afternoon on
+ wednesday saying hey steve we'd love to have you on thursday morning to talk about this on on our
+ show um can can you do that i said yeah sure so i attempted to tweet the news to my followers
+ that i would be on on thursday morning and i was blocked i got the weirdest like yeah you know this
+ looks like a bot is trying to post so bought off and it's like yeah what i'm not a bot they were
+ so i'm spending accounts too they were getting very aggressive about this yeah they didn't want
+ anybody to talk about it because i'm sure yours was suspended too because you and i are both um uh
+ what is it with the little were verified blue check verified yeah verified and so they did a blanket
+ block of all verified users just and and then there were other people who had anyone who had
+ changed their password recently that raised their flag of suspicion so they they blocked any posts
+ from those accounts i mean you know they really did respond quickly as quickly as they could yeah
+ yeah it's a it's a cool yeah this is the new york times article it came out on friday this is a
+ fascinating story the reason it's it perhaps more important than just oh they hacked twitter which
+ who cares is that the president uses this and many other leaders use this as a messaging system
+ to tell the world what they're up to it's terrifying to think that any of these accounts could have
+ been compromised and it was obvious when it started that it was not your it wasn't a password hack or
+ your average everyday hack because accounts like bill gates and joe bines and barack obamas all of
+ which were hacked almost certainly have higher levels of security on them right not just using
+ monkey one two three as a password there's clearly had to be it was obviously an inside job yeah yeah
+ that was our meat well and and the nature of the tweets it was a send you know two for one deal on
+ bitcoin send you know whatever you send me i'll double it and send it back to you and you know
+ the last i heard was the i think well i said on on thursday on on jason's show that that i had seen
+ three hundred thousand dollars had been transferred into the bitcoin account i haven't seen that again
+ i've seen more like a hundred and twenty thousand so some it's hard to tell out of money was made
+ the nature we know the bitcoin account so you can look at the blockchain and see what was going on
+ with it but hackers routinely will put put money into it take money out to obfuscate what they're
+ making the best so i like you i saw hundred thousand but the best information came from binance
+ which is a bitcoin exchange which said they had blocked a quarter of a million dollars of
+ attempted transfers into that account so that's their customers saying i'd like to give some money
+ to joe biden and get it doubled so it might have been a more successful hack than it appeared to be
+ and if it weren't for binance blocking those transfers it could have been a lot more money
+ it does make you wonder though if you had this god mode
+ yes what would be the best for this yeah what would you do with it and maybe maybe this is
+ misdirection maybe kirk is really you know vladimir and uh and he's up to other things so we don't
+ and that's the why i wonder what's really going on here well and uh what i said when i was talking
+ to jason on thursday was that you know i i i don't know whether he knew but you and i talked
+ years ago at back at the sony entertainment hack where there was an advanced persistent threat
+ that had been found in their network and you know i said famously on the podcast i don't want the
+ job of trying to secure something like sony oh yeah you know that's impossible it's i mean literally
+ impossible and so what what this suggests is that that clearly it was a mistake to if the credentials
+ for this thing were you know stapled in the slack channel so that it could be seen but but also the
+ idea that a that the bar is not higher to doing something like that for example and i and i talked
+ about uh how you know there are protocols that use a majority voting approach with crypto where
+ it's compromising a single individual wouldn't wouldn't render the company vulnerable you know
+ you know a secret a shared secret could be shared for example among nine people but you've got to
+ get three of them to all agree in order to cause something to happen that way if you have a large
+ enough body of people who who can be involved you're not worried about getting locked out because
+ you know mori is gone for the day but at the same time it just pretty it pretty i mean it's
+ protecting the people from from being you know uh suckered into doing something with a social
+ engineering attack so i i think this also suggests that you know twitter has become as you said
+ leo so crucial i mean like bizarrely important on the globally important on the global scale
+ well it also is it's kind of unconscionable because twitter is not the first so a contractor
+ when leaving his job at twitter two years ago you might remember this disconnected president
+ trumps account deleted it uh and then of course jack's account the ceo his account was hacked a
+ couple of months ago you would think that at this point twitter would kind of be on notice
+ yeah that maybe they should be doing a better job yeah this is just not a toy anymore yeah that
+ you know that allows people to send 140 characters between their phones yeah it's it's become a lot
+ more than that so and we should say hopefully new york time says that it was the slack channel that
+ you know they got that from hackers and who knows if that's true but right right right so twitter
+ is allegedly yeah to everything so far because and you know unless we get it officially and
+ who knows when and or if what will get officially from twitter anyway here yeah yeah yeah yeah that's
+ what's known and again sort of puts the industry on notice that this stuff which just started off
+ being kind of like oh look uh are they are they making any money yet leo or they still waiting to
+ make money in the future they've had profitable quarters but they're not exactly rolling in the
+ dough yeah we don't really have an economic model but yeah we're gonna let the whole world use this
+ to talk to itself and good luck yeah well we'll make it up in volume the best product of the year
+ from the point of view of security now came to us uh well it was announcement it's not
+ active from amazon you probably saw it the ring drone for your home okay so under our rhetorically
+ named what could possibly go wrong section we have amazon rings announcement thursday of their
+ autonomous home security flying webcam you know the thing that surprised me when i they announced
+ this lisa has forbidden cameras in the house for yes slightly so you know she doesn't know what that
+ video is going i said yeah you look at this you wouldn't want this she's oh no why are we gonna get
+ it like oh well because if cameras hidden in the base until it takes off true right but in order to
+ use it you have to map your home you actually have to take it around say okay this is the garage
+ this is the kitchen you have to teach it the lay out of your house yeah like the first thing you
+ do it's it's named the always home cam it will cost 250 dollars and is slated to start shipping
+ next year it is self-docking to allow it to recharge and it's able to fly around its owners home on
+ pre-approved paths as you mentioned you know and it's supposed to allow homeowners to check to see
+ if they left a window open forgot to turn the stove off or to check to make sure robbers aren't
+ breaking in presumably you know because they're also billing it as a security feature
+ and perhaps not surprisingly this announcement has been met with some mixed feelings yes
+ Rick Holland the CISO and VP of strategy at digital shadows in an interview he told threat
+ post for privacy advocates the concept of an untethered iot device surveilling the house
+ is a little disturbing coupled with rings controversial privacy practices the adoption of
+ the drone could be low however those that have already embraced the concept of in-house security
+ cameras are likely to be excited the prospect of having a single drone monitor your house instead
+ of multiple individual cameras would be alluring and this is exactly leases position is like hey
+ instead of having you know cameras like steadily looking out into our various rooms you know this
+ thing gives you total coverage potentially as long as it's you who are flying it around and
+ looking at things because you know consider the idea of it getting taken over and someone in Russia
+ taking a stroll around your house using this thing I mean really that's what's going to happen
+ ring for its part said that they it has it is they built in privacy into the physical design
+ noting that when the drone is docked in its charging base the camera is physically blocked
+ you know the camera is down on this it's it's sort of a like a think of it as a as a big
+ T shape where the top of the T is a big square so it's a square with a with a square post
+ that drops down from the center of this the this T and the camera is down at the bottom of that
+ so when this thing descends into its dock the post is going into a into a square shaped hole
+ thus preventing this thing from seeing anything so it's clear that the camera cannot be seen
+ but it's funny too because they said the device also has been designed to hum at a certain volume
+ so it's clear that the camera is in motion and recording and I thought wait hum are you kidding
+ me has anyone here not ever heard drones a micro drone fly I mean you you can't hear yourself think
+ yeah you know generating the lift required using four tiny designer approved props because of
+ course this thing has to look cute and and write and that requires that they spin at thousands of
+ revolutions per minute at least I suppose we don't need to worry about the thing creeping up on anyone
+ and surprising them and then what occurred to me is what I want to know is whether no one who designs
+ and tests these things has a dog or cat at home because this thing would drive the pets insane
+ yes it would you know they would dive under the bed and never be seen again you know
+ flying down the hallway and thought about that oh my god wow what a what a wonderful year it has been
+ well I really can't say that can't I it's been a terrible year 2020 maybe the worst year in living
+ memory but it's been a great year getting together every week with my pal Steve Gibson I uh I've known
+ Steve for oh my goodness it seems like more than 20 years I think it is and he's always been an
+ inspiration he's always been fun to hang with and and what I really love about Steve and I'm sure
+ you do too is he's super smart super analytical and he can really take tough complicated topics
+ and break him down in a way that we can understand or at least have a shot at understanding I hope
+ you enjoy security now I know I enjoy it we're gonna have to work on Steve because he says he's
+ gonna stop at episode 999 and doesn't have room for a fourth digit I'm working on him don't worry
+ but at least we know we have a good four more years with Steve Gibson and security now we'll be back
+ next week with a brand new show Steve never rests uh but I'm wishing you now a happy and healthy
+ holiday season please stay safe zoom your family if you need to see them but let's take care because
+ the light is at the end of the tunnel and we'll all get together next week for security now see you then

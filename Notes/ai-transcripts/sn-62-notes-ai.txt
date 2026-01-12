@@ -1,0 +1,670 @@
+ Netcast you love from people you trust This is Twitter bandwidth for security now is
+ provided by AOL radio at AOL dot com slash podcasting
+ this is security now and Steve Gibson episode 62 for October 19th 2006
+ proxies security now is brought to you by a starrow makers of the starrow
+ security gateway on the web at www dot a s t a r o dot com and by Dell for this
+ week specials visit twit dot TV slash Dell it's time for security now our
+ regular visit to the deep dark underside of the internet windows Mac and Linux
+ Steve Gibson our security wizard is here from dot com Hi Steve but you know we
+ at once again we're ahead of the curve last week talking about these windows
+ exploits the zero day exploits that come out right after the first or the
+ second Tuesday of the month yeah and there was another one a power point
+ exploit fortunately which doesn't seem to be out in the wild it's just it's
+ amazing when these patches come out there were 23 patches last Tuesday and boy
+ they just the hackers get to work well and in fact I'm glad you brought that up
+ because I wanted to reiterate that there is still this unpatched direct
+ animation path control exploit that we talked about last week right it's it's
+ Microsoft has not addressed it it's not clear whether or when they're going to
+ and there is public exploit code in the wild I shot a note a note off to our to
+ our friends down at Sunbelt software asking whether they had see whether
+ their web spiders had encountered the active exploitation of this in the same
+ way that it was like a wildfire with that VML the you know the right previous zero
+ day I've not heard back from them yet but I do want to remind people that you
+ know as we talked about last week if someone you know didn't get around to
+ doing that the using the little zert utility to do to temporarily disable the
+ handling of direct animation if in Internet Explorer if they use IE if they
+ have scripting enabled by default then you really do I think it's worth just
+ going and using this little bit of free software to turn that off until
+ Microsoft patches and we we can assume it'll be in the second Tuesday of
+ November that they will be patching so but that still leaves you know four
+ weeks of open vulnerability window and you know the way things are developing
+ now the the malicious hackers are deliberately releasing new exploits at
+ the same time Microsoft patches to optimize or maximize the amount of
+ vulnerability and it's all about installing junk in people's machines you
+ know junk that no one wants installing yeah it's just it's just amazing and
+ and the fact that Microsoft isn't responding to this pat this problem
+ hysterectics problem surprises me frankly I guess they're still you know
+ analyzing the issue yeah yeah and in fact and another interesting little bit of
+ news is this too related I'm sure you probably picked up on some of this
+ Leo the security companies have been very upset with Microsoft because
+ Vista protects modifications of the kernel which which you know programs
+ like McAfee and Symantec need to have access to the kernel in order to install
+ their hooks well Microsoft Vista one of the new security enhancements is a you
+ know explicit protection from making any modifications to the kernel the
+ problem is you know from an antitrust standpoint this locks out third party
+ software which has been able to use basically their own benign hacks in order
+ to hack into the XP kernel to install themselves at the low level that they
+ need to in order to monitor what's going on so what's real I kind of got a kick
+ out of this is Microsoft said okay well yes we see that could be a problem
+ so how about this in the service pack one release we will provide the API you
+ know brand new API's my Microsoft apparently is just weeks away from from
+ what's called RTM releasing to manufacturing that the final that the
+ final version one over 25th it's one week away yeah yeah and so Microsoft is
+ saying well there aren't API's in the kernel now that would allow this and so
+ we can't put them in in time because I mean after all it takes Microsoft a
+ month just a patch of flaw right so you know you could argue that there's no
+ way you know they could delay Vista's release so it seems unfortunate that I
+ mean essentially what's going to happen is as we know a major service pack
+ release is typically you know 12 to 18 months downstream so none of these
+ third-party tools can be developed in and and used until service pack one of
+ Vista which means that basically they're gonna shut out the market for third
+ parties now everyone will end up using Microsoft's new security solutions and
+ tools which are Vista compatible and as a consequence of this it's very likely
+ that you know these these traditional security companies are gonna you know
+ not be able to hook in their tools and probably end up never achieving the
+ market share that they would have if they've been able to release their stuff
+ right at the at the at the release of Vista well you know it's complicated
+ because you can if you can of course say well this is Microsoft trying to assert
+ a competitive advantage but I have to think that given the trouble they've
+ had with antitrust and the Department of Justice in the past that they'd be
+ very unlikely to attempt that and they can make a pretty good argument well the
+ reason we don't release you know what the reason we put this patch guard
+ technology in is because it's not we're not just we're not worried about
+ Symantec and McAfee we're worried about hackers and Lee having an API makes it
+ open to hackers and I exactly I would rather Microsoft did not open it yeah
+ because I think the danger of them doing that I mean you know the first question
+ that pops up is okay wait a minute if you if there's an API anyone can use it
+ the bad guys can use it too exactly I mean it's a win-win for Microsoft it
+ both gives them a competitive advantage and it makes their system more secure by
+ the way I'm just reading the article looks like that the API will only be for
+ 64-bit versions of Windows and anyway it won't be 32 bits so right and that's
+ of course what the big money is is in the 32-bit version yes I think I think we're
+ gonna see very slow adoption of 64-bit just because you know the hardware is
+ not there you know although you could argue at the same time that Vista is so
+ resource-hungry that we're gonna need a lot of all that ram I mean you know basically
+ new machines anyway yeah although the 64-bit platforms are probably gonna be a
+ lot more expensive than the you know the much more mature you know faster you
+ know pending for machines now today on the show we're gonna talk about proxies
+ and I want to do that in a second before we do I just this I mean this is kind of
+ crazy but I just got an email this morning from Megan who has a kind of a
+ crisis and I just wanted to ask if Spinrite would help with this I'm trying to
+ help her out she apparently lost a folder within Outlook and it had a
+ bunch of business emails that she absolutely needed I it's not clear from
+ her email if she lost the entire Outlook.pst I think she did she says I
+ didn't delete anything I didn't do anything is it first of all possible for
+ a file just to disappear because of a hard drive error well yes it absolutely
+ is. Would Spinrite recover a file if they were lost that way? Yeah probably if
+ if the if the problem was some file system damage that was as a there was
+ not created by a virus or malware that is deliberately rewriting something but
+ if it was a sector which was no longer readable right then and for example we
+ often see the you know the the testimonials pages full of people who were
+ unable to get into Windows if they like it was an even boot loop they couldn't
+ boot they couldn't do anything or something that they needed was broken and
+ so so they just you know they ran Spinrite and almost by you know almost
+ miraculously as they describe it now whatever problem they had is gone
+ because it would the problem was a was a as a result of a low-level hard disk
+ problem. So just to make it clear Spinrite isn't it doesn't understand file
+ systems its file system independent it's not going to rebuild your table of
+ contents but if the table of contents is damaged because of a bad sector or if a
+ file is damaged because of a bad sector it can recover that data by by by recovering
+ the data either moving it or kind of reformatting the sector underneath it to
+ make it readable again. Is that right? Well that's that that's exactly right the
+ way hard drives work today is different than the way they used to work. In the
+ old days Spinrite had to understand the file system because it had to it had to
+ relocate the clusters of data onto a different area of the drive and then
+ relink the file system to refer to the relocated data. Today drives are doing
+ sector reassignment and relocation themselves under underneath the file
+ system. Is that part of the ECC process? Well yeah what what actually happens is
+ that if you remember when when you and I demoed Spinrite on call for help we
+ could see errors occurring all the time on drives. Hundreds of them every minute.
+ Yes yes drives have gotten so dense that drives are now depending upon the error
+ correction code ECC just to read good sectors. Not even bad sectors. You're
+ really quantum level now where you're kind of guessing where the bits are
+ whether they're on or off. These drives are so dense. I mean it's just
+ insane how dense they are. I stopped buying big drives when you told me
+ that I you know I buy Raptors because I like the 100 the 10,000 RPMs but I buy
+ their 150 gigabytes. I don't buy the big drives anymore. It's funny because my
+ computer supplier whenever I call about and need some drives I say okay what's
+ the smallest. What's the smallest drive I can still buy. That's because you're
+ trying to reduce aerial density and therefore make them more reliable. Yes
+ okay yes. I mean you know you can imagine that today if we needed to we could
+ create the most reliable hundred meg drive ever seen because you know by
+ comparison the hundred meg drives the the individual bits were so huge on the
+ drive there's no way current technology could not read them reliably but but
+ you know manufacturers I mean think about it you know they're motivated by
+ profit they want to cram as much data as they can and so drives are reliable
+ enough you know they could you know they could make them absolutely reliable
+ or you know well by by increasing the price or by lowering the density but
+ but they you know they want five hundred gigabyte drives and we want them to be
+ inexpensive cheap and so exactly so so they make them reliable enough so anyway
+ but back to ECC real quickly what is what the drive does is when it makes a
+ correction basically it creates an XOR mask and we've talked about XORing in
+ the past in in the in the realm of encryption where you you you an XOR
+ mask basically flips various bits so the error correction code what when there's
+ a problem it creates an XOR mask that that inverts the wrong bits to make them
+ right again well the length of the mask tells the drive how bad the sector is
+ the longer the mask is from the first one bit to the last one bit which is to
+ say the first bit that needs to be fixed and the last bit that needs to be fixed
+ in a in in a linear run of bits the length of that tells the drive whether
+ it's time to relocate this sector so drives can tolerate all and they do now
+ routinely tolerate just all the time lots of little corrections when the
+ correction starts getting too long it passes a certain threshold and the drive
+ says oh if I wait much longer this may become uncorrectable and so the drive
+ takes the sector out of service copies the corrected data to a new sector and
+ and internally swaps that back into place since all that happens underneath the
+ file system spin right doesn't need to worry about whether it's a Linux or a
+ Tivo drive or a Mac or NTFS or anything it just works with the drive at the
+ sector level to repair things and and spin rights magic is it's able to
+ recover unrecoverable data that's always been its claim to fame and it's able to
+ do much more than the drive can do by itself working with the drive so you
+ know that's a long-winded answer to your your well what I'm gonna do is I'm gonna
+ send Megan an email saying you know get spin right I just wanted to verify with
+ you my initial instinct which was it could be up fact that just a bad sector
+ well and and you know for for for people like her who might be using spin right
+ for a specific purpose you know we don't have a demo because there's a lot of
+ people say I want a demo I've spent I know but so so what we do is we have you
+ know no problem with someone buying it and trying it and then writing to our
+ sales address and saying hey you know it didn't work for me I'd like I'm gonna
+ destroy my copy I'd like my money back and so we just have no problem with that
+ at all oh I had no idea you did that that's really
+ have no no questions asked we'll just put the money back on your credit card
+ Steve you're so ethical I can't stand it you're good I don't know how you've
+ survived in this industry for as long as you that's because you know look look
+ at that testimonials page you know if you were telling me about one guy who
+ pirated it yes in fact we we got a piece of email last week he said corrects
+ me I've got I've got in front of me said I must be honest and tell you I used a
+ pirated copy of spin right a friend a friend of mine gave me because you
+ never copy protected it I want to emphasize this he's never put copy
+ protection on spin right no I mean I I would much rather trust our customers
+ and not impede them in any way I mean you know good more and more more you know
+ copy protection is becoming a problem anyway so he says a friend of mine gave
+ me to recover 120 gig of data on a drive which suddenly quit as a systems admin
+ by trade I should know better and backup regularly but you know how it is
+ backups are always on a back burner not something we think about until problems
+ occur he said needless to say spin right saved my bacon I was able to recover all
+ my data yeah it to a secondary hard drive so great he says I was so thankful and
+ happy I just bought my own licensed version of spin right thank you so much
+ for an amazing product I doubt there very many people when there are many
+ companies that could say that their pirated program worked and so people
+ bought it I mean absolutely and and we hear this all the time I get this kind
+ of mail and I mean so so I don't want to formally tell people they could you
+ know loan their copies but if if if anyone listening to this owns a copy of
+ spin right a friend of theirs is in trouble I'm not gonna have a problem if
+ spin right could fix their system I would I would ask as a courtesy that that
+ person then considers buying spin right if it works by it you know if it works
+ for them yep you know I wish we'd had spin right at the data center where the
+ website is a store because you know we had a drive failure over the weekend and
+ it was everything I could do not to get on a plane with a copy of spin right
+ and flight and flight of Dallas you know I don't think the techs there were
+ paying much attention they didn't try to recover the drive they just pull it
+ out but there was some bad sectors and Linux was booting read only because of
+ it and and I thought boy if I can only get spin right on there I know I could
+ save that drive that's the kind of thing it does all the time fortunately we had
+ good backups and they gave me a free drive to replace it so it was okay although I
+ have to say it took them so long I'm moving to a different data center and now
+ I'm using RAID 5 with the three Raptors 350 gigabyte perfect and I think that
+ will that will protect us yes yes in fact that that is exactly my
+ configuration I'm not using Raptors because I don't need that much
+ performance but on on GRC's web servers I use RAID 5 I have three drives
+ three drives in a RAID 5 with a hot spare right and so the the RAID controller is
+ able to to switch over and rebuild the the RAID array on the fly oh that's neat
+ well I think I'd still have to make a call to the network center if that
+ happened but at least we wouldn't lose anything and I backup you know we have
+ a network attached storage device which I back up to and everything but right we
+ didn't lose any data thank goodness anyway enough of enough the only reason I
+ bring this up is because to get a chance to talk to Steve about hard drives I
+ mean this is the guy who knows more about hard drives probably than any human
+ alive except maybe Stanley Seagate or whatever but or Schugart died in the
+ Al Schugart but yeah but so it's nice to get something in a while I ask the I
+ have the privilege of asking you directly I do appreciate that you know as
+ long as we're talking about security let me mention our longtime sponsor it's
+ kind of need to be able to say our longtime sponsor and the great guys at
+ Astarro Corporation AST ARO makers of the Astarro security gateway I've told you
+ before that it's free for home users for non-commercial use you could download it
+ from AST ARO.com put it on a you know beige box PC any old computer lying
+ around and there it is boom you've got a great security device for a little bit
+ more I think it's something like 80 euros a year you can add anti spam anti
+ virus anti hacker all of this great stuff all open source all high quality I also
+ want to tell you though that the Astarro security gateway appliance is designed
+ for business if you're small or medium business network needs superior
+ protection from spam viruses and hackers as well as complete VPN
+ capabilities intrusion protection content filtering and an industrial
+ strength firewall all in an easy to use high performance appliance contact Astarro
+ AST ARO.com or call 877 the number four Astarro to schedule your free trial of an
+ Astarro security gateway appliance in your business Astarro crowd sponsors of
+ security now AST ARO.com today we're gonna talk about proxies yes we talked last
+ week about Mojo Pack and I said that I wanted that the plan was this week to
+ talk about Mojo Pack however unfortunately as I tried to communicate
+ with them because as I said I wanted to really understand what the technology was
+ I did a lot more research and I found out that that you know at the moment
+ they're sort of in they've got problems from the looks of it they they jumped
+ out of the gate prematurely there was a there was the the fall demo show was the
+ weekend before the the podcast Expo that that's right that's right it's
+ September 26th yeah yep and Mark Thompson was actually one of the of the 50
+ companies that was chosen to show well the Mojo Pack company was another one as
+ well as a third company called U3 I mentioned that because U3 has
+ something very similar unfortunately the the Mojo Pack stuff has apparently had
+ a lot of problems it was in beta working in a certain way when they took a
+ diversion 1.0 they made a major change that that involves basically their own
+ copy protection scheme it used to run on one on USB 1.0 drives which do not
+ necessarily have to have a built-in serial number the spec for USB 2.0
+ incorporates a serial number which locks their Mojo Pack stuff to the
+ drive well so so what happened was people who are all excited about Mojo Pack in
+ using it in beta when it went to version 1.0 it broke most of what people were
+ doing without any announcement or word then when people started complaining they
+ shut down the forums Mojo Pack shut down the forums in order not to allow these
+ complaints to be seen study on how to do things wrong it was amazing and then
+ then they had the the beta was also locked so that you could only use it for
+ 30 days that is the trial you can only use it for 30 days or 99 boots but it
+ turns out the way people were using it they would boot it many times a day so it
+ ended up lasting a week or two then it would refuse to work any longer but the
+ e-commerce system was not online yet so people could not buy it and could not
+ register it well a lot of that has just been fixed just in the last couple days
+ I've been trying to get someone on the phone try I sent email I mean even to
+ the to the who is registration email addresses because I can't get any
+ response from anybody and so I just thought okay let's I'm gonna back off
+ let's not talk about this product we can't we really I think it's not quite
+ ready for prime time not ready yet and it does seem like there are problems
+ with the technology because it doesn't perform a full virtualization of the
+ system so people have been finding that registered software that locks itself
+ to the computer won't it will see a different computer when you move it to a
+ different environment well the whole idea is for it to be portable so you're
+ able to you know stick it in any computer you happen to be visiting and it brings
+ your environment with you well if you if you are relying on the programs that
+ you've got and they suddenly say oh you're not authorized then you know defeats
+ the purpose so anyway I'm I while doing all this I found another company called
+ you three that has something similar and far more mature just appearing and they
+ also announced and released at at the fall demo show and then there's another
+ company called mocha five which is a an interesting really interesting approach
+ coming out of Stanford anyway you know we've been talking about how virtualization
+ technology is going to be moving forward well basically these are three net
+ other virtualization solutions that I want to cover next week great because I'm
+ very interested and obviously there's a lot of in demand for this kind of a
+ product of course if it doesn't work it's not well I think it's a cool idea the
+ idea that you carry your environment and your applications and your data with
+ you you plug them in everybody wants this this is right windows well and of
+ course it's been enabled by the fact that we now have affordable for gig USB
+ flash drives you know it would it could you couldn't have done it back when
+ people were talking about 64 megs right because contemporary applications and
+ data won't fit there but now that you've got multiple gig flash drives it's like
+ wait a minute this is this I mean it it inverts the whole model so I mean it
+ it's very exciting and I and the other thing too is that the mojo pack guys
+ really seem to be a little bit licensed heavy for example you you are you can
+ move your mojo pack between drives I think twice and never again oh please I
+ know I know why why and the problem is you know you would like and it's not
+ cheap it's 20 29 95 now but it's gonna be 50 bucks after it comes out of it
+ it's trial phase well that seems like a lot of money for what they're doing
+ especially with all the limitations that they're there they're putting on it
+ and it seems like a great idea so my sense is that they are not going to be
+ alone in this market for long and there will like you know likely be some some
+ free or open source solutions that that are coming along and in fact I've already
+ pretty much found one oh good all right well we'll talk about all that next
+ week yep this week proxies and you see this a lot I see proxies all the time you
+ see it more often you know it's hidden away in the browser settings and every
+ once in a while you'd see a program to say do you have a socks proxy or and then
+ people who talked about proxy servers it doesn't seem like people talk about it
+ much anymore what is a proxy and what is it used for well it is the kind of
+ thing we want to talk about because it can be it can enhance your privacy and
+ anonymity and and it can also be a security vulnerability and problem
+ essentially stepping back and looking at a definition you know the word proxy
+ itself implies somebody acting on your behalf so you know when you give like
+ you know voting proxies to somebody else you're saying you know you have my
+ voting proxy you can vote the way you know I instruct you to and so they do
+ that on your behalf the the formal definition of for example an internet
+ proxy or a web proxy is that your client for example your browser instead of
+ connecting to the remote server it it connects to the proxy server it makes
+ the request of the proxy which then turns around and on your behalf makes the
+ request to the remote server the the result comes back to the proxy it then
+ turns around and through the connection you have to the proxy it returns the
+ data to you there are that this is actually being done by many ISPs and in
+ fact my local Cox cable provider often proxies in a transparent fashion that is
+ you you as a as a customer of the ISP you believe you're connecting to the
+ remote machine in fact you are being transparently proxy that is it it's not
+ a proxy that you even see or are aware of but you are you're actually connecting
+ of your your connection is intercepted by the ISP it then makes the request the
+ reason they do this is for caching the ISP naturally has to pay for all the
+ bandwidth it uses out to the internet but if instead it can put a large caching
+ proxy at its at its boundary to the internet then maybe some of the things
+ your web browser is asking for are in its cache so so what happens is the first
+ person for example to go to amazon.com will make a request for the Amazon page
+ and due to you know the uniqueness of the page there are there are all kinds of
+ you know it looks very cryptic if you look at one of these Amazon.com pages
+ because they don't they don't want their page to be given to anybody else so so
+ what happens is you make the request to amazon.com the proxy intercepts it gets
+ the page from Amazon and then returns it to you as we know we've talked about how
+ web pages are built that web page contains all kinds of other little
+ pictures you know pictures of buttons pictures of of the user interface all
+ kinds of other things which you your web browser then sends out in a series of
+ requests well those are much more generic than the web page the custom web page
+ you received so it's very likely that if anybody had anybody also behind the same
+ proxy in this case an ISP's whole domain if if they had recently gone to Amazon
+ and their browser had pulled all of those other things back through the proxy would
+ cache them if it had permission to do so and keep them locally that's why that's
+ that argument I have constantly with our advertising agency because their
+ numbers are so low and I think it's a lot of it is because what would be the
+ number one thing you would cash a podcast yes if a thousand Comcast customers all
+ ask for the same security now podcast I bet you anything accounts as one
+ download well and it it's good for two reasons first of all saves me bandwidth
+ that's right well exactly it saves you bandwidth okay there's there's three
+ reasons it saves you bandwidth it saves the ISP's bandwidth to the net
+ remember that they're paying for their usage only get one copy exactly and it's
+ one tattoo to the local customer that's the third advantage exactly Leo is that
+ is that we're getting it from our local ISP even though it seems to be coming
+ from AOL it's actually coming from us from a stored copy on our ISP is there
+ anyway for my fast to tell that I'm getting a proxy to copy instead of a
+ cached copy instead of the original copy there there is no way from the user
+ standpoint in the case of a transparent proxy how about from the providers
+ standpoint there actually is if they cared I care deeply it's interesting
+ this is a problem that I had and solved with with shields up because that's how
+ I happen to know that my my local Cox provider is using a transparent proxy
+ because what would happen would be if if if someone at Cox for example went to
+ shields up there they're using a web page that they think is coming from me but
+ it's actually been intercepted by by by the Cox transparent proxy the IP address
+ that I receive from on my web server is the proxies IP address not the local
+ users exactly and so if I weren't you know a smart boy I would be testing the
+ security of the proxy server exactly rather than the the the actual visitor
+ who's coming to GRC to get their shields so you are able to get around that yes
+ I do it two ways first of all SSL as we've talked about before is a key for
+ avoiding proxies because unless the proxy is explicitly configured and and we'll
+ talk about that in a second what what it means to have an explicit proxy as
+ opposed to a transparent proxy but a transparent proxy cannot transparently
+ intercept SSL because the certificate there's no way it can give your browser
+ a certificate that matches the site so so when you establish a shields up
+ connection the first thing I do is switch you into a secure SSL connection to
+ avoid the proxy the other thing that happens is that proxy servers will add
+ some headers to the request that they forward to the server which is
+ another which is a nice way Leo that that your advertising technology could
+ know that this was actually a request coming from a from a proxy and not from
+ the user although it still wouldn't let the it wouldn't let we would just write
+ we would know that the who's requesting this is not an end user but a proxy
+ exactly but we would never know how many end users ended up sharing that copy
+ that's true and there's no way to know that what happens is in a in a in an
+ HTTP request there are headers at the beginning of the request that contain a
+ bunch of different information like you know what the user's client is that's
+ where cookies are offered along with the request the the user's user agent but
+ one of the things an optional header that could be included says it's call
+ it's it's an X header it says X hyphen forwarded for and then an IP address so
+ that's where it's saying I am a proxy forwarding this request on behalf of this
+ other IP so then you'd get the IP of the proxy server and the IP of the actual
+ user behind the request in order to in order to see that that's what was going
+ on there there there's another header called via and so that says that this
+ is coming via you know this server so there are some headers that will expose
+ that this is going on to the destination server but over on the user side there's
+ no way for them to know well I'm gonna have to go send a note to our advertising
+ agency and say are you looking for these headers well now now there are some
+ other things that are going on that could be done in order to give you
+ reliable counts remember at one point actually early in this discussion I said
+ if the if the if the proxy has permission to cache the content so one way we know
+ we can avoid caching is by using SSL SSL used to be much more expensive sort of
+ in the old days of the net we would try not to use SSL because of the of the
+ overhead of establishing connections that was especially true back in in the
+ HTTP 1.0 days where you would establish a separate connection for every single
+ asset that you were downloading from the server so that so you're just
+ constantly establishing SSL connections that do have that crypto overhead at
+ establishment well that's one of the reasons that the the next generation
+ spec the HTTP 1.1 spec which is what virtually everyone is using today it
+ limits the total number of connections by default to two so that your browser
+ can establish two simultaneous connections to a server but now it will
+ stream multiple queries and and responses through those two connections so that
+ that dramatically lowers the per asset overhead of SSL because it creates the
+ connection once and then leaves it up until the browser finally says okay I'm
+ done with this server so it means that SSL is a far less overhead technology and
+ also our machines at both ends the servers and the the the the client users
+ machines are so much stronger now that SSL really doesn't represent an
+ impediment so that's one thing that could be done the other thing is that when the
+ server returns the request to the users client which may be intercepted by a
+ transparent proxy one of the headers in the response is an expiration header or
+ can be an expiration header and there are even cash prohibition headers it's
+ possible for the server to say this expires in and it it can express it as a
+ future time or a duration so basically and and and that's really what you'd
+ like you'd like the server to say these gif images that I'm serving excuse me
+ for the page have a lifetime of a day for example and so what that does is that
+ permits not only the the transparent cash that the the proxy cash that may or
+ may not be in line but that's something that the user's own browser pays
+ attention to this is that this is where you sometimes see a difference if you
+ refresh your page especially in at least for the IE if you hold a control key
+ down when you do a refresh sometimes you'll get a different page or a fresher
+ page what holding the control key down does is it says to IE do not use any
+ assets in your cash go get fresh copy so shift so what are you on Mac okay yeah
+ so so so the idea is that you know it's a benefit for users and for the server
+ because the server says here's a page and oh by the way all these little you
+ know page decoration things they're good for a day so as long as it hasn't been
+ a day since you last asked for it feel free to use it from your local cash and
+ that is your local browser cash and what that has the effect of is it it speeds
+ up the second and third and successive pages on the same site as long as that
+ the those pages are using the same assets your browser takes them from your own
+ machine locally similarly any transparent cash is basically obeying the same
+ rules it receives the assets and it will cash them for all of the users that might
+ be behind the proxy served by the same ISP as long as that thing hasn't expired
+ now the other thing that can be done for volatile content for example e-commerce
+ pages you would hope that they're all going to be done over SSL so they're not
+ going to have a problem but but you I've seen sites where where you're only secure
+ during the the the sensitive transaction evolving a credit card and then you're
+ no longer secure hopefully those pages are all marked as non-cashable there's a
+ header that says absolutely never cash this the other thing that can be done
+ and and sometimes it's done redundantly it's what I do on my own site is I show
+ an expiration in 1997 who would actually a commonly used date in in the past that
+ will also prevent anything from caching that content because it's like it's
+ pre expired it says you know this expired in 1997 well now it's 2006 and so you
+ know obviously that's no good so there are things that could be done to
+ prevent these things from being cashed but but but you're right Leo there's no
+ way to know if the content you're serving isn't pre expired or served so that it
+ cannot be cashed it can be cashed and probably is being cashed because it's
+ such a win for ISPs so I have to figure and I remember that at home kind of
+ pioneered this that's one of the earliest broadband ISPs that was one of the
+ things they were most proud of was this a cashed proxy servers and I bet you
+ that we're missing a lot of downloads from the big broadband ISPs because I'm
+ sure Cox Comcast Roadrunner they all do this yes I mean it it really is a win for
+ them yeah okay now what we've talked about so far has been transparent ISP
+ caching there's there's another type of proxy which is not transparent which is
+ something that the user many users are often in a in a corporate setting they
+ have to configure their browsers to use their their corporate proxy in order to
+ get access to the web that's that setting in the browser that you see
+ exactly and and here's an interesting tip once I went down to my office and I
+ think it was in the evening because Sue was having some problems with her
+ computer I fired up IE and waited for a long time I mean more than I'm used to
+ for it to get going and I thought huh wonder what's going on well I poked
+ around and I found that she had left IE set in its default case which is
+ automatically determine proxy settings it turns out that if you haven't
+ disabled that every time you launch IE you are hung for a while while IE looks
+ for either a DHCP or a DNS server that can point it to a file containing its
+ proxy settings so so for anyone listening who's an IE user you if you go
+ through the normal menu you go to and under the tools off the main IE menu to
+ internet options then choose the connections tab and then there at the
+ bottom is a LAN settings button you should normally unless you need to use a
+ proxy you should uncheck automatically determine the proxy settings if you do
+ that I'm not sure if if you have to restart IE or reboot probably at least
+ have to restart IE you'll be surprised how much faster Internet Explorer gets
+ going because what the way these proxy settings are determined automatically is
+ that Internet Explorer sends out a request to a DHCP server now we've talked
+ about DHCP frequently because that's that the the it's what's engaged when you
+ tell your system to obtain its IP settings well turns out the DHCP can
+ actually provide a much wider range of information if it's asked to so beyond
+ just my IP address my subnet mask and my gateway it's actually able to provide
+ additional information and in fact in this case a URL for a server that can
+ can give the browser a file telling it how to configure itself for for local
+ proxy use that's cool I like that it is cool now the bad news is first of all
+ this was all designed by Microsoft for IE in a in a 1999 draft you know an IETF an
+ Internet engineering task force draft it has never been ratified it was never
+ adopted it's expired I think it expired in 1999 I think it was actually older
+ than that it expired it was never renewed and of course here we are now in 2006 so
+ it never really took hold the problem is if if DHCP if no local DHCP server
+ responds Microsoft IE falls back to using DNS queries it it it uses your machine
+ name you know you within a corporate environment you might have like your
+ machine name or number then you know dot your division dot your branch dot your
+ company dot com for example and so what it does is it it looks for a specific DNS
+ entry and it it goes backwards down the line stripping off one dotted name at a
+ time until it gets all the way back down to your company dot com or or or
+ graduate or whatever well so obviously that takes time which is where all this
+ delay is coming from as we're waiting for IE to launch it always does that if
+ you have it set to obtain the proxy settings automatically the problem is
+ it it makes a mistake if you've got a more than a single name in your top level
+ domain you know it works fine for you know grc.com or you know uci.edu for
+ example it fails though with those URLs like co.uk it actually thinks that co
+ is your company name it ends I know it's such a crock it's so easy to figure
+ that one out and it ends up being a security problem because it makes a
+ request out onto the internet for I think I think it's a file called W it's
+ wpad.co.uk which because it thinks you're in you're at a company called co in the
+ top-level domain UK right and it turns out that that file I mean that machine
+ was created and it can give your browser bogus proxy settings causing it to
+ reroute all of its traffic there oh interesting Microsoft yeah so you think
+ they know a little bit about TLDs by now it's not that hard well it makes a
+ mistake now now I'm not sure that the latest versions haven't fixed this who
+ knows what's going on but it's definitely the case that anyone who
+ doesn't need to use a locally configured proxy server definitely wants to go in
+ and turn off that automatic proxy discovery technology it's bad in the
+ first place and it slows down every time you use Internet Explorer and fire it up
+ for the first time so so what this does essentially is it gives your browser a
+ URL and a port often it's it's like port 8080 that is used internally and all of
+ your browsers traffic is rerouted through your your company's local
+ proxy server now that has a number of different benefits you know which which
+ really can be useful and and and and enhance the experience for example it can
+ be doing caching it will often often be enforcing policies you might have your
+ corporate IT you know black listing a whole bunch of sites that they don't
+ want anyone going to so it allows them to perform filtering it also allows them
+ to to perform you know on the fly malware filtering so that you're not
+ going to be getting malicious scripts and and and code and things by by forcing
+ the browser to go through this locally configured proxy so it can be that this
+ stuff is being done transparently but more often in a corporate setting you'll
+ find that you know if you don't use their local proxy they've got port 80 blocked
+ at the at the corporate firewall so you're not able to get out and access a
+ server on port 80 you are forced to configure your browser to use your
+ employer's proxy which in the process of doing so means that all of your traffic
+ goes through their filter for you know whatever purposes and unfortunately it
+ does mean that you know there are privacy concerns right right right so what
+ should you do really you have no choice at that point you you could as and we
+ sort of talked about this you could use you know like a hamachi or go to my PC
+ or VPN title right you know in order to get out of the corporate shield and of
+ course you know then there's a problem if if your corporation is allowing that
+ that's controversial because then you are explicitly avoiding whatever you
+ know security policies they've put in place for the purpose of protecting
+ themselves right right so that's that you know that's of dubious value and you
+ know you could you could imagine people in the future are going to be you know
+ blocking these sorts of things because you know it does open holes through the
+ through the corporate security right right and finally there are other
+ proxies I mean just sort of in general there are for example compression
+ proxies which cell phones and PDAs are beginning to use more and more they will
+ connect through a proxy and its job is to reformat large pages to fit much
+ smaller screen sizes so there you're actually seeing you know content being
+ redesigned on the fly in order to in order to to fulfill some specific niche
+ need of of that proxy user and so I mean the the whole concept of a proxy is
+ something which is is in between you and your your remote connection and is
+ probably doing some sort of filtering function that there's even a very
+ popular local proxy that you actually run in your own machine called Proxamatron
+ Proxamatron oh yeah we've recommended that for years yeah I mean it's a it's a
+ terrific looking piece of software I've ever seen but it does get a job done
+ yes it is it's not it's extremely techy and not very user friendly but the idea
+ is it sets up a little local web server on your machine you configure your web
+ browser to use it as you know your own machine as the proxy server so you you
+ make your request to Proxamatron just like we were saying and it issues the
+ request from itself in your computer it comes back that allows it to impose
+ itself in between your browser and the outside world and perform whatever
+ filtering and you know anti spam anti advertising all the different things
+ that it's able to do on behalf of of of your system that raises an interesting
+ question what kind of performance hit do these proxy servers impose well now
+ that's a very good that's a very good point Leo so the certainly the the fancier
+ they are the more they're doing the the more performance penalty you're going to
+ have and and a simple caching server is very low overhead you know the the the
+ instance of a caching server on the ISP has as we've said due to the fact that
+ it will often have substantial amounts of content that are current in its cash
+ due to somebody else having recently gone to MSNBC or MSN or Amazon or eBay or
+ whatever I mean the the net benefit is a huge gain because you're not loading
+ down that remote server that the the destination server and you're getting
+ your content back on essentially what is a land you know your own ISP's land so
+ that's a big improvement that's a concept everything yes and and and also
+ like I'm a try might slow it down because yes and and also proxamatron is very
+ powerful in as much as it's using it's using regular expressions it's using
+ scripting it it's got typically lots of layers of things one of the one of the
+ things that I've talked about and just have never never gotten around to is is
+ this notion of a of GRC's net filter which would be a transparent filter to do
+ these sorts of things but of course I'd write it in assembly language and you
+ know I'd really efficient make it really efficient and way prettier and and more
+ user-friendly so it's on my on my list of things I hope to get around to one of
+ these days someday I know it's a long list folks it's a little growing list and
+ long and growing and lastly I'm going to reserve a an in-depth look at one
+ additional proxy system for its own entire episode because it's so cool many
+ people are interested in it and are talking about it and that's Tor the onion
+ router system lots of questions about Tor yes it it yeah it's really cool
+ technology I want to give it its own show because it deserves it and it's
+ basically it uses a chain of explicitly privacy enhancing proxies in a very
+ clever way using essentially nested encryption in a in a that create the
+ reason it's called an onion router is it's like layers of an onion right which
+ are wrapped and unwrapped and we've got all of the background from our from our
+ from our crypto series to understand the use its use of symmetric and asymmetric
+ crypto keys I mean it's just been beautifully designed so we're going to
+ talk about that here before long in a couple weeks good well we made this an
+ extra long episode because I slowed you down at the beginning but I'm glad we
+ talked a little bit about proxies I know people are very interested in that and
+ we've seen that that word around for a long time and there are all different
+ kinds of proxies some could be an advantage some could be a security issue
+ and it just depends on how it's being implemented I guess there actually have
+ been cases where proxies have by mistake they have cashed malicious pages wow and
+ so after the server was taken down the the the server's content had been
+ scattered all over the net in ISP transparent caching proxies which
+ continued to infect people systems well and in fact there have been search
+ engines that have been guilty of the same thing since since search engines
+ cache you know basically you know Google I don't mean to single out Google because
+ all search engines do this but or they the ones that are doing caching do they
+ will keep copies of pages they don't know that it's a malicious page but they'll
+ keep it in their local cash and if you ask they'll they'll you know surf it to
+ you it's there yep yeah although I would imagine certainly in this day and age
+ that Google would spend some effort trying to sanitize that stuff well of
+ course as we know Google it Google is now explicitly using a list of known
+ malicious pages and warning people if they click on a link I actually got that
+ warning a couple days ago when I was when I was poking around really um yeah
+ it'll it'll say this is a potentially malicious page are you sure you want to
+ view it oh that's really interesting really a cool service that's a good idea
+ all right Steve Arino I appreciate your time as always we remind people that
+ spin right is the ultimate disk recovery and maintenance utility and available
+ from Steve's site at grc.com we also thank the folks at Dell for providing the
+ support for this podcast they've been a great sponsor for the last couple of
+ months and every week we add new pics to the Leo's pics page at twit.tv/dell if
+ you're getting ready for Vista you're ready to buy a new computer you just
+ like to see what's out there in terms of laptops and desktops we've got laptops
+ and desktops and other things all on the page and we'd appreciate it if even
+ if you don't buy those items if you click through there we get credit for
+ anything else you do buy at twit.tv/dell thanks to Dell for their support
+ Steve Gibson I think we've wrapped up another thrilling gripping episode of
+ security now we're gonna call it security and hard drive maintenance now
+ new name for the show I'm so I apologize for bringing that stuff up I just you
+ know when I get when I can have you to ask questions it really is a valuable
+ opportunity for me and I know people are interested in these subjects so yeah I've
+ actually had people want to spend more time talking about spin right which I
+ mean I I want to keep it in people's mind even just just how drives work would be
+ of interest that's not security but you you know so much I'm sure in order to
+ write spin right you had to really learn the details of drive operation right
+ down it's nitty gritty it's my life is it you know is it it sounds like it's
+ changed a little bit since when you first started writing spin right oh yeah I
+ mean remember that that you know the the original catalyst for spin right was
+ interleave optimization oh yes I remember that you said the interleave size when
+ you first formatted a drive oh those dark days are gone thank good the the
+ original concept was to do a non-destructive low-level reform matter
+ no one no one had ever heard of it and in fact when when Peter Norton invited me
+ up to Santa Monica because he wanted to buy spin right from me he said you know
+ Steve you know of course he was famous for the Norton utilities right and and
+ yeah their own reviews their their surveys of what their customer want
+ their their customers of the Norton utilities wanted they said they wanted
+ spin right and so he had me up for lunch to you know what's it gonna cost to buy
+ spin right from you and of course not selling it to Peter was the best
+ decision I ever made in my life I mean literally but that's true why is that oh
+ because you know it that was that was in the early days of spin right and I I've
+ been you know basically thriving from spin right and spin right's been thriving
+ from me you know for all these years if I had sold it to them I wouldn't I
+ wouldn't have it but then neither would they actually they ended up cloning it
+ and I'm being polite because I know this is not Peter's fault but we found our
+ code in their version which they called calibrate after I declined to sell it
+ I remember calibrate yeah calibrate but it ended up we ended up winning from that
+ too because since they hadn't really written it they couldn't support it and
+ so their customers would call and their own support people ended up saying well
+ why don't you just get a copy of spin right that's what we stole it from
+ anyway so we ended up getting referrals from them oh that's but but but but Peter
+ said he said you know Steve when I heard that you were doing a non-destructive
+ low-level reformat he said I just shook my head and kept waiting to see a mushroom
+ cloud coming up from from you know south of me in Southern California he said
+ you know how could you possibly do that safely and I said well that's you know
+ that's my magic so of course the mushroom cloud eventually came from the
+ other side of the valley but that's another story entirely for another day
+ Steve gives in a pleasure as always GRC.com for show notes the 16 kilobit
+ versions and of course Elaine's great transcripts grc.com and we will see you
+ next Thursday and maybe we'll talk about mojo pack and the like yeah you know
+ equivalent software and next Thursday on security now thanks Steve take care

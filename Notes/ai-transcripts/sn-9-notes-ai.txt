@@ -1,0 +1,721 @@
+ (upbeat music)
+ This is "Security Now" with Steve Gibson,
+ episode nine for October 13th, 2005, root kits.
+ (upbeat music)
+ - Steve Gibson is here, we are in Toronto,
+ preparing to record another episode two
+ or two or three or four of our help,
+ and today we're gonna talk about root kits.
+ What is a root kit?
+ - You know, in prior episodes of "Security Now,"
+ we've used the term, we've sort of bumped into them
+ tangentially, and I thought we ought to just, you know,
+ take some time and really explain what that is
+ because it's no longer just a theoretical problem,
+ it's really becoming something that end users
+ need to be aware of.
+ - That's not good.
+ - The term root is the original term used
+ for like the maximum privilege to count on a Unix machine.
+ Unix, of course, beat Windows to the internet
+ by, I don't know, a decade or so.
+ You know, it was the foundation of the internet,
+ and so when hackers wanted to get into
+ and compromise a Unix machine,
+ because Unix administrators are typically very savvy,
+ you know, they're not mom and dad,
+ they're like, I mean, they knew what was going on.
+ They couldn't just install files and run processes
+ 'cause they would be spotted immediately.
+ So they realized they had to go stealth.
+ So root kit technology refers to,
+ it's a stealthing approach.
+ Anything that stealths a process, or files,
+ or in the case of Windows, registry entries,
+ basically, and even the appearance of the process
+ in a list of processes.
+ So that stuff can be loaded on your hard drive
+ and running in the system,
+ and no matter what you do, you can't see it.
+ - It's undetectable.
+ - It's virtually undetectable.
+ We'll talk here before we're done
+ about new approaches that will detect root kits,
+ but unless you take extraordinary measures,
+ you can't see them.
+ - It seems like that's a pretty big flaw
+ in an operating system that a process
+ should be able to do that.
+ I mean, can't they just say nobody's allowed to be this?
+ - You know, the problem is no OS we have
+ was designed from the beginning with a summing mistrust.
+ One of the other things we're gonna talk about in the future
+ is the fundamental problem with security
+ being assuming trust and dealing with problems
+ rather than assuming mistrust and then explicitly allowing.
+ And our whole security model is upside down.
+ - That's too bad, I mean, it'd be nice to say everybody's
+ beneficial, nobody's being mean,
+ but in fact, we know now that no matter what you're designing,
+ somebody's gonna try to attack.
+ - Well, and imagine having a system
+ that is fundamentally hardened against attack
+ instead of all of our systems
+ being fundamentally open to attack.
+ - And patched, even Unix though,
+ originally was not designed to be secure.
+ - Well, it had the idea of like the root was the way
+ you had, you know, God-like powers over the system.
+ And then you were supposed to have normal users
+ that couldn't mess around with the operating system.
+ - And then from the beginning,
+ Unix had permissions and access control and things like that.
+ - Well, and so did Windows actually.
+ I mean, you know, the original NT was a secure
+ operating system that had the ability to--
+ - NT, but never Windows 95, 3, 1.
+ - Very good 98, but it was inherently insecure.
+ And in fact, I think that's part of the problem XP has
+ is that in order to maintain compatibility
+ with older 98 programs, they can't really have
+ secure policies, they have to allow programs
+ to do things they shouldn't.
+ - Exactly. - Yeah, yeah.
+ - So who's using root kits now besides
+ mean little hacker kits?
+ - Well, what's happened is in this ongoing escalation
+ of spyware and anti-spyware,
+ as people are becoming more aware of spyware.
+ And for example, the anti-virus companies
+ are now beginning to scan for malware.
+ And of course, we've talked about spyware itself,
+ adaware and spybot search and destroy.
+ There are now spyware scanners that attempt
+ to find this stuff on your system.
+ So what's happening is this root kit technology
+ has come down from on high.
+ And it's well known now, there are sites
+ like rootkits.com on the internet
+ that have the source code for this stuff.
+ - Rootkits are us.
+ - And remember, frackmagazine, frack.org, P-H-R-A-C-K,
+ they have a magazine that has published every song
+ I think they're like up to issue 63 over the last thing.
+ - Yeah, well they did shut down finally,
+ but the last issue is out.
+ And it's full of source code showing how you can do this.
+ So what's happening is the spyware
+ and commercialware and other sorts of malware
+ are now incorporating this root kit technology
+ to go stealth once they load themselves on your system,
+ they disappear.
+ - When you say disappear, you mean,
+ if I hit control, I'll delete,
+ I don't see them in a list of processes.
+ If I'm running an intrusion detection system,
+ I can't see them there, the antivirus
+ and the firewall don't see them.
+ They're totally invisible.
+ - It's freaky.
+ I mean, when you play with this stuff,
+ it gives you a sort of a chill
+ because you know it's on the hard drive
+ and you know where it is.
+ You do a directory listing and it does a show.
+ Now, we have a hidden files, for example,
+ where you're able to set the attributes to a file
+ to hidden or archive or read only at that level.
+ But this is a level where you can't unhide these files.
+ Your operating system will not show them.
+ - How do they do that?
+ - What happens is they essentially modify
+ the way the OS itself works.
+ They're compromising the operating system kernel.
+ You know, in operating system terminology,
+ we have the notion of a kernel which is the OS core
+ and then you've got applications which run
+ as sort of clients of that operating system.
+ So a program you're running, you know,
+ CorelDRAW or Outlook or whatever,
+ that's a client of the operating system.
+ Well, so are the spyware scanners.
+ So when you're running even a spyware scanner,
+ it's saying to the operating system, in fact,
+ for example, there are two API calls
+ that's find first file and find next file.
+ So if you ever wanna like do a directory listing,
+ you'll say find first file star dot star
+ and then it gives you the first file
+ and then you successfully call find next,
+ find next, find next until it returns no more files.
+ That's all there is to it.
+ So anything that's scanning your system
+ is basically doing that.
+ Well, imagine if something altered the way
+ the find first and find next operated
+ so that it was intercepting the response back to you
+ out of the operating system, back to any application
+ that was asking so that if it was about to report
+ one of its own files, it would call,
+ you would say whoops, and call find next again
+ on your behalf skipping over that file.
+ Suddenly, any program running on the operating system
+ will not see any of those stealth root-kitted files.
+ They just disappear.
+ - Do they have to kind of rewrite the operating system kernel?
+ They replace the kernel to do this?
+ - Actually no, it turns out that the way the OS
+ is linked together, there is a table of jumps
+ at the end of every program,
+ which is called the IAT, the interrupt.
+ - Access.
+ - Access table, yeah, and so all calls vector through that.
+ Look up the address in the operating system
+ and then go off to there.
+ All you have to do is change that address
+ to your own code, and so the call goes to you
+ instead of the operating system,
+ and then from there it goes down into the operating system.
+ So I mean-
+ - I say why they make that so easy,
+ but there are legitimate reasons
+ why you want to have an IAC.
+ - Yeah.
+ - I've done that myself.
+ On my own code, I want to make sure
+ that I don't overwrite memory.
+ So I've intercepted the memory allocation
+ and freeing of my own software
+ so that I put guard bands in front-hand after
+ blocks that I allocate, and whenever I allocate memory,
+ I fill them with a pattern, and whenever I deallocate,
+ I make sure that that pattern is still present.
+ So it's very cool.
+ For me, I was able to add a feature to the operating system
+ that it didn't have for my own software by doing this.
+ Well, imagine that something else comes along
+ and starts adding malicious features
+ to the operating system.
+ It's completely transparent to my software
+ that I'm checking my own memory allocation.
+ Similarly, it would be completely transparent
+ to some other software that something is altering
+ what the operating system is doing.
+ - Can't a tool, a security tool, look at that jump table
+ and make sure that it's intact,
+ or somehow maybe write its own directory scanning routines.
+ Somehow avoid this.
+ - The problem is that any tool like that
+ is using the operating system even to do that.
+ - They just have to prevent me from doing that.
+ - Once trust is broken, it's broken.
+ So once something gets into your system,
+ you don't know what it's doing
+ and what happened?
+ - And you may not even know it's there
+ 'cause there's no way of finding out.
+ - Well, that's because you have to use the operating system.
+ - Exactly, that's the biggest problem.
+ The only thing that you would see
+ would be like behavior that would give it away.
+ For example, there's no way it can keep the lights
+ from blinking on your router when it's sending data out.
+ And there's no way that, for example,
+ if you had another computer sniffing the traffic
+ that it could hide that.
+ Now, the problem is it could encrypt it
+ so you wouldn't know what it was.
+ And Windows is so busy talking to the world now.
+ It's all any new updates today.
+ What's going on?
+ I mean, who knows what's going on with it most of the time.
+ - Is it possible to write a secure operating system?
+ - Absolutely, theoretically possible.
+ The problem is that it's that the way OS is developed,
+ they developed in an environment,
+ sort of of academia in the case of Unix.
+ It's, you know, remember that these were $100,000 systems.
+ Nobody was gonna be carrying one in their pocket.
+ They weren't gonna go, you know, down to Radio Shack
+ and take one home.
+ - They weren't USB keys, they weren't, I mean, yeah.
+ - Yeah, people literally wore white coats.
+ - Yeah, it's going there.
+ - And they had to go or jack it
+ because they were in air-conditioned elevator floors.
+ I mean, so there was no awareness or presumption
+ that you'd have 13-year-old script keys
+ that were talking about this at lunch in high school
+ and coming home and trying to outcoat each other
+ to see who could hack their Christmas present
+ from the year before.
+ - It's pretty widely known, then,
+ that the kids are out there, they know about root kits.
+ They know how to write them, they know how to use them.
+ - Actually, it's now, they brag about getting root on this
+ and getting root on that.
+ That's the term for compromising
+ and getting full God-like power on someone else's machine.
+ - I guess, you know, the fact that you can figure this stuff
+ out in Windows shows that some people are pretty determined.
+ I guess it's not so hard at all
+ with an open source operating system.
+ I mean, Linux would be fairly easy to find as well.
+ - Actually, that's one place you could argue
+ and security people do that full disclosure is a problem.
+ There are several techniques that we'll talk about here
+ in a minute that are successful in finding current root kit
+ technology because they take advantage
+ of still undocumented stuff in Windows.
+ Now, we know it's only a matter of time
+ until that information gets loose.
+ So you might say, well, using that gives you a false sense
+ of security, but we know that the higher the fences,
+ the fewer people are gonna take the trouble
+ or they have the ability to climb over it.
+ That's the old saying security through obscurity.
+ I mean, it's certainly nothing you'd wanna rely on.
+ It's not a bad thing to have,
+ but so you're saying that open source operating systems
+ are perhaps more hackable at least in this way.
+ - I would say they are more hackable
+ because they are fully known.
+ And now people who wanna argue against that
+ and I could take that position too.
+ It's like, well, obscurity's bad, full disclosure's good.
+ - At least you're gonna write something secure
+ from this get-go.
+ - Well, the other thing you're gonna do is
+ you're gonna assume the hacker has the same information
+ you do and that's really what you want.
+ - You can't count them being not ignorant in the dark.
+ - Exactly.
+ - Who is using root kits?
+ - That's the real problem.
+ And that's why it's worth us talking about this
+ for our regular, you know, interested PC user.
+ Is it root kit technology has found its way
+ into downloadable spyware and malware
+ that is part of freeware,
+ that is part of file sharing systems
+ that is stuff you could have it on your system right now.
+ - There's no way of knowing it.
+ - You would not know.
+ And none of the anti-spyware technology at-aware
+ or spybot search and destroy,
+ those tools are not yet doing anti-root kit scanning.
+ Now, Microsoft's own malicious software removal tool
+ has just started doing that
+ because the research group in Microsoft,
+ remember that we, in fact, our very first podcast,
+ we talked about the Strider Honey Monkeys.
+ There is a Strider Ghostbuster project.
+ The idea is that Microsoft uses the term ghosting
+ as disappearing from all detection in the system.
+ So they have a ghostbuster as their technology
+ which they're working on to begin to deal with this.
+ But getting back to your question,
+ spyware is now incorporating this really hard to detect
+ and remove technology.
+ - You don't want to name any names?
+ - I know that cool web search is doing it.
+ - Really?
+ - Yes.
+ - I mean, there's no business model
+ that involves hacking your customers' computers
+ or is there?
+ - Anybody who knows about cool web search
+ and who has gotten their system in--
+ - Nasty.
+ - It's nasty.
+ You've gotten affected with it over and over and over.
+ I mean, it is absolutely detected by any anti-spyware tool
+ because it's so prevalent.
+ - You're making yourself an enemy.
+ - Yes, yes.
+ So it's got to be that the people who do cool web search
+ have just decided, look, we know the world hates us.
+ We're just going to try to get in there anyway.
+ We're going to give them this cool web search
+ whether they want it or not
+ and not going to let them take it out.
+ - And we're going to use root kit technology.
+ - And we're going to use root kit technology
+ to prevent ourself from being removed.
+ - You give me some hope though.
+ If Microsoft can come up with a way to detect these root kits,
+ they're not completely undetectable.
+ - Well, there are two approaches in general.
+ There is in-system detection and out-of-system detection.
+ The fundamental problem with in-system detection,
+ meaning that you're running your detector
+ on the system that you're trying to test.
+ The fundamental problem is you know nothing about
+ an infected system.
+ - It's been compromised.
+ You can't trust anything it tells you.
+ - Exactly.
+ Once compromised, anything could have been done.
+ You no longer can trust any operating system call.
+ For example, there is one root kit called the FU root kit
+ which removes itself from the list of processes.
+ There is a, I mean, down in the kernel,
+ internal kernel data structures,
+ down in unprotected kernel memory,
+ there's a list of everything running.
+ That's what task manager shows you,
+ that's what T-list shows you.
+ That's what everything uses.
+ Well, it's literally, it's what's called a linked list.
+ It's a series of entries, each one pointing to the next.
+ This thing takes the one, the entry pointing to it
+ and points it to the one it's pointing to,
+ meaning that it unlinks itself from the list.
+ Well, that's a bad thing to do
+ because now you can't get rid of it,
+ but that's what it wants.
+ It wants to be unbelievable to disappear from any listing.
+ It's still running, it's got threads,
+ it's able to do stuff, but it's sort of just disappeared
+ from the operating system.
+ - So how does Microsoft get rid of these things?
+ - Well.
+ - You said there's internal you can't trust.
+ So is there an external way to monitor this?
+ - Well, they're the fundamental problems
+ of internal and external.
+ Now, the guys at cisinternals.com
+ and we're gonna have a bunch of links
+ for people to download this stuff,
+ both on your show notes and on mine.
+ There is a root kit revealer,
+ it's called at cisinternals.
+ And they've done something that is very clever
+ and actually they say it's patent pending technology,
+ but it's exactly what Microsoft is doing
+ with their Ghostbusters.
+ So I'm not sure who got there first.
+ The cisinternals guys,
+ they know the FAT file system
+ and the NTFS file system backwards and forwards.
+ What they have done is they've built
+ a little file system technology,
+ basically a little mini OS of their own,
+ which you, and it's free.
+ This root kit revealer is free
+ and I hope everybody who's listening to this
+ is, well, we'll grab it.
+ You just wanna run it on your system.
+ It will probably find nothing,
+ but if it finds something,
+ that's gonna get your attention.
+ The idea is that any root kit
+ is all about hiding itself.
+ So what this thing does is this scans the operating system
+ from the normal API and it also,
+ because it knows how the FAT file system works
+ and the NTFS file system works,
+ it also scans it itself
+ down at the lowest level physical disk access level.
+ So it's doing a scan of what the OS is telling you
+ and it's basically it's its own little operating system
+ scanning individual file, individual hard disk sectors
+ interpreting the master file table,
+ interpreting the file allocation table
+ and all of the file and directory entries.
+ So, and what it does is it compares them
+ because if there's no root kit installed,
+ and that is then the operating system,
+ then you're asking it, it'll match exactly.
+ - So any discrepancy means that there's a file on there
+ that's not being exposed to the operating system.
+ - Exactly, and what's so cool about this
+ is it's universal.
+ Now, hiding yourself is a bad thing to do
+ because it exposes you, any change you make
+ to the operating system in terms of files, it will find.
+ - And pretty much anything has to at least do that,
+ has to save itself somewhere.
+ - And many things, the other stealthing technology
+ is to stick yourself in the registry.
+ The question is, how is this thing going to get started
+ when you reboot?
+ These root kits want to survive a reboot.
+ So they've got to stick themselves in all,
+ and we know Windows is all full of these, you know,
+ run once, run service, run, DLL, Appenit,
+ there's all kinds of ways these things can start.
+ Well, there's a comprehensive list of them.
+ They're in the registry.
+ So a root kit has to have logged itself
+ into the registry in order to get itself started at boot.
+ So the other thing the cis internal skies have done,
+ they absolutely know what's called the hive structure.
+ The hive is the on disk storage for the registry.
+ So similarly, they do a registry scan
+ of all the known ways that anything could start itself
+ in the operating system.
+ Then they read the raw hive file and parse it
+ in order to compare it with what the registry scan showed.
+ And again, anything, any discrepancy,
+ there should never be a discrepancy.
+ Any discrepancy says something is starting up
+ and is taking extreme measures to hide itself from us.
+ So this cis internal stuff doesn't use kernel calls at all.
+ It never uses the operating system call at all
+ for its own internal look.
+ Well, it uses the operating system call
+ like any application would.
+ And then a low physical--
+ And that couldn't be changed by a root kit.
+ Well, that's the problem.
+ That's the problem is, OK, in order to do that,
+ the root kit would have to intercept
+ the lowest level hard disk call and be smart enough
+ to edit individual hard disk sectors.
+ That's pretty hard to do.
+ That's the point.
+ This really--
+ You never know exactly what sector you're on.
+ This really raises the bar.
+ The root kit would then have to also
+ have a full little operating system in it
+ in order to be able to lie about the contents
+ of physical sectors.
+ So it is way harder.
+ And at this point, the free to download from cis internals
+ is called root kit revealer.
+ People could just Google it if they want to.
+ Do it tonight.
+ Yes.
+ You're running right out there.
+ It finds every known root kit because no root kits are yet
+ smart enough, I mean, capable enough to fool in.
+ But get this, this is really cool.
+ What root kits did start doing is when--
+ They don't look for root kit revealers, what they do.
+ --and not lie to it.
+ Tell it the truth.
+ Yes.
+ Isn't that neat?
+ So there's no discrepancy.
+ Right.
+ So I just love that.
+ So what happened was, after root kit revealer came out,
+ the malware said, oh, shoot, this is root kit revealer
+ making the call.
+ Let's tell it the truth.
+ Show it our files because root kit revealer doesn't know
+ about specific root kits.
+ It's looking for a lie.
+ And so the malware stopped lying to root kit revealer.
+ I love that.
+ So what they did was, now it makes up a random name
+ for itself and runs as a Windows server.
+ Essentially root kit revealer is a root kit.
+ It's got root kit technology.
+ Yes, because it's accessing the physical hard drive.
+ Right.
+ It has to act like a root kit to find a root kit.
+ But we trust this internals.
+ Oh, well, those guys are tremendous, yes.
+ OK, so we're still locked in a cat and mouse battle
+ with the root kit technology.
+ The root kit revealer free from this internals
+ finds 100% of the current root kits that are known to exist.
+ And because it does it by knowing exactly how the fat
+ and NTFS work, in order to trick it,
+ you would have to literally be able to edit physical sectors
+ on the fly, not creating any breaks.
+ And I mean, you--
+ Pretty hard to do.
+ It's a serious piece of work.
+ I mean, some of it may well end up doing it.
+ I wouldn't put it past these guys.
+ It's what's going to have to be done
+ if they're going to want to fool the root kit revealer.
+ Very interesting.
+ Now, Microsoft's approach or any approach--
+ and the guys at this internals understand this.
+ They talk about this is a limitation.
+ And the only way to really do this
+ is being outside the system.
+ So the way this works and the links
+ we have to the Microsoft Research Ghost Buster Project,
+ people will be able to read some white papers
+ to give more information about that.
+ The idea is, you, in the system,
+ you enumerate all the files, all the registry keys,
+ and so forth, and basically take a snapshot.
+ Then you boot the Win PE from a CD.
+ Basically, you boot windows from a read-only medium.
+ And now you look at the hard drive.
+ And again, look at everything that the hard drive has.
+ You parse the registry hive.
+ You figure out what's going on, and you compare the two.
+ So you take a snapshot that may have lies in it.
+ And then from outside the system, from a CD boot,
+ you look back at the hard drive.
+ While that operating system is not running at all,
+ and do a comparison.
+ Similarly, the root kit isn't running
+ because the operating system hasn't booted up.
+ You're running from a clean system.
+ Well, yeah, the root kit exists only on hard disk as some files.
+ And there's no way for it to hide itself
+ because it's sitting there trying to run next time you boot.
+ So Microsoft recognizes that, of course, this is not easy.
+ I mean, you would have to shut down your system.
+ Also, there's all that pesky licensing problems with windows.
+ I mean, it's an advantage of Linux or an open source system
+ because people can have as many copies of the operating system
+ as they want to.
+ Here, over on the window side, do you
+ have a problem of licensing a bootable copy of windows?
+ But ultimately, the only way to know, absolutely for sure,
+ if root kits ever get smart enough to bypass root kit
+ revealer, is by booting a static system
+ and then comparing a sort of an in-system and an out-system
+ snapshot in order to find the differences.
+ Is Microsoft offering a product like that yet?
+ Or is it an internal right now?
+ They know at the research level that's what they have to do.
+ Now, there are some problems.
+ Because I could see-- and neither way,
+ they have a lot of IT administrators who listen to this podcast
+ because they, of course, have to fight this fight for real
+ every single day.
+ And I could see an IT--
+ Ooh, speaking of which--
+ I'm not starting to interrupt, but I
+ wanted to make sure the IT guys know
+ that cis internals allows the root kit revealer
+ to be run on remote systems using that PS
+ exact utility they have.
+ As long as you have access to the system,
+ you're able to launch it remotely.
+ So we can get your whole network.
+ Yes, and eventually it would be worth buying an extra copy
+ of Windows and a CD for doing this
+ if you had a large installation.
+ It's the individual user that's going to be a little hard
+ pressed to figure out a way to do this.
+ So root kits are out there.
+ They're well known.
+ It's the technology that they use is well known.
+ And not much we can do to fight that.
+ But there are at least tools that we
+ can use to try to discover them.
+ Can you prevent infection?
+ Well, there we come.
+ There we come.
+ There we come.
+ And other spyware and resources.
+ There we come to the issue of hardening
+ the OS.
+ And right now we have extremely soft operating systems.
+ I mean, the traditional wisdom is don't run as administrator
+ because a non-admin account, you know,
+ like the guest account or a lower privileged account
+ under Windows or even, you know, any of the open source OS's.
+ The I, presumably, you have lesser privileges.
+ The problem is all kinds of things break.
+ And much software requires admin privileges
+ in order to install it.
+ Mostly on Windows.
+ And that's because of the erredity or the legacy,
+ I should say, of Windows 3, 1, and 9, 5, 9.
+ Well, and for example, root kit revealer
+ needs admin access.
+ But that's appropriate.
+ I mean, if you're going to install software,
+ you should be an admin.
+ Yes.
+ If you're going to run root kit revealer,
+ you should be the admin.
+ Yeah.
+ What I see Microsoft doing-- and I think
+ Longhorn, now called Vista, has some of this.
+ They're working to make it more feasible to run the system
+ as a non-privileged user.
+ So you're able to get elevated privileges briefly
+ in order to run an install of some software.
+ But you never yourself have to log on as that privileged user.
+ Every Unix book I've ever read, every manual, every program,
+ every Unix, sys admin has always said, never run as root.
+ This is one of many reasons why you never want to run as root.
+ You never see that in Microsoft's documentation.
+ No one is administrator.
+ It comes.
+ I mean, it comes with full privilege.
+ Who would ever-- mom and dad would never
+ know that they have to lower their privilege.
+ Because Microsoft knows too many things break.
+ You can't do that.
+ I set up my mom on Windows 2000 as a limited user.
+ And yeah, she would call me saying,
+ I want to-- you cannot take any virus.
+ You can't take it on any virus.
+ And it seems like that should be, at least,
+ that you should be able to run that.
+ But anyway, but that's better than she never
+ got any spyware and never got a virus.
+ Because she was never running with high enough privileges.
+ You can't install software.
+ You can't install any more virus.
+ That probably needs to surf the web and to check email.
+ And so you really want her to have a safe system.
+ And so she's not being a power user.
+ She's not going to hit that barrier of needing admin.
+ And at home, my family all runs there on Macs,
+ but the all-room is limited users.
+ It's a little easier on OS 10 to run as a limited user long term.
+ It's really hard on Windows, unfortunately.
+ Well, anything else to say about root kits?
+ We covered the topic.
+ Just run decision-turnals right now.
+ Go to decision-turnals, root kit revealer.
+ Also, just for the sake of completeness,
+ people will see these links on both of our pages.
+ fsecure.com also has in beta now, something
+ called Blacklight, which is the same kind of thing.
+ It is a root kit revealing root kit finding tool.
+ So the good news is, again, it's a cabin mouse game.
+ The spyware has up the ante, elevated the stakes,
+ is using more technology to hide.
+ So we're beginning to see the white hat guys are responding.
+ Unfortunately, we're reacting instead of being proactive.
+ The only question I have is, if you detect a root kit,
+ how do you remove it?
+ That'll be a topic for another security now.
+ I mean, yes, I would say if you detect a root kit,
+ you'll have to figure out what it is.
+ Then you can Google and find instructions for it.
+ If no normal tool can see it, it's
+ going to be darn hard to remove it.
+ Well, that's exactly the problem.
+ So that's where you really do need
+ to be able to have a multi-boot configuration, where, again,
+ you boot off a CD or take your drive
+ and make it the D drive of another machine,
+ then it won't be running, and you can go and delete those files.
+ No, no, because it's still the OS.
+ Steve Gibson, you've terrified us all,
+ but I think it was an important thing to talk about.
+ Yeah, that root kit revealer.
+ I'm-- we'll be showing it on call for help, in fact.
+ It's just a very cool tool.
+ Let's see how many of our machines
+ at call for help are caught on what I can't really say.
+ Thank you, Steve Gibson, and thanks, of course,
+ to our friends at AOL Radio for providing us
+ for the bandwidth for this podcast.
+ AOL, music.com, and of course, you
+ can tune in to their podcast channel on AOL Radio.
+ And here's security now, along with some other fine podcasts.
+ We'll see you next time.
+ Have a good trip back.
+ Yep.
+ Thanks.
+ Thanks.
+ [MUSIC PLAYING]

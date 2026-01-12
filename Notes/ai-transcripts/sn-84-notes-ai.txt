@@ -1,0 +1,973 @@
+ This is Twitch.
+ Bandwidth for Security Now is provided by AOL Radio at aol.com/podcasting.
+ This is Security Now is Steve Gibson, Episode 84 from March 22nd, 2007.
+ Your questions, Steve's answers.
+ Security Now is brought to you by Astaro, makers of the Astaro Security Gateway on the
+ web at www.astaroh.com.
+ And by Nerds on Site, looking to grow your IT service business, find out how Nerds on
+ Site can help visit "I Wanna Be a Nerd" dot com.
+ It's time for Security Now and because it's Episode 84, that's good news.
+ That means it's one of our divisible by four episodes.
+ Every fourth episode we like to answer your questions, Steve has a parcel of them.
+ Hello, Steve Gibson.
+ Hey, Leo, great to be back with you.
+ It's nice to have you.
+ You've been great, by the way, and I don't know if people know this, but Steve has been
+ doing a regular segment on my radio show as well.
+ But it's just been great.
+ It's going over very well.
+ It's a mini security now because it's only six minutes, but still, I think it's getting
+ the word out to a wider audience, and that's the kind of important.
+ Yeah, it's really cool, too, because you've got a whole different geographical spread.
+ You're on XM channel 152, I think it is.
+ That's really neat.
+ I'm really happy about that.
+ All six hours of the show every weekend.
+ Did you happen to mention GRC and Shields up maybe early in the show on Saturday?
+ Yes, you know, could well be.
+ I don't know.
+ I don't remember.
+ Why'd you get it?
+ Something happened on the server.
+ It's like, whoa, it's like in the old days of tech TV, whenever you mentioned GRC, I just
+ want to hold on to the edge of the desk.
+ Oh, I'm glad to hear that.
+ If it was during Showtime, that's probably what it was.
+ I don't know what else.
+ Anyway, yeah, because we're now in all over the country in 13 or 14 markets, we just got
+ Washington DC.
+ I mean, it's growing very rapidly, so it's a big audience, and it's, yeah, I'm really
+ happy about it.
+ I'm happy to use it to expose people to some of the Twitter, you know, the best Twitter
+ folks like you and Amber, and that's really, that's a neat opportunity to do partolo does
+ it.
+ But let's get to work.
+ Oh, before we do, hey, some happy news.
+ Last episode, we said goodbye to nerds on site.
+ They had only bought a three-week schedule.
+ We think they're a great company, and we were really glad that they came on the show,
+ and I think for a smaller company, I understand it's a big commitment, so we were happy to
+ give them a three-week schedule.
+ We don't normally do that.
+ But they've had such success with their results with their ads that they're back now for three
+ more months.
+ So thrilled.
+ That's very cool.
+ It just confirms what we know, of course, which is that people who listen to this podcast
+ are very active and pay attention, and the people who sponsor it get the results because,
+ you know, it's a good audience.
+ So let me just mention, we're sponsored once again, not only by a star, who is, of course,
+ still with us, and we'll be through the rest of the year, but by other good folks at nerds
+ on site, I want to be a nerd.com.
+ Maybe you can explain what they are because I'm not exactly sure, Steve.
+ It sounds like it's kind of a guild of tech support, IT people.
+ Yeah, I think the word is federation.
+ They're like a federation of individual consultants who have this organization that sort of provides
+ them with an umbrella identity, they get to all, I don't know, anything about the contractual
+ details.
+ But you get to keep your own business, you're still doing your own thing.
+ Exactly.
+ But certainly there's some sort of, you know, fielding of leads and, you know, they hold
+ educational seminars.
+ They have, they have, they have get-togethers where they all pull together.
+ You know, I've done a deal with them that allows the nerds to use Spinrite to help their own
+ customers, so it was like a special expanded site license kind of deal.
+ Yeah.
+ I mean, I just, I just think that they're, you know, I mean, I know for a fact that there
+ is a tremendous need for this kind of business.
+ And certainly the quality of the people you get to have come out and help you matters
+ a lot.
+ I've, frankly, I've not heard great things about that geek squad group that seem to be
+ doing that.
+ People talk about long lead times and then not really great performance.
+ This is not them.
+ I don't get confused.
+ This is nerds on site.
+ They're on, one of the other things I love about it.
+ It's very, most podcast advertisers are very nationalistic.
+ They buy the ad for, mostly for the U.S. market.
+ But nerds on sites in Canada, U.S., Mexico, England, Australia, South Africa, and Bolivia.
+ So-
+ Wait, wait, wait.
+ And India.
+ I just happened to know this.
+ Wow.
+ So we, and that's where, we're there too.
+ So that's one of the reasons podcasting is so good for them.
+ Anyway, we thank them for their support.
+ If you are a nerd, you're in business for yourself, but you don't want to be in business
+ by yourself, focus on your passion, not the burdens of running a business with the help
+ of nerds on site.
+ No matter what you do, PC to Mac, Cisco to Oracle, fix it, website design, programmers,
+ product managers, project managers, sales, trainers, security experts, antivirus gurus,
+ and more.
+ They especially like those nerds who troubleshoot, tear apart and rebuild their own systems
+ in their spare time.
+ I want to be a nerd.com register for a nerds only meeting in your area today.
+ I want to be a nerd.com.
+ We should make a little jingle for them.
+ I want to be a nerd.com.
+ Yeah.
+ So let's say, let's get, because we have a bunch of great questions.
+ I just love the questions that we get.
+ Yep.
+ Yep.
+ We have no errata this week, well, actually there was some, but I sort of incorporated
+ them into the Q&A because the errata were people making notes or comments and things.
+ So we'll, we'll deal with that in the Q&A.
+ I did want to share one fun spin right anecdote that put a smile on my face.
+ This is from someone named Harim, it looks like hack, H-A-Q-U-E.
+ He says, the subject of his, of his email was thanks for making spin right.
+ He said, my name is Harim Hack and I am a computer tech working with a firm here in
+ Toronto.
+ So he's up on the east coast of Canada.
+ He said, I would like to say that ever since I bought your product, life has been great.
+ Yes, we fixed people's lives as well.
+ He says, the firm keeps an old Dell server as its primary data server and the hard drive
+ on the server was acting strange for the past few months.
+ A few weeks ago, the disk drive was on the verge of death.
+ However, I ran spin right on the server and within 12 hours, the drive was working like
+ it was new.
+ There were no signs of data loss and that awful noise was no longer there.
+ Then he said, my boss was so impressed with the work, he gave me a promotion.
+ So I love you guys, man.
+ The best $89 I ever spent.
+ Keep up the good work.
+ Gosh, that's really great.
+ That's great.
+ Very nice, happy stuff.
+ It's been right, of course, Steve's product and you can get that at grc.com.
+ I use it.
+ Nerds on site use it.
+ If you have a hard drive, you ought to be using it too.
+ Well, I fixed your computer a few weeks.
+ It did.
+ Save me.
+ I'm still using, by the way, that drive that is fixed.
+ I'm still using it.
+ It's recording reliably now.
+ Haven't had a single problem ever since.
+ So it worked.
+ It worked.
+ Love it.
+ Love it.
+ I didn't even retire it.
+ I mean, I thought, well, it's fixed.
+ I don't even get a new one, which is a good thing is it was a wrap.
+ Oh, no, it wasn't a Raptor.
+ Was it a second hard drive that failed the Raptors or are they editing hard drives?
+ Anyway, let's get to our questions.
+ We've got quite a few of them here, starting with security now listener Ian Chapman of
+ Calgary, Alberta, Canada.
+ He found newer versions of that stealthy, stealthy wireless zero config update we were
+ talking about.
+ The one Microsoft didn't push out.
+ Which we keep talking about and try to try and not to talk about, but we can never get
+ away from this topic.
+ Right.
+ Check that will not die.
+ KB 923154, that's knowledge base article 923154 has slightly newer versions of the wireless
+ zero config files than KB 917021, newer by four days, hmm, the 22nd of August as opposed
+ to the 18th.
+ And a later build build 2979 instead of 297 seven, the files seem to be the same size of
+ both updates.
+ The update also includes a UPD S P a P I dot D L L and old D L L from 2005, but still
+ newer than the version of my up to date patch system.
+ I discovered these newer versions of a perusing the Ryan VM update packs to see if they included
+ the 917021 files, in case you don't know, and I didn't know this, the Ryan VM packs
+ are used to slipstream all XP patches into a new Windows installed is very handy thing
+ to have.
+ Yeah.
+ Thought you might like to update the security now episode 81 notes.
+ Yes.
+ Again.
+ Yet again.
+ Yeah.
+ Okay.
+ Well, so, so what we have is we have a an update to the update, neither of which you would
+ normally get when you were keeping your windows up to date using the normal Windows update
+ facility, even if you were accepting everything that Microsoft wanted to do to your machine.
+ So what we what we advise people of last week was this 0 to 1 knowledge base article that
+ has files for days older than the one that that Ian found this 923154.
+ So I will put a link to this in today's show notes for this episode number 84.
+ It's worth mentioning though that this is what Microsoft calls a hot fix or a hot patch
+ on the existing one.
+ They specifically say that it's in case you have authentication problems with your Wi-Fi.
+ It updates something called EAP, which we we just touched on briefly back when we were
+ doing all of our Wi-Fi our Wi-Fi coverage.
+ That's the extensible authentication protocol, which WPA encryption allows it basically allows
+ different types of authentication to be to be easily added to the Wi-Fi protocol.
+ Microsoft has a bunch of their own authentication that they like to use on their systems.
+ So there are situations with which they discovered where this this sort of reauthentication will
+ fail if you don't have this hot fix.
+ They specifically say don't bother with this unless you have this problem, but it seems
+ to me like, well, it's probably a good thing to do because you get newer files.
+ So I can see why Ryan VM has you are using these and I would say this is not this is
+ not nearly as critical to do.
+ If for any reason it's it's not easy to do, but that's worth doing because then you're
+ going to get more things fixed.
+ You know, and for all we know that newer file just has they changed a name of a menu item
+ or something.
+ I mean, it may not make a big difference.
+ It could be a small thing, it may not affect most people who are not using like one of
+ these strange add on authentication protocols.
+ I just want to let people know that it's there, and I hope we never talk about this again.
+ We're done.
+ Maybe David Weiss of Redmond, Washington, raises the following point about full radio silence
+ in episode 83.
+ You mentioned how to maintain what you call full radio silence on a Windows machine.
+ Now I'm a Mac user couldn't believe it was so hard to turn off Wi-Fi on a Windows machine.
+ It gets true because on the Mac it's just on the menu bar, you just pull it down and
+ you say turn off Wi-Fi after I've blogged about it.
+ By the way, I should point out that many laptops have an on/off switch, which is an even easier
+ way to do it.
+ After I've blogged about it, one of my astute readers pointed out that what you were talking
+ about was radio silence when Wi-Fi is on, not trying to turn it off.
+ I think the name full radio silence might be misleading, at least it was for me.
+ Maybe you'd want to clarify this, at least for others that might have been confused like
+ me.
+ Yes, so I wanted to put this in to this episode exactly for that reason to draw the distinction
+ that when I said full radio silence, I actually did mean it in the sense of the radio is on,
+ but nothing is being sent out because that's been the challenge that we've been talking
+ about for now.
+ It's five weeks is trying to get Windows to allow your Wi-Fi to remain on but to be quiet
+ about it, even when you're connected or not connected, because remember that even when
+ you're connected, it's still sending out packets, seeing if you can find a better connection
+ unless you say no, just be happy with what you've got.
+ Don't be talking about the networks that I've hooked up to in the past.
+ Like you, Leo, my laptops have an on/off switch.
+ I would recommend for people to get in the habit of just turning the switch off, or you
+ can normally disable Wi-Fi, depending upon which Wi-Fi manager you may be using on a
+ laptop.
+ Some of them have add-ons in addition to Microsoft.
+ There are different ways you can actually turn off the radio.
+ Being a fanatic about battery life, I like to do that all the time, just because anything
+ that's on is taking its little share of life from the battery, which as a cordless user,
+ you'd like to minimize that.
+ So turning the radio off is certainly the best of all worlds.
+ That's true, silence.
+ Then it's been fully gagged as opposed to sending out all these little beacons and probes
+ and things.
+ What we were talking about is full radio silence while still using Wi-Fi.
+ Yes, or being able to, or at least having the Wi-Fi radio enabled, whereas in the default
+ case, Windows is just blabbing like crazy.
+ You just in the system tray, you just right click on the Windows network little icon there
+ and say disable the wireless and then it'll be done.
+ Although as I said, it's really great when there's a switch on the side.
+ That's the best way to do it.
+ I think that's for airplanes.
+ So when you get on the airplane, you switch off your radio.
+ Stefan Schmidt, listening to us from Mississauga, Ontario, wanted to share a spam solution and
+ get our opinion, and I do have an opinion on this one.
+ He says, "After listening to you guys talk about spam during Q&A 13 at the end of 2006,
+ the spam sent to our office email addresses forced me to do something to search for a product
+ that could address this issue.
+ He tried the filtering features and outlook and Norton to no avail.
+ I agree.
+ They don't work."
+ What I found, he says, was a software program called Cloudmark Desktop at Cloudmark.com.
+ It plugs into the outlook.
+ When I came into the office the next day and started a outlook to my amazement and every
+ day since it gets rid of 99.9% of spam, Cloudmark's been around a long time.
+ We've actually talked about it.
+ I remember talking about it on the screen savers years ago.
+ He points out the software is based on a community of users who assist in identifying spam from
+ which Cloudmark ranks the users and collects the data to filter out the spam.
+ In other words, a community is working to find and delete spam and since it's a community,
+ the integrity of the spam filtering is tremendous.
+ Have you heard of this product?
+ What are your thoughts and concerns?
+ I put this in here, Leo, because I was hoping and assumed that you would know about Cloudmark.
+ Cloudmark's excellent, highly recommended.
+ The way it works is you actually are sending your mail through their servers.
+ You change the MX record and they make it crazy to do.
+ The mail goes through their servers.
+ That's what I use.
+ I use a very similar service called MailRoute.
+ The point is really that a professionally managed anti-spam service that is kept up to
+ date constantly worked on is going to do a better job than anything on your desktop.
+ For example, my own experience with Google Mail is that because they've got the same
+ sort of centralized view into the mail that's coming in, they're able to do a fantastic job
+ of spam.
+ Every so often, if your Google Mail box gets a piece of spam, you select it and say report
+ as spam and then of course tells Google for everybody else's benefit that this is spam
+ that exists with this particular profile.
+ Ironically, I agree, it's the same concept.
+ I've had less good results with Google.
+ I get spam every day in my Google Mail box, but it mostly will report very good results
+ with Google.
+ I'm not sure what's going on with mine.
+ It works well for me although I don't have a widely public email address either.
+ You're not a target.
+ The takeaway from this, I think, is that if we've got people who always cloud mark free,
+ it is not.
+ Actually, there's one that works very similarly that is, in my opinion, just a little bit
+ better.
+ It's a little more up-to-date.
+ It's called only mymail.com.
+ Same idea.
+ Collaborative filtering.
+ Moving off on cloud mark, cloud mark's very good.
+ I think cloud mark's been around for quite some time.
+ Only my email.com I think is 10 bucks a month, I'm not sure.
+ As I said, I use a commercial solution called mail route, but these all work the same way.
+ I've always said the best way to get rid of spam is to not have it arrive in the first
+ place.
+ The problem with a desktop anti-spam program is you're still downloading all that spam
+ from your servers.
+ These actually filter it out before it gets to your inbox on the ISP.
+ As a result, you're downloading a lot less mail.
+ In my case, a million messages a month less.
+ There is also the positive side effect that as we know, some of this shotgun sent email
+ can be hazardous to your health.
+ It's not just hazardous to your mental health.
+ That's been well-established, but it can actually be hazardous to your system, so not letting
+ it get near your computer is just generally good for security.
+ Well, all these services will get a lot of the phishing scams.
+ They will get a lot of the viruses, they'll actually strip viruses out.
+ Yes, you're absolutely right.
+ These are security solutions as well as spam solutions.
+ Yeah.
+ Cloud Mark is good.
+ I highly recommend it.
+ I haven't seen how much it costs lately.
+ Kevin Rose was a huge cloud mark fan.
+ The good service.
+ We are using the Gmail handle of Diasomet, which is a risky handle.
+ Isn't that a drug?
+ In Warrington UK is not impressed by Windows, UAC.
+ We talked about it last episode, the user access control.
+ Despite your price for UAC in episode 83 of a security now, I still see the problem of
+ security will be down to user behavior, and he's absolutely right.
+ Of course it is.
+ Users can screw up anything, can't they?
+ As far as I'm aware, the UAC implementation by Microsoft does not require a password, unlike
+ Linux or OS 10.
+ He's wrong there.
+ Yep.
+ The problem I see with this is partly the way in which Microsoft has implemented this,
+ requiring the entry of a password is far more secure, and partly the mentality of a lot of
+ Windows users.
+ I do not mean to be condescending to Windows users, but for your average Joe, if the common
+ response to these UAC dialog boxes is to click OK, then it will become a reflex action.
+ I do agree with him on that.
+ Yep.
+ Because this is the action that will get rid of the UAC dialog box, the quickest and therefore
+ any security offers will be quickly eroded by both the Marc Grissinovich, Obsis internals
+ and Jim Olshin of Microsoft State.
+ This is a design feature, which is a trade-off, as always.
+ It's always a trade-off between security and convenience.
+ Unfortunately, nobody ever said security be convenient.
+ However, security is a necessity, and as long as Microsoft puts convenience before security,
+ it'll be flawed.
+ Algin says if security is not convenient, people would not use it.
+ I say, don't give people the choice whether or not they realize it.
+ It's there for their own good.
+ I know this sounds a little totalitarian, but a compromised Windows machine can affect
+ all of us with spam bots and so forth.
+ That's a good point.
+ It's not just the machine's owner.
+ As Leo often stresses, change in user behavior is the biggest security feature you can have,
+ but humans are creatures of habit.
+ And sometimes it takes more than friendly advice to instigate change.
+ It's interesting that you put this in because Kaspersky, who makes an antivirus software effect,
+ one of the best antivirus software's out there, recently quoted by ZDNet saying that most
+ users are just going to get so annoyed by UAC, they'll disable it.
+ And Kaspersky says that without UAC, VIST is less secure.
+ And Kaspersky's chief executive, now remember he's got a little axe to grind here, said,
+ actually she said Natalia Kaspersky said that her analysts have already found five ways
+ in which malware could bypass UAC.
+ Well, you know, my comment to this, of course, and I put this in here just because I wanted
+ to, I mean, it's a very valid point.
+ He was a little mistaken saying that you didn't need to enter a password unlike the
+ Mac.
+ In fact, on one of my Macs, I don't have to enter a password.
+ And in the case of Windows Vista, it's the idea is if you didn't log on with the authorizing
+ credentials, that is if you're not logged on as a, as an administrator, in which case,
+ if you are logged on as administrator, you simply have to say, okay, if you're logged
+ on as a so-called standard user, then you do need to provide administrative credentials.
+ Of course, that just makes the burden of the UAC pop-ups more annoying rather than less.
+ So, so I mean, it's Microsoft is stuck because they are as we've said before, and as I talked
+ a lot about last week, they really are trying to make the system more secure, but they really
+ are fighting the corner that they're painted into because anything they do that really
+ changes the system's behavior to increase security will break things.
+ So this is, you know, it's a, it's an evil, unhappy compromise, but it's, it's arguably
+ better than allowing changes to the system with no oversight at all.
+ It's, it's not perfect.
+ They recognize everyone recognizes that it's a tradeoff.
+ It's going to be really interesting to see how it plays out.
+ We really won't know probably for six months and as we, as we get more sort of feedback
+ from people, was this useful or is it just, you know, annoying?
+ It does seem to bug you more than the Macintosh does.
+ I've gotten used to it on the Macintosh in both my Mac and my Windows machine.
+ I am frequently asked for an admin password.
+ You don't get asked if you're running as admin on Mac.
+ On the Mac, isn't it only when you install something?
+ Yeah.
+ Yeah.
+ Yeah.
+ Notify system files.
+ Yes.
+ Okay.
+ And so on Windows, it certainly is more pervasive than that.
+ There are many other things that will cause that to pop up because, of course, Microsoft
+ is reacting to, in every case, to specific malware that has abused something in Windows
+ and they're like saying, wait a minute, if that happens again, let's make sure this is
+ the user doing it.
+ So I do think that UAC is more, I don't know if I would say more granular, certainly more
+ in the way in Windows, due to Windows own history of having so many exploited problems
+ in the past.
+ Yeah.
+ Look, there's no perfect solution.
+ Those are going to be able to get back anything that a company does.
+ That's the problem.
+ There's no way you can force a user to be secure.
+ Yeah.
+ Well, now I have to go and research what Casper C is saying because that's a little scary,
+ although they bring up that same old boondoggle about why doesn't Microsoft let us modify
+ the kernel?
+ They say they need to, they, the patch guard hinders their ability.
+ I'll send you the link to this article in ZDNet.
+ Yeah.
+ Cool.
+ Yeah.
+ Yeah.
+ Jonathan Lachman of Kansas City, Missouri has an oft asked question.
+ I've been reading your site for years.
+ I presume he's talking about GRC.com.
+ I'm an IT professional and you've taught me a lot.
+ I know he's talking now about GRC.com.
+ I've also been listening to your podcast since numero Uno.
+ However, when setting up my new iPod, only the last 14 show up and iTunes, do you have
+ any idea why they don't all show up?
+ I can download them separately, but they aren't as nicely formatted and presented on
+ the iPod and that's for you, Leo, I take that one, it's, it's here for you because it,
+ but it really is.
+ I hear this all the time.
+ So I thought we ought to just tell people what's going on and you're, you're Mr. Podman.
+ It's, it's, and I make the decision, by the way, not to include all of them with 84 episodes.
+ It would be the RSS file would be several hundred K. The way RSS works, it's really
+ never been intended to have a complete listing.
+ It's, it's, it's, if you look at the RSS feed from any web page, it doesn't show every article
+ that's ever been on that web page.
+ It shows the most recent articles and every RSS person who creates an RSS feed has to
+ make a decision.
+ Well, how many articles are you going to include?
+ I know the problem.
+ The problem is we've deliberately designed a podcast that laid down some really significant
+ important historical stuff rather than just being sort of a news sort of thing.
+ And so that's created a strong desire on, on, in the part of people who discover security
+ now to like go back and get them all.
+ I don't, I don't mind them, but the feed is not the place to find them.
+ Now I make a point of my general policy is, is the most recent 20 episodes of every podcast.
+ That's five months back.
+ And it's really balancing the size of the RSS feed.
+ Remember that every time some aggregator, including iTunes, requests the feed, it's downloaded
+ from our site.
+ And that can be quite a bit that's several terabytes a month of downloads.
+ They're trying to manage that as well.
+ So what I do, if you go to twit.tv, in fact, just go to twit.tv/sn for security now, and
+ every episode's there.
+ It's on the web.
+ It's not that it's not available to you.
+ It's just that it doesn't show up in the RSS feed.
+ And I think the reason people are confused is I, it's kind of Apple, I blame Apple a little
+ bit because it's not clear that what you're looking at is an RSS feed.
+ It looks like you're looking at a directory of all episodes.
+ And that's not the case.
+ It's the case from our podcast or anybody's podcast.
+ You can't do that.
+ So when he says I, he says I could download them separately.
+ So we obviously knows about that, but they aren't as nicely formatted and presented on
+ the iPod.
+ That shouldn't be the case.
+ It should be exactly the same.
+ It may be something that iTunes does differently with a podcast.
+ It probably is when it sees it as a podcast in the feed.
+ Right to Apple.
+ Don't complain to me.
+ That's the way that's the way iTunes has decided.
+ iTunes does some very strange things.
+ It renames the files.
+ It does some very strange things.
+ But all of them are there.
+ And frankly, you can listen to them all on the web page.
+ It's the other thing we've done is we've made it possible to just click on an episode
+ number.
+ In fact, you can go by episode number.
+ Just go to twit.tv/SN and the number.
+ So if we say, oh, episode 81, remember that, you can go to twit.tv/SN 81.
+ You'll go right there.
+ And there's a player on that page.
+ So I think that you can always frankly find it.
+ It's not, it's not that you can't find it.
+ I get this periodically, you know, with a daily giz was we've done 270 episodes.
+ Oh, yeah.
+ There's no, there's no way I'm going to put 270 episodes in the feed.
+ I mean, it's just.
+ I'm not going to be catching up with that number any time soon.
+ Well, and nobody would probably want to listen all 270, although we do hear from time to
+ time people doing that.
+ You're absolutely right.
+ Security.
+ Now it's more, it's more natural.
+ You'd want to go back and listen.
+ It's really the difference between what a feed is and what iTunes is presenting to you.
+ It really does look like iTunes is saying, Hey, here's all the episodes.
+ They're not.
+ They're just saying what's in the current feed.
+ Moving right along.
+ I'm glad actually you put that in because we get, I get that question a lot and I just,
+ I can't put in a, I used to, I, I used to, I, for the first, you remember for the first,
+ maybe year I put them all in there and the file size was well over a hundred K was getting
+ too big.
+ Well, and frankly, that would, it would encourage people.
+ I mean, okay, the way things are now, if people like the podcast, they've got to deliberately
+ go back and yank these files off the server, which creates a nice trade off.
+ If in fact, the entire feed contained all the files, somebody just experimentally joining
+ would suddenly find themselves downloading 84 monster files.
+ That's like, stop.
+ I don't want all this.
+ iTunes is smart enough to say you, you just want the most recent one, right?
+ But you could say, no, I always want to get all the files and that really would be a nightmare.
+ But if you look at any podcast, if there, I don't know of anyone that actually puts
+ all of their shows, if they have any number of shows, you just can't.
+ Doug Smith of Albany, New York is busy catching up on back episodes after being hooked by
+ the honey monkeys.
+ Well, that's, was episode one, it was really was, I couldn't believe it was so long away
+ back.
+ He asks, here's my question.
+ In your show about wireless security, when talking about brute force attacks, you mentioned
+ a hacker could steal off with a sample of encrypted traffic and subjected to the attack.
+ You made it clear that as long as you have a good password, you're probably safe from
+ this kind of attack.
+ But my curiosity is this, how does a hacker know when they've cracked the encryption?
+ It would seem to me that they'd need to attempt to try to access your network with what they
+ believe to be the key before they could really know.
+ Doesn't that make the idea of them doing it from the comfort of their own secret layer?
+ Somewhat impractical.
+ I love the question because it's something I never addressed.
+ It never occurred to me because I know the answer to make it explicit.
+ And I also like it because we've much more recently seen exactly this happening with
+ the cracks of, of protected content under Vista and HD DVDs where, where they were finding
+ keys and they remember the idea was that the key would be somewhere in memory.
+ And so they would scan through memory, taking candidate keys and testing them against known
+ encrypted content to see if it decrypted it exactly in an analogous fashion.
+ We talked about, and this is specifically the WPA.
+ Of course, there were, you know, innumerable ways of cracking WEP, WEP, the first generation
+ bad encryption for Wi-Fi.
+ The only known vulnerability for WPA is exactly what, what Doug cites here.
+ And that's sort of the offline brute force attack.
+ That's just because it's so hard to do that you need a lot of time to do it.
+ Is that why?
+ Well, it's because, yes, there is no obvious attack.
+ So the, the, the attack that is available is that you, you, you capture some encrypted
+ traffic and then you do a brute force attack, exactly, exactly using dictionary attack,
+ using alphabetic attack, you using, you know, basically, I mean, maybe as much as going A
+ B than ABC and so forth, so if you have a 60, that's why you keep pushing for a 64 character
+ ran totally random key.
+ And as we know that if you, so if you go to grc.com/passwords, you get exactly that over
+ secure link as, as raw material for using a key, because it's just going to be garbage.
+ And there's just, that's going to maximize the, the chance to the point where it's just
+ not feasible of doing that kind of attack.
+ Anyway, to answer this question and the exact analogous question in the case of high def decoding,
+ it's always the case, at least in both of these cases, it wouldn't necessarily have to
+ be the case, but in both of these cases, when you get a decrypted blob, whether it's a chunk
+ of video that's been encoded in mpeg format, like, you know, a frame of mpeg or a frame
+ of radio data, a frame of Wi-Fi, suddenly the format becomes crystal clear.
+ That is, all of these things, for example, a Wi-Fi packet has a bunch of header information
+ at the beginning before it's got whatever the content might be, whether it's ASCII or
+ binary.
+ And arguably, that just looks like noise to, to a casual observer, but the headers have
+ a rigorous set format that is very easy to recognize.
+ So the automated software is looking at the beginning of the packet, or in the case of
+ Wi-Fi, or the beginning of a frame of mpeg data, and you know if it looks like complete
+ nonsense, or if suddenly it all makes sense to software that knows sort of heuristically
+ what the front of, of that, whatever it is you're trying to decrypt should actually look
+ like.
+ It'll pop into focus.
+ It'll be obvious.
+ It'll just jump at you.
+ Everything in the focus is a great analogy, because literally, if you've got the key wrong,
+ it is completely random.
+ As we know, encrypting and decrypting with the wrong key results in absolutely nothing
+ coming back.
+ It's just noise.
+ So if suddenly you get structure at the beginning of whatever it is you're trying to decrypt,
+ you know you got the right key.
+ Yes, absolutely.
+ Stan Berkowitz writing from Somewhere in Pennsylvania says, "In my work, I set up PCs for people."
+ You should call nerds on site.
+ A week after I installed - free plug - a week after I installed a Vista machine for someone
+ they told me they don't even pay attention to the UAC pop-up anymore, okay.
+ Proof positive, and they hate Vista for it.
+ All this brought me to thinking UAC might bring spyware infestations from 25 percent
+ of PCs to 15 to 20 percent, you know, it bring it down, but it's not going to be a whole
+ lot more.
+ The normal user that doesn't pay attention to the window is still going to get infected.
+ Do you agree with this statement?
+ It might be an interesting side note, and they will always find a way around it probably
+ in a week.
+ Well, we have addressed it, haven't we, in earlier questions?
+ Yeah, exactly.
+ And I just - I like this because it - as I said, we're going to have to see how the world
+ reacts to this over time.
+ This is an experiment that Microsoft is doing clearly saying to, you know, my mom and, you
+ know, people who are not computer savvy, you know, popping this thing up and saying, you
+ know, something is trying to mess around with your computer, is this you?
+ I mean, even that question, you could argue, is somewhat murky.
+ It's like - it's very much like the problem that the personal software firewall vendors
+ had when their software was popping up a dialogue saying something wants to talk to the internet,
+ it's this, do you want to allow it or not?
+ I mean, the great Achilles heel of that was people not knowing whether to say yes or
+ no.
+ That was that happened, that was very clear that people eventually either turned it off
+ or gave up and just said, okay, okay, okay, okay, okay, okay.
+ Or as I - as happened in the case of personal firewalls, once all - they had authorized
+ all of their properly formatted programs, you know, properly intended to be talking to
+ the internet software to do so and - it did calm down, yeah.
+ And then it really did calm down.
+ See, that won't happen with UAC.
+ It's going to annoy you every single time.
+ It will never learn.
+ I'm afraid that might be the case.
+ Yeah.
+ So it's not like it's going to ever calm down.
+ What you see now, you're going to see in five years because it's going to warn you every
+ single time you install a program or every single time you modify the desktop fileer.
+ And the - you know, it doesn't bother me.
+ I know in a way - now I don't use Vista day in day out, so maybe it would if I used it
+ full time, I don't.
+ But I use it a lot and it doesn't bother me.
+ I just feel in a way I just say, hmm, good, it's protecting me.
+ Well, yes.
+ And you know, from a power user standpoint, which certainly the two of us are and many
+ of our power - many, if not all of our listeners probably are to a much greater degree than
+ you know, our moms, for me, it's like - I come to expect it.
+ It's like, okay.
+ Yeah.
+ You know, I just did something, yes, yes, I - you know, this is me.
+ I mean, so for someone who understands what it's doing, it isn't that interruptive because
+ like you Leo, I recognize, ah, the system is there, I would want to know - of course,
+ we're the ones who need the least protection.
+ Exactly.
+ Yeah.
+ We're the ones who could turn it off safely.
+ Yep.
+ Alex in Kentucky needs to accept incoming connections from SSH on port 22.
+ SSH is the secure terminal.
+ Shell.
+ Yeah, secure shell.
+ He writes, I have an SSH server set up on my computer so I can create a secure tunnel
+ for tight VNC.
+ I currently have the server set up to use port 22.
+ I use a 12-character password of random number and letters.
+ I'm having trouble changing from the default port.
+ Is there any significant security problem from using the default port?
+ He - 21, I think, is the default for SSH, isn't it?
+ No, that's telnet.
+ Oh, that's telnet.
+ Okay.
+ So 22 is the normal port.
+ Correct.
+ He wants to use a non-default port.
+ Well he'd like to change to a non-default port, but for whatever reason, he says he's
+ having trouble changing it from the default port.
+ So he is on 22, the default port for SSH, and he's wondering, is this a problem?
+ You know, he says, is there any significant security problem from using the default port?
+ Well, I'll tell you.
+ When I look at my server logs, I see people try to log in on port 22 all the time.
+ Well exactly now, but you don't have a server running on 22, right?
+ I do.
+ This is on my website.
+ I use SSH to log into my website, of course, because it's secure, and we use the default
+ port.
+ The point is if you have a good secure password, these Chinese hackers are going to be working
+ on it, but it's going to - but it's not like you can do a mass brute force attack.
+ You get three tries and you're - and then you have to start over again.
+ Right.
+ So here's the issue, I think.
+ He's advertising.
+ This system is advertising that it's got SSH running that is an SSH server listening
+ and accepting incoming connections, because he wants to be able to be outside of his own
+ network and be able to connect in, give his credentials, which is secure over secure shell.
+ It was well designed.
+ So you end up with, you know, good, non-eaves, dropable security, but the problem is he's
+ saying, okay, when people don't know my password and he's, you know, he knows enough to have
+ a, you know, a really bizarre 12-character password, am I in any danger?
+ If his password is good, as you say Leo, it's very burdensome for someone to crack it.
+ On the other hand, it's still there.
+ It's accepting connections, and so I would say he doesn't have a security problem, he
+ just sort of has an annoyance problem.
+ For example, he would be prone not to log what's going on on his router or his server
+ because it's going to be just as exactly as you said in the case of your logging, it's
+ going to fill up with people who go, oh, let's see if he's got a simple password that's
+ in a dictionary.
+ So he'll be prone to being attacked on 22, not that he would be vulnerable because he's
+ the smart thing, but people are going to be hooking up to him and trying, and that would
+ annoy me if I was looking at my log and just seeing people hooking up to my point.
+ So it's a little scary, but that's, you know, I mean, when you run a web server, you have
+ stuff like that.
+ I mean, they're always trying to get in an, you know, and they're trying to get in other
+ services too.
+ I mean, they're always trying to do that.
+ But I would, what I would suggest is if he's behind a router and he's mapped port 22 through,
+ some routers allow you to map a different incoming port on the outside to a port on the
+ inside.
+ It may be that his, that his SSH server running on his system doesn't like to change off of
+ port 22.
+ If he's done a route.
+ That's not the case.
+ I don't know of any SSH server that won't let you easily do that.
+ I'm not sure.
+ Exactly.
+ And I don't know what his problem is.
+ But anyway, I guess, I guess Alex, if you're listening to this, and I hope you are, not
+ only for the benefit of all of our other listeners, but, but for you, you know, make up your
+ own mind.
+ I wouldn't say you're under a great security risk, but it would bug me if I had just random
+ strangers all over the globe who I don't know hooking up to my port 22 and giving it a,
+ giving it a try.
+ Well, when we were talking about Chinese hackers in the other episode, that's, that's what they're
+ doing there.
+ And I can tell I look at the IP address.
+ It's from China.
+ Yeah.
+ I have strong passwords on there.
+ I don't think a brute force attack because you can't, it's not like you can run a program
+ that will run high speed, high speed.
+ It's exactly slow pro.
+ It has to be done by hand, essentially.
+ On the other hand, it's automated and it's happening day and night unless you do something
+ to prevent it.
+ That's true.
+ I guess if I saw a lot of activity, I might change ports.
+ Well, and it would also be a matter of the value.
+ You can imagine that if this was a DoD IP or, you know, something really, you know, within
+ dot gov, that's probably much more prone to somebody methodically just saying, well,
+ we don't care how long it takes.
+ Maybe we'll get lucky one of these days, whereas this guy, you know, he's just some
+ random IP and Cox or wherever that, you know, doesn't clearly have that much value.
+ The other, the other point is that even if you move it to a nonstandard port, these guys
+ test all ports.
+ So they'll test all ports for a SSH response until they find your port.
+ So it's, if they're really determined to hack at you, they're going to hack at you.
+ Well, and in fact, it may not be that anyone would even bother doing a brute force.
+ There have been historically known security vulnerabilities in SSH.
+ So it could be somebody looking for vulnerable servers, which Alex probably doesn't have.
+ So it's just, as you exactly as you say, Leo, someone scanning through IPs on port on 22,
+ hoping to take advantage of an insecure secure shell server.
+ So they'll hook up, they'll try their little hack to see if they can, you know, bust through
+ some buffer overrun in the server and if not, they go away.
+ Right, right.
+ You know, how hard you make your system, how hardened you make it is up to you.
+ And you're right.
+ It depends on the value of what you're protecting.
+ Mike Fatore, listening and writing in Toronto writes on a number of occasions in the past
+ few months, Stephen has mentioned somewhat parenthetically that IP addresses cannot be
+ spoofed because of the three way handshaking involved with setting up a TCP connection.
+ We recently had a Cisco firewall expert, do some fire wall expert, do some consulting
+ for us.
+ I asked him about IP spoofing and he said it was all too really attempted to explain
+ how it's done, but we were interrupted before he completed his explanation.
+ So is I put IP spoofing real or are you and he talking about different types of spoofing?
+ Well, I'm sorry that this guy was interrupted because I'd love to hear from a Cisco firewall
+ expert how IP spoofing is all too real.
+ He's probably talking about raw sockets.
+ Well, yes, he had to have been talking about something else.
+ It's absolutely the case that again, we've talked about this extensively in the past,
+ you know, on those podcasts that are not available on the for easy download.
+ By the way, if you subscribe and iTunes from now on, it doesn't delete old forms of the
+ podcast. So from everything from now on, we'll be in your iTunes directory.
+ And that's exactly how it was intended operate, right? Right. So anyway, anyway, the idea
+ is packets are just little blobs of data moving across the internet. The only thing
+ that most software looks at is the so called destination IP. The source IP is also there,
+ always there, every IP that is every internet protocol packet has that right up at the very
+ front. The destination IP and the source IP, the destination IP is where that packet is
+ going. In theory, the source IP is the IP of the source of that packet, which is where
+ it came from. But nothing validates that as packets move across the internet. So anybody
+ who wants to emit a packet can pretty much make up any source IP that they want to drop
+ it on the net and off it goes. So yes, that's spoofed. But you can't have a conversation
+ if you do. Yes. And that's exactly my point. That's why when I specifically talk about
+ the three way handshake that is that sets up a TCP connection, the beauty of the security
+ of that is that each end requires a round trip. The reason it takes three packets is
+ that the, the initiator sends a sin packet, a synchronized packet. The receiver sends
+ a sin, which acknowledges the receipt of the sin and contains its own synchronization to
+ which the, the first party sends a final back back to acknowledge the sing the, the sin,
+ the synchronization from the second party. So those three packets give each end a round
+ trip. The only way each end can get a round trip is if both the, the, is if all packets
+ have the correct source IP and destination IP. So it is that, that TCP handshake prevents
+ spoofing. Now things that don't prevent it are, for example, pings, which can just be
+ sent out to any random IP you want. Well, or if you're a hacker who doesn't care about
+ any, with a return response, as in a sin flood, you can spoof the, the originating IP because
+ you don't having a conversation, you're just flooding. Exactly. Exactly. All right. I'm
+ going to give you a hypothetical. How about in the man in the middle attack? Couldn't a
+ man in the middle modify the, the return IP address? He knows what the real return is.
+ Yes, absolutely. In fact, that's what a, a man in the middle attack would do is, is he
+ would grab the packet on its way to the other party and, and change the source IP to his
+ own so that then the packet goes off to the other party. The other party responds back
+ to him thinking that it's the first party. He then changes the, the source of that packet
+ as he forwards it back to the first party to his own, basically knitting himself into
+ the middle of a conversation. And by the way, that's exactly what proxies do. Proxies are
+ man in the middle of TCP connections. I guess they are. So, in that sense, certainly it
+ is possible to spoof IP addresses. It's just not, it's possible to spoof an IP address
+ in a real conversation. That's all. Right. And I, and we're normally talking about something
+ where you've got an encrypted TCP connection, which, if things are done properly, even prevents
+ a man in the middle, i.e. a proxying of that connection. Right. Right. David Barnes from
+ Basilden asks, what can we as users do about the continuing spread of excessive Java and
+ other client-side scripting use? I'm just going to have to correct him here. There's
+ Java and there's JavaScript. It's, it's not your fault. It's the people at, at Netscape
+ who decided, oh, we'll call our language JavaScript and confuse everybody. And you know, Leo,
+ it has, it doesn't even, it's got no connection to Java. It's not even, doesn't look the same.
+ It's a made-up language completely separate. Well, it was original. I can't remember the
+ original name, but it wasn't JavaScript. It was purely a marketing thing. Well, hey, Java's
+ hot right now. Anyway, so he says, Java, I'm going to read it as JavaScript. I recently
+ complained to eBay that the pages were not displaying correctly with scripting off. Well,
+ as you might imagine, I was told I had to use scripting on eBay a sort of tough. We don't
+ care a lumped attitude. I then had a quick look at the Java script, and include files
+ for a normal search results page. It totaled up over 300. Kane, I'm under the page's bloody
+ slow to load with scripting enabled. What else can us lowly sys admins and our users
+ do? I feel like I'm being held hostage and dictated to in how I use the internet.
+ This is where I put the needle down on my broken record. You know, and I just say, mark
+ of my words. This is going to be a problem, not just the size of scripting, but it's
+ going to, it's going to be a constant problem. And you know, I wanted to answer David's question
+ because of course I'm sympathetic to it. As you know, I surf with scripting disabled
+ much as he obviously does. In my case, I've seen the same thing with eBay. So I've, you
+ know, using IE's sort of dynamic scripting enablement system, which is using these zones
+ of trust that IE has. eBay is in my trusted zone. So scripting is enabled automatically
+ when I go to eBay, but not by default when I surf to random sites that I don't trust.
+ So so basically he's talking about sort of the tyranny of of web scripting. And I could
+ not be more sympathetic to him. I mean, I'm, I absolutely agree. I think it's, it's sad
+ that it is that we have these problems. Of course, now I understand you take and as you've
+ said recently, when we talked about this, sort of, you know, your site is require scripting
+ like eBay does almost all sorts to you. It's just it's you can't do Ajax. You can't do
+ a lot of user interface stuff. You can't validate forms. I mean, there's it just goes on and
+ on and on and sort of all of that web 2.0 stuff that you never talking about. Yeah. Yeah.
+ Now you can, if you really work hard, do a lot of it as you've proven with your CSS without
+ any JavaScript, but it's a lot of work. And there is stuff you just absolutely have to
+ use JavaScript. Now what I would say is, yeah, there are JavaScript exploits, but they are
+ few and far between. I don't, I don't think JavaScript is as dangerous as, as you seem
+ to. I mean, it's just, I, I'm not complaining about the danger. I'm just saying philosophically,
+ it's bad to load code from random websites. You don't know, but that's what the web is.
+ That's what it's what it's, it's what it's become. It isn't, I mean, it wasn't there
+ originally, but if you just want static text pages, the web is fine except them, except
+ that my site runs perfectly with no scripting. My e-commerce system just looks like it came
+ from 1989. Well, it did. I mean, this is, this is the trade off more and more we want web-based
+ applications. You're going to have to load code. So you're right. In my opinion, what
+ you should do, I mean, look at Java as opposed to JavaScript, which is sandboxed. There have
+ been some exploits, but nothing of any severity, you could make JavaScript much more secure.
+ Now is Gmail, JavaScript or Java? Java script. Okay. Pretty much I, if, well, you know, because
+ you turn off scripting, almost every site uses scripting, even if just for a rollover.
+ Now that's somewhat, some of that's laziness, I suppose you could do it in other ways, but
+ it's pretty much accepted. And as we get to a richer and richer web experience, it's,
+ it's going to be more and more, not less and less with flash. I mean, flash is scripting.
+ So David and I are losing the battle. You're going to lose this battle. Yeah. So I think
+ the real trick is to really insist that companies that make these languages sandbox them, make
+ them bulletproof. Well, and it's one of the things that we briefly touched on last week
+ with UAC. Microsoft has this notion, this concept, which is still in its infancy. But
+ the idea is that IE or other browsers and email clients, that things that are chatty
+ on the net, things that are, they're fundamentally less trustworthy. They will be running with,
+ with less interconnection privileges in Vista, which doesn't give them the access to the desktop
+ and to other Windows resources that more trustworthy applications have. I think that's where we're
+ going. Absolutely. And I think that's a perfectly sensible way to deal with it. And it's, we've
+ talked in fact about like running sandboxes and sandboxing IE or, or virtual machines,
+ you're using virtual machines to create an environment of containment around these dangerous
+ things. Java's been around a long time. And, and, and no, you've received very few complaints
+ about its security. Java script, you know, I'm talking about Java. Java sandbox. Oh, oh,
+ oh, yes. Yes. Java script obviously has issues. The biggest issue is most, this most recent
+ one where you could, if somebody hasn't changed their default password on their router, you
+ can go into the router. And I think that that's a whole that can be fixed. I mean, I think
+ that just should be fixed. But it's a perfect example of what I'm saying too. I mean, yes,
+ I know it can be fixed, but it's a perfect example. You know, I'm running my system is
+ running script that I didn't really want it to run. No, I know. But that's the web. I
+ mean, the question is, do you want the web to be static text? Or do you want it to be
+ web services? Do you want applications to run? And I think people want applications to run.
+ Yeah, you're right. A listener named John from Downers Grove, Illinois wonders, I followed
+ all the Wi-Fi lockdown instructions from your recent episode 81 notes. But now I see two
+ new networks free to guest and NRT airport, both unsecured computer to computer networks,
+ but they're not real network. Stumbler doesn't see him. Any explanation from the guru department?
+ I guess that's us. I don't know. Yes. What what I never made this explicit, but that preferred
+ networks list that you can see in the dialog box in the samples. There are two different
+ lists that you encounter when you're using most Wi-Fi interconnection helpers and certainly
+ Microsoft's default one. There's that list of all networks that your computer can currently
+ see. And then there's that different list called preferred networks. And those are networks
+ it has seen in the past. So those you can and that's what he's talking about here. He's
+ got everything locked down, but he's seeing free to guest and NRT airport in his preferred
+ networks list. All you have to do is highlight them and delete them, highlight the next one
+ and delete it and they will go away. And now that you've got this thing locked down, they
+ won't come back. So this may happen from time to time that new networks enter that list.
+ It could because networks that you do connect to will be added to that list. I see because
+ because windows thinks it's doing the right thing by trying to reconnect to things you
+ have explicitly connected to in the past. The good news is you at least now with all these
+ updates in place, even the one today that we talked about today, you at least won't be
+ broadcasting that you ever talk to those networks in the past.
+ And now our last question, Ryan Skeleton in Portland, Oregon has a different problem
+ with windows UAC. I'm a serious computer user with multiple disabilities and I must use assistive
+ technology to enter text into all computer applications. My concern is that the UAC secure
+ desktop may prevent my assistive technology application from entering text into the authentication
+ fields. This is because it has does that weird screen thing. I understand this is a trade
+ off between your ability and security. My case and I suspect many other disabled users out there,
+ this usability is not merely a convenience, but a necessity is there a way for an administrative
+ user to specify that a particular program should be allowed to run in a protected desktop environment.
+ If not, maybe I won't be able to use Vista. Well, we never talked about and this is a
+ great question because we never talked about disabling all of this UAC nonsense. I certainly
+ don't want to be promoting it, but this seemed a very valid place where a serious computer
+ user is saying, I just for whatever reason, I can't have these pop ups. Now backing off
+ from that for a moment, I would imagine that any updates to his assistive technology would
+ be updated to deal with this and that there are doubtless ways of handling it. I'm assuming
+ that. On the other hand, you could imagine that if there were ways of handling it, that
+ would be back doors that would allow hacker technology to do the same thing. What I do
+ know is that many power users are familiar with utilities like Tweak UI. Tweak UI basically
+ allows you to change even more settings than you can from the normal desktop. Well, there's
+ a whole another huge array of settings that are known as Windows policies. There's group
+ policy editor. Those are things. It's phenomenal how many other Tweaks there are and it turns
+ out that being sensitive to what changes Microsoft was introducing with Windows Vista, there
+ are a whole bunch of new policy settings that allow you to completely remove UAC. And I believe
+ you don't have to go that far. You can even just you can just turn off secure desktop,
+ but still have UAC. Correct. And that's probably going to solve his problem. I mean, he could
+ certainly turn off UAC, but but you can keep UAC without getting rid of. I mean, you can
+ get rid of that blacked out desktop without getting rid of UAC. Yes. And and if you did
+ that, then you're right that then the assistive technology would no longer be cut off from
+ the secure desktop environment that is deliberately putting a moat around itself in order to prevent
+ it from being disabled. But I wanted to to first of all, to tell Ryan that that exists
+ in Vista. So he could definitely use it if he needed to. And I wanted to point out for
+ all of our listeners that there is highly granular granular control in the Windows policies.
+ It's real. Yeah. Yeah. I mean, there's just a ton of stuff you can do. And again, sensitive
+ to what Microsoft because Microsoft never wants to break anything. So sensitive to that, they
+ said we're going to have an intrusive technology, but we're going to give you all kinds of control.
+ In fact, there's even right up in the, in the standard log on profiles, not even down
+ in, in the policy editing stuff that you're able as an administrator to just turn off the
+ pop up completely, turn off that acknowledgement there with a single checkbox up in the regular
+ user configuration dialogue. But there's much more you can do as well. So I wanted to make
+ sure that our listeners knew that that was all buried down there in Vista for people
+ who did want, for example, and Ryan may have to make that cord that that sort of change
+ if, if UAC is really causing a problem. It isn't a, isn't a reason for abandoning Vista.
+ I should point out, unfortunately, that the, all of these policies are available in a
+ very easy to use the local security policy, very easy to use, you know, in Vista Ultimate
+ and Vista Business. But if you're a home user, you have to go into the registry and
+ modify a registry key. So they don't want home users to have that kind of capability,
+ I guess, probably just as well. Yeah. I, you know, I have a good article here from howtogeek.com
+ on that, that describes us in detail. So maybe I'll put that link up in the show notes there.
+ Oh, cool. Yeah. It just talks exactly about how to do it and even has the key for registry
+ editing, editing. Well, that wraps up a list of 12 great questions before we wrap up though.
+ I do want to thank our friends at Astaro who have been sponsoring this podcast for a long
+ time and have now are up for the entire year of 2007. Again, we really, that support makes
+ such a difference to, to Steve and me. I mean, it really means that the show is working for
+ them. And they work for you. Let me tell you version seven of the Astaro security gateway
+ is out and amazing. I've talked about some of the features, the fact that now email encryption
+ is, is centralized. So your, you know, users don't even have to know they're doing it.
+ It's just automatic. You've got SSL VPN makes it very easy to use VPN. It clusters now.
+ So it scales to us, you know, up to 10 Astaro units in one without installing and load balancing.
+ It's just really remarkable. But the thing for the home user I think is great is they've
+ now waived the license fee for the V7 package. So you when you download the free Astaro security
+ gateway as a non commercial user, you get all of the subscriptions, including a star up
+ to date, the anti spam, the antivirus that used to charge 79 euros for it. It's now free.
+ I'll tell you if you are in business and you want the best appliance to protect yourself,
+ you've got to check with the star up www dot A S T A R O dot com or call 877 the number four
+ A S T A R O and you could schedule a free trial of the star of security gateway in your business.
+ I use them and it's just, it's just fantastic. Wow. 12 questions, 12 answers and some really
+ fascinating stuff too, I think. Yeah, I love these. I really did too. Yeah. Okay, because
+ they they bring a diversity, lots of different things going on are, you know, it closes the
+ loop with our users and our listeners. Yeah, it's just terrific. Well, Steve, we'll wrap
+ this up and we'll be back next week for another episode of security now. Have a great week,
+ Steve. We'll see you next time. Right. Oh, security.

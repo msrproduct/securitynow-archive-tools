@@ -1,0 +1,819 @@
+ Bandwidth for Security Now is provided by AOL Radio at AOL.com/podcasting.
+ This is Security Now with Steve Gibson, Episode 49 for July 20th, 2006, Netstack.
+ Security Now is brought to you by Astaro, makers of the Astaro Security Gateway
+ on the web at www.ASTARO.com.
+ It's time to talk security with Steve Gibson. Hey Steve.
+ Hey Leo, great to be back with you.
+ I was in Boston earlier in the week. Why was it hot? It's hot everywhere.
+ It's hot today. It's hot.
+ Well, and I don't know about Northern California, but down here in the south,
+ I guess because of monsoon season, it is so humid.
+ Oh, that's not usual.
+ It's not dry heat, which you know...
+ Oh, that's not good at all.
+ No, because then your own body's natural perspiration can't be really used very effectively
+ to cool you off through evaporative cooling.
+ And we're learning something about all kinds of things in the show.
+ You're kind of one of them auto-diadacts, aren't you?
+ Well, I'm curious about everything.
+ So I spend time here and there learning what I can,
+ but I didn't realize, I mean, and people may not, you know, since we're on the topic,
+ that we are even though we're not like sweating profusely,
+ we're constantly perspiring as part of our body's temperature regulation system,
+ and we depend upon it being dry in order for perspiration to evaporate,
+ which creates the cooling effect because, of course, it takes energy to move water into vapor.
+ So that reduces our temperature.
+ Well, I'm spritzing right now because it's really hot up here.
+ The reason I brought it up was I was approached by a cable guy in Texas,
+ and he said, you know, I'm a small cable operator in Texas,
+ and we love security now, and we would just like to know if we can kind of,
+ I don't know, send it to our customers or something,
+ because it's just, we want them to know this information.
+ And I thought, bravo.
+ And I said, absolutely.
+ Please do.
+ You know, our license prohibits commercial usage without permission,
+ so he was right to ask for permission.
+ But I think you'd agree that we're just here to get that information out,
+ and I think it's wonderful that an Internet service provider would actually
+ give this podcast to his customers.
+ Oh, absolutely.
+ Saying, you know, listen to this, you need to know this stuff.
+ Yeah, and you know, I would imagine that some percentage of them
+ will hopefully get hooked and think, hey, I want to know about this stuff.
+ Well, it's good for us, absolutely.
+ And you know, any way we can build the audience, we're happy to do it.
+ Although the audience numbers are out, and we're pretty much over 100,000
+ every show now, so that's very good news.
+ Very cool.
+ And I also wanted to mention that there's a big window security fly
+ sent in this link yesterday.
+ Guess what?
+ The WMF flaw that you've been talking about.
+ Well, we talked about, you know, very controversially at the beginning of the year.
+ That was, you know, the first big news of 2006 was the Windows meta file
+ vulnerability that was discovered.
+ Basically, old code, for whatever reason, in Windows that allowed images,
+ just a standard old image.
+ That's what the WMF file is.
+ It's an image file.
+ Exactly.
+ To execute code that was contained in the image.
+ And not surprisingly, there have been, you know, sort of in the background
+ relatively quietly, malware and malicious sites have been using this
+ to exploit, to install Trojans of various sorts in unpatched computers.
+ What you found yesterday, Leo, was really sort of alarming because,
+ apparently, the very popular MySpace domain, as well as several others,
+ have been hosting some ads that contain and use the Windows meta file
+ vulnerability.
+ And by backtracking where the ads go and what the malware was doing,
+ some security researchers are of the opinion that more than a hundred,
+ I'm sorry, more than a million instances of this malware has been
+ installed using this Windows meta file vulnerability, which is a big number.
+ Well, but what's really puzzling is, you know, who, what million people?
+ Because in order to, I mean, this vulnerability was fixed as you'll remember,
+ even out of Microsoft's normal upgrade cycle because it was such a big problem.
+ You know, and they patched it, you know, six months ago.
+ Well, and we had Ilfak on the show, you know, because he came up with a quick little
+ fix for it in order to, because we didn't know what Microsoft was going to.
+ So for someone to be infected by this today, they can't have updated
+ the security on their machine all year.
+ I mean, for, for seven months.
+ Well, we know, of course, MySpace is huge.
+ These were pushed out in a banner ad, which was provided by a provider.
+ So MySpace didn't push the ad or even hosted.
+ They, you know, they, as with all banner ads, they're hosted by the--
+ They were using a third party or third party.
+ And web shots and a number of other sites also apparently pushed out the ad.
+ But the point is, is so many MySpace is so huge, tens of millions of subscribers
+ that it was possible for them to infect a million computers.
+ But again, a million not patched computers.
+ So, you know, certainly nobody listening to this show needs to worry.
+ Because there's nobody listening to us that isn't, you know, updating their machine
+ all the time.
+ And the other thing to point out is that you would get this virus
+ not through any action on your own.
+ And that's what really made it deadly.
+ Just by looking at this MySpace page, if that banner ad happened to come up
+ and you had an unpached computer and you were using it in an explorer,
+ you'd be bit.
+ You'd have that code and they were putting a Trojan horse code on people's computers.
+ So, wow, a really dramatic example of what can happen
+ if you don't follow basic security procedures.
+ Okay.
+ Any other issues we want to cover before we get to our topic at hand?
+ I think we're ready to go.
+ What is the topic at hand?
+ I didn't ask.
+ Network monitoring.
+ And, you know, of course, that phrase or that term has many different meanings.
+ In this case, I want to talk about a tool which is built in to, well,
+ that started back with Unix and is in virtually every machine,
+ whether it's a Unix, Mac, Linux, FreeBSD, and even Windows from the beginning.
+ It's a command called netstat.
+ And the issue is how do you know what your machine is doing?
+ What connections it has to the internet?
+ What services may be open and running in your machine wanting to accept connections?
+ And basically sort of like, what's going on in your machine?
+ Now, there's the netstat command that I'm going to sort of focus on.
+ And then there's a GUI-ized version that our friends at SIS internals,
+ Marc Grissonovich, wrote, oh, and by the way, there is a bit of news.
+ Not really wonderful news from the standpoint of the whole industry.
+ SIS internals is now a division of Microsoft.
+ Oh, no.
+ Oh, no.
+ Oh, and SIS internals is, Marc Grissonovich, I guess, is the front man,
+ but I think there's others involved.
+ He and Bryce are the two main guys.
+ And Marc is the heavy-duty coder who's written over the last 10 years.
+ SIS internals is 10 years old, was founded in 1996, and it took, you know,
+ they grew it and built it and it became a serious, you know, wonderful resource.
+ We've talked about SIS internals' utilities all the time.
+ They discovered the Sony root kit most notably, but they've done a lot of other things.
+ Well, and it was root kit revealer that we've talked about.
+ It was their program.
+ That's another one of Marc's pieces of freeware.
+ I mean, SIS internals distributes a whole bunch of freeware.
+ Then they had their commercial side, which is wind turnals, and they sell, you know,
+ like some, in some cases, pro versions of their freeware and stuff that they don't offer in freeware.
+ But I mean, just, it's been a tremendous source of super utilities over the last 10 years.
+ And Microsoft decided that they wanted it all.
+ Well, I'm thrilled for Marc and Bryce.
+ I hope they made a ton of money.
+ Yes.
+ In fact, he and I exchanged an email yesterday because I told him I wanted to talk about
+ TCP view, which is his gooey-eyed version of Netstat.
+ But not surprisingly, the moment the announcement was made, you could hardly get to their site.
+ Yeah, I bet.
+ Because everybody was like, "Oh, no!
+ Before it goes away, I want to get everything."
+ And I'm sure that's not the case.
+ I'm sure Microsoft will keep all that stuff up.
+ I would hope so.
+ I wouldn't be that sure.
+ Immediately, all of the Ulas changed.
+ Oh, dear.
+ And the terms began to change.
+ Marc explained, the reason I exchanged email a couple times with Marc yesterday was I said,
+ "You know, no one can get to your site now."
+ I mean, it was literally, it was slash dotted, as they say, because so many people were trying
+ to grab the latest state of the site before it went away if it was going to.
+ Right.
+ You know, and we've had things go away before that we thought would be here forever.
+ So, anyway, Marc explained that he was just in the process then of moving the site to
+ much faster hardware and connection.
+ And sure enough, it's now back up and running and just fine.
+ Because I wanted to ask him whether I could redistribute TCP view.
+ He said, "I am no longer in control of the site."
+ So, that's no longer his responsibility.
+ Somebody at Microsoft, presumably, has taken that over.
+ I mean, he is excited.
+ Certainly, I'm sure he embraced it really well in being acquired by Microsoft with, you know,
+ probably huge stock trade and so forth.
+ And you know what, Microsoft can really use their skills and their tools.
+ So, I think it's, if it gets their stuff out to a broader audience, I'm happy about it.
+ But we do hope that they'll continue to offer the stuff for free that they have been offering
+ because it's so useful.
+ And they'll continue to do the work they've been doing.
+ Well, also, Marc has really continually been moving the code forward, adding features
+ here and there.
+ You know, I mean, really tending his flock of freeware.
+ He deserves that.
+ That will end.
+ So, you know, it is pretty much, it's pretty clear that we're not going to continually have,
+ you know, a forward motion of those things.
+ I mean, I think this era is over.
+ So, for what it's worth for people listening to the podcast, you know?
+ Just who you are now.
+ Yeah.
+ Well, Anne, all of you might just go to, it's www.sisinternals, S-Y-S-I-N-T-E-R-N-A-L-S.com.
+ And just browse around.
+ There's their OS utilities, network utilities, you know, security stuff, all kinds of good stuff.
+ I would advise that you go sooner rather than later and just grab the things that look good to you.
+ I have to point out, this is one of the reasons I'm a fan of open source.
+ Had he open sourced it and GPL did, it wouldn't matter if he was going to continue to develop
+ it because others would.
+ But we're not in that position now, Microsoft owns it.
+ Right.
+ So, you know, that is one reason why I'm a big fan of open source utilities.
+ The other reason is that you can look at the source and make sure they do what they say they're going to do.
+ He releases some source, I think, but I don't think he's open sourced any of it.
+ Correct.
+ Yes, he's sort of what he'll do is he'll have sort of juniorized versions of his utilities
+ and source form just because he wants to give things away.
+ Right.
+ You know, I mean, he was truly a factor to the community.
+ And then the more fancy things would normally not be available in source.
+ And as I said, he does also have some commercial for pay pro versions.
+ For example, there is a TCP view pro that offers some additional features beyond what the free one does.
+ Right.
+ Oh, well, you hit me with a show, but you can still get TCP view.
+ And so, and actually, I've always used net stat.
+ I didn't realize TCP view was a gooey front end on that.
+ So that's good to know.
+ Right.
+ Right.
+ Well, and in fact, it's interesting.
+ Now, as you know, Leo, I'm becoming a little more of a Mac person recently.
+ I've had to.
+ I've been working with some new technology for the GRC site.
+ Wanting to do menuing adds some good navigation and menuing to grc.com, which is, you know, it sorely needs.
+ And I wanted to make sure that it will run under Safari and the older IE 5.2 over on the Mac.
+ So I've been over on the Mac and I thought, you know, I ought to make sure that the stuff I'm going to talk about today,
+ if there are issues for like the net stat command on the Mac, that I talk about that.
+ So I'm adding a little more Mac support to my repertoire.
+ Right.
+ Good.
+ Well, thank goodness somebody gave you a Mac book.
+ Yeah, the neat guys at Nerds on site, they wanted me to participate in their conference at the end of this month via iChat.
+ So they provided me with a Mac book so that I could do that.
+ They've done more good than they could know.
+ The Mac community, thanks them.
+ And there is an analog to net stat.
+ In fact, I think it's called net stat in Unix and on the Macintosh, is there not?
+ Oh, it started there.
+ I mean, it was net stat on Unix.
+ The idea is, okay, so let's rewind things a little bit here.
+ You've got a computer.
+ We've talked many times about how there's a network interface card, a network adapter.
+ Which is connecting you physically to the net.
+ Then we've talked about this, the so-called TCP/IP stack.
+ This essentially a stack of layers, this why it's called a stack, of technology that interfaces the low-level internet raw data to the operating system.
+ Well, and we've talked about the UDP protocol and TCP and the notion of listening ports and ports being open and connections being established, you know, and syn packets and acts and all that.
+ Well, the net stat command which originated with all of this technology which originated in Unix and was then moved over into Windows and other Unix-like operating systems.
+ It's the network status command that allows you to find out what's going on.
+ Now, for that reason, it's really useful.
+ There's really nothing else that does this and that's why I wanted to give it its own episode of security now to talk about the net stat command and to introduce it to people, to invite people.
+ This is the kind of thing you're probably going to want to listen to this podcast again.
+ Maybe if you're listening to it in your car while you're commuting, you're going to want to rewind it, listen to it again, sitting in front of your computer and poking at this as I talk about what this command does and how useful it is.
+ Because it allows you to know exactly what's going on with this lower level networking in real time in your computer.
+ This is the way I'll run the Unix version on my Mac and everybody else run the Windows version and I'll tell you if there's any differences on here.
+ In Unix, it's used much more extensively than it is in Windows.
+ If you just do the net stat command on a Mac, you'll see way more stuff than you want.
+ What you need to do on a Mac is you need there's an F command line option.
+ You'd say net stat space then dash F-I-N-E-T. You can put a space between the F and the I-Net if you want to.
+ I-Net short for Internet. If you do net stat, then space dash F-I-N-E-T.
+ That says only show the Internet socket activity, not the whole unit.
+ Don't include the Unix sockets, which is not stuff that we really have any interested at all.
+ Everything that I'm talking about, and also I just say that the command lines,
+ I'm going to focus on the Windows side because we have a-
+ That's where most of our listeners are.
+ Also over on the Mac, if you have the terminal window open, you can say man space net stat, M-A-N short for manual, man space net stat.
+ That will give you a screen of basically that will help you translate the things I'm talking about specifically over into the Unix side.
+ Of course, this works for free BSD and Linux listeners.
+ Also, we'll do the Windows version here.
+ First of all, you've got to get your command line up by clicking start, entering run, and typing net stat.
+ We're actually like command, I'm sorry, C-M-D, and then you'll have a command line window so you can do that.
+ Either that or in Windows users, all Windows systems start out with an option under the start menu that says MS-DOS-prompt.
+ And so probably the easiest thing for people to do is just hit start, go to programs, I think it's under accessor.
+ I don't have that, you have that.
+ MS-DOS-start really?
+ No, no, MS-DOS-prompt.
+ Yeah, I have command prompt because it isn't a Windows-DOS-index.
+ Right, right, right.
+ Yeah, they've also changed the name from time to time.
+ No MS-DOS anymore, that's why.
+ And so that will bring up a window.
+ Now, do you want to start off also with sizing this correctly?
+ Sometimes the window is sizable, in which case you want to probably stretch it out so it's the full height of your screen.
+ When you are doing these things with net stat, depending on how much network activity you have,
+ net stat will be doing sort of a log of everything happening on your machine, which can get long.
+ So the first thing you want to do is to stretch the window out, but you may want to be able to scroll back further if this window scrolls a lot.
+ So the way you can do that is click on the little icon in Windows on the upper left hand side of the window, and then choose properties, then there's a tab there, the layout tab, shows both a screen buffer and a window size.
+ If you change your screen buffer, this is in the number of lines, change that to maybe, I mean, it can be big, set it to 1,000 while you're doing this.
+ That way you'll be able to scroll way back as far as you need to if the stuff we're doing scrolls off the window.
+ So that will allow you now, so basically you've got now a command window opened, which allows you to enter commands, and we've got the window so that it's tall on your screen, and if you set your screen buffer size to like 1,000 and then clicked OK a few times to make it happy, you should now be able to scroll way back into the past.
+ For people who haven't used this command window a lot before, you want to know how to clear it in order from time to time like before you issue a command, you might want to just get rid of all of the history that is scrolled by.
+ The command for that is cls, that's the clear screen command, so cls and then press enter, we'll wipe that window clean and get ready for your next command.
+ Now, you'll get sort of a begin to get comfortable with what's going on, and I will encourage everyone not to freak out, I mean it looks complicated and it's got all kinds of stuff going on, but we're going to sort of tackle this step by step and simplify this so that it's pretty clear what's happening.
+ Look, I actually can see that I'm connected to Irvine, which I presume is you.
+ Oh yeah, I'm sure it is, and see, that's what's so cool is that, say for example, that you were going over to a friend's house because there, something was wrong with their computer, their modem light was flashing all the time, you know, their cable modem or DSL, or gotten really slow.
+ And the first thing you want to know is, okay, what's happening here with this computer?
+ Should I be concerned that I'm connected to France?
+ Maybe we'll get to that a little later on.
+ Well, I mean, and this is the beauty is remember that we're not here to like scare people, we're here to give people tools that they can use to answer these questions themselves.
+ I would say Leo, that if you didn't expect to be connected to France, then you will want to find out why you are.
+ So, for example, right now you could type netstat-b, b stands for binaries, that will add to the display the names of the programs that are responsible for every line in that netstat display.
+ Okay, and what that'll allow you to do is to find out which executable program in your system.
+ Skype.
+ Oh, interesting.
+ Am I a super node? Is that what that means?
+ Let's hope not.
+ No, I would think you're behind a router.
+ I am.
+ I've opened a whole poll in order to make this usable, and I see that somebody in Grenoble, France, is using me as well as LAX San Francisco.
+ I think probably these are you, the Comcast.net.
+ All of this is on Skype.
+ This is interesting.
+ Aren't you glad about netstat?
+ I couldn't ask for a better example, Leo.
+ I'll take a screenshot and show people.
+ People are going to think we were making this up or we set this up.
+ No, I know.
+ And in fact, I once went to a home of some people who were having some serious problems with their machine.
+ I think I referred to them before.
+ There was a machine that was sending traffic to us located in Irvine.
+ I went through the FBI to get their name and address, and the FBI contacted them and said,
+ "Would you mind if one of our friends came over and took a look at your computer?"
+ First thing I did was open a DOS box, type netstat, and it was like, "Oh, my God."
+ I mean, they had so much crud in their machine and a whole bunch of connections to 6667,
+ which is the default IRC port.
+ So, for example, if you say netstat and you see 6667s, there's a very good chance,
+ and when you're not knowingly using IRC, there's a chance that you've got an IRC Trojan
+ that has connected to a remote IRC server and is connected right now
+ and waiting to receive commands following exactly what we were talking about before,
+ about the whole bot armies and bot fleets and how all that works.
+ So, the beauty of this is it's built into the system.
+ It's always there, and you don't have to load or install or bring any software with you
+ if you want to find out what some computer is doing.
+ So, in general, the netstat display has four columns.
+ The leftmost column says "proto," and that's short for "proto call."
+ We've talked about TCP and UDP.
+ Netstat always sorts the protocol, so that all the TCP connections
+ and activities are shown first, followed by UDP.
+ The second column is the local address column.
+ Now, we've talked about how a socket is an IP address and a port.
+ So, what you'll see there is either an IP address, you know,
+ the standard something dot something dot something dot something.
+ If, for example, if we're looking at the local column, you might see your machine's own IP address,
+ 192.168.0.1 or whatever, then a colon and the port number.
+ So, the way the so-called socket is displayed, the socket endpoint
+ to use the full terminology, is an IP address and colon and the port number
+ that is involved in that.
+ You may see things that say 127.0.0.1.
+ We talked about that with regard to the host's file recently.
+ That's called the local host IP.
+ That's sort of an abbreviation or just another IP that represents your own machine.
+ I see that a lot on the Mac.
+ I don't see it on my Windows machine particularly.
+ Yeah, also over on the local side, you might see 0.0.0.0.
+ That's actually a wild card IP.
+ That means, you know, any IP.
+ So, for example, if you have some lines that show listening when it
+ displays, actually, if you just type netstat, like even dash B,
+ you won't see any lines that show listening because the normal netstat
+ command, just all by itself, only shows you either existing or
+ recently closed connections.
+ You need to say dash A, A stands for all.
+ Then you'll see, if you saw, if you say netstat dash A or over on the Mac,
+ you'd say netstat dash F, iNet, and then space dash A.
+ That will, now you will also see any listening sockets.
+ That's a lot longer list, too.
+ It is a lot longer list, and these are so-called open ports.
+ These are ports on your machine due to processes running in your machine,
+ which are, have open ports on our looking for incoming traffic.
+ Now, people should not freak out because this, remember, is the machine
+ itself that's inside the firewall that might be running on your machine,
+ and hopefully is, if you don't have any other protection,
+ and it's inside your net router.
+ So, the fact that these are open listening ports on your computer does not
+ mean that they are exposed to the public internet.
+ Let's mention a couple that you might see a lot of.
+ For instance, SVC host.exe.
+ I see that all the time when I run software firewalls,
+ I say service host is trying to connect.
+ What is that?
+ That's a general, sort of a generic hosting process that contains a whole
+ collection of Windows services.
+ So, it's an executable that is sort of like a PoPri.
+ The way Windows works, you're able to have multiple services
+ in a single executable.
+ So, it might be DNS, it might be your net BIOS technology.
+ It could be any of the services that you see when you enumerate
+ all of the services your system is running.
+ Many of them are sort of collected inside a single service host.exe file.
+ Right, and there's also LSAS, you see a lot of that.
+ Yes, that's the licensing security service.
+ And, of course, Sasser took advantage of that and named itself L-S-S-A-S-S.
+ Right.
+ And that was a sign that's Sasser.
+ So, let's hope you don't see that.
+ Windows, you'll often see port 135.
+ So, you'll see something that is cold in 135.
+ Auto also mentioned, I intended to sort of get to the --
+ Oh, I'm sorry.
+ We're going to do the columns.
+ We were doing the columns across.
+ Well, yeah, because then we'll talk about command line options.
+ Okay.
+ Because you're probably seeing things like DNS and netbios.
+ You know, various English versions.
+ If you do dash N, N stands for numeric, then you'll see these things
+ in numeric form rather than having them sort of --
+ Windows translating them into something easier.
+ And I don't know.
+ I'm just comfortable with port numbers because I know 53 is DNS
+ and 135 is RPC and so forth.
+ Okay, so we have the first column is protocols.
+ Second column is the local endpoint.
+ And the third column is the remote or the foreign address.
+ Well, that's the one that's really interesting because this --
+ And I'm sure this is where you've been seeing France and Irvine
+ and San Francisco and so forth.
+ These are the IP and port to which your computer is connected
+ at the moment.
+ You'll see that if you do a netstat dash A for all,
+ which will show you listening, then you'll see 0.0.0 colon
+ and a port, meaning that it will accept any connection incoming
+ from any IP, 0.0.0 being sort of a wild card,
+ sort of like star.star is in our file system.
+ And then the final column is called state,
+ which is the state that this connection or potential connection is in.
+ Most common states are listening,
+ meaning that you have a classic open port listening for any incoming traffic.
+ If you actually have connections established, that is --
+ I mean, that's what -- we've talked about the TCP three-way handshake
+ that establishes a connection.
+ And so now you have an agreement between your local machine
+ and some remote machine, then the word established will appear in that column,
+ meaning that that is an actual connection right now
+ that exists between your machine and that remote IP and port
+ that is able to exchange traffic.
+ And sometimes people will see time underscore weight.
+ Time weight is a state that TCP goes into at the end of an established connection
+ as it's being torn down that prevents packets coming in late from confusing the system.
+ So it's sort of like a delay before those endpoints can be used again.
+ It sort of holds that connection out of use
+ to allow the packets that might be still floating around the Internet
+ to die or no longer arrive before it will sort of release that for reuse
+ so that a new connection isn't confused by an old connection,
+ it's, you know, similar endpoint packets coming along.
+ So generally you'll see listening, meaning you've got open ports
+ and something is listening for incoming packets to accept a connection,
+ established for an existing connection or time weight for one
+ that was just connected but is no longer connected.
+ Then less common are sort of more of the TCP plumbing.
+ Sometimes you might see sin received or sin sent
+ that literally refers to the sin packets we've talked about often
+ that are involved in establishing a connection.
+ So that means that a connection is in the process of being set up.
+ And normally that happens so quickly that you won't see it in a net stat command,
+ but I've seen them and in fact on a busy server you typically will see them.
+ Now that isn't always updating itself though, right?
+ So actually net stat doesn't, it takes a snapshot right then.
+ There is a command line option that I think it's I for interval
+ that allows you to say, you know, do this.
+ Yeah, exactly, do it repetitively.
+ Now it's one of the cool things about TCP view.
+ Basically everything I've talked about here applies to the GUI version
+ of this that Mark wrote at Siss internals TCP view.
+ And it has a very nice feature where it does automatically update itself.
+ I think it's about every five seconds and you can control that interval.
+ And even cooler is it will highlight with a green and a red highlight
+ on the line as new things are added and as old things go away
+ to sort of draw your eye to the changes that are occurring in this list.
+ So one thing that people could do if they wanted to experiment with this
+ would be to open their web browser and do a little bit of web surfing,
+ maybe jump to a few different sites and then do a net stat command over in their DOS box.
+ And you'll suddenly see a bunch of stuff that wasn't there before.
+ You'll see established connections and time weight that has previously established connections
+ right there in the display and you'll see the IP address and port
+ or maybe even the host name that is the domain name and port
+ if the system is looking that up for you.
+ So the final thing you may see there's one fifth column called PID
+ which is the process ID.
+ People who have used tax manager before may have turned on the column
+ that shows you the process ID of the various programs.
+ This is a sort of a universal token which the system uses to identify
+ and essentially to number all the processes that are running in it at any given time.
+ There are some command line options to net stat
+ which produce additional information we'll talk about next.
+ And that also causes this PID that process ID column to display
+ although it's not particularly useful information unless you have some use
+ for associating that with the task manager display.
+ It's more useful to Unix folks who can then list processes and kill processes and that kind of stuff.
+ So in terms of command line options, so now we've got a DOS box,
+ we've got the window open, we've got our scroll so we can scroll back.
+ If this link is long, you can always, over on the window side,
+ you can always say net stat space slash question mark.
+ Sort of the standard, tell me, you know, what commands to use.
+ So it's the way of asking for like online help for the net stat command.
+ This is important because for example Windows 2000 has a different set of commands
+ than Windows XP does, XP has added some really nice new features.
+ And since most people are all over on XP, that's where I'm focusing.
+ And so if this doesn't work, if some of the things I'm talking about,
+ for example Windows 2000 does not show you the processes associated with the line items
+ that net stat has, there is no dash B for binaries.
+ So you're not able to do that.
+ You might, over on Windows 2000, do net stat space slash question mark.
+ And that will show you which command line options are available in your version of net stat.
+ And this even works on Windows 98.
+ I mean net stat has always been there since the TCP/IP stack arrived over on Windows.
+ So it's interesting because Windows has a number of command line utilities
+ and always has like IP config and net stat that are very useful.
+ But I think people don't really know they exist unless they have to troubleshoot a network connection or something like that.
+ Right, well it's funny too because I mean I had never given the man net stat command to a Mac.
+ And I was thinking, "Gee, I wonder, does the Mac have the full set of manuals?"
+ Well it doesn't have the full set, but it has a lot of manuals for a lot.
+ That's very handy because you can always find out more about a program.
+ Right, so over on net stat we've talked about the dash A command.
+ A stands for all whereas where net stat normally shows you only established connections
+ in order to find out what ports are listening and what services are associated with those listening ports.
+ You need to add an A to the command line options A for all and then you'll see a lot more information.
+ The B command for over on Windows XP also says show me which binaries that is the executables
+ are responsible on a line-by-line basis for being involved with this particular element of the stack.
+ Either something listening or something that has a connection in your machine.
+ And that's very valuable because it'll give you the application name.
+ It's good if you at least know what it is.
+ For example, Leo, I'm sure you saw Skype.exe.
+ Yeah, I mean that's pretty obvious.
+ Yeah, exactly. You know what Skype is now.
+ On the other hand, you're not sure why it seems to be connecting all over the planet.
+ But that's a start. At least I know who's connecting.
+ Exactly. And it's going to move that information.
+ I mean, I guess you could have named yourself Skype.exe.
+ Exactly. In fact, that was what my original leak test program.
+ You know, I wrote the first firewall leak tester that anyone ever created.
+ Just called it leak test. And what I realized was the firewalls were the early firewalls were saying,
+ "Hey, we're going to make sure that only applications you permit are able to use your internet connection."
+ It's like, "Well, that's good."
+ But at the time, there was only one firewall that was also at the time my favorite firewall, zone alarm.
+ Of course, that's no longer true. Now I'm a Kerrio fan.
+ But only zone alarm was actually checking the, basically, a cryptographic fingerprint of the application.
+ They were doing a hash to make sure that it really was the same application you had given permission to.
+ So all malware had to do was call itself explorer.exe.
+ Or, you know, or I explorer.exe to masquerade as internet explorer,
+ everyone would have given internet explorer permission through their firewall or they wouldn't be able to web surf.
+ And so anyway, my little leak test became very popular.
+ And within a very short period of time, every firewall manufacturer was virtually forced by their users to add this feature.
+ And now no firewall doesn't check to make sure it's really the application that you gave permission to.
+ So presumably, because of fingerprinting, when Netstat says it's Skype, it is Skype.
+ Actually, no, fingerprinting wouldn't prevent that forgery at this level.
+ It would prevent it from getting out of your firewall if you were running a personal firewall on your machine.
+ So there is no protection that this is actually Skype when I'm looking at it in Netstat.
+ That is true.
+ For example, what you could do is, well, for one thing, if you weren't running Skype and it said Skype is doing this,
+ it's like, I don't think so.
+ I mean, I don't have it.
+ And what you could do is, but don't do it now, Leo, because we are using Skype.
+ Like before, you mean?
+ You could close Skype and then run Netstat again and exactly see if all the Skype entries went away as you would expect them to.
+ So I mean, this is an incredibly powerful tool that I'm really glad we're talking about,
+ because for people who want to know what their computer is doing, this does it.
+ So just to finish with these, a couple of last command line options, A for all, B for showing binaries,
+ and instead of the normal display, it tries to do DNS lookups for the IPs, which is useful by default,
+ unless you want to see what the actual IP and port number is, you can get that by saying N, which is short for numeric.
+ So that says, give me this display in just numeric form, numeric IPs and ports,
+ instead of friendly human domain names and English versions of the port, like DNS instead of 53, for example.
+ Is there any reason, any time you'd prefer that over the English language?
+ I actually do.
+ You know the numbers.
+ Exactly.
+ So anyway, it's there as an option.
+ Even if you know the numbers, though, you don't know some of the internet addresses,
+ so the reverse lookup that it does on that is very useful.
+ Very good point.
+ Yes.
+ And the last one is a V option.
+ Now, I couldn't think of what V could possibly stand for, except perhaps very much more than you ever wanted to know.
+ We're both standing.
+ There you go.
+ That's exactly what it's for.
+ That's a lot of Unix commands.
+ It's noisy.
+ The noisy version.
+ Oh, well, in fact, in Windows XP, it is that to an extreme.
+ What it does is it shows you not only which executable is behind what's going on, but then in reverse order,
+ it shows you the hierarchy of internal Windows modules, which have been invoked in a stack, in a chain essentially,
+ all the way back down to the lowest level it can get.
+ So, for example, Skype is probably invoking something else, which is invoking something else,
+ which is invoking something else.
+ So I would imagine I'm not doing it.
+ I'm sure you can, Leo, if you were to do.
+ I'm doing it right now, and it's gone on for quite a while.
+ Yeah.
+ It's, like I said, very much more than you ever wanted to know.
+ And I don't really think that's very useful, except for real, serious computer guys.
+ If you didn't recognize what your application was by name, it might be that something it was calling would be more familiar,
+ although you'd still need to know what that main binary was that was, you know, starting up all of this traffic.
+ Right.
+ So that would be very useful.
+ So you can also concatenate these.
+ For example, you could say "netstat -abn" or "abnv", just all running together in order to put those together,
+ or probably just "ab".
+ I would think that's probably going to be the most popular connection collection,
+ because that's going to give you all of what's happening and tell you what the binaries are.
+ So you'll be able to see who is doing connections, who is listening to ports,
+ and what's going on.
+ Yeah, that's the one I use pretty much exclusively.
+ Yeah.
+ "netstat -abnv".
+ "space-dash -abnv".
+ Yes, exactly.
+ I think slash or dash both work.
+ Oh, okay.
+ So either way.
+ Anyway, there is a short course on netstat command, a very useful command,
+ which can be used, you know, again, no software needs to be installed.
+ It's available in any machine you approach.
+ You want to know what's going on.
+ This thing will tell you.
+ Now, and again, remember that listening ports are ports that are open on your machine
+ internally, but not any what you're exposed externally.
+ If you wanted to find out, for sure, you could use shields up, you know,
+ at mygrc.com, you're able to use the custom port probe feature that the GRC has.
+ You can put in any ports that you want specifically checked,
+ and I will send from GRC servers probes back to your IP at those ports
+ and tell you whether they're open or closed.
+ So you're able to do a custom port probe that way,
+ or just do the normal full service port scan, which doesn't take very long.
+ The test supports one through 10.56, I think it is, that I'm testing.
+ So, again, ports that are shown internally are not necessarily exposed,
+ they do represent something in your machine that would like to have the opportunity
+ to talk on the internet.
+ So, for example, you could have a Trojan in your machine,
+ which is not detected by any external software, like the shields up won't see
+ because you're being protected by a router or by your software firewall.
+ Nonetheless, you've got a Trojan, you might have a Trojan,
+ which has opened a port, a back door, that is wanting and hoping for someone
+ to connect to it.
+ So, it would be listening, and so this is still very useful information
+ because it shows you what's going on that would like to be had conversation,
+ even though it can't, you may want to get rid of it.
+ It may be something you don't want in your computer.
+ So, again, this nets deck command is like the way to do that.
+ I also fired up Kerrio, the Kerrio firewall briefly because I was sure
+ that I remembered that it had built in its own very nice connection monitor,
+ and I want to just verify that it did, and indeed it does.
+ In the overview, there is a connections tab, and Kerrio itself will show you
+ all of the current connections that it has through itself.
+ So, there's another way, if you happen to be using Kerrio and it's installed,
+ to see what's going on.
+ That's free, as well, from Sunbelt-Software.com.
+ Exactly.
+ But again, it's something that you have to install, and the nets deck command
+ is sort of a superset of that because it'll show even things that are listening
+ and haven't yet been able to establish a connection.
+ Now, here's a question for you.
+ If I have a root kit, like the Sony root kit, and it's listening,
+ is it visible in net stat?
+ Well, I don't think the Sony root kit was opening a port and listening,
+ so I wouldn't say that you could count on net stat, for example,
+ like to be a comprehensive process list that would show you all the processes running.
+ No, in fact, a root kit would not show up in the process list.
+ I wonder if it would show up, though, in the net stat list as making a connection.
+ Well, if it had its own stack, if it had its own stack, you wouldn't see it.
+ It would be a huge lot of work to circumvent the stack and get down to the adapter,
+ but you certainly could.
+ For example, there are network monitoring tools which install a low-level driver
+ that allow them to sniff the network traffic, and they don't show in net stat.
+ So it is really for things that are playing by the rules and behaving themselves.
+ I see why you've raised the point, and it's a very good one.
+ This is not a guaranteed display of absolutely everything going on,
+ because it's running in, and this is one of our standard laws of security,
+ because it's running in the same computer that your questioning,
+ or something malicious, might also be sharing.
+ There's no way you can ever trust anything in the same machine
+ as the one that might be hosting something malicious.
+ There just isn't a way.
+ And that's why people will use programs like NMap from outside the machine
+ to check those kinds of connections.
+ Well, yes, and in fact, we talked last week about the idea of,
+ and this was one of the questions raised in last week's Q&A.
+ I was asking, "How can I be really sure about what's going on?"
+ And the answer was, "Well, you can use a program like net stat,
+ a command like net stat, just to probably see what's going on."
+ And it's certainly super useful in 99.999% of the cases.
+ But to really know, you'd have to be running your machine's traffic
+ through another machine and be watching the traffic there,
+ or perhaps have an external firewall or router,
+ which is showing you what connections and traffic it has alive
+ and open at any given time.
+ But you lose, then, as soon as you step outside the machine,
+ you lose the ability to know which programs are running inside your machine.
+ And so I'll say lastly, that sysinternals has this program TCP view,
+ which is freeware, there's a pro version, which is not free,
+ but not very expensive. If you love TCP view,
+ you can look and see what the additional features of TCP view pro are.
+ One of them, for example, is that in earlier versions of the OS's,
+ 95, 98, I think in 2000,
+ the TCP view won't show you the processes running.
+ TCP view pro does, which is, as we've said, is very useful
+ to see who is listening, who is opening ports and established connections.
+ TCP view pro will do that for all versions of Windows operating systems.
+ And again, it's, you know, if you get comfortable with netstat,
+ the actual command line that we've been talking about,
+ and then run TCP view, even the freeware version,
+ you'll see it's exactly the same sort of display.
+ It's very comfortable, and it allows you just to kind of keep an eye
+ on what's going on in your computer from moment to moment.
+ And very handy.
+ If you want to keep an eye on what's going on in your computer all the time,
+ may I recommend our lovely sponsor,
+ the Astaro Corporation, makers of the Astaro Security Gateway.
+ If your small or medium business network needs superior protection from spam,
+ viruses, hackers,
+ as well as complete VPN capabilities, intrusion protection,
+ content filtering, and an industrial strength firewall,
+ all in a very easy to use, high performance appliance.
+ I want you to contact Astaro, a-s-t-a-r-o.com, or call 877,
+ the number four, a-s-t-a-r-o.
+ You can schedule a free trial of the Astaro Security Gateway appliance
+ in your business.
+ Of course, if you're a non-commercial user, you can download the software,
+ a-s-g, for home use at the same site, a-s-t-a-r-o.com.
+ We thank them for their support.
+ And as long as we're giving plugs out,
+ we can't forget to plug our good friends at grc.com.
+ Steve's site, you know, you were talking about how Mark and Assistant Turnals
+ have been giving away all this great software, and everybody loves it.
+ I was just thinking, you've done much the same thing.
+ You have a lot of very useful free utilities that you've put out there.
+ Yeah, well, you know, I've written things that there's been a need for.
+ There was, you know, when firewalls weren't checking,
+ as we were talking before, that the real program was what was happening.
+ The program might be masquerading as a different file name.
+ I wrote leak tests.
+ All right.
+ When I discovered that Ori8 spyware, I wrote opt-out to be, you know,
+ the very first spyware eliminator, the detector and eliminator.
+ And then, of course, through the years, I've continued to write freeware.
+ And more, yeah.
+ Exactly.
+ Deconbobulator, shoot the messenger, unplug and pray.
+ Well, in fact, you and I first met at tech TV when I had tip,
+ trouble and paradise.
+ Yeah, the click of death.
+ The click of death for the Iomega cartridges.
+ They've always been a boon anybody who wants to know more and should
+ everybody who's testing their security should be trying it through shields up.
+ It's grc.com.
+ You'll see a link there for shields up.
+ And of course, Steve's bread and butter, the fabulous Spinrite,
+ S-P-I-N-R-I-T-E, which is everybody, including my,
+ me personally, my favorite disc recovery and maintenance utility.
+ You learn, it's, you know, if you're interested in information,
+ you know, it's fun to look at netstat, but you want to find out more about what your hard drive is doing.
+ Just run Spinrite.
+ Unbelievable.
+ There's a lot of information there.
+ You showed me, and this is something everybody should try out,
+ just watch how many error corrections.
+ A second, your hard drive is doing.
+ Yes.
+ It's a lot.
+ Well, and actually it's fun because the ECC used to be something that was only being done
+ in the event of like a problem with a sector that needed to be relocated.
+ Now, drive's density has gotten so high that ECC is happening on the fly all the time.
+ All the time.
+ But what's neat is that it creates a very useful early warning system.
+ If the rate that is the level of ECC started to increase over what it was when the drive was new,
+ that would be an early red flag that the drive was having more trouble.
+ Certainly, Spinrite will show that too.
+ It's interesting, but it's a great diagnostic.
+ Spinrite is really, I mean anybody who works with hard drives knows.
+ I don't have to tell them.
+ But for those of you who are new to this or have a problem with hard drive that you want to recover
+ or just want to know more, s-p-i-n-r-i-t-e.info.
+ That's all the testimonials and a link to where you can get a copy of Spinrite for yourself from g-r-c.com.
+ We have come to the end of, I think, one of the most interesting shows.
+ I think Netstat is such a useful tool, and I love tools where you can investigate your system.
+ I know users do too.
+ Well, it's a little daunting when you first give the command, but if people will not run away from the screen,
+ just sort of sit there and go, "Okay, now, wait.
+ Well, in fact, I think if people do Netstat -ab, they're going to see a bunch of stuff.
+ And just like you did, Leo, it's like, "Okay, what's going on?
+ What is France connecting with?"
+ Exactly, and that's what we're all about.
+ This show, and in fact, all of the shows on Twit.TV are not aimed at people who just want to use the computer
+ and not curious about it, not interested in how it's working or what it's doing.
+ But we're aimed at people who are curious.
+ And if you're interested in your machine, this is just a great little tool.
+ I think everybody who listens to one another more.
+ Thank you, Steve.
+ Reminder, we've got a brand new site, Twit.TV.
+ All new, fresh and shiny, just for you.
+ The paint was really nice.
+ It's much easier, I think, now to find the podcast.
+ And listen to them right on the site with a great flash player that was designed by Mike Hogue,
+ so thank you, Mike, for that.
+ And there's also the donation buttons, and we certainly do appreciate your donations.
+ They are what keeps this podcast afloat.
+ Just to make it clear, you know, we do have advertising.
+ That money goes to the podcasters, the contributors, as salaries.
+ The money that you donate goes to infrastructure, things like the web design, the bandwidth,
+ the web hosting, the rental for the offices, the equipment, all of that stuff.
+ And those expenses are not minuscule, trust me.
+ Your contribution has made this network possible, and we really do thank you for that.
+ Twit.TV.
+ And now my friends, the time has come to say good night.
+ Little Stevie Gibson.
+ For one week.
+ For one week.
+ Next week?
+ Next week is we're going to plow into a really interesting topic, which is virtual machine technology.
+ Oh, I'm excited.
+ We're going to begin that.
+ That's going to be a two-parter, isn't it?
+ It's going to be a multi-parter because it's extremely useful.
+ And I want to lay down some foundation.
+ Again, I want to approach this and really fully cover it because for the growing concern of
+ security, virtual machine technology allows true sandboxing and encapsulation of potentially
+ dangerous internet experiences in a way that won't allow anything that happens to affect
+ anything outside the sandbox.
+ Nothing can get to your machine.
+ So some really cool stuff there, and we'll start talking about it next week.
+ Very cool.
+ Thank you, Steve.
+ We'll see you next time on Security Now.
+ Security Now.
