@@ -1,586 +1,486 @@
 # Frequently Asked Questions (FAQ)
 
-Common questions about the Security Now! Archive Tools project.
-
----
+Quick answers to common questions about the Security Now Archive Tools.
 
 ## General Questions
 
 ### What is this project?
 
-This is a PowerShell-based automation toolkit that helps Security Now! fans build personal archives of show notes and transcripts from official sources (GRC and TWiT.tv).
-
-**What it does:**
-- Downloads official show notes PDFs from Steve Gibson's GRC website
-- Generates AI transcripts for episodes that never had official notes
-- Organizes everything by year in a clean folder structure
-- Maintains a CSV index of all episodes
-
-**What it does NOT do:**
-- Redistribute copyrighted content (PDFs, audio, or transcripts)
-- Stream or play podcast episodes
-- Modify or edit Steve Gibson's original content
-
----
-
-### Who is this for?
-
-This project is designed for:
-- **Security Now! fans** who want a searchable local archive for research
-- **Researchers** studying security topics covered across 1000+ episodes
-- **Students** learning from Steve Gibson's explanations
-- **IT professionals** referencing specific episodes for work
-
-**Technical skill level:** Beginner-friendly. If you can follow step-by-step instructions, you can use this.
-
----
-
-### Is this official?
-
-**No.** This is an unofficial, fan-created tool.
-
-- It is NOT affiliated with Steve Gibson, GRC, or TWiT.tv
-- It is NOT endorsed by the Security Now! podcast
-- All Security Now! content remains © Steve Gibson / GRC and TWiT.tv
-
-**Official resources:**
-- [GRC Security Now! page](https://www.grc.com/securitynow.htm)
-- [TWiT Security Now! page](https://twit.tv/shows/security-now)
-
----
-
-## Legal & Copyright
+A set of PowerShell tools that help you build and maintain a **personal archive** of Steve Gibson's Security Now podcast show notes, transcripts, and audio files. The tools automate downloading from official sources (GRC.com and TWiT.tv) and organizing everything locally.
 
 ### Is this legal?
 
-**Yes**, with important caveats:
+Yes, with important caveats:
 
-**What IS legal:**
-- ✅ Downloading public content from GRC for personal use
-- ✅ Automating your own personal archive
-- ✅ Creating AI transcripts of publicly available audio for personal research
-- ✅ Sharing the automation **tools** (scripts, not content)
+- ✅ **Downloading for personal use** is legal (like recording TV shows)
+- ✅ **Sharing the tools** (scripts) is legal (they're open source)
+- ❌ **Publicly distributing copyrighted content** (PDFs, MP3s) is NOT legal
 
-**What is NOT legal:**
-- ❌ Redistributing Steve Gibson's PDFs or TWiT audio files
-- ❌ Selling or monetizing Security Now! content
-- ❌ Claiming AI transcripts as official Steve Gibson notes
-- ❌ Bypassing paywalls or DRM
+This is why we use two repositories: public for tools, private for your personal media.
 
-**Bottom line:** This project helps you build a *personal archive* from *public sources*. It does not redistribute copyrighted material.
+### Does Steve Gibson or GRC endorse this?
 
----
+No. This is an **independent, fan-created project**. Steve Gibson and GRC are not affiliated with this project. Always support the official sources:
 
-### Can I share my archive with others?
+- Official show notes: https://www.grc.com/securitynow.htm
+- Official podcast: https://twit.tv/shows/security-now
 
-**No, you should not share the media files.**
+### Why not just use one repository?
 
-**Do NOT share:**
-- ❌ PDF files (official or AI-generated)
-- ❌ MP3 audio files
-- ❌ Transcript text files
+Copyright law. We cannot legally share Steve Gibson's show notes (PDFs) or TWiT's audio files (MP3s) publicly. The dual-repo design lets us:
 
-**You CAN share:**
-- ✅ This GitHub repository (tools only)
-- ✅ Links to official GRC/TWiT pages
-- ✅ Your CSV index (episode numbers and URLs)
+- Share the **tools** openly (public repo)
+- Keep **copyrighted media** private (private repo)
+- Automate synchronization between them
 
-**Why?** The PDFs, audio, and transcripts are copyrighted. Even though you downloaded them legally for personal use, redistributing them violates copyright law.
+See [Architecture.md](Architecture.md) for details.
 
 ---
 
-### What about AI-generated transcripts?
+## Setup Questions
 
-**AI transcripts are NOT Steve Gibson's work.**
+### What do I need to get started?
 
-This project generates them ONLY for episodes that:
-1. Never had official show notes (early episodes, audio-only Q&A episodes)
-2. Are publicly available as audio on GRC or TWiT.tv
+**Required**:
+- Windows 10/11
+- PowerShell 5.1+ (built into Windows)
+- Git for Windows
+- Internet connection
 
-**Legal basis:**
-- You're transcribing publicly available audio for personal research (fair use)
-- AI transcripts are clearly marked with disclaimers
-- They supplement, not replace, Steve's official notes where available
+**Optional** (for AI transcripts):
+- Python 3.8+
+- OpenAI Whisper CLI
+- Microsoft Edge or Google Chrome (for web scraping)
 
-**Important:** Do NOT:
-- Share AI transcripts as if they're official
-- Claim they represent Steve Gibson's views accurately
-- Use them commercially
+### How much disk space do I need?
 
----
+**Estimates** (as of 2026):
+- PDFs only: ~2-3 GB
+- MP3s only: ~15-20 GB
+- AI transcripts: ~500 MB
+- **Complete archive**: ~20-25 GB
 
-## Technical Questions
+Plan for more as new episodes are released.
 
-### What are the system requirements?
+### Do I need a GitHub account?
 
-**Minimum:**
-- **OS:** Windows 10/11, macOS 10.15+, or Linux (Ubuntu 20.04+, etc.)
-- **PowerShell:** Version 7.0 or higher
-- **Disk space:** 5-10 GB for full archive (1000+ PDFs + AI transcripts)
-- **RAM:** 4 GB (8 GB recommended for AI transcription)
-- **Internet:** Broadband connection
+Yes, to create your own private repository for storing media files. GitHub offers free private repos with Git LFS (for large files).
 
-**Optional (for HTML → PDF conversion):**
-- **wkhtmltopdf** ([Download](https://wkhtmltopdf.org/downloads.html))
-  - Windows: MSI installer (adds to PATH automatically)
-  - macOS: `brew install wkhtmltopdf`
-  - Linux: `apt-get install wkhtmltopdf` or `yum install wkhtmltopdf`
+### Can I use this on Mac or Linux?
 
-**Optional (for AI transcripts):**
-- **whisper.cpp** (speech-to-text engine)
+The scripts are PowerShell-based (Windows), but PowerShell Core runs on Mac/Linux. You may need to modify file paths and some commands. Community contributions for cross-platform support are welcome!
 
 ---
 
-### Does this work on macOS or Linux?
+## Usage Questions
 
-**Yes!** The scripts are fully cross-platform with PowerShell 7.
+### How do I download all episodes?
 
-**Installation:**
-- **macOS:** `brew install powershell wkhtmltopdf`
-- **Linux:** Install PowerShell 7 ([instructions](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-linux))
-
-**What works cross-platform:**
-- ✅ Downloading PDFs from GRC
-- ✅ HTML → PDF conversion (via wkhtmltopdf)
-- ✅ Building the CSV index
-- ✅ Organizing files by year
-- ✅ AI transcription (whisper.cpp available on all platforms)
-
-**Path differences:**
-- Windows: `C:\whisper\main.exe`
-- macOS/Linux: `/usr/local/bin/main` or `~/whisper.cpp/main`
-
----
-
-### How long does the initial run take?
-
-**Expect 3-8 hours** for a full archive:
-
-| Phase | Time |
-|-------|------|
-| Downloading 500+ PDFs | 30-60 minutes |
-| AI transcription (~100 episodes) | 2-7 hours |
-| Organizing and indexing | 5-10 minutes |
-
-**Variables:**
-- Internet speed (downloads)
-- CPU speed (AI transcription)
-- Whisper model size (`tiny` = fast, `medium` = slow but accurate)
-
-**Tip:** Run overnight or while you're away from your computer.
-
----
-
-### Can I pause and resume?
-
-**Yes!** The script is designed to be interruptible:
-
-- Press `Ctrl+C` to stop at any time
-- Re-run the script later
-- It automatically **skips files that already exist**
-- No need to start over from scratch
-
-**Example:**
 ```powershell
-# Start the archive
-.\scripts\SecurityNow-EndToEnd.ps1
-
-# (Runs for 2 hours, then you need to leave)
-# Press Ctrl+C to stop
-
-# Later, resume where you left off:
-.\scripts\SecurityNow-EndToEnd.ps1
-# Skips 200 already-downloaded PDFs, continues with remaining episodes
-```
-
----
-
-### What if a download fails?
-
-**The script handles failures gracefully:**
-
-1. **Network errors:** Logs a warning, moves to the next episode
-2. **404 Not Found:** Marks the episode as missing, attempts AI transcript
-3. **403 Forbidden:** Waits 5 seconds, retries once
-
-**You can manually retry** specific episodes by deleting the local file and re-running the script.
-
-**Example:**
-```powershell
-# Episode 432 failed to download
-Remove-Item $HOME\SecurityNowArchive\local\PDF\2013\sn-432-notes.pdf
-
-# Re-run script to retry just that episode
+cd D:\Desktop\SecurityNow-Full-Private
 .\scripts\SecurityNow-EndToEnd.ps1
 ```
 
----
+The script will:
+1. Check which episodes you already have
+2. Download missing PDFs from GRC.com
+3. Download missing MP3s from TWiT.tv
+4. Generate AI transcripts (if configured)
+5. Update the CSV index
 
-### Why are some transcripts missing?
+### How do I update my archive with new episodes?
 
-**Possible reasons:**
+Run the same command! The script is smart:
 
-1. **Whisper.cpp not installed** or path incorrect
-2. **MP3 audio unavailable** from GRC/TWiT
-3. **Model file missing** (e.g., `ggml-base.en.bin`)
-4. **Insufficient disk space** or RAM during transcription
-5. **Episode is a video-only special** (no audio-only MP3)
+- Skips episodes you already have
+- Only downloads new episodes
+- Updates the CSV index
 
-**Check the console output** for error messages during the AI transcription phase.
-
----
-
-### How accurate are AI transcripts?
-
-**Accuracy varies:**
-
-| Whisper Model | Accuracy | Speed | Disk Space |
-|---------------|----------|-------|------------|
-| `tiny.en` | ~85% | Fastest | 75 MB |
-| `base.en` | **~90%** (recommended) | Fast | 142 MB |
-| `small.en` | ~93% | Moderate | 466 MB |
-| `medium.en` | ~95% | Slow | 1.5 GB |
-
-**Common errors:**
-- Technical jargon ("Diffie-Hellman" → "difficult helmet")
-- Acronyms ("AES" → "ace")
-- Names ("Schneier" → "schneider")
-
-**Recommendation:** Use `base.en` for a good balance of speed and accuracy. Review transcripts before relying on them for critical research.
-
----
-
-### Can I search the archive?
-
-**Yes, but not built-in.**
-
-This project creates the files; you need a separate tool to search them:
-
-**Options:**
-- **Windows Search:** Index the `SecurityNowArchive` folder
-- **Everything (software):** Lightning-fast filename search
-- **DocFetcher:** Free desktop search for PDF content
-- **PowerShell:** `Select-String` for text search across files
-
-**Example PowerShell search:**
-```powershell
-# Find all PDFs mentioning "ransomware"
-Get-ChildItem -Path $HOME\SecurityNowArchive -Recurse -Filter *.pdf |
-  Select-String -Pattern "ransomware" | Select-Object Path
-```
-
----
-
-## Maintenance
-
-### How do I update for new episodes?
-
-**Simply re-run the script:**
+### Can I download just specific episodes?
 
 ```powershell
-cd path\to\securitynow-archive-tools
-.\scripts\SecurityNow-EndToEnd.ps1
+# Single episode
+.\scripts\SecurityNow-EndToEnd.ps1 -EpisodeNumber 950
+
+# Range of episodes
+.\scripts\SecurityNow-EndToEnd.ps1 -StartEpisode 900 -EndEpisode 950
 ```
 
-**What happens:**
-1. Checks GRC for new episodes since your last run
-2. Downloads any new official notes PDFs
-3. Skips all existing files (fast!)
-4. Updates the CSV index
+### Can I skip AI transcription?
 
-**Recommendation:** Run monthly or after each new episode release.
+Yes! AI transcription is optional. You can:
 
----
+- Skip the Whisper installation
+- Comment out transcription code in the script
+- Just download PDFs and MP3s
 
-### What if GRC changes their website?
+### How long does it take to build a complete archive?
 
-**This project may break** if GRC restructures their archive pages.
+**Depends on**:
+- Your internet speed
+- Whether you generate AI transcripts
+- Which episodes you download
 
-**How to check:**
-1. Visit [GRC Security Now!](https://www.grc.com/securitynow.htm)
-2. Verify the PDF links still follow the pattern: `https://www.grc.com/sn/sn-###-notes.pdf`
-
-**If broken:**
-- Check for [open issues](https://github.com/msrproduct/securitynow-archive-tools/issues)
-- Report a new issue with details
-- Community contributions welcome to fix!
+**Rough estimates**:
+- PDFs only: 1-2 hours
+- PDFs + MP3s: 3-5 hours
+- Everything + AI transcripts: 10-20+ hours (run overnight)
 
 ---
 
-### How do I back up my archive?
+## Sync Questions
 
-**Your archive is stored locally** in the folder you configured (e.g., `$HOME\SecurityNowArchive`).
+### When should I run Sync-Repos.ps1?
 
-**Backup options:**
+Run it whenever you:
+- Update any script in `scripts/`
+- Modify documentation in `docs/`
+- Change `README.md` or other root files
+- Update the CSV index
 
-1. **Cloud storage:**
-   ```powershell
-   # Copy to OneDrive, Dropbox, Google Drive, etc.
-   Copy-Item -Path $HOME\SecurityNowArchive -Destination "$HOME\OneDrive\Backups\" -Recurse
-   ```
+**Don't need to run** for:
+- Downloading new PDFs or MP3s (media stays private)
 
-2. **External drive:**
-   ```powershell
-   Copy-Item -Path $HOME\SecurityNowArchive -Destination "E:\Backups\" -Recurse
-   ```
+### What if I edited files in the public repo?
 
-3. **ZIP archive:**
-   ```powershell
-   Compress-Archive -Path $HOME\SecurityNowArchive -DestinationPath "$HOME\Desktop\SecurityNow-Backup.zip"
-   ```
+Your changes will be **overwritten** on next sync. The sync direction is:
 
-**Reminder:** This is YOUR personal archive. Do NOT upload to public cloud shares or file-sharing sites.
+**Private → Public** (one-way)
 
----
+Always edit in the private repo, then sync.
 
-## Repository Sync Questions
-
-### What is the Sync-Repos.ps1 script?
-
-**Purpose:** Automatically synchronizes non-copyrighted files between your private archive (which includes PDFs/MP3s) and the public GitHub repository (scripts and docs only).
-
-**Why it exists:**
-- Keeps your private complete archive
-- Shares improvements with the community
-- Prevents accidental copyright violations
-- Automates what would otherwise be manual copying
-
-**See:** [SYNC-REPOS-GUIDE.md](SYNC-REPOS-GUIDE.md) for full documentation.
-
----
-
-### Do I need two repositories?
-
-**No, but it's recommended** if you want to contribute back to the community.
-
-**Single repo (simpler):**
-- Clone the public repo
-- Run scripts to build your archive
-- Keep everything local
-- Don't push to GitHub
-
-**Two repos (advanced):**
-- **Private repo:** Your complete archive with media files
-- **Public repo:** Scripts and docs only
-- Use `Sync-Repos.ps1` to keep them in sync
-- Contribute improvements to public repo safely
-
----
-
-### How do I set up the two-repo workflow?
-
-**Step-by-step:**
-
-1. **Clone public repo:**
-   ```powershell
-   git clone https://github.com/msrproduct/securitynow-archive-tools.git SecurityNow-Full
-   ```
-
-2. **Create private copy:**
-   ```powershell
-   Copy-Item -Path SecurityNow-Full -Destination SecurityNow-Full-Private -Recurse
-   cd SecurityNow-Full-Private
-   ```
-
-3. **Initialize as separate repo:**
-   ```powershell
-   Remove-Item -Path .git -Recurse -Force
-   git init
-   git add .
-   git commit -m "Initial private archive"
-   ```
-
-4. **Create private GitHub repo** (via website)
-
-5. **Push to private:**
-   ```powershell
-   git remote add origin https://github.com/YOUR-USERNAME/securitynow-full-archive.git
-   git branch -M main
-   git push -u origin main
-   ```
-
-6. **Use sync script:**
-   ```powershell
-   .\scripts\Sync-Repos.ps1
-   ```
-
-**See:** [QUICK-START.md](QUICK-START.md#two-repo-setup-private--public) for detailed instructions.
-
----
-
-### What files does Sync-Repos.ps1 sync?
-
-**Synced (private → public):**
-- ✅ `README.md`
-- ✅ `LICENSE`
-- ✅ `docs/` folder (all documentation)
-- ✅ `scripts/` folder (all scripts)
-- ✅ `data/SecurityNowNotesIndex.csv`
-
-**Never synced (stays private):**
-- ❌ `local/PDF/` (official and AI-generated PDFs)
-- ❌ `local/mp3/` (audio files)
-- ❌ `local/Notes/ai-transcripts/` (transcripts)
-- ❌ `.gitignore` (each repo maintains its own)
-
----
-
-### How do I test sync without making changes?
-
-**Use dry-run mode:**
+### How do I test sync before running it?
 
 ```powershell
 .\scripts\Sync-Repos.ps1 -DryRun -Verbose
 ```
 
-**Output shows:**
-- What files would be synced
-- What's already in sync
-- What would be skipped
-- **No changes are made**
+This shows what would be synced without making changes.
 
-**Perfect for:**
-- Verifying sync before running
-- Checking if repos are already in sync
-- Testing after making changes
+### Does syncing copy my media files?
 
----
+No! The sync script is designed to **exclude** copyrighted content:
 
-### Sync script says "Files synced: 0" - is that normal?
-
-**Yes!** This is **good** - it means:
-
-✅ Both repos are perfectly in sync  
-✅ No changes need to be copied  
-✅ Script is working correctly  
-
-**You'll see non-zero counts when:**
-- You've edited files in the private repo
-- You've added new scripts
-- You've updated documentation
-- First time running after changes
+- ❌ `local/PDF/` (not synced)
+- ❌ `local/mp3/` (not synced)
+- ❌ `local/Notes/ai-transcripts/` (not synced)
+- ✅ `scripts/` (synced)
+- ✅ `docs/` (synced)
+- ✅ CSV index (synced)
 
 ---
 
-### Can I edit files in the public repo directly?
+## AI Transcription Questions
 
-**Not recommended.** The sync script copies from private → public (one-way).
+### What is AI transcription?
 
-**What happens if you edit public repo:**
-- Next sync will **overwrite** your changes
-- You'll lose your edits
+Using OpenAI's Whisper model to automatically generate text transcripts from MP3 audio files. This gives you searchable text for episodes that never had official show notes.
 
-**Correct workflow:**
-1. Edit files in **private** repo
-2. Commit to private repo
-3. Run `Sync-Repos.ps1`
-4. Changes automatically pushed to public
+### Why generate transcripts when official notes exist?
 
-**Exception:** If you only have a public repo (no private), edit directly and push normally.
+Some early episodes (especially 2005-2006) don't have official show notes. AI transcripts fill those gaps.
+
+### How accurate are AI transcripts?
+
+Pretty good! Whisper is state-of-the-art, but:
+
+- ✅ Generally 90-95% accurate for clear audio
+- ❌ Technical terms may be misspelled
+- ❌ Speaker attribution not perfect
+- ❌ Can miss context or nuance
+
+**Important**: AI transcripts are labeled as such and are NOT official show notes.
+
+### Can I edit AI transcripts?
+
+Yes! They're plain text files in `local/Notes/ai-transcripts/`. Feel free to:
+
+- Fix technical terms
+- Add formatting
+- Correct errors
+- Add timestamps
+
+### Do I need a GPU for transcription?
+
+No, but it helps:
+
+- **CPU**: Works fine, just slower (5-10x real-time)
+- **GPU**: Much faster (1-2x real-time)
+
+Use smaller models (`tiny`, `base`) on CPU for speed.
+
+### Can I use a different AI model?
+
+Yes! The scripts can be modified to use:
+
+- Different Whisper models (`tiny`, `base`, `small`, `medium`, `large`)
+- Other transcription services (Azure, AWS, Google Cloud)
+- Local Whisper variants (faster-whisper, whisper.cpp)
+
+Community contributions welcome!
 
 ---
 
-### Sync failed with "Git operations failed" - what now?
+## Copyright & Ethics Questions
 
-**Don't worry!** The files are already synced locally.
+### Why keep media in a private repo?
 
-**Cause:** Network issue, authentication problem, or merge conflict.
+Copyright compliance. The PDFs and MP3s are copyrighted by Steve Gibson/GRC and TWiT. We cannot legally distribute them publicly, but you can download them for personal use.
 
-**Solution:**
+### Can I share my private repo with friends?
+
+No. Your private repo contains copyrighted content. Keep it private and respect the creators' rights.
+
+### What if Steve Gibson asks me to take it down?
+
+We'd comply immediately. This project exists to help fans organize their personal archives, not to undermine the creators. If you're concerned, **support Security Now** through official channels:
+
+- Visit https://www.grc.com
+- Listen at https://twit.tv/shows/security-now
+- Consider sponsoring TWiT or donating to Steve's projects
+
+### Are AI transcripts copyrighted?
+
+Unclear legal area. AI transcripts are **derivative works** of copyrighted audio, so we treat them the same as the original media:
+
+- Keep them private
+- Don't distribute publicly
+- Label as AI-generated
+
+### Can I contribute to this project?
+
+Yes! We welcome:
+
+- ✅ Script improvements
+- ✅ Documentation updates
+- ✅ Bug fixes
+- ✅ Feature suggestions
+
+Contribute via pull requests to the **public repo** only (no copyrighted content).
+
+---
+
+## Technical Questions
+
+### Why PowerShell and not Python/Bash/etc?
+
+PowerShell is:
+
+- Built into Windows (no installation needed)
+- Excellent for file operations and web requests
+- Good Git integration
+- Familiar to Windows sysadmins
+
+Python/cross-platform versions could be community contributions!
+
+### Can I run this on a schedule (automation)?
+
+Yes! Use Windows Task Scheduler:
 
 ```powershell
-# Navigate to public repo
-cd D:\Desktop\SecurityNow-Full
-
-# Check status
-git status
-
-# Try pushing manually
-git push origin main
-
-# If authentication fails, check your GitHub token
+# Create a scheduled task
+$action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-File D:\Desktop\SecurityNow-Full-Private\scripts\SecurityNow-EndToEnd.ps1"
+$trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Sunday -At 2am
+Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "SecurityNow-Update"
 ```
 
-**See:** [TROUBLESHOOTING.md](TROUBLESHOOTING.md#git-issues) for detailed solutions.
+### What's the CSV index for?
+
+The `SecurityNowNotesIndex.csv` file tracks:
+
+- Episode numbers and titles
+- Publication dates
+- File locations (PDF, MP3, transcript)
+- Metadata (duration, size, etc.)
+
+You can use it to:
+
+- Search episodes
+- Generate reports
+- Build a web interface
+- Create playlists
+
+### Can I build a searchable database?
+
+Yes! The CSV and text transcripts make this possible. You could:
+
+- Import CSV into SQLite/MySQL
+- Full-text index transcripts
+- Build a web interface (Electron app, local web server)
+- Use tools like Obsidian or Notion
+
+Community projects for this are encouraged!
+
+### Why Git LFS?
+
+Git Large File Storage (LFS) prevents your repo from getting bloated:
+
+- Regular Git stores full history of every file version
+- With 20GB of media, this would be massive
+- Git LFS stores large files separately
+- Your repo stays fast and manageable
 
 ---
 
-## Contributing
+## Troubleshooting Questions
 
-### Can I contribute improvements?
+### Script gives "Execution Policy" error
 
-**Yes!** Contributions are welcome.
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 
-**See:** [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
+See [Troubleshooting.md](Troubleshooting.md) for details.
 
-**Popular contribution ideas:**
-- Improve error handling
-- Add macOS/Linux support
-- Better progress indicators
-- Enhanced CSV export formats
-- Integration with note-taking apps
+### Git says "Authentication Failed"
 
----
+GitHub no longer accepts passwords. Use a Personal Access Token (PAT):
 
-### I found a bug. What should I do?
+1. Go to https://github.com/settings/tokens
+2. Generate new token with `repo` access
+3. Use token as password when prompted
 
-1. Check [existing issues](https://github.com/msrproduct/securitynow-archive-tools/issues)
-2. If not already reported, [open a new issue](https://github.com/msrproduct/securitynow-archive-tools/issues/new)
-3. Include:
-   - PowerShell version
-   - OS version
-   - Error message (full text)
-   - Steps to reproduce
+See [Troubleshooting.md](Troubleshooting.md) for full instructions.
 
----
+### Downloads are failing
 
-## Support
+Check:
 
-### Where can I get help?
+1. Internet connection
+2. GRC.com and TWiT.tv are accessible
+3. Episode actually exists (not all episodes have PDFs)
+4. Rate limiting (script should handle this)
 
-**Resources:**
+See [Troubleshooting.md](Troubleshooting.md) for solutions.
 
-1. **Documentation:**
-   - [README.md](../README.md) - Quick start guide
-   - [QUICK-START.md](QUICK-START.md) - Beginner-friendly setup
-   - [WORKFLOW.md](WORKFLOW.md) - Detailed step-by-step instructions
-   - [SYNC-REPOS-GUIDE.md](SYNC-REPOS-GUIDE.md) - Sync script documentation
-   - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Problem solving
+### Sync says files are different but they look the same
 
-2. **Community:**
-   - [GitHub Issues](https://github.com/msrproduct/securitynow-archive-tools/issues) - Bug reports and questions
-   - [GitHub Discussions](https://github.com/msrproduct/securitynow-archive-tools/discussions) - General discussion
+Line ending differences (CRLF vs LF). Configure Git:
 
-3. **Security Now! Community:**
-   - [GRC Forums](https://forums.grc.com/)
-   - [/r/SecurityNow subreddit](https://www.reddit.com/r/SecurityNow/)
+```powershell
+git config core.autocrlf true
+```
 
-**Note:** This is a community project with no official support. Response times vary.
+See [Troubleshooting.md](Troubleshooting.md) for details.
+
+### Where do I find more help?
+
+1. Check [Troubleshooting.md](Troubleshooting.md)
+2. Review [Sync-Repos-Guide.md](Sync-Repos-Guide.md)
+3. Read [Architecture.md](Architecture.md)
+4. Open an issue on GitHub (public repo only)
 
 ---
 
-### Can I hire someone to set this up for me?
+## Future Plans
 
-**This is a free, community project** with no commercial support.
+### Will there be a GUI?
 
-**However:**
-- The setup is designed to be beginner-friendly
-- Follow the [QUICK-START.md](QUICK-START.md) step-by-step
-- Ask for help in [GitHub Discussions](https://github.com/msrproduct/securitynow-archive-tools/discussions) if stuck
+Not currently planned, but community contributions welcome! Possibilities:
 
-**If you're a business** needing professional assistance, consider hiring a freelance PowerShell developer on platforms like Upwork or Fiverr to help with setup.
+- PowerShell GUI (Windows Forms)
+- Electron app
+- Web interface (local server)
+
+### Will you add video support?
+
+Security Now is primarily audio, but if TWiT releases video versions, we could add support. Community contributions welcome!
+
+### Can this work with other podcasts?
+
+The architecture is Security Now-specific (GRC.com URLs, TWiT.tv structure), but the concepts apply to any podcast. Fork and adapt!
+
+### Will you add cloud storage integration?
+
+Potential features:
+
+- OneDrive/Dropbox sync
+- Cloud backup automation
+- Multi-device sync
+
+Community contributions welcome!
 
 ---
 
-## Still Have Questions?
+## Getting Involved
 
-**Didn't find your answer?**
+### How can I contribute?
 
-1. Search [existing issues](https://github.com/msrproduct/securitynow-archive-tools/issues)
-2. Check the [TROUBLESHOOTING.md](TROUBLESHOOTING.md) guide
-3. Review the [QUICK-START.md](QUICK-START.md) setup instructions
-4. Ask in [GitHub Discussions](https://github.com/msrproduct/securitynow-archive-tools/discussions)
+1. Fork the **public repo**: https://github.com/msrproduct/securitynow-archive-tools
+2. Make improvements (scripts, docs, bug fixes)
+3. Submit pull request
+4. No copyrighted content in PRs!
+
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
+
+### Can I report bugs?
+
+Yes! Open issues on the public repo:
+
+- Describe the problem
+- Include error messages
+- Provide system info (OS, PowerShell version)
+- No copyrighted content in issues!
+
+### Can I request features?
+
+Absolutely! Open an issue with:
+
+- Feature description
+- Use case / why it's useful
+- Implementation ideas (if any)
+
+### How can I support the project?
+
+The best way to support this project is to **support the creators**:
+
+- Visit https://www.grc.com and use Steve's tools
+- Listen to Security Now at https://twit.tv
+- Sponsor TWiT or support their advertisers
+- Share Security Now with friends
 
 ---
 
-**Happy archiving!** 🔐📚
+## Quick Reference
+
+### Key Commands
+
+```powershell
+# Build/update archive
+.\scripts\SecurityNow-EndToEnd.ps1
+
+# Sync repos (dry run)
+.\scripts\Sync-Repos.ps1 -DryRun -Verbose
+
+# Sync repos (for real)
+.\scripts\Sync-Repos.ps1
+
+# Fix AI PDFs
+.\scripts\Fix-AI-PDFs.ps1
+
+# Check Git status
+git status
+
+# Get help
+Get-Help .\scripts\SecurityNow-EndToEnd.ps1 -Full
+```
+
+### Important Links
+
+- Public repo: https://github.com/msrproduct/securitynow-archive-tools
+- Official Security Now: https://www.grc.com/securitynow.htm
+- Official podcast: https://twit.tv/shows/security-now
+- Git for Windows: https://git-scm.com/download/win
+- OpenAI Whisper: https://github.com/openai/whisper
+
+### Documentation
+
+- [Sync-Repos Guide](Sync-Repos-Guide.md) - How to sync repos
+- [Architecture](Architecture.md) - Why two repos?
+- [Troubleshooting](Troubleshooting.md) - Common problems
+- [Main Workflow](../WORKFLOW.md) - Complete process
+- [Contributing](../CONTRIBUTING.md) - How to help
+
+---
+
+**Still have questions?** Open an issue on the [public repo](https://github.com/msrproduct/securitynow-archive-tools) or contribute to this FAQ!

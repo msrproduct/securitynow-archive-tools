@@ -2,88 +2,88 @@
 
 ## Overview
 
-The `Sync-Repos.ps1` script synchronizes non-copyrighted files between your private Security Now archive and the public GitHub repository. This allows you to maintain a complete private archive with media files while contributing scripts, documentation, and index data to the public community repository.
+`Sync-Repos.ps1` is a PowerShell script that keeps your public and private Security Now archive repositories synchronized. It ensures non-copyrighted files (scripts, documentation, index files) are identical across both repos while respecting copyright boundaries.
 
 ## Why This Script Exists
 
-When maintaining both a private and public Security Now archive repository:
+This project uses a **dual-repository architecture**:
 
-- **Private repo** contains everything (scripts, docs, PDFs, MP3s, transcripts)
-- **Public repo** contains only non-copyrighted content (scripts, docs, CSV index)
+- **Private repo** (`securitynow-full-archive`) - Contains everything: scripts, docs, PDFs, MP3s, transcripts
+- **Public repo** (`securitynow-archive-tools`) - Contains only tools and documentation (no copyrighted media)
 
-Manually keeping these in sync is error-prone. This script automates the synchronization while respecting copyright boundaries.
+The sync script automates keeping shared files (scripts, docs) identical between both repos without accidentally copying copyrighted content to the public repo.
 
 ## What It Does
 
-The script:
+### Files That Get Synced
 
-1. **Compares files** between private and public repos using SHA-256 hashes
-2. **Syncs changed files** from private → public (one-way sync)
-3. **Excludes copyrighted content** (PDFs, MP3s, AI transcripts)
-4. **Maintains separate .gitignore files** (each repo has different needs)
-5. **Commits and pushes** changes to the public GitHub repo
-6. **Provides detailed reporting** of all operations
+✅ **Always synced**:
+- `README.md`
+- `LICENSE`
+- `FUNDING.yml`
+- `docs/` folder (all documentation)
+- `scripts/` folder (all PowerShell scripts)
+- `data/SecurityNowNotesIndex.csv`
 
-### Files That Are Synced
+❌ **Never synced** (copyrighted content):
+- `local/PDF/` (official GRC show notes)
+- `local/mp3/` (podcast audio files)
+- `local/Notes/ai-transcripts/` (AI-generated transcripts)
+- `.gitignore` (intentionally different per repo)
 
-- `README.md` - Repository overview
-- `LICENSE` - License information
-- `FUNDING.yml` - Donation/sponsorship links
-- `docs/` - All documentation files
-- `scripts/` - All PowerShell scripts
-- `data/SecurityNowNotesIndex.csv` - Episode index
+### Smart Features
 
-### Files That Are NEVER Synced
+- **Hash-based comparison** - Only syncs files that actually changed (uses SHA256)
+- **Dry-run mode** - Test before making changes
+- **Verbose output** - See exactly what's happening
+- **Automatic Git operations** - Commits and pushes to public repo for you
+- **Idempotent** - Safe to run multiple times; won't make unnecessary changes
 
-- `local/PDF/` - Official and AI-generated PDF show notes
-- `local/mp3/` - Audio files
-- `local/Notes/ai-transcripts/` - AI-generated transcripts
-- `.gitignore` - Each repo maintains its own version
-
-## Usage
+## How to Use
 
 ### Basic Usage
 
 ```powershell
-# Sync from private to public repo
+# Navigate to private repo
 cd D:\Desktop\SecurityNow-Full-Private
+
+# Run the sync
 .\scripts\Sync-Repos.ps1
 ```
 
-### Dry Run (Test Mode)
+### Test Before Syncing (Recommended)
 
 ```powershell
-# See what would be synced without making changes
+# Dry-run with detailed output
 .\scripts\Sync-Repos.ps1 -DryRun -Verbose
+```
+
+This shows what **would** be synced without making any changes.
+
+### Verbose Mode
+
+```powershell
+# See detailed file-by-file status
+.\scripts\Sync-Repos.ps1 -Verbose
 ```
 
 ### Custom Paths
 
 ```powershell
-# Specify custom repo locations
-.\scripts\Sync-Repos.ps1 `
-    -PrivateRepo "C:\MyArchive\Private" `
-    -PublicRepo "C:\MyArchive\Public"
+# If your repos are in different locations
+.\scripts\Sync-Repos.ps1 -PrivateRepo "C:\MyRepos\Private" -PublicRepo "C:\MyRepos\Public"
 ```
 
-## Parameters
-
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `-PrivateRepo` | String | `D:\Desktop\SecurityNow-Full-Private` | Path to private repo |
-| `-PublicRepo` | String | `D:\Desktop\SecurityNow-Full` | Path to public repo |
-| `-DryRun` | Switch | Off | Test mode - shows changes without applying them |
-| `-Verbose` | Switch | Off | Display detailed file-by-file comparison |
-
-## Output Explained
+## Understanding the Output
 
 ### Status Indicators
 
-- **[SAME]** - File is identical in both repos
-- **[NEW]** - File exists in private but not public (will be created)
-- **[UPDATE]** - File differs between repos (will be updated)
-- **[SKIP]** - File not found in source repo
-- **[EXCLUDE]** - File in copyrighted folder (not synced)
+- **[SAME]** - File is identical in both repos (no action needed)
+- **[UPDATE]** - File exists but differs; will be updated
+- **[NEW]** - File doesn't exist in public repo; will be created
+- **[SKIP]** - File doesn't exist in private repo
+- **[SYNC]** - Processing directory
+- **[EXCLUDE]** - File is in excluded folder (copyrighted content)
 
 ### Example Output
 
@@ -98,9 +98,13 @@ Comparing files...
 NOTE: .gitignore is excluded (each repo maintains its own)
 
 [SAME] README.md
-[UPDATE] docs/WORKFLOW.md
-[NEW] scripts/New-Feature.ps1
-[SKIP] Source not found: LICENSE
+[SYNC] Directory: scripts
+  [UPDATE] SecurityNow-EndToEnd.ps1
+  [SAME] Fix-AI-PDFs.ps1
+  [NEW] New-Helper-Script.ps1
+
+Committing changes to public repo...
+  Pushed to public GitHub repo
 
 ========================================
 SUMMARY
@@ -112,109 +116,160 @@ Complete!
 ========================================
 ```
 
-## Workflow Integration
+## When to Run This Script
 
-### Recommended Workflow
+Run the sync script whenever you:
 
-1. **Work in private repo** (your primary workspace)
-   ```powershell
-   cd D:\Desktop\SecurityNow-Full-Private
-   # Make your changes, test scripts, etc.
-   ```
+1. **Update scripts** in the private repo
+2. **Modify documentation** (README, WORKFLOW.md, etc.)
+3. **Add new scripts** to the `scripts/` folder
+4. **Update the CSV index** after running SecurityNow-EndToEnd.ps1
 
-2. **Commit to private repo**
-   ```powershell
-   git add .
-   git commit -m "Add new feature"
-   git push origin main
-   ```
+**Don't need to run** when you only:
+- Download new PDFs or MP3s
+- Generate new AI transcripts
+- Make changes only to `local/` folder
 
-3. **Test sync with dry run**
-   ```powershell
-   .\scripts\Sync-Repos.ps1 -DryRun -Verbose
-   # Review what would be synced
-   ```
-
-4. **Sync to public repo**
-   ```powershell
-   .\scripts\Sync-Repos.ps1
-   # Automatically commits and pushes to public GitHub
-   ```
-
-### Verification
-
-After syncing, verify both repos are in sync:
+## Typical Workflow
 
 ```powershell
-# Should show "Files synced: 0"
+# 1. Work in private repo (your primary workspace)
+cd D:\Desktop\SecurityNow-Full-Private
+
+# 2. Make your changes to scripts or docs
+# ... edit files ...
+
+# 3. Commit to private repo
+git add .
+git commit -m "Updated scripts and docs"
+git push origin main
+
+# 4. Test the sync (optional but recommended)
 .\scripts\Sync-Repos.ps1 -DryRun -Verbose
+
+# 5. Sync to public repo
+.\scripts\Sync-Repos.ps1
+
+# Done! Both repos are now in sync
 ```
 
 ## Troubleshooting
 
-### "ERROR: Private repo not found"
+### Issue: "ERROR: Private repo not found"
 
-**Cause:** Script cannot locate the private repository path.
+**Solution**: Check the path to your private repo:
 
-**Solution:** Verify the path exists or use `-PrivateRepo` parameter:
 ```powershell
-.\scripts\Sync-Repos.ps1 -PrivateRepo "C:\Correct\Path\To\Private"
+# Verify path exists
+Test-Path "D:\Desktop\SecurityNow-Full-Private"
+
+# Use correct path
+.\scripts\Sync-Repos.ps1 -PrivateRepo "D:\Your\Actual\Path"
 ```
 
-### "Warning: Git operations failed"
+### Issue: "Updates were rejected" (Git push failed)
 
-**Cause:** Git commit or push failed (network issue, authentication, conflicts).
+**Solution**: The public repo has changes you don't have locally:
 
-**Solution:**
-1. Files are already synced locally (safe to continue)
-2. Manually push from public repo:
-   ```powershell
-   cd D:\Desktop\SecurityNow-Full
-   git status
-   git push origin main
-   ```
-
-### Files Not Syncing
-
-**Cause:** File might be in excluded folder or .gitignore is blocking it.
-
-**Solution:**
-1. Run with `-Verbose` to see detailed status
-2. Check if file is in `local/PDF`, `local/mp3`, or `local/Notes/ai-transcripts`
-3. These folders are intentionally excluded
-
-### Merge Conflicts
-
-**Cause:** Public repo was edited directly instead of syncing from private.
-
-**Solution:**
 ```powershell
+# Go to public repo and pull changes
 cd D:\Desktop\SecurityNow-Full
 git pull origin main
-# Resolve conflicts, then sync again
-cd ..\SecurityNow-Full-Private
+
+# Then run sync again
+cd D:\Desktop\SecurityNow-Full-Private
 .\scripts\Sync-Repos.ps1
 ```
 
+### Issue: Files showing as different when they shouldn't be
+
+**Cause**: Line ending differences (CRLF vs LF)
+
+**Solution**: Ensure Git is configured consistently:
+
+```powershell
+# In both repos, set line ending handling
+git config core.autocrlf true
+```
+
+### Issue: "Files synced: 0" but I made changes
+
+**Check**:
+1. Are you editing files in the private repo?
+2. Are the files in the sync list (see "What It Does" above)?
+3. Did you save your changes?
+
+```powershell
+# Run verbose dry-run to see status
+.\scripts\Sync-Repos.ps1 -DryRun -Verbose
+```
+
+### Issue: Script runs but doesn't push to GitHub
+
+**Cause**: No files actually changed
+
+**Behavior**: Script only commits/pushes when files are different. This is correct behavior.
+
+## Parameters Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `-PrivateRepo` | String | `D:\Desktop\SecurityNow-Full-Private` | Path to private repo |
+| `-PublicRepo` | String | `D:\Desktop\SecurityNow-Full` | Path to public repo |
+| `-DryRun` | Switch | `$false` | Test mode; no changes made |
+| `-Verbose` | Switch | `$false` | Detailed output |
+
 ## Best Practices
 
-### ✅ DO
+### ✅ DO:
 
-- Always work in the private repo first
-- Use `-DryRun` before actual sync to preview changes
-- Run sync after committing to private repo
-- Keep both repos on the same branch (usually `main`)
+- Run `-DryRun -Verbose` first to preview changes
+- Keep private repo as your primary workspace
+- Commit to private repo before syncing
+- Run sync after updating scripts or docs
 
-### ❌ DON'T
+### ❌ DON'T:
 
-- Don't edit files directly in the public repo (sync will overwrite)
-- Don't manually copy files between repos (use the script)
-- Don't commit copyrighted content to private repo's synced folders
-- Don't modify the script's exclusion rules without understanding copyright implications
+- Edit files directly in public repo (they'll be overwritten)
+- Manually copy files between repos (use the script)
+- Skip the dry-run for major changes
+- Commit copyrighted content to public repo
+
+## FAQ
+
+**Q: How often should I run this?**  
+A: After any changes to scripts, docs, or the CSV index. For media-only changes (PDFs, MP3s), you don't need to sync.
+
+**Q: Can I run this from the public repo?**  
+A: Technically yes, but not recommended. Always work in the private repo and sync outward.
+
+**Q: What if I accidentally edited the public repo?**  
+A: Your changes will be overwritten on next sync. Edit in private repo instead, then sync.
+
+**Q: Does this sync Git commit history?**  
+A: No, only file contents. Each repo maintains its own Git history.
+
+**Q: Is this idempotent?**  
+A: Yes! Running multiple times won't cause problems. It only syncs when files differ.
 
 ## Related Documentation
 
-- [WORKFLOW.md](WORKFLOW.md) - Overall Security Now archiving workflow
-- [FAQ.md](FAQ.md) - Frequently asked questions
-- [README.md](../README.md) - Repository overview
-- [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Detailed troubleshooting guide
+- [Architecture Guide](Architecture.md) - Why two repos?
+- [Main Workflow](../WORKFLOW.md) - Complete archive building process
+- [Troubleshooting Guide](Troubleshooting.md) - Common issues and solutions
+- [FAQ](FAQ.md) - Frequently asked questions
+
+## Support
+
+If you encounter issues:
+
+1. Check [Troubleshooting.md](Troubleshooting.md)
+2. Review [FAQ.md](FAQ.md)
+3. Open an issue on GitHub with:
+   - Full command you ran
+   - Complete output (use `-Verbose`)
+   - Your repo paths
+
+---
+
+**Remember**: This script is designed to keep your public repo safe from copyrighted content while maintaining identical tools and documentation across both repos.

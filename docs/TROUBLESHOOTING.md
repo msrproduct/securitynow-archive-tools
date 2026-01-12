@@ -1,779 +1,608 @@
 # Troubleshooting Guide
 
-Detailed solutions for common issues with Security Now! Archive Tools.
-
----
+Common issues and solutions when building your Security Now archive.
 
 ## Table of Contents
 
-- [PowerShell Issues](#powershell-issues)
 - [Git Issues](#git-issues)
-- [Download Problems](#download-problems)
-- [HTML to PDF Conversion](#html-to-pdf-conversion)
-- [File Organization Issues](#file-organization-issues)
-- [Sync Script Problems](#sync-script-problems)
+- [Sync Script Issues](#sync-script-issues)
+- [Download Issues](#download-issues)
 - [AI Transcription Issues](#ai-transcription-issues)
-- [Performance Problems](#performance-problems)
-- [GitHub Integration](#github-integration)
-
----
-
-## PowerShell Issues
-
-### "Cannot run scripts on this system"
-
-**Error:**
-```
-File cannot be loaded because running scripts is disabled on this system.
-```
-
-**Cause:** PowerShell execution policy blocks script execution.
-
-**Solution:**
-```powershell
-# Check current policy
-Get-ExecutionPolicy
-
-# Set to RemoteSigned (recommended)
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-# Verify
-Get-ExecutionPolicy -List
-```
-
-**Alternative (one-time bypass):**
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\SecurityNow-EndToEnd.ps1
-```
-
----
-
-### "Command not found" for PowerShell 7
-
-**Error:**
-```
-powershell : The term 'powershell' is not recognized
-```
-
-**Cause:** PowerShell 7 not installed or not in PATH.
-
-**Solution:**
-
-1. **Install PowerShell 7:**
-   - Windows: [Download MSI installer](https://github.com/PowerShell/PowerShell/releases)
-   - macOS: `brew install powershell`
-   - Linux: See [official docs](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell)
-
-2. **Verify installation:**
-   ```powershell
-   pwsh --version
-   # Should show 7.x.x
-   ```
-
-3. **Use `pwsh` instead of `powershell`:**
-   ```powershell
-   pwsh
-   cd path\to\securitynow-archive-tools
-   .\scripts\SecurityNow-EndToEnd.ps1
-   ```
-
----
-
-### Path with Spaces Causes Errors
-
-**Error:**
-```
-Cannot find path 'C:\Program' because it does not exist.
-```
-
-**Cause:** Paths with spaces not properly quoted.
-
-**Solution:**
-
-```powershell
-# WRONG
-.\script.ps1 -Path C:\Program Files\Archive
-
-# CORRECT
-.\script.ps1 -Path "C:\Program Files\Archive"
-
-# OR use literal path
-.\script.ps1 -LiteralPath "C:\Program Files\Archive"
-```
+- [File System Issues](#file-system-issues)
+- [PowerShell Issues](#powershell-issues)
 
 ---
 
 ## Git Issues
 
-### "Git not recognized as a command"
-
-**Error:**
-```
-git : The term 'git' is not recognized
-```
-
-**Cause:** Git not installed or not in system PATH.
-
-**Solution:**
-
-1. **Install Git:**
-   - Download from [git-scm.com](https://git-scm.com/)
-   - Run installer (accept defaults)
-
-2. **Restart PowerShell** (to reload PATH)
-
-3. **Verify:**
-   ```powershell
-   git --version
-   # Should show git version 2.x.x
-   ```
-
----
-
-### "Failed to push - Authentication required"
-
-**Error:**
-```
-fatal: Authentication failed for 'https://github.com/...'
-```
-
-**Cause:** GitHub credentials not configured or token expired.
-
-**Solution:**
-
-1. **Use Personal Access Token (PAT):**
-   - Go to GitHub → Settings → Developer settings → Personal access tokens
-   - Generate new token (classic) with `repo` scope
-   - Copy token
-
-2. **Update remote URL:**
-   ```powershell
-   git remote set-url origin https://YOUR_TOKEN@github.com/USERNAME/REPO.git
-   ```
-
-3. **Or use SSH instead:**
-   ```powershell
-   git remote set-url origin git@github.com:USERNAME/REPO.git
-   ```
-
----
-
 ### Merge Conflicts
 
-**Error:**
-```
-CONFLICT (content): Merge conflict in README.md
-Automatic merge failed; fix conflicts and then commit the result.
-```
+**Symptom**: `CONFLICT (content): Merge conflict in <file>`
 
-**Cause:** Same file edited in both repos.
+**Cause**: Same file edited in both repos or GitHub
 
-**Solution:**
-
-1. **Check status:**
-   ```powershell
-   git status
-   ```
-
-2. **Open conflicted file** (marked with `<<<<<<<`, `=======`, `>>>>>>>`)
-
-3. **Edit to keep desired version:**
-   ```
-   <<<<<<< HEAD
-   Your local changes
-   =======
-   Remote changes
-   >>>>>>> origin/main
-   ```
-   
-   Remove conflict markers and keep what you want.
-
-4. **Mark as resolved:**
-   ```powershell
-   git add README.md
-   git commit -m "Resolve merge conflict"
-   git push origin main
-   ```
-
----
-
-## Download Problems
-
-### PDFs Not Downloading
-
-**Symptoms:** Script runs but no PDF files appear.
-
-**Diagnosis:**
+**Solution**:
 
 ```powershell
-# Test GRC connectivity
-Test-Connection www.grc.com -Count 4
+# Check status
+git status
 
-# Test specific PDF URL
-$testUrl = "https://www.grc.com/sn/sn-001-notes.pdf"
-Invoke-WebRequest -Uri $testUrl -Method Head
+# Open conflicted files, look for:
+<<<<<<< HEAD
+Your changes
+=======
+Other changes
+>>>>>>> branch-name
+
+# Edit to keep desired version, remove markers
+
+# Mark as resolved
+git add <file>
+git commit -m "Resolved merge conflict"
 ```
 
-**Solutions:**
+### Unfinished Merge
 
-1. **Check internet connection**
-2. **Verify firewall/antivirus** isn't blocking downloads
-3. **Test manual download:**
-   ```powershell
-   Invoke-WebRequest -Uri $testUrl -OutFile "test.pdf"
-   ```
-4. **Check GRC website status** (may be temporarily down)
+**Symptom**: `error: You have not concluded your merge (MERGE_HEAD exists)`
 
----
+**Cause**: Previous merge not completed
 
-### "403 Forbidden" Errors
-
-**Error:**
-```
-Invoke-WebRequest : The remote server returned an error: (403) Forbidden.
-```
-
-**Cause:** GRC server rate-limiting or blocking automated requests.
-
-**Solution:**
-
-1. **The script already includes retry logic with delays**
-2. **Increase delay between requests:**
-   ```powershell
-   # Edit script, find:
-   Start-Sleep -Seconds 1
-   # Change to:
-   Start-Sleep -Seconds 3
-   ```
-
-3. **Run during off-peak hours** (late evening/early morning)
-
----
-
-### Incomplete Downloads
-
-**Symptoms:** PDF files exist but are corrupted or 0 bytes.
-
-**Solution:**
+**Solution**:
 
 ```powershell
-# Find 0-byte files
-Get-ChildItem -Path $HOME\SecurityNowArchive -Recurse -File | 
-  Where-Object { $_.Length -eq 0 }
+# Complete the merge
+git commit --no-edit
 
-# Delete them
-Get-ChildItem -Path $HOME\SecurityNowArchive -Recurse -File | 
-  Where-Object { $_.Length -eq 0 } | Remove-Item
-
-# Re-run script to download again
-.\scripts\SecurityNow-EndToEnd.ps1
+# Or abort if you want to start over
+git merge --abort
 ```
 
----
+### Push Rejected (Non-Fast-Forward)
 
-## HTML to PDF Conversion
+**Symptom**: `error: failed to push some refs` / `tip of your current branch is behind`
 
-### "wkhtmltopdf not found"
+**Cause**: Remote has commits you don't have locally
 
-**Error:**
-```
-wkhtmltopdf : The term 'wkhtmltopdf' is not recognized
-```
-
-**Cause:** wkhtmltopdf not installed or not in PATH.
-
-**Solution:**
-
-**Windows:**
-```powershell
-# Install via winget
-winget install wkhtmltopdf
-
-# Add to PATH for current session
-$env:PATH += ";C:\Program Files\wkhtmltopdf\bin"
-
-# Add to PATH permanently
-$userPath = [Environment]::GetEnvironmentVariable("Path", "User")
-$newPath = $userPath + ";C:\Program Files\wkhtmltopdf\bin"
-[Environment]::SetEnvironmentVariable("Path", $newPath, "User")
-
-# Restart PowerShell
-```
-
-**macOS:**
-```bash
-brew install wkhtmltopdf
-
-# Verify
-wkhtmltopdf --version
-```
-
-**Linux:**
-```bash
-# Debian/Ubuntu
-sudo apt-get install wkhtmltopdf
-
-# RHEL/CentOS
-sudo yum install wkhtmltopdf
-
-# Verify
-wkhtmltopdf --version
-```
-
----
-
-### HTML to PDF Conversion Fails
-
-**Error:**
-```
-Exit with code 1 due to network error: HostNotFoundError
-```
-
-**Cause:** wkhtmltopdf trying to access external resources that don't exist.
-
-**Solution:**
+**Solution**:
 
 ```powershell
-# Use --disable-external-links flag
-wkhtmltopdf --disable-external-links input.html output.pdf
+# Pull and merge remote changes
+git pull origin main --no-edit
 
-# Or in script, update conversion command:
-wkhtmltopdf --quiet --disable-external-links --page-size Letter input.html output.pdf
+# Then push
+git push origin main
 ```
 
----
+### Authentication Failed
 
-### PDF Output is Blank or Incomplete
+**Symptom**: `fatal: Authentication failed`
 
-**Symptoms:** PDF is created but has no content or missing content.
+**Cause**: GitHub changed authentication (no more passwords)
 
-**Diagnosis:**
+**Solution**: Use Personal Access Token (PAT)
 
 ```powershell
-# Test with a simple HTML file
-@"
-<!DOCTYPE html>
-<html><body><h1>Test</h1></body></html>
-"@ | Out-File test.html
+# Generate PAT at: https://github.com/settings/tokens
+# Use PAT as password when prompted
 
-wkhtmltopdf test.html test.pdf
-
-# Check if test.pdf has content
-Start-Process test.pdf
+# Or configure Git credential manager
+git config --global credential.helper manager-core
 ```
 
-**Solutions:**
+### Large Files Push Failed
 
-1. **Add delay for JavaScript to load:**
-   ```powershell
-   wkhtmltopdf --javascript-delay 1000 input.html output.pdf
-   ```
+**Symptom**: `remote: error: File is XXX MB; this exceeds GitHub's file size limit`
 
-2. **Disable smart shrinking:**
-   ```powershell
-   wkhtmltopdf --disable-smart-shrinking input.html output.pdf
-   ```
+**Cause**: Trying to push files >100MB without Git LFS
 
-3. **Use specific page size:**
-   ```powershell
-   wkhtmltopdf --page-size Letter --margin-top 10mm --margin-bottom 10mm input.html output.pdf
-   ```
-
----
-
-### Cross-Platform Path Issues
-
-**Error (macOS/Linux):**
-```
-wkhtmltopdf: error while loading shared libraries
-```
-
-**Solution:**
-
-**macOS:**
-```bash
-# If installed via Homebrew but not found
-xcode-select --install
-brew reinstall wkhtmltopdf
-
-# Update PATH if needed
-export PATH="/usr/local/bin:$PATH"
-```
-
-**Linux:**
-```bash
-# Install dependencies
-sudo apt-get install -y libxrender1 libfontconfig1 libxext6
-
-# Or install via tarball for newer version
-wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
-sudo dpkg -i wkhtmltox_0.12.6-1.focal_amd64.deb
-sudo apt-get install -f
-```
-
----
-
-## File Organization Issues
-
-### Files Not Organized by Year
-
-**Cause:** Script couldn't determine episode date.
-
-**Solution:**
+**Solution**:
 
 ```powershell
-# Manually organize by year
-$sourceFolder = "$HOME\SecurityNowArchive\local\PDF"
-$files = Get-ChildItem -Path $sourceFolder -Filter "*.pdf" -Recurse
+# Install Git LFS (if not already)
+git lfs install
 
-foreach ($file in $files) {
-    # Extract episode number from filename (sn-XXX-notes.pdf)
-    if ($file.Name -match 'sn-(\d+)-notes\.pdf') {
-        $episodeNum = [int]$Matches[1]
-        
-        # Estimate year (rough calculation)
-        $year = 2005 + [Math]::Floor($episodeNum / 52)
-        
-        # Create year folder
-        $yearFolder = Join-Path $sourceFolder $year
-        if (-not (Test-Path $yearFolder)) {
-            New-Item -Path $yearFolder -ItemType Directory -Force
-        }
-        
-        # Move file
-        Move-Item -Path $file.FullName -Destination $yearFolder
-    }
-}
+# Track large file types
+git lfs track "*.pdf"
+git lfs track "*.mp3"
+
+# Add .gitattributes
+git add .gitattributes
+
+# Migrate existing large files
+git lfs migrate import --include="*.pdf,*.mp3"
+
+# Push
+git push origin main
 ```
 
 ---
 
-### Duplicate Files
+## Sync Script Issues
 
-**Cause:** Script re-downloaded files that already exist.
+### "Private repo not found"
 
-**Solution:**
+**Symptom**: `ERROR: Private repo not found at: D:\Desktop\SecurityNow-Full-Private`
+
+**Cause**: Wrong path or repo not cloned
+
+**Solution**:
 
 ```powershell
-# Find duplicate files
-Get-ChildItem -Path $HOME\SecurityNowArchive -Recurse -File | 
-  Group-Object Name | 
-  Where-Object { $_.Count -gt 1 } | 
-  Select-Object Name, Count
+# Check if path exists
+Test-Path "D:\Desktop\SecurityNow-Full-Private"
 
-# Remove duplicates (keeps first occurrence)
-Get-ChildItem -Path $HOME\SecurityNowArchive -Recurse -File | 
-  Group-Object Name | 
-  Where-Object { $_.Count -gt 1 } | 
-  ForEach-Object { $_.Group | Select-Object -Skip 1 | Remove-Item }
+# If false, clone the repo
+git clone <your-private-repo-url> D:\Desktop\SecurityNow-Full-Private
+
+# Or specify correct path
+.\scripts\Sync-Repos.ps1 -PrivateRepo "C:\Your\Actual\Path"
 ```
 
----
+### "Public repo not found"
 
-## Sync Script Problems
+**Symptom**: `ERROR: Public repo not found at: D:\Desktop\SecurityNow-Full`
 
-### "ERROR: Private repo not found"
-
-**Error:**
-```
-ERROR: Private repo not found: D:\Desktop\SecurityNow-Full-Private
-```
-
-**Cause:** Script looking in wrong location.
-
-**Solution:**
+**Solution**:
 
 ```powershell
-# Specify correct path
-.\scripts\Sync-Repos.ps1 -PrivateRepo "C:\Your\Actual\Path\Private"
+# Clone public repo
+git clone https://github.com/msrproduct/securitynow-archive-tools.git D:\Desktop\SecurityNow-Full
+```
 
-# Or update script default path
-notepad .\scripts\Sync-Repos.ps1
-# Change line:
-[string]$PrivateRepo = "D:\Desktop\SecurityNow-Full-Private",
+### Files Show Different When They're Not
+
+**Symptom**: Sync says files differ, but they look identical
+
+**Cause**: Line ending differences (CRLF vs LF)
+
+**Solution**:
+
+```powershell
+# Configure Git consistently in both repos
+cd D:\Desktop\SecurityNow-Full-Private
+git config core.autocrlf true
+
+cd D:\Desktop\SecurityNow-Full
+git config core.autocrlf true
+
+# Normalize line endings
+git add --renormalize .
+git commit -m "Normalize line endings"
+```
+
+### Sync Shows 0 Files But I Made Changes
+
+**Causes**:
+1. Edited files in public repo (sync direction is private → public)
+2. Edited files in excluded folders (local/PDF, local/mp3)
+3. Didn't save changes
+
+**Solution**:
+
+```powershell
+# Always edit in PRIVATE repo
+cd D:\Desktop\SecurityNow-Full-Private
+
+# Verify your changes are saved
+Get-Content .\scripts\YourScript.ps1
+
+# Run sync with verbose output
+.\scripts\Sync-Repos.ps1 -Verbose
+```
+
+### Git Push Fails During Sync
+
+**Symptom**: Sync completes but fails to push to GitHub
+
+**Solution**:
+
+```powershell
+# Manually push from public repo
+cd D:\Desktop\SecurityNow-Full
+git push origin main
+
+# If that fails, pull first
+git pull origin main --no-edit
+git push origin main
 ```
 
 ---
 
-### Files Syncing That Shouldn't
+## Download Issues
 
-**Cause:** Copyrighted files not properly excluded.
+### SSL/TLS Certificate Errors
 
-**Solution:**
+**Symptom**: `The underlying connection was closed: Could not establish trust relationship`
 
-1. **Check exclusion rules in Sync-Repos.ps1:**
-   ```powershell
-   $ExcludeFolders = @(
-       "local\PDF",
-       "local\mp3",
-       "local\Notes\ai-transcripts"
-   )
-   ```
-
-2. **Verify .gitignore in public repo:**
-   ```
-   local/PDF/
-   local/mp3/
-   local/Notes/ai-transcripts/
-   *.pdf
-   *.mp3
-   ```
-
-3. **Remove accidentally committed files:**
-   ```powershell
-   cd public-repo
-   git rm -r local/PDF/
-   git commit -m "Remove copyrighted content"
-   git push origin main
-   ```
-
----
-
-### Sync Shows Changes But Files Are Identical
-
-**Cause:** Line ending differences (CRLF vs LF) or file permissions.
-
-**Solution:**
+**Solution**:
 
 ```powershell
-# Configure Git to normalize line endings
-git config --global core.autocrlf true
+# Temporary workaround (not recommended for production)
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
 
-# Re-sync
-.\scripts\Sync-Repos.ps1
+# Better: Update Windows and PowerShell
+# Or use -SkipCertificateCheck with Invoke-WebRequest
+```
+
+### 404 Not Found
+
+**Symptom**: Episode PDF or MP3 not found
+
+**Cause**: Episode number format wrong or file doesn't exist
+
+**Solution**:
+
+```powershell
+# Check episode exists at GRC.com
+# Format: https://www.grc.com/sn/sn-XXX-notes.pdf
+# Some early episodes may not have show notes
+
+# Script should log and continue
+```
+
+### Rate Limiting / Too Many Requests
+
+**Symptom**: Downloads fail after many successful requests
+
+**Solution**:
+
+```powershell
+# Add delays between requests (already in script)
+Start-Sleep -Milliseconds 500
+
+# Run in smaller batches
+.\scripts\SecurityNow-EndToEnd.ps1 -StartEpisode 1 -EndEpisode 100
+```
+
+### Network Timeouts
+
+**Symptom**: `The operation has timed out`
+
+**Solution**:
+
+```powershell
+# Increase timeout in script
+$timeout = 30000  # 30 seconds
+
+# Or check your internet connection
+Test-Connection grc.com
+Test-Connection twit.tv
 ```
 
 ---
 
 ## AI Transcription Issues
 
-### Whisper.cpp Not Found
+### Whisper Not Found
 
-**Error:**
+**Symptom**: `whisper : The term 'whisper' is not recognized`
+
+**Cause**: OpenAI Whisper CLI not installed
+
+**Solution**:
+
+```bash
+# Install Python (if not already)
+# Download from: https://www.python.org/downloads/
+
+# Install whisper
+pip install openai-whisper
+
+# Verify installation
+whisper --help
 ```
-whisper.exe : The term 'whisper.exe' is not recognized
-```
 
-**Cause:** whisper.cpp not installed or path incorrect.
+### CUDA/GPU Errors
 
-**Solution:**
+**Symptom**: `CUDA out of memory` or GPU-related errors
 
-1. **Download whisper.cpp:**
-   ```powershell
-   # Clone repo
-   git clone https://github.com/ggerganov/whisper.cpp.git
-   cd whisper.cpp
-   
-   # Build (requires Visual Studio or MinGW)
-   cmake -B build
-   cmake --build build --config Release
-   ```
-
-2. **Update script path:**
-   ```powershell
-   $whisperPath = "C:\path\to\whisper.cpp\build\bin\Release\main.exe"
-   ```
-
----
-
-### Transcription Extremely Slow
-
-**Cause:** Using large Whisper model or CPU-only processing.
-
-**Solution:**
-
-1. **Use smaller model:**
-   ```powershell
-   # Instead of medium.en (slow)
-   $whisperModel = "ggml-tiny.en.bin"  # Fast
-   # Or
-   $whisperModel = "ggml-base.en.bin"  # Balanced
-   ```
-
-2. **Enable GPU acceleration** (if available):
-   ```powershell
-   # Rebuild whisper.cpp with CUDA support
-   cmake -B build -DWHISPER_CUDA=ON
-   cmake --build build --config Release
-   ```
-
----
-
-### Transcripts Have Poor Accuracy
-
-**Cause:** Using `tiny` model or audio quality issues.
-
-**Solution:**
-
-1. **Upgrade to better model:**
-   ```powershell
-   # Download medium model
-   cd C:\whisper\models
-   Invoke-WebRequest -Uri "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.en.bin" -OutFile "ggml-medium.en.bin"
-   
-   # Update script
-   $whisperModel = "C:\whisper\models\ggml-medium.en.bin"
-   ```
-
-2. **Check audio quality:**
-   - Ensure MP3 files are not corrupted
-   - Re-download if necessary
-
----
-
-## Performance Problems
-
-### Script Running Very Slow
-
-**Diagnosis:**
+**Solution**:
 
 ```powershell
-# Check disk I/O
-Get-PhysicalDisk | Get-StorageReliabilityCounter | Select-Object DeviceId, Temperature, Wear
+# Use CPU instead of GPU
+whisper audio.mp3 --device cpu --model base
 
-# Check CPU usage
-Get-Process | Sort-Object CPU -Descending | Select-Object -First 5
-
-# Check available memory
-Get-CimInstance Win32_OperatingSystem | Select-Object FreePhysicalMemory
+# Or use smaller model
+whisper audio.mp3 --model tiny
 ```
 
-**Solutions:**
+### Transcription Takes Forever
 
-1. **Run during idle time** (overnight)
-2. **Close other applications**
-3. **Increase delays** (reduces server load, increases total time)
-4. **Use SSD instead of HDD** for archive location
+**Cause**: Using large model on CPU
+
+**Solution**:
+
+```powershell
+# Use faster model
+whisper audio.mp3 --model base  # Instead of large
+
+# Process overnight for large batches
+# Or use GPU if available
+```
+
+### Transcription Output Garbled
+
+**Cause**: Wrong language detection or poor audio quality
+
+**Solution**:
+
+```powershell
+# Force English language
+whisper audio.mp3 --language en
+
+# Try different model
+whisper audio.mp3 --model medium --language en
+```
+
+### Out of Disk Space During Transcription
+
+**Cause**: Whisper cache files
+
+**Solution**:
+
+```powershell
+# Clear Whisper cache
+Remove-Item -Path "$env:USERPROFILE\.cache\whisper" -Recurse -Force
+
+# Or specify output directory
+whisper audio.mp3 --output_dir "D:\Transcripts"
+```
 
 ---
 
-### Out of Disk Space
+## File System Issues
 
-**Error:**
-```
-There is not enough space on the disk.
+### Access Denied
+
+**Symptom**: `Access to the path is denied`
+
+**Solution**:
+
+```powershell
+# Run PowerShell as Administrator
+# Or check file permissions
+Get-Acl -Path "D:\Desktop\SecurityNow-Full"
+
+# Ensure you have write access to the directory
 ```
 
-**Solution:**
+### Path Too Long
+
+**Symptom**: `The specified path, file name, or both are too long`
+
+**Solution**:
+
+```powershell
+# Enable long paths in Windows 10/11
+# Run as Administrator:
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+
+# Or use shorter folder names
+# Instead of: D:\Desktop\SecurityNow-Full-Private-Archive-Complete
+# Use: D:\SN-Archive
+```
+
+### Disk Full
+
+**Symptom**: `There is not enough space on the disk`
+
+**Cause**: Complete archive is 10-20+ GB
+
+**Solution**:
 
 ```powershell
 # Check available space
-Get-PSDrive C
+Get-PSDrive D
 
-# Find large files
-Get-ChildItem -Path $HOME\SecurityNowArchive -Recurse -File | 
-  Sort-Object Length -Descending | 
-  Select-Object -First 20 FullName, @{Name="SizeMB";Expression={[math]::Round($_.Length/1MB,2)}}
+# Delete old episodes or use external drive
+# Or process in batches
+```
 
-# Delete logs and temp files
-Remove-Item $HOME\SecurityNowArchive\logs\* -Recurse -Force
-Remove-Item $HOME\SecurityNowArchive\temp\* -Recurse -Force
+### File in Use
 
-# Or move archive to larger drive
-Move-Item -Path $HOME\SecurityNowArchive -Destination "E:\SecurityNowArchive"
+**Symptom**: `The process cannot access the file because it is being used`
+
+**Solution**:
+
+```powershell
+# Close any applications using the file
+# Check what's using it:
+Get-Process | Where-Object {$_.MainWindowTitle -like "*SecurityNow*"}
+
+# Or restart PowerShell
 ```
 
 ---
 
-## GitHub Integration
+## PowerShell Issues
 
-### Push Rejected (Non-Fast-Forward)
+### Execution Policy Blocks Script
 
-**Error:**
-```
- ! [rejected]        main -> main (non-fast-forward)
-```
+**Symptom**: `cannot be loaded because running scripts is disabled`
 
-**Cause:** Remote has changes you don't have locally.
-
-**Solution:**
+**Solution**:
 
 ```powershell
-# Pull and merge
-git pull origin main --no-edit
+# Check current policy
+Get-ExecutionPolicy
 
-# Resolve any conflicts (see Merge Conflicts section)
+# Set to allow local scripts (run as Administrator)
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# Push again
-git push origin main
+# Or bypass for single session
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+```
+
+### "Not Recognized as Cmdlet"
+
+**Symptom**: `The term 'SomeCommand' is not recognized`
+
+**Cause**: Module not loaded or command doesn't exist
+
+**Solution**:
+
+```powershell
+# For Git commands
+# Ensure Git is installed and in PATH
+$env:Path
+
+# Restart PowerShell after installing Git
+```
+
+### Script Hangs or Freezes
+
+**Causes**:
+1. Network timeout
+2. Large file processing
+3. Infinite loop (bug)
+
+**Solution**:
+
+```powershell
+# Press Ctrl+C to stop
+
+# Check network connectivity
+# Review script logic
+# Add debug output
+Write-Host "Processing episode $episodeNum" -ForegroundColor Cyan
+```
+
+### Parameter Not Recognized
+
+**Symptom**: `A parameter cannot be found that matches parameter name`
+
+**Solution**:
+
+```powershell
+# Check parameter spelling
+Get-Help .\scripts\SecurityNow-EndToEnd.ps1 -Full
+
+# Ensure using correct parameters for the script
+```
+
+### "Cannot Convert Value to Type"
+
+**Symptom**: `Cannot convert value "abc" to type "System.Int32"`
+
+**Cause**: Passing wrong data type to parameter
+
+**Solution**:
+
+```powershell
+# Ensure numbers are passed to numeric parameters
+.\script.ps1 -EpisodeNumber 123  # Correct
+.\script.ps1 -EpisodeNumber "123"  # Also works (auto-converts)
+.\script.ps1 -EpisodeNumber "abc"  # ERROR
 ```
 
 ---
 
-### Large File Rejected
+## Getting More Help
 
-**Error:**
-```
-remote: error: File local/PDF/sn-001-notes.pdf is 105.25 MB; this exceeds GitHub's file size limit of 100.00 MB
-```
-
-**Cause:** Accidentally committing copyrighted media files.
-
-**Solution:**
+### Enable Verbose Output
 
 ```powershell
-# Remove from staging
-git reset HEAD local/PDF/sn-001-notes.pdf
-
-# Ensure in .gitignore
-echo "local/PDF/" >> .gitignore
-echo "*.pdf" >> .gitignore
-
-# Remove from Git history (if already committed)
-git filter-branch --force --index-filter \
-  "git rm --cached --ignore-unmatch local/PDF/sn-001-notes.pdf" \
-  --prune-empty --tag-name-filter cat -- --all
-
-# Force push (WARNING: rewrites history)
-git push origin main --force
+# Most scripts support -Verbose
+.\scripts\Sync-Repos.ps1 -Verbose
 ```
 
----
-
-## Still Having Issues?
-
-### Gather Diagnostic Information
+### Check Script Help
 
 ```powershell
-# System info
-$PSVersionTable
-Get-ComputerInfo | Select-Object WindowsVersion, OsArchitecture
-
-# Git info
-git --version
-git remote -v
-
-# wkhtmltopdf info
-wkhtmltopdf --version
-
-# Path info
-$env:PATH -split ';'
-
-# Disk space
-Get-PSDrive
-
-# Recent errors (if any)
-Get-EventLog -LogName Application -EntryType Error -Newest 10
+# View script parameters and examples
+Get-Help .\scripts\SecurityNow-EndToEnd.ps1 -Full
 ```
 
-### Get Help
+### Debug Mode
 
-1. **Search existing issues:** [GitHub Issues](https://github.com/msrproduct/securitynow-archive-tools/issues)
-2. **Open new issue** with:
+```powershell
+# Enable debug output
+$DebugPreference = "Continue"
+
+# Run script
+.\scripts\YourScript.ps1
+
+# Disable when done
+$DebugPreference = "SilentlyContinue"
+```
+
+### Log Output
+
+```powershell
+# Save output to file for review
+.\scripts\SecurityNow-EndToEnd.ps1 -Verbose *> output.log
+
+# Review log
+notepad output.log
+```
+
+### Still Stuck?
+
+1. Check [FAQ.md](FAQ.md) for common questions
+2. Review [Architecture.md](Architecture.md) to understand the design
+3. Open an issue on GitHub with:
    - Full error message
-   - PowerShell version
-   - OS version
-   - Steps to reproduce
-   - Diagnostic information above
-
-3. **Community help:**
-   - [GitHub Discussions](https://github.com/msrproduct/securitynow-archive-tools/discussions)
-   - [GRC Forums](https://forums.grc.com/)
+   - Command you ran
+   - PowerShell version: `$PSVersionTable.PSVersion`
+   - OS version: `[System.Environment]::OSVersion`
 
 ---
 
-**Related Documentation:**
+## Quick Reference
 
-- [FAQ.md](FAQ.md) - Frequently asked questions
-- [QUICK-START.md](QUICK-START.md) - Getting started guide
-- [SYNC-REPOS-GUIDE.md](SYNC-REPOS-GUIDE.md) - Sync script documentation
+### Common Commands
+
+```powershell
+# Check Git status
+cd D:\Desktop\SecurityNow-Full-Private
+git status
+
+# Sync repos
+.\scripts\Sync-Repos.ps1 -DryRun -Verbose
+
+# Build archive
+.\scripts\SecurityNow-EndToEnd.ps1
+
+# Test paths
+Test-Path "D:\Desktop\SecurityNow-Full-Private"
+
+# Check PowerShell version
+$PSVersionTable.PSVersion
+
+# Check Git version
+git --version
+```
+
+### Emergency Recovery
+
+```powershell
+# If Git is completely broken
+cd D:\Desktop\SecurityNow-Full-Private
+
+# Backup your local/ folder first!
+Copy-Item -Path ".\local" -Destination "D:\Backup\local" -Recurse
+
+# Reset to last known good state
+git reset --hard HEAD
+
+# Or re-clone if needed
+cd D:\Desktop
+Rename-Item SecurityNow-Full-Private SecurityNow-Full-Private-Broken
+git clone <your-repo-url> SecurityNow-Full-Private
+
+# Restore local/ folder
+Copy-Item -Path "D:\Backup\local" -Destination ".\SecurityNow-Full-Private\local" -Recurse
+```
+
+---
+
+## Related Documentation
+
+- [Sync-Repos Guide](Sync-Repos-Guide.md) - Sync script usage
+- [Architecture](Architecture.md) - System design
+- [FAQ](FAQ.md) - Frequently asked questions
+- [Main Workflow](../WORKFLOW.md) - Complete process
+
+---
+
+**Remember**: When reporting issues, include error messages, commands run, and system information!
