@@ -6,6 +6,8 @@
     Converts HTML show notes to PDF format using wkhtmltopdf.
     Works on Windows, macOS, and Linux.
     Auto-detects wkhtmltopdf installation or uses provided path.
+    
+    Optimized for Security Now! HTML show notes with external resources.
 
 .PARAMETER InputHTML
     Path to input HTML file.
@@ -31,11 +33,11 @@
 .PARAMETER MarginRight
     Optional. Right margin in millimeters (default: 10).
 
-.PARAMETER DisableExternalLinks
-    Optional. Disable loading of external resources (default: true).
+.PARAMETER EnableJavaScript
+    Optional. Enable JavaScript processing (default: true).
 
 .PARAMETER JavaScriptDelay
-    Optional. Milliseconds to wait for JavaScript to finish (default: 0).
+    Optional. Milliseconds to wait for JavaScript to finish (default: 1000).
 
 .EXAMPLE
     .\Convert-HTMLtoPDF.ps1 -InputHTML "episode-001.html" -OutputPDF "episode-001.pdf"
@@ -54,6 +56,8 @@
       Windows: winget install wkhtmltopdf
       macOS:   brew install wkhtmltopdf
       Linux:   apt-get install wkhtmltopdf  OR  yum install wkhtmltopdf
+    
+    Tested with Security Now! HTML show notes from GRC.com
 #>
 
 [CmdletBinding()]
@@ -84,10 +88,10 @@ param(
     [int]$MarginRight = 10,
     
     [Parameter(Mandatory=$false)]
-    [bool]$DisableExternalLinks = $true,
+    [bool]$EnableJavaScript = $true,
     
     [Parameter(Mandatory=$false)]
-    [int]$JavaScriptDelay = 0
+    [int]$JavaScriptDelay = 1000
 )
 
 function Find-wkhtmltopdf {
@@ -176,13 +180,14 @@ function Convert-HTMLtoPDFInternal {
         [int]$MarginBottom,
         [int]$MarginLeft,
         [int]$MarginRight,
-        [bool]$DisableExternalLinks,
+        [bool]$EnableJavaScript,
         [int]$JavaScriptDelay
     )
     
-    # Build arguments
+    # Build arguments - optimized for Security Now HTML with external resources
     $args = @(
-        "--quiet",
+        "--enable-local-file-access",    # Allow local file access
+        "--no-stop-slow-scripts",        # Don't timeout on scripts
         "--page-size", $PageSize,
         "--margin-top", "${MarginTop}mm",
         "--margin-bottom", "${MarginBottom}mm",
@@ -190,12 +195,14 @@ function Convert-HTMLtoPDFInternal {
         "--margin-right", "${MarginRight}mm"
     )
     
-    if ($DisableExternalLinks) {
-        $args += "--disable-external-links"
-    }
-    
-    if ($JavaScriptDelay -gt 0) {
-        $args += @("--javascript-delay", $JavaScriptDelay)
+    # JavaScript support (needed for some Security Now pages)
+    if ($EnableJavaScript) {
+        $args += "--enable-javascript"
+        if ($JavaScriptDelay -gt 0) {
+            $args += @("--javascript-delay", $JavaScriptDelay)
+        }
+    } else {
+        $args += "--disable-javascript"
     }
     
     # Add input and output files
@@ -204,8 +211,8 @@ function Convert-HTMLtoPDFInternal {
     Write-Verbose "Executing: $wkhtmltopdf $($args -join ' ')"
     
     try {
-        # Execute conversion
-        $output = & $wkhtmltopdf $args 2>&1
+        # Execute conversion (suppress warnings about missing external resources)
+        $output = & $wkhtmltopdf $args 2>&1 | Where-Object { $_ -notmatch 'Warning: Failed to load' -and $_ -notmatch 'Warning: SSL error ignored' }
         
         # Check result
         if ($LASTEXITCODE -eq 0 -and (Test-Path $OutputPDF)) {
@@ -278,6 +285,8 @@ Write-Host "  [OK] wkhtmltopdf is functional" -ForegroundColor Green
 
 # Convert HTML to PDF
 Write-Host "`n[3/3] Converting HTML to PDF..." -ForegroundColor Yellow
+Write-Verbose "Note: Warnings about missing external resources (CSS, images) are normal for Security Now HTML."
+
 $success = Convert-HTMLtoPDFInternal `
     -wkhtmltopdf $wkhtmltopdfPath `
     -InputHTML $InputHTML `
@@ -287,7 +296,7 @@ $success = Convert-HTMLtoPDFInternal `
     -MarginBottom $MarginBottom `
     -MarginLeft $MarginLeft `
     -MarginRight $MarginRight `
-    -DisableExternalLinks $DisableExternalLinks `
+    -EnableJavaScript $EnableJavaScript `
     -JavaScriptDelay $JavaScriptDelay
 
 if ($success) {
