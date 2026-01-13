@@ -1,223 +1,266 @@
-# Sync-Repos.ps1
-# Synchronize non-copyrighted files between private and public Security Now repos
-
 param(
     [string]$PrivateRepo = "D:\Desktop\SecurityNow-Full-Private",
-    [string]$PublicRepo = "D:\Desktop\SecurityNow-Full",
+    [string]$PublicRepo  = "D:\Desktop\SecurityNow-Full",
     [switch]$DryRun,
-    [switch]$Verbose
+    [switch]$Verbose,
+    [string]$PrivateCommitMessage = "Sync: update private repo before public sync",
+    [string]$PublicCommitMessage  = "Sync from private repo (Sync-Repos.ps1: private→public + public-only warning)"
 )
 
-Write-Host "`n========================================" -ForegroundColor Cyan
 Write-Host "Security Now Repo Sync" -ForegroundColor Cyan
-Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "Private repo: $PrivateRepo"
-Write-Host "Public repo:  $PublicRepo"
+Write-Host "Public repo : $PublicRepo"
 if ($DryRun) {
-    Write-Host "MODE: DRY RUN (no changes will be made)" -ForegroundColor Yellow
-}
-Write-Host ""
-
-# ========================================
-# VALIDATE REPOS
-# ========================================
-
-if (-not (Test-Path -LiteralPath $PrivateRepo)) {
-    Write-Host "ERROR: Private repo not found: $PrivateRepo" -ForegroundColor Red
-    exit 1
+    Write-Host "MODE DRY RUN (no changes will be made)" -ForegroundColor Yellow
 }
 
-if (-not (Test-Path -LiteralPath $PublicRepo)) {
-    Write-Host "ERROR: Public repo not found: $PublicRepo" -ForegroundColor Red
-    exit 1
-}
-
-# ========================================
-# DEFINE SYNC RULES
-# ========================================
-
-# Files/folders to sync (non-copyrighted content only)
-# NOTE: .gitignore is intentionally EXCLUDED because it differs between repos:
-#   - Public repo: doesn't need to ignore media files (they don't exist)
-#   - Private repo: must track media files (PDFs, MP3s, transcripts)
-$SyncItems = @(
-    "README.md",
-    "LICENSE",
-    "FUNDING.yml",
+# Folders we sync (relative to repo root)
+$syncRoots = @(
+    "",              # README.md, LICENSE, FUNDING.yml, etc.
     "docs",
     "scripts",
-    "data\SecurityNowNotesIndex.csv"
+    "data"           # data\SecurityNowNotesIndex.csv when present
 )
 
-# Folders to NEVER sync (copyrighted content)
-$ExcludeFolders = @(
-    "local\PDF",
-    "local\mp3",
-    "local\Notes\ai-transcripts"
+# Copyrighted / excluded folders (under private)
+$excludedFolders = @(
+    "local-pdf",
+    "local-mp3",
+    "local-notes-ai-transcripts"
 )
 
-# ========================================
-# COMPARE AND SYNC FILES
-# ========================================
-
-Write-Host "Comparing files..." -ForegroundColor Yellow
-Write-Host "NOTE: .gitignore is excluded (each repo maintains its own)" -ForegroundColor Cyan
-Write-Host ""
-
-$syncCount = 0
-$skipCount = 0
-$deleteCount = 0
-
-foreach ($item in $SyncItems) {
-    $sourcePath = Join-Path $PrivateRepo $item
-    $destPath = Join-Path $PublicRepo $item
-    
-    # Check if source exists
-    if (-not (Test-Path -LiteralPath $sourcePath)) {
-        if ($Verbose) {
-            Write-Host "[SKIP] Source not found: $item" -ForegroundColor Yellow
-        }
-        $skipCount++
-        continue
-    }
-    
-    # Handle directories
-    if (Test-Path -LiteralPath $sourcePath -PathType Container) {
-        Write-Host "[SYNC] Directory: $item" -ForegroundColor Cyan
-        
-        if (-not $DryRun) {
-            # Create destination directory if it doesn't exist
-            if (-not (Test-Path -LiteralPath $destPath)) {
-                New-Item -ItemType Directory -Path $destPath -Force | Out-Null
-            }
-            
-            # Copy all files recursively, excluding copyrighted content
-            $files = Get-ChildItem -LiteralPath $sourcePath -Recurse -File
-            
-            foreach ($file in $files) {
-                $relativePath = $file.FullName.Substring($sourcePath.Length + 1)
-                $destFile = Join-Path $destPath $relativePath
-                
-                # Skip if in excluded folder
-                $shouldExclude = $false
-                foreach ($excludeFolder in $ExcludeFolders) {
-                    if ($file.FullName -like "*$excludeFolder*") {
-                        $shouldExclude = $true
-                        break
-                    }
-                }
-                
-                if ($shouldExclude) {
-                    if ($Verbose) {
-                        Write-Host "  [EXCLUDE] $relativePath" -ForegroundColor DarkGray
-                    }
-                    continue
-                }
-                
-                # Create parent directory if needed
-                $destParent = Split-Path -Parent $destFile
-                if (-not (Test-Path -LiteralPath $destParent)) {
-                    New-Item -ItemType Directory -Path $destParent -Force | Out-Null
-                }
-                
-                # Compare and copy if different
-                if (-not (Test-Path -LiteralPath $destFile)) {
-                    Copy-Item -LiteralPath $file.FullName -Destination $destFile -Force
-                    Write-Host "  [NEW] $relativePath" -ForegroundColor Green
-                    $syncCount++
-                } else {
-                    $sourceHash = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash
-                    $destHash = (Get-FileHash -LiteralPath $destFile -Algorithm SHA256).Hash
-                    
-                    if ($sourceHash -ne $destHash) {
-                        Copy-Item -LiteralPath $file.FullName -Destination $destFile -Force
-                        Write-Host "  [UPDATE] $relativePath" -ForegroundColor Yellow
-                        $syncCount++
-                    } else {
-                        if ($Verbose) {
-                            Write-Host "  [SAME] $relativePath" -ForegroundColor DarkGray
-                        }
-                    }
-                }
-            }
-        } else {
-            Write-Host "  [DRY RUN] Would sync directory contents" -ForegroundColor DarkYellow
-        }
-        
-    } else {
-        # Handle single files
-        if (Test-Path -LiteralPath $destPath) {
-            # Compare file hashes
-            $sourceHash = (Get-FileHash -LiteralPath $sourcePath -Algorithm SHA256).Hash
-            $destHash = (Get-FileHash -LiteralPath $destPath -Algorithm SHA256).Hash
-            
-            if ($sourceHash -ne $destHash) {
-                Write-Host "[UPDATE] $item" -ForegroundColor Yellow
-                
-                if (-not $DryRun) {
-                    Copy-Item -LiteralPath $sourcePath -Destination $destPath -Force
-                }
-                $syncCount++
-            } else {
-                if ($Verbose) {
-                    Write-Host "[SAME] $item" -ForegroundColor DarkGray
-                }
-            }
-        } else {
-            Write-Host "[NEW] $item" -ForegroundColor Green
-            
-            if (-not $DryRun) {
-                # Create parent directory if needed
-                $destParent = Split-Path -Parent $destPath
-                if (-not (Test-Path -LiteralPath $destParent)) {
-                    New-Item -ItemType Directory -Path $destParent -Force | Out-Null
-                }
-                Copy-Item -LiteralPath $sourcePath -Destination $destPath -Force
-            }
-            $syncCount++
-        }
-    }
-}
-
-# ========================================
-# GIT COMMIT AND PUSH
-# ========================================
-
-if ($syncCount -gt 0 -and -not $DryRun) {
+# 0) STEP ZERO: Ensure private repo is up-to-date with remote (fast-forward only)
+if (-not $DryRun) {
     Write-Host ""
-    Write-Host "Committing changes to public repo..." -ForegroundColor Yellow
-    
-    Push-Location $PublicRepo
+    Write-Host "STEP 0: Updating private repo from remote (fast-forward only)..." -ForegroundColor Cyan
+    Push-Location $PrivateRepo
     try {
-        git add .
-        git commit -m "Sync from private repo: $syncCount file(s) updated"
-        git push origin main
-        Write-Host "  Pushed to public GitHub repo" -ForegroundColor Green
-    } catch {
-        Write-Host "  Warning: Git operations failed" -ForegroundColor Yellow
-        Write-Host "  $($_.Exception.Message)" -ForegroundColor Yellow
-    } finally {
+        Write-Host "Running: git pull origin main --ff-only" -ForegroundColor DarkGray
+        git pull origin main --ff-only
+        if ($LASTEXITCODE -ne 0) {
+            throw "git pull origin main --ff-only failed with exit code $LASTEXITCODE"
+        }
+    }
+    finally {
         Pop-Location
     }
 }
-
-# ========================================
-# SUMMARY
-# ========================================
-
-Write-Host ""
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "SUMMARY" -ForegroundColor Cyan
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "Files synced:  $syncCount" -ForegroundColor Green
-Write-Host "Files skipped: $skipCount" -ForegroundColor Yellow
-
-if ($DryRun) {
+else {
     Write-Host ""
-    Write-Host "DRY RUN COMPLETE - No changes were made" -ForegroundColor Yellow
-    Write-Host "Run without -DryRun to apply changes" -ForegroundColor Yellow
+    Write-Host "STEP 0 (DRY RUN): Would run 'git pull origin main --ff-only' in private repo." -ForegroundColor Yellow
+}
+
+# 1) STEP ONE: Commit & push private repo changes (if any)
+if (-not $DryRun) {
+    Write-Host ""
+    Write-Host "STEP 1: Committing and pushing private repo changes..." -ForegroundColor Cyan
+
+    Push-Location $PrivateRepo
+    try {
+        $status = git status --porcelain
+        if ($LASTEXITCODE -ne 0) {
+            throw "git status failed in private repo"
+        }
+
+        if ([string]::IsNullOrWhiteSpace($status)) {
+            if ($Verbose) {
+                Write-Host "Private repo: no changes to commit." -ForegroundColor DarkGray
+            }
+        }
+        else {
+            if ($Verbose) {
+                Write-Host "Private repo has changes:" -ForegroundColor Yellow
+                $status
+            }
+
+            git add .
+            if ($LASTEXITCODE -ne 0) {
+                throw "git add failed in private repo"
+            }
+
+            git commit -m $PrivateCommitMessage
+            if ($LASTEXITCODE -ne 0) {
+                throw "git commit failed in private repo"
+            }
+
+            git push origin main
+            if ($LASTEXITCODE -ne 0) {
+                throw "git push failed in private repo"
+            }
+
+            Write-Host "Private repo changes committed and pushed." -ForegroundColor Green
+        }
+    }
+    finally {
+        Pop-Location
+    }
+}
+else {
+    Write-Host ""
+    Write-Host "STEP 1 (DRY RUN): Would commit and push private repo changes if any exist." -ForegroundColor Yellow
+}
+
+# 2) STEP TWO: Build file maps for private vs public
+$privateFiles = @{}
+$publicFiles  = @{}
+
+foreach ($root in $syncRoots) {
+    # PRIVATE: map relative path (from private root) → full path
+    $privateRoot = if ([string]::IsNullOrWhiteSpace($root)) { $PrivateRepo } else { Join-Path $PrivateRepo $root }
+    if (Test-Path $privateRoot) {
+        foreach ($file in Get-ChildItem -Path $privateRoot -File -Recurse -ErrorAction SilentlyContinue) {
+            $rel = $file.FullName.Substring($PrivateRepo.Length).TrimStart('\','/')
+
+            # Exclude .git and excluded media folders
+            $isExcluded = $false
+            if ($rel -like ".git*") {
+                $isExcluded = $true
+            }
+            else {
+                foreach ($ex in $excludedFolders) {
+                    if ($rel -like "$ex*") {
+                        $isExcluded = $true
+                        break
+                    }
+                }
+            }
+            if ($isExcluded) { continue }
+
+            $privateFiles[$rel.ToLowerInvariant()] = $file.FullName
+        }
+    }
+
+    # PUBLIC: map relative path (from public root) → full path
+    $publicRoot = if ([string]::IsNullOrWhiteSpace($root)) { $PublicRepo } else { Join-Path $PublicRepo $root }
+    if (Test-Path $publicRoot) {
+        foreach ($file in Get-ChildItem -Path $publicRoot -File -Recurse -ErrorAction SilentlyContinue) {
+            $rel = $file.FullName.Substring($PublicRepo.Length).TrimStart('\','/')
+
+            # Ignore .git internals only
+            if ($rel -like ".git*") { continue }
+
+            $publicFiles[$rel.ToLowerInvariant()] = $file.FullName
+        }
+    }
 }
 
 Write-Host ""
-Write-Host "Complete!" -ForegroundColor Green
-Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "STEP 2: Comparing private and public repos..." -ForegroundColor Cyan
+Write-Host "NOTE: .gitignore is excluded (each repo maintains its own)" -ForegroundColor DarkGray
+
+# 3) STEP THREE: New / updated files from PRIVATE -> PUBLIC
+$filesSynced  = 0
+$filesSkipped = 0
+
+foreach ($rel in $privateFiles.Keys) {
+    $privatePath = $privateFiles[$rel]
+    $publicPath  = if ($publicFiles.ContainsKey($rel)) { $publicFiles[$rel] } else { Join-Path $PublicRepo $rel }
+
+    # Skip .gitignore entirely
+    if ([System.IO.Path]::GetFileName($rel).ToLowerInvariant() -eq ".gitignore") {
+        if ($Verbose) {
+            Write-Host "SKIP  (EXCLUDE)  $rel (.gitignore is repo-specific)" -ForegroundColor DarkGray
+        }
+        $filesSkipped++
+        continue
+    }
+
+    $privateHash = (Get-FileHash -Path $privatePath -Algorithm SHA256).Hash
+    $publicHash  = $null
+
+    if (Test-Path $publicPath) {
+        $publicHash = (Get-FileHash -Path $publicPath -Algorithm SHA256).Hash
+    }
+
+    if (-not (Test-Path $publicPath)) {
+        Write-Host "NEW   $rel" -ForegroundColor Green
+        if (-not $DryRun) {
+            New-Item -ItemType Directory -Path (Split-Path $publicPath) -Force | Out-Null
+            Copy-Item $privatePath $publicPath -Force
+        }
+        $filesSynced++
+    }
+    elseif ($privateHash -ne $publicHash) {
+        Write-Host "UPDATE $rel" -ForegroundColor Yellow
+        if (-not $DryRun) {
+            Copy-Item $privatePath $publicPath -Force
+        }
+        $filesSynced++
+    }
+    else {
+        if ($Verbose) {
+            Write-Host "SAME  $rel"
+        }
+    }
+}
+
+# 4) STEP FOUR: Check for files that exist only in PUBLIC (private should be superset)
+$publicOnly = @()
+
+foreach ($rel in $publicFiles.Keys) {
+    if (-not $privateFiles.ContainsKey($rel)) {
+        # Ignore .gitignore and .git internals
+        $name = [System.IO.Path]::GetFileName($rel)
+        if ($name.ToLowerInvariant() -eq ".gitignore" -or $rel -like ".git*") {
+            continue
+        }
+
+        $publicOnly += $rel
+    }
+}
+
+if ($publicOnly.Count -gt 0) {
+    Write-Host ""
+    Write-Host "WARNING: Detected files present in PUBLIC repo but missing in PRIVATE repo." -ForegroundColor Yellow
+    Write-Host "Private is supposed to be the source of truth. Review and copy these into private:" -ForegroundColor Yellow
+    foreach ($rel in $publicOnly) {
+        Write-Host "  PUBLIC-ONLY: $rel" -ForegroundColor Yellow
+    }
+    $filesSkipped += $publicOnly.Count
+}
+
+Write-Host ""
+Write-Host "SUMMARY" -ForegroundColor Cyan
+Write-Host "Files synced (private → public): $filesSynced"
+Write-Host "Files skipped                 : $filesSkipped"
+
+# 5) STEP FIVE: Commit & push public repo changes (if any)
+if ($DryRun) {
+    Write-Host "DRY RUN COMPLETE - No changes were made anywhere." -ForegroundColor Yellow
+}
+else {
+    if ($filesSynced -gt 0) {
+        Write-Host ""
+        Write-Host "STEP 5: Committing and pushing public repo changes..." -ForegroundColor Cyan
+
+        Push-Location $PublicRepo
+        try {
+            git add .
+            if ($LASTEXITCODE -ne 0) {
+                throw "git add failed in public repo"
+            }
+
+            git commit -m $PublicCommitMessage
+            if ($LASTEXITCODE -ne 0) {
+                throw "git commit failed in public repo"
+            }
+
+            git push origin main
+            if ($LASTEXITCODE -ne 0) {
+                throw "git push failed in public repo"
+            }
+
+            Write-Host "Public repo changes committed and pushed." -ForegroundColor Green
+        }
+        finally {
+            Pop-Location
+        }
+    }
+    else {
+        Write-Host ""
+        Write-Host "STEP 5: No public changes to commit or push (repos already in sync)." -ForegroundColor DarkGray
+    }
+
+    Write-Host ""
+    Write-Host "COMPLETE: Private and public repos are in sync, with both GitHub remotes updated." -ForegroundColor Green
+}
