@@ -75,7 +75,7 @@ Security Now podcast content has different copyright statuses:
 ### Shared Structure (Both Repos)
 
 ```
-├── README.md                  # Main documentation
+├── README.md                 # Main documentation
 ├── WORKFLOW.md               # How to use the tools
 ├── scripts/                  # PowerShell automation
 │   ├── SecurityNow-EndToEnd.ps1
@@ -120,7 +120,7 @@ This script is the bridge between the two repositories:
 
 ```
 ┌─────────────────────────────────┐
-│  Private Repo (Full Archive)   │
+│  Private Repo (Full Archive)    │
 │                                 │
 │  • Scripts                      │
 │  • Docs                         │
