@@ -1,12 +1,12 @@
 <#
 .SYNOPSIS
-    Security Now! Archive Builder - Production Script v3.1.0
+    Security Now! Archive Builder - Production Script
 
 .DESCRIPTION
     Complete end-to-end workflow for Security Now podcast archiving:
-    - Downloads GRC official PDFs (from grc.com/sn/)
+    - Downloads GRC official PDFs
     - Generates AI transcripts for missing episodes (Whisper)
-    - Creates PDFs with wkhtmltopdf + red AI disclaimer
+    - Creates PDFs with wkhtmltopdf
     - Organizes by year using episode-dates.csv
 
 .NOTES
@@ -15,11 +15,11 @@
     Author:         MSRProduct
     Repository:     github.com/msrproduct/SecurityNow-Full-Private
     
-    Version History:
-    3.1.0 (2026-01-13) - Standardized filename, removed v3 suffix
-    3.0.0 (2026-01-13) - Aggressive rewrite, fixed Whisper/GRC regex
-    2.1.0 (2026-01-12) - Added wkhtmltopdf, episode-dates.csv integration
-    2.0.0 (2026-01-11) - Initial production release
+    Changelog:
+    3.1.0 (2026-01-13) - Post-cleanup standardization, renamed from v3
+    3.0.0 (2026-01-13) - Aggressive rewrite, fixed Whisper paths, GRC regex
+    2.1.0 (2026-01-12) - Added wkhtmltopdf support, episode-dates.csv
+    2.0.0 (2026-01-11) - Initial production release with AI transcription
     
 .PARAMETER DryRun
     Test mode - shows what would happen without making changes
@@ -28,21 +28,18 @@
     Starting episode number (default: 1)
 
 .PARAMETER MaxEpisode
-    Ending episode number (default: 1200, adjust as show continues)
+    Ending episode number (default: current latest)
 
 .EXAMPLE
     .\sn-full-run.ps1 -DryRun -MinEpisode 1 -MaxEpisode 5
-    Test run for episodes 1-5 without downloads
+    Test episodes 1-5 without downloads
 
 .EXAMPLE
     .\sn-full-run.ps1 -MinEpisode 1000
-    Process episodes 1000 to latest
+    Process all episodes from 1000 to latest
 
 .LINK
     https://github.com/msrproduct/SecurityNow-Full-Private/blob/main/docs/QUICK-START.md
-
-.LINK
-    https://github.com/msrproduct/SecurityNow-Full-Private/blob/main/docs/TROUBLESHOOTING.md
 #>
 
 [CmdletBinding()]
@@ -52,16 +49,11 @@ param(
     [int]$MaxEpisode = 1200
 )
 
-# Script version for runtime display
+# Script version (Semantic Versioning: MAJOR.MINOR.PATCH)
 $ScriptVersion = "3.1.0"
-$ScriptReleaseDate = "2026-01-13"
+$ScriptDate = "2026-01-13"
 
-Write-Host ""
-Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "Security Now! Archive Builder v$ScriptVersion" -ForegroundColor Cyan
-Write-Host "Released: $ScriptReleaseDate" -ForegroundColor Gray
-Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Cyan
-Write-Host ""
+Write-Host "Security Now! Archive Builder v$ScriptVersion ($ScriptDate)" -ForegroundColor Cyan
 
 #==============================================================================
 # CONFIGURATION WITH VALIDATION
