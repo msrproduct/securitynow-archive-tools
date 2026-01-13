@@ -29,6 +29,9 @@ $excludedFolders = @(
     "local-notes-ai-transcripts"
 )
 
+# Extensions that must NEVER be synced to public
+$blockedExtensions = @(".pdf", ".mp3", ".m4a", ".flac", ".wav")
+
 # 0) STEP ZERO: Ensure private repo is up-to-date with remote (fast-forward only)
 if (-not $DryRun) {
     Write-Host ""
@@ -111,20 +114,22 @@ foreach ($root in $syncRoots) {
         foreach ($file in Get-ChildItem -Path $privateRoot -File -Recurse -ErrorAction SilentlyContinue) {
             $rel = $file.FullName.Substring($PrivateRepo.Length).TrimStart('\','/')
 
-            # Exclude .git and excluded media folders
-            $isExcluded = $false
-            if ($rel -like ".git*") {
-                $isExcluded = $true
-            }
-            else {
-                foreach ($ex in $excludedFolders) {
-                    if ($rel -like "$ex*") {
-                        $isExcluded = $true
-                        break
-                    }
+            # 1) Exclude .git internals
+            if ($rel -like ".git*") { continue }
+
+            # 2) Exclude any file under copyrighted folders
+            $underCopyright = $false
+            foreach ($ex in $excludedFolders) {
+                if ($rel -like "$ex*" -or $rel -like "*\$ex\*" -or $rel -like "*/$ex/*") {
+                    $underCopyright = $true
+                    break
                 }
             }
-            if ($isExcluded) { continue }
+            if ($underCopyright) { continue }
+
+            # 3) Exclude any blocked media extensions anywhere
+            $ext = [System.IO.Path]::GetExtension($file.Name).ToLowerInvariant()
+            if ($blockedExtensions -contains $ext) { continue }
 
             $privateFiles[$rel.ToLowerInvariant()] = $file.FullName
         }
