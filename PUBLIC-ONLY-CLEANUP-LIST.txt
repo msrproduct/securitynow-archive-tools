@@ -1,1 +1,3 @@
-docs\.gitkeep
+public-only-cleanup-list.txt
+scripts\delete10.txt
+delete8.txt

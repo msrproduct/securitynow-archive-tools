@@ -1,0 +1,2488 @@
+PS D:\Desktop\SecurityNow-Full-Private> .\scripts\Fix-AI-PDFs.ps1
+
+========================================
+Fix AI-Generated PDFs (using wkhtmltopdf)
+========================================
+Root: D:\Desktop\SecurityNow-Full-Private
+
+Validating tools...
+  PDF Converter: wkhtmltopdf (via Convert-HTMLtoPDF.ps1)
+Finding AI transcript files...
+  Found 112 AI transcript files
+
+[Episode 1] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-1.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-1-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-1-notes-ai.pdf (55.16 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 10] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-10.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-10-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-10-notes-ai.pdf (73.23 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 1006] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-1006.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2024\sn-1006-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2024\sn-1006-notes-ai.pdf (208.28 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 1058] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-1058.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2025\sn-1058-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2025\sn-1058-notes-ai.pdf (214.82 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 11] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-11.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-11-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-11-notes-ai.pdf (107.49 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 12] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-12.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-12-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-12-notes-ai.pdf (58.37 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 13] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-13.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-13-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-13-notes-ai.pdf (81.74 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 14] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-14.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-14-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-14-notes-ai.pdf (72.19 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 15] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-15.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-15-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-15-notes-ai.pdf (124.75 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 16] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-16.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-16-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-16-notes-ai.pdf (130.95 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 17] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-17.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-17-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-17-notes-ai.pdf (98.18 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 18] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-18.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-18-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-18-notes-ai.pdf (96.01 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 19] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-19.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-19-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-19-notes-ai.pdf (152.31 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 2] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-2.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-2-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-2-notes-ai.pdf (71.93 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 20] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-20.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-20-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-20-notes-ai.pdf (157.71 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 21] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-21.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-21-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-21-notes-ai.pdf (77.98 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 22] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-22.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-22-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-22-notes-ai.pdf (91.83 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 23] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-23.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-23-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-23-notes-ai.pdf (66.9 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 24] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-24.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-24-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-24-notes-ai.pdf (135.42 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 25] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-25.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-25-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-25-notes-ai.pdf (131.24 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 26] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-26.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-26-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-26-notes-ai.pdf (105.79 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 27] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-27.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-27-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-27-notes-ai.pdf (110.71 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 28] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-28.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-28-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-28-notes-ai.pdf (90.61 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 29] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-29.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-29-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-29-notes-ai.pdf (134.99 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 3] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-3.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-3-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-3-notes-ai.pdf (88.2 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 30] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-30.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-30-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-30-notes-ai.pdf (92.33 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 31] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-31.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-31-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-31-notes-ai.pdf (138.75 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 32] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-32.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-32-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-32-notes-ai.pdf (159.46 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 33] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-33.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-33-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-33-notes-ai.pdf (85.2 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 34] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-34.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-34-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-34-notes-ai.pdf (86.74 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 35] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-35.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-35-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-35-notes-ai.pdf (94.38 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 36] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-36.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-36-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-36-notes-ai.pdf (135.1 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 37] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-37.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-37-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-37-notes-ai.pdf (114.05 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 38] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-38.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-38-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-38-notes-ai.pdf (85.65 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 39] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-39.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-39-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-39-notes-ai.pdf (102.08 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 4] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-4.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-4-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-4-notes-ai.pdf (59.35 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 40] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-40.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-40-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-40-notes-ai.pdf (145.15 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 41] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-41.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-41-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-41-notes-ai.pdf (77.35 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 42] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-42.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-42-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-42-notes-ai.pdf (73.84 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 43] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-43.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-43-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-43-notes-ai.pdf (106.07 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 436] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-436.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2013\sn-436-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2013\sn-436-notes-ai.pdf (228.87 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 44] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-44.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-44-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-44-notes-ai.pdf (115.2 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 45] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-45.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-45-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-45-notes-ai.pdf (58.3 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 46] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-46.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-46-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-46-notes-ai.pdf (84.21 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 47] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-47.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-47-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-47-notes-ai.pdf (107.92 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 48] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-48.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-48-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-48-notes-ai.pdf (154.15 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 487] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-487.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2014\sn-487-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2014\sn-487-notes-ai.pdf (116.78 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 49] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-49.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-49-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-49-notes-ai.pdf (129.9 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 5] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-5.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-5-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-5-notes-ai.pdf (54.45 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 50] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-50.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-50-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-50-notes-ai.pdf (130.88 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 51] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-51.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-51-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-51-notes-ai.pdf (114.1 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 52] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-52.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-52-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-52-notes-ai.pdf (131 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 53] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-53.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-53-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-53-notes-ai.pdf (97.58 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 54] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-54.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-54-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-54-notes-ai.pdf (119.32 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 540] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-540.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2015\sn-540-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2015\sn-540-notes-ai.pdf (170.52 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 55] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-55.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-55-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-55-notes-ai.pdf (97.04 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 56] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-56.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-56-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-56-notes-ai.pdf (133.17 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 57] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-57.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-57-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-57-notes-ai.pdf (92.51 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 58] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-58.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-58-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-58-notes-ai.pdf (93.08 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 59] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-59.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-59-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-59-notes-ai.pdf (143.34 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 592] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-592.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2016\sn-592-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2016\sn-592-notes-ai.pdf (243.42 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 6] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-6.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-6-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-6-notes-ai.pdf (47.48 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 60] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-60.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-60-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-60-notes-ai.pdf (123.36 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 61] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-61.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-61-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-61-notes-ai.pdf (78.81 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 62] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-62.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-62-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-62-notes-ai.pdf (115.89 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 63] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-63.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-63-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-63-notes-ai.pdf (125.4 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 64] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-64.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-64-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-64-notes-ai.pdf (111.83 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 643] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-643.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2017\sn-643-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2017\sn-643-notes-ai.pdf (102.38 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 65] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-65.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-65-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-65-notes-ai.pdf (80.65 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 66] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-66.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-66-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-66-notes-ai.pdf (100.42 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 67] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-67.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-67-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-67-notes-ai.pdf (96.8 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 68] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-68.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-68-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-68-notes-ai.pdf (174.01 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 69] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-69.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-69-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-69-notes-ai.pdf (91.05 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 695] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-695.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2018\sn-695-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2018\sn-695-notes-ai.pdf (240.11 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 7] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-7.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-7-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-7-notes-ai.pdf (75.44 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 70] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-70.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-70-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-70-notes-ai.pdf (115.37 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 71] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-71.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-71-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-71-notes-ai.pdf (136.42 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 72] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-72.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-72-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2006\sn-72-notes-ai.pdf (150.29 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 73] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-73.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-73-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-73-notes-ai.pdf (119.12 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 74] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-74.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-74-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-74-notes-ai.pdf (122.86 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 747] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-747.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2019\sn-747-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2019\sn-747-notes-ai.pdf (198.87 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 75] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-75.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-75-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-75-notes-ai.pdf (91.93 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 76] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-76.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-76-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-76-notes-ai.pdf (163.87 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 77] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-77.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-77-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-77-notes-ai.pdf (127.33 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 78] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-78.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-78-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-78-notes-ai.pdf (93.91 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 79] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-79.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-79-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-79-notes-ai.pdf (164.25 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 798] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-798.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2020\sn-798-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2020\sn-798-notes-ai.pdf (114.04 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 8] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-8.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-8-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-8-notes-ai.pdf (76.21 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 80] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-80.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-80-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-80-notes-ai.pdf (156.33 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 81] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-81.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-81-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-81-notes-ai.pdf (127.3 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 82] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-82.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-82-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-82-notes-ai.pdf (107.54 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 83] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-83.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-83-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-83-notes-ai.pdf (97.8 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 84] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-84.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-84-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-84-notes-ai.pdf (150.1 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 85] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-85.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-85-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-85-notes-ai.pdf (113.58 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 851] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-851.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2021\sn-851-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2021\sn-851-notes-ai.pdf (225.08 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 86] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-86.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-86-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-86-notes-ai.pdf (173.01 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 87] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-87.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-87-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-87-notes-ai.pdf (94.55 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 88] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-88.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-88-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-88-notes-ai.pdf (137.03 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 89] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-89.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-89-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-89-notes-ai.pdf (95.74 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 9] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-9.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-9-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2005\sn-9-notes-ai.pdf (104.67 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 90] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-90.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-90-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-90-notes-ai.pdf (136.11 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 903] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-903.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2022\sn-903-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2022\sn-903-notes-ai.pdf (266.06 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 91] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-91.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-91-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-91-notes-ai.pdf (178.31 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 92] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-92.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-92-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-92-notes-ai.pdf (106.93 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 93] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-93.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-93-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-93-notes-ai.pdf (122.62 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 94] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-94.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-94-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-94-notes-ai.pdf (112.83 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 95] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-95.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-95-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-95-notes-ai.pdf (115.67 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 954] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-954.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2023\sn-954-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2023\sn-954-notes-ai.pdf (151.79 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 96] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-96.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-96-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-96-notes-ai.pdf (149.28 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 97] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-97.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-97-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-97-notes-ai.pdf (96.38 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 98] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-98.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-98-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-98-notes-ai.pdf (97.6 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+[Episode 99] Processing...
+========================================
+HTML to PDF Conversion
+========================================
+
+Input:  D:\Desktop\SecurityNow-Full-Private\local\Notes\ai-transcripts\temp-99.html
+Output: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-99-notes-ai.pdf
+
+[1/3] Locating wkhtmltopdf...
+  Found: C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+[2/3] Verifying wkhtmltopdf...
+  [OK] wkhtmltopdf is functional
+
+[3/3] Converting HTML to PDF...
+  [OK] Converted to PDF: D:\Desktop\SecurityNow-Full-Private\local\PDF\2007\sn-99-notes-ai.pdf (112.52 KB)
+
+========================================
+Conversion Complete!
+========================================
+
+ OK
+
+========================================
+SUMMARY
+========================================
+Processed successfully: 112
+Failed: 0
+
+PDFs location: D:\Desktop\SecurityNow-Full-Private\local\PDF
+
+Complete!
+========================================
+PS D:\Desktop\SecurityNow-Full-Private>
