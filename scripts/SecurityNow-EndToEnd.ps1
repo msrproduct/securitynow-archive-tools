@@ -1,261 +1,229 @@
-# Security Now! - Complete End-to-End Archive Builder
-# This script downloads official show notes from GRC and generates AI transcripts for missing episodes
+<#
+.SYNOPSIS
+    Security Now! Archive Manager - Complete End-to-End Pipeline
+    
+.DESCRIPTION
+    Downloads official show notes from GRC, generates AI transcripts for missing episodes,
+    organizes everything by year, and maintains a comprehensive CSV index.
+    
+.PARAMETER DoTranscribe
+    Run Whisper transcription for missing episodes
+    
+.PARAMETER DoBuildAIPDFs
+    Convert AI transcripts to PDF with disclaimer
+    
+.PARAMETER DoOrganizeByYear
+    Move all PDFs into year-based folders
+    
+.PARAMETER MaxEpisode
+    Maximum episode number to process (default: 1200)
+#>
 
 param(
-    [string]$Root = "$HOME\SecurityNowArchive",
-    [string]$WhisperExe = "C:\whisper\whisper-cli.exe",
-    [string]$WhisperModel = "C:\whisper\ggml-base.en.bin",
-    [int]$MinEpisode = 1,
-    [int]$MaxEpisode = 1060,
-    [switch]$SkipAI,
-    [switch]$Verbose
+    [switch]$DoTranscribe,
+    [switch]$DoBuildAIPDFs,
+    [switch]$DoOrganizeByYear,
+    [int]$MaxEpisode = 1200
 )
 
-# ========================================
+# ============================================================================
 # CONFIGURATION
-# ========================================
+# ============================================================================
 
-$DataFolder = Join-Path $Root "data"
-$LocalRoot = Join-Path $Root "local"
-$NotesFolder = Join-Path $LocalRoot "Notes"
+# Paths - all relative to repo root
+$RepoRoot = Split-Path -Parent $PSScriptRoot
+$DataFolder = Join-Path $RepoRoot "data"
+$LocalRoot = Join-Path $RepoRoot "local"
 $PdfRoot = Join-Path $LocalRoot "PDF"
 $Mp3Folder = Join-Path $LocalRoot "mp3"
-$TranscriptsFolder = Join-Path $NotesFolder "ai-transcripts"
-$IndexCsvPath = Join-Path $DataFolder "SecurityNowNotesIndex.csv"
+$TranscriptsFolder = Join-Path $LocalRoot "ai-transcripts"
 
-# Browser paths for HTML to PDF conversion
-$EdgePath = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-$ChromePath = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+# Index files
+$IndexCsvPath = Join-Path $DataFolder "SecurityNowNotesIndex.csv"
+$EpisodeDatesPath = Join-Path $DataFolder "episode-dates.csv"
+
+# Whisper configuration (required for AI transcription)
+$WhisperExe = "C:\whisper-cli\whisper-cli.exe"
+$WhisperModel = "C:\whisper-cli\ggml-base.en.bin"
+
+# wkhtmltopdf configuration (required for PDF generation)
+$WkHtmlToPdfExe = "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+
+# Episodes that require AI transcription (no official GRC PDFs)
+$TargetMissingEpisodes = @(1..99) + @(436, 487, 540, 592, 643, 695, 747, 798, 851, 903, 954, 1006, 1058)
+
+# ============================================================================
+# INITIALIZE
+# ============================================================================
 
 Write-Host "`n========================================" -ForegroundColor Cyan
-Write-Host "Security Now! Archive Builder" -ForegroundColor Cyan
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "Root: $Root"
-Write-Host "Episodes: $MinEpisode to $MaxEpisode"
-Write-Host "Whisper: $WhisperExe"
-Write-Host "Skip AI: $SkipAI"
-Write-Host ""
+Write-Host "Security Now! Archive Manager" -ForegroundColor Cyan
+Write-Host "========================================`n" -ForegroundColor Cyan
 
-# ========================================
-# CREATE FOLDER STRUCTURE
-# ========================================
-
-Write-Host "Creating folder structure..." -ForegroundColor Yellow
-foreach ($path in @($Root, $DataFolder, $LocalRoot, $NotesFolder, $PdfRoot, $Mp3Folder, $TranscriptsFolder)) {
-    if (-not (Test-Path -LiteralPath $path)) {
+# Ensure core directories exist
+foreach ($path in @($DataFolder, $LocalRoot, $PdfRoot, $Mp3Folder, $TranscriptsFolder)) {
+    if (-not (Test-Path $path)) {
         New-Item -ItemType Directory -Path $path -Force | Out-Null
-        if ($Verbose) { Write-Host "  Created: $path" }
+        Write-Host "Created: $path" -ForegroundColor Gray
     }
 }
 
-# ========================================
-# VALIDATE TOOLS
-# ========================================
+# ============================================================================
+# HELPER FUNCTIONS
+# ============================================================================
 
-Write-Host "Validating tools..." -ForegroundColor Yellow
-
-# Check PDF tool
-$PdfTool = $null
-if (Test-Path -LiteralPath $EdgePath) {
-    $PdfTool = $EdgePath
-    Write-Host "  PDF Tool: Microsoft Edge" -ForegroundColor Green
-} elseif (Test-Path -LiteralPath $ChromePath) {
-    $PdfTool = $ChromePath
-    Write-Host "  PDF Tool: Google Chrome" -ForegroundColor Green
-} else {
-    Write-Host "  ERROR: Neither Edge nor Chrome found for HTML-to-PDF conversion" -ForegroundColor Red
-    Write-Host "  Install Edge or Chrome to generate AI PDFs" -ForegroundColor Red
-    if (-not $SkipAI) {
-        exit 1
-    }
-}
-
-# Check Whisper (only if not skipping AI)
-if (-not $SkipAI) {
-    if (-not (Test-Path -LiteralPath $WhisperExe)) {
-        Write-Host "  ERROR: whisper-cli.exe not found at $WhisperExe" -ForegroundColor Red
-        Write-Host "  Install whisper.cpp or use -SkipAI to skip AI transcript generation" -ForegroundColor Red
-        exit 1
-    }
-    if (-not (Test-Path -LiteralPath $WhisperModel)) {
-        Write-Host "  ERROR: Whisper model not found at $WhisperModel" -ForegroundColor Red
-        Write-Host "  Download ggml-base.en.bin from whisper.cpp releases" -ForegroundColor Red
-        exit 1
-    }
-    Write-Host "  Whisper: Ready" -ForegroundColor Green
-}
-
-# ========================================
-# EPISODE TO YEAR MAPPING
-# ========================================
-
-function Get-SnYearFromEpisode {
+function Get-EpisodeYear {
     param([int]$Episode)
     
-    switch ($Episode) {
-        { $_ -ge 1 -and $_ -le 20 } { return 2005 }
-        { $_ -ge 21 -and $_ -le 72 } { return 2006 }
-        { $_ -ge 73 -and $_ -le 124 } { return 2007 }
-        { $_ -ge 125 -and $_ -le 176 } { return 2008 }
-        { $_ -ge 177 -and $_ -le 228 } { return 2009 }
-        { $_ -ge 229 -and $_ -le 280 } { return 2010 }
-        { $_ -ge 281 -and $_ -le 332 } { return 2011 }
-        { $_ -ge 333 -and $_ -le 384 } { return 2012 }
-        { $_ -ge 385 -and $_ -le 436 } { return 2013 }
-        { $_ -ge 437 -and $_ -le 488 } { return 2014 }
-        { $_ -ge 489 -and $_ -le 540 } { return 2015 }
-        { $_ -ge 541 -and $_ -le 592 } { return 2016 }
-        { $_ -ge 593 -and $_ -le 644 } { return 2017 }
-        { $_ -ge 645 -and $_ -le 696 } { return 2018 }
-        { $_ -ge 697 -and $_ -le 748 } { return 2019 }
-        { $_ -ge 749 -and $_ -le 800 } { return 2020 }
-        { $_ -ge 801 -and $_ -le 852 } { return 2021 }
-        { $_ -ge 853 -and $_ -le 904 } { return 2022 }
-        { $_ -ge 905 -and $_ -le 956 } { return 2023 }
-        { $_ -ge 957 -and $_ -le 1008 } { return 2024 }
-        { $_ -ge 1009 -and $_ -le 1060 } { return 2025 }
-        { $_ -ge 1061 } { return 2026 }
-        default { return 0 }
+    # Try episode-dates.csv first (accurate recording dates)
+    if ($global:EpisodeDateIndex) {
+        $entry = $global:EpisodeDateIndex | Where-Object { [int]$_.Episode -eq $Episode }
+        if ($entry) {
+            return [int]$entry.Year
+        }
     }
+    
+    # Fallback: Use current/next year for new episodes
+    $now = Get-Date
+    if ($now.Month -eq 12 -and $now.Day -gt 20) {
+        return $now.Year + 1
+    }
+    return $now.Year
 }
 
-# ========================================
-# LOAD OR INITIALIZE INDEX
-# ========================================
-
-Write-Host "Loading episode index..." -ForegroundColor Yellow
-$index = @()
-if (Test-Path -LiteralPath $IndexCsvPath) {
-    $index = @(Import-Csv -Path $IndexCsvPath)
-    Write-Host "  Loaded $($index.Count) existing episodes from index" -ForegroundColor Green
-} else {
-    Write-Host "  Creating new index" -ForegroundColor Green
+function Get-Index {
+    param([string]$Path)
+    if (Test-Path $Path) {
+        return Import-Csv -Path $Path
+    }
+    return @()
 }
 
 function Save-Index {
-    param([array]$Index)
-    $Index | Sort-Object { [int]$_.Episode } -Unique | Export-Csv -Path $IndexCsvPath -NoTypeInformation -Encoding UTF8
+    param($Index, [string]$Path)
+    $Index | Sort-Object Episode, File -Unique | 
+        Export-Csv -Path $Path -NoTypeInformation -Encoding UTF8
 }
 
-# ========================================
-# MAIN PROCESSING LOOP
-# ========================================
+# ============================================================================
+# LOAD EPISODE DATE INDEX
+# ============================================================================
 
-Write-Host ""
-Write-Host "Processing episodes $MinEpisode to $MaxEpisode..." -ForegroundColor Cyan
-Write-Host ""
+if (Test-Path $EpisodeDatesPath) {
+    $global:EpisodeDateIndex = Import-Csv -Path $EpisodeDatesPath
+    Write-Host "✓ Loaded episode dates: $($global:EpisodeDateIndex.Count) entries" -ForegroundColor Green
+} else {
+    Write-Host "⚠ Warning: episode-dates.csv not found - using fallback year logic" -ForegroundColor Yellow
+    Write-Host "  Run Create-EpisodeDateIndex.ps1 first for accurate year mapping" -ForegroundColor Yellow
+    $global:EpisodeDateIndex = $null
+}
 
-$processed = 0
-$downloaded = 0
-$aiGenerated = 0
-$skipped = 0
+# ============================================================================
+# PHASE 1: AI TRANSCRIPTION (Optional)
+# ============================================================================
 
-for ($ep = $MinEpisode; $ep -le $MaxEpisode; $ep++) {
+if ($DoTranscribe) {
+    Write-Host "`n========================================" -ForegroundColor Cyan
+    Write-Host "PHASE 1: AI Transcription" -ForegroundColor Cyan
+    Write-Host "========================================`n" -ForegroundColor Cyan
     
-    $year = Get-SnYearFromEpisode -Episode $ep
-    if ($year -eq 0) {
-        Write-Host "[Episode $ep] WARNING: No year mapping, skipping" -ForegroundColor Yellow
-        continue
+    if (-not (Test-Path $WhisperExe)) {
+        Write-Host "ERROR: whisper-cli not found at $WhisperExe" -ForegroundColor Red
+        exit 1
     }
     
-    $yearFolder = Join-Path $PdfRoot $year
-    if (-not (Test-Path -LiteralPath $yearFolder)) {
-        New-Item -ItemType Directory -Path $yearFolder -Force | Out-Null
+    if (-not (Test-Path $WhisperModel)) {
+        Write-Host "ERROR: Whisper model not found at $WhisperModel" -ForegroundColor Red
+        exit 1
     }
     
-    # Check if already processed
-    $existingOfficial = Join-Path $yearFolder "sn-$ep-notes.pdf"
-    $existingAI = Join-Path $yearFolder "sn-$ep-notes-ai.pdf"
-    
-    if ((Test-Path -LiteralPath $existingOfficial) -or (Test-Path -LiteralPath $existingAI)) {
-        if ($Verbose) { Write-Host "[Episode $ep] Already exists, skipping" }
-        $skipped++
-        continue
+    $mp3MapPath = Join-Path $DataFolder "MissingEpisodesMp3Map.csv"
+    if (-not (Test-Path $mp3MapPath)) {
+        Write-Host "ERROR: MissingEpisodesMp3Map.csv not found" -ForegroundColor Red
+        exit 1
     }
     
-    # ========================================
-    # TRY TO DOWNLOAD OFFICIAL GRC PDF
-    # ========================================
+    $mp3MapAll = Import-Csv -Path $mp3MapPath
+    $mp3Map = $mp3MapAll | Where-Object { [int]$_.Episode -in $TargetMissingEpisodes }
     
-    $grcUrl = "https://www.grc.com/sn/sn-$ep-notes.pdf"
-    $tempPdf = Join-Path $PdfRoot "sn-$ep-notes.pdf"
-    $finalPdf = Join-Path $yearFolder "sn-$ep-notes.pdf"
-    
-    Write-Host "[Episode $ep] Checking GRC for official notes..." -NoNewline
-    
-    try {
-        Invoke-WebRequest -Uri $grcUrl -OutFile $tempPdf -UseBasicParsing -ErrorAction Stop | Out-Null
-        Move-Item -LiteralPath $tempPdf -Destination $finalPdf -Force
-        Write-Host " Downloaded" -ForegroundColor Green
+    foreach ($row in $mp3Map) {
+        $ep = [int]$row.Episode
+        $mp3Url = $row.Mp3Url
+        $mp3File = Join-Path $Mp3Folder "sn-$ep.mp3"
+        $txtFile = Join-Path $TranscriptsFolder "sn-$ep-notes-ai.txt"
+        $prefix = Join-Path $TranscriptsFolder "sn-$ep-notes-ai"
         
-        $index += [PSCustomObject]@{
-            Episode = $ep
-            Url = $grcUrl
-            File = "sn-$ep-notes.pdf"
-        }
+        Write-Host "`nEpisode $ep - transcription" -ForegroundColor Yellow
         
-        $downloaded++
-        $processed++
-        
-    } catch {
-        Write-Host " Not found" -ForegroundColor Yellow
-        
-        # ========================================
-        # GENERATE AI TRANSCRIPT IF NO OFFICIAL NOTES
-        # ========================================
-        
-        if ($SkipAI) {
-            Write-Host "[Episode $ep] Skipping AI generation (SkipAI flag set)" -ForegroundColor Yellow
+        if (Test-Path $txtFile) {
+            Write-Host "  Transcript exists, skipping" -ForegroundColor Gray
             continue
         }
         
-        Write-Host "[Episode $ep] Attempting AI transcript generation..." -ForegroundColor Cyan
-        
-        # Try to download MP3
-        $mp3Path = Join-Path $Mp3Folder "sn-$ep.mp3"
-        $mp3Url = "https://cdn.twit.tv/audio/sn/sn$('{0:D4}' -f $ep)/sn$('{0:D4}' -f $ep).mp3"
-        
-        if (-not (Test-Path -LiteralPath $mp3Path)) {
-            Write-Host "[Episode $ep]   Downloading MP3..." -NoNewline
+        if (-not (Test-Path $mp3File)) {
+            Write-Host "  Downloading MP3..." -ForegroundColor Gray
             try {
-                Invoke-WebRequest -Uri $mp3Url -OutFile $mp3Path -UseBasicParsing -ErrorAction Stop | Out-Null
-                Write-Host " OK" -ForegroundColor Green
+                Invoke-WebRequest -Uri $mp3Url -OutFile $mp3File -UseBasicParsing -ErrorAction Stop
             } catch {
-                Write-Host " Failed" -ForegroundColor Red
-                Write-Host "[Episode $ep]   Cannot generate AI transcript without audio" -ForegroundColor Yellow
+                Write-Host "  ERROR downloading MP3: $($_.Exception.Message)" -ForegroundColor Red
                 continue
             }
-        } else {
-            Write-Host "[Episode $ep]   MP3 already exists" -ForegroundColor Green
         }
         
-        # Run Whisper transcription
-        $txtPrefix = Join-Path $TranscriptsFolder "sn-$ep-notes-ai"
-        $txtPath = "$txtPrefix.txt"
-        
-        if (-not (Test-Path -LiteralPath $txtPath)) {
-            Write-Host "[Episode $ep]   Running Whisper transcription..." -NoNewline
-            try {
-                & $WhisperExe -m $WhisperModel -f $mp3Path -otxt -of $txtPrefix 2>&1 | Out-Null
-                if (Test-Path -LiteralPath $txtPath) {
-                    Write-Host " OK" -ForegroundColor Green
-                } else {
-                    Write-Host " Failed (no output)" -ForegroundColor Red
-                    continue
-                }
-            } catch {
-                Write-Host " Failed" -ForegroundColor Red
-                Write-Host "[Episode $ep]   Error: $($_.Exception.Message)" -ForegroundColor Red
-                continue
-            }
-        } else {
-            Write-Host "[Episode $ep]   Transcript already exists" -ForegroundColor Green
+        Write-Host "  Running Whisper..." -ForegroundColor Gray
+        try {
+            & $WhisperExe -m $WhisperModel -f $mp3File -otxt -of $prefix
+        } catch {
+            Write-Host "  ERROR during transcription: $($_.Exception.Message)" -ForegroundColor Red
+            continue
         }
         
-        # Create HTML with disclaimer
-        Write-Host "[Episode $ep]   Creating AI PDF with disclaimer..." -NoNewline
+        if (Test-Path $txtFile) {
+            Write-Host "  ✓ Transcript created" -ForegroundColor Green
+        } else {
+            Write-Host "  ✗ Transcript missing after ASR" -ForegroundColor Red
+        }
+    }
+}
+
+# ============================================================================
+# PHASE 2: BUILD AI PDFs (Optional)
+# ============================================================================
+
+if ($DoBuildAIPDFs) {
+    Write-Host "`n========================================" -ForegroundColor Cyan
+    Write-Host "PHASE 2: Build AI PDFs" -ForegroundColor Cyan
+    Write-Host "========================================`n" -ForegroundColor Cyan
+    
+    if (-not (Test-Path $WkHtmlToPdfExe)) {
+        Write-Host "ERROR: wkhtmltopdf not found at $WkHtmlToPdfExe" -ForegroundColor Red
+        Write-Host "Download from: https://wkhtmltopdf.org/downloads.html" -ForegroundColor Yellow
+        exit 1
+    }
+    
+    $index = Get-Index -Path $IndexCsvPath
+    $txtFiles = Get-ChildItem -Path $TranscriptsFolder -Filter "sn-*-notes-ai.txt" -File
+    $newNotes = @()
+    
+    foreach ($txt in $txtFiles) {
+        if ($txt.BaseName -notmatch 'sn-(\d+)-notes-ai') { continue }
+        $ep = [int]$Matches[1]
         
-        $bodyText = Get-Content -LiteralPath $txtPath -Raw
+        if ($ep -notin $TargetMissingEpisodes) { continue }
+        
+        $txtFile = $txt.FullName
+        $pdfFile = Join-Path $PdfRoot "sn-$ep-notes-ai.pdf"
+        
+        Write-Host "`nEpisode $ep - AI PDF" -ForegroundColor Yellow
+        
+        $existing = $index | Where-Object { [int]$_.Episode -eq $ep -and $_.File -eq "sn-$ep-notes-ai.pdf" }
+        if ($existing -and (Test-Path $pdfFile)) {
+            Write-Host "  PDF exists, skipping" -ForegroundColor Gray
+            continue
+        }
+        
+        $htmlFile = Join-Path $TranscriptsFolder "sn-$ep-notes-ai.html"
+        $bodyText = Get-Content -LiteralPath $txtFile -Raw
         $episodeTitle = "Security Now! Episode $ep - AI-Derived Transcript"
         
         $htmlContent = @"
@@ -267,93 +235,132 @@ for ($ep = $MinEpisode; $ep -le $MaxEpisode; $ep++) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            white-space: pre-wrap;
             background-color: white;
             color: black;
             margin: 20px;
+            white-space: pre-wrap;
         }
         .disclaimer {
             font-weight: bold;
-            color: white;
-            background-color: red;
-            padding: 15px;
+            color: red;
+            background-color: white;
+            padding: 10px;
             margin-bottom: 20px;
-            border: 2px solid darkred;
+            border: 2px solid red;
         }
     </style>
 </head>
 <body>
     <div class="disclaimer">
-        ⚠️ THIS IS AN AUTOMATICALLY GENERATED TRANSCRIPT/NOTES FILE CREATED FROM AUDIO.
-        <br><br>
-        IT IS NOT AN ORIGINAL STEVE GIBSON SHOW-NOTES DOCUMENT AND MAY CONTAIN ERRORS.
-        <br><br>
-        Official Security Now! notes are available at: https://www.grc.com/securitynow.htm
+⚠️ THIS IS AN AUTOMATICALLY GENERATED TRANSCRIPT/NOTES FILE CREATED FROM AUDIO.
+IT IS NOT AN ORIGINAL STEVE GIBSON SHOW-NOTES DOCUMENT AND MAY CONTAIN ERRORS.
     </div>
-    <pre>`$bodyText</pre>
+    <pre>
+$bodyText
+    </pre>
 </body>
 </html>
 "@
         
-        $htmlPath = Join-Path $TranscriptsFolder "sn-$ep-notes-ai.html"
-        $htmlContent | Out-File -LiteralPath $htmlPath -Encoding UTF8 -Force
+        $htmlContent | Out-File -LiteralPath $htmlFile -Encoding UTF8 -Force
         
-        # Convert HTML to PDF
-        $pdfPath = Join-Path $PdfRoot "sn-$ep-notes-ai.pdf"
-        $finalAiPdf = Join-Path $yearFolder "sn-$ep-notes-ai.pdf"
-        
+        Write-Host "  Converting to PDF..." -ForegroundColor Gray
         try {
-            & $PdfTool --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="$pdfPath" $htmlPath 2>&1 | Out-Null
+            & $WkHtmlToPdfExe --enable-local-file-access --quiet $htmlFile $pdfFile 2>&1 | Out-Null
             Start-Sleep -Seconds 2
-            
-            if (Test-Path -LiteralPath $pdfPath) {
-                Move-Item -LiteralPath $pdfPath -Destination $finalAiPdf -Force
-                Write-Host " OK" -ForegroundColor Green
-                
-                $index += [PSCustomObject]@{
-                    Episode = $ep
-                    Url = "(AI-generated)"
-                    File = "sn-$ep-notes-ai.pdf"
-                }
-                
-                $aiGenerated++
-                $processed++
-            } else {
-                Write-Host " Failed (PDF not created)" -ForegroundColor Red
-            }
         } catch {
-            Write-Host " Failed" -ForegroundColor Red
-            Write-Host "[Episode $ep]   Error: $($_.Exception.Message)" -ForegroundColor Red
-        } finally {
-            # Cleanup HTML
-            Remove-Item -LiteralPath $htmlPath -Force -ErrorAction SilentlyContinue
+            Write-Host "  ERROR during PDF conversion: $($_.Exception.Message)" -ForegroundColor Red
+            continue
         }
+        
+        if (Test-Path $pdfFile) {
+            Write-Host "  ✓ PDF created" -ForegroundColor Green
+            $newNotes += [pscustomobject]@{
+                Episode = $ep
+                Url = "generated from audio"
+                File = "sn-$ep-notes-ai.pdf"
+            }
+        } else {
+            Write-Host "  ✗ PDF missing after conversion" -ForegroundColor Red
+        }
+        
+        Remove-Item -LiteralPath $htmlFile -Force -ErrorAction SilentlyContinue
+    }
+    
+    if ($newNotes.Count -gt 0) {
+        $index = $index + $newNotes
+        Save-Index -Index $index -Path $IndexCsvPath
+        Write-Host "`n✓ Index updated with $($newNotes.Count) AI PDFs" -ForegroundColor Green
     }
 }
 
-# ========================================
-# SAVE INDEX
-# ========================================
+# ============================================================================
+# PHASE 3: ORGANIZE BY YEAR (Optional)
+# ============================================================================
 
-Write-Host ""
-Write-Host "Saving index..." -ForegroundColor Yellow
-Save-Index -Index $index
+if ($DoOrganizeByYear) {
+    Write-Host "`n========================================" -ForegroundColor Cyan
+    Write-Host "PHASE 3: Organize by Year" -ForegroundColor Cyan
+    Write-Host "========================================`n" -ForegroundColor Cyan
+    
+    # Create year folders
+    $years = 2005..2026
+    foreach ($year in $years) {
+        $yearFolder = Join-Path $PdfRoot $year
+        if (-not (Test-Path $yearFolder)) {
+            New-Item -ItemType Directory -Path $yearFolder -Force | Out-Null
+        }
+    }
+    
+    $allPdfs = Get-ChildItem -Path $PdfRoot -Filter "sn-*-notes*.pdf" -File -Recurse
+    
+    foreach ($pdf in $allPdfs) {
+        # Skip if already in year folder
+        if ($pdf.DirectoryName -match '\d{4}$') { continue }
+        
+        if ($pdf.BaseName -notmatch 'sn-(\d+)') { continue }
+        $ep = [int]$Matches[1]
+        
+        $year = Get-EpisodeYear -Episode $ep
+        if ($year -eq 0) {
+            Write-Host "⚠ No year mapping for episode $ep" -ForegroundColor Yellow
+            continue
+        }
+        
+        $destFolder = Join-Path $PdfRoot $year
+        $destPath = Join-Path $destFolder $pdf.Name
+        
+        Write-Host "Moving episode $ep ($($pdf.Name)) → $year" -ForegroundColor Gray
+        Move-Item -LiteralPath $pdf.FullName -Destination $destPath -Force
+    }
+    
+    Write-Host "`n✓ PDFs organized by year" -ForegroundColor Green
+}
 
-# ========================================
+# ============================================================================
 # SUMMARY
-# ========================================
+# ============================================================================
 
-Write-Host ""
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "SUMMARY" -ForegroundColor Cyan
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "Total processed:      $processed"
-Write-Host "  Official GRC PDFs:  $downloaded" -ForegroundColor Green
-Write-Host "  AI-generated PDFs:  $aiGenerated" -ForegroundColor Yellow
-Write-Host "Skipped (existing):   $skipped"
-Write-Host ""
-Write-Host "Archive location:     $Root" -ForegroundColor Cyan
-Write-Host "Index file:           $IndexCsvPath" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "Complete!" -ForegroundColor Green
-Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "`n========================================" -ForegroundColor Cyan
+Write-Host "Summary" -ForegroundColor Cyan
+Write-Host "========================================`n" -ForegroundColor Cyan
+
+$indexFinal = Get-Index -Path $IndexCsvPath
+if ($indexFinal.Count -gt 0) {
+    $allEpisodes = 1..$MaxEpisode
+    $haveEpisodes = $indexFinal.Episode | Sort-Object -Unique
+    $missingEpisodes = $allEpisodes | Where-Object { $_ -notin $haveEpisodes }
+    
+    Write-Host "Episodes in index: $($haveEpisodes.Count)" -ForegroundColor Green
+    
+    if ($missingEpisodes.Count -gt 0) {
+        Write-Host "Missing episodes: $($missingEpisodes.Count)" -ForegroundColor Yellow
+        Write-Host "First 20: $($missingEpisodes | Select-Object -First 20 -join ', ')" -ForegroundColor Gray
+    } else {
+        Write-Host "✓ Complete! All episodes 1-$MaxEpisode present" -ForegroundColor Green
+    }
+} else {
+    Write-Host "⚠ WARNING: Index is empty" -ForegroundColor Yellow
+}
+
+Write-Host "`nDone!`n" -ForegroundColor Cyan
