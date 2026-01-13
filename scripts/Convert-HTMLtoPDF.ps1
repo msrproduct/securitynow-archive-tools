@@ -1,312 +1,127 @@
 <#
 .SYNOPSIS
-    Convert HTML files to PDF using wkhtmltopdf (cross-platform).
+    Convert HTML files to PDF using wkhtmltopdf
 
 .DESCRIPTION
-    Converts HTML show notes to PDF format using wkhtmltopdf.
-    Works on Windows, macOS, and Linux.
-    Auto-detects wkhtmltopdf installation or uses provided path.
-    
-    Optimized for Security Now! HTML show notes with external resources.
+    Cross-platform HTML to PDF converter with auto-detection of wkhtmltopdf.
+    Includes critical flags for local file access and proper PDF generation.
 
 .PARAMETER InputHTML
-    Path to input HTML file.
+    Path to the input HTML file
 
 .PARAMETER OutputPDF
-    Path to output PDF file.
+    Path where the PDF should be saved
 
 .PARAMETER wkhtmltopdfPath
-    Optional. Path to wkhtmltopdf executable. Auto-detected if not specified.
-
-.PARAMETER PageSize
-    Optional. PDF page size (default: Letter). Options: Letter, A4, Legal.
-
-.PARAMETER MarginTop
-    Optional. Top margin in millimeters (default: 10).
-
-.PARAMETER MarginBottom
-    Optional. Bottom margin in millimeters (default: 10).
-
-.PARAMETER MarginLeft
-    Optional. Left margin in millimeters (default: 10).
-
-.PARAMETER MarginRight
-    Optional. Right margin in millimeters (default: 10).
-
-.PARAMETER EnableJavaScript
-    Optional. Enable JavaScript processing (default: true).
-
-.PARAMETER JavaScriptDelay
-    Optional. Milliseconds to wait for JavaScript to finish (default: 1000).
+    Optional: Explicit path to wkhtmltopdf executable
 
 .EXAMPLE
-    .\Convert-HTMLtoPDF.ps1 -InputHTML "episode-001.html" -OutputPDF "episode-001.pdf"
-
-.EXAMPLE
-    .\Convert-HTMLtoPDF.ps1 -InputHTML "episode-001.html" -OutputPDF "episode-001.pdf" -PageSize A4
-
-.EXAMPLE
-    .\Convert-HTMLtoPDF.ps1 -InputHTML "episode-001.html" -OutputPDF "episode-001.pdf" -wkhtmltopdfPath "C:\Tools\wkhtmltopdf.exe"
-
-.NOTES
-    Author: Security Now Archive Tools Project
-    Requires: wkhtmltopdf (https://wkhtmltopdf.org/downloads.html)
-    
-    Installation:
-      Windows: winget install wkhtmltopdf
-      macOS:   brew install wkhtmltopdf
-      Linux:   apt-get install wkhtmltopdf  OR  yum install wkhtmltopdf
-    
-    Tested with Security Now! HTML show notes from GRC.com
+    .\Convert-HTMLtoPDF.ps1 -InputHTML "episode.html" -OutputPDF "episode.pdf"
 #>
 
-[CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)]
     [string]$InputHTML,
-    
+
     [Parameter(Mandatory=$true)]
     [string]$OutputPDF,
-    
-    [Parameter(Mandatory=$false)]
-    [string]$wkhtmltopdfPath = "",
-    
-    [Parameter(Mandatory=$false)]
-    [ValidateSet("Letter", "A4", "Legal")]
-    [string]$PageSize = "Letter",
-    
-    [Parameter(Mandatory=$false)]
-    [int]$MarginTop = 10,
-    
-    [Parameter(Mandatory=$false)]
-    [int]$MarginBottom = 10,
-    
-    [Parameter(Mandatory=$false)]
-    [int]$MarginLeft = 10,
-    
-    [Parameter(Mandatory=$false)]
-    [int]$MarginRight = 10,
-    
-    [Parameter(Mandatory=$false)]
-    [bool]$EnableJavaScript = $true,
-    
-    [Parameter(Mandatory=$false)]
-    [int]$JavaScriptDelay = 1000
+
+    [string]$wkhtmltopdfPath = ""
 )
 
-function Find-wkhtmltopdf {
-    <#
-    .SYNOPSIS
-        Auto-detect wkhtmltopdf installation.
-    #>
-    
-    Write-Verbose "Searching for wkhtmltopdf..."
-    
-    # Platform-specific paths
-    if ($IsWindows -or $PSVersionTable.PSVersion.Major -lt 6) {
-        # Windows
-        $possiblePaths = @(
-            "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe",
-            "C:\Program Files (x86)\wkhtmltopdf\bin\wkhtmltopdf.exe",
-            "$env:ProgramFiles\wkhtmltopdf\bin\wkhtmltopdf.exe",
-            "${env:ProgramFiles(x86)}\wkhtmltopdf\bin\wkhtmltopdf.exe"
-        )
-    } elseif ($IsMacOS) {
-        # macOS
-        $possiblePaths = @(
-            "/usr/local/bin/wkhtmltopdf",
-            "/opt/homebrew/bin/wkhtmltopdf",
-            "/usr/bin/wkhtmltopdf"
-        )
-    } else {
-        # Linux
-        $possiblePaths = @(
-            "/usr/local/bin/wkhtmltopdf",
-            "/usr/bin/wkhtmltopdf",
-            "/opt/wkhtmltopdf/bin/wkhtmltopdf"
-        )
-    }
-    
-    # Check each possible path
-    foreach ($path in $possiblePaths) {
-        if (Test-Path $path) {
-            Write-Verbose "  Found: $path"
-            return $path
-        }
-    }
-    
-    # Try PATH environment
-    try {
-        $cmd = Get-Command wkhtmltopdf -ErrorAction Stop
-        Write-Verbose "  Found in PATH: $($cmd.Source)"
-        return $cmd.Source
-    } catch {
-        # Not found
-    }
-    
-    return $null
-}
+Write-Host "`n=== HTML to PDF Conversion ===" -ForegroundColor Cyan
+Write-Host "Input:  $InputHTML" -ForegroundColor Gray
+Write-Host "Output: $OutputPDF" -ForegroundColor Gray
 
-function Test-wkhtmltopdf {
-    <#
-    .SYNOPSIS
-        Verify wkhtmltopdf is working.
-    #>
-    param(
-        [string]$Path
-    )
-    
-    try {
-        $version = & $Path --version 2>&1 | Select-Object -First 1
-        Write-Verbose "  wkhtmltopdf version: $version"
-        return $true
-    } catch {
-        Write-Warning "  Failed to execute wkhtmltopdf: $($_.Exception.Message)"
-        return $false
-    }
-}
+# Step 1: Locate wkhtmltopdf
+Write-Host "`n[1/3] Locating wkhtmltopdf..." -ForegroundColor Yellow
 
-function Convert-HTMLtoPDFInternal {
-    <#
-    .SYNOPSIS
-        Perform the actual HTML to PDF conversion.
-    #>
-    param(
-        [string]$wkhtmltopdf,
-        [string]$InputHTML,
-        [string]$OutputPDF,
-        [string]$PageSize,
-        [int]$MarginTop,
-        [int]$MarginBottom,
-        [int]$MarginLeft,
-        [int]$MarginRight,
-        [bool]$EnableJavaScript,
-        [int]$JavaScriptDelay
-    )
-    
-    # Build arguments - optimized for Security Now HTML with external resources
-    $args = @(
-        "--enable-local-file-access",    # Allow local file access
-        "--no-stop-slow-scripts",        # Don't timeout on scripts
-        "--page-size", $PageSize,
-        "--margin-top", "${MarginTop}mm",
-        "--margin-bottom", "${MarginBottom}mm",
-        "--margin-left", "${MarginLeft}mm",
-        "--margin-right", "${MarginRight}mm"
-    )
-    
-    # JavaScript support (needed for some Security Now pages)
-    if ($EnableJavaScript) {
-        $args += "--enable-javascript"
-        if ($JavaScriptDelay -gt 0) {
-            $args += @("--javascript-delay", $JavaScriptDelay)
-        }
-    } else {
-        $args += "--disable-javascript"
-    }
-    
-    # Add input and output files
-    $args += @($InputHTML, $OutputPDF)
-    
-    Write-Verbose "Executing: $wkhtmltopdf $($args -join ' ')"
-    
-    try {
-        # Execute conversion (suppress warnings about missing external resources)
-        $output = & $wkhtmltopdf $args 2>&1 | Where-Object { $_ -notmatch 'Warning: Failed to load' -and $_ -notmatch 'Warning: SSL error ignored' }
-        
-        # Check result
-        if ($LASTEXITCODE -eq 0 -and (Test-Path $OutputPDF)) {
-            $pdfSize = (Get-Item $OutputPDF).Length / 1KB
-            Write-Host "  [OK] Converted to PDF: $OutputPDF ($([math]::Round($pdfSize, 2)) KB)" -ForegroundColor Green
-            return $true
-        } else {
-            Write-Warning "  [WARN] PDF conversion failed (exit code: $LASTEXITCODE)"
-            if ($output) {
-                Write-Verbose "wkhtmltopdf output: $output"
-            }
-            return $false
-        }
-    } catch {
-        Write-Error "  [ERROR] Failed to convert HTML to PDF: $($_.Exception.Message)"
-        return $false
-    }
-}
-
-#
-# Main Script
-#
-
-Write-Host "`n========================================" -ForegroundColor Cyan
-Write-Host "HTML to PDF Conversion" -ForegroundColor Cyan
-Write-Host "========================================`n" -ForegroundColor Cyan
-
-# Validate input file
-if (-not (Test-Path $InputHTML)) {
-    Write-Error "ERROR: Input HTML file not found: $InputHTML"
-    exit 1
-}
-
-Write-Host "Input:  $InputHTML" -ForegroundColor White
-Write-Host "Output: $OutputPDF" -ForegroundColor White
-Write-Host ""
-
-# Find wkhtmltopdf
 if ([string]::IsNullOrEmpty($wkhtmltopdfPath)) {
-    Write-Host "[1/3] Locating wkhtmltopdf..." -ForegroundColor Yellow
-    $wkhtmltopdfPath = Find-wkhtmltopdf
-    
-    if ([string]::IsNullOrEmpty($wkhtmltopdfPath)) {
-        Write-Error "ERROR: wkhtmltopdf not found!"
-        Write-Host "`nInstallation instructions:" -ForegroundColor Yellow
-        Write-Host "  Windows: winget install wkhtmltopdf" -ForegroundColor White
-        Write-Host "  macOS:   brew install wkhtmltopdf" -ForegroundColor White
-        Write-Host "  Linux:   apt-get install wkhtmltopdf  OR  yum install wkhtmltopdf" -ForegroundColor White
-        Write-Host "`nDownload: https://wkhtmltopdf.org/downloads.html`n" -ForegroundColor White
-        exit 1
-    }
-    
-    Write-Host "  Found: $wkhtmltopdfPath" -ForegroundColor Green
-} else {
-    Write-Host "[1/3] Using provided wkhtmltopdf path: $wkhtmltopdfPath" -ForegroundColor Yellow
-    
-    if (-not (Test-Path $wkhtmltopdfPath)) {
-        Write-Error "ERROR: wkhtmltopdf not found at: $wkhtmltopdfPath"
-        exit 1
+    Write-Verbose "Searching for wkhtmltopdf..."
+
+    $possiblePaths = @(
+        "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe",
+        "C:\Program Files (x86)\wkhtmltopdf\bin\wkhtmltopdf.exe",
+        "/usr/local/bin/wkhtmltopdf",
+        "/usr/bin/wkhtmltopdf"
+    )
+
+    foreach ($path in $possiblePaths) {
+        Write-Verbose "Checking: $path"
+        if (Test-Path $path) {
+            $wkhtmltopdfPath = $path
+            Write-Verbose "Found: $path"
+            break
+        }
     }
 }
 
-# Verify wkhtmltopdf works
+if ([string]::IsNullOrEmpty($wkhtmltopdfPath) -or !(Test-Path $wkhtmltopdfPath)) {
+    Write-Host "✗ ERROR: wkhtmltopdf not found" -ForegroundColor Red
+    Write-Host "  Please install from: https://wkhtmltopdf.org/downloads.html" -ForegroundColor Yellow
+    exit 1
+}
+
+Write-Host "  ✓ Found: $wkhtmltopdfPath" -ForegroundColor Green
+
+# Step 2: Verify wkhtmltopdf
 Write-Host "`n[2/3] Verifying wkhtmltopdf..." -ForegroundColor Yellow
-if (-not (Test-wkhtmltopdf -Path $wkhtmltopdfPath)) {
-    Write-Error "ERROR: wkhtmltopdf verification failed"
+
+try {
+    $version = & $wkhtmltopdfPath --version 2>&1 | Select-Object -First 1
+    Write-Verbose "wkhtmltopdf version: $version"
+    Write-Host "  ✓ OK: wkhtmltopdf is functional" -ForegroundColor Green
+} catch {
+    Write-Host "✗ WARN: Could not verify wkhtmltopdf version" -ForegroundColor Yellow
+}
+
+# Step 3: Convert HTML to PDF
+Write-Host "`n[3/3] Converting HTML to PDF..." -ForegroundColor Yellow
+
+# Verify input file exists
+if (!(Test-Path -LiteralPath $InputHTML)) {
+    Write-Host "✗ ERROR: Input HTML file not found: $InputHTML" -ForegroundColor Red
     exit 1
 }
-Write-Host "  [OK] wkhtmltopdf is functional" -ForegroundColor Green
 
-# Convert HTML to PDF
-Write-Host "`n[3/3] Converting HTML to PDF..." -ForegroundColor Yellow
-Write-Verbose "Note: Warnings about missing external resources (CSS, images) are normal for Security Now HTML."
+# Build command with critical flags
+$arguments = @(
+    "--enable-local-file-access",      # CRITICAL: Allow reading temp HTML files
+    "--no-stop-slow-scripts",          # Don't timeout on scripts
+    "--disable-external-links",        # Ignore external resources
+    "--quiet",                          # Suppress verbose output
+    "--page-size", "Letter",           # Standard US letter size
+    "--margin-top", "10mm",            # Top margin
+    "--margin-bottom", "10mm",         # Bottom margin
+    "--margin-left", "10mm",           # Left margin
+    "--margin-right", "10mm",          # Right margin
+    "--no-pdf-header-footer",          # Remove browser artifacts
+    $InputHTML,
+    $OutputPDF
+)
 
-$success = Convert-HTMLtoPDFInternal `
-    -wkhtmltopdf $wkhtmltopdfPath `
-    -InputHTML $InputHTML `
-    -OutputPDF $OutputPDF `
-    -PageSize $PageSize `
-    -MarginTop $MarginTop `
-    -MarginBottom $MarginBottom `
-    -MarginLeft $MarginLeft `
-    -MarginRight $MarginRight `
-    -EnableJavaScript $EnableJavaScript `
-    -JavaScriptDelay $JavaScriptDelay
+Write-Verbose "Executing: $wkhtmltopdfPath $($arguments -join ' ')"
 
-if ($success) {
-    Write-Host "`n========================================" -ForegroundColor Cyan
-    Write-Host "Conversion Complete!" -ForegroundColor Green
-    Write-Host "========================================`n" -ForegroundColor Cyan
-    exit 0
-} else {
-    Write-Host "`n========================================" -ForegroundColor Cyan
-    Write-Host "Conversion Failed" -ForegroundColor Red
-    Write-Host "========================================`n" -ForegroundColor Cyan
-    exit 1
+try {
+    # Execute wkhtmltopdf
+    $output = & $wkhtmltopdfPath @arguments 2>&1
+
+    # Check results
+    if ($LASTEXITCODE -eq 0 -and (Test-Path -LiteralPath $OutputPDF)) {
+        $fileSize = (Get-Item -LiteralPath $OutputPDF).Length / 1KB
+        Write-Host "  ✓ OK: Converted to PDF: $OutputPDF ($([math]::Round($fileSize, 2)) KB)" -ForegroundColor Green
+        Write-Host "`n=== Conversion Complete! ===" -ForegroundColor Cyan
+        return $true
+    } else {
+        Write-Host "  ✗ WARN: PDF conversion failed (exit code: $LASTEXITCODE)" -ForegroundColor Yellow
+        if ($output) {
+            Write-Verbose "wkhtmltopdf output: $output"
+        }
+        return $false
+    }
+
+} catch {
+    Write-Host "  ✗ ERROR: Failed to convert HTML to PDF" -ForegroundColor Red
+    Write-Host "  Error: $($_.Exception.Message)" -ForegroundColor Red
+    return $false
 }
