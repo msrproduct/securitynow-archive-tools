@@ -1,1 +1,1 @@
-scripts\securitynow-endtoend.ps1
+public-only-cleanup-list.txt
