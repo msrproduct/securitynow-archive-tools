@@ -1,3 +1,7 @@
+scripts\simple-test.ps1
+scripts\test-wkhtmltopdf.ps1
+scripts\myscript.ps1
 test-wkhtmltopdf.ps1
 simple-test.ps1
+public-only-cleanup-list.txt
 sn-full-run.ps1
