@@ -26,7 +26,10 @@ $syncRoots = @(
 $excludedFolders = @(
     "local-pdf",
     "local-mp3",
-    "local-notes-ai-transcripts"
+    "local-notes-ai-transcripts",
+    "local\pdf",
+    "local\mp3",
+    "local\notes\ai-transcripts"
 )
 
 # Extensions that must NEVER be synced to public
@@ -118,14 +121,14 @@ foreach ($root in $syncRoots) {
             if ($rel -like ".git*") { continue }
 
             # 2) Exclude any file under copyrighted folders
-            $underCopyright = $false
+            $exclude = $false
             foreach ($ex in $excludedFolders) {
                 if ($rel -like "$ex*" -or $rel -like "*\$ex\*" -or $rel -like "*/$ex/*") {
-                    $underCopyright = $true
+                    $exclude = $true
                     break
                 }
             }
-            if ($underCopyright) { continue }
+            if ($exclude) { continue }
 
             # 3) Exclude any blocked media extensions anywhere
             $ext = [System.IO.Path]::GetExtension($file.Name).ToLowerInvariant()
@@ -246,16 +249,30 @@ else {
             }
 
             git commit -m $PublicCommitMessage
-            if ($LASTEXITCODE -ne 0) {
-                throw "git commit failed in public repo"
-            }
+            $commitExit = $LASTEXITCODE
 
-            git push origin main
-            if ($LASTEXITCODE -ne 0) {
-                throw "git push failed in public repo"
-            }
+            if ($commitExit -ne 0) {
+                # If nothing to commit, treat as already up to date (no push)
+                $status = git status --porcelain
+                if ($LASTEXITCODE -ne 0) {
+                    throw "git status failed in public repo after commit attempt"
+                }
 
-            Write-Host "Public repo changes committed and pushed." -ForegroundColor Green
+                if ([string]::IsNullOrWhiteSpace($status)) {
+                    Write-Host "Public repo: no changes to commit (already up to date)." -ForegroundColor DarkGray
+                }
+                else {
+                    throw "git commit failed in public repo"
+                }
+            }
+            else {
+                git push origin main
+                if ($LASTEXITCODE -ne 0) {
+                    throw "git push failed in public repo"
+                }
+
+                Write-Host "Public repo changes committed and pushed." -ForegroundColor Green
+            }
         }
         finally {
             Pop-Location
