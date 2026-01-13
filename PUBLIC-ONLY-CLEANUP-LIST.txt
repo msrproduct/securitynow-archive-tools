@@ -1,2 +1,0 @@
-public-only-cleanup-list.txt
-docs\test-repo-change-sync-script-then-delete.txt
