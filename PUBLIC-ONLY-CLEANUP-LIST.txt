@@ -1,0 +1,3 @@
+docs\special-sync.md
+scripts\push-to-private.ps1
+scripts\configure-gitignore.ps1

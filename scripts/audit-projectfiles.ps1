@@ -1,0 +1,424 @@
+# File Audit and Classification Tool
+# Saves to: D:\Desktop\SecurityNow-Full-Private\FILE-AUDIT-REPORT.txt
+
+param(
+    [string]$PrivateRepo = "D:\Desktop\SecurityNow-Full-Private",
+    [string]$PublicRepo = "D:\Desktop\SecurityNow-Full"
+)
+
+$OutputFile = Join-Path $PrivateRepo "FILE-AUDIT-REPORT.txt"
+
+function Get-FileClassification {
+    param([string]$Path, [string]$RepoType)
+    
+    $name = Split-Path $Path -Leaf
+    $ext = [System.IO.Path]::GetExtension($Path)
+    $size = (Get-Item $Path -ErrorAction SilentlyContinue).Length
+    $content = ""
+    
+    # Read first 500 chars for analysis
+    if ($ext -in @('.ps1', '.md', '.txt', '.csv')) {
+        try {
+            $content = (Get-Content $Path -ErrorAction SilentlyContinue -TotalCount 20) -join "`n"
+        } catch {}
+    }
+    
+    # Classification logic
+    $classification = @{
+        File = $name
+        Path = $Path -replace [regex]::Escape($PrivateRepo), "~Private" -replace [regex]::Escape($PublicRepo), "~Public"
+        Size = $size
+        Type = "Unknown"
+        Criticality = "Unknown"
+        Purpose = "Unknown"
+        Recommendation = "Review"
+    }
+    
+    # Classify by name patterns
+    switch -Regex ($name) {
+        # CRITICAL PRODUCTION SCRIPTS
+        '^sn-full-run\.ps1$' {
+            $classification.Type = "Production Script"
+            $classification.Criticality = "CRITICAL"
+            $classification.Purpose = "Main production script - downloads GRC PDFs, generates AI transcripts, organizes by year"
+            $classification.Recommendation = "KEEP - Primary workflow script"
+        }
+        '^Special-Sync\.ps1$' {
+            $classification.Type = "Production Script"
+            $classification.Criticality = "CRITICAL"
+            $classification.Purpose = "Syncs Private (SOT) → Public repos, maintains 4-way sync"
+            $classification.Recommendation = "KEEP - Essential for repo management"
+        }
+        '^episode-dates\.csv$' {
+            $classification.Type = "Data File"
+            $classification.Criticality = "CRITICAL"
+            $classification.Purpose = "Episode recording dates - required by sn-full-run.ps1 for year mapping"
+            $classification.Recommendation = "KEEP - Required by production script"
+        }
+        '^Create-EpisodeDateIndex\.ps1$' {
+            $classification.Type = "Utility Script"
+            $classification.Criticality = "Important"
+            $classification.Purpose = "Generates episode-dates.csv from GRC archive pages"
+            $classification.Recommendation = "KEEP - Needed to update date index for new episodes"
+        }
+        
+        # IMPORTANT UTILITIES
+        '^Convert-HTMLtoPDF\.ps1$' {
+            $classification.Type = "Utility Script"
+            $classification.Criticality = "Important"
+            $classification.Purpose = "Converts HTML transcripts to PDFs using wkhtmltopdf"
+            $classification.Recommendation = "KEEP - Used for AI PDF generation"
+        }
+        '^Fix-AI-PDFs\.ps1$' {
+            $classification.Type = "Utility Script"
+            $classification.Criticality = "Important"
+            $classification.Purpose = "Repairs/regenerates AI-derived PDFs with proper disclaimers"
+            $classification.Recommendation = "KEEP - Maintenance tool for AI content"
+        }
+        
+        # DOCUMENTATION
+        '\.md$' {
+            $classification.Type = "Documentation"
+            $classification.Criticality = "Important"
+            if ($name -match 'README') {
+                $classification.Purpose = "Primary project documentation"
+                $classification.Recommendation = "KEEP - Essential documentation"
+            } elseif ($name -match 'WORKFLOW|QUICK-START|FAQ|TROUBLESHOOTING') {
+                $classification.Purpose = "User documentation"
+                $classification.Recommendation = "KEEP - User guides"
+            } else {
+                $classification.Purpose = "Documentation file"
+                $classification.Recommendation = "REVIEW - Check if current"
+            }
+        }
+        
+        # GIT FILES
+        '^\.gitignore$' {
+            $classification.Type = "Git Config"
+            $classification.Criticality = "CRITICAL"
+            $classification.Purpose = "Prevents committing copyrighted media to public repo"
+            $classification.Recommendation = "KEEP - Essential for copyright compliance"
+        }
+        '^\.gitattributes$' {
+            $classification.Type = "Git Config"
+            $classification.Criticality = "Important"
+            $classification.Purpose = "Git LFS configuration for large files"
+            $classification.Recommendation = "KEEP - Required for LFS"
+        }
+        
+        # DATA/INDEX FILES
+        'Index\.csv$' {
+            $classification.Type = "Data File"
+            $classification.Criticality = "Important"
+            $classification.Purpose = "Episode index database"
+            $classification.Recommendation = "KEEP - Generated by sn-full-run.ps1"
+        }
+        'Mp3Map\.csv$' {
+            $classification.Type = "Data File"
+            $classification.Criticality = "Important"
+            $classification.Purpose = "MP3 URL mappings for episodes without GRC notes"
+            $classification.Recommendation = "KEEP - Required for AI transcript generation"
+        }
+        
+        # DIAGNOSTIC/HELPER SCRIPTS
+        '^Diagnose.*\.ps1$' {
+            $classification.Type = "Diagnostic Tool"
+            $classification.Criticality = "Utility"
+            $classification.Purpose = "Diagnostic/troubleshooting script"
+            $classification.Recommendation = "KEEP - Useful for debugging"
+        }
+        '^configure-.*\.ps1$' {
+            $classification.Type = "Setup Script"
+            $classification.Criticality = "Utility"
+            $classification.Purpose = "Configuration helper script"
+            $classification.Recommendation = "KEEP - Setup utility"
+        }
+        '^push-to-.*\.ps1$' {
+            $classification.Type = "Git Helper"
+            $classification.Criticality = "Utility"
+            $classification.Purpose = "Git workflow helper"
+            $classification.Recommendation = "REVIEW - May be redundant with Special-Sync.ps1"
+        }
+        
+        # TEST/TEMPORARY FILES
+        '^test-.*\.(ps1|txt)$' {
+            $classification.Type = "Test File"
+            $classification.Criticality = "None"
+            $classification.Purpose = "Testing/development artifact"
+            $classification.Recommendation = "DELETE - Test file should be removed"
+        }
+        '^simple-test\.ps1$' {
+            $classification.Type = "Test File"
+            $classification.Criticality = "None"
+            $classification.Purpose = "Testing/development artifact"
+            $classification.Recommendation = "DELETE - Test file should be removed"
+        }
+        '(temp|tmp|backup|old|bak)' {
+            $classification.Type = "Temporary File"
+            $classification.Criticality = "None"
+            $classification.Purpose = "Temporary or backup file"
+            $classification.Recommendation = "DELETE - Cleanup needed"
+        }
+        '^sync-test-run.*\.txt$' {
+            $classification.Type = "Test Output"
+            $classification.Criticality = "None"
+            $classification.Purpose = "Test run output file"
+            $classification.Recommendation = "DELETE - Test artifact"
+        }
+        '^MyScript\.ps1$' {
+            $classification.Type = "Test File"
+            $classification.Criticality = "None"
+            $classification.Purpose = "Generic test/placeholder script"
+            $classification.Recommendation = "DELETE - Placeholder file"
+        }
+        '^SecurityNow-Bootstrap\.ps1$' {
+            $classification.Type = "Historical Artifact"
+            $classification.Criticality = "Low"
+            $classification.Purpose = "Initial setup script (obsolete - repos already set up)"
+            $classification.Recommendation = "ARCHIVE - Move to /archive folder or delete"
+        }
+        '^PUBLIC-ONLY-CLEANUP-LIST\.txt$' {
+            $classification.Type = "Generated Report"
+            $classification.Criticality = "None"
+            $classification.Purpose = "Auto-generated by Special-Sync.ps1"
+            $classification.Recommendation = "DELETE - Auto-regenerated each run"
+        }
+        
+        # GITHUB FILES
+        '^FUNDING\.yml$' {
+            $classification.Type = "GitHub Config"
+            $classification.Criticality = "Important"
+            $classification.Purpose = "GitHub Sponsors / donation configuration"
+            $classification.Recommendation = "KEEP - Donation setup"
+        }
+        
+        default {
+            # Check content for clues
+            if ($content -match "param.*DryRun|MinEpisode") {
+                $classification.Type = "Script (Purpose Unknown)"
+                $classification.Criticality = "Review"
+                $classification.Purpose = "PowerShell script - content analysis needed"
+                $classification.Recommendation = "REVIEW - Check if needed"
+            } elseif ($ext -eq '.ps1') {
+                $classification.Type = "PowerShell Script"
+                $classification.Criticality = "Review"
+                $classification.Purpose = "Unknown purpose - manual review required"
+                $classification.Recommendation = "REVIEW - Inspect content"
+            }
+        }
+    }
+    
+    return $classification
+}
+
+# Scan both repos
+Write-Host "Scanning repositories..." -ForegroundColor Cyan
+Write-Host ""
+
+$allFiles = @()
+
+# Scan Private repo (excluding /local folder)
+Get-ChildItem $PrivateRepo -Recurse -File | Where-Object {
+    $_.FullName -notmatch '\\local\\' -and
+    $_.FullName -notmatch '\\.git\\' -and
+    $_.Name -ne 'FILE-AUDIT-REPORT.txt'
+} | ForEach-Object {
+    $allFiles += Get-FileClassification -Path $_.FullName -RepoType "Private"
+}
+
+# Scan Public repo
+Get-ChildItem $PublicRepo -Recurse -File | Where-Object {
+    $_.FullName -notmatch '\\local\\' -and
+    $_.FullName -notmatch '\\.git\\'
+} | ForEach-Object {
+    $allFiles += Get-FileClassification -Path $_.FullName -RepoType "Public"
+}
+
+# Generate report
+$report = @"
+================================================================================
+SECURITY NOW ARCHIVE PROJECT - FILE AUDIT REPORT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+================================================================================
+
+SUMMARY
+-------
+Total Files Scanned: $($allFiles.Count)
+  - CRITICAL files:  $($allFiles | Where-Object { $_.Criticality -eq 'CRITICAL' } | Measure-Object | Select-Object -ExpandProperty Count)
+  - Important files: $($allFiles | Where-Object { $_.Criticality -eq 'Important' } | Measure-Object | Select-Object -ExpandProperty Count)
+  - Utility files:   $($allFiles | Where-Object { $_.Criticality -eq 'Utility' } | Measure-Object | Select-Object -ExpandProperty Count)
+  - To DELETE:       $($allFiles | Where-Object { $_.Recommendation -match 'DELETE' } | Measure-Object | Select-Object -ExpandProperty Count)
+  - To REVIEW:       $($allFiles | Where-Object { $_.Recommendation -match 'REVIEW' } | Measure-Object | Select-Object -ExpandProperty Count)
+  - To ARCHIVE:      $($allFiles | Where-Object { $_.Recommendation -match 'ARCHIVE' } | Measure-Object | Select-Object -ExpandProperty Count)
+
+================================================================================
+CRITICAL FILES (MUST KEEP)
+================================================================================
+
+"@
+
+$allFiles | Where-Object { $_.Criticality -eq 'CRITICAL' } | ForEach-Object {
+    $report += @"
+File: $($_.File)
+Path: $($_.Path)
+Type: $($_.Type)
+Purpose: $($_.Purpose)
+Size: $($_.Size) bytes
+Recommendation: $($_.Recommendation)
+
+"@
+}
+
+$report += @"
+
+================================================================================
+IMPORTANT FILES (KEEP)
+================================================================================
+
+"@
+
+$allFiles | Where-Object { $_.Criticality -eq 'Important' } | ForEach-Object {
+    $report += @"
+File: $($_.File)
+Path: $($_.Path)
+Type: $($_.Type)
+Purpose: $($_.Purpose)
+Size: $($_.Size) bytes
+Recommendation: $($_.Recommendation)
+
+"@
+}
+
+$report += @"
+
+================================================================================
+UTILITY FILES (USEFUL BUT NOT ESSENTIAL)
+================================================================================
+
+"@
+
+$allFiles | Where-Object { $_.Criticality -eq 'Utility' } | ForEach-Object {
+    $report += @"
+File: $($_.File)
+Path: $($_.Path)
+Type: $($_.Type)
+Purpose: $($_.Purpose)
+Size: $($_.Size) bytes
+Recommendation: $($_.Recommendation)
+
+"@
+}
+
+$report += @"
+
+================================================================================
+FILES TO DELETE (Test/Temporary/Generated)
+================================================================================
+
+"@
+
+$deleteFiles = $allFiles | Where-Object { $_.Recommendation -match 'DELETE' }
+if ($deleteFiles.Count -eq 0) {
+    $report += "No files recommended for deletion.`n"
+} else {
+    $deleteFiles | ForEach-Object {
+        $report += @"
+File: $($_.File)
+Path: $($_.Path)
+Reason: $($_.Purpose)
+
+"@
+    }
+}
+
+$report += @"
+
+================================================================================
+FILES TO REVIEW (Unknown Purpose or Redundant)
+================================================================================
+
+"@
+
+$reviewFiles = $allFiles | Where-Object { $_.Recommendation -match 'REVIEW' }
+if ($reviewFiles.Count -eq 0) {
+    $report += "No files require review.`n"
+} else {
+    $reviewFiles | ForEach-Object {
+        $report += @"
+File: $($_.File)
+Path: $($_.Path)
+Type: $($_.Type)
+Current Purpose: $($_.Purpose)
+Action: Manual inspection recommended
+
+"@
+    }
+}
+
+$report += @"
+
+================================================================================
+FILES TO ARCHIVE (Historical/Obsolete But Potentially Useful)
+================================================================================
+
+"@
+
+$archiveFiles = $allFiles | Where-Object { $_.Recommendation -match 'ARCHIVE' }
+if ($archiveFiles.Count -eq 0) {
+    $report += "No files recommended for archiving.`n"
+} else {
+    $archiveFiles | ForEach-Object {
+        $report += @"
+File: $($_.File)
+Path: $($_.Path)
+Reason: $($_.Purpose)
+Suggestion: Move to /archive or /historical folder
+
+"@
+    }
+}
+
+$report += @"
+
+================================================================================
+RECOMMENDED CLEANUP ACTIONS
+================================================================================
+
+1. DELETE TEST FILES (if found):
+   - Run from Private repo root:
+     Get-ChildItem -Recurse -File | Where-Object { `$_.Name -match 'test-|MyScript|sync-test-run' } | Remove-Item -Force
+
+2. REVIEW UTILITY SCRIPTS:
+   - Check if push-to-private.ps1 is redundant with Special-Sync.ps1
+   - Verify all Diagnose-*.ps1 scripts are still useful
+
+3. ARCHIVE OBSOLETE SCRIPTS:
+   - Create /archive folder in Private repo
+   - Move SecurityNow-Bootstrap.ps1 (if exists) to /archive
+
+4. VERIFY DOCUMENTATION:
+   - Ensure all .md files are current and accurate
+   - Update README.md if sn-full-run.ps1 is now primary script
+
+5. SYNC AFTER CLEANUP:
+   - After deletions: Run Special-Sync.ps1 to sync changes to Public repo
+
+================================================================================
+END OF REPORT
+================================================================================
+"@
+
+# Save report
+$report | Out-File -FilePath $OutputFile -Encoding UTF8 -Force
+
+Write-Host "✅ Audit complete!" -ForegroundColor Green
+Write-Host ""
+Write-Host "Report saved to: $OutputFile" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Summary:" -ForegroundColor Yellow
+Write-Host "  Total files: $($allFiles.Count)"
+Write-Host "  Critical:    $($allFiles | Where-Object { $_.Criticality -eq 'CRITICAL' } | Measure-Object | Select-Object -ExpandProperty Count)"
+Write-Host "  To DELETE:   $($allFiles | Where-Object { $_.Recommendation -match 'DELETE' } | Measure-Object | Select-Object -ExpandProperty Count)"
+Write-Host "  To REVIEW:   $($allFiles | Where-Object { $_.Recommendation -match 'REVIEW' } | Measure-Object | Select-Object -ExpandProperty Count)"
+Write-Host ""
+Write-Host "Open the report to see detailed recommendations." -ForegroundColor Green
