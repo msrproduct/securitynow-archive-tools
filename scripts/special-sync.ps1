@@ -17,6 +17,9 @@
     5. Detect PUBLIC-ONLY files (WARNING mode with cleanup list)
     6. Commit and push Local Public to GitHub Public
     
+    CRITICAL: .ai-context.md is synced from private (SOT) to public
+    for Space Instructions access while maintaining single source of truth.
+    
 .PARAMETER DryRun
     Preview all operations without making any changes
     
@@ -44,7 +47,13 @@ param(
 # ============================================================================
 
 $script:Config = @{
-    SyncRoots = @("", "docs", "scripts", "data")
+    # Sync these root folders/files from private → public
+    SyncRoots = @(
+        "",           # Root-level files (includes .ai-context.md)
+        "docs", 
+        "scripts", 
+        "data"
+    )
     
     # CRITICAL: These EXACT folder names contain copyrighted material
     ExcludedFolders = @(
@@ -53,7 +62,7 @@ $script:Config = @{
         "local-notes-ai-transcripts"
     )
     
-    AlwaysSkip = @(".gitignore")
+    AlwaysSkip = @(".gitignore")  # Each repo maintains its own
     GitBranch = "main"
 }
 
@@ -340,7 +349,7 @@ Invoke-GitOperation -RepoPath $PrivateRepoLocal -Operation "push" -DryRun:$DryRu
 # STEP 4: Sync Local Private → Local Public (EXCLUDE /local-*)
 # ============================================================================
 
-Write-Step -Number 4 -Description "Sync Local Private → Local Public (tools/docs only)"
+Write-Step -Number 4 -Description "Sync Local Private → Local Public (tools/docs + .ai-context.md)"
 
 # Collect files from both repos
 $privateFiles = @{}
@@ -364,6 +373,7 @@ foreach ($root in $script:Config.SyncRoots) {
 
 Write-Host "Comparing files..." -ForegroundColor Gray
 Write-Host "NOTE: .gitignore is excluded (each repo maintains its own)" -ForegroundColor DarkGray
+Write-Host "NOTE: .ai-context.md is synced from private (SOT) to public for Space Instructions" -ForegroundColor Cyan
 Write-Host "NOTE: /local-* folders are EXCLUDED (copyrighted material - NEVER synced to public)" -ForegroundColor Yellow
 
 $comparison = Compare-RepoFiles `
@@ -421,7 +431,7 @@ Write-Step -Number 5 -Description "Commit and Push Local Public → GitHub Publi
 $publicCommitted = Invoke-GitOperation `
     -RepoPath $PublicRepoLocal `
     -Operation "commit" `
-    -Message "Special Sync: Update from private repo (tools/docs only - NO copyrighted media)" `
+    -Message "Special Sync: Update from private repo (tools/docs + .ai-context.md - NO copyrighted media)" `
     -DryRun:$DryRun
 
 if ($publicCommitted -or $DryRun) {
@@ -444,5 +454,6 @@ if ($DryRun) {
     Write-Host "Run without -DryRun to apply changes" -ForegroundColor Yellow
 } else {
     Write-Host "`n✅ ALL 4 REPOS SYNCED SUCCESSFULLY!" -ForegroundColor Green
+    Write-Host "✓ .ai-context.md synced from private (SOT) to public for Space Instructions" -ForegroundColor Cyan
 }
 Write-Host "========================================`n"
