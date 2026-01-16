@@ -34,10 +34,7 @@
 #>
 
 [CmdletBinding(SupportsShouldProcess)]
-param(
-    [Parameter()]
-    [switch]$WhatIf
-)
+param()
 
 $ErrorActionPreference = "Stop"
 
@@ -59,7 +56,7 @@ Write-Host "══════════════════════�
 Write-Host "`nDate: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" -ForegroundColor Gray
 Write-Host "Repo: $repoRoot" -ForegroundColor Gray
 
-if ($WhatIf) {
+if ($WhatIfPreference) {
     Write-Host "`n⚠️  DRY RUN MODE - No files will be deleted" -ForegroundColor Yellow
 }
 
@@ -88,7 +85,7 @@ $dirsDeleted = 0
 $dirsFailed = 0
 
 # Create backup directory if not in WhatIf mode
-if (-not $WhatIf) {
+if (-not $WhatIfPreference) {
     Write-Host "`n📦 Creating backup folder..." -ForegroundColor Cyan
     New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
     Write-Host "   ✓ Backup location: $backupRoot" -ForegroundColor Green
@@ -100,10 +97,8 @@ foreach ($file in $filesToDelete) {
     $fullPath = Join-Path $repoRoot $file
     
     if (Test-Path $fullPath) {
-        try {
-            if ($WhatIf) {
-                Write-Host "   [WHATIF] Would delete: $file" -ForegroundColor Yellow
-            } else {
+        if ($PSCmdlet.ShouldProcess($file, "Delete file")) {
+            try {
                 # Backup first
                 $backupPath = Join-Path $backupRoot $file
                 $backupDir = Split-Path $backupPath -Parent
@@ -116,10 +111,10 @@ foreach ($file in $filesToDelete) {
                 Remove-Item -LiteralPath $fullPath -Force
                 Write-Host "   ✓ Deleted: $file" -ForegroundColor Green
                 $filesDeleted++
+            } catch {
+                Write-Host "   ✗ Failed: $file - $($_.Exception.Message)" -ForegroundColor Red
+                $filesFailed++
             }
-        } catch {
-            Write-Host "   ✗ Failed: $file - $($_.Exception.Message)" -ForegroundColor Red
-            $filesFailed++
         }
     } else {
         Write-Host "   ⊘ Not found: $file (already removed?)" -ForegroundColor Gray
@@ -132,10 +127,8 @@ foreach ($dir in $dirsToDelete) {
     $fullPath = Join-Path $repoRoot $dir
     
     if (Test-Path $fullPath) {
-        try {
-            if ($WhatIf) {
-                Write-Host "   [WHATIF] Would delete folder: $dir\" -ForegroundColor Yellow
-            } else {
+        if ($PSCmdlet.ShouldProcess($dir, "Delete directory")) {
+            try {
                 # Backup first
                 $backupPath = Join-Path $backupRoot $dir
                 Copy-Item -LiteralPath $fullPath -Destination $backupPath -Recurse -Force
@@ -144,10 +137,10 @@ foreach ($dir in $dirsToDelete) {
                 Remove-Item -LiteralPath $fullPath -Recurse -Force
                 Write-Host "   ✓ Deleted folder: $dir\" -ForegroundColor Green
                 $dirsDeleted++
+            } catch {
+                Write-Host "   ✗ Failed: $dir\ - $($_.Exception.Message)" -ForegroundColor Red
+                $dirsFailed++
             }
-        } catch {
-            Write-Host "   ✗ Failed: $dir\ - $($_.Exception.Message)" -ForegroundColor Red
-            $dirsFailed++
         }
     } else {
         Write-Host "   ⊘ Not found: $dir\ (already removed?)" -ForegroundColor Gray
@@ -160,7 +153,7 @@ Write-Host "══════════════════════�
 Write-Host "  CLEANUP SUMMARY" -ForegroundColor Cyan
 Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Cyan
 
-if ($WhatIf) {
+if ($WhatIfPreference) {
     Write-Host "`n⚠️  This was a DRY RUN - no changes were made" -ForegroundColor Yellow
     Write-Host "   Remove -WhatIf parameter to perform actual cleanup" -ForegroundColor Gray
 } else {
