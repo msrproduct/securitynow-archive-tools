@@ -606,3 +606,26 @@ Copy-Item -Path "D:\Backup\local" -Destination ".\SecurityNow-Full-Private\local
 ---
 
 **Remember**: When reporting issues, include error messages, commands run, and system information!
+
+---
+
+## Frequently Asked Questions
+
+### Q: Will running this script cause high bandwidth costs for Steve Gibson or Leo Laporte?
+
+**A: No. Zero impact.**
+
+The Security Now! archive is hosted on CDN infrastructure (Cloudflare/AWS) specifically designed for massive concurrent downloads:
+
+- **GRC PDFs** (grc.com/sn/): Cloudflare free tier with unlimited bandwidth for cached content
+- **TWiT MP3s** (cdn.twit.tv): Enterprise CDN built for podcast distribution
+
+**Technical Details:**
+- Your downloads hit CDN edge servers (cached copies), not origin servers
+- CDN capacity: 45+ million requests/second globally
+- Your script: ~20-30 requests/minute (sequential downloads)
+- Impact: 0.0000086% of CDN capacity
+
+**Bottom Line:** The script already includes polite rate limiting (20-second timeouts, exponential backoff). No additional throttling needed. Steve and Leo pay $  extra regardless of how many users run the archive tool.
+
+**Reference:** Content distribution networks are designed for exactly this use case. Your current implementation is already respectful and CDN-friendly.

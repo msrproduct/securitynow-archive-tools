@@ -1,0 +1,145 @@
+# New Thread Checklist
+**For AI: Read this FIRST when starting a new thread in this Space**
+
+---
+
+## 🚨 Mandatory Pre-Response Actions
+
+Before responding to user's first question in a new thread:
+
+### 1️⃣ Load Core Context
+- [ ] Read `.ai-context.md` completely
+- [ ] Note current production script name/version
+- [ ] Verify tool paths (Whisper, wkhtmltopdf)
+- [ ] Review file sync rules (Private vs Public repo)
+
+### 2️⃣ Search Space History
+- [ ] Search Space files for keywords from user's question
+- [ ] Check if similar issue was solved in past threads
+- [ ] Review last 2-3 thread titles for project state
+- [ ] Note any recent changes to script structure
+
+### 3️⃣ Confirm Current State
+- [ ] Which repo is user working in? (Private or Public)
+- [ ] Which script version are they using?
+- [ ] Have paths changed from `.ai-context.md` defaults?
+
+---
+
+## ✅ Opening Response Template
+
+Use this structure for your first response:
+
+```markdown
+✅ **Context Loaded:** I've reviewed `.ai-context.md` and recent threads
+✅ **Key Facts Confirmed:**
+- Working directory: D:\Desktop\SecurityNow-Full-Private
+- Production script: sn-full-run.ps1
+- Whisper path: C:\Tools\whispercpp\ (no dot)
+- GRC regex: Uses `&#160;` HTML entities
+
+✅ **Recent Project State:** [1-sentence summary from Space search]
+
+🎯 **Ready to assist with:** [restate user's question]
+
+**Quick confirm:** [Ask 1 clarifying question if needed]
+```
+
+---
+
+## 🛑 Before Every Code Suggestion
+
+### Pre-Flight Checks
+1. ✅ Does solution already exist in Space files?
+2. ✅ Are paths verified against `.ai-context.md`?
+3. ✅ Is this the correct script version?
+4. ✅ Could this repeat a past mistake? (Check COMMON-MISTAKES.md)
+
+### If Proposing Regex for GRC
+⚠️ **STOP!** Verify you're using:
+```regex
+Episode\s*&#160;(\d{1,4})&#160;(\d{1,2})
+```
+**NOT:** pipes, regular spaces, or `\s+` alone
+
+### If Proposing Whisper Paths
+⚠️ **STOP!** Verify you're using:
+```powershell
+$WhisperExe = "C:\Tools\whispercpp\whisper-cli.exe"
+$WhisperModel = "C:\Tools\whispercpp\models\ggml-base.en.bin"
+```
+**NOT:** `whisper.cpp` (with dot) or model in root
+
+---
+
+## 🔄 During Thread: Continuous Validation
+
+### When User Reports an Error
+1. ❌ **Don't immediately propose a fix**
+2. ✅ **First:** Search Space files for this exact error
+3. ✅ **Then:** Check if we've solved this before
+4. ✅ **Finally:** Reference the past solution OR explain why new approach is needed
+
+### If Repeating a Mistake
+**Acknowledge immediately:**
+```markdown
+⚠️ I apologize - I repeated [specific mistake from COMMON-MISTAKES.md].
+
+Let me correct this by referencing the solution from [thread/file]:
+[paste correct solution]
+```
+
+---
+
+## 📋 End-of-Thread Summary
+
+Before thread closes, offer:
+
+```markdown
+## 📊 Thread Summary
+
+**Problem Solved:** [brief description]
+
+**Key Learnings:**
+- [Lesson 1]
+- [Lesson 2]
+
+**Files Modified:**
+- [file1] - [what changed]
+- [file2] - [what changed]
+
+**Next Steps:** [if applicable]
+
+**Should I update .ai-context.md with any new information from this thread?**
+```
+
+---
+
+## 🚦 Red Flags - When to STOP
+
+If you catch yourself about to:
+
+- 🛑 Propose a regex pattern for GRC **without** `&#160;`
+- 🛑 Use `goto` in PowerShell
+- 🛑 Ask user to manually browse websites when automation exists
+- 🛑 Suggest Whisper path with `.cpp` in folder name
+- 🛑 Recommend deleting from Public repo before Private
+- 🛑 Provide code without confirming script version first
+
+**→ STOP, check `.ai-context.md` and COMMON-MISTAKES.md FIRST!**
+
+---
+
+## 🎯 Success Criteria
+
+A successful thread demonstrates:
+
+✅ No repeated mistakes from Space history  
+✅ All paths verified against `.ai-context.md`  
+✅ Solutions reference past work when applicable  
+✅ User confirms approach before code generation  
+✅ Clear acknowledgment if error was repeated  
+
+---
+
+**Remember:** This checklist exists because we've wasted hours re-solving the same problems. Use it religiously!

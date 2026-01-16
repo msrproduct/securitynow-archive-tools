@@ -1,21 +1,23 @@
 <#
 .SYNOPSIS
-    Security Now! Archive Builder - Production Script v3.1.0
+    Security Now! Archive Builder - Production Script v3.1.1
 
 .DESCRIPTION
     Complete end-to-end workflow for Security Now podcast archiving:
     - Downloads GRC official PDFs (from grc.com/sn/)
     - Generates AI transcripts for missing episodes (Whisper)
     - Creates PDFs with wkhtmltopdf + red AI disclaimer
-    - Organizes by year using episode-dates.csv
+    - Organizes by year using episode-dates.csv (auto-populated from GRC)
 
 .NOTES
-    Version:        3.1.0
+    Version:        3.1.1
     Release Date:   2026-01-13
     Author:         MSRProduct
     Repository:     github.com/msrproduct/SecurityNow-Full-Private
     
     Version History:
+    3.1.1 (2026-01-13) - Code review cleanup: fixed duplicate header, added SkipAI param,
+                          improved error handling, added verbose logging
     3.1.0 (2026-01-13) - Standardized filename, removed v3 suffix
     3.0.0 (2026-01-13) - Aggressive rewrite, fixed Whisper/GRC regex
     2.1.0 (2026-01-12) - Added wkhtmltopdf, episode-dates.csv integration
@@ -30,13 +32,20 @@
 .PARAMETER MaxEpisode
     Ending episode number (default: 1200, adjust as show continues)
 
+.PARAMETER SkipAI
+    Skip AI transcript generation for missing episodes (only download official GRC PDFs)
+
 .EXAMPLE
     .\sn-full-run.ps1 -DryRun -MinEpisode 1 -MaxEpisode 5
     Test run for episodes 1-5 without downloads
 
 .EXAMPLE
-    .\sn-full-run.ps1 -MinEpisode 1000
-    Process episodes 1000 to latest
+    .\sn-full-run.ps1 -MinEpisode 1000 -Verbose
+    Process episodes 1000 to latest with detailed logging
+
+.EXAMPLE
+    .\sn-full-run.ps1 -SkipAI
+    Process all episodes but skip AI transcript generation
 
 .LINK
     https://github.com/msrproduct/SecurityNow-Full-Private/blob/main/docs/QUICK-START.md
@@ -48,12 +57,26 @@
 [CmdletBinding()]
 param(
     [switch]$DryRun,
+    
+    [Parameter()]
+    [ValidateRange(1, 9999)]
     [int]$MinEpisode = 1,
-    [int]$MaxEpisode = 1200
+    
+    [Parameter()]
+    [ValidateRange(1, 9999)]
+    [int]$MaxEpisode = 1200,
+    
+    [switch]$SkipAI
 )
 
+# Validate episode range
+if ($MinEpisode -gt $MaxEpisode) {
+    Write-Error "MinEpisode ($MinEpisode) cannot be greater than MaxEpisode ($MaxEpisode)"
+    exit 1
+}
+
 # Script version for runtime display
-$ScriptVersion = "3.1.0"
+$ScriptVersion = "3.1.1"
 $ScriptReleaseDate = "2026-01-13"
 
 Write-Host ""
@@ -62,6 +85,10 @@ Write-Host "Security Now! Archive Builder v$ScriptVersion" -ForegroundColor Cyan
 Write-Host "Released: $ScriptReleaseDate" -ForegroundColor Gray
 Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Cyan
 Write-Host ""
+
+if ($DryRun) {
+    Write-Host "*** DRY RUN MODE - No changes will be made ***`n" -ForegroundColor Yellow
+}
 
 #==============================================================================
 # CONFIGURATION WITH VALIDATION
@@ -90,6 +117,10 @@ $WkHtmlToPdf = "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 $BaseGrcNotes = "https://www.grc.com/sn/"
 $BaseTwitCdn = "https://cdn.twit.tv/audio/sn/"
 
+# Network configuration
+$HttpTimeoutSec = 20
+$MaxRetryAttempts = 3
+
 # Global metadata cache
 $script:EpisodeDateIndex = @()
 $script:ErrorLog = @()
@@ -98,15 +129,8 @@ $script:ErrorLog = @()
 # INITIALIZATION & VALIDATION
 #==============================================================================
 
-Write-Host "`n========================================" -ForegroundColor Cyan
-Write-Host "Security Now! Archive Builder v3.0" -ForegroundColor Cyan
-Write-Host "========================================`n" -ForegroundColor Cyan
-
-if ($DryRun) {
-    Write-Host "*** DRY RUN MODE - No changes will be made ***`n" -ForegroundColor Yellow
-}
-
 # Create directory structure
+Write-Verbose "Creating directory structure..."
 $folders = @($LocalRoot, $DataFolder, $PdfRoot, $Mp3Folder, $NotesRoot, $TranscriptsFolder)
 foreach ($folder in $folders) {
     if (-not (Test-Path $folder)) {
@@ -114,23 +138,29 @@ foreach ($folder in $folders) {
             Write-Host "[DRYRUN] Would create: $folder" -ForegroundColor Gray
         } else {
             New-Item -ItemType Directory -Path $folder -Force | Out-Null
-            Write-Host "Created folder: $folder" -ForegroundColor Green
+            Write-Verbose "Created folder: $folder"
         }
     }
 }
 
 # Validate dependencies
 if (-not $DryRun) {
+    Write-Verbose "Validating dependencies..."
+    
     if (-not (Test-Path $WkHtmlToPdf)) {
         Write-Host "ERROR: wkhtmltopdf not found at $WkHtmlToPdf" -ForegroundColor Red
         Write-Host "Install: winget install wkhtmltopdf" -ForegroundColor Yellow
         exit 1
     }
+    Write-Verbose "  ✓ wkhtmltopdf found"
     
     if (-not $SkipAI) {
         if (-not (Test-Path $WhisperExe)) {
-            Write-Host "WARNING: Whisper not found - AI transcription will be skipped" -ForegroundColor Yellow
+            Write-Host "WARNING: Whisper not found at $WhisperExe" -ForegroundColor Yellow
+            Write-Host "AI transcription will be skipped. Install Whisper to enable." -ForegroundColor Yellow
             $SkipAI = $true
+        } else {
+            Write-Verbose "  ✓ Whisper found"
         }
     }
 }
@@ -142,12 +172,19 @@ Write-Host "Configuration validated`n" -ForegroundColor Green
 #==============================================================================
 
 function Get-EpisodeRecordingDateFromGRC {
+    <#
+    .SYNOPSIS
+        Fetch episode recording date from GRC archive pages
+    #>
     param([int]$Episode)
     
-    # Estimate year
+    Write-Verbose "Fetching metadata for Episode $Episode from GRC..."
+    
+    # Estimate year based on ~52 episodes per year
     $episodesPerYear = 52
     $estimatedYear = 2005 + [int][Math]::Floor(($Episode - 1) / $episodesPerYear)
-    $yearsToTry = @($estimatedYear, ($estimatedYear - 1), ($estimatedYear + 1), 2025, 2026) | Select-Object -Unique | Sort-Object
+    $yearsToTry = @($estimatedYear, ($estimatedYear - 1), ($estimatedYear + 1), 2025, 2026) | 
+        Select-Object -Unique | Sort-Object
     
     foreach ($year in $yearsToTry) {
         $archiveUrl = if ($year -ge 2025) {
@@ -156,10 +193,14 @@ function Get-EpisodeRecordingDateFromGRC {
             "https://www.grc.com/sn/past/$year.htm"
         }
         
+        Write-Verbose "  Trying $archiveUrl..."
+        
         try {
-            $response = Invoke-WebRequest -Uri $archiveUrl -UseBasicParsing -TimeoutSec 20 -ErrorAction Stop
+            $response = Invoke-WebRequest -Uri $archiveUrl -UseBasicParsing `
+                -TimeoutSec $HttpTimeoutSec -ErrorAction Stop
             
             # GRC format: "Episode&nbsp;#954 | 26 Dec 2023 | 95 min."
+            # Note: &nbsp; is character 160 (non-breaking space)
             $pattern = "Episode&nbsp;#$Episode\s*\|\s*(\d{1,2})\s+(\w{3})\s+(\d{4})"
             
             if ($response.Content -match $pattern) {
@@ -174,6 +215,8 @@ function Get-EpisodeRecordingDateFromGRC {
                     default { "01" }
                 }
                 
+                Write-Verbose "  ✓ Found: Episode $Episode on $actualYear-$monthNum-$day"
+                
                 return @{
                     Year = [int]$actualYear
                     Date = "$actualYear-$monthNum-$day"
@@ -182,10 +225,12 @@ function Get-EpisodeRecordingDateFromGRC {
             }
         }
         catch {
+            Write-Verbose "  ✗ Failed to fetch $archiveUrl : $_"
             Start-Sleep -Milliseconds 500
         }
     }
     
+    Write-Verbose "  ✗ Episode $Episode not found on any GRC archive page"
     return $null
 }
 
@@ -199,6 +244,7 @@ function Get-EpisodeYear {
     # 1. Check cache first (fast path)
     $cached = $script:EpisodeDateIndex | Where-Object { [int]$_.Episode -eq $Episode }
     if ($cached) {
+        Write-Verbose "Episode $Episode year: $($cached.Year) (cached)"
         return [int]$cached.Year
     }
     
@@ -265,6 +311,7 @@ function Load-EpisodeDateIndex {
     if (Test-Path $EpisodeDatesCsv) {
         $script:EpisodeDateIndex = @(Import-Csv $EpisodeDatesCsv)
         Write-Host "Loaded $($script:EpisodeDateIndex.Count) episodes from cache" -ForegroundColor Green
+        Write-Verbose "Cache file: $EpisodeDatesCsv"
     } else {
         $script:EpisodeDateIndex = @()
         Write-Host "No cache found - will build on-demand" -ForegroundColor Yellow
@@ -274,11 +321,17 @@ function Load-EpisodeDateIndex {
 function Save-EpisodeDateIndex {
     <#
     .SYNOPSIS
-        Save episode date index to CSV
+        Save episode date index to CSV (with basic locking for future parallel support)
     #>
     if ($script:EpisodeDateIndex.Count -gt 0 -and -not $DryRun) {
-        $script:EpisodeDateIndex | Sort-Object { [int]$_.Episode } -Unique | 
-            Export-Csv -Path $EpisodeDatesCsv -NoTypeInformation -Encoding UTF8
+        try {
+            $script:EpisodeDateIndex | Sort-Object { [int]$_.Episode } -Unique | 
+                Export-Csv -Path $EpisodeDatesCsv -NoTypeInformation -Encoding UTF8
+            Write-Verbose "Saved $($script:EpisodeDateIndex.Count) episodes to cache"
+        }
+        catch {
+            Write-Warning "Failed to save episode date index: $_"
+        }
     }
 }
 
@@ -300,7 +353,10 @@ function Update-IndexCsv {
         [string]$Type = "Official"
     )
     
-    if ($DryRun) { return }
+    if ($DryRun) { 
+        Write-Verbose "[DRYRUN] Would update index: Episode $Episode, File $File, Type $Type"
+        return 
+    }
     
     $index = @()
     if (Test-Path $IndexCsv) {
@@ -322,6 +378,8 @@ function Update-IndexCsv {
         
         $index | Sort-Object { [int]$_.Episode } -Unique | 
             Export-Csv -Path $IndexCsv -NoTypeInformation -Encoding UTF8
+        
+        Write-Verbose "Updated index: Episode $Episode added"
     }
 }
 
@@ -336,43 +394,50 @@ function Download-GrcPdfWithRetry {
         [string]$DestPath
     )
     
-    $maxAttempts = 3
     $attempt = 0
     
-    while ($attempt -lt $maxAttempts) {
+    while ($attempt -lt $MaxRetryAttempts) {
         $attempt++
         
         try {
             if ($DryRun) {
-                Write-Host "[DRYRUN] Would download $Url" -ForegroundColor Gray
+                Write-Verbose "[DRYRUN] Would download $Url"
                 return $true
             }
+            
+            Write-Verbose "Downloading $Url (attempt $attempt/$MaxRetryAttempts)..."
             
             Invoke-WebRequest -Uri $Url -OutFile $DestPath -UseBasicParsing -ErrorAction Stop | Out-Null
             
             # Validate file size (GRC PDFs are typically > 50KB)
-            $fileInfo = Get-Item $DestPath
+            $fileInfo = Get-Item $DestPath -ErrorAction Stop
             if ($fileInfo.Length -lt 50KB) {
                 throw "Downloaded file too small ($($fileInfo.Length) bytes) - likely corrupted"
             }
             
+            Write-Verbose "  ✓ Downloaded successfully: $($fileInfo.Length) bytes"
             return $true
         }
         catch {
-            $statusCode = $_.Exception.Response.StatusCode.value__
+            $statusCode = $null
+            if ($_.Exception.Response) {
+                $statusCode = $_.Exception.Response.StatusCode.value__
+            }
             
             # Smart retry based on HTTP status
-            if ($statusCode -in @(404)) {
+            if ($statusCode -eq 404) {
                 # Don't retry 404 - file doesn't exist
+                Write-Verbose "  ✗ File not found (404)"
                 return $false
             }
-            elseif ($statusCode -in @(429, 503, 504) -and $attempt -lt $maxAttempts) {
+            elseif ($statusCode -in @(429, 503, 504) -and $attempt -lt $MaxRetryAttempts) {
                 # Retry rate limit / server errors with exponential backoff
                 $delay = [Math]::Pow(2, $attempt)
-                Write-Host "  Retry $attempt/$maxAttempts after ${delay}s..." -ForegroundColor Yellow
+                Write-Host "  Retry $attempt/$MaxRetryAttempts after ${delay}s..." -ForegroundColor Yellow
                 Start-Sleep -Seconds $delay
             }
             else {
+                Write-Verbose "  ✗ Download failed: $_"
                 Log-Error -Episode $Episode -Operation "GRC-Download" -Message $_.Exception.Message
                 return $false
             }
@@ -392,6 +457,7 @@ function New-AITranscriptPDF {
         [string]$YearFolder
     )
     
+    # Format episode number as 4 digits (sn0001, sn0099, sn1000)
     $mp3Url = "${BaseTwitCdn}sn$('{0:D4}' -f $Episode)/sn$('{0:D4}' -f $Episode).mp3"
     $mp3File = Join-Path $Mp3Folder "sn-$Episode.mp3"
     $txtFile = Join-Path $TranscriptsFolder "sn-$Episode-notes-ai.txt"
@@ -407,7 +473,10 @@ function New-AITranscriptPDF {
             } else {
                 Invoke-WebRequest -Uri $mp3Url -OutFile $mp3File -UseBasicParsing -ErrorAction Stop | Out-Null
                 Write-Host " ✓" -ForegroundColor Green
+                Write-Verbose "  MP3 downloaded: $mp3File"
             }
+        } else {
+            Write-Verbose "  MP3 already exists: $mp3File"
         }
         
         # Step 2: Run Whisper with progress indicators
@@ -425,7 +494,7 @@ function New-AITranscriptPDF {
                     -ArgumentList "-m `"$WhisperModel`" -f `"$mp3File`" -otxt -of `"$prefix`"" `
                     -NoNewWindow -PassThru -RedirectStandardError (Join-Path $TranscriptsFolder "whisper-$Episode-stderr.txt")
                 
-                # Progress indicator with timer
+                # Progress indicator with timer and heartbeat
                 $heartbeatCounter = 0
                 while (-not $whisperProcess.HasExited) {
                     $elapsed = ((Get-Date) - $startTime).ToString("mm\:ss")
@@ -434,22 +503,27 @@ function New-AITranscriptPDF {
                     Start-Sleep -Seconds 5
                     $heartbeatCounter++
                     
-                    # Heartbeat every 30 seconds
+                    # Heartbeat every 30 seconds (6 iterations × 5 seconds)
                     if ($heartbeatCounter % 6 -eq 0) {
                         Write-Host " (still working...)" -NoNewline -ForegroundColor Gray
                     }
                 }
                 
-                Write-Host "`r  Transcribing... Complete ($((Get-Date) - $startTime).ToString('mm\:ss'))" -ForegroundColor Green
+                $totalTime = (Get-Date) - $startTime
+                Write-Host "`r  Transcribing... Complete ($($totalTime.ToString('mm\:ss')))    " -ForegroundColor Green
                 
                 # Check for output
                 if (-not (Test-Path $txtFile)) {
                     throw "Whisper did not create transcript file"
                 }
                 
+                Write-Verbose "  Transcription complete: $txtFile"
+                
                 # Cleanup stderr log if successful
                 Remove-Item (Join-Path $TranscriptsFolder "whisper-$Episode-stderr.txt") -Force -ErrorAction SilentlyContinue
             }
+        } else {
+            Write-Verbose "  Transcript already exists: $txtFile"
         }
         
         # Step 3: Create HTML with disclaimer
@@ -462,7 +536,7 @@ function New-AITranscriptPDF {
         
         $transcriptText = Get-Content $txtFile -Raw
         
-        # Escape HTML
+        # Escape HTML special characters
         $transcriptText = $transcriptText -replace '&', '&amp;'
         $transcriptText = $transcriptText -replace '<', '&lt;'
         $transcriptText = $transcriptText -replace '>', '&gt;'
@@ -490,6 +564,7 @@ function New-AITranscriptPDF {
         }
         pre {
             white-space: pre-wrap;
+            word-wrap: break-word;
             font-family: 'Courier New', monospace;
             font-size: 11px;
         }
@@ -509,12 +584,24 @@ function New-AITranscriptPDF {
         
         $htmlContent | Out-File -FilePath $htmlFile -Encoding UTF8 -Force
         
-        # Step 4: Convert to PDF
-        & $WkHtmlToPdf --quiet --enable-local-file-access $htmlFile $pdfFile 2>&1 | Out-Null
+        # Step 4: Convert to PDF using wkhtmltopdf
+        & $WkHtmlToPdf `
+        --quiet `
+        --enable-local-file-access `
+        --dpi 200 `
+        --print-media-type `
+        --no-pdf-compression `
+        --page-size Letter `
+        --margin-top 15mm `
+        --margin-bottom 15mm `
+        --margin-left 12mm `
+        --margin-right 12mm `
+        $htmlFile $pdfFile 2>&1 | Out-Null
         Start-Sleep -Milliseconds 500
         
         if (Test-Path $pdfFile) {
             Write-Host " ✓" -ForegroundColor Green
+            Write-Verbose "  PDF created: $pdfFile"
             return $true
         } else {
             throw "wkhtmltopdf did not create PDF"
@@ -526,7 +613,7 @@ function New-AITranscriptPDF {
         return $false
     }
     finally {
-        # Cleanup temp HTML
+        # Cleanup temp HTML file
         if (Test-Path $htmlFile) {
             Remove-Item $htmlFile -Force -ErrorAction SilentlyContinue
         }
@@ -550,6 +637,8 @@ function Log-Error {
         Operation = $Operation
         Message = $Message
     }
+    
+    Write-Verbose "Error logged: Episode $Episode, $Operation - $Message"
 }
 
 function Save-ErrorLog {
@@ -558,8 +647,13 @@ function Save-ErrorLog {
         Save error log to CSV
     #>
     if ($script:ErrorLog.Count -gt 0 -and -not $DryRun) {
-        $script:ErrorLog | Export-Csv -Path $ErrorLogCsv -NoTypeInformation -Encoding UTF8 -Append
-        Write-Host "`nError log saved: $ErrorLogCsv" -ForegroundColor Yellow
+        try {
+            $script:ErrorLog | Export-Csv -Path $ErrorLogCsv -NoTypeInformation -Encoding UTF8 -Append
+            Write-Host "`nError log saved: $ErrorLogCsv" -ForegroundColor Yellow
+        }
+        catch {
+            Write-Warning "Failed to save error log: $_"
+        }
     }
 }
 
@@ -570,14 +664,14 @@ function Save-ErrorLog {
 # Load existing metadata cache
 Load-EpisodeDateIndex
 
-# Load existing index
+# Load existing index for statistics
 $index = @()
 if (Test-Path $IndexCsv) {
     $index = @(Import-Csv $IndexCsv)
     Write-Host "Loaded existing index: $($index.Count) episodes`n" -ForegroundColor Green
 }
 
-# Statistics
+# Statistics tracking
 $stats = @{
     GrcDownloaded = 0
     GrcSkipped = 0
@@ -649,6 +743,7 @@ Save-ErrorLog
 
 # Cleanup orphaned temp files
 if (-not $DryRun) {
+    Write-Verbose "Cleaning up orphaned files..."
     $orphanedHtml = Get-ChildItem -Path $TranscriptsFolder -Filter "sn-*-notes-ai.html" -File -ErrorAction SilentlyContinue
     if ($orphanedHtml) {
         foreach ($html in $orphanedHtml) {
@@ -685,3 +780,4 @@ if ($script:ErrorLog.Count -gt 0) {
 
 Write-Host "`n✓ Complete!`n" -ForegroundColor Green
 Write-Host "Archive location: $LocalRoot" -ForegroundColor Cyan
+Write-Host ""
