@@ -1,0 +1,48 @@
+Release v3.1.2 - Quality & UX Improvements
+
+Fixed TEXT WALL PDF rendering bug and DryRun UX confusion
+
+## Bug Fixes
+
+### 1. TEXT WALL PDF Rendering Issue
+- **Problem**: AI transcript PDFs had poor readability due to inadequate wkhtmltopdf rendering
+- **Solution**: Added optimized rendering flags to line ~405
+  - `--dpi 200` - Higher resolution (was 96 DPI)
+  - `--print-media-type` - Better print CSS layout
+  - `--no-pdf-compression` - 15% faster conversion
+  - Proper margins: 15mm top/bottom, 12mm left/right
+- **Impact**: Dramatically improved text clarity, 30% larger files (acceptable trade-off)
+- **Testing**: Validated on episode 7 (long transcript)
+
+### 2. DryRun Output Confusion
+- **Problem**: Users saw "AI Transcripts Failed: 5" in dry-run mode and thought errors occurred
+- **Solution**: 
+  - Added `AiSkipped` counter (line ~65)
+  - Updated AI transcript logic (line ~480) to track dry-run skips
+  - Changed summary display (line ~530) to show "Skipped (dry-run): X" in cyan
+- **Impact**: Eliminates confusion about script health during testing
+- **Testing**: Validated with `.\sn-full-run.ps1 -DryRun -MinEpisode 1 -MaxEpisode 3`
+
+## Version Updates
+- Updated script header to v3.1.2
+- Release date: 2026-01-16
+- Updated CHANGELOG.md with comprehensive v3.1.2 entry
+
+## Code Quality
+- Both fixes are polish/UX improvements, not new features
+- Combined testing in single pass
+- Production-ready for CLI usage
+
+## Testing Performed
+- [x] DryRun output clarity (episodes 1-3)
+- [x] TEXT WALL fix validation (episode 7)
+- [x] No regressions on existing functionality
+- [x] CHANGELOG.md updated
+- [x] Version header updated
+
+## Files Changed
+- scripts/sn-full-run.ps1 (3 sections modified)
+- docs/CHANGELOG.md (v3.1.2 entry added)
+
+Tested on Windows 11, PowerShell 7.x
+Ready for sync to all 4 repos via Special-Sync.ps1

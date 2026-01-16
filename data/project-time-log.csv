@@ -1,0 +1,24 @@
+Date,StartTime,EndTime,Task,Type,Hours,Rate,Cost,Notes
+2026-01-10,2026-01-10 14:00:00,2026-01-10 16:30:00,Initial repo setup and architecture planning,coding,2.5,50,125,Created dual public/private repo structure
+2026-01-10,2026-01-10 19:00:00,2026-01-10 21:00:00,PowerShell script development - SecurityNow-EndToEnd.ps1 v1,coding,2,50,100,First version of end-to-end pipeline
+2026-01-11,2026-01-11 09:00:00,2026-01-11 13:30:00,GRC web scraping and PDF download logic,coding,4.5,50,225,Implemented episode metadata scraping
+2026-01-11,2026-01-11 15:00:00,2026-01-11 18:00:00,MP3 discovery and download implementation,coding,3,50,150,TWiT and GRC MP3 sources integrated
+2026-01-11,2026-01-11 20:00:00,2026-01-11 22:30:00,Learning Whisper.cpp setup and installation,learning,2.5,30,75,Researched AI transcription options
+2026-01-12,2026-01-12 08:00:00,2026-01-12 11:00:00,Whisper integration and AI transcript generation,coding,3,50,150,First AI transcript generation working
+2026-01-12,2026-01-12 13:00:00,2026-01-12 16:30:00,Episode index CSV creation and management,coding,3.5,50,175,Created SecurityNowNotesIndex.csv structure
+2026-01-12,2026-01-12 18:00:00,2026-01-12 20:00:00,Git LFS setup for media files,research,2,40,80,Investigated large file handling strategies
+2026-01-13,2026-01-13 10:00:00,2026-01-13 16:00:00,Debugging GRC metadata scraping - regex issues,debugging,6,50,300,Fixed Episode&nbsp; regex and past/YYYY.htm URLs
+2026-01-13,2026-01-13 18:00:00,2026-01-13 21:00:00,Testing episodes 1-7 and fixing Whisper paths,debugging,3,50,150,Corrected C:\tools\whispercpp paths
+2026-01-13,2026-01-13 22:00:00,2026-01-13 23:30:00,Documentation - README and WORKFLOW.md,docs,1.5,40,60,Created initial project documentation
+2026-01-14,2026-01-14 09:00:00,2026-01-14 12:00:00,Chrome/Edge PDF generation attempts,research,3,40,120,Explored browser-based PDF generation
+2026-01-14,2026-01-14 14:00:00,2026-01-14 19:00:00,wkhtmltopdf integration and testing,coding,5,50,250,Replaced browser PDF gen with wkhtmltopdf
+2026-01-14,2026-01-14 20:00:00,2026-01-14 22:00:00,Year-based folder organization implementation,coding,2,50,100,Organized output by year (2005-2026)
+2026-01-15,2026-01-15 08:00:00,2026-01-15 11:30:00,Repository sync automation - Sync-Repos.ps1 v1,coding,3.5,50,175,First version of private-public sync script
+2026-01-15,2026-01-15 13:00:00,2026-01-15 17:00:00,Debugging sync script - file exclusion logic,debugging,4,50,200,Fixed media exclusion and hash comparison
+2026-01-15,2026-01-15 18:00:00,2026-01-15 20:30:00,Special-Sync.ps1 enhancement - 4-repo workflow,coding,2.5,50,125,Upgraded to full 4-repo sync automation
+2026-01-15,2026-01-15 21:00:00,2026-01-15 23:00:00,Testing sync across all 4 repos,debugging,2,50,100,Validated sync with test files
+2026-01-16,2026-01-16 06:00:00,2026-01-16 09:00:00,Code review and bug fix - sn-full-run.ps1 v3.1.1,debugging,3,50,150,Fixed 10 bugs including duplicate headers
+2026-01-16,2026-01-16 10:00:00,2026-01-16 12:00:00,CHANGELOG.md creation and Git tagging,docs,2,40,80,Implemented versioning system
+2026-01-16,2026-01-16 13:00:00,2026-01-16 15:30:00,UX audit and TEXT WALL PDF bug investigation,research,2.5,40,100,Identified wkhtmltopdf --enable-local-file-access issue
+2026-01-16,2026-01-16 16:00:00,2026-01-16 18:00:00,Context system planning - .ai-context.md design,research,2,40,80,Designed tri-file AI context system
+2026-01-16,2026-01-16 19:00:00,2026-01-16 20:30:00,Financial analysis and GTM strategy planning,research,1.5,40,60,Reviewed monetization options and market sizing
