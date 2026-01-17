@@ -1,9 +1,9 @@
 # AI Context - Security Now Archive Tools
-**Version:** 3.10 🎯 OPTIMIZED - 29% leaner, zero functionality loss  
-**Last Updated:** 2026-01-16 23:33 CST by Perplexity AI  
+**Version:** 3.11 🎯 PERFORMANCE ROADMAP ADDED - Strategic direction clear  
+**Last Updated:** 2026-01-16 23:39 CST by Perplexity AI  
 **Project Phase:** Production - v3.1.1 Stable Engine  
 **Current Version:** v3.1.1 (Production Stable)  
-**File Size:** 16KB (down from 22.5KB)  
+**File Size:** 21.8KB (performance roadmap added)  
 **Paths Last Verified:** 2026-01-16
 
 ---
@@ -171,6 +171,7 @@ Archive all **~1,000+ Security Now! podcast episodes** (2005–2026+) with offic
 | 2026-01-16 | Special-Sync auto-pull (v3.7)     | MCP commits bypass local filesystem            | One command sync (no manual git pull)    |
 | 2026-01-16 | Split context files (v3.8)        | Business info (billing) shouldn't be public    | Privacy protection, professional image   |
 | 2026-01-16 | File optimization (v3.10)         | 29% size reduction improves thread load speed  | 22.5KB → 16KB, zero functionality loss   |
+| 2026-01-16 | Performance roadmap (v3.11)       | Speed IS the product for air-gapped markets    | Unlocks $5K-15K enterprise pricing       |
 
 ---
 
@@ -218,6 +219,165 @@ Archive all **~1,000+ Security Now! podcast episodes** (2005–2026+) with offic
 - v3.1.2: Almost created `sn-full-run-v3.1.2.ps1` (caught before commit)
 
 **See:** `COMMON-MISTAKES.md` for version control anti-patterns
+
+---
+
+## PERFORMANCE OPTIMIZATION ROADMAP (v3.2.0)
+
+### Current Bottleneck - Why Speed Matters
+
+**Processing Time Today (v3.1.1):**
+- **Per episode:** 15-30 minutes (CPU-bound Whisper transcription)
+- **Full archive:** 500-1,000 hours for ~1,000 episodes
+- **Real-world impact:** 21-42 days of continuous processing
+
+**Market Blocker:** This is **impractical for air-gapped enterprise deployments** - the primary target market for this tool.
+
+### Target Market: Air-Gapped/Classified Systems
+
+**Use Cases:**
+- Defense contractors building offline training archives in SCIFs (Sensitive Compartmented Information Facilities)
+- Government analysts requiring complete searchable archives on air-gapped workstations
+- Corporate security teams in zero-trust environments (no internet streaming)
+
+**The Problem:**
+- User must run script for 500-1,000 hours to build complete archive
+- In air-gapped environments, can't pause/resume easily
+- 21-42 days continuous = completely impractical for production deployment
+
+**The Solution (v3.2.0 Target):**
+- **Overnight archive build:** 5-15 hours total
+- **User workflow:** Setup Friday evening → complete archive Monday morning
+- **Business impact:** Unlocks $5K-15K enterprise pricing tier
+
+### Target: 40-80x Speedup
+
+**Tier 1 Optimizations (Free - No Hardware Cost):**
+
+1. **Distil-Whisper Model** (10x faster)
+   - OpenAI's distilled Whisper variant
+   - 97% accuracy (vs 98% base.en)
+   - 1.5-3 min/episode (from 15-30 min)
+   
+2. **Parallel CPU Processing** (4x speedup)
+   - PowerShell background jobs
+   - 8-core CPU → 4 parallel Whisper instances
+   - Zero cost with existing hardware
+
+3. **Smart Caching** (infinite speedup on re-runs)
+   - Store transcripts in filesystem cache
+   - Never re-process same episode twice
+   - Critical for interrupted runs
+
+4. **Parallel Network I/O** (2x speedup)
+   - Download PDF + MP3 simultaneously
+   - Batch metadata downloads (10 episodes at once)
+   - Test CDN rate limits for optimal parallelism
+
+**Expected Combined Result:** 40-80x total speedup
+- **New time:** 1,000 episodes in 5-15 hours (vs 500-1,000 hours)
+- **ROI:** Zero cost, massive user experience improvement
+
+**Tier 2 Optimizations (Optional - Hardware Investment):**
+
+1. **GPU Acceleration** (20-50x additional speedup)
+   - Whisper.cpp CUDA support
+   - RTX 4060 Ti 16GB (~$500) → 30 sec - 2 min/episode
+   - Or cloud GPU testing: Vast.ai ($0.20-0.40/hour)
+   - **Decision point:** Cost-benefit analysis after Tier 1 validation
+
+**Expected Additional Result:** 20-50x on top of Tier 1
+- **Theoretical max:** 160-400x combined speedup
+- **New time:** 1,000 episodes in 1-3 hours
+
+### Why This Unlocks Enterprise Market
+
+**Before v3.2.0 (Current State):**
+- Processing time: 500-1,000 hours
+- User experience: "Run for a month straight? Not realistic."
+- Market fit: Hobbyists only, not enterprise-ready
+- Pricing: Free/donation only
+
+**After v3.2.0 (Performance Optimized):**
+- Processing time: 5-15 hours (Tier 1) or 1-3 hours (Tier 2)
+- User experience: "Overnight build? I can deploy this."
+- Market fit: Defense contractors, classified systems, air-gapped enterprise
+- Pricing: $5K-15K justified for 24-hour archive deployment solution
+
+**Speed IS the product** for the target market segment.
+
+### Implementation Plan - v3.2.0 Development Process
+
+**Phase 1: Establish Baseline (2 hours)**
+1. Run current v3.1.2 engine on 10 episodes (1-10)
+2. Measure:
+   - Total time
+   - Per-episode breakdown (download, transcribe, convert, write)
+   - CPU/RAM/disk usage profile
+3. Document in `docs/PERFORMANCE-BASELINE.md`
+
+**Phase 2: Identify Bottlenecks (1 hour)**
+1. Analyze where time is spent:
+   - 80% in Whisper transcription? → Focus here first
+   - 15% in network I/O? → Secondary priority
+   - 5% in PDF conversion? → Ignore for now
+2. Document bottleneck hierarchy
+
+**Phase 3: Implement Tier 1 Optimizations (4-6 hours)**
+1. Distil-Whisper integration
+2. PowerShell parallel processing (`Start-Job` pattern)
+3. Transcript cache system (check before Whisper invocation)
+4. Parallel download implementation (test CDN limits)
+
+**Phase 4: Benchmark & Validate (2 hours)**
+1. Re-run same 10 episodes with optimizations enabled
+2. Compare to baseline performance
+3. Test on 100 episodes for real-world validation
+4. Update `docs/PERFORMANCE-RESULTS.md`
+
+**Phase 5: Document & Tag (1 hour)**
+1. Update `CHANGELOG.md` with performance gains
+2. Create `docs/PERFORMANCE.md` - optimization guide for users
+3. Tag as `v3.2.0-performance`
+4. Update README.md with new speed claims ("Build 1,000-episode archive in 5-15 hours")
+
+**Total Time Investment:** 10-12 hours conservative estimate
+
+**Expected Deliverable:** Engine that processes 1,000 episodes in 5-15 hours instead of 500-1,000 hours
+
+### What NOT to Do During Performance Phase
+
+**Avoid scope creep:**
+- ❌ Don't add progress bars (wait until v3.3.0 UX polish)
+- ❌ Don't build GUI features
+- ❌ Don't implement RAG search
+- ❌ Only performance optimization - stay focused
+
+**Avoid over-optimization:**
+- ❌ Don't spend 20 hours optimizing CSV writes that save 30 seconds total
+- ✅ Focus on Whisper bottleneck (80% of runtime)
+- ✅ Law of diminishing returns applies
+
+**Don't skip measurement:**
+- ✅ MUST document "before" performance to prove improvements
+- ✅ Makes great marketing content: "400x faster than v3.1.2!"
+
+### Success Criteria for v3.2.0
+
+**Must Have:**
+- [ ] Baseline performance documented (v3.1.2 speed)
+- [ ] 40x minimum speedup achieved via Tier 1 optimizations
+- [ ] 100-episode validation test passes (no regressions)
+- [ ] Performance documentation updated (PERFORMANCE.md)
+- [ ] Git tagged as v3.2.0-performance
+
+**Nice to Have:**
+- [ ] 80x speedup (upper bound of Tier 1 target)
+- [ ] GPU acceleration tested (Tier 2 proof-of-concept)
+- [ ] Cloud GPU cost analysis for users without hardware
+
+**Release Blocker:**
+- [ ] If speedup < 20x, investigate bottleneck analysis errors before release
 
 ---
 
@@ -393,6 +553,7 @@ Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return F
 
 | Version | Date       | Changes |
 |---------|------------|---------|
+| 3.11    | 2026-01-16 | Added Performance Optimization Roadmap v3.2.0: Current bottleneck (500-1,000 hrs), target 40-80x speedup via Tier 1 free optimizations (Distil-Whisper 10x, parallel CPU 4x, caching, parallel downloads), business justification (air-gapped market = $5K-15K pricing), implementation plan (baseline → optimize → validate → tag). Strategic "why" behind next development phase. |
 | 3.10    | 2026-01-16 | Optimized structure: Removed duplicate paths, condensed version history, compressed MCP workflow (72→15 lines), moved Static/Dynamic section, streamlined privacy architecture, replaced ASCII tree with bullets, reduced examples. Result: 22.5KB → 16KB (-29%) |
 | 3.9     | 2026-01-16 | Audit complete: Added v3.8 history entry, consolidated paths, added Static/Dynamic separation rule, repositioned MCP workflow, enhanced privacy architecture, added file size guideline (20KB), paths last verified date |
 | 3.8     | 2026-01-16 | Privacy fix: Split context files (ai-context-private.md for business data), sanitized public version, updated Special-Sync exclusions |
@@ -401,17 +562,16 @@ Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return F
 | 3.5     | 2026-01-16 | Removed dynamic content, eliminated 157-line duplication with COMMON-MISTAKES.md, added dev standards & testing protocols |
 | 3.4     | 2026-01-16 | SOT established: Private repo source of truth, added GRC regex, PowerShell gotchas, verification commands, NEW-THREAD-CHECKLIST protocol |
 | 3.3     | 2026-01-16 | Fixed local repo path (SecurityNow-Full-Private), added cleanup completion, verified all paths |
-| 3.2     | 2026-01-16 | Fixed Whisper path (4th time), moved to top with validation |
-| 3.1     | 2026-01-15 | Fixed sync script name (Special-Sync.ps1), drive audit |
 
 **Thread Policy:** Treat older threads as retired sources - cite when relevant, don't re-summarize.
 
 ---
 
-## END OF ai-context.md v3.10
-🎯 **OPTIMIZED** - 29% leaner (16KB from 22.5KB), zero functionality loss  
+## END OF ai-context.md v3.11
+🎯 **PERFORMANCE ROADMAP ADDED** - Strategic direction for v3.2.0 clear  
 🔒 **Privacy Protected** - Business context in ai-context-private.md  
-✅ **Public-Safe Technical Context** - Tool paths, workflows, error patterns  
-✅ **MCP Workflow Active** - Special-Sync.ps1 auto-pull confirmed (Step 1/5)  
-✅ **One-Command Sync** - `.\scripts\Special-Sync.ps1` (no manual git pull needed)  
-✅ **Fast Thread Loading** - Reduced size improves token processing speed
+✅ **Air-Gapped Market Strategy** - Speed IS the product ($5K-15K pricing)  
+✅ **40-80x Speedup Target** - Tier 1 free optimizations documented  
+✅ **Implementation Plan** - Baseline → optimize → validate → tag  
+✅ **MCP Workflow Active** - Special-Sync.ps1 auto-pull confirmed  
+✅ **One-Command Sync** - `.\scripts\Special-Sync.ps1` (no manual git pull needed)
