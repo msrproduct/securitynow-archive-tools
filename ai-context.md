@@ -1,6 +1,6 @@
 # AI Context - Security Now Archive Tools
-**Version:** 3.8 🔒 PRIVACY FIX - Business info moved to ai-context-private.md  
-**Last Updated:** 2026-01-16 22:00 CST by Perplexity AI  
+**Version:** 3.12 🔄 THREAD ANALYSIS COMPLETE - File references added  
+**Last Updated:** 2026-01-17 00:18 CST by Perplexity AI  
 **Project Phase:** Production - v3.1.1 Stable Engine  
 **Current Version:** v3.1.1 (Production Stable)
 
@@ -62,7 +62,7 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe     # ✅ PDF converter
 ## PROJECT OVERVIEW
 
 ### Mission
-Archive all **~1,000+ Security Now! podcast episodes** (2005–2026+) with official GRC PDFs where available, AI-generated transcripts for missing episodes, and proper copyright separation between public tools and private media.
+Archive all **1,000 Security Now! podcast episodes** (2005–2026) with official GRC PDFs where available, AI-generated transcripts for missing episodes, and proper copyright separation between public tools and private media.
 
 ### Core Principles (NEVER VIOLATE)
 1. **Steve Gibson Alignment** - Honor Steve's "trust no one's cloud" philosophy; local-first architecture; free tools for the greater good
@@ -109,8 +109,8 @@ D:\Desktop\SecurityNow-Full-Private/         (Private - LOCAL + GitHub)
 ├── docs/                     # Documentation
 ├── ai-context.md             # Technical context (synced to public)
 ├── ai-context-private.md     # Business context (PRIVATE ONLY - never synced)
-├── COMMON-MISTAKES.md        # Error prevention
-└── NEW-THREAD-CHECKLIST.md   # Development workflow
+├── COMMON-MISTAKES.md        # Error prevention log
+└── NEW-THREAD-CHECKLIST.md   # Session workflow
 
 D:\Desktop\SecurityNow-Full/                 (Public Mirror - LOCAL + GitHub)
 ├── scripts/           # Sanitized scripts ONLY (no credentials)
@@ -133,14 +133,25 @@ D:\Desktop\SecurityNow-Full/                 (Public Mirror - LOCAL + GitHub)
 | `ai-context.md` | PUBLIC | Technical documentation, tool paths, workflows | ✅ YES |
 | `ai-context-private.md` | PRIVATE | Billing rates, cost tracking, business strategy | ❌ NO |
 
+**Related Files:**
+
+| File | Purpose | When to Use |
+|------|---------|-------------|
+| `NEW-THREAD-CHECKLIST.md` | Session startup protocol | Read at START of every new thread for dynamic content (current sprint tasks, blockers) |
+| `COMMON-MISTAKES.md` | Error prevention log | Consult BEFORE suggesting solutions to avoid known pitfalls (Whisper paths, regex, sync loops); update after discovering new repeated errors |
+
 **AI Thread Startup Process:**
 1. Read `ai-context.md` from **public repo** (Space Instructions auto-load)
 2. Read `ai-context-private.md` from **private repo** via MCP (business context)
-3. Combine both for full project understanding
+3. Read `NEW-THREAD-CHECKLIST.md` for current sprint status
+4. Consult `COMMON-MISTAKES.md` before code suggestions
+5. Combine all for full project understanding
 
 **Special-Sync.ps1 Behavior:**
 - ✅ `ai-context.md` → Syncs to public repo
 - ❌ `ai-context-private.md` → **EXCLUDED** from sync (stays private)
+- ❌ `NEW-THREAD-CHECKLIST.md` → Synced to public (dynamic content)
+- ❌ `COMMON-MISTAKES.md` → Synced to public (error prevention)
 
 ---
 
@@ -184,7 +195,7 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
 | 2026-01-13 | episode-dates.csv dynamic lookup  | Hardcoded year ranges fail for holiday episodes| Correct folder placement                 |
 | 2026-01-13 | $PSScriptRoot for all paths       | Eliminates hardcoded assumptions               | Works across machines                    |
 | 2026-01-15 | ai-context.md system              | Prevent 8-hour debugging loops                 | 21.5 hrs saved (projected)               |
-| 2026-01-16 | Complete system cleanup           | 5 orphaned folders causing confusion           | Clean development environment            |
+| 2026-01-16 | Complete system cleanup           | 5 orphaned folders (~750MB) causing confusion  | Clean development environment            |
 | 2026-01-16 | Path corrections v3.3             | Local folder ≠ GitHub repo name                | Eliminated remaining confusion           |
 | 2026-01-16 | Private repo as SOT               | ai-context.md synced private→public            | Single source of truth established       |
 | 2026-01-16 | Git tags for versioning           | No version numbers in filenames                | Prevents file proliferation chaos        |
@@ -308,7 +319,7 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
 - ✅ MCP commits to GitHub Private → You run Special-Sync → **Automatically pulls latest** → Syncs all 4 repos
 - ✅ **NO manual `git pull` needed** before running Special-Sync.ps1
 - ✅ Impossible to sync outdated version (Special-Sync always pulls GitHub first)
-- ✅ One-command workflow: `.\.scripts\Special-Sync.ps1` (that's it!)
+- ✅ One-command workflow: `.\scripts\Special-Sync.ps1` (that's it!)
 
 ### MCP Commit Workflow (AI Commits Directly to GitHub)
 
@@ -535,12 +546,13 @@ Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return F
 
 | Version | Date       | Changes                                                                 |
 |---------|------------|--------------------------------------------------------------------|--------|
+| 3.12    | 2026-01-17 | **THREAD ANALYSIS COMPLETE:** Added NEW-THREAD-CHECKLIST.md reference (session workflow), COMMON-MISTAKES.md purpose (error prevention activation), system cleanup historical record to v3.3 (5 dirs deleted, 750MB reclaimed), clarified file relationship table. All additions from comprehensive 41-thread analysis. Total: +9 lines. |
 | 3.8     | 2026-01-16 | **PRIVACY FIX:** Split context files - Created `ai-context-private.md` (business-sensitive info - NEVER syncs to public), sanitized `ai-context.md` (removed cost tracking for public visibility), updated Special-Sync.ps1 to exclude private file. Protects billing rates, ROI calculations, monetization strategy from public exposure. |
 | 3.7     | 2026-01-16 | **MCP WORKFLOW FIX:** Corrected GitHub MCP section - Special-Sync.ps1 **ALREADY auto-pulls** in Step 1/5 (no manual git pull needed). One-command workflow confirmed. Added live proof-of-concept test (this commit). Time savings: 2 hours per dev cycle. |
-| 3.6     | 2026-01-16 | **COMPLETE:** Added 6 critical elements from thread analysis - File Versioning Convention (no version numbers in filenames), GitHub MCP + Special-Sync workflow (git pull requirement), Dynamic/Static content separation rule, Inline code documentation requirement, Developer time tracking system (optional), Episode count update (~1,000+) |
+| 3.6     | 2026-01-16 | **COMPLETE:** Added 6 critical elements from thread analysis - File Versioning Convention (no version numbers in filenames), GitHub MCP + Special-Sync workflow (git pull requirement), Dynamic/Static content separation rule, Inline code documentation requirement, Developer time tracking system (optional), Episode count update (1,000 episodes) |
 | 3.5     | 2026-01-16 | **AUDIT COMPLETE:** Removed "Current Development Focus" (dynamic content), eliminated 157-line duplication with COMMON-MISTAKES.md, added Development Standards & Testing Protocols, compressed cleanup summary, streamlined path corrections. File reduced from 485→315 lines (-35%). |
 | 3.4     | 2026-01-16 | SOT ESTABLISHED: Private repo now source of truth, synced to public. Added GRC regex pattern, PowerShell goto gotcha, verification commands, NEW-THREAD-CHECKLIST protocol, development roadmap |
-| 3.3     | 2026-01-16 | CRITICAL: Fixed local repo path (SecurityNow-Full-Private), added cleanup completion status, verified all paths |
+| 3.3     | 2026-01-16 | CRITICAL: System cleanup - Deleted 5 orphaned directories (~750MB reclaimed: SecurityNow-Test, SecurityNow-Full-Archive, backup folders), removed 11 duplicate/obsolete files, verified D:\Desktop\SecurityNow-Full-Private as canonical path, all repos synced. Clean development environment achieved. |
 | 3.2     | 2026-01-16 | Fixed Whisper path (4th time), moved to top with validation |
 | 3.1     | 2026-01-15 | Fixed sync script name (Special-Sync.ps1), drive audit |
 | 3.0     | 2026-01-15 | Complete context system with mistake log |
@@ -551,9 +563,11 @@ Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return F
 
 ---
 
-## END OF ai-context.md v3.8
-🔒 **PRIVACY PROTECTED** - Business-sensitive info moved to ai-context-private.md  
+## END OF ai-context.md v3.12
+🔄 **THREAD ANALYSIS COMPLETE** - All 41 threads reviewed, knowledge captured  
 ✅ **Public-Safe Technical Context** - Tool paths, workflows, error patterns  
+✅ **File References Added** - NEW-THREAD-CHECKLIST.md + COMMON-MISTAKES.md purposes clarified  
+✅ **Historical Records Updated** - System cleanup scope documented (750MB)  
 ✅ **MCP Workflow Active** - Special-Sync.ps1 auto-pull confirmed (Step 1/5)  
 ✅ **One-Command Sync** - `.\scripts\Special-Sync.ps1` (no manual git pull needed)  
 ✅ **READY FOR PUBLIC** - No billing rates, no business strategy exposed
