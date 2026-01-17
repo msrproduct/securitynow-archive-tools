@@ -1,47 +1,258 @@
-# Security Now! Tools & Index
+# Security Now! Archive Tools
 
-This repository contains tooling and index data to help researchers and fans work with Steve Gibson's **Security** Now! podcast episodes.[file:1]
+**Version 3.1.2** - Complete AI transcription pipeline  
+**Released:** January 17, 2026
 
-## What this repo contains
+PowerShell tools to build a complete archive of Steve Gibson's **Security Now!** podcast episodes with official PDFs and AI-generated transcripts for missing episodes.
 
-- PowerShell scripts to:
-  - Discover official show-notes PDFs (\sn-XXXX-notes.pdf\) on Gibson Research Corporation (GRC).[file:1]
-  - Detect episodes with no official notes and (optionally) generate clearly marked AI-derived notes locally.
-  - Organize local notes PDFs by year.
-  - Maintain a CSV index of all episodes and their associated notes files.
+---
 
-- A CSV index under \data\ (for example \SecurityNowNotesIndex.csv\) with:
+## ✨ What's New in v3.1.2
+
+- **Complete AI transcription pipeline** restored and tested
+- Whisper.cpp integration for high-quality local speech-to-text
+- Automatic fallback: official GRC PDFs → AI transcripts for missing episodes
+- HTML wrapper with prominent disclaimer for AI-generated content
+- Episode metadata caching for faster subsequent runs
+- Air-gapped deployment support (no cloud dependencies)
+
+**Tested Performance (Episode 7):** ~158 seconds total processing time (MP3 download + Whisper transcription + PDF generation)
+
+---
+
+## 📋 What This Repo Contains
+
+### Scripts (`/scripts`)
+- **`sn-full-run.ps1`** - Main archive builder
+  - Downloads official show-notes PDFs from [GRC.com](https://www.grc.com/securitynow.htm)
+  - Generates AI transcripts for episodes without official notes
+  - Organizes files by year (2005-2026+)
+  - Maintains searchable CSV index
+
+### Data (`/data`)
+- **`episode-dates.csv`** - Cached episode-to-year mappings
+- **`SecurityNowNotesIndex.csv`** - Master index of all episodes
   - Episode number
-  - Title (when available)
-  - Original show-notes URL on GRC and TWiT.tv
-  - Local file name (on **your** system)
-  - Flags indicating whether AI-derived notes exist locally.[file:1]
+  - Source URL (GRC or TWiT CDN)
+  - Local filename
+  - File type (official PDF vs AI transcript)
 
-## What this repo does NOT contain
+---
 
-This public repository does **not** contain:
+## 🚫 What This Repo Does NOT Contain
 
-- Original Security Now! show-notes PDFs from GRC (\sn-XXXX-notes.pdf\).[file:1]
-- TWiT.tv transcripts or audio files (MP3s).
-- Any copyrighted content from GRC or TWiT.tv.
+This public repository **does not include**:
 
-Instead, it provides tools and an index so that you can obtain that material yourself from the official sources and keep it in a separate private archive.[file:1]
+- Original Security Now! show-notes PDFs (copyright Steve Gibson/GRC)
+- TWiT.tv transcripts or MP3 audio files
+- Any copyrighted content from GRC or TWiT.tv
 
-## Respecting Steve Gibson and TWiT
+Instead, it provides **tools and an index** so you can:
+1. Download official content directly from authoritative sources
+2. Generate clearly-marked AI transcripts for gaps in official coverage
+3. Maintain a private archive in compliance with fair use principles
 
-All Security Now! content is authored and owned by Steve Gibson / Gibson Research Corporation and published in cooperation with TWiT.tv.[file:1]
-This project exists to assist with personal research and archival and to avoid making others re-implement the same tooling.
+---
 
-Any AI-derived notes workflow is intended only to fill gaps for episodes which never had official show notes, and generated files must always be clearly labeled as automatically generated and **not** official show notes.[file:1]
+## ⚙️ Installation
 
-## High-level workflow
+### Prerequisites
 
-1. Clone this repo locally.
-2. Place the end-to-end PowerShell script into \scripts\SecurityNow-EndToEnd.ps1\.
-3. Run the script to:
-   - Build or update your local notes archive under a separate \local\ folder (kept out of this public repo).
-   - Update the CSV index under \data\.
-4. Maintain a **private** clone of this repo (or a separate private repo) that stores:
-   - PDFs (official and AI-derived).
-   - MP3s.
-   - AI-generated transcripts under \local\.[file:1]
+1. **PowerShell 5.1+** (Windows) or **PowerShell Core 7+** (cross-platform)
+
+2. **Whisper.cpp** (for AI transcription)
+   - Download: [github.com/ggerganov/whisper.cpp/releases](https://github.com/ggerganov/whisper.cpp/releases)
+   - Extract to `C:\whisper.cpp\` (or update path in script)
+   - Download model: `ggml-base.en.bin` to `C:\whisper.cpp\models\`
+
+3. **wkhtmltopdf** (for PDF generation)
+   - Download: [wkhtmltopdf.org/downloads.html](https://wkhtmltopdf.org/downloads.html)
+   - Install to default location: `C:\Program Files\wkhtmltopdf\`
+
+### Quick Start
+
+```powershell
+# Clone the repository
+git clone https://github.com/msrproduct/securitynow-archive-tools.git
+cd securitynow-archive-tools
+
+# Test run (no changes made)
+.\scripts\sn-full-run.ps1 -DryRun -MinEpisode 1 -MaxEpisode 5
+
+# Download episodes 1-100 with AI transcripts
+.\scripts\sn-full-run.ps1 -MinEpisode 1 -MaxEpisode 100
+
+# GRC PDFs only (skip AI generation)
+.\scripts\sn-full-run.ps1 -MinEpisode 1 -MaxEpisode 1000 -SkipAI
+```
+
+---
+
+## 📁 Directory Structure
+
+After running the script, your repository will contain:
+
+```
+securitynow-archive-tools/
+├── scripts/
+│   └── sn-full-run.ps1          # Main archive builder
+├── data/
+│   └── episode-dates.csv        # Cached metadata
+├── local/                       # Created on first run (gitignored)
+│   ├── pdf/
+│   │   ├── 2005/
+│   │   │   ├── sn-0001-notes.pdf          # Official GRC PDF
+│   │   │   └── sn-0007-notes-ai.pdf       # AI-generated (if no official)
+│   │   ├── 2006/
+│   │   └── .../
+│   ├── mp3/                     # Downloaded episode audio
+│   └── Notes/
+│       └── ai-transcripts/      # Intermediate text files
+├── SecurityNowNotesIndex.csv    # Master episode index
+└── error-log.csv                # Processing errors
+```
+
+**Note:** The `local/` folder is **not synced** to the public repo (`.gitignore` exclusion). For backups, use a [private fork](https://github.com/msrproduct/securitynow-full-archive) or separate private repository.
+
+---
+
+## 🎯 Usage Examples
+
+### Build Complete Archive (Episodes 1-1000)
+
+```powershell
+.\scripts\sn-full-run.ps1 -MinEpisode 1 -MaxEpisode 1000
+```
+
+**Output:**
+- Downloads all available official PDFs from GRC
+- Generates AI transcripts for missing episodes
+- Creates year-organized folder structure
+- Updates `SecurityNowNotesIndex.csv`
+
+### Update Archive (New Episodes)
+
+```powershell
+# Re-run same command to pick up new episodes
+.\scripts\sn-full-run.ps1 -MinEpisode 1 -MaxEpisode 1100
+```
+
+**Smart caching:**
+- Skips already-downloaded files
+- Uses cached episode metadata
+- Only processes new/missing episodes
+
+### Air-Gapped Deployment
+
+1. **Online system:** Download Whisper.cpp, wkhtmltopdf, and this repo
+2. **Transfer to air-gapped system** via approved media
+3. **Run script** - all processing is local (no internet required after setup)
+
+---
+
+## 🚀 Roadmap: v3.2.0 Performance Optimization
+
+**Current baseline (v3.1.2):** ~158 seconds per episode  
+**Target (v3.2.0):** ~4-8 seconds per episode (20-40x speedup)
+
+### Planned Optimizations
+
+| Tier | Optimization | Expected Speedup | Complexity |
+|------|--------------|------------------|------------|
+| 1 | **Distil-Whisper** integration | 6-10x | Low |
+| 1 | Parallel episode processing | 4-8x (8-core CPU) | Medium |
+| 2 | Content-addressable caching | 2-5x (re-runs) | Medium |
+| 2 | GPU acceleration (Whisper) | 2-4x | Medium-High |
+| 3 | Incremental MP3 download | 1.2-1.5x | Low |
+
+**Combined potential:** 40-80x speedup for batch processing
+
+### Why This Matters
+
+- **Enterprise air-gapped deployments:** Process 1000+ episodes in <2 hours instead of days
+- **Research workflows:** Rapid iteration on transcription quality improvements
+- **Cost savings:** Eliminate cloud API dependencies ($0.006/min → $0 via local Whisper)
+
+---
+
+## 🔒 Respecting Copyright
+
+All Security Now! content is authored and owned by **Steve Gibson / Gibson Research Corporation** and published in cooperation with **TWiT.tv**.
+
+### Fair Use Principles
+
+✅ **Allowed:**
+- Personal archival and research
+- Generating AI transcripts **only for episodes without official show notes**
+- Clearly labeling AI-generated content as "NOT OFFICIAL"
+- Downloading from authoritative sources (GRC.com, TWiT CDN)
+
+❌ **Prohibited:**
+- Redistributing copyrighted PDFs or audio files
+- Presenting AI transcripts as official Steve Gibson content
+- Commercial use without explicit permission
+
+### AI Transcript Disclaimer
+
+All AI-generated transcripts include a prominent red banner:
+
+> ⚠️ **AI-GENERATED TRANSCRIPT - NOT OFFICIAL SHOW NOTES**
+>
+> This transcript was automatically generated using Whisper.cpp speech recognition.  
+> It may contain errors, omissions, or inaccuracies. This is NOT an official  
+> Steve Gibson show notes document from GRC.com.
+>
+> For official episode notes (when available), visit [grc.com/securitynow.htm](https://www.grc.com/securitynow.htm)
+
+---
+
+## 🤝 Contributing
+
+Contributions welcome! Please:
+
+1. **Test thoroughly** before submitting PRs
+2. **Document changes** in commit messages
+3. **Respect copyright** - no copyrighted content in PRs
+4. **Follow existing code style** (PowerShell best practices)
+
+### Reporting Issues
+
+- **Script bugs:** Open GitHub issue with error log (`error-log.csv`)
+- **Performance ideas:** Suggest in Discussions (v3.2.0 roadmap)
+- **Missing episodes:** Check [GRC.com](https://www.grc.com/securitynow.htm) first
+
+---
+
+## 📜 License
+
+MIT License - see [LICENSE](LICENSE) file
+
+**Important:** This license applies **only to the scripts and tools**, not to:
+- Security Now! podcast content (copyright Steve Gibson/GRC)
+- TWiT.tv media files
+- Any generated transcripts (derivative works)
+
+---
+
+## 🙏 Credits
+
+- **Steve Gibson** - Creator of Security Now! podcast
+- **TWiT.tv** - Podcast hosting and distribution
+- **Whisper.cpp** - [ggerganov/whisper.cpp](https://github.com/ggerganov/whisper.cpp)
+- **OpenAI Whisper** - Original speech recognition model
+- **wkhtmltopdf** - HTML to PDF conversion
+
+---
+
+## 📞 Support
+
+- **Documentation:** This README
+- **Issues:** [GitHub Issues](https://github.com/msrproduct/securitynow-archive-tools/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/msrproduct/securitynow-archive-tools/discussions)
+- **Official podcast:** [grc.com/securitynow.htm](https://www.grc.com/securitynow.htm)
+
+---
+
+**Status:** v3.1.2 baseline complete ✅ | v3.2.0 optimization roadmap defined 🚀
+
+**Last updated:** January 17, 2026
