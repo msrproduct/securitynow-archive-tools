@@ -13,12 +13,14 @@
     1. Pull latest from GitHub Private to Local Private
     2. Check and commit any pending changes in Local Private
     3. Push Local Private to GitHub Private
-    4. Sync Local Private → Local Public (excluding /local-* folders)
+    4. Sync Local Private → Local Public (excluding /local-* folders + ai-context-private.md)
     5. Detect PUBLIC-ONLY files (WARNING mode with cleanup list)
     6. Commit and push Local Public to GitHub Public
     
-    CRITICAL: .ai-context.md is synced from private (SOT) to public
+    CRITICAL: ai-context.md is synced from private (SOT) to public
     for Space Instructions access while maintaining single source of truth.
+    
+    PRIVACY: ai-context-private.md is EXCLUDED from public sync (business-sensitive info).
     
 .PARAMETER DryRun
     Preview all operations without making any changes
@@ -49,7 +51,7 @@ param(
 $script:Config = @{
     # Sync these root folders/files from private → public
     SyncRoots = @(
-        "",           # Root-level files (includes .ai-context.md)
+        "",           # Root-level files (includes ai-context.md)
         "docs", 
         "scripts", 
         "data"
@@ -60,6 +62,11 @@ $script:Config = @{
         "local-pdf",
         "local-mp3", 
         "local-notes-ai-transcripts"
+    )
+    
+    # PRIVACY: These files contain business-sensitive info (NEVER sync to public)
+    ExcludedFiles = @(
+        "ai-context-private.md"   # Business context: billing rates, cost tracking, strategy
     )
     
     AlwaysSkip = @(".gitignore")  # Each repo maintains its own
@@ -99,6 +106,25 @@ function Test-IsCopyrightedPath {
         
         # Check if path starts with this copyrighted folder
         if ($normalized -like "$pathPattern/*" -or $normalized -eq $pathPattern) {
+            return $true
+        }
+    }
+    return $false
+}
+
+function Test-IsPrivateFile {
+    <#
+    .SYNOPSIS
+        Check if file should be excluded from public sync (business-sensitive)
+    #>
+    param([string]$RelativePath)
+    
+    # Normalize to forward slashes
+    $normalized = $RelativePath.Replace('\', '/').TrimStart('/')
+    
+    foreach ($excludedFile in $script:Config.ExcludedFiles) {
+        $pattern = $excludedFile.Replace('\', '/')
+        if ($normalized -eq $pattern -or $normalized -like "*/$pattern") {
             return $true
         }
     }
@@ -193,6 +219,11 @@ function Get-RepoFiles {
             return $false
         }
         
+        # 🔒 PRIVACY: Exclude business-sensitive files
+        if (Test-IsPrivateFile $rel) {
+            return $false
+        }
+        
         return $true
     }
 }
@@ -215,6 +246,11 @@ function Compare-RepoFiles {
     foreach ($rel in $SourceFiles.Keys) {
         # CRITICAL FIX: Double-check copyrighted content exclusion
         if (Test-IsCopyrightedPath $rel) {
+            continue
+        }
+        
+        # 🔒 PRIVACY: Double-check business-sensitive file exclusion
+        if (Test-IsPrivateFile $rel) {
             continue
         }
         
@@ -346,16 +382,16 @@ Write-Step -Number 3 -Description "Push Local Private → GitHub Private"
 Invoke-GitOperation -RepoPath $PrivateRepoLocal -Operation "push" -DryRun:$DryRun
 
 # ============================================================================
-# STEP 4: Sync Local Private → Local Public (EXCLUDE /local-*)
+# STEP 4: Sync Local Private → Local Public (EXCLUDE /local-* + ai-context-private.md)
 # ============================================================================
 
-Write-Step -Number 4 -Description "Sync Local Private → Local Public (tools/docs + .ai-context.md)"
+Write-Step -Number 4 -Description "Sync Local Private → Local Public (tools/docs + ai-context.md)"
 
 # Collect files from both repos
 $privateFiles = @{}
 $publicFiles = @{}
 
-Write-Host "Scanning Private repo (excluding /local-pdf, /local-mp3, /local-notes-ai-transcripts)..." -ForegroundColor Gray
+Write-Host "Scanning Private repo (excluding /local-* + ai-context-private.md)..." -ForegroundColor Gray
 foreach ($root in $script:Config.SyncRoots) {
     foreach ($file in Get-RepoFiles -RepoPath $PrivateRepoLocal -Root $root) {
         $rel = $file.FullName.Substring($PrivateRepoLocal.Length).TrimStart('\','/')
@@ -373,7 +409,8 @@ foreach ($root in $script:Config.SyncRoots) {
 
 Write-Host "Comparing files..." -ForegroundColor Gray
 Write-Host "NOTE: .gitignore is excluded (each repo maintains its own)" -ForegroundColor DarkGray
-Write-Host "NOTE: .ai-context.md is synced from private (SOT) to public for Space Instructions" -ForegroundColor Cyan
+Write-Host "NOTE: ai-context.md is synced from private (SOT) to public for Space Instructions" -ForegroundColor Cyan
+Write-Host "NOTE: ai-context-private.md is EXCLUDED (business-sensitive - PRIVATE ONLY)" -ForegroundColor Magenta
 Write-Host "NOTE: /local-* folders are EXCLUDED (copyrighted material - NEVER synced to public)" -ForegroundColor Yellow
 
 $comparison = Compare-RepoFiles `
@@ -431,7 +468,7 @@ Write-Step -Number 5 -Description "Commit and Push Local Public → GitHub Publi
 $publicCommitted = Invoke-GitOperation `
     -RepoPath $PublicRepoLocal `
     -Operation "commit" `
-    -Message "Special Sync: Update from private repo (tools/docs + .ai-context.md - NO copyrighted media)" `
+    -Message "Special Sync: Update from private repo (tools/docs + ai-context.md - NO copyrighted media)" `
     -DryRun:$DryRun
 
 if ($publicCommitted -or $DryRun) {
@@ -454,6 +491,7 @@ if ($DryRun) {
     Write-Host "Run without -DryRun to apply changes" -ForegroundColor Yellow
 } else {
     Write-Host "`n✅ ALL 4 REPOS SYNCED SUCCESSFULLY!" -ForegroundColor Green
-    Write-Host "✓ .ai-context.md synced from private (SOT) to public for Space Instructions" -ForegroundColor Cyan
+    Write-Host "✓ ai-context.md synced from private (SOT) to public for Space Instructions" -ForegroundColor Cyan
+    Write-Host "🔒 ai-context-private.md EXCLUDED from public (business-sensitive info protected)" -ForegroundColor Magenta
 }
 Write-Host "========================================`n"
