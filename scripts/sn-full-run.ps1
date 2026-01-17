@@ -8,6 +8,7 @@ organizes by year, and creates searchable index. Designed for air-gapped systems
 
 Version 3.1.2
 Released 2026-01-16
+Updated 2026-01-17 - AI pipeline restored
 
 .PARAMETER MinEpisode
 Starting episode number (default 1)
@@ -56,7 +57,7 @@ $Root      = Split-Path -Parent $ScriptDir
 
 Write-Host ""
 Write-Host "Security Now! Archive Builder v3.1.2" -ForegroundColor Cyan
-Write-Host "Released 2026-01-16" -ForegroundColor Cyan
+Write-Host "Released 2026-01-16 | AI Pipeline Restored 2026-01-17" -ForegroundColor Cyan
 Write-Host ""
 
 if ($DryRun) {
@@ -78,17 +79,37 @@ $notesRoot      = Join-Path $localRoot "Notes"
 $transcriptsRoot= Join-Path $notesRoot "ai-transcripts"
 $mp3Root        = Join-Path $localRoot "mp3"
 
-# AI transcription tools (adjust paths as needed)
-$whisperExe     = "C:\whisper\whisper-cli.exe"
-$whisperModel   = "C:\whisper\models\ggml-base.en.bin"
+# AI Tools (Whisper.cpp + wkhtmltopdf)
+$whisperExe     = "C:\whisper.cpp\whisper-cli.exe"
+$whisperModel   = "C:\whisper.cpp\models\ggml-base.en.bin"
 $wkhtmltopdf    = "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 
-# Ensure data directory exists
-if (-not (Test-Path $dataDir)) {
-    if ($DryRun) {
-        Write-Host "Would create data directory at $dataDir" -ForegroundColor Yellow
-    } else {
-        New-Item -ItemType Directory -Path $dataDir -Force | Out-Null
+# Ensure required directories exist
+foreach ($dir in @($dataDir, $localRoot, $pdfRoot, $notesRoot, $transcriptsRoot, $mp3Root)) {
+    if (-not (Test-Path $dir)) {
+        if ($DryRun) {
+            Write-Host "Would create directory: $dir" -ForegroundColor Yellow
+        } else {
+            New-Item -ItemType Directory -Path $dir -Force | Out-Null
+        }
+    }
+}
+
+# Verify AI tools exist (only if not skipping AI)
+if (-not $SkipAI) {
+    if (-not (Test-Path $whisperExe)) {
+        Write-Host "ERROR: Whisper.cpp not found at $whisperExe" -ForegroundColor Red
+        Write-Host "Please install Whisper.cpp or use -SkipAI flag" -ForegroundColor Yellow
+        exit 1
+    }
+    if (-not (Test-Path $whisperModel)) {
+        Write-Host "ERROR: Whisper model not found at $whisperModel" -ForegroundColor Red
+        Write-Host "Please download ggml-base.en.bin model" -ForegroundColor Yellow
+        exit 1
+    }
+    if (-not (Test-Path $wkhtmltopdf)) {
+        Write-Host "WARNING: wkhtmltopdf not found at $wkhtmltopdf" -ForegroundColor Yellow
+        Write-Host "AI transcripts will be text-only (no PDF)" -ForegroundColor Yellow
     }
 }
 
@@ -96,19 +117,6 @@ if (-not (Test-Path $dataDir)) {
 if (-not (Test-Path $errorLogPath)) {
     if (-not $DryRun) {
         "Episode,Stage,Message" | Out-File -FilePath $errorLogPath -Encoding UTF8
-    }
-}
-
-# Ensure AI working directories exist
-if (-not $SkipAI) {
-    foreach ($dir in @($transcriptsRoot, $mp3Root)) {
-        if (-not (Test-Path $dir)) {
-            if ($DryRun) {
-                Write-Host "Would create directory $dir" -ForegroundColor Yellow
-            } else {
-                New-Item -ItemType Directory -Path $dir -Force | Out-Null
-            }
-        }
     }
 }
 
@@ -122,7 +130,28 @@ function Log-Error {
     Write-Host "ERROR (Ep $Episode, $Stage): $Message" -ForegroundColor Red
 
     if (-not $DryRun) {
-        "$Episode,""$Stage"",""$Message""" | Out-File -FilePath $errorLogPath -Encoding UTF8 -Append
+        "$Episode,`"$Stage`",`"$Message`"" | Out-File -FilePath $errorLogPath -Encoding UTF8 -Append
+    }
+}
+
+# Load or create index
+$index = @()
+if (Test-Path $indexCsvPath) {
+    try {
+        $index = @(Import-Csv -Path $indexCsvPath)
+    } catch {
+        Write-Host "WARNING: Failed to read index, will rebuild" -ForegroundColor Yellow
+    }
+}
+
+function Save-Index {
+    param(
+        [array]$IndexData
+    )
+    
+    if (-not $DryRun) {
+        $IndexData | Sort-Object @{Expression={[int]$_.Episode}}, File -Unique | 
+            Export-Csv -Path $indexCsvPath -NoTypeInformation -Encoding UTF8
     }
 }
 
@@ -151,49 +180,15 @@ if ($episodeDates.Count -eq 0) {
     Write-Host "Loaded $($episodeDates.Count) cached episode dates" -ForegroundColor Green
 }
 
-# Check AI tools
 if (-not $SkipAI) {
-    Write-Host ""
-    Write-Host "AI Tools Configuration" -ForegroundColor Cyan
-    
-    $aiReady = $true
-    
-    if (Test-Path $whisperExe) {
-        Write-Host "  Whisper: OK" -ForegroundColor Green
-    } else {
-        Write-Host "  Whisper: NOT FOUND at $whisperExe" -ForegroundColor Yellow
-        $aiReady = $false
-    }
-    
-    if (Test-Path $whisperModel) {
-        Write-Host "  Model: OK" -ForegroundColor Green
-    } else {
-        Write-Host "  Model: NOT FOUND at $whisperModel" -ForegroundColor Yellow
-        $aiReady = $false
-    }
-    
-    if (Test-Path $wkhtmltopdf) {
-        Write-Host "  wkhtmltopdf: OK" -ForegroundColor Green
-    } else {
-        Write-Host "  wkhtmltopdf: NOT FOUND at $wkhtmltopdf" -ForegroundColor Yellow
-        $aiReady = $false
-    }
-    
-    if (-not $aiReady) {
-        Write-Host ""
-        Write-Host "WARNING: AI tools not fully configured. AI transcripts will be skipped." -ForegroundColor Yellow
-        Write-Host "To enable AI transcripts, install:" -ForegroundColor Yellow
-        Write-Host "  - Whisper.cpp: https://github.com/ggml-org/whisper.cpp" -ForegroundColor Yellow
-        Write-Host "  - wkhtmltopdf: winget install wkhtmltopdf" -ForegroundColor Yellow
-        $script:SkipAI = $true
-    }
+    Write-Host "AI Tools: Whisper.cpp + wkhtmltopdf" -ForegroundColor Green
 }
 
 Write-Host ""
 Write-Host "Processing Episodes $MinEpisode-$MaxEpisode" -ForegroundColor Cyan
 Write-Host ""
 
-# Helper: estimate year from episode number (simple mapping, used when cache miss)
+# Helper: estimate year from episode number
 function Get-EstimatedYear {
     param(
         [int]$Episode
@@ -234,10 +229,8 @@ function Get-GrcYearForEpisode {
 
     Write-Host "Episode $Episode  Fetching metadata from GRC..." -NoNewline
 
-    # Estimate a base year using mapping above
     $estimatedYear = Get-EstimatedYear -Episode $Episode
 
-    # NEW: robust year list construction to avoid op_Subtraction on arrays
     $yearsToTry = @()
 
     if ($estimatedYear -ne $null) {
@@ -246,12 +239,10 @@ function Get-GrcYearForEpisode {
         $yearsToTry += ($base + 1)
         $yearsToTry += ($base - 1)
     } else {
-        # Fallback range if we truly have no estimate
         $yearsToTry += 2005
         $yearsToTry += 2006
     }
 
-    # Sanity: keep years in a reasonable range and unique
     $yearsToTry = $yearsToTry |
         Where-Object { $_ -ge 2005 -and $_ -le 2100 } |
         Select-Object -Unique
@@ -264,16 +255,13 @@ function Get-GrcYearForEpisode {
             $html     = Invoke-WebRequest -Uri $yearUrl -UseBasicParsing -ErrorAction Stop
             $content  = $html.Content
 
-            # GRC uses HTML non-breaking space; regex matches Episode&nbsp;###&nbsp;-
             $pattern = "Episode&#160;$episodeStr&#160;-"
 
             if ($content -match $pattern) {
-                # Once matched, we can simply return the year we're on.
                 Write-Host " $year" -ForegroundColor Green
                 return $year
             }
         } catch {
-            # Ignore errors for that year and try next
             continue
         }
     }
@@ -282,16 +270,89 @@ function Get-GrcYearForEpisode {
     return $null
 }
 
-# Helper: Create HTML with AI disclaimer
-function New-AITranscriptHtml {
+# Helper: Find MP3 URL for episode (TWiT CDN pattern)
+function Get-Mp3Url {
     param(
-        [int]$Episode,
-        [string]$TranscriptText
+        [int]$Episode
     )
 
-    $episodeTitle = "Security Now! Episode $Episode - AI-Generated Transcript"
+    # TWiT CDN pattern: https://cdn.twit.tv/audio/sn/sn####/sn####.mp3
+    $paddedEp = '{0:D4}' -f $Episode
+    $mp3Url = "https://cdn.twit.tv/audio/sn/sn$paddedEp/sn$paddedEp.mp3"
     
-    $html = @"
+    return $mp3Url
+}
+
+# Helper: Generate AI transcript and PDF
+function Generate-AITranscript {
+    param(
+        [int]$Episode,
+        [int]$Year
+    )
+
+    $paddedEp = '{0:D4}' -f $Episode
+    $mp3File = Join-Path $mp3Root "sn-$paddedEp.mp3"
+    $txtPrefix = Join-Path $transcriptsRoot "sn-$paddedEp-notes-ai"
+    $txtFile = "$txtPrefix.txt"
+    $htmlFile = Join-Path $transcriptsRoot "sn-$paddedEp-notes-ai.html"
+    $pdfFile = Join-Path (Join-Path $pdfRoot $Year) "sn-$paddedEp-notes-ai.pdf"
+
+    # Check if AI PDF already exists
+    if (Test-Path $pdfFile) {
+        Write-Host "Episode $Episode  AI PDF already exists, skipping" -ForegroundColor DarkGray
+        return $true
+    }
+
+    Write-Host "Episode $Episode  Generating AI transcript..." -ForegroundColor Cyan
+
+    # Step 1: Download MP3 if not present
+    if (-not (Test-Path $mp3File)) {
+        $mp3Url = Get-Mp3Url -Episode $Episode
+        Write-Host "  Downloading MP3 from TWiT CDN..." -NoNewline
+        
+        try {
+            Invoke-WebRequest -Uri $mp3Url -OutFile $mp3File -UseBasicParsing -ErrorAction Stop
+            Write-Host " OK" -ForegroundColor Green
+        } catch {
+            Write-Host " Failed" -ForegroundColor Red
+            Log-Error -Episode $Episode -Stage "MP3Download" -Message $_.Exception.Message
+            return $false
+        }
+    } else {
+        Write-Host "  MP3 already exists" -ForegroundColor DarkGray
+    }
+
+    # Step 2: Run Whisper.cpp transcription
+    if (-not (Test-Path $txtFile)) {
+        Write-Host "  Running Whisper.cpp transcription..." -NoNewline
+        
+        try {
+            & $whisperExe -m $whisperModel -f $mp3File -otxt -of $txtPrefix 2>&1 | Out-Null
+            
+            if (Test-Path $txtFile) {
+                Write-Host " OK" -ForegroundColor Green
+            } else {
+                Write-Host " Failed (no output)" -ForegroundColor Red
+                Log-Error -Episode $Episode -Stage "Whisper" -Message "Transcription produced no output"
+                return $false
+            }
+        } catch {
+            Write-Host " Failed" -ForegroundColor Red
+            Log-Error -Episode $Episode -Stage "Whisper" -Message $_.Exception.Message
+            return $false
+        }
+    } else {
+        Write-Host "  Transcript already exists" -ForegroundColor DarkGray
+    }
+
+    # Step 3: Create HTML with disclaimer
+    Write-Host "  Creating HTML wrapper..." -NoNewline
+    
+    try {
+        $transcriptText = Get-Content -LiteralPath $txtFile -Raw
+        $episodeTitle = "Security Now! Episode $Episode - AI-Derived Transcript"
+        
+        $htmlContent = @"
 <!DOCTYPE html>
 <html>
 <head>
@@ -300,48 +361,80 @@ function New-AITranscriptHtml {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: white;
-            color: black;
-            margin: 20px;
             white-space: pre-wrap;
-            line-height: 1.4;
+            margin: 20px;
         }
         .disclaimer {
             font-weight: bold;
-            color: white;
-            background-color: #cc0000;
+            color: red;
+            background-color: #fff3cd;
             padding: 15px;
             margin-bottom: 20px;
-            border: 2px solid #990000;
-            border-radius: 4px;
-            font-size: 11px;
-            line-height: 1.6;
-        }
-        .transcript {
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 10px;
-            color: #000;
-            background-color: #fafafa;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border: 2px solid red;
         }
     </style>
 </head>
 <body>
     <div class="disclaimer">
-        AI-GENERATED TRANSCRIPT - NOT OFFICIAL SHOW NOTES<br>
-        This transcript was automatically generated from audio and may contain errors.<br>
-        Official Security Now! notes: https://www.grc.com/securitynow.htm
+        ⚠️ AI-GENERATED TRANSCRIPT - NOT OFFICIAL SHOW NOTES
+        <br><br>
+        This transcript was automatically generated using Whisper.cpp speech recognition.
+        It may contain errors, omissions, or inaccuracies. This is NOT an official
+        Steve Gibson show notes document from GRC.com.
+        <br><br>
+        For official episode notes (when available), visit https://www.grc.com/securitynow.htm
     </div>
-    <div class="transcript">
-$TranscriptText
-    </div>
+    <h1>$episodeTitle</h1>
+    <pre>$transcriptText</pre>
 </body>
 </html>
 "@
 
-    return $html
+        $htmlContent | Out-File -FilePath $htmlFile -Encoding UTF8 -Force
+        Write-Host " OK" -ForegroundColor Green
+    } catch {
+        Write-Host " Failed" -ForegroundColor Red
+        Log-Error -Episode $Episode -Stage "HTML" -Message $_.Exception.Message
+        return $false
+    }
+
+    # Step 4: Convert HTML to PDF using wkhtmltopdf
+    if (Test-Path $wkhtmltopdf) {
+        Write-Host "  Converting to PDF..." -NoNewline
+        
+        try {
+            & $wkhtmltopdf --quiet --page-size Letter $htmlFile $pdfFile 2>&1 | Out-Null
+            Start-Sleep -Seconds 1
+            
+            if (Test-Path $pdfFile) {
+                Write-Host " OK" -ForegroundColor Green
+                
+                # Add to index
+                $script:index += [PSCustomObject]@{
+                    Episode = $Episode
+                    Url     = Get-Mp3Url -Episode $Episode
+                    File    = "sn-$paddedEp-notes-ai.pdf"
+                }
+                
+                # Clean up intermediate HTML
+                Remove-Item -LiteralPath $htmlFile -Force -ErrorAction SilentlyContinue
+                
+                return $true
+            } else {
+                Write-Host " Failed (no output)" -ForegroundColor Red
+                Log-Error -Episode $Episode -Stage "PDF" -Message "wkhtmltopdf produced no output"
+                return $false
+            }
+        } catch {
+            Write-Host " Failed" -ForegroundColor Red
+            Log-Error -Episode $Episode -Stage "PDF" -Message $_.Exception.Message
+            return $false
+        }
+    } else {
+        Write-Host "  PDF conversion skipped (wkhtmltopdf not found)" -ForegroundColor Yellow
+        Write-Host "  Transcript saved as: $txtFile" -ForegroundColor Yellow
+        return $true
+    }
 }
 
 # Main loop counters
@@ -349,7 +442,6 @@ $downloadedPdfs   = 0
 $skippedPdfs      = 0
 $generatedAI      = 0
 $skippedAI        = 0
-$failedAI         = 0
 $cachedCount      = 0
 
 for ($ep = $MinEpisode; $ep -le $MaxEpisode; $ep++) {
@@ -386,11 +478,22 @@ for ($ep = $MinEpisode; $ep -le $MaxEpisode; $ep++) {
 
     $grcPdfUrl   = "https://www.grc.com/sn/sn-$('{0:D3}' -f $ep)-notes.pdf"
 
+    # Try to download official GRC PDF first
     if (Test-Path $pdfPath) {
         Write-Host "Episode $ep  PDF already exists, skipping download." -ForegroundColor DarkGray
         $skippedPdfs++
+        
+        # Add to index if not already present
+        $existing = $index | Where-Object { [int]$_.Episode -eq $ep -and $_.File -eq $pdfFileName }
+        if (-not $existing -and -not $DryRun) {
+            $index += [PSCustomObject]@{
+                Episode = $ep
+                Url     = $grcPdfUrl
+                File    = $pdfFileName
+            }
+        }
     } else {
-        Write-Host "Episode $ep  Downloading PDF..." -NoNewline
+        Write-Host "Episode $ep  Downloading official PDF..." -NoNewline
         if ($DryRun) {
             Write-Host " DRY-RUN" -ForegroundColor Yellow
         } else {
@@ -398,87 +501,24 @@ for ($ep = $MinEpisode; $ep -le $MaxEpisode; $ep++) {
                 Invoke-WebRequest -Uri $grcPdfUrl -OutFile $pdfPath -UseBasicParsing -ErrorAction Stop
                 Write-Host " OK" -ForegroundColor Green
                 $downloadedPdfs++
-            } catch {
-                Write-Host " Failed ($($_.Exception.Message))" -ForegroundColor Red
-                Log-Error -Episode $ep -Stage "DownloadPDF" -Message $_.Exception.Message
-            }
-        }
-    }
-
-    # AI transcript generation
-    if (-not $SkipAI) {
-        $aiPdfName = "sn-$('{0:D4}' -f $ep)-notes-ai.pdf"
-        $aiPdfPath = Join-Path $yearFolder $aiPdfName
-
-        if ($DryRun) {
-            if (-not (Test-Path $aiPdfPath)) {
-                Write-Host "Episode $ep  Would generate AI transcript (DRY-RUN)" -ForegroundColor Yellow
-            }
-            continue
-        }
-
-        if (Test-Path $aiPdfPath) {
-            Write-Host "Episode $ep  AI PDF already exists, skipping." -ForegroundColor DarkGray
-            $skippedAI++
-        } else {
-            Write-Host "Episode $ep  Generating AI transcript..." -ForegroundColor Cyan
-            
-            # Define file paths
-            $epStr = '{0:D4}' -f $ep
-            $mp3File = Join-Path $mp3Root "sn-$epStr.mp3"
-            $txtFile = Join-Path $transcriptsRoot "sn-$epStr-notes-ai.txt"
-            $htmlFile = Join-Path $transcriptsRoot "sn-$epStr-notes-ai.html"
-            
-            # TWiT CDN MP3 URL
-            $mp3Url = "https://cdn.twit.tv/audio/sn/sn$epStr/sn$epStr.mp3"
-            
-            try {
-                # Step 1: Download MP3 if needed
-                if (-not (Test-Path $mp3File)) {
-                    Write-Host "  Downloading MP3 from TWiT..." -NoNewline
-                    Invoke-WebRequest -Uri $mp3Url -OutFile $mp3File -UseBasicParsing -ErrorAction Stop
-                    Write-Host " OK" -ForegroundColor Green
-                }
                 
-                # Step 2: Run Whisper transcription if needed
-                if (-not (Test-Path $txtFile)) {
-                    Write-Host "  Running Whisper transcription..." -NoNewline
-                    $prefix = Join-Path $transcriptsRoot "sn-$epStr-notes-ai"
-                    & $whisperExe -m $whisperModel -f $mp3File -otxt -of $prefix 2>&1 | Out-Null
-                    
-                    if (Test-Path $txtFile) {
-                        Write-Host " OK" -ForegroundColor Green
+                # Add to index
+                $index += [PSCustomObject]@{
+                    Episode = $ep
+                    Url     = $grcPdfUrl
+                    File    = $pdfFileName
+                }
+            } catch {
+                Write-Host " Not available" -ForegroundColor Yellow
+                
+                # If official PDF not available and AI not skipped, generate AI transcript
+                if (-not $SkipAI -and -not $DryRun) {
+                    if (Generate-AITranscript -Episode $ep -Year $year) {
+                        $generatedAI++
                     } else {
-                        throw "Whisper did not create transcript file"
+                        $skippedAI++
                     }
                 }
-                
-                # Step 3: Create HTML with disclaimer
-                $transcriptText = Get-Content -Path $txtFile -Raw
-                $html = New-AITranscriptHtml -Episode $ep -TranscriptText $transcriptText
-                $html | Out-File -FilePath $htmlFile -Encoding UTF8 -Force
-                
-                # Step 4: Convert to PDF with wkhtmltopdf
-                Write-Host "  Converting to PDF..." -NoNewline
-                & $wkhtmltopdf --quiet --page-size Letter --margin-top 10mm --margin-bottom 10mm --margin-left 10mm --margin-right 10mm --enable-local-file-access --no-stop-slow-scripts --enable-javascript --javascript-delay 1000 $htmlFile $aiPdfPath 2>&1 | Out-Null
-                
-                if (Test-Path $aiPdfPath) {
-                    Write-Host " OK" -ForegroundColor Green
-                    $generatedAI++
-                    
-                    # Cleanup temp HTML
-                    Remove-Item -Path $htmlFile -Force -ErrorAction SilentlyContinue
-                } else {
-                    throw "wkhtmltopdf did not create PDF"
-                }
-                
-            } catch {
-                Write-Host " Failed" -ForegroundColor Red
-                Log-Error -Episode $ep -Stage "AITranscript" -Message $_.Exception.Message
-                $failedAI++
-                
-                # Cleanup on failure
-                if (Test-Path $htmlFile) { Remove-Item -Path $htmlFile -Force -ErrorAction SilentlyContinue }
             }
         }
     }
@@ -496,10 +536,13 @@ if (-not $DryRun -and $episodeDates.Count -gt 0) {
         } | Export-Csv -Path $datesCsvPath -NoTypeInformation -Encoding UTF8
 }
 
+# Save index
+if (-not $DryRun) {
+    Save-Index -IndexData $index
+}
+
 Write-Host ""
-Write-Host "=" * 60 -ForegroundColor Cyan
 Write-Host "SUMMARY" -ForegroundColor Cyan
-Write-Host "=" * 60 -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Official PDFs" -ForegroundColor Cyan
 Write-Host "  Downloaded: $downloadedPdfs"
@@ -507,19 +550,20 @@ Write-Host "  Skipped (existing): $skippedPdfs"
 Write-Host ""
 Write-Host "AI Transcripts" -ForegroundColor Cyan
 Write-Host "  Generated: $generatedAI"
-Write-Host "  Skipped (existing): $skippedAI"
-Write-Host "  Failed: $failedAI"
+Write-Host "  Skipped/Failed: $skippedAI"
 Write-Host ""
 Write-Host "Metadata" -ForegroundColor Cyan
 Write-Host "  Cached episodes: $cachedCount"
 Write-Host "  Cache file: $datesCsvPath"
 Write-Host ""
+Write-Host "Index" -ForegroundColor Cyan
+Write-Host "  Total entries: $($index.Count)"
+Write-Host "  Index file: $indexCsvPath"
+Write-Host ""
 Write-Host "Errors" -ForegroundColor Cyan
 Write-Host "  Logged to: $errorLogPath"
 Write-Host ""
-Write-Host "=" * 60 -ForegroundColor Green
-Write-Host " Complete!" -ForegroundColor Green
-Write-Host "=" * 60 -ForegroundColor Green
+Write-Host "✅ Complete!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Archive location: $Root"
 Write-Host ""
