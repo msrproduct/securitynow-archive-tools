@@ -1,6 +1,6 @@
 # AI Context - Security Now Archive Tools
-**Version:** 3.5 🎯 AUDIT COMPLETE - OPTIMIZED  
-**Last Updated:** 2026-01-16 21:01 CST by Perplexity AI  
+**Version:** 3.6 🎯 COMPLETE - All Thread Analysis Additions  
+**Last Updated:** 2026-01-16 21:16 CST by Perplexity AI  
 **Project Phase:** Production - v3.1.1 Stable Engine  
 **Current Version:** v3.1.1 (Production Stable)
 
@@ -62,7 +62,7 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe     # ✅ PDF converter
 ## PROJECT OVERVIEW
 
 ### Mission
-Archive all Security Now! podcast episodes (2005–2026+) with official GRC PDFs where available, AI-generated transcripts for missing episodes, and proper copyright separation between public tools and private media.
+Archive all **~1,000+ Security Now! podcast episodes** (2005–2026+) with official GRC PDFs where available, AI-generated transcripts for missing episodes, and proper copyright separation between public tools and private media.
 
 ### Core Principles (NEVER VIOLATE)
 1. **Steve Gibson Alignment** - Honor Steve's "trust no one's cloud" philosophy; local-first architecture; free tools for the greater good
@@ -168,6 +168,7 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
 | 2026-01-16 | Complete system cleanup           | 5 orphaned folders causing confusion           | Clean development environment            |
 | 2026-01-16 | Path corrections v3.3             | Local folder ≠ GitHub repo name                | Eliminated remaining confusion           |
 | 2026-01-16 | Private repo as SOT               | .ai-context.md synced private→public           | Single source of truth established       |
+| 2026-01-16 | Git tags for versioning           | No version numbers in filenames                | Prevents file proliferation chaos        |
 
 ---
 
@@ -185,6 +186,39 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
 
 ---
 
+## FILE VERSIONING CONVENTION
+
+### 🔴 CRITICAL RULE: NO VERSION NUMBERS IN FILENAMES
+
+**Correct Approach:**
+- **Filename:** `sn-full-run.ps1` (NEVER changes)
+- **Version Tracking:** Git tags (`v3.1.0`, `v3.1.1`, `v3.1.2`)
+- **Internal Version:** Script header comment + `CHANGELOG.md`
+- **Release Process:**
+  ```powershell
+  git tag v3.1.2 -m "Release v3.1.2: TEXT WALL PDF fix, DryRun UX"
+  git push origin v3.1.2
+  ```
+
+**Wrong - DO NOT DO THIS:**
+- ❌ `sn-full-run-v3.1.2.ps1` (breaks git history, creates duplicates)
+- ❌ `sn-full-run-2026-01-16.ps1` (date-based versions)
+- ❌ `sn-full-run-new.ps1` (ambiguous naming)
+
+**Rationale:**
+- Users always download `sn-full-run.ps1` (stable URL on GitHub)
+- Git tags enable rollback without renaming files: `git checkout v3.1.0`
+- Prevents "which version is production?" confusion
+- Matches industry-standard OSS practices (Linux kernel, Node.js, Python)
+
+**Historical Mistakes:**
+- v3.0.0: Created `sn-full-run-v3.0.0-pre-rename.ps1` (had to archive/delete)
+- v3.1.2: Almost created `sn-full-run-v3.1.2.ps1` (caught before commit)
+
+**See:** `COMMON-MISTAKES.md` for version control anti-patterns
+
+---
+
 ## DEVELOPMENT STANDARDS & REQUIREMENTS
 
 ### Code Quality Standards
@@ -192,6 +226,12 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
 - **DRY Principle** - NEVER duplicate logic; refactor into functions
 - **Portable Paths** - ALL paths must use `$PSScriptRoot`, NEVER hardcoded drives
 - **PowerShell Best Practices** - Approved verbs, comment-based help, proper error handling, CmdletBinding
+- **Inline Error Prevention** - For any pattern documented in COMMON-MISTAKES.md, add a WARNING comment directly in the code
+  ```powershell
+  # ⚠️ CRITICAL: GRC uses HTML entity &#160; not space
+  # See COMMON-MISTAKES.md Mistake #4 - Regex failed 4× before this was documented
+  $episodePattern = 'Episode&#160;(\d{1,4})&#160;-'
+  ```
 
 ### User Experience Requirements
 - **Friendly Error Messages** - NO developer jargon (e.g., "regex failed"); explain WHY and WHAT TO DO
@@ -237,6 +277,129 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
 
 ---
 
+## GITHUB MCP + SPECIAL-SYNC WORKFLOW
+
+### Understanding the Two-Phase Sync
+
+**Phase 1: GitHub Private → Local Private** (Manual - NOT automated by Special-Sync)
+```powershell
+cd D:\Desktop\SecurityNow-Full-Private
+git pull origin main   # Pull changes from GitHub Private to Local Private
+```
+
+**Phase 2: Local Private → Local/GitHub Public** (Automated by Special-Sync.ps1)
+```powershell
+.\scripts\Special-Sync.ps1   # Syncs Local Private → Local Public → GitHub Public
+```
+
+### MCP Commit Workflow (AI Commits to GitHub)
+
+When AI uses GitHub MCP tools to commit directly to `msrproduct/securitynow-full-archive`:
+
+**⚠️ CRITICAL:** Special-Sync.ps1 does NOT pull from GitHub. You MUST manually pull first.
+
+**Correct Workflow:**
+```powershell
+# After AI commits to GitHub Private using MCP tools
+cd D:\Desktop\SecurityNow-Full-Private
+git pull origin main                # ✅ STEP 1: Pull GitHub → Local Private
+.\scripts\Special-Sync.ps1        # ✅ STEP 2: Sync Local Private → Public
+```
+
+**Why This Matters:**
+- Special-Sync.ps1 only syncs **Local Private → Local Public → GitHub Public**
+- It does NOT pull from GitHub Private to Local Private
+- Skipping `git pull` leaves Local Private outdated
+- Changes committed via MCP won't appear in Local Private until you pull
+
+**Common Mistake:**
+```powershell
+# ❌ WRONG - Skipping git pull
+.\scripts\Special-Sync.ps1   # Local Private is now outdated!
+```
+
+**One-Command Solution (Optional Helper Script):**
+```powershell
+# Create Sync-From-GitHub.ps1 in scripts folder
+git pull origin main
+.\scripts\Special-Sync.ps1
+```
+
+---
+
+## DYNAMIC VS. STATIC CONTENT SEPARATION
+
+### What Belongs WHERE
+
+**Static Context (Lives in `.ai-context.md` - THIS FILE):**
+- ✅ Repository structure, tool paths, technical decisions
+- ✅ Common mistake patterns, testing protocols
+- ✅ Development standards, UX requirements
+- ✅ File versioning conventions, Git workflows
+
+**Session Context (Lives in `NEW-THREAD-CHECKLIST.md`):**
+- ✅ "What I'm working on TODAY" (e.g., v3.1.2 TEXT WALL fix)
+- ✅ Active blockers, current sprint tasks
+- ✅ Development roadmap milestones
+- ✅ Unfinished items from previous session
+
+### The Rule
+
+**If it changes weekly or per-session, it belongs in `NEW-THREAD-CHECKLIST.md`, NOT here.**
+
+**Examples:**
+- ❌ **WRONG:** "Current Development Focus: Fixing TEXT WALL PDF bug" in `.ai-context.md`
+- ✅ **CORRECT:** "Current Development Focus: [See NEW-THREAD-CHECKLIST.md]" in `.ai-context.md`
+
+**Why This Matters:**
+- `.ai-context.md` is project knowledge (timeless reference)
+- `NEW-THREAD-CHECKLIST.md` is session state (ephemeral, changes daily)
+- Mixing them creates noise and makes `.ai-context.md` stale
+
+---
+
+## PROJECT COST TRACKING (Optional)
+
+### Billing Rate for Internal Accounting
+
+**Recommended Hourly Rates (2026 Market Data):**
+- **Pure Coding/Debugging:** $50/hr (market rate for specialized PowerShell + AI work)
+- **Learning/Research:** $30/hr (junior learning rate)
+- **Blended Average:** $40-45/hr (conservative, 20-30% below market)
+
+**Why $40-50/hr is Defensible:**
+- Self-taught developers average $45/hr (2026 US market data)
+- Specialized niche: Security Now archiving + AI transcription + multi-repo Git
+- Production-ready tool with real user base potential
+- No supervision required - self-directed architecture decisions
+
+**Time Tracker Usage (Optional):**
+```powershell
+# Start tracking session
+.\scripts\Start-DevSession.ps1 -Task "v3.2.0 performance optimization"
+
+# Work on code...
+
+# End session and log time
+.\scripts\End-DevSession.ps1 -Rate 45  # Outputs to project-time-log.csv
+```
+
+**CSV Output Format:**
+```csv
+Date,Task,Hours,Rate,Cost,Notes
+2026-01-16,Engine v3.1.2 fix,3.5,50,175,Coding
+2026-01-16,Learning wkhtmltopdf,1.2,30,36,Research
+```
+
+**Use Case:**
+- Track sweat equity for payback after revenue starts
+- Justify project value to potential investors/partners
+- Calculate true ROI vs. hiring external developer ($55-65/hr market rate)
+
+**Note:** Only implement if you plan to track costs. Otherwise, skip to avoid file bloat.
+
+---
+
 ## FILE SYNC WORKFLOW
 
 ### Sync Order (NEVER REVERSE)
@@ -278,6 +441,7 @@ Test-Path "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"            # True
 - Hardcoded path failures
 - Copy-paste error patterns
 - DRY violations (year mapping, CSV updates)
+- File versioning anti-patterns
 
 ---
 
@@ -285,7 +449,7 @@ Test-Path "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"            # True
 
 **Every new development thread MUST:**
 1. Read this file (`.ai-context.md`) from private repo
-2. Read `NEW-THREAD-CHECKLIST.md` for session workflow
+2. Read `NEW-THREAD-CHECKLIST.md` for session workflow and active tasks
 3. Read `COMMON-MISTAKES.md` for error prevention patterns
 4. Verify paths with `Test-Path` before proceeding
 5. **Treat older threads as retired sources** - cite when needed, but don't re-summarize
@@ -293,8 +457,8 @@ Test-Path "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"            # True
 ### Context Files Location
 ```powershell
 D:\Desktop\SecurityNow-Full-Private\.ai-context.md              # This file (SOT)
-D:\Desktop\SecurityNow-Full-Private\NEW-THREAD-CHECKLIST.md     # Workflow
-D:\Desktop\SecurityNow-Full-Private\COMMON-MISTAKES.md          # Errors
+D:\Desktop\SecurityNow-Full-Private\NEW-THREAD-CHECKLIST.md     # Session workflow
+D:\Desktop\SecurityNow-Full-Private\COMMON-MISTAKES.md          # Error patterns
 ```
 
 **Note:** Space Instructions point to public repo copy, but private repo is the source of truth.
@@ -348,6 +512,7 @@ git remote -v  # Should show msrproduct/securitynow-full-archive
 
 | Version | Date       | Changes                                                                 |
 |---------|------------|-------------------------------------------------------------------------|
+| 3.6     | 2026-01-16 | **COMPLETE:** Added 6 critical elements from thread analysis - File Versioning Convention (no version numbers in filenames), GitHub MCP + Special-Sync workflow (git pull requirement), Dynamic/Static content separation rule, Inline code documentation requirement, Developer time tracking system (optional), Episode count update (~1,000+) |
 | 3.5     | 2026-01-16 | **AUDIT COMPLETE:** Removed "Current Development Focus" (dynamic content), eliminated 157-line duplication with COMMON-MISTAKES.md, added Development Standards & Testing Protocols, compressed cleanup summary, streamlined path corrections. File reduced from 485→315 lines (-35%). |
 | 3.4     | 2026-01-16 | SOT ESTABLISHED: Private repo now source of truth, synced to public. Added GRC regex pattern, PowerShell goto gotcha, verification commands, NEW-THREAD-CHECKLIST protocol, development roadmap |
 | 3.3     | 2026-01-16 | CRITICAL: Fixed local repo path (SecurityNow-Full-Private), added cleanup completion status, verified all paths |
@@ -361,9 +526,12 @@ git remote -v  # Should show msrproduct/securitynow-full-archive
 
 ---
 
-## END OF .ai-context.md v3.5
-✅ **AUDIT COMPLETE** - OPTIMIZED FOR ERROR-FREE DEVELOPMENT  
-✅ **DUPLICATIONS ELIMINATED** - Single source per concept  
-✅ **MISSING STANDARDS ADDED** - UX priority, testing protocols  
-✅ **DYNAMIC CONTENT REMOVED** - Active work belongs in session context  
-✅ **READY FOR PRODUCTION** - Trust built through clarity and precision
+## END OF .ai-context.md v3.6
+✅ **COMPLETE** - All 6 thread analysis additions integrated  
+✅ **File Versioning Convention** - Git tags, no version numbers in filenames  
+✅ **GitHub MCP Workflow** - git pull requirement documented  
+✅ **Inline Code Docs** - Error prevention in code comments  
+✅ **Static/Dynamic Separation** - Clear architectural guidance  
+✅ **Time Tracking** - Optional developer cost tracking system  
+✅ **Episode Count** - Updated to ~1,000+ episodes  
+✅ **READY FOR PRODUCTION** - Zero ambiguity, complete workflow documentation
