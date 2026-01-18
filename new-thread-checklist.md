@@ -24,6 +24,29 @@ Before responding to user's first question in a new thread:
 - [ ] Which script version are they using?
 - [ ] Have paths changed from `ai-context.md` defaults?
 
+### 4️⃣ 🛡️ **CONTEXT PROOF OF LIFE (MANDATORY)**
+
+**AI MUST provide this verification as FIRST response in thread:**
+
+```markdown
+✅ **CONTEXT VERIFIED v3.13:**
+- Repo: D:\Desktop\SecurityNow-Full-Private\
+- Whisper: C:\tools\whispercpp\whisper-cli.exe
+- Script: sn-full-run.ps1 v3.1.3
+- Sync: Special-Sync.ps1 (NOT Sync-Repos.ps1)
+- 14 documented errors in COMMON-MISTAKES.md loaded
+
+**Verification checkpoint passed** - See ai-context.md line 1 for details
+```
+
+**If AI cannot produce this = CONTEXT NOT LOADED = Stop thread immediately**
+
+**Why This Matters:**
+- 41+ threads documented wrong paths suggested despite ai-context.md documentation
+- Root cause: AI not actually loading/reading context files at thread start
+- This protocol FORCES verification before any response
+- Space Instructions bug fixed: `.ai-context.md` → `ai-context.md`
+
 ---
 
 ## ✅ Opening Response Template
@@ -31,11 +54,17 @@ Before responding to user's first question in a new thread:
 Use this structure for your first response:
 
 ```markdown
-✅ **Context Loaded:** I've reviewed `ai-context.md` and recent threads
+✅ **CONTEXT VERIFIED v3.13:**
+- Repo: D:\Desktop\SecurityNow-Full-Private\
+- Whisper: C:\tools\whispercpp\whisper-cli.exe  
+- Script: sn-full-run.ps1 v3.1.3
+- Sync: Special-Sync.ps1 (NOT Sync-Repos.ps1)
+- 14 documented errors in COMMON-MISTAKES.md loaded
+
 ✅ **Key Facts Confirmed:**
 - Working directory: D:\Desktop\SecurityNow-Full-Private
 - Production script: sn-full-run.ps1
-- Whisper path: C:\Tools\whispercpp\ (no dot)
+- Whisper path: C:\tools\whispercpp\ (no dot)
 - GRC regex: Uses `&#160;` HTML entities
 
 ✅ **Recent Project State:** [1-sentence summary from Space search]
@@ -187,6 +216,7 @@ If you catch yourself about to:
 - 🛑 Recommend deleting from Public repo before Private
 - 🛑 Provide code without confirming script version first
 - 🛑 Tell user to run `git pull` before Special-Sync.ps1 (auto-pull is built-in!)
+- 🛑 **Respond without Context Proof of Life verification**
 
 **→ STOP, check `ai-context.md` and COMMON-MISTAKES.md FIRST!**
 
@@ -196,6 +226,7 @@ If you catch yourself about to:
 
 A successful thread demonstrates:
 
+✅ **Context Proof of Life** provided in first response  
 ✅ No repeated mistakes from Space history  
 ✅ All paths verified against `ai-context.md`  
 ✅ Solutions reference past work when applicable  
@@ -208,3 +239,5 @@ A successful thread demonstrates:
 **Remember:** This checklist exists because we've wasted hours re-solving the same problems. Use it religiously!
 
 **NEW (2026-01-16):** MCP workflow is now the STANDARD for all file commits. Special-Sync auto-pulls, so never tell user to run `git pull` manually!
+
+**NEW (2026-01-18):** **Context Proof of Life protocol is MANDATORY** - AI must prove context loaded in first response or thread stops immediately.

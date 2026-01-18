@@ -1,8 +1,32 @@
+# ⚠️ AI ASSISTANT MANDATORY CHECKPOINT ⚠️
+**STOP - Verify Context Loaded BEFORE Responding:**
+
+- [ ] This file loaded from GitHub (NOT from cache/memory)
+- [ ] Version 3.13+ confirmed (check version header below)
+- [ ] Current date verified: File shows 2026-01-18 update
+- [ ] CRITICAL PATHS section read (lines 50-80)
+- [ ] NEW-THREAD-CHECKLIST.md consulted for session workflow
+- [ ] COMMON-MISTAKES.md referenced to prevent repeated errors
+
+**IF ANY CHECKBOX UNCHECKED: STOP and reload context files.**
+
+**Proof of Context Loading Required:**
+Your FIRST response in any new thread MUST include:
+```
+✅ CONTEXT VERIFIED v3.13:
+- Repo: D:\Desktop\SecurityNow-Full-Private\
+- Whisper: C:\tools\whispercpp\whisper-cli.exe
+- Script: sn-full-run.ps1 v3.1.3
+- 14 documented errors in COMMON-MISTAKES.md loaded
+```
+
+---
+
 # AI Context - Security Now Archive Tools
-**Version:** 3.12 🔄 THREAD ANALYSIS COMPLETE - File references added  
-**Last Updated:** 2026-01-17 00:18 CST by Perplexity AI  
-**Project Phase:** Production - v3.1.1 Stable Engine  
-**Current Version:** v3.1.1 (Production Stable)
+**Version:** 3.13 🛡️ CONTEXT LOADING VERIFICATION ADDED  
+**Last Updated:** 2026-01-18 01:00 CST by Perplexity AI  
+**Project Phase:** Production - v3.1.3 Stable Engine  
+**Current Version:** v3.1.3 (Production Stable)
 
 ---
 
@@ -52,7 +76,7 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe     # ✅ PDF converter
 **Scripts:**
 ```powershell
 .\scripts\Special-Sync.ps1   # ✅ Sync private→public (NOT Sync-Repos.ps1)
-.\scripts\sn-full-run.ps1    # ✅ Production engine v3.1.1
+.\scripts\sn-full-run.ps1    # ✅ Production engine v3.1.3
 ```
 
 **⚠️ Common Path Errors:** See `COMMON-MISTAKES.md` for detailed error prevention patterns.
@@ -101,7 +125,7 @@ D:\Desktop\SecurityNow-Full-Private/         (Private - LOCAL + GitHub)
 │   ├── pdf/           # Official GRC PDFs + AI-generated PDFs (by year)
 │   └── transcripts/   # Whisper AI transcripts (text files)
 ├── scripts/
-│   ├── sn-full-run.ps1       # v3.1.1 PRODUCTION ENGINE
+│   ├── sn-full-run.ps1       # v3.1.3 PRODUCTION ENGINE
 │   └── Special-Sync.ps1      # Sync script
 ├── data/
 │   ├── SecurityNowNotesIndex.csv  # Episode metadata index
@@ -201,6 +225,7 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
 | 2026-01-16 | Git tags for versioning           | No version numbers in filenames                | Prevents file proliferation chaos        |
 | 2026-01-16 | Special-Sync auto-pull (v3.7)     | MCP commits bypass local filesystem            | One command sync (no manual git pull)    |
 | 2026-01-16 | Split context files (v3.8)        | Business info (billing) shouldn't be public    | Privacy protection, professional image   |
+| 2026-01-18 | AI verification checkpoint (v3.13)| Context loading failures caused repeated errors| Mandatory proof-of-loading protocol      |
 
 ---
 
@@ -514,7 +539,7 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe          # ✅ PDF
 
 # Scripts
 .\scripts\Special-Sync.ps1                                  # ✅ Sync (auto-pull + 4-repo sync)
-.\scripts\sn-full-run.ps1                                   # ✅ Engine v3.1.1
+.\scripts\sn-full-run.ps1                                   # ✅ Engine v3.1.3
 ```
 
 ### Verification Commands
@@ -529,7 +554,7 @@ cd "D:\Desktop\SecurityNow-Full-Private"
 git remote -v  # Should show msrproduct/securitynow-full-archive
 
 # Check engine version
-.\scripts\sn-full-run.ps1 -MaxEpisode 1 -DryRun  # Should show v3.1.1
+.\scripts\sn-full-run.ps1 -MaxEpisode 1 -DryRun  # Should show v3.1.3
 
 # Verify privacy protection
 Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return False (not in public)
@@ -545,7 +570,8 @@ Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return F
 ## VERSION HISTORY
 
 | Version | Date       | Changes                                                                 |
-|---------|------------|--------------------------------------------------------------------|--------|
+|---------|------------|-------------------------------------------------------------------------|
+| 3.13    | 2026-01-18 | **CONTEXT LOADING FIX:** Added mandatory AI verification checkpoint at top of file - prevents 41+ documented cases of wrong paths/repeated mistakes. AI must prove context loaded before responding. Fixes Space Instructions bug (`.ai-context.md` → `ai-context.md`). Total: +30 lines (verification protocol). |
 | 3.12    | 2026-01-17 | **THREAD ANALYSIS COMPLETE:** Added NEW-THREAD-CHECKLIST.md reference (session workflow), COMMON-MISTAKES.md purpose (error prevention activation), system cleanup historical record to v3.3 (5 dirs deleted, 750MB reclaimed), clarified file relationship table. All additions from comprehensive 41-thread analysis. Total: +9 lines. |
 | 3.8     | 2026-01-16 | **PRIVACY FIX:** Split context files - Created `ai-context-private.md` (business-sensitive info - NEVER syncs to public), sanitized `ai-context.md` (removed cost tracking for public visibility), updated Special-Sync.ps1 to exclude private file. Protects billing rates, ROI calculations, monetization strategy from public exposure. |
 | 3.7     | 2026-01-16 | **MCP WORKFLOW FIX:** Corrected GitHub MCP section - Special-Sync.ps1 **ALREADY auto-pulls** in Step 1/5 (no manual git pull needed). One-command workflow confirmed. Added live proof-of-concept test (this commit). Time savings: 2 hours per dev cycle. |
@@ -563,11 +589,11 @@ Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return F
 
 ---
 
-## END OF ai-context.md v3.12
-🔄 **THREAD ANALYSIS COMPLETE** - All 41 threads reviewed, knowledge captured  
-✅ **Public-Safe Technical Context** - Tool paths, workflows, error patterns  
-✅ **File References Added** - NEW-THREAD-CHECKLIST.md + COMMON-MISTAKES.md purposes clarified  
-✅ **Historical Records Updated** - System cleanup scope documented (750MB)  
+## END OF ai-context.md v3.13
+🛡️ **CONTEXT LOADING VERIFICATION ADDED** - Mandatory checkpoint prevents repeated errors  
+✅ **AI Must Prove Context Loaded** - First response must include verification checklist  
+✅ **Space Instructions Bug Fixed** - Corrected filename reference  
+✅ **41+ Error Cases Documented** - Wrong paths, repeated mistakes now preventable  
 ✅ **MCP Workflow Active** - Special-Sync.ps1 auto-pull confirmed (Step 1/5)  
 ✅ **One-Command Sync** - `.\scripts\Special-Sync.ps1` (no manual git pull needed)  
 ✅ **READY FOR PUBLIC** - No billing rates, no business strategy exposed

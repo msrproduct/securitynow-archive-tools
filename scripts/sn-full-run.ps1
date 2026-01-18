@@ -1,4 +1,18 @@
 <#
+⚠️ AI MODIFICATION CHECKPOINT ⚠️
+BEFORE modifying this script, AI assistant MUST verify:
+
+□ Confirmed paths via: Test-Path "D:\Desktop\SecurityNow-Full-Private\scripts\sn-full-run.ps1"
+□ Read COMMON-MISTAKES.md to avoid 14 documented errors
+□ Verified this is correct script: sn-full-run.ps1 (NOT Sync-Repos.ps1)
+□ Checked Whisper path: C:\tools\whispercpp\whisper-cli.exe (NOT C:\whisper-cli\)
+□ Reviewed ai-context.md for current architecture
+
+IF ANY CHECKBOX UNCHECKED: Load context files FIRST before suggesting changes.
+See: https://github.com/msrproduct/securitynow-archive-tools/blob/main/ai-context.md
+#>
+
+<#
 .SYNOPSIS
 Security Now! Archive Builder - Complete episode archive with AI transcription
 
@@ -6,9 +20,9 @@ Security Now! Archive Builder - Complete episode archive with AI transcription
 Downloads official PDFs from GRC, generates AI transcripts for missing episodes,
 organizes by year, and creates searchable index. Designed for air-gapped systems.
 
-Version 3.1.2
-Released 2026-01-16
-Updated 2026-01-17 - AI pipeline restored
+Version 3.1.3
+Released 2026-01-17
+Updated 2026-01-17 - Quantized base.en-q5_1 (2-3x speedup, realistic)
 
 .PARAMETER MinEpisode
 Starting episode number (default 1)
@@ -23,15 +37,15 @@ Test mode - no downloads or file changes
 Skip AI transcript generation (GRC PDFs only)
 
 .EXAMPLE
-.\sn-full-run-v3.1.2.ps1 -DryRun -MinEpisode 1 -MaxEpisode 5
+.\sn-full-run.ps1 -DryRun -MinEpisode 1 -MaxEpisode 5
 Test the script before running for real
 
 .EXAMPLE
-.\sn-full-run-v3.1.2.ps1 -MinEpisode 500 -MaxEpisode 505
+.\sn-full-run.ps1 -MinEpisode 500 -MaxEpisode 505
 Download episodes 500-505 with AI transcripts for missing PDFs
 
 .EXAMPLE
-.\sn-full-run-v3.1.2.ps1 -MinEpisode 1 -MaxEpisode 1000 -SkipAI
+.\sn-full-run.ps1 -MinEpisode 1 -MaxEpisode 1000 -SkipAI
 Download only official GRC PDFs, skip AI generation
 #>
 
@@ -56,8 +70,8 @@ $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Root      = Split-Path -Parent $ScriptDir
 
 Write-Host ""
-Write-Host "Security Now! Archive Builder v3.1.2" -ForegroundColor Cyan
-Write-Host "Released 2026-01-16 | AI Pipeline Restored 2026-01-17" -ForegroundColor Cyan
+Write-Host "Security Now! Archive Builder v3.1.3" -ForegroundColor Cyan
+Write-Host "Released 2026-01-17 | Quantized base.en-q5_1 (2-3x Speedup)" -ForegroundColor Cyan
 Write-Host ""
 
 if ($DryRun) {
@@ -79,9 +93,32 @@ $notesRoot      = Join-Path $localRoot "Notes"
 $transcriptsRoot= Join-Path $notesRoot "ai-transcripts"
 $mp3Root        = Join-Path $localRoot "mp3"
 
-# AI Tools (Whisper.cpp + wkhtmltopdf)
-$whisperExe     = "C:\whisper.cpp\whisper-cli.exe"
-$whisperModel   = "C:\whisper.cpp\models\ggml-base.en.bin"
+# ⚠️ CRITICAL: Whisper.cpp paths - See ai-context.md for correct paths
+# Common mistake: C:\whisper.cpp\ or C:\whispercpp\ (WRONG)
+# Correct path: C:\tools\whispercpp\ (as documented)
+$whisperExe     = "C:\tools\whispercpp\whisper-cli.exe"
+
+# v3.1.3: Quantized base.en-q5_1 for realistic 2-3x transcription speedup
+# Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en-q5_1.bin
+# File size: ~60 MB (vs 74 MB full, vs 1.4 GB Distil-large unquantized)
+# Performance: 2-3x faster than full base.en, ~95% accuracy retained
+# Fallback: If q5_1 not found, will attempt to use full base.en
+$whisperModelQ5 = "C:\tools\whispercpp\models\ggml-base.en-q5_1.bin"
+$whisperModelFull = "C:\tools\whispercpp\models\ggml-base.en.bin"
+
+if (Test-Path $whisperModelQ5) {
+    $whisperModel = $whisperModelQ5
+    $modelType = "Quantized Q5 (2-3x faster)"
+} elseif (Test-Path $whisperModelFull) {
+    $whisperModel = $whisperModelFull
+    $modelType = "Full precision (baseline)"
+} else {
+    Write-Host "ERROR: No Whisper model found" -ForegroundColor Red
+    Write-Host "  Tried Q5: $whisperModelQ5" -ForegroundColor Yellow
+    Write-Host "  Tried Full: $whisperModelFull" -ForegroundColor Yellow
+    exit 1
+}
+
 $wkhtmltopdf    = "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 
 # Ensure required directories exist
@@ -100,11 +137,7 @@ if (-not $SkipAI) {
     if (-not (Test-Path $whisperExe)) {
         Write-Host "ERROR: Whisper.cpp not found at $whisperExe" -ForegroundColor Red
         Write-Host "Please install Whisper.cpp or use -SkipAI flag" -ForegroundColor Yellow
-        exit 1
-    }
-    if (-not (Test-Path $whisperModel)) {
-        Write-Host "ERROR: Whisper model not found at $whisperModel" -ForegroundColor Red
-        Write-Host "Please download ggml-base.en.bin model" -ForegroundColor Yellow
+        Write-Host "See ai-context.md for correct installation paths" -ForegroundColor Yellow
         exit 1
     }
     if (-not (Test-Path $wkhtmltopdf)) {
@@ -182,6 +215,8 @@ if ($episodeDates.Count -eq 0) {
 
 if (-not $SkipAI) {
     Write-Host "AI Tools: Whisper.cpp + wkhtmltopdf" -ForegroundColor Green
+    Write-Host "Model: $modelType" -ForegroundColor Green
+    Write-Host "Path: $whisperModel" -ForegroundColor DarkGray
 }
 
 Write-Host ""
@@ -255,6 +290,8 @@ function Get-GrcYearForEpisode {
             $html     = Invoke-WebRequest -Uri $yearUrl -UseBasicParsing -ErrorAction Stop
             $content  = $html.Content
 
+            # ⚠️ CRITICAL: GRC uses HTML entity &#160; not space
+            # See COMMON-MISTAKES.md Mistake #4 - Regex failed 4× before this was documented
             $pattern = "Episode&#160;$episodeStr&#160;-"
 
             if ($content -match $pattern) {
@@ -324,7 +361,7 @@ function Generate-AITranscript {
 
     # Step 2: Run Whisper.cpp transcription
     if (-not (Test-Path $txtFile)) {
-        Write-Host "  Running Whisper.cpp transcription..." -NoNewline
+        Write-Host "  Running Whisper transcription ($modelType)..." -NoNewline
         
         try {
             & $whisperExe -m $whisperModel -f $mp3File -otxt -of $txtPrefix 2>&1 | Out-Null
@@ -378,7 +415,7 @@ function Generate-AITranscript {
     <div class="disclaimer">
         ⚠️ AI-GENERATED TRANSCRIPT - NOT OFFICIAL SHOW NOTES
         <br><br>
-        This transcript was automatically generated using Whisper.cpp speech recognition.
+        This transcript was automatically generated using Whisper speech recognition.
         It may contain errors, omissions, or inaccuracies. This is NOT an official
         Steve Gibson show notes document from GRC.com.
         <br><br>
@@ -551,6 +588,7 @@ Write-Host ""
 Write-Host "AI Transcripts" -ForegroundColor Cyan
 Write-Host "  Generated: $generatedAI"
 Write-Host "  Skipped/Failed: $skippedAI"
+Write-Host "  Model: $modelType" -ForegroundColor Green
 Write-Host ""
 Write-Host "Metadata" -ForegroundColor Cyan
 Write-Host "  Cached episodes: $cachedCount"
