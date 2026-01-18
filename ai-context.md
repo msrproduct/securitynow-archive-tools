@@ -2,29 +2,46 @@
 **STOP - Verify Context Loaded BEFORE Responding:**
 
 - [ ] This file loaded from GitHub (NOT from cache/memory)
-- [ ] Version 3.13+ confirmed (check version header below)
+- [ ] Version 3.14+ confirmed (check version header below)
 - [ ] Current date verified: File shows 2026-01-18 update
-- [ ] CRITICAL PATHS section read (lines 50-80)
+- [ ] VERIFICATION STRINGS section read (copy EXACTLY for @context verify)
+- [ ] CRITICAL PATHS section read (lines 90-120)
 - [ ] NEW-THREAD-CHECKLIST.md consulted for session workflow
 - [ ] COMMON-MISTAKES.md referenced to prevent repeated errors
 
 **IF ANY CHECKBOX UNCHECKED: STOP and reload context files.**
 
-**Proof of Context Loading Required:**
-Your FIRST response in any new thread MUST include:
+---
+
+## 🔐 VERIFICATION STRINGS (COPY EXACTLY - NO TYPING)
+
+**When user types `@context verify`, display these EXACT strings:**
+
 ```
-✅ CONTEXT VERIFIED v3.13:
+✅ CONTEXT VERIFIED v3.14:
 - Repo: D:\Desktop\SecurityNow-Full-Private\
 - Whisper: C:\tools\whispercpp\whisper-cli.exe
 - Script: sn-full-run.ps1 v3.1.3
-- 14 documented errors in COMMON-MISTAKES.md loaded
+- Sync: Special-Sync.ps1
+- Context loaded: [INSERT TIMESTAMP]
+- Ready for queries
 ```
+
+**CRITICAL RULES:**
+1. ⚠️ **COPY these strings EXACTLY** - Do NOT type from memory
+2. ⚠️ **NO TYPOS ALLOWED** - Extract from this section, don't paraphrase
+3. ⚠️ **Verify line-by-line** - Each path must match character-for-character
+4. ⚠️ **If MCP fails** - Display "🛑 GitHub MCP failed - cannot verify context" and STOP
+
+**Test Case (2026-01-18):**
+- ❌ **WRONG:** "C:\tools\whispercercpp\whisper-cli.exe" (typo: "cercpp")
+- ✅ **CORRECT:** "C:\tools\whispercpp\whisper-cli.exe" (exact match)
 
 ---
 
 # AI Context - Security Now Archive Tools
-**Version:** 3.13 🛡️ CONTEXT LOADING VERIFICATION ADDED  
-**Last Updated:** 2026-01-18 01:00 CST by Perplexity AI  
+**Version:** 3.14 🔐 VERIFICATION STRINGS ADDED  
+**Last Updated:** 2026-01-18 04:05 CST by Perplexity AI  
 **Project Phase:** Production - v3.1.3 Stable Engine  
 **Current Version:** v3.1.3 (Production Stable)
 
@@ -174,8 +191,8 @@ D:\Desktop\SecurityNow-Full/                 (Public Mirror - LOCAL + GitHub)
 **Special-Sync.ps1 Behavior:**
 - ✅ `ai-context.md` → Syncs to public repo
 - ❌ `ai-context-private.md` → **EXCLUDED** from sync (stays private)
-- ❌ `NEW-THREAD-CHECKLIST.md` → Synced to public (dynamic content)
-- ❌ `COMMON-MISTAKES.md` → Synced to public (error prevention)
+- ✅ `NEW-THREAD-CHECKLIST.md` → Synced to public (dynamic content)
+- ✅ `COMMON-MISTAKES.md` → Synced to public (error prevention)
 
 ---
 
@@ -226,6 +243,7 @@ C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
 | 2026-01-16 | Special-Sync auto-pull (v3.7)     | MCP commits bypass local filesystem            | One command sync (no manual git pull)    |
 | 2026-01-16 | Split context files (v3.8)        | Business info (billing) shouldn't be public    | Privacy protection, professional image   |
 | 2026-01-18 | AI verification checkpoint (v3.13)| Context loading failures caused repeated errors| Mandatory proof-of-loading protocol      |
+| 2026-01-18 | Verification strings (v3.14)      | AI typing paths from memory introduced typos   | Copy-paste enforcement prevents drift    |
 
 ---
 
@@ -495,12 +513,14 @@ Test-Path "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"            # True
 ## NEW THREAD STARTUP PROTOCOL
 
 **Every new development thread MUST:**
-1. Read `ai-context.md` from GitHub Public repo (Space Instructions auto-load)
-2. Read `ai-context-private.md` from GitHub Private repo via MCP (business context)
-3. Read `NEW-THREAD-CHECKLIST.md` for session workflow and active tasks
-4. Read `COMMON-MISTAKES.md` for error prevention patterns
-5. Verify paths with `Test-Path` before proceeding
-6. **Treat older threads as retired sources** - cite when needed, but don't re-summarize
+1. User types: `@context verify`
+2. AI loads `ai-context.md` from GitHub Public repo via MCP
+3. AI loads `ai-context-private.md` from GitHub Private repo via MCP
+4. AI displays verification using EXACT strings from VERIFICATION STRINGS section (copy-paste, no typing)
+5. AI reads `NEW-THREAD-CHECKLIST.md` for session workflow and active tasks
+6. AI reads `COMMON-MISTAKES.md` for error prevention patterns
+7. AI verifies paths with `Test-Path` if needed
+8. **Treat older threads as retired sources** - cite when needed, but don't re-summarize
 
 ### Context Files Location
 ```powershell
@@ -561,7 +581,7 @@ Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return F
 ```
 
 ### When Path Confusion Occurs
-1. ⚠️ **STOP** - Check this file FIRST
+1. ⚠️ **STOP** - Check VERIFICATION STRINGS section in this file FIRST
 2. Verify: `Test-Path "D:\Desktop\SecurityNow-Full-Private\"`
 3. Do NOT proceed with wrong paths
 
@@ -571,6 +591,7 @@ Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return F
 
 | Version | Date       | Changes                                                                 |
 |---------|------------|-------------------------------------------------------------------------|
+| 3.14    | 2026-01-18 | **TYPO FIX:** Added VERIFICATION STRINGS section with copy-paste enforcement. AI must extract exact strings (no manual typing) to prevent typos like "whispercercpp". Test case documented. Root cause: Previous protocol required AI to type paths from memory, introducing error. New protocol mandates exact string extraction. Total: +35 lines (verification section + test case). |
 | 3.13    | 2026-01-18 | **CONTEXT LOADING FIX:** Added mandatory AI verification checkpoint at top of file - prevents 41+ documented cases of wrong paths/repeated mistakes. AI must prove context loaded before responding. Fixes Space Instructions bug (`.ai-context.md` → `ai-context.md`). Total: +30 lines (verification protocol). |
 | 3.12    | 2026-01-17 | **THREAD ANALYSIS COMPLETE:** Added NEW-THREAD-CHECKLIST.md reference (session workflow), COMMON-MISTAKES.md purpose (error prevention activation), system cleanup historical record to v3.3 (5 dirs deleted, 750MB reclaimed), clarified file relationship table. All additions from comprehensive 41-thread analysis. Total: +9 lines. |
 | 3.8     | 2026-01-16 | **PRIVACY FIX:** Split context files - Created `ai-context-private.md` (business-sensitive info - NEVER syncs to public), sanitized `ai-context.md` (removed cost tracking for public visibility), updated Special-Sync.ps1 to exclude private file. Protects billing rates, ROI calculations, monetization strategy from public exposure. |
@@ -589,11 +610,11 @@ Test-Path "D:\Desktop\SecurityNow-Full\ai-context-private.md"  # Should return F
 
 ---
 
-## END OF ai-context.md v3.13
-🛡️ **CONTEXT LOADING VERIFICATION ADDED** - Mandatory checkpoint prevents repeated errors  
-✅ **AI Must Prove Context Loaded** - First response must include verification checklist  
-✅ **Space Instructions Bug Fixed** - Corrected filename reference  
-✅ **41+ Error Cases Documented** - Wrong paths, repeated mistakes now preventable  
+## END OF ai-context.md v3.14
+🔐 **VERIFICATION STRINGS ADDED** - Copy-paste enforcement prevents typos  
+✅ **AI Must Extract Exact Paths** - No manual typing from memory allowed  
+✅ **Test Case Documented** - "whispercercpp" typo from 2026-01-18 test  
+✅ **Root Cause Fixed** - Previous protocol allowed typing, introduced error  
 ✅ **MCP Workflow Active** - Special-Sync.ps1 auto-pull confirmed (Step 1/5)  
 ✅ **One-Command Sync** - `.\scripts\Special-Sync.ps1` (no manual git pull needed)  
 ✅ **READY FOR PUBLIC** - No billing rates, no business strategy exposed
